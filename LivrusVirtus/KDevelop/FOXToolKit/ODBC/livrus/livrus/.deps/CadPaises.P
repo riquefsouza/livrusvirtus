@@ -1,0 +1,421 @@
+CadPaises.o: CadPaises.cpp resource.h /usr/include/c++/3.2.2/new \
+  /usr/include/c++/3.2.2/cstddef \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stddef.h \
+  /usr/include/c++/3.2.2/exception /usr/include/unistd.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/bits/confname.h /usr/include/getopt.h \
+  /usr/include/c++/3.2.2/ctime /usr/include/time.h \
+  /usr/include/bits/time.h /usr/include/xlocale.h \
+  /usr/include/c++/3.2.2/cmath \
+  /usr/include/c++/3.2.2/i586-mandrake-linux-gnu/bits/c++config.h \
+  /usr/include/c++/3.2.2/i586-mandrake-linux-gnu/bits/os_defines.h \
+  /usr/include/math.h /usr/include/bits/huge_val.h \
+  /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /usr/include/c++/3.2.2/bits/cmath.tcc \
+  /usr/include/c++/3.2.2/cstdlib /usr/include/stdlib.h \
+  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+  /usr/include/endian.h /usr/include/bits/endian.h \
+  /usr/include/sys/types.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+  /usr/include/bits/sched.h /usr/include/alloca.h \
+  /usr/include/c++/3.2.2/cstdio \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdio.h \
+  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+  /usr/include/bits/wchar.h /usr/include/gconv.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdarg.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+  /usr/local/include/fox-1.2/fx.h /usr/include/string.h \
+  /usr/local/include/fox-1.2/fxver.h /usr/local/include/fox-1.2/fxdefs.h \
+  /usr/local/include/fox-1.2/FXException.h \
+  /usr/local/include/fox-1.2/FXStream.h \
+  /usr/local/include/fox-1.2/FXFileStream.h \
+  /usr/local/include/fox-1.2/FXMemoryStream.h \
+  /usr/local/include/fox-1.2/FXString.h \
+  /usr/local/include/fox-1.2/FXSize.h \
+  /usr/local/include/fox-1.2/FXPoint.h \
+  /usr/local/include/fox-1.2/FXRectangle.h \
+  /usr/local/include/fox-1.2/FXObject.h \
+  /usr/local/include/fox-1.2/FXDelegator.h \
+  /usr/local/include/fox-1.2/FXDict.h /usr/local/include/fox-1.2/FXFile.h \
+  /usr/local/include/fox-1.2/FXURL.h \
+  /usr/local/include/fox-1.2/FXStringDict.h \
+  /usr/local/include/fox-1.2/FXSettings.h \
+  /usr/local/include/fox-1.2/FXRegistry.h \
+  /usr/local/include/fox-1.2/FXObjectList.h \
+  /usr/local/include/fox-1.2/FXAccelTable.h \
+  /usr/local/include/fox-1.2/FXRecentFiles.h \
+  /usr/local/include/fox-1.2/FXHash.h /usr/local/include/fox-1.2/FXApp.h \
+  /usr/local/include/fox-1.2/FXId.h /usr/local/include/fox-1.2/FXVisual.h \
+  /usr/local/include/fox-1.2/FXFont.h \
+  /usr/local/include/fox-1.2/FXCursor.h \
+  /usr/local/include/fox-1.2/FXCURCursor.h \
+  /usr/local/include/fox-1.2/FXGIFCursor.h \
+  /usr/local/include/fox-1.2/FXDrawable.h \
+  /usr/local/include/fox-1.2/FXBitmap.h \
+  /usr/local/include/fox-1.2/FXImage.h \
+  /usr/local/include/fox-1.2/FXIcon.h \
+  /usr/local/include/fox-1.2/FXGIFImage.h \
+  /usr/local/include/fox-1.2/FXBMPImage.h \
+  /usr/local/include/fox-1.2/FXICOImage.h \
+  /usr/local/include/fox-1.2/FXXBMImage.h \
+  /usr/local/include/fox-1.2/FXXPMImage.h \
+  /usr/local/include/fox-1.2/FXPCXImage.h \
+  /usr/local/include/fox-1.2/FXTGAImage.h \
+  /usr/local/include/fox-1.2/FXRGBImage.h \
+  /usr/local/include/fox-1.2/FXPPMImage.h \
+  /usr/local/include/fox-1.2/FXGIFIcon.h \
+  /usr/local/include/fox-1.2/FXBMPIcon.h \
+  /usr/local/include/fox-1.2/FXICOIcon.h \
+  /usr/local/include/fox-1.2/FXXBMIcon.h \
+  /usr/local/include/fox-1.2/FXXPMIcon.h \
+  /usr/local/include/fox-1.2/FXPCXIcon.h \
+  /usr/local/include/fox-1.2/FXTGAIcon.h \
+  /usr/local/include/fox-1.2/FXRGBIcon.h \
+  /usr/local/include/fox-1.2/FXPPMIcon.h \
+  /usr/local/include/fox-1.2/FXRegion.h /usr/local/include/fox-1.2/FXDC.h \
+  /usr/local/include/fox-1.2/FXDCWindow.h \
+  /usr/local/include/fox-1.2/FXDCPrint.h \
+  /usr/local/include/fox-1.2/FXFileDict.h \
+  /usr/local/include/fox-1.2/FXWindow.h \
+  /usr/local/include/fox-1.2/FXFrame.h \
+  /usr/local/include/fox-1.2/FXSeparator.h \
+  /usr/local/include/fox-1.2/FXLabel.h \
+  /usr/local/include/fox-1.2/FXDial.h \
+  /usr/local/include/fox-1.2/FXColorBar.h \
+  /usr/local/include/fox-1.2/FXColorWell.h \
+  /usr/local/include/fox-1.2/FXColorWheel.h \
+  /usr/local/include/fox-1.2/FXTextField.h \
+  /usr/local/include/fox-1.2/FXButton.h \
+  /usr/local/include/fox-1.2/FXPicker.h \
+  /usr/local/include/fox-1.2/FXToggleButton.h \
+  /usr/local/include/fox-1.2/FXTriStateButton.h \
+  /usr/local/include/fox-1.2/FXCheckButton.h \
+  /usr/local/include/fox-1.2/FXRadioButton.h \
+  /usr/local/include/fox-1.2/FXArrowButton.h \
+  /usr/local/include/fox-1.2/FXMenuButton.h \
+  /usr/local/include/fox-1.2/FXComposite.h \
+  /usr/local/include/fox-1.2/FXPacker.h \
+  /usr/local/include/fox-1.2/FXHorizontalFrame.h \
+  /usr/local/include/fox-1.2/FXVerticalFrame.h \
+  /usr/local/include/fox-1.2/FXSpring.h \
+  /usr/local/include/fox-1.2/FXMatrix.h \
+  /usr/local/include/fox-1.2/FXSpinner.h \
+  /usr/local/include/fox-1.2/FXRealSpinner.h \
+  /usr/local/include/fox-1.2/FXRootWindow.h \
+  /usr/local/include/fox-1.2/FXCanvas.h \
+  /usr/local/include/fox-1.2/FXGroupBox.h \
+  /usr/local/include/fox-1.2/FXShell.h \
+  /usr/local/include/fox-1.2/FXToolTip.h \
+  /usr/local/include/fox-1.2/FXPopup.h \
+  /usr/local/include/fox-1.2/FXTopWindow.h \
+  /usr/local/include/fox-1.2/FXDialogBox.h \
+  /usr/local/include/fox-1.2/FXMainWindow.h \
+  /usr/local/include/fox-1.2/FXMenuPane.h \
+  /usr/local/include/fox-1.2/FXScrollPane.h \
+  /usr/local/include/fox-1.2/FXMenuCaption.h \
+  /usr/local/include/fox-1.2/FXMenuSeparator.h \
+  /usr/local/include/fox-1.2/FXMenuTitle.h \
+  /usr/local/include/fox-1.2/FXMenuCascade.h \
+  /usr/local/include/fox-1.2/FXMenuCommand.h \
+  /usr/local/include/fox-1.2/FXMenuCheck.h \
+  /usr/local/include/fox-1.2/FXMenuRadio.h \
+  /usr/local/include/fox-1.2/FXToolBar.h \
+  /usr/local/include/fox-1.2/FXMenuBar.h \
+  /usr/local/include/fox-1.2/FXOptionMenu.h \
+  /usr/local/include/fox-1.2/FXSwitcher.h \
+  /usr/local/include/fox-1.2/FXTabBar.h \
+  /usr/local/include/fox-1.2/FXTabBook.h \
+  /usr/local/include/fox-1.2/FXTabItem.h \
+  /usr/local/include/fox-1.2/FXScrollBar.h \
+  /usr/local/include/fox-1.2/FXScrollArea.h \
+  /usr/local/include/fox-1.2/FXScrollWindow.h \
+  /usr/local/include/fox-1.2/FXList.h \
+  /usr/local/include/fox-1.2/FXComboBox.h \
+  /usr/local/include/fox-1.2/FXListBox.h \
+  /usr/local/include/fox-1.2/FXTreeList.h \
+  /usr/local/include/fox-1.2/FXTreeListBox.h \
+  /usr/local/include/fox-1.2/FXFoldingList.h \
+  /usr/local/include/fox-1.2/FXBitmapView.h \
+  /usr/local/include/fox-1.2/FXBitmapFrame.h \
+  /usr/local/include/fox-1.2/FXImageView.h \
+  /usr/local/include/fox-1.2/FXImageFrame.h \
+  /usr/local/include/fox-1.2/FXTable.h \
+  /usr/local/include/fox-1.2/FXDragCorner.h \
+  /usr/local/include/fox-1.2/FXStatusBar.h \
+  /usr/local/include/fox-1.2/FXStatusLine.h \
+  /usr/local/include/fox-1.2/FXMessageBox.h \
+  /usr/local/include/fox-1.2/FXDirList.h \
+  /usr/local/include/fox-1.2/FXSlider.h \
+  /usr/local/include/fox-1.2/FXRealSlider.h \
+  /usr/local/include/fox-1.2/FXSplitter.h \
+  /usr/local/include/fox-1.2/FX4Splitter.h \
+  /usr/local/include/fox-1.2/FXHeader.h \
+  /usr/local/include/fox-1.2/FXShutter.h \
+  /usr/local/include/fox-1.2/FXIconList.h \
+  /usr/local/include/fox-1.2/FXFileList.h \
+  /usr/local/include/fox-1.2/FXDirBox.h \
+  /usr/local/include/fox-1.2/FXDriveBox.h \
+  /usr/local/include/fox-1.2/FXDirSelector.h \
+  /usr/local/include/fox-1.2/FXDirDialog.h \
+  /usr/local/include/fox-1.2/FXFileSelector.h \
+  /usr/local/include/fox-1.2/FXFileDialog.h \
+  /usr/local/include/fox-1.2/FXColorSelector.h \
+  /usr/local/include/fox-1.2/FXColorDialog.h \
+  /usr/local/include/fox-1.2/FXFontSelector.h \
+  /usr/local/include/fox-1.2/FXFontDialog.h \
+  /usr/local/include/fox-1.2/FXUndoList.h \
+  /usr/local/include/fox-1.2/FXText.h \
+  /usr/local/include/fox-1.2/FXDataTarget.h \
+  /usr/local/include/fox-1.2/FXProgressBar.h \
+  /usr/local/include/fox-1.2/FXReplaceDialog.h \
+  /usr/local/include/fox-1.2/FXRuler.h \
+  /usr/local/include/fox-1.2/FXSearchDialog.h \
+  /usr/local/include/fox-1.2/FXInputDialog.h \
+  /usr/local/include/fox-1.2/FXProgressDialog.h \
+  /usr/local/include/fox-1.2/FXWizard.h \
+  /usr/local/include/fox-1.2/FXMDIButton.h \
+  /usr/local/include/fox-1.2/FXMDIClient.h \
+  /usr/local/include/fox-1.2/FXMDIChild.h \
+  /usr/local/include/fox-1.2/FXDocument.h \
+  /usr/local/include/fox-1.2/FXToolBarGrip.h \
+  /usr/local/include/fox-1.2/FXToolBarShell.h \
+  /usr/local/include/fox-1.2/FXToolBarTab.h \
+  /usr/local/include/fox-1.2/FXPrintDialog.h \
+  /usr/local/include/fox-1.2/FXDebugTarget.h \
+  /usr/local/include/fox-1.2/FXArray.h \
+  /usr/local/include/fox-1.2/FXElement.h \
+  /usr/local/include/fox-1.2/FXThread.h Cadastros.h RotinasGlobais.h \
+  /usr/local/include/sql.h /usr/local/include/sqltypes.h CadPaises.h \
+  Principal.h ConsultasSQL.h
+CadPaises.cpp :
+resource.h :
+/usr/include/c++/3.2.2/new :
+/usr/include/c++/3.2.2/cstddef :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stddef.h :
+/usr/include/c++/3.2.2/exception :
+/usr/include/unistd.h :
+/usr/include/features.h :
+/usr/include/sys/cdefs.h :
+/usr/include/gnu/stubs.h :
+/usr/include/bits/posix_opt.h :
+/usr/include/bits/environments.h :
+/usr/include/bits/wordsize.h :
+/usr/include/bits/types.h :
+/usr/include/bits/typesizes.h :
+/usr/include/bits/confname.h :
+/usr/include/getopt.h :
+/usr/include/c++/3.2.2/ctime :
+/usr/include/time.h :
+/usr/include/bits/time.h :
+/usr/include/xlocale.h :
+/usr/include/c++/3.2.2/cmath :
+/usr/include/c++/3.2.2/i586-mandrake-linux-gnu/bits/c++config.h :
+/usr/include/c++/3.2.2/i586-mandrake-linux-gnu/bits/os_defines.h :
+/usr/include/math.h :
+/usr/include/bits/huge_val.h :
+/usr/include/bits/nan.h :
+/usr/include/bits/mathdef.h :
+/usr/include/bits/mathcalls.h :
+/usr/include/c++/3.2.2/bits/cmath.tcc :
+/usr/include/c++/3.2.2/cstdlib :
+/usr/include/stdlib.h :
+/usr/include/bits/waitflags.h :
+/usr/include/bits/waitstatus.h :
+/usr/include/endian.h :
+/usr/include/bits/endian.h :
+/usr/include/sys/types.h :
+/usr/include/sys/select.h :
+/usr/include/bits/select.h :
+/usr/include/bits/sigset.h :
+/usr/include/sys/sysmacros.h :
+/usr/include/bits/pthreadtypes.h :
+/usr/include/bits/sched.h :
+/usr/include/alloca.h :
+/usr/include/c++/3.2.2/cstdio :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdio.h :
+/usr/include/libio.h :
+/usr/include/_G_config.h :
+/usr/include/wchar.h :
+/usr/include/bits/wchar.h :
+/usr/include/gconv.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdarg.h :
+/usr/include/bits/stdio_lim.h :
+/usr/include/bits/sys_errlist.h :
+/usr/local/include/fox-1.2/fx.h :
+/usr/include/string.h :
+/usr/local/include/fox-1.2/fxver.h :
+/usr/local/include/fox-1.2/fxdefs.h :
+/usr/local/include/fox-1.2/FXException.h :
+/usr/local/include/fox-1.2/FXStream.h :
+/usr/local/include/fox-1.2/FXFileStream.h :
+/usr/local/include/fox-1.2/FXMemoryStream.h :
+/usr/local/include/fox-1.2/FXString.h :
+/usr/local/include/fox-1.2/FXSize.h :
+/usr/local/include/fox-1.2/FXPoint.h :
+/usr/local/include/fox-1.2/FXRectangle.h :
+/usr/local/include/fox-1.2/FXObject.h :
+/usr/local/include/fox-1.2/FXDelegator.h :
+/usr/local/include/fox-1.2/FXDict.h :
+/usr/local/include/fox-1.2/FXFile.h :
+/usr/local/include/fox-1.2/FXURL.h :
+/usr/local/include/fox-1.2/FXStringDict.h :
+/usr/local/include/fox-1.2/FXSettings.h :
+/usr/local/include/fox-1.2/FXRegistry.h :
+/usr/local/include/fox-1.2/FXObjectList.h :
+/usr/local/include/fox-1.2/FXAccelTable.h :
+/usr/local/include/fox-1.2/FXRecentFiles.h :
+/usr/local/include/fox-1.2/FXHash.h :
+/usr/local/include/fox-1.2/FXApp.h :
+/usr/local/include/fox-1.2/FXId.h :
+/usr/local/include/fox-1.2/FXVisual.h :
+/usr/local/include/fox-1.2/FXFont.h :
+/usr/local/include/fox-1.2/FXCursor.h :
+/usr/local/include/fox-1.2/FXCURCursor.h :
+/usr/local/include/fox-1.2/FXGIFCursor.h :
+/usr/local/include/fox-1.2/FXDrawable.h :
+/usr/local/include/fox-1.2/FXBitmap.h :
+/usr/local/include/fox-1.2/FXImage.h :
+/usr/local/include/fox-1.2/FXIcon.h :
+/usr/local/include/fox-1.2/FXGIFImage.h :
+/usr/local/include/fox-1.2/FXBMPImage.h :
+/usr/local/include/fox-1.2/FXICOImage.h :
+/usr/local/include/fox-1.2/FXXBMImage.h :
+/usr/local/include/fox-1.2/FXXPMImage.h :
+/usr/local/include/fox-1.2/FXPCXImage.h :
+/usr/local/include/fox-1.2/FXTGAImage.h :
+/usr/local/include/fox-1.2/FXRGBImage.h :
+/usr/local/include/fox-1.2/FXPPMImage.h :
+/usr/local/include/fox-1.2/FXGIFIcon.h :
+/usr/local/include/fox-1.2/FXBMPIcon.h :
+/usr/local/include/fox-1.2/FXICOIcon.h :
+/usr/local/include/fox-1.2/FXXBMIcon.h :
+/usr/local/include/fox-1.2/FXXPMIcon.h :
+/usr/local/include/fox-1.2/FXPCXIcon.h :
+/usr/local/include/fox-1.2/FXTGAIcon.h :
+/usr/local/include/fox-1.2/FXRGBIcon.h :
+/usr/local/include/fox-1.2/FXPPMIcon.h :
+/usr/local/include/fox-1.2/FXRegion.h :
+/usr/local/include/fox-1.2/FXDC.h :
+/usr/local/include/fox-1.2/FXDCWindow.h :
+/usr/local/include/fox-1.2/FXDCPrint.h :
+/usr/local/include/fox-1.2/FXFileDict.h :
+/usr/local/include/fox-1.2/FXWindow.h :
+/usr/local/include/fox-1.2/FXFrame.h :
+/usr/local/include/fox-1.2/FXSeparator.h :
+/usr/local/include/fox-1.2/FXLabel.h :
+/usr/local/include/fox-1.2/FXDial.h :
+/usr/local/include/fox-1.2/FXColorBar.h :
+/usr/local/include/fox-1.2/FXColorWell.h :
+/usr/local/include/fox-1.2/FXColorWheel.h :
+/usr/local/include/fox-1.2/FXTextField.h :
+/usr/local/include/fox-1.2/FXButton.h :
+/usr/local/include/fox-1.2/FXPicker.h :
+/usr/local/include/fox-1.2/FXToggleButton.h :
+/usr/local/include/fox-1.2/FXTriStateButton.h :
+/usr/local/include/fox-1.2/FXCheckButton.h :
+/usr/local/include/fox-1.2/FXRadioButton.h :
+/usr/local/include/fox-1.2/FXArrowButton.h :
+/usr/local/include/fox-1.2/FXMenuButton.h :
+/usr/local/include/fox-1.2/FXComposite.h :
+/usr/local/include/fox-1.2/FXPacker.h :
+/usr/local/include/fox-1.2/FXHorizontalFrame.h :
+/usr/local/include/fox-1.2/FXVerticalFrame.h :
+/usr/local/include/fox-1.2/FXSpring.h :
+/usr/local/include/fox-1.2/FXMatrix.h :
+/usr/local/include/fox-1.2/FXSpinner.h :
+/usr/local/include/fox-1.2/FXRealSpinner.h :
+/usr/local/include/fox-1.2/FXRootWindow.h :
+/usr/local/include/fox-1.2/FXCanvas.h :
+/usr/local/include/fox-1.2/FXGroupBox.h :
+/usr/local/include/fox-1.2/FXShell.h :
+/usr/local/include/fox-1.2/FXToolTip.h :
+/usr/local/include/fox-1.2/FXPopup.h :
+/usr/local/include/fox-1.2/FXTopWindow.h :
+/usr/local/include/fox-1.2/FXDialogBox.h :
+/usr/local/include/fox-1.2/FXMainWindow.h :
+/usr/local/include/fox-1.2/FXMenuPane.h :
+/usr/local/include/fox-1.2/FXScrollPane.h :
+/usr/local/include/fox-1.2/FXMenuCaption.h :
+/usr/local/include/fox-1.2/FXMenuSeparator.h :
+/usr/local/include/fox-1.2/FXMenuTitle.h :
+/usr/local/include/fox-1.2/FXMenuCascade.h :
+/usr/local/include/fox-1.2/FXMenuCommand.h :
+/usr/local/include/fox-1.2/FXMenuCheck.h :
+/usr/local/include/fox-1.2/FXMenuRadio.h :
+/usr/local/include/fox-1.2/FXToolBar.h :
+/usr/local/include/fox-1.2/FXMenuBar.h :
+/usr/local/include/fox-1.2/FXOptionMenu.h :
+/usr/local/include/fox-1.2/FXSwitcher.h :
+/usr/local/include/fox-1.2/FXTabBar.h :
+/usr/local/include/fox-1.2/FXTabBook.h :
+/usr/local/include/fox-1.2/FXTabItem.h :
+/usr/local/include/fox-1.2/FXScrollBar.h :
+/usr/local/include/fox-1.2/FXScrollArea.h :
+/usr/local/include/fox-1.2/FXScrollWindow.h :
+/usr/local/include/fox-1.2/FXList.h :
+/usr/local/include/fox-1.2/FXComboBox.h :
+/usr/local/include/fox-1.2/FXListBox.h :
+/usr/local/include/fox-1.2/FXTreeList.h :
+/usr/local/include/fox-1.2/FXTreeListBox.h :
+/usr/local/include/fox-1.2/FXFoldingList.h :
+/usr/local/include/fox-1.2/FXBitmapView.h :
+/usr/local/include/fox-1.2/FXBitmapFrame.h :
+/usr/local/include/fox-1.2/FXImageView.h :
+/usr/local/include/fox-1.2/FXImageFrame.h :
+/usr/local/include/fox-1.2/FXTable.h :
+/usr/local/include/fox-1.2/FXDragCorner.h :
+/usr/local/include/fox-1.2/FXStatusBar.h :
+/usr/local/include/fox-1.2/FXStatusLine.h :
+/usr/local/include/fox-1.2/FXMessageBox.h :
+/usr/local/include/fox-1.2/FXDirList.h :
+/usr/local/include/fox-1.2/FXSlider.h :
+/usr/local/include/fox-1.2/FXRealSlider.h :
+/usr/local/include/fox-1.2/FXSplitter.h :
+/usr/local/include/fox-1.2/FX4Splitter.h :
+/usr/local/include/fox-1.2/FXHeader.h :
+/usr/local/include/fox-1.2/FXShutter.h :
+/usr/local/include/fox-1.2/FXIconList.h :
+/usr/local/include/fox-1.2/FXFileList.h :
+/usr/local/include/fox-1.2/FXDirBox.h :
+/usr/local/include/fox-1.2/FXDriveBox.h :
+/usr/local/include/fox-1.2/FXDirSelector.h :
+/usr/local/include/fox-1.2/FXDirDialog.h :
+/usr/local/include/fox-1.2/FXFileSelector.h :
+/usr/local/include/fox-1.2/FXFileDialog.h :
+/usr/local/include/fox-1.2/FXColorSelector.h :
+/usr/local/include/fox-1.2/FXColorDialog.h :
+/usr/local/include/fox-1.2/FXFontSelector.h :
+/usr/local/include/fox-1.2/FXFontDialog.h :
+/usr/local/include/fox-1.2/FXUndoList.h :
+/usr/local/include/fox-1.2/FXText.h :
+/usr/local/include/fox-1.2/FXDataTarget.h :
+/usr/local/include/fox-1.2/FXProgressBar.h :
+/usr/local/include/fox-1.2/FXReplaceDialog.h :
+/usr/local/include/fox-1.2/FXRuler.h :
+/usr/local/include/fox-1.2/FXSearchDialog.h :
+/usr/local/include/fox-1.2/FXInputDialog.h :
+/usr/local/include/fox-1.2/FXProgressDialog.h :
+/usr/local/include/fox-1.2/FXWizard.h :
+/usr/local/include/fox-1.2/FXMDIButton.h :
+/usr/local/include/fox-1.2/FXMDIClient.h :
+/usr/local/include/fox-1.2/FXMDIChild.h :
+/usr/local/include/fox-1.2/FXDocument.h :
+/usr/local/include/fox-1.2/FXToolBarGrip.h :
+/usr/local/include/fox-1.2/FXToolBarShell.h :
+/usr/local/include/fox-1.2/FXToolBarTab.h :
+/usr/local/include/fox-1.2/FXPrintDialog.h :
+/usr/local/include/fox-1.2/FXDebugTarget.h :
+/usr/local/include/fox-1.2/FXArray.h :
+/usr/local/include/fox-1.2/FXElement.h :
+/usr/local/include/fox-1.2/FXThread.h :
+Cadastros.h :
+RotinasGlobais.h :
+/usr/local/include/sql.h :
+/usr/local/include/sqltypes.h :
+CadPaises.h :
+Principal.h :
+ConsultasSQL.h :

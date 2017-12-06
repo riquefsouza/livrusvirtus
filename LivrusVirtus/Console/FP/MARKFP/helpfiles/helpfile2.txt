@@ -1,0 +1,16 @@
+                            FP functional forms
+                            -------------------
+
+.                 composition, compose two functions
+
+#                 constant, return the thing given after #, not the data
+
+[ , ]             construction, apply all these functions to the same data
+
+@                 apply to all, apply this one function all elements in a list
+
+/                 insertion, put this function between each element in the list
+
+condition         make a decision between 2 functions
+
+def               define a function

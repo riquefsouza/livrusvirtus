@@ -1,0 +1,73 @@
+                         OVERVIEW OF PROLOG LANGUAGE
+
+1.  What is Prolog?
+-------------------
+
+    Prolog is a very high level programming language that is designed to 
+    implement logic rules.  The name, Prolog, comes from the French for
+    "Programming in Logic."
+
+    Being used mainly for Artificial Intelligence (AI) applications, Prolog is
+    not widely used for business or scientific system.  However, it can be used
+    as a general purpose programming language, even though it's paradigm is
+    not imperative like traditional languages (C, Pascal, FORTRAN, BASIC, etc).
+
+    In a prolog program, one defines a set of facts about objects and the
+    relationships between them.  Then one adds rules that tell how to derive
+    new facts.  Running a Prolog program is then a matter of looking up facts
+    in the database, or inferring them given the facts and the rules.
+
+    Prolog programs tend to run slow, since it is an interpreted, not a 
+    compiled language, the inference of new facts may take much time and may
+    require substantial backtracking through incorrect chains of logic.
+
+    If you study and understand prepositional logic and/or first order predicate
+    logic, then Prolog will be easier to understand.  However, it is so differ-
+    ent than traditional languages that it may take a while to "catch on."
+    However, most students end up enjoying Prolog because it is so different
+    that it is fun and invites them to think of problems in entirely new ways.
+
+    Prolog programs tend to be very short, since most of the actual work of
+    computing is done in the system by the "inference engine," which is the
+    software that grinds through the facts and rules, spitting out new facts
+    as it applies a logic method to the rules you have entered.  Typically,
+    programmers speak of finding a solution to a problem, rather than computing
+    it.
+
+
+2.  Which version do we have at Canisius?
+-----------------------------------------
+
+    We use a very good, free version of Prolog called C Prolog, version
+    1.5.  It is an implementation of the popular Edinburgh Prolog developed
+    by Fernando Pereira at the University of Edinburgh.
+
+
+3.  What is the history of Prolog?
+----------------------------------
+
+    Prolog began around 1970 in France by Alain Colmerauer, as a way of
+    writing AI programs to prove mathematical theorems.  It used a logic
+    rule called resolution and a simplified form of first order predicate
+    expressions called Horn clauses.  Early Prolog systems were unacceptably
+    slow until D. H. D. Warren implemented Prolog in a clever way that used
+    some shortcuts in recursion.
+
+    Then in 1980, the Japanese initiated the famous 5th Generation project to
+    capture the future of computing by being the first to build truly intelli-
+    gent computers.  They chose Prolog as their language of choice.  Though
+    the project fizzled by the mid-80s, Prolog's fame and importance were
+    established.
+
+
+4.  What books are good to read?
+--------------------------------
+
+    The standard Prolog text and reference is
+
+          "Programming in Prolog, 3rd edition" by W. F. Clocksin and
+          C. S. Mellish, Springer-Verlag, 1987.
+
+    It is extremely readable, has excellent examples, and is relatively
+    complete.  Its examples are also in Edinburgh Prolog, which is what
+    we use here.

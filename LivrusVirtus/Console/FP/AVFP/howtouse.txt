@@ -1,0 +1,161 @@
+                                   AVFP
+
+This is an implementation of the FP programming language written by Andy
+Valencia (vandys@lindy.stanford.edu or br.ajv@rlg.BITNET).  He wrote it in C
+and the source code is public domain.  It is a full implementation of John
+Backus' FP language, but only for numeric data.  For the sake of discussions 
+below, we will refer to this implementation as AVFP (Andy Valencia's FP).
+
+To use, just type
+
+     % fp
+
+as long as /usr/local/bin is in your path.
+
+FP doesn't really give a prompt.  It just indents about 7 spaces and waits for
+your input.  FP's response is printed in column 1.
+
+To quit, do
+
+     )quit
+
+or just press CONTROL-D.
+
+The rest of this document describes the differences between the classical
+syntax and Andy Valencia's implementation.
+
+
+1.  Simple selection and structure primitives:
+
+    cons is not defined in AVFP, but cons is superfluous anyway since apndl
+    (append on the left) is defined.
+
+    -i works as a component selector of a list, taking the ith element from
+    the end, rather than from the beginning:
+
+        2:<5,6,8,4,7>    gives 6
+        -2:<5,6,8,4,7>   gives 4
+
+    Any erroneous use of a function returns ?
+
+        5:<1,2,3>        (there is no fifth element to the list)    ?
+
+    The commas between elements of a list are unnecessary but they do not 
+    harm anything, either.  Thus <1 2 3> is exactly the same list as <1,2,3>.
+
+    <> is the empty list.  Nil cannot be used to stand for it.
+
+2.  Arithmetic
+
+    / is division and mod is modulus.  If division would give a fractional
+    amount then the result is a real number.
+
+
+3.  Boolean
+
+     =          equality
+     eq         equality
+     ~=         not equal
+     <
+     >
+     >=
+     <=
+
+ 
+4.  Complex Selection and structure
+
+
+4.5  Other built-ins
+
+        tl
+        div
+        hd
+        eq
+        atom
+        pick
+        not
+        nil
+        reverse
+        distl
+        distr
+        length
+        trans
+        apndl
+        apndr
+        tlr
+        front
+        rotl
+        rotr
+        iota     -- input is a single integer
+                    output is a list of ints from 1 up to that integer
+                    example:    iota:7   result=<1 2 3 4 5 6 7>
+        pair
+        split
+        concat
+        last
+        first
+        out
+        sin
+        cos
+        tan
+        asin
+        acos
+        atan
+        log
+        exp
+        mod
+        or
+        and
+        xor
+        id
+
+    
+
+X.  Functional Forms
+
+    & stands for "apply to all"
+
+       &tl:<<5,3,2>,<8,9,10,11>,<6,1>>   gives   <<3,2>,<9,10,11>,<1>>
+
+    % stands for "constant"
+
+        %5:3   gives   5   (no matter what the argument is)
+
+    @ stands for "function composition" (perhaps think of "AND")
+
+        iota@+:<2,3>    gives    <1 2 3 4 5>
+
+    [ ] stands for construct (as in the book)
+
+        [id %0]:8       gives    <8 0>
+
+    | stands for insertion (instead of /)
+    ! can be used synonymously for |
+
+        |+:<5,3,2>      gives    10, since 5+3+2=10
+
+    ( p -> g ; h) stands for condition (as in the book)
+
+        (< -> + ; -):<4,6> gives 10
+
+    (while p f) stands for repetition (as in the book)
+
+        (while >@[length %0] [tl |+]):<3,5,6>
+
+    {name ....} stands for definition
+
+        {junk id} defines a new function called "junk" whose action is "id":
+
+        junk:5   gives  5
+
+        {add1 +@[id,%1]}
+        add1:7             gives 8
+
+
+XX. External files and commands
+
+     )quit          -- leave AVFP
+     )help          -- print out a simple help menu
+     )load filename -- get input from a file
+
+

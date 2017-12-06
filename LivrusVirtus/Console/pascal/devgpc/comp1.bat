@@ -1,0 +1,1 @@
+c:\dev_gpc\bin\gpc --automake C:\LivrusVirtus\Console\devgpc\Livrus.pas -oc:\livrusvirtus\console\devgpc\plivrus.exe -fno-inline -fno-io-checking -fno-stack-checking -O1  -march=i386 -mcpu=i386   -funit-path=c:\dev_gpc\units   -Bc:\dev_gpc\lib\ -Bc:\dev_gpc\lib\gcc-lib\ -Bc:\dev_gpc\bin\   -mconsole -Xlinker C:\LivrusVirtus\Console\devgpc\rsrc.o

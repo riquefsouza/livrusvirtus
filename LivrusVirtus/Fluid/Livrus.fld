@@ -1,0 +1,1147 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0106 
+header_name {.h} 
+code_name {.cxx}
+Function {} {C
+} {} 
+
+class CfrmPrincipal {open : Fl_Window
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fPrincipal {
+      label {Livrus Virtus} open
+      image {C:/LivrusVirtus/FXRuby/figuras/Livrus.bmp} xywh {313 253 507 390} type Double resizable
+      class frmPrincipal visible
+    } {
+      Fl_Menu_Bar BarraDeMenu {
+        xywh {0 0 505 25} align 1
+      } {
+        submenu mnuCadastros {
+          label {&Cadastros} open
+          xywh {0 0 100 20}
+        } {
+          menuitem mnuCadAssuntos {
+            label {&Assuntos}
+            callback frmPrincipal_mnuCadAssuntos_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuCadAutores {
+            label {A&utores}
+            callback frmPrincipal_mnuCadAutores_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuCadEditoras {
+            label {&Editoras}
+            callback frmPrincipal_mnuCadEditoras_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuCadEnderecos {
+            label {E&ndereços}
+            callback frmPrincipal_mnuCadEnderecos_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuCadIdiomas {
+            label {&Idiomas}
+            callback frmPrincipal_mnuCadIdiomas_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuCadPaises {
+            label {&Países}
+            callback frmPrincipal_mnuCadPaises_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuCadProfissoes {
+            label {P&rofissões}
+            callback frmPrincipal_mnuCadProfissoes_cb
+            xywh {0 0 100 20} divider
+          }
+          menuitem mnuCadCLientes {
+            label {&Clientes}
+            callback frmPrincipal_mnuCadClientes_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuCadLivros {
+            label {&Livros}
+            callback frmPrincipal_mnuCadLivros_cb
+            xywh {0 0 100 20}
+          }
+        }
+        submenu mnuPesquisas {
+          label {&Pesquisas} open
+          xywh {0 0 100 20}
+        } {
+          menuitem mnuConAssuntos {
+            label {&Assuntos}
+            callback frmPrincipal_mnuConAssuntos_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuConAutores {
+            label {A&utores}
+            callback frmPrincipal_mnuConAutores_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuConEditoras {
+            label {&Editoras}
+            callback frmPrincipal_mnuConEditoras_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuConEnderecos {
+            label {E&ndereços}
+            callback frmPrincipal_mnuConEnderecos_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuConIdiomas {
+            label {&Idiomas}
+            callback frmPrincipal_mnuConIdiomas_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuConPaises {
+            label {&Países}
+            callback frmPrincipal_mnuConPaises_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuConProfissoes {
+            label {P&rofissões}
+            callback frmPrincipal_mnuConProfissoes_cb
+            xywh {0 0 100 20} divider
+          }
+          menuitem mnuConClientes {
+            label {&Clientes}
+            callback frmPrincipal_mnuConClientes_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuConLivros {
+            label {&Livros}
+            callback frmPrincipal_mnuConLivros_cb
+            xywh {0 0 100 20}
+          }
+        }
+        submenu mnuVendas {
+          label {&Vendas} open
+          xywh {0 0 100 20}
+        } {
+          menuitem mnuVenVenderLivros {
+            label {&Vender Livros}
+            callback frmPrincipal_mnuVenVenderLivros_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuVenVendasRealizadas {
+            label {Vendas &Realizadas}
+            callback frmPrincipal_mnuVenVendasRealizadas_cb
+            xywh {0 0 100 20}
+          }
+        }
+        submenu mnuJanelas {
+          label {&Janelas} open
+          xywh {0 0 100 20}
+        } {
+          menuitem mnuJanLadoHorizontal {
+            label {Lado a lado &horizontal}
+            xywh {0 0 100 20}
+          }
+          menuitem mnuJanLadoVertical {
+            label {Lado a lado &vertical}
+            xywh {0 0 100 20}
+          }
+          menuitem mnuJanEmCascata {
+            label {Em &cascata}
+            xywh {0 0 100 20}
+          }
+          menuitem mnuJanOrganizarIcones {
+            label {&Organizar ícones}
+            xywh {0 0 100 20}
+          }
+        }
+        submenu mnuOpcoes {
+          label {&Opções} open
+          xywh {0 0 100 20}
+        } {
+          menuitem mnuOpAlterarSenha {
+            label {&Alterar Senha}
+            callback frmPrincipal_mnuOpAlterarSenha_cb
+            xywh {0 0 100 20} divider
+          }
+          menuitem mnuOpSobre {
+            label {&Sobre}
+            callback frmPrincipal_mnuOpSobre_cb
+            xywh {0 0 100 20}
+          }
+          menuitem mnuOpSair {
+            label {Sa&ir}
+            callback frmPrincipal_mnuOpSair_cb
+            xywh {0 0 100 20}
+          }
+        }
+      }
+      Fl_Group BarraDeFerra {
+        xywh {0 25 505 35} box UP_BOX
+      } {
+        Fl_Button tlbClientes {
+          callback frmPrincipal_tlbClientesClick_cb
+          image {C:/LivrusVirtus/VCPP6/FLTK/xpms/cliente.xpm} deimage {C:/LivrusVirtus/VCPP6/FLTK/xpms/dcliente.xpm} xywh {5 30 25 25}
+        }
+        Fl_Button tlbLivros {
+          callback frmPrincipal_tlbLivrosClick_cb
+          image {C:/LivrusVirtus/VCPP6/FLTK/xpms/livro.xpm} deimage {C:/LivrusVirtus/VCPP6/FLTK/xpms/dlivro.xpm} xywh {30 30 25 25}
+        }
+        Fl_Button tlbVenda {
+          callback frmPrincipal_tlbVendaClick_cb
+          image {C:/LivrusVirtus/VCPP6/FLTK/xpms/livros.xpm} deimage {C:/LivrusVirtus/VCPP6/FLTK/xpms/dlivros.xpm} xywh {55 30 25 25}
+        }
+        Fl_Button tlbSobre {
+          callback frmPrincipal_tlbSobreClick_cb
+          image {C:/LivrusVirtus/VCPP6/FLTK/xpms/sobre.xpm} deimage {C:/LivrusVirtus/VCPP6/FLTK/xpms/dsobre.xpm} xywh {85 30 25 25}
+        }
+        Fl_Button tlbSair {
+          callback frmPrincipal_tlbSairClick_cb
+          image {C:/LivrusVirtus/VCPP6/FLTK/xpms/sair.xpm} deimage {C:/LivrusVirtus/VCPP6/FLTK/xpms/dsair.xpm} xywh {110 30 25 25}
+        }
+      }
+      Fl_Box BarraDeStatus1 {
+        label {Usuário: admin}
+        xywh {0 370 105 20} box DOWN_BOX align 20
+      }
+      Fl_Box BarraDeStatus2 {
+        xywh {106 370 400 20} box DOWN_BOX
+      }
+    }
+    Fl_Window {} {open
+      xywh {433 187 104 100} type Double hide
+    } {}
+  }
+} 
+
+class CfrmCadastros {: Fl_Double_Window
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fCadastros {
+      label {Cadastro de} open
+      xywh {363 374 382 136} type Double hide
+    } {
+      Fl_Input edtCodigo {
+        label {Código:}
+        xywh {10 20 140 25} type Int align 5
+      }
+      Fl_Button btnNovo {
+        label {&Novo}
+        callback frmCadastros_btnNovoClick_cb
+        xywh {160 20 75 25}
+      }
+      Fl_Input edtDescricao {
+        label {Descrição:}
+        xywh {10 70 275 25} align 5 deactivate
+      }
+      Fl_Button btnPesquisar {
+        label {&Pesquisar}
+        callback frmCadastros_btnPesquisarClick_cb
+        xywh {300 10 75 25}
+      }
+      Fl_Button btnAnterior {
+        label {&Anterior}
+        callback frmCadastros_btnAnteriorClick_cb
+        xywh {300 40 75 25} deactivate
+      }
+      Fl_Button btnProximo {
+        label {Próxi&mo}
+        callback frmCadastros_btnProximoClick_cb
+        xywh {300 70 75 25} deactivate
+      }
+      Fl_Button btnSalvar {
+        label {&Salvar}
+        callback frmCadastros_btnSalvarClick_cb
+        xywh {60 105 75 25} deactivate
+      }
+      Fl_Button btnExcluir {
+        label {&Excluir}
+        callback frmCadastros_btnExcluirClick_cb
+        xywh {140 105 75 25} deactivate
+      }
+      Fl_Button btnLimpar {
+        label {&Limpar}
+        callback frmCadastros_btnLimparClick_cb
+        xywh {220 105 75 25}
+      }
+      Fl_Button btnFechar {
+        label {&Fechar}
+        callback frmCadastros_btnFecharClick_cb
+        xywh {300 105 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmSplash {: Fl_Double_Window
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fSplash {open
+      xywh {375 264 259 73} type Double hide
+      class CfrmSplash modal noborder
+    } {
+      Fl_Box imagem1 {
+        image {C:/LivrusVirtus/VCPP6/FLTK/xpms/livrusvirtus.xpm} xywh {0 0 260 70}
+      }
+    }
+  }
+} 
+
+class CfrmSobre {: Fl_Double_Window
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fSobre {
+      label {Sobre o Sistema} open
+      xywh {380 213 302 267} type Double hide hotspot
+      class CfrmSobre modal
+    } {
+      Fl_Group grupo1 {open
+        xywh {5 5 290 220} box ENGRAVED_BOX
+      } {
+        Fl_Box imagem1 {
+          image {C:/LivrusVirtus/VCPP6/FLTK/xpms/livrusvirtus.xpm} xywh {20 15 260 80}
+        }
+        Fl_Box labVersao {
+          label {Versão 1.0.0}
+          xywh {195 95 95 20}
+        }
+        Fl_Box labDireitos {
+          label {Todos os diretos reservados para: Henrique F. de Souza}
+          xywh {15 120 275 40} align 128
+        }
+        Fl_Box labSistema {
+          label {Sistema integrante do projeto Livrus Virtus, versão programada no Visual C++ 6.0 usando FLTK.}
+          xywh {10 165 285 55} align 128
+        }
+      }
+      Fl_Button btnOk {
+        label {&Ok}
+        callback frmSobre_btnOkClick_cb
+        xywh {115 235 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmLogin {: Fl_Double_Window
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fLogin {
+      label {Login do Sistema} open
+      xywh {627 308 207 141} type Double hide
+      class CfrmLogin modal
+    } {
+      Fl_Box {} {
+        image {C:/LivrusVirtus/VCPP6/FLTK/xpms/login.xpm} xywh {5 5 100 105}
+      }
+      Fl_Input edtLogin {
+        label {Login:}
+        xywh {110 30 95 25} align 5
+      }
+      Fl_Input edtSenha {
+        label {Senha:}
+        xywh {110 75 95 25} type Secret align 5
+      }
+      Fl_Button btnLogin {
+        label {&Login}
+        callback frmLogin_btnLoginClick_cb
+        xywh {25 110 75 25}
+      }
+      Fl_Button btnCancelar {
+        label {&Cancelar}
+        callback frmLogin_btnCancelarClick_cb
+        xywh {110 110 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmAlterarSenha {: Fl_Double_Window
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fAlterarSenha {
+      label {Alteração de Senha} open
+      xywh {330 303 258 137} type Double hide
+      class CfrmAlterarSenha
+    } {
+      Fl_Input edtLogin {
+        label {Login:}
+        xywh {10 25 105 25} align 5 deactivate
+      }
+      Fl_Input edtSenhaAtual {
+        label {Senha atual:}
+        xywh {120 25 105 25} type Secret align 5
+      }
+      Fl_Input edtNovaSenha {
+        label {Nova senha:}
+        xywh {10 70 105 25} type Secret align 5
+      }
+      Fl_Input edtConfirmaSenha {
+        label {Confirma Senha:}
+        xywh {120 70 105 25} type Secret align 5
+      }
+      Fl_Button btnSalvar {
+        label {&Salvar}
+        callback frmAlterarSenha_btnSalvarClick_cb
+        xywh {10 105 75 25}
+      }
+      Fl_Button btnLimpar {
+        label {&Limpar}
+        callback frmAlterarSenha_btnLimparClick_cb
+        xywh {90 105 75 25}
+      }
+      Fl_Button btnFechar {
+        label {&Fechar}
+        callback frmAlterarSenha_btnFecharClick_cb
+        xywh {170 105 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmCadEnderecos {: CfrmCadastros
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fCadEnderecos {
+      label {Cadastro de Endereços} open
+      xywh {333 195 525 175} type Double labeltype NORMAL_LABEL hide
+      class CfrmCadEnderecos
+    } {
+      Fl_Input edtCodigo {
+        label {Código:}
+        xywh {5 20 140 25} type Int align 5
+      }
+      Fl_Button btnNovo {
+        label {&Novo}
+        callback frmCadEnderecos_btnNovoClick_cb
+        xywh {150 20 75 25}
+      }
+      Fl_Input edtDescricao {
+        label {Logradouro:}
+        xywh {5 65 275 25} align 5 deactivate
+      }
+      Fl_Input edtBairro {
+        label {Bairro:}
+        xywh {285 65 150 25} align 5 deactivate
+      }
+      Fl_Input edtCep {
+        label {CEP:}
+        xywh {5 110 85 25} align 5 deactivate
+      }
+      Fl_Input edtCidade {
+        label {Cidade:}
+        xywh {95 110 185 25} align 5 deactivate
+      }
+      Fl_Choice cmbEstado {
+        label {Estado:} open
+        xywh {285 110 150 25} down_box BORDER_BOX align 5 deactivate
+      } {}
+      Fl_Button btnPesquisar {
+        label {&Pesquisar}
+        callback frmCadEnderecos_btnPesquisarClick_cb
+        xywh {445 15 75 25}
+      }
+      Fl_Button btnAnterior {
+        label {&Anterior}
+        callback frmCadEnderecos_btnAnteriorClick_cb
+        xywh {445 45 75 25} deactivate
+      }
+      Fl_Button btnProximo {
+        label {Próxi&mo}
+        callback frmCadEnderecos_btnProximoClick_cb
+        xywh {445 75 75 25} deactivate
+      }
+      Fl_Button btnSalvar {
+        label {&Salvar}
+        callback frmCadEnderecos_btnSalvarClick_cb
+        xywh {205 145 75 25} deactivate
+      }
+      Fl_Button btnExcluir {
+        label {&Excluir}
+        callback frmCadEnderecos_btnExcluirClick_cb
+        xywh {285 145 75 25} deactivate
+      }
+      Fl_Button btnLimpar {
+        label {&Limpar}
+        callback frmCadEnderecos_btnLimparClick_cb
+        xywh {365 145 75 25}
+      }
+      Fl_Button btnFechar {
+        label {&Fechar}
+        callback frmCadEnderecos_btnFecharClick_cb
+        xywh {445 145 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmCadAssuntos {: CfrmCadastros
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fCadAssuntos {
+      label {Cadastro de Assuntos} open
+      xywh {335 200 382 136} type Double labeltype NORMAL_LABEL hide
+    } {
+      Fl_Input edtCodigo {
+        label {Código:}
+        xywh {10 20 140 25} type Int align 5
+      }
+      Fl_Button btnNovo {
+        label {&Novo}
+        callback frmCadAssuntos_btnNovoClick_cb
+        xywh {160 20 75 25}
+      }
+      Fl_Input edtDescricao {
+        label {Assunto:}
+        xywh {10 70 275 25} align 5 deactivate
+      }
+      Fl_Button btnPesquisar {
+        label {&Pesquisar}
+        callback frmCadAssuntos_btnPesquisarClick_cb
+        xywh {300 10 75 25}
+      }
+      Fl_Button btnAnterior {
+        label {&Anterior}
+        callback frmCadAssuntos_btnAnteriorClick_cb
+        xywh {300 40 75 25} deactivate
+      }
+      Fl_Button btnProximo {
+        label {Próxi&mo}
+        callback frmCadAssuntos_btnProximoClick_cb
+        xywh {300 70 75 25} deactivate
+      }
+      Fl_Button btnSalvar {
+        label {&Salvar}
+        callback frmCadAssuntos_btnSalvarClick_cb
+        xywh {60 105 75 25} deactivate
+      }
+      Fl_Button btnExcluir {
+        label {&Excluir}
+        callback frmCadAssuntos_btnExcluirClick_cb
+        xywh {140 105 75 25} deactivate
+      }
+      Fl_Button btnLimpar {
+        label {&Limpar}
+        callback frmCadAssuntos_btnLimparClick_cb
+        xywh {220 105 75 25}
+      }
+      Fl_Button btnFechar {
+        label {&Fechar}
+        callback frmCadAssuntos_btnFecharClick_cb
+        xywh {300 105 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmCadAutores {: CfrmCadastros
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fCadAutores {
+      label {Cadastro de Autores} open
+      xywh {345 210 382 136} type Double hide
+    } {
+      Fl_Input edtCodigo {
+        label {Código:}
+        xywh {10 20 140 25} type Int align 5
+      }
+      Fl_Button btnNovo {
+        label {&Novo}
+        callback frmCadAutores_btnNovoClick_cb
+        xywh {160 20 75 25}
+      }
+      Fl_Input edtDescricao {
+        label {Autor::}
+        xywh {10 70 275 25} align 5 deactivate
+      }
+      Fl_Button btnPesquisar {
+        label {&Pesquisar}
+        callback frmCadAutores_btnPesquisarClick_cb
+        xywh {300 10 75 25}
+      }
+      Fl_Button btnAnterior {
+        label {&Anterior}
+        callback frmCadAutores_btnAnteriorClick_cb
+        xywh {300 40 75 25} deactivate
+      }
+      Fl_Button btnProximo {
+        label {Próxi&mo}
+        callback frmCadAutores_btnProximoClick_cb
+        xywh {300 70 75 25} deactivate
+      }
+      Fl_Button btnSalvar {
+        label {&Salvar}
+        callback frmCadAutores_btnSalvarClick_cb
+        xywh {60 105 75 25} deactivate
+      }
+      Fl_Button btnExcluir {
+        label {&Excluir}
+        callback frmCadAutores_btnExcluirClick_cb
+        xywh {140 105 75 25} deactivate
+      }
+      Fl_Button btnLimpar {
+        label {&Limpar}
+        callback frmCadAutores_btnLimparClick_cb
+        xywh {220 105 75 25}
+      }
+      Fl_Button btnFechar {
+        label {&Fechar}
+        callback frmCadAutores_btnFecharClick_cb
+        xywh {300 105 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmCadClientes {open : CfrmCadastros
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fCadClientes {
+      label {Cadastro de Clientes} open
+      xywh {334 226 535 469} type Double hide
+      class CfrmCadClientes
+    } {
+      Fl_Input edtCodigo {
+        label {CPF:}
+        user_data novidade
+        callback frmCadClientes_edtCodigoKillFocus_cb selected
+        xywh {10 25 140 25} align 5
+      }
+      Fl_Button btnNovo {
+        label {&Novo}
+        callback frmCadClientes_btnNovoClick_cb
+        xywh {155 25 75 25}
+      }
+      Fl_Input edtDescricao {
+        label {Nome:}
+        xywh {10 70 305 25} align 5 deactivate
+      }
+      Fl_Input edtEmail {
+        label {E-mail:}
+        xywh {10 115 305 25} align 5 deactivate
+      }
+      Fl_Input edtIdentidade {
+        label {Identidade:}
+        xywh {320 115 120 25} align 5 deactivate
+      }
+      Fl_Group grpSexo {
+        label Sexo
+        xywh {10 160 190 30} box ENGRAVED_BOX align 5 deactivate
+      } {
+        Fl_Round_Button rbMasculino {
+          label Masculino
+          xywh {20 165 90 20} down_box ROUND_DOWN_BOX
+        }
+        Fl_Round_Button rbFeminino {
+          label Feminino
+          xywh {110 165 85 20} down_box ROUND_DOWN_BOX
+        }
+      }
+      Fl_Input edtTelefone {
+        label {Telefone:}
+        xywh {205 165 110 25} align 5 deactivate
+      }
+      Fl_Input edtDtNasc {
+        label {Dt. Nascimento:}
+        callback frmCadClientes_edtDtNascKillFocus_cb
+        xywh {320 165 120 25} align 5 deactivate
+      }
+      Fl_Group grpEndereco {
+        label {Endereço}
+        xywh {10 210 440 130} box ENGRAVED_BOX align 5 deactivate
+      } {
+        Fl_Input edtCodEndereco {
+          callback frmCadLivros_edtCodEnderecoKillFocus_cb
+          xywh {20 220 140 25} type Int labeltype NO_LABEL align 5
+        }
+        Fl_Button btnPEndereco {
+          label {...}
+          callback frmCadClientes_btnPEnderecoClick_cb
+          xywh {160 220 25 25}
+        }
+        Fl_Input edtLogradouro {
+          label {Logradouro:}
+          xywh {20 265 275 25} align 5
+        }
+        Fl_Input edtBairro {
+          label {Bairro:}
+          xywh {300 265 145 25} align 5
+        }
+        Fl_Input edtCep {
+          label {CEP:}
+          xywh {20 310 85 25} align 5
+        }
+        Fl_Input edtCidade {
+          label {Cidade:}
+          xywh {110 310 185 25} align 5
+        }
+        Fl_Input edtEstado {
+          label {Estado:}
+          xywh {300 310 145 25} align 5
+        }
+      }
+      Fl_Input edtCodPais {
+        label {País de origem:}
+        callback frmCadClientes_edtCodPaisKillFocus_cb
+        xywh {10 360 100 25} type Int align 5 deactivate
+      }
+      Fl_Input edtPais {
+        xywh {115 360 275 25} labeltype NO_LABEL align 5 deactivate
+      }
+      Fl_Button btnPPais {
+        label {...}
+        callback frmCadClientes_btnPPaisClick_cb
+        xywh {390 360 25 25} deactivate
+      }
+      Fl_Input edtCodProfissao {
+        label {Profissão:}
+        callback frmCadClientes_edtCodProfissaoKillFocus_cb
+        xywh {10 405 100 25} type Int align 5 deactivate
+      }
+      Fl_Input edtProfissao {
+        xywh {115 405 275 25} labeltype NO_LABEL align 5 deactivate
+      }
+      Fl_Button btnPProfissao {
+        label {...}
+        callback frmCadClientes_btnPProfissaoClick_cb
+        xywh {390 405 25 25} deactivate
+      }
+      Fl_Button btnPesquisar {
+        label {&Pesquisar}
+        callback frmCadClientes_btnPesquisarClick_cb
+        xywh {455 25 75 25}
+      }
+      Fl_Button btnAnterior {
+        label {&Anterior}
+        callback frmCadClientes_btnAnteriorClick_cb
+        xywh {455 55 75 25} deactivate
+      }
+      Fl_Button btnProximo {
+        label {Próxi&mo}
+        callback frmCadClientes_btnProximoClick_cb
+        xywh {455 85 75 25} deactivate
+      }
+      Fl_Button btnSalvar {
+        label {&Salvar}
+        callback frmCadClientes_btnSalvarClick_cb
+        xywh {215 440 75 25} deactivate
+      }
+      Fl_Button btnExcluir {
+        label {&Excluir}
+        callback frmCadClientes_btnExcluirClick_cb
+        xywh {295 440 75 25} deactivate
+      }
+      Fl_Button btnLimpar {
+        label {&Limpar}
+        callback frmCadClientes_btnLimparClick_cb
+        xywh {375 440 75 25}
+      }
+      Fl_Button btnFechar {
+        label {&Fechar}
+        callback frmCadClientes_btnFecharClick_cb
+        xywh {455 440 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmCadLivros {: CfrmCadastros
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fCadLivros {
+      label {Cadastro de Livros} open
+      xywh {327 146 557 436} type Double hide
+      class CfrmCadLivros
+    } {
+      Fl_Input edtCodigo {
+        label {ISBN:}
+        callback frmCadLivros_edtCodigoKillFocus_cb
+        xywh {10 25 140 25} align 5
+      }
+      Fl_Button btnNovo {
+        label {&Novo}
+        callback frmCadLivros_btnNovoClick_cb
+        xywh {155 25 75 25}
+      }
+      Fl_Input edtDescricao {
+        label {Título:}
+        xywh {10 70 350 25} align 5 deactivate
+      }
+      Fl_Value_Input edtEdicao {
+        label {Edição:}
+        xywh {365 70 105 25} align 5 minimum 1 maximum 9999 step 1 value 1 deactivate
+      }
+      Fl_Value_Input edtAnoPubli {
+        label {Ano Publicação:}
+        xywh {10 115 105 25} align 5 minimum 1 maximum 9999 step 1 value 1 deactivate
+      }
+      Fl_Input edtCodEditora {
+        label {Editora:}
+        callback frmCadLivros_edtCodEditoraKillFocus_cb
+        xywh {120 115 100 25} type Int align 5 deactivate
+      }
+      Fl_Input edtEditora {
+        xywh {225 115 220 25} labeltype NO_LABEL align 5 deactivate
+      }
+      Fl_Button btnPEditora {
+        label {...}
+        callback frmCadLivros_btnPEditoraClick_cb
+        xywh {445 115 25 25} deactivate
+      }
+      Fl_Value_Input edtVolume {
+        label {Volume:}
+        xywh {10 160 105 25} align 5 minimum 1 maximum 9999 step 1 value 1 deactivate
+      }
+      Fl_Choice cmbIdioma {
+        label {Idioma:} open
+        xywh {120 160 350 25} down_box BORDER_BOX align 5 deactivate
+      } {}
+      Fl_Value_Input edtNPaginas {
+        label {N. Páginas:}
+        xywh {10 205 105 25} align 5 minimum 1 maximum 9999 step 1 value 1 deactivate
+      }
+      Fl_Input edtCodAssunto {
+        label {Assunto:}
+        callback frmCadLivros_edtCodAssuntoKillFocus_cb
+        xywh {120 205 100 25} type Int align 5 deactivate
+      }
+      Fl_Input edtAssunto {
+        xywh {225 205 190 25} labeltype NO_LABEL align 5 deactivate
+      }
+      Fl_Button btnAdAssuntos {
+        label {+}
+        callback frmCadLivros_btnAdAssuntosClick_cb
+        xywh {415 205 25 25} deactivate
+      }
+      Fl_Button btnPAssunto {
+        label {...}
+        callback frmCadLivros_btnPAssuntoClick_cb
+        xywh {445 205 25 25} deactivate
+      }
+      Fl_Input edtPreco {
+        label {Preço:}
+        xywh {10 265 105 25} type Float align 5 deactivate
+      }
+      Fl_Browser lstAssuntos {
+        callback frmCadLivros_lstAssuntosDblClick_cb
+        xywh {120 230 350 60} type Select deactivate
+      }
+      Fl_Value_Input edtQtdEstoque {
+        label {Qtd. Estoque:}
+        xywh {10 310 105 25} align 5 maximum 9999 step 1 deactivate
+      }
+      Fl_Input edtCodAutor {
+        label {Autor:}
+        callback frmCadLivros_edtCodAutorKillFocus_cb
+        xywh {120 310 100 25} type Int align 5 deactivate
+      }
+      Fl_Input edtAutor {
+        xywh {225 310 190 25} labeltype NO_LABEL align 5 deactivate
+      }
+      Fl_Button btnAdAutores {
+        label {+}
+        callback frmCadLivros_btnAdAutoresClick_cb
+        xywh {415 310 25 25} deactivate
+      }
+      Fl_Button btnPAutor {
+        label {...}
+        callback frmCadLivros_btnPAutorClick_cb
+        xywh {445 310 25 25} deactivate
+      }
+      Fl_Browser lstAutores {
+        callback frmCadLivros_lstAutoresDblClick_cb
+        xywh {120 335 350 60} type Select deactivate
+      }
+      Fl_Button btnPesquisar {
+        label {&Pesquisar}
+        callback frmCadLivros_btnPesquisarClick_cb
+        xywh {475 20 75 25}
+      }
+      Fl_Button btnAnterior {
+        label {&Anterior}
+        callback frmCadLivros_btnAnteriorClick_cb
+        xywh {475 50 75 25} deactivate
+      }
+      Fl_Button btnProximo {
+        label {Próxi&mo}
+        callback frmCadLivros_btnProximoClick_cb
+        xywh {475 80 75 25} deactivate
+      }
+      Fl_Button btnSalvar {
+        label {&Salvar}
+        callback frmCadLivros_btnSalvarClick_cb
+        xywh {235 404 75 25} deactivate
+      }
+      Fl_Button btnExcluir {
+        label {&Excluir}
+        callback frmCadLivros_btnExcluirClick_cb
+        xywh {315 404 75 25} deactivate
+      }
+      Fl_Button btnLimpar {
+        label {&Limpar}
+        callback frmCadLivros_btnLimparClick_cb
+        xywh {395 404 75 25}
+      }
+      Fl_Button btnFechar {
+        label {&Fechar}
+        callback frmCadLivros_btnFecharClick_cb
+        xywh {475 404 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmConsultas {: Fl_Double_Window
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fConsultas {
+      label {Consulta de } open
+      xywh {431 255 416 255} type Double hide resizable
+      class CfrmConsultas modal
+    } {
+      Fl_Group grupo1 {open
+        xywh {0 0 415 65} box UP_BOX
+      } {
+        Fl_Input edtDescricao {
+          label {Descrição:}
+          xywh {10 25 315 25} align 5
+        }
+        Fl_Button btnPesquisar {
+          label {&Pesquisar}
+          callback frmConsultas_btnPesquisarClick_cb
+          xywh {330 25 75 25}
+        }
+      }
+      Fl_Browser gridConsulta {
+        callback frmConsultas_gridConsultaSelect_cb
+        xywh {0 65 415 145} type Multi box UP_BOX resizable
+      }
+      Fl_Group grupo2 {open
+        xywh {0 210 415 45} box UP_BOX
+      } {
+        Fl_Box labRegistros {
+          label {Registro 0 de 0 }
+          xywh {10 220 140 25} align 20
+        }
+        Fl_Button btnLimpar {
+          label {&Limpar}
+          callback frmConsultas_btnLimparClick_cb
+          xywh {250 220 75 25}
+        }
+        Fl_Button btnFechar {
+          label {&Fechar}
+          callback frmConsultas_btnFecharClick_cb
+          xywh {330 220 75 25}
+        }
+      }
+    }
+  }
+} 
+
+class CfrmConAssuntos {: CfrmConsultas
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fConAssuntos {
+      label {Consulta de Assuntos} open
+      xywh {441 265 416 255} type Double hide resizable
+      class CfrmConAssuntos modal
+    } {
+      Fl_Group grupo1 {open
+        xywh {0 0 415 65} box UP_BOX
+      } {
+        Fl_Input edtDescricao {
+          label {Assunto:}
+          xywh {10 25 315 25} align 5
+        }
+        Fl_Button btnPesquisar {
+          label {&Pesquisar}
+          callback frmConsultas_btnPesquisarClick_cb
+          xywh {330 25 75 25}
+        }
+      }
+      Fl_Browser gridConsulta {
+        callback frmConsultas_gridConsultaSelect_cb
+        xywh {0 65 415 145} type Multi box UP_BOX resizable
+      }
+      Fl_Group grupo2 {open
+        xywh {0 210 415 45} box UP_BOX
+      } {
+        Fl_Box labRegistros {
+          label {Registro 0 de 0 }
+          xywh {10 220 140 25} align 20
+        }
+        Fl_Button btnLimpar {
+          label {&Limpar}
+          callback frmConsultas_btnLimparClick_cb
+          xywh {250 220 75 25}
+        }
+        Fl_Button btnFechar {
+          label {&Fechar}
+          callback frmConsultas_btnFecharClick_cb
+          xywh {330 220 75 25}
+        }
+      }
+    }
+  }
+} 
+
+class CfrmVenderLivros {: Fl_Double_Window
+} {
+  Function {IniciaControles()} {return_type void
+  } {
+    Fl_Window fVenderLivros {
+      label {Vender Livros} open
+      xywh {345 249 511 316} type Double hide resizable
+      class CfrmVenderLivros
+    } {
+      Fl_Output edtDtHrVenda {
+        label {Data/Hora Venda:}
+        xywh {10 20 160 25} align 5 deactivate
+      }
+      Fl_Input edtCPF {
+        label {CPF:}
+        callback frmVenderLivros_edtCPFKillFocus_cb
+        xywh {10 65 160 25} align 5
+      }
+      Fl_Output edtCliente {
+        xywh {170 65 310 25} deactivate
+      }
+      Fl_Button btnPCliente {
+        label {...}
+        callback frmVenderLivros_btnPClienteClick_cb
+        xywh {480 65 25 25}
+      }
+      Fl_Input edtISBN {
+        label {ISBN:}
+        callback frmVenderLivros_edtISBNKillFocus_cb
+        xywh {10 110 160 25} align 5
+      }
+      Fl_Output edtLivro {
+        xywh {170 110 280 25} deactivate
+      }
+      Fl_Button btnAdLivros {
+        label {+}
+        callback frmVenderLivros_btnAdLivrosClick_cb
+        xywh {450 110 25 25}
+      }
+      Fl_Button btnPLivro {
+        label {...}
+        callback frmVenderLivros_btnPLivroClick_cb
+        xywh {480 110 25 25}
+      }
+      Fl_Browser lstLivros {
+        label {Livros para vender:}
+        callback frmVenderLivros_lstVendasSelect_cb
+        xywh {10 155 495 95} type Select align 5
+      }
+      Fl_Output edtPrecoTotal {
+        label {Preço Total:}
+        xywh {350 255 155 25} deactivate
+      }
+      Fl_Button btnVender {
+        label {&Vender}
+        callback frmVenderLivros_btnVenderClick_cb
+        xywh {270 285 75 25}
+      }
+      Fl_Button btnLimpar {
+        label {&Limpar}
+        callback frmVenderLivros_btnLimparClick_cb
+        xywh {350 285 75 25}
+      }
+      Fl_Button btnFechar {
+        label {&Fechar}
+        callback frmVenderLivros_btnFecharClick_cb
+        xywh {430 285 75 25}
+      }
+    }
+  }
+} 
+
+class CfrmConVendas {: Fl_Double_Window
+} {
+  Function {IniciaControles()} {open return_type void
+  } {
+    Fl_Window fConVendas {
+      label {Vendas Realizadas} open
+      xywh {344 157 520 329} type Double hide resizable
+      class CfrmConVendas
+    } {
+      Fl_Group grupo1 {
+        xywh {0 0 520 150} box UP_BOX
+      } {
+        Fl_Output edtDtHrVenda {
+          label {Data/Hora Venda:}
+          callback frmConVendas_edtDtHrVendaKillFocus_cb
+          xywh {10 25 160 25} align 5
+        }
+        Fl_Button btnPesquisar {
+          label {&Pesquisar}
+          callback frmConVendas_btnPesquisarClick_cb
+          xywh {175 25 75 25}
+        }
+        Fl_Input edtCPF {
+          label {CPF:}
+          callback frmConVendas_edtCPFKillFocus_cb
+          xywh {10 70 160 25} align 5
+        }
+        Fl_Output edtCliente {
+          xywh {175 70 310 25} deactivate
+        }
+        Fl_Button btnPCliente {
+          label {...}
+          callback frmConVendas_btnPClienteClick_cb
+          xywh {485 70 25 25}
+        }
+        Fl_Input edtISBN {
+          label {ISBN:}
+          callback frmConVendas_edtISBNKillFocus_cb
+          xywh {10 115 160 25} align 5
+        }
+        Fl_Output edtLivro {
+          xywh {175 115 310 25} deactivate
+        }
+        Fl_Button btnPLivro {
+          label {...}
+          callback frmConVendas_btnPLivroClick_cb
+          xywh {485 115 25 25}
+        }
+      }
+      Fl_Browser gridConsulta {
+        callback frmConVendas_gridConsultaSelect_cb
+        xywh {0 150 520 100} type Multi box UP_BOX
+      }
+      Fl_Group grupo2 {open
+        xywh {0 250 520 80} box UP_BOX
+      } {
+        Fl_Box labRegistros {
+          label {Registro 0 de 0 }
+          xywh {10 260 140 25} align 20
+        }
+        Fl_Output edtPrecoTotal {
+          label {Preço Total:}
+          xywh {360 260 155 25} deactivate
+        }
+        Fl_Button btnLimpar {
+          label {&Limpar}
+          callback frmConVendas_btnLimparClick_cb
+          xywh {360 295 75 25}
+        }
+        Fl_Button btnFechar {
+          label {&Fechar}
+          callback frmConVendas_btnFecharClick_cb
+          xywh {440 295 75 25}
+        }
+      }
+    }
+  }
+} 

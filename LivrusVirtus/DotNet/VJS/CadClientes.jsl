@@ -1,0 +1,769 @@
+package  Livrus;
+
+import System.*;
+import System.Drawing.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+
+/// <summary>
+/// Summary description for WinForm.
+/// </summary>
+public class frmCadClientes extends Livrus.frmCadastros
+{
+	public static frmCadClientes fCadClientes;
+	private	ArrayList ConsCampo;
+	private String sSexo;
+	/// <summary>
+	/// Required designer variable.
+	/// </summary>
+	private System.ComponentModel.Container components = null;
+	private System.Windows.Forms.Label labEmail;
+	private System.Windows.Forms.TextBox edtEmail;
+	private System.Windows.Forms.TextBox edtIdentidade;
+	private System.Windows.Forms.Label labIdentidade;
+	private System.Windows.Forms.GroupBox rdgSexo;
+	private System.Windows.Forms.RadioButton rbMasculino;
+	private System.Windows.Forms.RadioButton rbFeminino;
+	private System.Windows.Forms.TextBox edtTelefone;
+	private System.Windows.Forms.Label labTelefone;
+	private System.Windows.Forms.DateTimePicker edtDtNascimento;
+	private System.Windows.Forms.Label labDtNascimento;
+	private System.Windows.Forms.GroupBox grpEndereco;
+	private System.Windows.Forms.TextBox edtCodEndereco;
+	private System.Windows.Forms.Button btnPEndereco;
+	private System.Windows.Forms.TextBox edtBairro;
+	private System.Windows.Forms.Label labBairro;
+	private System.Windows.Forms.TextBox edtLogradouro;
+	private System.Windows.Forms.Label labLogradouro;
+	private System.Windows.Forms.Label labEstado;
+	private System.Windows.Forms.TextBox edtCidade;
+	private System.Windows.Forms.Label labCidade;
+	private System.Windows.Forms.TextBox edtCEP;
+	private System.Windows.Forms.Label labCEP;
+	private System.Windows.Forms.TextBox edtEstado;
+	private System.Windows.Forms.TextBox edtPais;
+	private System.Windows.Forms.TextBox edtCodPais;
+	private System.Windows.Forms.Label labPais;
+	private System.Windows.Forms.Button btnPPais;
+	private System.Windows.Forms.Button btnPProfissao;
+	private System.Windows.Forms.TextBox edtProfissao;
+	private System.Windows.Forms.TextBox edtCodProfissao;
+	private System.Windows.Forms.Label labProfissao;
+
+	public frmCadClientes()
+	{
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent();
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+		ConsCampo = new ArrayList();	
+	}
+
+	/// <summary>
+	/// Clean up any resources being used.
+	/// </summary>
+	protected void Dispose (boolean disposing)
+	{
+		if (disposing)
+		{
+			if (components != null)
+			{
+				components.Dispose();
+			}
+		}
+		super.Dispose(disposing);
+	}
+
+	/// <summary>
+	/// Required method for Designer support - do not modify
+	/// the contents of this method with the code editor.
+	/// </summary>
+	private void InitializeComponent()
+	{
+                this.labEmail = new System.Windows.Forms.Label();
+                this.edtEmail = new System.Windows.Forms.TextBox();
+                this.edtIdentidade = new System.Windows.Forms.TextBox();
+                this.labIdentidade = new System.Windows.Forms.Label();
+                this.rdgSexo = new System.Windows.Forms.GroupBox();
+                this.rbFeminino = new System.Windows.Forms.RadioButton();
+                this.rbMasculino = new System.Windows.Forms.RadioButton();
+                this.edtTelefone = new System.Windows.Forms.TextBox();
+                this.labTelefone = new System.Windows.Forms.Label();
+                this.edtDtNascimento = new System.Windows.Forms.DateTimePicker();
+                this.labDtNascimento = new System.Windows.Forms.Label();
+                this.grpEndereco = new System.Windows.Forms.GroupBox();
+                this.edtEstado = new System.Windows.Forms.TextBox();
+                this.labEstado = new System.Windows.Forms.Label();
+                this.edtCidade = new System.Windows.Forms.TextBox();
+                this.labCidade = new System.Windows.Forms.Label();
+                this.edtCEP = new System.Windows.Forms.TextBox();
+                this.labCEP = new System.Windows.Forms.Label();
+                this.edtBairro = new System.Windows.Forms.TextBox();
+                this.labBairro = new System.Windows.Forms.Label();
+                this.edtLogradouro = new System.Windows.Forms.TextBox();
+                this.labLogradouro = new System.Windows.Forms.Label();
+                this.btnPEndereco = new System.Windows.Forms.Button();
+                this.edtCodEndereco = new System.Windows.Forms.TextBox();
+                this.edtPais = new System.Windows.Forms.TextBox();
+                this.edtCodPais = new System.Windows.Forms.TextBox();
+                this.labPais = new System.Windows.Forms.Label();
+                this.btnPPais = new System.Windows.Forms.Button();
+                this.btnPProfissao = new System.Windows.Forms.Button();
+                this.edtProfissao = new System.Windows.Forms.TextBox();
+                this.edtCodProfissao = new System.Windows.Forms.TextBox();
+                this.labProfissao = new System.Windows.Forms.Label();
+                this.rdgSexo.SuspendLayout();
+                this.grpEndereco.SuspendLayout();
+                this.SuspendLayout();
+                // 
+                // labCodigo
+                // 
+                this.labCodigo.set_Name("labCodigo");
+                this.labCodigo.set_Text("CPF:");
+                // 
+                // edtCodigo
+                // 
+                this.edtCodigo.set_Name("edtCodigo");
+		this.edtCodigo.set_MaxLength(14);
+                this.edtCodigo.add_Leave(new System.EventHandler(this.edtCodigo_Leave));
+                // 
+                // labDescricao
+                // 
+                this.labDescricao.set_Name("labDescricao");
+                this.labDescricao.set_Text("Nome:");
+                // 
+                // edtDescricao
+                // 
+                this.edtDescricao.set_Name("edtDescricao");
+                this.edtDescricao.set_Size(new System.Drawing.Size(320, 20));
+                // 
+                // btnNovo
+                // 
+                this.btnNovo.set_Name("btnNovo");
+                // 
+                // btnPesquisar
+                // 
+                this.btnPesquisar.set_Location(new System.Drawing.Point(440, 8));
+                this.btnPesquisar.set_Name("btnPesquisar");
+                this.btnPesquisar.set_TabIndex(23);
+                this.btnPesquisar.add_Click(new System.EventHandler(this.btnPesquisar_Click));
+                // 
+                // btnAnterior
+                // 
+                this.btnAnterior.set_Location(new System.Drawing.Point(440, 40));
+                this.btnAnterior.set_Name("btnAnterior");
+                this.btnAnterior.set_TabIndex(24);
+                // 
+                // btnProximo
+                // 
+                this.btnProximo.set_Location(new System.Drawing.Point(440, 72));
+                this.btnProximo.set_Name("btnProximo");
+                this.btnProximo.set_TabIndex(25);
+                // 
+                // btnFechar
+                // 
+                this.btnFechar.set_Location(new System.Drawing.Point(440, 424));
+                this.btnFechar.set_Name("btnFechar");
+                this.btnFechar.set_TabIndex(29);
+                // 
+                // btnLimpar
+                // 
+                this.btnLimpar.set_Location(new System.Drawing.Point(360, 424));
+                this.btnLimpar.set_Name("btnLimpar");
+                this.btnLimpar.set_TabIndex(28);
+                // 
+                // btnExcluir
+                // 
+                this.btnExcluir.set_Location(new System.Drawing.Point(280, 424));
+                this.btnExcluir.set_Name("btnExcluir");
+                this.btnExcluir.set_TabIndex(27);
+                this.btnExcluir.add_Click(new System.EventHandler(this.btnExcluir_Click));
+                // 
+                // btnSalvar
+                // 
+                this.btnSalvar.set_Location(new System.Drawing.Point(200, 424));
+                this.btnSalvar.set_Name("btnSalvar");
+                this.btnSalvar.set_TabIndex(26);
+                this.btnSalvar.add_Click(new System.EventHandler(this.btnSalvar_Click));
+                // 
+                // labEmail
+                // 
+                this.labEmail.set_Location(new System.Drawing.Point(8, 88));
+                this.labEmail.set_Name("labEmail");
+                this.labEmail.set_Size(new System.Drawing.Size(100, 16));
+                this.labEmail.set_TabIndex(5);
+                this.labEmail.set_Text("E-mail:");
+                // 
+                // edtEmail
+                // 
+                this.edtEmail.set_Enabled(false);
+                this.edtEmail.set_Location(new System.Drawing.Point(8, 104));
+                this.edtEmail.set_MaxLength(30);
+                this.edtEmail.set_Name("edtEmail");
+                this.edtEmail.set_Size(new System.Drawing.Size(320, 20));
+                this.edtEmail.set_TabIndex(6);
+                this.edtEmail.set_Text("");
+                // 
+                // edtIdentidade
+                // 
+                this.edtIdentidade.set_Enabled(false);
+                this.edtIdentidade.set_Location(new System.Drawing.Point(336, 104));
+                this.edtIdentidade.set_MaxLength(10);
+                this.edtIdentidade.set_Name("edtIdentidade");
+                this.edtIdentidade.set_Size(new System.Drawing.Size(92, 20));
+                this.edtIdentidade.set_TabIndex(8);
+                this.edtIdentidade.set_Text("");
+                // 
+                // labIdentidade
+                // 
+                this.labIdentidade.set_Location(new System.Drawing.Point(336, 88));
+                this.labIdentidade.set_Name("labIdentidade");
+                this.labIdentidade.set_Size(new System.Drawing.Size(68, 16));
+                this.labIdentidade.set_TabIndex(7);
+                this.labIdentidade.set_Text("Identidade:");
+                // 
+                // rdgSexo
+                // 
+                this.rdgSexo.get_Controls().Add(this.rbFeminino);
+                this.rdgSexo.get_Controls().Add(this.rbMasculino);
+                this.rdgSexo.set_Location(new System.Drawing.Point(8, 128));
+                this.rdgSexo.set_Name("rdgSexo");
+                this.rdgSexo.set_Size(new System.Drawing.Size(184, 40));
+                this.rdgSexo.set_TabIndex(9);
+                this.rdgSexo.set_TabStop(false);
+                this.rdgSexo.set_Text("Sexo");
+                // 
+                // rbFeminino
+                // 
+                this.rbFeminino.set_Location(new System.Drawing.Point(104, 16));
+                this.rbFeminino.set_Name("rbFeminino");
+                this.rbFeminino.set_Size(new System.Drawing.Size(72, 16));
+                this.rbFeminino.set_TabIndex(1);
+                this.rbFeminino.set_Text("Feminino");
+                // 
+                // rbMasculino
+                // 
+                this.rbMasculino.set_Enabled(false);
+                this.rbMasculino.set_Location(new System.Drawing.Point(16, 16));
+                this.rbMasculino.set_Name("rbMasculino");
+                this.rbMasculino.set_Size(new System.Drawing.Size(80, 16));
+                this.rbMasculino.set_TabIndex(0);
+                this.rbMasculino.set_Text("Masculino");
+                // 
+                // edtTelefone
+                // 
+                this.edtTelefone.set_Enabled(false);
+                this.edtTelefone.set_Location(new System.Drawing.Point(200, 144));
+                this.edtTelefone.set_MaxLength(17);
+                this.edtTelefone.set_Name("edtTelefone");
+                this.edtTelefone.set_Size(new System.Drawing.Size(128, 20));
+                this.edtTelefone.set_TabIndex(11);
+                this.edtTelefone.set_Text("");
+                // 
+                // labTelefone
+                // 
+                this.labTelefone.set_Location(new System.Drawing.Point(200, 128));
+                this.labTelefone.set_Name("labTelefone");
+                this.labTelefone.set_Size(new System.Drawing.Size(68, 16));
+                this.labTelefone.set_TabIndex(10);
+                this.labTelefone.set_Text("Telefone:");
+                // 
+                // edtDtNascimento
+                // 
+                this.edtDtNascimento.set_Enabled(false);
+                this.edtDtNascimento.set_Format(System.Windows.Forms.DateTimePickerFormat.Short);
+                this.edtDtNascimento.set_Location(new System.Drawing.Point(336, 144));
+                this.edtDtNascimento.set_Name("edtDtNascimento");
+                this.edtDtNascimento.set_Size(new System.Drawing.Size(96, 20));
+                this.edtDtNascimento.set_TabIndex(13);
+                // 
+                // labDtNascimento
+                // 
+                this.labDtNascimento.set_Location(new System.Drawing.Point(336, 128));
+                this.labDtNascimento.set_Name("labDtNascimento");
+                this.labDtNascimento.set_Size(new System.Drawing.Size(96, 16));
+                this.labDtNascimento.set_TabIndex(12);
+                this.labDtNascimento.set_Text("Dt. Nascimento:");
+                // 
+                // grpEndereco
+                // 
+                this.grpEndereco.get_Controls().Add(this.edtEstado);
+                this.grpEndereco.get_Controls().Add(this.labEstado);
+                this.grpEndereco.get_Controls().Add(this.edtCidade);
+                this.grpEndereco.get_Controls().Add(this.labCidade);
+                this.grpEndereco.get_Controls().Add(this.edtCEP);
+                this.grpEndereco.get_Controls().Add(this.labCEP);
+                this.grpEndereco.get_Controls().Add(this.edtBairro);
+                this.grpEndereco.get_Controls().Add(this.labBairro);
+                this.grpEndereco.get_Controls().Add(this.edtLogradouro);
+                this.grpEndereco.get_Controls().Add(this.labLogradouro);
+                this.grpEndereco.get_Controls().Add(this.btnPEndereco);
+                this.grpEndereco.get_Controls().Add(this.edtCodEndereco);
+                this.grpEndereco.set_Location(new System.Drawing.Point(8, 176));
+                this.grpEndereco.set_Name("grpEndereco");
+                this.grpEndereco.set_Size(new System.Drawing.Size(424, 152));
+                this.grpEndereco.set_TabIndex(14);
+                this.grpEndereco.set_TabStop(false);
+                this.grpEndereco.set_Text("Endereço");
+                // 
+                // edtEstado
+                // 
+                this.edtEstado.set_Enabled(false);
+                this.edtEstado.set_Location(new System.Drawing.Point(280, 120));
+                this.edtEstado.set_MaxLength(10);
+                this.edtEstado.set_Name("edtEstado");
+                this.edtEstado.set_Size(new System.Drawing.Size(128, 20));
+                this.edtEstado.set_TabIndex(11);
+                this.edtEstado.set_Text("");
+                // 
+                // labEstado
+                // 
+                this.labEstado.set_Location(new System.Drawing.Point(280, 104));
+                this.labEstado.set_Name("labEstado");
+                this.labEstado.set_Size(new System.Drawing.Size(64, 16));
+                this.labEstado.set_TabIndex(10);
+                this.labEstado.set_Text("Estado:");
+                // 
+                // edtCidade
+                // 
+                this.edtCidade.set_Enabled(false);
+                this.edtCidade.set_Location(new System.Drawing.Point(88, 120));
+                this.edtCidade.set_MaxLength(30);
+                this.edtCidade.set_Name("edtCidade");
+                this.edtCidade.set_Size(new System.Drawing.Size(184, 20));
+                this.edtCidade.set_TabIndex(9);
+                this.edtCidade.set_Text("");
+                // 
+                // labCidade
+                // 
+                this.labCidade.set_Location(new System.Drawing.Point(88, 104));
+                this.labCidade.set_Name("labCidade");
+                this.labCidade.set_Size(new System.Drawing.Size(64, 16));
+                this.labCidade.set_TabIndex(8);
+                this.labCidade.set_Text("Cidade:");
+                // 
+                // edtCEP
+                // 
+                this.edtCEP.set_Enabled(false);
+                this.edtCEP.set_Location(new System.Drawing.Point(8, 120));
+                this.edtCEP.set_MaxLength(8);
+                this.edtCEP.set_Name("edtCEP");
+                this.edtCEP.set_Size(new System.Drawing.Size(72, 20));
+                this.edtCEP.set_TabIndex(7);
+                this.edtCEP.set_Text("");
+                // 
+                // labCEP
+                // 
+                this.labCEP.set_Location(new System.Drawing.Point(8, 104));
+                this.labCEP.set_Name("labCEP");
+                this.labCEP.set_Size(new System.Drawing.Size(64, 16));
+                this.labCEP.set_TabIndex(6);
+                this.labCEP.set_Text("CEP:");
+                // 
+                // edtBairro
+                // 
+                this.edtBairro.set_Enabled(false);
+                this.edtBairro.set_Location(new System.Drawing.Point(280, 74));
+                this.edtBairro.set_MaxLength(10);
+                this.edtBairro.set_Name("edtBairro");
+                this.edtBairro.set_Size(new System.Drawing.Size(128, 20));
+                this.edtBairro.set_TabIndex(5);
+                this.edtBairro.set_Text("");
+                // 
+                // labBairro
+                // 
+                this.labBairro.set_Location(new System.Drawing.Point(280, 58));
+                this.labBairro.set_Name("labBairro");
+                this.labBairro.set_Size(new System.Drawing.Size(68, 16));
+                this.labBairro.set_TabIndex(4);
+                this.labBairro.set_Text("Bairro:");
+                // 
+                // edtLogradouro
+                // 
+                this.edtLogradouro.set_Enabled(false);
+                this.edtLogradouro.set_Location(new System.Drawing.Point(8, 74));
+                this.edtLogradouro.set_MaxLength(30);
+                this.edtLogradouro.set_Name("edtLogradouro");
+                this.edtLogradouro.set_Size(new System.Drawing.Size(264, 20));
+                this.edtLogradouro.set_TabIndex(3);
+                this.edtLogradouro.set_Text("");
+                // 
+                // labLogradouro
+                // 
+                this.labLogradouro.set_Location(new System.Drawing.Point(8, 58));
+                this.labLogradouro.set_Name("labLogradouro");
+                this.labLogradouro.set_Size(new System.Drawing.Size(78, 16));
+                this.labLogradouro.set_TabIndex(2);
+                this.labLogradouro.set_Text("Logradouro:");
+                // 
+                // btnPEndereco
+                // 
+                this.btnPEndereco.set_Enabled(false);
+                this.btnPEndereco.set_Location(new System.Drawing.Point(104, 24));
+                this.btnPEndereco.set_Name("btnPEndereco");
+                this.btnPEndereco.set_Size(new System.Drawing.Size(22, 20));
+                this.btnPEndereco.set_TabIndex(1);
+                this.btnPEndereco.set_Text("...");
+                this.btnPEndereco.add_Click(new System.EventHandler(this.btnPEndereco_Click));
+                // 
+                // edtCodEndereco
+                // 
+                this.edtCodEndereco.set_Enabled(false);
+                this.edtCodEndereco.set_Location(new System.Drawing.Point(8, 24));
+                this.edtCodEndereco.set_MaxLength(10);
+                this.edtCodEndereco.set_Name("edtCodEndereco");
+                this.edtCodEndereco.set_Size(new System.Drawing.Size(92, 20));
+                this.edtCodEndereco.set_TabIndex(0);
+                this.edtCodEndereco.set_Text("");
+                this.edtCodEndereco.add_Leave(new System.EventHandler(this.edtCodEndereco_Leave));
+                // 
+                // edtPais
+                // 
+                this.edtPais.set_Enabled(false);
+                this.edtPais.set_Location(new System.Drawing.Point(92, 352));
+                this.edtPais.set_MaxLength(30);
+                this.edtPais.set_Name("edtPais");
+                this.edtPais.set_Size(new System.Drawing.Size(224, 20));
+                this.edtPais.set_TabIndex(17);
+                this.edtPais.set_Text("");
+                // 
+                // edtCodPais
+                // 
+                this.edtCodPais.set_Enabled(false);
+                this.edtCodPais.set_Location(new System.Drawing.Point(8, 352));
+                this.edtCodPais.set_MaxLength(10);
+                this.edtCodPais.set_Name("edtCodPais");
+                this.edtCodPais.set_Size(new System.Drawing.Size(80, 20));
+                this.edtCodPais.set_TabIndex(16);
+                this.edtCodPais.set_Text("");
+                this.edtCodPais.add_Leave(new System.EventHandler(this.edtCodPais_Leave));
+                // 
+                // labPais
+                // 
+                this.labPais.set_Location(new System.Drawing.Point(8, 336));
+                this.labPais.set_Name("labPais");
+                this.labPais.set_Size(new System.Drawing.Size(88, 16));
+                this.labPais.set_TabIndex(15);
+                this.labPais.set_Text("País de origem:");
+                // 
+                // btnPPais
+                // 
+                this.btnPPais.set_Enabled(false);
+                this.btnPPais.set_Location(new System.Drawing.Point(320, 352));
+                this.btnPPais.set_Name("btnPPais");
+                this.btnPPais.set_Size(new System.Drawing.Size(22, 20));
+                this.btnPPais.set_TabIndex(18);
+                this.btnPPais.set_Text("...");
+                this.btnPPais.add_Click(new System.EventHandler(this.btnPPais_Click));
+                // 
+                // btnPProfissao
+                // 
+                this.btnPProfissao.set_Enabled(false);
+                this.btnPProfissao.set_Location(new System.Drawing.Point(320, 392));
+                this.btnPProfissao.set_Name("btnPProfissao");
+                this.btnPProfissao.set_Size(new System.Drawing.Size(22, 20));
+                this.btnPProfissao.set_TabIndex(22);
+                this.btnPProfissao.set_Text("...");
+                this.btnPProfissao.add_Click(new System.EventHandler(this.btnPProfissao_Click));
+                // 
+                // edtProfissao
+                // 
+                this.edtProfissao.set_Enabled(false);
+                this.edtProfissao.set_Location(new System.Drawing.Point(96, 392));
+                this.edtProfissao.set_MaxLength(30);
+                this.edtProfissao.set_Name("edtProfissao");
+                this.edtProfissao.set_Size(new System.Drawing.Size(224, 20));
+                this.edtProfissao.set_TabIndex(21);
+                this.edtProfissao.set_Text("");
+                // 
+                // edtCodProfissao
+                // 
+                this.edtCodProfissao.set_Enabled(false);
+                this.edtCodProfissao.set_Location(new System.Drawing.Point(8, 392));
+                this.edtCodProfissao.set_MaxLength(10);
+                this.edtCodProfissao.set_Name("edtCodProfissao");
+                this.edtCodProfissao.set_Size(new System.Drawing.Size(80, 20));
+                this.edtCodProfissao.set_TabIndex(20);
+                this.edtCodProfissao.set_Text("");
+                this.edtCodProfissao.add_Leave(new System.EventHandler(this.edtCodProfissao_Leave));
+                // 
+                // labProfissao
+                // 
+                this.labProfissao.set_Location(new System.Drawing.Point(8, 376));
+                this.labProfissao.set_Name("labProfissao");
+                this.labProfissao.set_Size(new System.Drawing.Size(88, 16));
+                this.labProfissao.set_TabIndex(19);
+                this.labProfissao.set_Text("Profissão:");
+                // 
+                // frmCadClientes
+                // 
+                this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+                this.set_ClientSize(new System.Drawing.Size(520, 453));
+                this.get_Controls().Add(this.btnPProfissao);
+                this.get_Controls().Add(this.edtProfissao);
+                this.get_Controls().Add(this.edtCodProfissao);
+                this.get_Controls().Add(this.labProfissao);
+                this.get_Controls().Add(this.btnPPais);
+                this.get_Controls().Add(this.edtPais);
+                this.get_Controls().Add(this.edtCodPais);
+                this.get_Controls().Add(this.labPais);
+                this.get_Controls().Add(this.grpEndereco);
+                this.get_Controls().Add(this.labDtNascimento);
+                this.get_Controls().Add(this.edtDtNascimento);
+                this.get_Controls().Add(this.edtTelefone);
+                this.get_Controls().Add(this.labTelefone);
+                this.get_Controls().Add(this.rdgSexo);
+                this.get_Controls().Add(this.edtIdentidade);
+                this.get_Controls().Add(this.labIdentidade);
+                this.get_Controls().Add(this.edtEmail);
+                this.get_Controls().Add(this.labEmail);
+                this.set_Name("frmCadClientes");
+                this.set_Text("Cadastro de Clientes");
+                this.add_Closing(new System.ComponentModel.CancelEventHandler(this.frmCadClientes_Closing));
+                this.rdgSexo.ResumeLayout(false);
+                this.grpEndereco.ResumeLayout(false);
+                this.ResumeLayout(false);
+	}
+
+	protected boolean ValidaDados(boolean bTodosDados)
+	{
+		super.ValidaDados(bTodosDados);	
+
+		if (RotinasGlobais.Rotinas.ValidaCampo(edtCodigo.get_Text(),
+			"CPF não informado!"))
+		  return false;
+		if (bTodosDados) {
+		  if (RotinasGlobais.Rotinas.ValidaCampo(edtDescricao.get_Text(),
+			"Nome não informado!"))
+			return false;
+                  if (RotinasGlobais.Rotinas.ValidaCampo(edtEmail.get_Text(),
+                  	"E-mail não informado!"))
+                  	return false;
+                  if (rbMasculino.get_Checked()==false && rbFeminino.get_Checked()==false){
+                    MessageBox.Show(this,"Sexo não informado!",
+                    frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    return false;
+                  }
+                  if (RotinasGlobais.Rotinas.ValidaCampo(edtTelefone.get_Text(),
+                  	"Telefone não informado!"))
+                  	return false;
+                  if (RotinasGlobais.Rotinas.ValidaCampo(edtCodEndereco.get_Text(),
+                  	"Endereço não informado!"))
+                  	return false;
+                  if (RotinasGlobais.Rotinas.ValidaCampo(edtCodPais.get_Text(),
+                  	"País não informado!"))
+                  	return false;
+                  if (RotinasGlobais.Rotinas.ValidaCampo(edtCodProfissao.get_Text(),
+                  	"Profissão não informada!"))
+                  	return false;
+		}
+		return true;
+	}
+
+	protected void InformaLimpaDados(boolean bInformar)
+	{
+	  super.InformaLimpaDados(bInformar);
+
+	  if (bInformar) {
+		edtEmail.set_Text(Campos.get_Item(2).ToString());
+		edtIdentidade.set_Text(Campos.get_Item(3).ToString());
+		if (Campos.get_Item(4).ToString().Equals("M")) {
+		   rbMasculino.set_Checked(true);
+		   rbFeminino.set_Checked(false);
+		} else {
+		  rbMasculino.set_Checked(false);
+		  rbFeminino.set_Checked(true);
+		}
+		edtTelefone.set_Text(Campos.get_Item(5).ToString());
+		edtDtNascimento.set_Text(RotinasGlobais.Rotinas.FormataDataStr(
+							 Campos.get_Item(6).ToString(),"dd/MM/yyyy"));
+		edtCodEndereco.set_Text(Campos.get_Item(7).ToString());
+		edtLogradouro.set_Text(Campos.get_Item(8).ToString());
+		edtBairro.set_Text(Campos.get_Item(9).ToString());
+		edtCEP.set_Text(Campos.get_Item(10).ToString());
+		edtCidade.set_Text(Campos.get_Item(11).ToString());
+		edtEstado.set_Text(Campos.get_Item(12).ToString());
+		edtCodPais.set_Text(Campos.get_Item(13).ToString());
+		edtPais.set_Text(Campos.get_Item(14).ToString());
+		edtCodProfissao.set_Text(Campos.get_Item(15).ToString());
+		edtProfissao.set_Text(Campos.get_Item(16).ToString());
+	  } else {
+		edtEmail.Clear();
+		edtIdentidade.Clear();
+		rbMasculino.set_Checked(false);
+		rbFeminino.set_Checked(false);
+		edtTelefone.Clear();
+		edtDtNascimento.set_Value(DateTime.get_Now());
+		edtCodEndereco.Clear();
+		edtLogradouro.Clear();
+		edtBairro.Clear();
+		edtCEP.Clear();
+		edtCidade.Clear();
+		edtEstado.Clear();
+		edtCodPais.Clear();
+		edtPais.Clear();
+		edtCodProfissao.Clear();
+		edtProfissao.Clear();
+	  }
+
+	}
+
+	protected void HabilitaDados(boolean bHabilita)
+	{
+		 super.HabilitaDados(bHabilita);
+
+		 edtEmail.set_Enabled(bHabilita);
+		 edtIdentidade.set_Enabled(bHabilita);
+		 rbMasculino.set_Enabled(bHabilita);
+		 rbFeminino.set_Enabled(bHabilita);
+		 edtTelefone.set_Enabled(bHabilita);
+		 edtDtNascimento.set_Enabled(bHabilita);
+		 edtCodEndereco.set_Enabled(bHabilita);
+		 btnPEndereco.set_Enabled(bHabilita);
+		 edtCodPais.set_Enabled(bHabilita);
+		 btnPPais.set_Enabled(bHabilita);
+		 edtCodProfissao.set_Enabled(bHabilita);
+		 btnPProfissao.set_Enabled(bHabilita);
+	}
+
+	private void btnExcluir_Click(Object sender, System.EventArgs e)
+	{
+		ExcluirDados(ConsultasSQL.ConsSQL.Cliente('D',edtCodigo.get_Text(),
+		"","","","","","","","",""));
+	}
+
+	private void btnPesquisar_Click(Object sender, System.EventArgs e)
+	{
+		PesquisarDados(ConsultasSQL.ConsSQL.Cliente('S',edtCodigo.get_Text(),
+		"","","","","","","","",""),"Cliente não encontrado!");
+	}
+
+	private void btnSalvar_Click(Object sender, System.EventArgs e)
+	{
+                if (rbMasculino.get_Checked())
+                  sSexo="M";
+                else
+                  sSexo="F";
+
+		SalvarDados(ConsultasSQL.ConsSQL.Cliente('S',edtCodigo.get_Text(),
+		"","","","","","","","",""),
+		ConsultasSQL.ConsSQL.Cliente('U',edtCodigo.get_Text(),edtDescricao.get_Text(),
+		edtEmail.get_Text(),edtIdentidade.get_Text(),sSexo,edtTelefone.get_Text(),
+		edtDtNascimento.get_Value().ToString("MM/dd/yyyy"),
+		edtCodEndereco.get_Text(),edtCodPais.get_Text(),edtCodProfissao.get_Text()),
+		ConsultasSQL.ConsSQL.Cliente('I',edtCodigo.get_Text(),edtDescricao.get_Text(),
+		edtEmail.get_Text(),edtIdentidade.get_Text(),sSexo,edtTelefone.get_Text(),
+		edtDtNascimento.get_Value().ToString("MM/dd/yyyy"),
+		edtCodEndereco.get_Text(),edtCodPais.get_Text(),edtCodProfissao.get_Text()),
+		true);
+	}
+
+	private void frmCadClientes_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
+	{
+		frmPrincipal.fPrincipal.mnuCadClientes.set_Enabled(true);
+		frmPrincipal.fPrincipal.tlbClientes.set_Enabled(true);
+	}
+
+	protected void edtCodigo_Leave(Object sender, System.EventArgs e)
+	{
+		if (edtCodigo.get_Text().Equals("")==false) {
+		  if (RotinasGlobais.Rotinas.ValidaCPF(edtCodigo.get_Text())==false) {
+			  MessageBox.Show(this,"CPF inválido!",
+			  frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+			  MessageBoxIcon.Error);
+			  edtCodigo.Clear();
+			  edtCodigo.Focus();
+		  }
+		}
+	}
+
+	private void edtCodEndereco_Leave(Object sender, System.EventArgs e)
+	{
+	  if (edtCodEndereco.get_Text().Equals("")==false) {
+		edtLogradouro.set_Text(
+		RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+		edtCodEndereco.get_Text(),ConsultasSQL.ConsSQL.Endereco('S',
+		edtCodEndereco.get_Text(),"","","","",""),"Endereço não encontrado!"));
+		if (edtLogradouro.get_Text().Equals("")==false) {
+		  edtBairro.set_Text(ConsCampo.get_Item(2).ToString());
+		  edtCEP.set_Text(ConsCampo.get_Item(3).ToString());
+		  edtCidade.set_Text(ConsCampo.get_Item(4).ToString());
+		  edtEstado.set_Text(ConsCampo.get_Item(5).ToString());
+		} else {
+		  edtCodEndereco.Focus();
+		  edtLogradouro.Clear();
+		  edtBairro.Clear();
+		  edtCEP.Clear();
+		  edtCidade.Clear();
+		  edtEstado.Clear();
+		}
+	  } else {
+		  edtLogradouro.Clear();
+		  edtBairro.Clear();
+		  edtCEP.Clear();
+		  edtCidade.Clear();
+		  edtEstado.Clear();
+	  }
+	}
+	
+	private void edtCodPais_Leave(Object sender, System.EventArgs e)
+	{
+		if (edtCodPais.get_Text().Equals("")==false) {
+		   edtPais.set_Text(RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+		   ConsultasSQL.ConsSQL.Pais('S',edtCodPais.get_Text(),""),
+		   "País não encontrado!"));
+		   if (edtPais.get_Text().Equals("")) {
+			 edtCodPais.Clear();
+			 edtCodPais.Focus();
+		   }
+		 } else
+			edtPais.Clear();
+
+	}
+
+	private void edtCodProfissao_Leave(Object sender, System.EventArgs e)
+	{
+	  if (edtCodProfissao.get_Text().Equals("")==false) {
+	   edtProfissao.set_Text(RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+	   edtCodProfissao.get_Text(),ConsultasSQL.ConsSQL.Profissao('S',
+	   edtCodProfissao.get_Text(),""),"Profissão não encontrado!"));
+	   if (edtProfissao.get_Text().Equals(""))
+		 edtCodProfissao.Focus();
+	  } else
+		edtProfissao.Clear();
+	}
+
+	private void btnPEndereco_Click(Object sender, System.EventArgs e)
+	{
+		frmConEnderecos pfConEnderecos = new frmConEnderecos();
+		pfConEnderecos.ShowDialog();
+		edtCodEndereco.set_Text(RotinasGlobais.Rotinas.sCodigoSelecionado);
+		edtCodEndereco_Leave(this, null);
+	}
+
+	private void btnPPais_Click(Object sender, System.EventArgs e)
+	{
+		frmConPaises pfConPaises = new frmConPaises();
+		pfConPaises.ShowDialog();
+		edtCodPais.set_Text(RotinasGlobais.Rotinas.sCodigoSelecionado);
+		edtCodPais_Leave(this,null);
+	}
+
+	private void btnPProfissao_Click(Object sender, System.EventArgs e)
+	{
+		frmConProfissoes pfConProfissoes = new frmConProfissoes();
+		pfConProfissoes.ShowDialog();
+		edtCodProfissao.set_Text(RotinasGlobais.Rotinas.sCodigoSelecionado);
+		edtCodProfissao_Leave(this,null);
+	}
+
+}
+
+

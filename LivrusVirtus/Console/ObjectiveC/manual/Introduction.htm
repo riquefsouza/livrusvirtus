@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0051)http://toodarkpark.org/computers/objc/introobj.html -->
+<HTML><HEAD><TITLE>Introduction</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content="MSHTML 6.00.2800.1458" name=GENERATOR></HEAD>
+<BODY vLink=#8b4500 bgColor=#e0e0e0><A 
+href="http://toodarkpark.org/computers/objc/objctoc.html"><IMG 
+src="Introduction_arquivos/DocsContents.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/oop.html"><IMG 
+src="Introduction_arquivos/DocsRightArrow.gif"></A> <A name=375></A><A 
+name=499></A><A name=483></A>
+<CENTER><FONT size=+5><B>I</B><FONT size=+0><FONT 
+size=+4><B>ntroduction</B><FONT size=+0> </CENTER>
+<HR>
+
+<P><A name=703></A>Object-oriented programming, like most interesting new 
+developments, builds on some old ideas, extends them, and puts them together in 
+novel ways. The result is many-faceted and a clear step forward for the art of 
+programming. An object-oriented approach makes programs more intuitive to 
+design, faster to develop, more amenable to modifications, and easier to 
+understand. It leads not only to new ways of constructing programs, but also to 
+new ways of conceiving the programming task.
+<P><A name=704></A>Nevertheless, object-oriented programming presents some 
+formidable obstacles to those who would like to understand what it's all about 
+or begin trying it out. It introduces a new way of doing things that may seem 
+strange at first, and it comes with an extensive terminology that can take some 
+getting used to. The terminology will help in the end, but it's not always easy 
+to learn. Moreover, there are as yet few full-fledged object-oriented 
+development environments available to try out. It can be difficult to get 
+started.
+<P><A name=705></A>That's where this book comes in. It's designed to help you 
+become familiar with object-oriented programming and get over the hurdle its 
+terminology presents. It spells out some of the implications of object-oriented 
+design and tries to give you a flavor of what writing an object-oriented program 
+is really like. It fully documents the Objective-C(tm) language, an 
+object-oriented programming language based on standard C, and introduces the 
+most extensive object-oriented development environment currently 
+available--OPENSTEP(tm).
+<P><A name=706></A>The book is intended for readers who might be interested in:
+<P>
+<UL><A name=707></A>
+  <LI>Learning about object-oriented programming, <A name=708></A>
+  <LI>Finding out about the OPENSTEP development environment, or <A 
+name=709></A>
+  <LI>Programming in Objective-C. </LI></UL><A name=710></A>NeXT supplies its own 
+compiler for the Objective-C language (a modification of the GNU C compiler) and 
+a run-time system to carry out the dynamic functions of the language. It has 
+tested and made steady improvements to both over the years; this book describes 
+the latest release, which includes provisions for declaring and adopting 
+protocols and setting the scope of instance variables.
+<P><A name=711></A>Throughout this manual and in other NeXT documentation, the 
+term ``Objective-C'' refers to the language as implemented for the OPENSTEP 
+development environment and presented here.
+<P><A name=712></A>
+<HR width="45%">
+
+<CENTER><FONT size=+3>T<FONT size=+0><FONT size=+2>he<FONT size=+0> <FONT 
+size=+3>D<FONT size=+0><FONT size=+2>evelopment<FONT size=+0> <FONT 
+size=+3>E<FONT size=+0><FONT size=+2>nvironment<FONT size=+0> </CENTER>
+<HR width="45%">
+
+<P><A name=713></A>Every object-oriented development environment worthy of the 
+name consists of at least three parts:
+<P>
+<UL><A name=714></A>
+  <LI>A library of objects and software frameworks and kits <A name=715></A>
+  <LI>A set of development tools <A name=716></A>
+  <LI>An object-oriented programming language </LI></UL><A name=717></A>OPENSTEP 
+comes with an extensive library. It includes several software frameworks 
+containing definitions for objects that you can use ``off the shelf'' or adapt 
+to your program's needs. These include the Foundation Framework, the Application 
+Kit(tm) framework (for building a graphical user interface), and others.
+<P><A name=348></A>OPENSTEP also includes some exceptional development tools for 
+putting together applications. There's Interface Builder(tm), a program that 
+lets you design an application graphically and assemble its user interface 
+on-screen, and Project Builder, a project-management program that provides 
+graphical access to the compiler, the debugger, documentation, a program editor, 
+and other tools. 
+<P><A name=349></A>This book is about the third component of the development 
+environment--the programming language. All OPENSTEP software frameworks are 
+written in the Objective-C language. To get the benefit of the frameworks, 
+applications must also use Objective-C. You are not restricted entirely to 
+Objective-C, however; you are free to incorporate C++ code into your 
+applications as well.
+<P><A name=718></A>Objective-C is implemented as set of extensions to the C 
+language. It's designed to give C a full capability for object-oriented 
+programming, and to do so in a simple and straightforward way. Its additions to 
+C are few and are mostly based on Smalltalk, one of the first object-oriented 
+programming languages.
+<P><A name=719></A>This book both introduces the object-oriented model that 
+Objective-C is based upon and fully documents the language. It concentrates on 
+the Objective-C extensions to C, not on the C language itself. There are many 
+good books available on C; this manual doesn't attempt to duplicate them.
+<P><A name=720></A>Because this isn't a book about C, it assumes some prior 
+acquaintance with that language. However, it doesn't have to be an extensive 
+acquaintance. Object-oriented programming in Objective-C is sufficiently 
+different from procedural programming in standard C that you won't be hampered 
+if you're not an experienced C programmer.
+<P><A name=721></A>
+<HR width="35%">
+
+<CENTER><FONT size=+3>W<FONT size=+0><FONT size=+2>hy<FONT size=+0> <FONT 
+size=+3>O<FONT size=+0><FONT size=+2>bjective-C<FONT size=+0> </CENTER>
+<HR width="35%">
+
+<P><A name=722></A>The Objective-C language was chosen for the OPENSTEP 
+development environment for a variety of reasons. First and foremost, it's an 
+object-oriented language. The kind of functionality that's packaged in the 
+OPENSTEP software frameworks can only be delivered through object-oriented 
+techniques. This manual will explain how the frameworks work and why this is the 
+case.
+<P><A name=723></A>Second, because Objective-C is an extension of standard ANSI 
+C, existing C programs can be adapted to use the software frameworks without 
+losing any of the work that went into their original development. Since 
+Objective-C incorporates C, you get all the benefits of C when working within 
+Objective-C. You can choose when to do something in an object-oriented way 
+(define a new class, for example) and when to stick to procedural programming 
+techniques (define a structure and some functions instead of a class).
+<P><A name=724></A>Moreover, Objective-C is a simple language. Its syntax is 
+small, unambiguous, and easy to learn. Object-oriented programming, with its 
+self-conscious terminology and emphasis on abstract design, often presents a 
+steep learning curve to new recruits. A well-organized language like Objective-C 
+can make becoming a proficient object-oriented programmer that much less 
+difficult. The size of this manual is a testament to the simplicity of 
+Objective-C. It's not a big book--and Objective-C is fully documented in just 
+two of its chapters.
+<P><A name=725></A>Objective-C is the most dynamic of the object-oriented 
+languages based on C. The compiler throws very little away, so a great deal of 
+information is preserved for use at run time. Decisions that otherwise might be 
+made at compile time can be postponed until the program is running. This gives 
+Objective-C programs unusual flexibility and power. For example, Objective-C's 
+dynamism yields two big benefits that are hard to get with other nominally 
+object-oriented languages:
+<P>
+<UL><A name=726></A>
+  <LI>Objective-C supports an open style of dynamic binding, a style than can 
+  accommodate a simple architecture for interactive user interfaces. Messages 
+  are not necessarily constrained by either the class of the receiver or the 
+  method selector, so a software framework can allow for user choices at run 
+  time and permit developers freedom of expression in their design. (Terminology 
+  like ``dynamic binding,'' ``message,'' ``class,'' ``receiver,'' and 
+  ``selector'' will be explained in due course in this manual.) <A name=727></A>
+  <LI>Objective-C's dynamism enables the construction of sophisticated 
+  development tools. An interface to the run-time system provides access to 
+  information about running applications, so it's possible to develop tools that 
+  monitor, intervene, and reveal the underlying structure and activity of 
+  Objective-C applications. Interface Builder could not have been developed with 
+  a less dynamic language. </LI></UL><A name=728></A>
+<HR width="45%">
+
+<CENTER><FONT size=+3>H<FONT size=+0><FONT size=+2>ow the<FONT size=+0> <FONT 
+size=+3>M<FONT size=+0><FONT size=+2>anual is<FONT size=+0> <FONT size=+3>O<FONT 
+size=+0><FONT size=+2>rgnaized<FONT size=+0> </CENTER>
+<HR width="45%">
+
+<P><A name=729></A>This manual is divided into four chapters and two appendices. 
+The chapters are:
+<P>
+<UL><A name=730></A>
+  <LI><A href="http://toodarkpark.org/computers/objc/oop.html#">Chapter 1</A>, 
+  ``<STRONG><A 
+  href="http://toodarkpark.org/computers/objc/oop.html#">OBJECT-ORIENTED 
+  PROGRAMMING</A></STRONG>,'' discusses the rationale for object-oriented 
+  programming languages and introduces much of the terminology. It develops the 
+  ideas behind object-oriented programming techniques. If you're already 
+  familiar with object-oriented programming and are interested only in 
+  Objective-C, you may want to skip this chapter and go directly to <A 
+  href="http://toodarkpark.org/computers/objc/coreobjc.html#">Chapter 2</A>. <A 
+  name=731></A>
+  <LI><A href="http://toodarkpark.org/computers/objc/coreobjc.html#">Chapter 
+  2</A>, ``<STRONG><A 
+  href="http://toodarkpark.org/computers/objc/coreobjc.html#">THE OBJECTIVE-C 
+  LANGUAGE</A></STRONG>,'' describes the basic concepts and syntax of 
+  Objective-C. It covers many of the same topics as <A 
+  href="http://toodarkpark.org/computers/objc/oop.html#">Chapter 1</A>, but 
+  looks at them from the standpoint of the Objective-C language. It reintroduces 
+  the terminology of object-oriented programming, but in the context of 
+  Objective-C. <A name=732></A>
+  <LI><A href="http://toodarkpark.org/computers/objc/moreobjc.htm#">Chapter 
+  3</A>, ``<STRONG><A 
+  href="http://toodarkpark.org/computers/objc/moreobjc.html#">OBJECTIVE-C 
+  EXTENSIONS</A></STRONG>,'' concentrates on two of the principal innovations 
+  introduced into the language as part of OPENSTEP Objective-C--categories and 
+  protocols. It also takes up static typing and lesser used aspects of the 
+  language. <A name=733></A>
+  <LI><A href="http://toodarkpark.org/computers/objc/runtime.html#">Chapter 
+  4</A>, ``<STRONG><A 
+  href="http://toodarkpark.org/computers/objc/runtime.html#">THE RUN-TIME 
+  SYSTEM</A></STRONG>,'' looks at the NSObject class and how Objective-C 
+  programs interact with the run-time system. In particular, it examines the 
+  paradigms for allocating and initializing new objects, dynamically loading new 
+  classes at run time, and forwarding messages to other objects. </LI></UL><A 
+name=734></A>The appendices contain reference material that might be useful for 
+understanding the language. They are:
+<P>
+<UL><A name=735></A>
+  <LI><A href="http://toodarkpark.org/computers/objc/summary.html#">Appendix 
+  A</A>, ``<STRONG><A 
+  href="http://toodarkpark.org/computers/objc/summary.html#">OBJECTIVE-C 
+  LANGUAGE SUMMARY</A></STRONG>,'' lists and briefly comments on all of the 
+  Objective-C extensions to the C language. <A name=736></A>
+  <LI><A href="http://toodarkpark.org/computers/objc/grammar.html#">Appendix 
+  B</A>, ``<STRONG><A 
+  href="http://toodarkpark.org/computers/objc/grammar.html#">REFERENCE MANUAL 
+  FOR THE OBJECTIVE-C LANGUAGE</A></STRONG>,'' presents, without comment, a 
+  formal grammar of the Objective-C extensions to the C language. This reference 
+  manual is meant to be read as a companion to the reference manual for C 
+  presented in <EM>The C Programming Language</EM> by Brian W. Kernighan and 
+  Dennis M. Ritchie, published by Prentice Hall. </LI></UL><A name=737></A>
+<HR width="30%">
+
+<CENTER><FONT size=+3>C<FONT size=+0><FONT size=+2>onventions<FONT size=+0> 
+</CENTER>
+<HR width="30%">
+
+<P><A name=738></A>Where this manual discusses functions, methods, and other 
+programming elements, it makes special use of bold and italic fonts. 
+<STRONG>Bold</STRONG> denotes words or characters that are to be taken literally 
+(typed as they appear). <EM>Italic</EM> denotes words that represent something 
+else or can be varied. For example, the syntax
+<P><A name=739></A><STRONG>@interface</STRONG> <EM>ClassName</EM> 
+<STRONG>(</STRONG> <EM>CategoryName</EM> <STRONG>)</STRONG>
+<P><A name=740></A>means that <STRONG>@interface</STRONG> and the two 
+parentheses are required, but that you can choose the class name and category 
+name. Where method syntax is shown, the method name is bold, parameters are 
+italic, and other elements (mainly data types) are in regular font. For example:
+<P><A name=741></A>-- (void)<STRONG>encodeWithCoder:</STRONG>(NSCoder 
+*)<EM>coder</EM>
+<P><A name=742></A>Where example code is shown, ellipsis indicates the parts, 
+often substantial parts, that have been omitted:
+<P><A name=1862></A><PRE>- (void)encodeWithCoder:(NSCoder *)coder<BR>
+{<BR>
+    [super encodeWithCoder:coder];<BR>
+    . . .<BR>
+}
+</PRE><A name=744></A>The conventions used in the reference appendix are 
+described in that appendix.
+<P><BR><A href="http://toodarkpark.org/computers/objc/objctoc.html"><IMG 
+src="Introduction_arquivos/DocsContents.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/oop.html"><IMG 
+src="Introduction_arquivos/DocsRightArrow.gif"></A> 
+<P>
+<HR>
+<FONT size=-1>Last Modified: 03:46pm , January 13, 1996 
+<CENTER>
+<HR>
+<A href="http://www.next.com/HotNews/">Hot News</A> | <A 
+href="http://www.next.com/OpenStep/">OpenStep</A> | <A 
+href="http://www.next.com/WebObjects/">WebObjects</A> | <A 
+href="http://www.next.com/Services/">Services</A> | <A 
+href="http://www.next.com/BuyNow/">Buy Now</A> | <A 
+href="http://www.next.com/NeXTanswers/">NeXTanswers</A> | <A 
+href="http://www.next.com/Search/">Search</A> | <A 
+href="http://www.next.com/AboutNeXT/">About NeXT</A> 
+<HR>
+</CENTER>NeXT sales and product information inquiries? <A 
+href="http://www.next.com/AboutNeXT/Feedback.html">Click here</A><BR><A 
+href="http://www.next.com/Legal/">Copyright</A> 1996 <A 
+href="http://www.next.com/">NeXT Software, Inc.</A> <A 
+href="http://www.next.com/Legal/">Proprietary Notices.</A> 
+</FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></FONT></BODY></HTML>

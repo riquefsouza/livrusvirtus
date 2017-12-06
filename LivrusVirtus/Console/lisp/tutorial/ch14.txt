@@ -1,0 +1,100 @@
+LISP Tutorial   by Mark Meyer
+Chapter 14
+Advanced topics
+--------------------------------------------------------------------------------
+TOPICS:  multiple values, sorting trickiness, random numbers, nested functions
+--------------------------------------------------------------------------------
+
+Multiple Values
+---------------
+
+    You may get multiple-valued returns from some functions such as round.
+    These values can be stored using multiple-value-setq:
+
+        > (multiple-value-setq (int-part frac-part) (round 7.3))
+
+    You will see the value 7, but if you evaluate "frac-part" you will get 0.3.
+
+    Here's another thing you can do:
+
+        > (multiple-value-setq (a b c) (values 1 2 3))
+
+    This effectively assigns 1 to a, 2 to b, 3 to c.  (Of course, setq can do
+    this better:
+
+        > (setq a 1 b 2 c 3)
+
+    But you may want some of your functions to return multiple-values.  It
+    makes for cleaner code than returning a list, and then picking apart
+    this list.
+
+Sorting
+-------
+
+    Sort is tricky to use.  You really should following the example below. Here
+    are the steps:
+
+       1.  Identify the variable that contains the list to be sorted.
+           Call it "var".
+       2.  Use stable-sort, not sort.
+       3.  Identify your predicate function.  By clever choice, you
+           can get the sort to go in ascending order or descending.
+       4.  (setq var (stable-sort var *predicate*))
+
+    ALL of these steps should be followed to avoid surprises!
+
+     (defun demo1 ()
+         (setq numlist '(53 100 23 14 900 12 37 2300 720 18 53 97 37))
+         (setq numlist (stable-sort numlist #'<))
+         (format t "Sorted ascending...~S~%~%" numlist)
+
+         (setq numlist '(53 100 23 14 900 12 37 2300 720 18 53 97 37))
+         (setq numlist (stable-sort numlist #'>))
+         (format t "Sorted descending...~S~%~%" numlist)
+
+         nil
+     )
+
+
+Random numbers & seeds
+----------------------
+
+    This is how to set the random state from the system clock:
+
+         > (setq *random-state* (make-random-state t))
+
+    Then just use (random NNN) as you want.  You can have more than one random
+    state.
+
+Defining functions inside of functions
+--------------------------------------
+
+    Use "flet".  The function definition is identical to the familiar
+    defun method, except that you do not use the keyword defun.  Here's
+    a simple example:
+
+         (defun whatever (n)
+             (format t "Now in whatever, n=~D~%" n)
+             (flet ((square (k) (* k k)))
+                   (print n)
+                   (setq m 5)
+                   (setq x (square m))
+                   (format t "m=~D  x=~D~%" m x)
+             )
+         )
+
+    The new function square can only be used outside whatever.  If there
+    were already a square function in your environment, this one would
+    temporarily override it.  (To permanently redefine square in your
+    environment, just issue another defun.)
+
+    Flet can be used to create a temporary function that is visible only
+    within this current function, or to temporarily redefine a function
+    that is in your environment.  Because of this, any function that
+    the inner function calls refers to some function outside the flet.
+    Thus, you could not define a recursive function.
+
+    To define a local recursive function, use "labels" instead.  It has
+    the same syntax as flet.
+
+--------------------------------------------------------------------------------

@@ -1,0 +1,27 @@
+//---------------------------------------------------------------------------
+
+#ifndef ConAutoresH
+#define ConAutoresH
+//---------------------------------------------------------------------------
+#include <Classes.hpp>
+#include <Controls.hpp>
+#include <StdCtrls.hpp>
+#include <Forms.hpp>
+#include "Consultas.h"
+#include <Db.hpp>
+#include <DBGrids.hpp>
+#include <DBTables.hpp>
+#include <ExtCtrls.hpp>
+#include <Grids.hpp>
+//---------------------------------------------------------------------------
+class TfrmConAutores : public TfrmConsultas
+{
+__published:	// IDE-managed Components
+private:	// User declarations
+public:		// User declarations
+        __fastcall TfrmConAutores(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TfrmConAutores *frmConAutores;
+//---------------------------------------------------------------------------
+#endif

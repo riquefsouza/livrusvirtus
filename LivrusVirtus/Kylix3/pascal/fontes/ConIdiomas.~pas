@@ -1,0 +1,25 @@
+unit ConIdiomas;
+
+interface
+
+uses
+  SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
+  QDialogs, QStdCtrls, Consultas, FMTBcd, Provider, DBClient, DB, SqlExpr,
+  QGrids, QDBGrids, QExtCtrls;
+
+type
+  TfrmConIdiomas = class(TfrmConsultas)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConIdiomas: TfrmConIdiomas;
+
+implementation
+
+{$R *.xfm}
+
+end.

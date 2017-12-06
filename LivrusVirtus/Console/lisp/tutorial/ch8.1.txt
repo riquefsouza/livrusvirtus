@@ -1,0 +1,88 @@
+LISP Tutorial   by Mark Meyer
+Chapter 8.1
+More about Functions
+--------------------------------------------------------------------------------
+TOPICS:  Optional and keyword parameters, standard keywords
+--------------------------------------------------------------------------------
+
+Optional parameters in function definitions
+-------------------------------------------
+
+    If you have 1 or more optional parameters, put the keyword &optional
+    in front of a list of pairs.  Each pair starts out with the parameter's
+    name, followed by its default value.
+
+         (defun doit (x y &optional (z 10) (w 15))
+              ...body of function doit...
+         )
+
+    In this example, x and y must be given in any call to doit, but z and
+    w are optional.  If the user wants to override the value of 15 for w,
+    then z MUST be specified, too, even it the value given is the same as
+    the default.
+
+Keyword parameters in function definitions
+------------------------------------------
+
+    The above situation where z must be specified if w is explicitly
+    specified can be overcome by using keyword parameters.  Put the keyword
+    &key in front of the keyword parameters.  Then list the parameter names,
+    or list name/default-value pairs if you wish to give them a default
+    value as in the optional parameter case:
+
+         (defun doit (x y &key z (w 15))
+              ...body of function doit...
+         )
+
+    Now we can refer to z or w independently by keyword if we want to
+    specify them.  W has a default value of 15, while z has a default of nil.
+    To call doit, you might use
+
+         (doit 5 7 :w 13)      or     (doit 1 2 :w 13 :z 0)
+
+Keywords
+--------
+
+    Often functions have keyword parameters to make it easier to customize.
+    The often used "assoc" function is such a one.  It has a test function
+    parameter, identified by the keyword :test.  Every such keyword in Common
+    LISP begins with a colon.  Here is an example:
+
+      (setq dbase '(("mark" 35) ("kathy" 25) ("doran" 29) ("sally" 53)))
+      (print (assoc "kathy" dbase :test #'string=))
+
+    Remember that an association list is a list of lists, usually a list of
+    pairs as "dbase" above.  The assoc function is given something to search
+    for, which is matched against the 1st element of each sublist.  It then
+    returns the whole sublist, if it finds the 1st element.  Normally,
+    however, assoc uses the "eql" function, which won't work if you are
+    searching a list of strings, as we are above.  You have to instead say
+    that assoc should use the built-in function "string=" when it searches
+    for the 1st element.  The keyword :test says that the next s-expression
+    is the name of the function to use for this test.  Notice that when you
+    refer to functions by name, as we did above, you must use a special
+    form of the quote, called the "function quote."  This takes the form #'
+    instead of just '.
+
+
+Local variables
+---------------
+
+    There are several ways, but the let statement is the easiest.  Just
+    include a variable list after the let keyword, before the list of
+    forms to be evaluated.  Thus, it works just like a compound statement in
+    C.
+
+        (let (a b c)
+             (setq a (car biglist))
+             (setq b (transform a))
+             (setq c a)
+        )
+
+    In the above, a, b, and c are local variables.  If there were global
+    variables in existence before the let was entered, their values are
+    saved, so that when the last form of the let block is done, those original
+    values will be restored.  Naturally, any other variable, such as "biglist"
+    which is not declared in the let block is global to it, and can be used.
+
+--------------------------------------------------------------------------------

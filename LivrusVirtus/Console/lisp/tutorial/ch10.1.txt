@@ -1,0 +1,419 @@
+LISP Tutorial   by Mark Meyer
+Chapter 10.1
+Advanced Recursion
+--------------------------------------------------------------------------------
+TOPICS:    
+--------------------------------------------------------------------------------
+
+Sometimes you have to "preprocess" the arguments to make them workable
+for the recursion function.  In cases like this, you should make up
+an auxiliary or helper function that does the real work, while the
+main function does the setup and calling of the auxiliary.  By doing this,
+users of your main function do not have to know about the preprocessing.
+Here's an example using our left to right evaluation which we discussed
+above:
+
+   
+    (defun evaluate (list)
+         (evaluate (reverse list))
+    )
+    (defun evaluate-aux (list)
+         (xif (= 1 (length list))
+          then (car list)
+          else (case (second list)
+                  (+ (+ (evaluate-aux (cdr (cdr list))) (first list)))
+                  (- (- (evaluate-aux (cdr (cdr list))) (first list)))
+               )
+         )
+    )
+
+Can you figure out how to write a recursive function that evaluates
+from left to right without first reversing the list?
+
+This preprocessing of arguments often includes error checking of param-
+eters, because this is usually done only once.  You don't need to keep
+rechecking the parameters for correctness if you've checked them once.
+Thus, main functions, even non-recursive ones, include an error checking
+helper.  In recursive functions, this should go into the nonrecursive 
+part, which is usually the startup function like "evaluate" above.
+
+Here's another classic -- the length of a list as a recursive function.
+It relies upon adding 1 for each recursive call, triggered by a
+non-empty list parameter, to the length of the rest of the list:
+   
+    (defun length (list)
+         (if (null list)
+             0
+             (1+ (length (cdr list)))
+         )
+    )
+
+A few things should be noted about this.  First, the "pure" if construct
+of LISP is used instead of my "xif" macro.  There are just two forms:
+one for the true condition and one for the false, so you can execute
+only one form, which is often inconvenient.  You can always clump
+together many forms into one by using a (let... or a (block... but that
+is just another set of parentheses!  The built-in "if" does NOT have 
+the "then" and "else" keywords.
+
+Second, the 1+ function is used to add 1.  This is just a shorthand
+form for (+ 1 ...).  Third, note that (car list) is not used!  That
+is because we just note its presence and add 1 to our length, but we
+don't inspect that first element at all.
+
+If it is more convenient to set up the recursive call with a smaller
+list by chopping off elements from the end of the list, you can use
+the built-in functions "last" and "butlast."  The trouble with "last"
+is that it returns the last element of a list in a list:
+
+     (last '(5 3 1 2 8))        gives    (8)
+
+but you can always take the car of that.  Butlast returns the list when
+the last element has been removed:
+
+     (butlast '(5 3 1 2 8))     gives    (5 3 1 2)
+
+Our next example involves a generic sort of list processor using
+recursion.  Let's say that you have a list of things (could be atoms
+or lists or anything) and you need to process each item with some
+other function, let's say "doit".  In addition, you don't have to
+accumulate any results, because function "doit" will put the results
+somewhere else.  Here's our generic function:
+
+     (defun recurse (list)
+          (xif (null list)
+           then  nil
+           else (doit (car list))
+                (recurse (cdr list))
+          )
+     )
+
+This is actually called "tail recursion" because the tail or very last
+part of the function recurse is another call to recurse.   Note that
+since this function does not accumulate the results of "doit", it
+just returns nil when the list is empty.
+
+A variation of the above is the following which uses an explicit
+return-from and thereby takes the else part outside the "if":
+
+     (defun recurse (list)      ; works the same as above
+          (if (null list)
+              (return-from recurse nil)
+          )
+          (doit (car list))
+          (recurse (cdr list))
+     )
+
+One simplification that can be done to the above is to change the 
+condition of the "if" to use a faster and simpler way, but not a 
+clearer way, of checking to see if the list is empty:
+
+     (defun recurse (list)
+          (xif list
+           then (doit (car list))
+                (recurse (cdr list))
+           else  nil
+          )
+     )
+
+By simply evaluating list, we look up the value of this variable
+(actually a parameter).  If it is nil, then the list will execute the
+else limb.  If it still has a non-nil value, then the list will do
+the true limb, which in this case is to keep going after "doing it"
+with "doit".  The reason why this is faster is because just looking
+up the value of list is less overhead than explicitly calling the null
+function:
+ 
+          (null list)
+
+Note that in this form, you still have to look up the value of list 
+anyway, so it is definitely slower than just evaluating the variable
+"list."
+
+One last tiny refinement of this generic "recurse" function is to pass
+in the "doit" function as a variable.  Yes, a variable!  Instead of
+forcing the users of function recurse to define and use a specific 
+function that they defined, called "doit", why not let them pass in 
+whatever function they want to use to apply to each element of the list?
+To do this, you need to put doit in the parameter list.  But you can't
+just call doit by the form
+
+         (doit (car list))
+
+anymore because doit is a variable whose value is a function, and
+LISP doesn't allow this.  LISP always looks at the first item in the
+list and expects it to be a function NAME.  To get around this little
+barrier, you can use the built-in function funcall.  Funcall's first
+parameter is a variable holding the name of the function you really
+want to use, followed by the parameters you wish to use with that 
+function.  Here's an example:
+
+         (setq doit '+)
+         (funcall doit 5 6 7)
+
+The answer is 18, just as if you had typed (+ 5 6 7).  Here's our
+funcall for use inside the recurse function:
+
+         (funcall doit (car list))
+
+And here's the new recurse:
+
+     (defun recurse (doit list)
+          (if (null list)
+              (return-from recurse nil)
+          )
+          (funcall doit (car list))
+          (recurse doit (cdr list))
+     )
+
+Notice that the variable "doit" must be supplied to the recursive
+call as well.
+
+How is this called?  You just give the name of the function, with a
+quote mark, as the "doit" parameter:
+
+     (recurse 'print '(1 5 3 2 6))
+
+Actually, Common LISP would prefer that you use a special quote
+mark when you pass a function's name, which is #'.  So the proper
+way to call recurse would be
+
+     (recurse #'print '(1 5 3 2 6))
+
+This has to do with passing a function's value and its scoping
+environment, and we will not concern ourselves further here.
+
+                      ------------+------------
+
+While the above recurse function works okay, the function you pass
+in does its action and "throws away" its result, unless it has
+some side effect like print or setq.  Thus, a more useful version
+of recurse would bundle together all the results of applying the
+function parameter to each of the items in the list, and then
+return the bundle as the final value of recurse.  Here's a version
+of recurse which does this:
+
+     (defun recurse (doit list)
+          (if (null list)
+              (return-from recurse nil)
+          )
+          (append (list (funcall doit (car list)))
+                  (recurse doit (cdr list))
+          )
+     )
+
+It is necessary to use the list function to turn the result of
+(funcall doit (car list)) into a list because append requires two
+lists, and the results of "doit" may not be a list.
+
+To test, let's use the 1+ function:
+
+     (recurse #'1+ '(5 2 8 9 14))
+
+We get (6 3 9 10 15).
+
+Now it seems like recurse, especially in this second form, would be
+very useful, and indeed it is.  We can still use it even if we don't
+want to do anything with the bundle of results, in which case we
+just ignore the results of recurse.  This is the case if the function
+parameter operates by side effects, like print or setq.  So useful
+is a function like recurse that there is a built-in function in
+LISP, called MAPCAR, which does it.  It works exactly as shown above:
+
+     (mapcar #'1+ '(5 2 8 9 14))
+
+Use it instead of explicit iteration or writing your own recursion!
+Recursive functions and mapping constructs can greatly decrease the
+obscurity in your program code that ensues from using explicit
+iteration and variables.
+
+Here's a question for you to ponder.  What if the function you wish
+to send in as the function parameter requires two or more arguments?
+How would that look?  (Hint:  mapcar takes care of this, and your
+textbook has examples.  Plus, there is another technique called
+"curried functions" that are useful in this regard, which we will
+discuss in class later.)
+
+As a final example, consider implementing "last".  We will return the
+last element, rather than the last element encapsulated in a list,
+which is what the built-in "last" function does.  So we will call our
+function "lastelem" for last element.
+
+First, we write this:
+
+      (defun lastelem (list)
+           (if (= 1 (length list))
+               (car list)
+               (lastelem (cdr list))
+           )
+      )
+
+This works, but it uses the length function, which itself might be a
+recursive function.  Moreover, every time length is used, it has to
+examine every element in the list, so length is actually quite expensive
+to use.
+
+Thus, we try it this way, omitting length:
+
+      (defun lastelem (list)          ; WARNING!  this doesn't work
+           (if (null list)
+               (car list)
+               (lastelem (cdr list))
+           )
+      )
+
+But wait!  If (null list) is true, then taking the car of it will not
+give us the last element, but rather nil.  (It used to be in the old
+days that taking the car of the empty list would give an error, but
+since this occurs so frequently, Common LISP has redefined it so that
+it just returns nil.)  In any case, we have in effect gone too far.
+So how do we know when we are "about" to reach the end of the list?
+We could use length to see if there is one element... But we can't 
+find out if the length is 1 without using the length function, which
+we said we wouldn't do!
+
+After scratching our heads for a very long time, we suddenly remember
+that functions can have more than one parameter, even recursive
+functions.  What we will do is design lastelem so that it sends
+the car of the list of the last call along with the cdr of that list.
+We can then check to see if our second parameter is null.   If it is
+then we are at the end of the list and our recursion is done, but we
+will have saved the element just before the end of the list, so we 
+can return that.
+
+      (defun lastelem (thing list)
+           (if (null list)
+               thing
+               (lastelem (car list) (cdr list))
+           )  
+      )
+
+The only thing bad about this is that lastelem has 2 parameters, but
+programmers want a function that requires just 1 parameter.  After
+all, what do you give as the first parameter to the main call?  The
+solution is to write an auxiliary function that is recursive, and
+then the main function just sets up the first call to the auxiliary.
+Thus the main function, which we will call "lastelem" (because the
+main function should always be given a name that users will remember)
+calls "lastelem-aux" with two parameters.  Users never need to know
+that lastelem-aux even exists!  Lastelem should also do an initial
+check to see if it was passed an empty list, in which case it does
+not need to call lastelem-aux at all.
+
+      (defun lastelem (list)
+           (if (null list)
+               nil
+               (lastelem-aux (car list) (cdr list))
+           )
+      )
+      (defun lastelem-aux (thing list)
+           (if (null list)
+               thing
+               (lastelem-aux (car list) (cdr list))
+           )  
+      )
+
+We could replace the (null list) with just list, and reverse the order
+of the then-else parts, but we will not do this in the interests of 
+clarity.
+
+                      ------------+------------
+
+Here's a challenge for you.  Can you implement the "butlast" function,
+which returns its input list except for the last element, recursively
+without using the length function?  (Hint:  use two parameters, only
+keep the car's of the intermediate lists, rather than just ignoring
+them.)
+
+                      ------------+------------
+
+It is amazing how much you can do with recursion.  After writing many
+recursive functions, you begin to see how you never need to use loops
+at all, and you tend to analyze what it is you're doing more carefully.
+Since most of us learned "ordinary" programming with loops, it is a
+challenge, and hopefully a fun challenge (like a game), to conjure up
+a recursive function that solves some problem, even though we think
+we could easily do it with a loop.
+
+Sometimes you need to declare a temporary variable just to hold a value
+so that you don't have to evaluate it twice.  Sometimes you have to be 
+rather clever at setting up the recursion, such as the left to right 
+evaluation above.  (Hint:  evaluate the first three items in the list, 
+forming a new number, then cons it into what's left, and evaluate this 
+new list.)
+
+To get some experience with recursion, see the file "recursion-problems"
+in this same directory.  Think of it as a game...can you solve these
+without using loops and without changing variables?
+
+
+                       Simulating Loops with Recursion
+==========================================================================
+
+1.  Dolist loop -- execute the body of the loop once for each element of
+                   a list:
+
+        (dolist (x somelist)
+            (body x)
+        )
+
+    Here's the recursive version:
+
+        (defun dolist1 (somelist)
+            (xif (not (null somelist))
+             then (body (car somelist))
+                  (dolist1 (cdr somelist))
+            )
+        )
+
+
+2.  Dotimes loop -- execute the body of the loop n times.
+
+    Note that the index variable "i" starts out at 0 and goes up to
+    (n - 1) in Common LISP:
+
+        (dotimes (i n)
+            (body i)
+        )
+
+    Here's the recursive version.  Note that this does not make use of
+    the loop variable "i":
+
+        (defun dotimes1 (k)
+            (xif (not (zerop k))
+             then (body)
+                  (dotimes1 (1- k)
+            )
+        )
+
+    If you need to make use of the loop variable, then a simple trick will
+    suffice to give you that number.  Simply pass in the original "n" as
+    an additional parameter, and subtract from that the decreasing value "k".
+
+        (defun dotimes1 (k n)
+            (xif (not (zerop k))
+             then (body (- n k))
+                  (dotimes1 (1- k) n)
+            )
+        )
+
+3.  General while loop -- execute the body of the loop while some condition
+    is true:
+
+        (loop
+             (if (not (condition-tester)) (return))  ; (return) gets out of loop
+             (body)
+        )
+
+    Recursive version:
+
+        (defun loop1 ()
+             (xif (condition-test)
+              then (body)
+                   (loop1)
+             )
+        )
+
+In all three cases, the else clause of the "xif" inside the recursive function
+is missing, in which case the function just "falls through" and quits.  This
+is the termination of the recursion.

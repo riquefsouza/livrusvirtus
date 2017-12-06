@@ -1,0 +1,146 @@
+--
+--  Global Names
+--  ============
+--
+--  This package contains data shared by a number of other packages, but
+--  not logically belonging to any one of them.  This is just a
+--  convenient place to stick it.
+--
+
+package globals;
+
+   --
+   --  Options easily controllable by the user, either on the command
+   --  line or in an `%options' section.
+   --
+
+   var comment_delimiters     := ["--"];
+   var pending_actions := [];
+
+   var cline_overrides        := {},
+       action_handle := om,
+       source_file_name       := "",
+       action_file_name       := "", 
+       table_file_name        := "",
+       log_file_name          := "",
+       cpp_line_numbers       := false,
+       table_format           := "setl2",
+       verbose                := false,
+       actions_only           := false,
+       edit_only              := false,
+       check_log_file         := false,
+       default_rules          := true,
+       escape_mark            := "%",
+       start_symbol           := om;
+       
+   --
+   --  Internal tables, built by `load_grammar'.
+   --
+
+   var symbol_desc            := [],
+       eof_symbol_number      := 0,
+       error_symbol_number    := 0,
+       epsilon_symbol_number  := -1,
+       accept_symbol_number   := 0,
+       current_rhs            := [],
+       current_lhs            := 1,
+       lhs_map                := {},
+       error_count            := 0;
+
+   --
+   --  Variables typically written to files.
+   --
+
+   var symbol_list            := [],
+       max_term_width         := 0,
+       max_symbol_width       := 0,
+       num_terminals          := 0,
+       num_symbols            := 0,
+       alias_map              := {},
+       lhs_list               := [],
+       rhs_list               := [],
+       num_rules              := 0,
+       num_states             := 0,
+       term_index             := [],
+       term_check             := [],
+       term_action            := [],
+       default_action         := [],
+       goto_index             := [],
+       goto_action            := [];
+                              
+      --
+      --  Two maps to let us change case easily.
+      --
+
+   const tolower_map := {
+      ["A", "a"], ["B", "b"], ["C", "c"], ["D", "d"], ["E", "e"],
+      ["F", "f"], ["G", "g"], ["H", "h"], ["I", "i"], ["J", "j"],
+      ["K", "k"], ["L", "l"], ["M", "m"], ["N", "n"], ["O", "o"],
+      ["P", "p"], ["Q", "q"], ["R", "r"], ["S", "s"], ["T", "t"],
+      ["U", "u"], ["V", "v"], ["W", "w"], ["X", "x"], ["Y", "y"],
+      ["Z", "z"] };
+
+   const toupper_map := {[l, u] : [u, l] in tolower_map}; 
+
+   procedure tolower(s);
+   procedure easy_sort(things);
+
+end globals;
+
+package body globals;
+
+   --
+   --  tolower
+   --  -------
+   --
+   --  This procedure converts a string to lower case.
+   --
+
+   procedure tolower(s);
+
+      return +/[tolower_map(c) ? c : c in s];
+
+   end tolower;
+
+   --
+   --  easy_sort
+   --  ---------
+   --
+   --  This is a terrible sort, adequate only when one is fairly certain
+   --  the source sets will always be small.  It borrows the idea of
+   --  partitioning from quicksort, but since it doesn't sort in place
+   --  and makes no effort to find a good pivot, it's neither `quick' nor
+   --  `quicksort'.
+   --
+
+   procedure easy_sort(things);
+
+      if #things = 0 then
+         return [];
+      end if;
+
+      if is_tuple(things) then
+         pivot := things(1);
+      elseif is_set(things) then
+         pivot := arb things;
+      else
+         pivot := arb {x : x in things};
+      end if;
+
+      lower_tuple := middle_tuple := upper_tuple := [];
+
+      for x in things loop
+         if x < pivot then
+            lower_tuple with:= x;
+         elseif x > pivot then
+            upper_tuple with:= x;
+         else
+            middle_tuple with:= x;
+         end if;
+      end loop;
+      
+      return easy_sort(lower_tuple) + middle_tuple + easy_sort(upper_tuple);
+
+   end easy_sort;
+
+end globals;

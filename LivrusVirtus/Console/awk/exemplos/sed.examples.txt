@@ -1,0 +1,28 @@
+sed 's/$/   /' file1          # append blanks to each line
+
+sed 's/^/    /' file1         # prepend blanks to each line
+
+sed 's/can/should/g' file1    # replace all strings "can" by "should"
+
+sed 's/\<can\>/should/g' file1 # replace all words "can" by "should"
+
+sed 's/Unix/UNIX/g ; s/ucb/UCB/g' file1
+
+sed '/^$/d' file1             # remove all blank lines
+
+sed '/^[ 	]*$/d' file1  # remove lines having only blanks and tabs
+                              # (there's a blank and a tab inside the
+                              # brackets)
+
+sed -n '12,20p' file1         # save only lines 12 through 20 inclusive
+
+sed 'y/abc/ABC/' file1        # translates a->A, b->B, c->C in all lines
+
+sed '/^\.TS/,/^\.TE/!d' file1 # extract (keep) all tables sections
+                              # ! reverse the sense of the address expression
+
+sed -f directives file1       # sed directives stored in file "directives"
+
+sed '/^.code/d' file1         # deletes all lines that start with .code
+
+sed '/blob$/d' file1         # deletes all lines that end with "blob"

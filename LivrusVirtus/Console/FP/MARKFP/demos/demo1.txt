@@ -1,0 +1,129 @@
+// Simple arithmetic
+
++:<5,3>
+          8
+
+*:<5,3>
+          15
+
+-:<3,5>
+          -2
+
+// Boolean (comparison) operators
+// less than is lss or lt, you cannot use <
+
+lss:<5,3>
+          NIL
+
+lss:<3,5>
+          T
+
+<=:<3,5>
+          T
+
+// greater than is gt or gtr, you cannot use >
+
+gtr:<3,5>
+          NIL
+
+>=:<5,5>
+          T
+
+=:<3,5>
+          NIL
+
+neq:<3,5>
+          T
+
+
+// The id function just returns the data (this is very useful,
+// especially when used with the construct)
+
+id:8
+          8
+
+// Constant function 1, no matter what the input 1 is returned
+
+#1:8
+          1
+
+
+// Make a list out of a value
+[id]:15
+          (15)
+
+// Use the construct and the id function to duplicate a value 
+
+[id,id]:8
+          (8 8)
+
+// Assign a value to variable x
+
+x := id:6
+          6
+
+// Check up on that variable
+
+$x$
+          6
+
+// Same thing as above
+
+id:{x}
+          6
+
+// Car is 1
+
+1:<a,b,c,d>
+          a
+
+// second is 2, third is 3, etc.  There is an "nth" function in
+// FP, it is just the integer:
+
+2:<a,b,c,d>
+          b
+
+3:<a,b,c,d>
+          c
+
+4:<a,b,c,d>
+          d
+
+// Cdr is tl (tail)
+
+tl:<a,b,c,d>
+          <b,c,d>
+
+// Cons works just like in LISP, except that the two parameters
+// are in a list
+
+cons:<mark,<sally,kathy>>
+          <mark,sally,kathy>
+
+length:<mark,sally,kathy>
+          3
+
+length:<a,b,<c,d>>
+          3
+
+// There is both an "append at the left (front)" and
+// "append at the right (end)".  This is really just cons again,
+// not the true append of LISP.
+
+apndl:<a,<b,c,d>>
+          <a,b,c,d>
+
+apndr:<<b,c,d>,a>
+          <b,c,d,a>
+
+distl:<a,<b,c,d>>
+          <<a,b>,<a,c>,<a,d>>
+
+1r:<a,b,c,d>
+          d
+
+2r:<a,b,c,d>
+          c
+
+3r:<a,b,c,d>
+          b

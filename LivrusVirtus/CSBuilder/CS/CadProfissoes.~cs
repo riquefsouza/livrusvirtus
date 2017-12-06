@@ -1,0 +1,114 @@
+using System;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Data;
+
+namespace Livrus
+{
+	/// <summary>
+	/// Summary description for WinForm.
+	/// </summary>
+	public class frmCadProfissoes : Livrus.frmCadastros
+	{
+		public static frmCadProfissoes fCadProfissoes;
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.Container components = null;
+
+		public frmCadProfissoes()
+		{
+			//
+			// Required for Windows Form Designer support
+			//
+			InitializeComponent();
+
+			//
+			// TODO: Add any constructor code after InitializeComponent call
+			//
+		}
+
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		protected override void Dispose (bool disposing)
+		{
+			if (disposing)
+			{
+				if (components != null)
+				{
+					components.Dispose();
+				}
+			}
+			base.Dispose(disposing);
+		}
+
+		#region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			// 
+			// labCodigo
+			// 
+			this.labCodigo.Name = "labCodigo";
+			// 
+			// edtCodigo
+			// 
+			this.edtCodigo.Name = "edtCodigo";
+			// 
+			// labDescricao
+			// 
+			this.labDescricao.Name = "labDescricao";
+			this.labDescricao.Text = "Profissão:";
+			// 
+			// edtDescricao
+			// 
+			this.edtDescricao.Name = "edtDescricao";
+			// 
+			// btnNovo
+			// 
+			this.btnNovo.Name = "btnNovo";
+			// 
+			// btnPesquisar
+			// 
+			this.btnPesquisar.Name = "btnPesquisar";
+			// 
+			// btnAnterior
+			// 
+			this.btnAnterior.Name = "btnAnterior";
+			// 
+			// btnProximo
+			// 
+			this.btnProximo.Name = "btnProximo";
+			// 
+			// btnFechar
+			// 
+			this.btnFechar.Name = "btnFechar";
+			// 
+			// btnLimpar
+			// 
+			this.btnLimpar.Name = "btnLimpar";
+			// 
+			// btnExcluir
+			// 
+			this.btnExcluir.Name = "btnExcluir";
+			// 
+			// btnSalvar
+			// 
+			this.btnSalvar.Name = "btnSalvar";
+			// 
+			// frmCadProfissoes
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.ClientSize = new System.Drawing.Size(336, 133);
+			this.Name = "frmCadProfissoes";
+			this.Text = "Cadastro de Profissões";
+		}
+		#endregion
+	}
+}

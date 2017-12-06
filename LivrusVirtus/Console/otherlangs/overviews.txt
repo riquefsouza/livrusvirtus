@@ -1,0 +1,178 @@
+%
+$ml
+                     Quick overview of the ML programming language
+                     ---------------------------------------------
+
+ML is a pure functional programming language, perhaps the most popular and 
+widely used.  In some ways it is a descendant of LISP, but a number of modern
+features considered to be characteristics of functional programming have made
+their way into ML, such as assign-once variables and type variables and type
+inferencing.
+
+ML actually stands for "meta-language," although it is unclear why the origin-
+ators thought this was an appropriate language.
+
+The version that we have at Canisius is the Standard ML of New Jersey.  The
+command's name is sml, and it is an interpreter.  All you have to do to start
+using sml is
+
+     % sml
+
+CONTROL-D will take you out of it and back into the shell.
+
+There are on-line documents describing ML, and some documents in PostScript
+format which you can print out on the QMS or Sparc printers.  Also, a large
+number of books exist which show how to use ML, including primers and regular
+programming texts.  ML is also discussed widely in many books on Programming
+Languages such as Sethi's textbook.
+
+There are a few example programs available in our on-line HELP system.
+$j
+                     Quick overview of the J programming language
+                     --------------------------------------------
+
+J is a modern descendent of the famous APL programming language.  APL (which 
+stands for "A Programming Language", a totally non-descriptive generic name)
+premiered in the early 1960s and was a big hit with mathematical types.  It is
+basically a functional programming language, although it does have variables and
+even loops.  Its large number of highly sophisticated math operators made it 
+easy to invert matrices in one operation, find prime numbers in just a few
+symbols, and do other amazing feats.  The most characteristic feature of APL is
+its distinct character set, utilizing many mathematical symbols that are not
+on typewriter keyboards and the Greek alphabet.  
+
+J fixes this by doing away with the special symbols so that it can be used on
+any keyboard.  Written and supported by the same folks who wrote APL, namely
+Kenneth Iverson and associates, J has much the same flavor.  Unfortunately,
+there are very few texts and manuals on J.  Dr. Meyer in the CS department has
+one, as well as where to get more information on J.
+$perl
+                   Quick overview of the Perl programming language
+                   -----------------------------------------------
+
+Perl is a promising parvenu on the UNIX scene.  Data manipulation tools like
+awk and sed often have their own programming language as a part of them, and
+naturally people want their programming languages to be able to do anything,
+certainly anything that a "real" language like C can do.  However, this has
+proved difficult or incomplete in the past.  Sed was a very primitive language,
+and awk improved upon it immensely.  But awk's success only caused a clamor for
+more, so nawk and gawk were invented.
+
+Larry Wall, a systems programmer, decided that the awk concept ought to be
+taken even further, so he wrote Perl as a sort of super awk.  Perl stands for
+Practical Extraction and Report Language, which gives you an idea of what kind
+of tool Larry was trying to invent.  In particular, he wanted to enable systems
+programmers and systems administrators to create sophisticated programs that
+formerly could only be done by C programs.
+
+Perl quickly caught on, especially with systems programmers and data processing
+people who need to get a data processing task done very quickly and who do not 
+have a lot of time to write a full C program from scratch and debug and test it.
+However, Perl includes capabilities to do almost anything that C can do, so it 
+promises to be an extremely popular language, so much so that O'Reilly 
+Associates, the popular publishers of the Nutshell series, have two books on 
+Perl available, an introductory one and a complete manual.  Dr. Meyer of the 
+CS department has both so you can contact him, or to find out how to contact 
+O'Reilly.
+$scheme
+                     Quick overview of the Schem programming language
+                     ------------------------------------------------
+
+Scheme is a variant of the popular LISP programming language.  However, Scheme
+takes LISP and "cleans it up," making it simpler and more regular.  It also 
+makes LISP into more of a pure functional language by doing away with all loops.
+
+What????!  How does Scheme ever get anything useful done, then?  Simple, it uses
+recursion for all looping and iteration.  In order to keep recursion from being
+too inefficient or from quickly overrunning stack space if the "loop" goes too
+many times, a sneaky variant of recursion, called tail-recursion, is used.  In
+tail-recursive functions, the last statement of the function is a recursive
+call.  Scheme replaces this with a little goto that replaces the activation
+record for the parent function with the activation record of the new, so that
+no extra stack space is used up.  It works well and is now also used in regular
+LISP where appropriate.
+
+Scheme is being used to teach beginning programming at many colleges and univer-
+sities.  Advocates proclaim that it allows students to worry less about syntax
+and more about problem solving.  Abel and Sussmann wrote a famous introductory
+programming text using Scheme.
+
+In Bouwhuis Library, we have one book totally devoted to Scheme:
+
+     "An Introduction to Scheme" by Jerry Smith, c1988
+
+Scheme is also discussed in books related to programming languages.
+$bc
+                     Quick overview of the bc programming language
+                     ---------------------------------------------
+
+Have you ever wanted to know what 1000 factorial is?  It is a very very very
+large integer!   You can use bc as a calculator or a programming language to
+do very large arithmetic, although it is slower than C because it is interpret-
+ed.
+
+Now one really knows whether "bc" stands for "big calculator" or not; the names
+of these programming languages and tools become obscure.  Bc is a more sensible
+descendent of an RPN calculator called "dc" in UNIX.  Now we are all sure that
+"dc" stands for "desk calculator," but only engineering students who love their
+Hewlett-Packard scientific calculators could love it.  
+
+Bc is much more like C and like standard calculators, since it uses infix
+notation.  To use it as a fancy calculator, just do
+
+     % bc
+
+and start typing stuff in.  To get out, press CONTROL-D.
+
+     5 * 3
+     15
+     n = 19832
+     n * 4
+
+Bc has variables, but, alas! they can only be 1 character long (shades of 
+BASIC!)
+
+However, the control structures and function definitions of bc are remarkably
+like C.  You may look at the sample programs in this help system for confir-
+mation of this remarkably useful fact.  There are differences, however, such as
+no semicolons and the use of the "define" keyword.  But these are minor.
+
+If you want a language that is much more C-like, then use awk, but awk is not
+set up for arbitrary precision arithmetic.
+$setl
+                     Quick overview of the setl programming language
+                     -----------------------------------------------
+
+SETL stands for SET language and it is meant to be an implementation of First-
+order predicate calculus, the main vehicle for mathematical logic.  Thus, SETL
+is in some ways a logic language akin to Prolog, although it is vastly 
+different.
+
+We have a version of SETL here at Canisius developed by
+
+   Kirk Snyder
+   Courant Institute of Mathematical Sciences
+   New York University
+   251 Mercer Street
+   New York, NY  10012
+
+   e-mail:  snyder@cs.nyu.edu
+
+It implements the SETL2 language, an upgraded variant of SETL.
+
+The UNIX commands are:
+
+    % stlc filename          <-- setl compiler
+    % stlx                   <-- setl execution system
+    % stll                   <-- setl library manager
+
+The proper use of these is a little tricky and I refer you to the setl2.manual,
+accessible through this menu system.
+
+
+There are a few books on SETL, the primary one being
+
+    "Programming with sets: an introduction to SETL" by J. T. Schwarz, c1986.
+
+which we have in Bouwhuis library.
+$

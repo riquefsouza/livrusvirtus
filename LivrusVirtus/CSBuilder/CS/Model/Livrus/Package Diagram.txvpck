@@ -1,0 +1,757 @@
+<?xml version="1.0"?>
+<nodeSet>
+  <view uin="s95b0adjp">
+    <property name="$name" value="Package Diagram" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="source:Livrus.frmPrincipal">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:frmPrincipal.components">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mainMenu1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadastros">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadAssuntos">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.statusBar1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.statusBarPanel1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.statusBarPanel2">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.toolBar1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.tlbClientes">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.tlbLivros">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.tlbVender">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.toolBarButton4">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.tlbSobre">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.tlbSair">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.imageList1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.Dispose">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.InitializeComponent">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.Main">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.frmPrincipal_Closing">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.toolBar1_ButtonClick">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.frmPrincipal_Load">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.fPrincipal">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.db">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadAutores">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadEditoras">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadEnderecos">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadIdiomas">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadPaises">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadProfissoes">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.menuItem1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadClientes">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuCadLivros">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuPesquisas">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuConAssuntos">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuConAutores">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuConEditoras">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuConEnderecos">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuConIdiomas">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuConPaises">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuConProfissoes">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.menuItem2">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuConClientes">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuConLivros">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuVendas">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuVenderLivros">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuVendasRealizadas">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuJanelas">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuLadoALadoHorizontal">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuLadoALadoVertical">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuEmCascata">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuOrganizarIcones">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuOpcoes">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuAlterarSenha">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.menuItem3">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuSobre">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmPrincipal.mnuSair">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.mnuSair_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.mnuLadoALadoHorizontal_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.mnuLadoALadoVertical_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.mnuEmCascata_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.mnuOrganizarIcones_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.mnuSobre_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.frmPrincipal_MouseMove">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.mnuCadAssuntos_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.mnuAlterarSenha_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmPrincipal.mnuConAssuntos_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.RotinasGlobais">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus.RotinasGlobais.ValidaCampo">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.RotinasGlobais.ValidaISBN">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.RotinasGlobais.ValidaCPF">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.RotinasGlobais.modulo11">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.RotinasGlobais.VirgulaParaPonto">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.RotinasGlobais.ValidaFloat">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.RotinasGlobais.ValidaInteger">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.RotinasGlobais..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:RotinasGlobais.Rotinas">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:RotinasGlobais.sUsuarioSenha">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:RotinasGlobais.sUsuarioLogin">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:RotinasGlobais.sQtdEstoque">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:RotinasGlobais.sPreco">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:RotinasGlobais.sCodigoSelecionado">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.RotinasGlobais.ConsultaDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.ConsultasSQL">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus.ConsultasSQL..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:ConsultasSQL.ConsSQL">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Assunto">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Autor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Editora">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Usuario">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Idioma">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Livro">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Cliente">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Endereco">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Pais">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Profissao">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.LivroAss">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.Venda">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ConsultasSQL.LivroAut">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.frmSobre">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:frmSobre.fSobre">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmSobre.components">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmSobre.groupBox1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmSobre.btnOk">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmSobre.pictureBox1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmSobre.label1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmSobre.label2">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmSobre.label3">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmSobre..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmSobre.Dispose">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmSobre.InitializeComponent">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmSobre.frmSobre_MouseMove">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmSobre.frmSobre_Closing">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.frmSplash">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:frmSplash.fSplash">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmSplash.components">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmSplash.timer1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmSplash..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmSplash.Dispose">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmSplash.InitializeComponent">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmSplash.timer1_Tick">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.frmLogin">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:frmLogin.fLogin">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmLogin.InitializeComponent">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmLogin.btnLogin_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.components">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.btnLogin">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.edtLogin">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmLogin.frmLogin_Closing">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.bFecharOuTerminar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.label1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.label2">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.label3">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmLogin.frmLogin_Load">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.edtSenha">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmLogin..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.btnCancelar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmLogin.Dispose">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmLogin.btnCancelar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmLogin.Consulta">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.frmCadAssuntos">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:frmCadAssuntos.fCadAssuntos">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadAssuntos.components">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadAssuntos..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadAssuntos.Dispose">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadAssuntos.InitializeComponent">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadAssuntos.ValidaDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadAssuntos.btnNovo_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadAssuntos.btnExcluir_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadAssuntos.btnPesquisar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadAssuntos.btnSalvar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadAssuntos.frmCadAssuntos_Closing">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:I$Livrus.frmCadastros">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.frmAlterarSenha">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:frmAlterarSenha.fAlterarSenha">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.components">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.btnSalvar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.btnLimpar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.btnFechar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.label3">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.edtNovaSenha">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.edtLogin">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.label2">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.label1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.edtConfirmarSenha">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.edtSenhaAtual">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.label4">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmAlterarSenha.Arquiva">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha.Dispose">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha.InitializeComponent">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha.frmAlterarSenha_Closing">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha.btnFechar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha.btnLimpar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha.ValidaDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha.btnSalvar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha.frmAlterarSenha_Load">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmAlterarSenha.frmAlterarSenha_MouseMove">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.frmConsultas">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:frmConsultas.components">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.panel1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.btnPesquisar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.edtDescricao">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.labDescricao">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.gridConsulta">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.panel2">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.btnLimpar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.btnFechar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.labRegistros">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConsultas.dsConsulta">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConsultas..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConsultas.Dispose">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConsultas.InitializeComponent">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConsultas.btnFechar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConsultas.frmConsultas_Closing">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConsultas.LimparDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConsultas.PesquisarDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConsultas.gridConsulta_CurrentCellChanged">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConsultas.gridConsulta_MouseMove">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.frmCadastros">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:frmCadastros.Registros">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.Campos">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.nLinhaRegistro">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.components">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.labCodigo">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.edtCodigo">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.labDescricao">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.edtDescricao">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.btnNovo">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.btnPesquisar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.btnAnterior">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.btnProximo">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.btnFechar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.btnLimpar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.btnExcluir">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.btnSalvar">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmCadastros.Arquiva">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.Dispose">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.InitializeComponent">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.btnFechar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.ValidaDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.InformaLimpaDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.HabilitaDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.btnNovo_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.NovoDado">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.btnLimpar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.ExcluirDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.PesquisarDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.btnAnterior_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.btnProximo_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.SalvarDados">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.edtCodigo_Leave">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.frmCadastros_MouseMove">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmCadastros.frmCadastros_Closing">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus.frmConAssuntos">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:frmConAssuntos.fConAssuntos">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConAssuntos.components">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConAssuntos.dataGridTableStyle1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConAssuntos.dataGridTextBoxColumn1">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:frmConAssuntos.dataGridTextBoxColumn2">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConAssuntos..ctor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConAssuntos.Dispose">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConAssuntos.InitializeComponent">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConAssuntos.frmConAssuntos_Closing">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConAssuntos.btnLimpar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConAssuntos.btnPesquisar_Click">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.frmConAssuntos.frmConAssuntos_Load">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:I$Livrus.frmConsultas">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+  </view>
+</nodeSet>

@@ -1,0 +1,27 @@
+package Livrus;
+
+import System.*;
+import System.Drawing.*;
+import wx.*;
+
+public class frmSplash extends wx.SplashScreen
+{
+	public static int ID_FRMSPLASH = 100;
+	public static frmSplash fSplash = null;
+
+	public frmSplash( Window parent ) {
+    super(new wx.Bitmap("xpms/LivrusVirtus.xpm", 
+    wx.BitmapType.wxBITMAP_TYPE_XPM), 
+    wx.SplashScreen.wxSPLASH_CENTRE_ON_SCREEN | wx.SplashScreen.wxSPLASH_TIMEOUT, 
+    1000, parent, ID_FRMSPLASH, wxDefaultPosition, wxDefaultSize, 
+    wxSIMPLE_BORDER | wxSTAY_ON_TOP );
+
+		EVT_CLOSE( new EventListener( OnClose ) );
+	}
+
+	public void OnClose( System.Object sender, wx.Event e ) {
+    frmLogin.fLogin = new frmLogin(null);
+    frmLogin.fLogin.Show(true);
+		e.Skip();
+	}
+}

@@ -1,0 +1,324 @@
+  gropen:
+	proc (a);
+	dcl a fixed binary (15);
+       /* open workstation */
+	contrl (1) = 1 ;
+	contrl (2) = 0 ;
+	contrl (4) = 10;
+       /* workstation identifier */
+       /*  1 - 10  console	  */
+       /* 11 - 20  plotter       */
+       /* 21 - 30  printer	  */
+	intin (1) = a ;
+	intin (2) = 1 ;
+	intin (3) = 1 ;
+	intin (4) = 1;
+	intin (5) = 1;
+	intin (6) = 1;
+	intin (7) = 1;
+	intin (8) = 0;
+	intin (9) = 1;
+	intin (10) = 1;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end gropen;
+
+  grclose:
+	proc;
+	contrl (1) = 2;
+	contrl (2) = 0;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end grclose;
+  
+
+  grclear:
+	proc;
+	contrl (1) = 3;
+	contrl (2) = 0;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end grclear;
+
+  grupdate:
+	proc;
+	contrl (1) = 4;
+	contrl (2) = 0;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end grupdate;
+polyline:
+	proc (a,b,c,d);
+	dcl	a,b,c,d fixed binary (15);
+	contrl (1) = 6;
+	contrl (2) = 2;
+	ptsin (1) = a;
+	ptsin (2) = b;
+	ptsin (3) = c;
+	ptsin (4) = d;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end polyline;
+  polymarker:
+	proc (a,b);
+	dcl a,b fixed binary (15);
+	contrl (1) = 7;
+	contrl (2) = 1;
+	ptsin (1) = a;
+	ptsin (2) = b;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end polymarker;
+  text:
+	proc (a,b,c);
+	dcl	a char(80) var;
+	dcl	b,c fixed binary (15);
+	dcl	d char (1);
+	contrl (1) = 8;
+	contrl (2) = 1;
+	contrl (4) = length (a);
+	do i = 0 to contrl (4);
+	   d = substr (a,i+1,1);
+	   intin (i+1) = rank(d);
+	end;
+	ptsin (1) = b;
+	ptsin (2) = c;
+	call outg (contrl,intin,ptsin,intout,ptsout);	
+  end text;
+  bar:
+	proc (a,b,c,d);
+	dcl	a,b,c,d fixed binary (15);
+	contrl (1) = 11;
+	contrl (2) = 2;
+	contrl (6) = 1;
+	ptsin (1) = a;
+	ptsin (2) = b;
+	ptsin (3) = c;
+	ptsin (4) = d;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end bar;
+  circle:
+	proc (a,b,c);
+	dcl	a,b,c fixed binary (15);
+	contrl (1) = 11;
+	contrl (2) = 3;
+	contrl (6) = 4;
+	ptsin (1) = a;
+	ptsin (2) = b;
+	ptsin (5) = c;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end circle;
+  set_character_height:
+	proc (a);
+	dcl	a fixed binary (15);
+	contrl (1) = 12;
+	contrl (2) = 1;
+	ptsin (1) = 0;
+	ptsin (2) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_character_height;
+  set_character_up_vector:
+	proc (a);
+	dcl a fixed binary (15);
+	contrl (1) = 13;
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_character_up_vector;
+  set_color_representation:
+	proc (a);
+	dcl a fixed binary (15);
+	contrl (1) = 14;
+	contrl (2) = 0;
+	intin (1) = a;
+	intin (2) = 1000;
+	intin (3) = 1000;
+	intin (4) = 1000;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_color_representation;
+  set_polyline_linetype:
+	proc (a);
+	dcl	a fixed binary (15);
+	contrl (1) = 15;
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_polyline_linetype;
+  set_polyline_color_index:
+	proc (a);
+	dcl a fixed binary (15);
+	contrl (1) = 17;
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_polyline_color_index;
+  set_polymarker_type:
+	proc (a);
+	dcl	a fixed binary (15);
+	contrl (1) = 18;
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_polymarker_type;
+  set_polymarker_scale:
+	proc (a);
+	dcl a fixed binary (15);
+	contrl (1) = 19;
+	contrl (2) = 1;
+	ptsin (1) = 0;
+	ptsin (2) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_polymarker_scale;
+  set_polymarker_color_index:
+	proc (a);
+	dcl a fixed binary (15);
+	contrl (1) = 20;
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_polymarker_color_index;  
+  set_text_color_index:
+	proc (a);
+	dcl	a fixed binary (15);
+	contrl (1) = 22;
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_text_color_index;
+  set_fill_interior_style:
+	proc (a);
+	dcl 	a fixed binary (15);
+	contrl (1) = 23; 		
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_fill_interior_style;
+ set_fill_style_index:
+	proc (a);
+	dcl 	a fixed binary (15);
+	contrl (1) = 24; 		
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_fill_style_index;
+  set_fill_color_index:
+	proc (a);
+	dcl 	a fixed binary (15);
+	contrl (1) = 25; 		
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_fill_color_index;
+  input_locator_request:
+	proc (a,b);
+	dcl	a,b fixed binary (15);
+	contrl (1) = 33;
+	contrl (2) = 0;
+	intin (1) = 1;
+	intin (2) = 1;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+	contrl (1) = 28;
+	contrl (2) = 1;
+	intin (1) = 1;
+	ptsin (1) = a;
+	ptsin (2) = b;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end input_locator_request;
+  input_locator_sample:
+	proc;
+	contrl (1) = 33;
+	contrl (2) = 0;
+	intin (1) = 1;
+	intin (2) = 2;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+	contrl (1) = 28;
+	contrl (2) = 0;
+	intin (1) = 1;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end input_locator_sample; 
+  input_valuator_request:
+	proc (a);
+	dcl	a fixed binary (15);
+	contrl (1) = 33;
+	contrl (2) = 0;
+	intin (1) = 2;
+	intin (2) = 1;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+	contrl (1) = 29;
+	contrl (2) = 0;
+	intin (1) = 1;
+	intin (2) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end input_valuator_request;
+  input_valuator_sample:
+	proc;
+	contrl (1) = 33;
+	contrl (2) = 0;
+	intin (1) = 2;
+	intin (2) = 2;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+	contrl (1) = 29;
+	contrl (2) = 0;
+	intin (1) = 1;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end input_valuator_sample;
+  input_choice_request:
+	proc (a);
+	dcl a fixed binary (15);
+	contrl (1) = 33;
+	contrl (2) = 0;
+	intin (1) = 3;
+	intin (2) = 1;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+	contrl (1) = 30;
+	contrl (2) = 0;
+	intin (1) = 2;
+	intin (2) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end input_choice_request;
+  input_choice_sample:
+	proc;
+	contrl (1) = 33;
+	contrl (2) = 0;
+	intin (1) = 3;
+	intin (2) = 2;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+	contrl (1) = 30;
+	contrl (2) = 0;
+	intin (1) = 2;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end input_choice_sample;
+  input_string_request:
+	proc (a,b);
+	dcl a,b fixed binary (15);
+	contrl (1) = 33;
+	contrl (2) = 0;
+	intin (1) = 4;
+	intin (2) = 1;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+	contrl (1) = 31;
+	contrl (2) = 0;
+	intin (1) = 1;
+	intin (2) = a;
+	intin (3) = b;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end input_string_request;
+  input_string_sample:
+	proc (a,b);
+	dcl a,b fixed binary (15);
+	contrl (1) = 33;
+	contrl (2) = 0;
+	intin (1) = 4;
+	intin (2) = 2;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+	contrl (1) = 31;
+	contrl (2) = 0;
+	intin (1) = 1;
+	intin (2) = a;
+	intin (3) = b;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end input_string_sample;
+  set_writing_mode:
+	proc (a);
+	dcl	a fixed binary (15);
+	contrl (1) = 32;
+	contrl (2) = 0;
+	intin (1) = a;
+	call outg (contrl,intin,ptsin,intout,ptsout);
+  end set_writing_mode;
+
+

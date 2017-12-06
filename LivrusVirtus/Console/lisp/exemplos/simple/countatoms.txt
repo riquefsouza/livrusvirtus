@@ -1,0 +1,9 @@
+(defun countatoms (sexpr)
+     (if (null sexpr)
+         0
+         (if (atom sexpr)
+             1
+             (+ (countatoms (car sexpr)) (countatoms (cdr sexpr)))
+         )
+     )
+)

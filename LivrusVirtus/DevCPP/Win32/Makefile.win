@@ -1,0 +1,125 @@
+# Project: Livrus Virtus
+# Makefile created by Dev-C++ 4.9.8.0
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = Livrus_private.res
+OBJ  = objs/Splash.o objs/ConsultasSQL.o objs/Livrus.o objs/Login.o objs/RotinasGlobais.o objs/Sobre.o objs/CadAssuntos.o objs/StdAfx.o objs/ListaStr.o objs/AlterarSenha.o objs/ConAssuntos.o objs/Consultas.o objs/Cadastros.o objs/CadClientes.o objs/CadEditoras.o objs/CadEnderecos.o objs/CadIdiomas.o objs/CadLivros.o objs/CadPaises.o objs/CadProfissoes.o objs/CadAutores.o objs/ConClientes.o objs/ConEditoras.o objs/ConEnderecos.o objs/ConIdiomas.o objs/ConLivros.o objs/ConPaises.o objs/ConProfissoes.o objs/ConAutores.o objs/VenderLivros.o objs/ConVendas.o objs/Principal.o $(RES)
+LINKOBJ  = objs/Splash.o objs/ConsultasSQL.o objs/Livrus.o objs/Login.o objs/RotinasGlobais.o objs/Sobre.o objs/CadAssuntos.o objs/StdAfx.o objs/ListaStr.o objs/AlterarSenha.o objs/ConAssuntos.o objs/Consultas.o objs/Cadastros.o objs/CadClientes.o objs/CadEditoras.o objs/CadEnderecos.o objs/CadIdiomas.o objs/CadLivros.o objs/CadPaises.o objs/CadProfissoes.o objs/CadAutores.o objs/ConClientes.o objs/ConEditoras.o objs/ConEnderecos.o objs/ConIdiomas.o objs/ConLivros.o objs/ConPaises.o objs/ConProfissoes.o objs/ConAutores.o objs/VenderLivros.o objs/ConVendas.o objs/Principal.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -L"C:/Comps/harbour/LIB" -mwindows -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lcomctl32 
+INCS =  -I"C:/Comps/harbour/INCLUDE" 
+CXXINCS =  -I"C:/Dev-Cpp/include/c++"  -I"C:/Dev-Cpp/include/c++/mingw32"  -I"C:/Dev-Cpp/include/c++/backward"  -I"C:/Dev-Cpp/include" 
+BIN  = produto/Livrus.exe
+CXXFLAGS = $(CXXINCS)-D__GNUWIN32__ -W -DWIN32 -DNDEBUG -D_MBCS  
+CFLAGS = $(INCS)-D__GNUWIN32__ -W -DWIN32 -DNDEBUG -D_MBCS  
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before produto/Livrus.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(LINKOBJ)
+	$(CPP) $(LINKOBJ) -o "produto\Livrus.exe" $(LIBS)
+
+objs/Splash.o: Splash.cpp
+	$(CPP) -c Splash.cpp -o objs/Splash.o $(CXXFLAGS)
+
+objs/ConsultasSQL.o: ConsultasSQL.cpp
+	$(CPP) -c ConsultasSQL.cpp -o objs/ConsultasSQL.o $(CXXFLAGS)
+
+objs/Livrus.o: Livrus.cpp
+	$(CPP) -c Livrus.cpp -o objs/Livrus.o $(CXXFLAGS)
+
+objs/Login.o: Login.cpp
+	$(CPP) -c Login.cpp -o objs/Login.o $(CXXFLAGS)
+
+objs/RotinasGlobais.o: RotinasGlobais.cpp
+	$(CPP) -c RotinasGlobais.cpp -o objs/RotinasGlobais.o $(CXXFLAGS)
+
+objs/Sobre.o: Sobre.cpp
+	$(CPP) -c Sobre.cpp -o objs/Sobre.o $(CXXFLAGS)
+
+objs/CadAssuntos.o: CadAssuntos.cpp
+	$(CPP) -c CadAssuntos.cpp -o objs/CadAssuntos.o $(CXXFLAGS)
+
+objs/StdAfx.o: StdAfx.cpp
+	$(CPP) -c StdAfx.cpp -o objs/StdAfx.o $(CXXFLAGS)
+
+objs/ListaStr.o: ListaStr.cpp
+	$(CPP) -c ListaStr.cpp -o objs/ListaStr.o $(CXXFLAGS)
+
+objs/AlterarSenha.o: AlterarSenha.cpp
+	$(CPP) -c AlterarSenha.cpp -o objs/AlterarSenha.o $(CXXFLAGS)
+
+objs/ConAssuntos.o: ConAssuntos.cpp
+	$(CPP) -c ConAssuntos.cpp -o objs/ConAssuntos.o $(CXXFLAGS)
+
+objs/Consultas.o: Consultas.cpp
+	$(CPP) -c Consultas.cpp -o objs/Consultas.o $(CXXFLAGS)
+
+objs/Cadastros.o: Cadastros.cpp
+	$(CPP) -c Cadastros.cpp -o objs/Cadastros.o $(CXXFLAGS)
+
+objs/CadClientes.o: CadClientes.cpp
+	$(CPP) -c CadClientes.cpp -o objs/CadClientes.o $(CXXFLAGS)
+
+objs/CadEditoras.o: CadEditoras.cpp
+	$(CPP) -c CadEditoras.cpp -o objs/CadEditoras.o $(CXXFLAGS)
+
+objs/CadEnderecos.o: CadEnderecos.cpp
+	$(CPP) -c CadEnderecos.cpp -o objs/CadEnderecos.o $(CXXFLAGS)
+
+objs/CadIdiomas.o: CadIdiomas.cpp
+	$(CPP) -c CadIdiomas.cpp -o objs/CadIdiomas.o $(CXXFLAGS)
+
+objs/CadLivros.o: CadLivros.cpp
+	$(CPP) -c CadLivros.cpp -o objs/CadLivros.o $(CXXFLAGS)
+
+objs/CadPaises.o: CadPaises.cpp
+	$(CPP) -c CadPaises.cpp -o objs/CadPaises.o $(CXXFLAGS)
+
+objs/CadProfissoes.o: CadProfissoes.cpp
+	$(CPP) -c CadProfissoes.cpp -o objs/CadProfissoes.o $(CXXFLAGS)
+
+objs/CadAutores.o: CadAutores.cpp
+	$(CPP) -c CadAutores.cpp -o objs/CadAutores.o $(CXXFLAGS)
+
+objs/ConClientes.o: ConClientes.cpp
+	$(CPP) -c ConClientes.cpp -o objs/ConClientes.o $(CXXFLAGS)
+
+objs/ConEditoras.o: ConEditoras.cpp
+	$(CPP) -c ConEditoras.cpp -o objs/ConEditoras.o $(CXXFLAGS)
+
+objs/ConEnderecos.o: ConEnderecos.cpp
+	$(CPP) -c ConEnderecos.cpp -o objs/ConEnderecos.o $(CXXFLAGS)
+
+objs/ConIdiomas.o: ConIdiomas.cpp
+	$(CPP) -c ConIdiomas.cpp -o objs/ConIdiomas.o $(CXXFLAGS)
+
+objs/ConLivros.o: ConLivros.cpp
+	$(CPP) -c ConLivros.cpp -o objs/ConLivros.o $(CXXFLAGS)
+
+objs/ConPaises.o: ConPaises.cpp
+	$(CPP) -c ConPaises.cpp -o objs/ConPaises.o $(CXXFLAGS)
+
+objs/ConProfissoes.o: ConProfissoes.cpp
+	$(CPP) -c ConProfissoes.cpp -o objs/ConProfissoes.o $(CXXFLAGS)
+
+objs/ConAutores.o: ConAutores.cpp
+	$(CPP) -c ConAutores.cpp -o objs/ConAutores.o $(CXXFLAGS)
+
+objs/VenderLivros.o: VenderLivros.cpp
+	$(CPP) -c VenderLivros.cpp -o objs/VenderLivros.o $(CXXFLAGS)
+
+objs/ConVendas.o: ConVendas.cpp
+	$(CPP) -c ConVendas.cpp -o objs/ConVendas.o $(CXXFLAGS)
+
+objs/Principal.o: Principal.cpp
+	$(CPP) -c Principal.cpp -o objs/Principal.o $(CXXFLAGS)
+
+Livrus_private.res: Livrus_private.rc 
+	$(WINDRES) -i Livrus_private.rc -I rc -o Livrus_private.res -O coff 

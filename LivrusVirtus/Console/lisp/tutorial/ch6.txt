@@ -1,0 +1,121 @@
+LISP Tutorial   by Mark Meyer
+Chapter 6
+Control Structures; decisions
+--------------------------------------------------------------------------------
+TOPICS:   if, cond
+--------------------------------------------------------------------------------
+
+LISP has a conditional form that allows you to do an "if" statement.  In fact,
+it has too many of them!  The original one is called "cond" and is still 
+explained in many books, but it is unwieldy and messy, so it will be ignored
+herein.
+
+The better form of "if" is actually called "if".  But before we look at it, we
+have to understand how LISP evaluates conditions.  LISP is surprisingly like 
+the C programming language!  A condition is just an expression or a value or
+a function call, and depending on whether or not the result is the empty list
+or not, LISP considers it false or true.  In fact NIL (the empty list, also
+written as ()) is false and all else is true, including the built-in atom t.
+Thus C's 0 corresponds to LISP's NIL, and in fact C uses NULL to mean 0.
+(Null and Nil both mean 0 in Germanic/Scandanavian languages.)
+
+Now let's look at if in its two familiar forms:  if-then and if-then-else:
+
+   (if  conditional 
+        true-form
+   )
+
+   (if  conditional 
+        true-form
+        false-form
+   )
+
+Note that each form is just one LISP function call.  Here is an example:
+
+   (setq x '(a b c d e f))
+   (if (member 'd x)
+       (setq y (position 'd x))
+   )
+
+The condition would be true since the atom "d" is in the list (a b c d e f),
+and so this would set y to 3, which is the position of d within the list.
+(LISP is also like C in that it starts counting at 0, rather than 1.)
+
+A common error is to try to put more than one statement in the true-form.
+For example, suppose we wanted to add 1 to a counter if d is found within the
+list.  We might be tempted to write:
+
+   (if (member 'd x)                                
+       (setq y (position 'd x))            <====WRONG!
+       (setq counter (+ 1 counter))
+   )
+
+Why?  Because the (setq counter (+ 1 counter)) would NOT get done if (member 'd x) were true, but only if it were false!  LISP does not seem to give us an
+easy way to bundle together multiple statements.  
+
+But it actually does.  You can introduce a local scope (a block) anywhere you
+like, using a let form.  In fact let forms can even create new variables.  In
+the form below, we put the empty list after the let because we don't need new
+variables:
+    
+   (if (member 'd x)                                
+       (let ()
+            (setq y (position 'd x))     
+            (setq counter (+ 1 counter))
+       )
+   )
+
+This also gives a picture of how I parenthesize my LISP, very much like the
+curly braces in C lining up underneath each other.  Some LISPers would write
+the following, which I consider ugly and confusing:
+
+   (if (member 'd x)                                
+       (let () (setq y (position 'd x))     
+               (setq counter (+ 1 counter))))
+
+You could even write
+
+   (if (member 'd x) (let () (setq y (position 'd x)) (setq counter (+ 
+   1 counter))))
+
+which would probably land you a big fat F!
+
+Fortunately, some systems, like our version of Common LISP, allow you to 
+customize LISP.  In Ibuki, you can put such customizations in a local file
+called init.lsp, which is loaded whenever you start.  One of the macros that
+I created effectively creates a new form, called xif, which looks and acts
+more like a normal if.  Xif allows you to specify more than one statement in
+a row without explictly writing the let form.  You can also introduce nested
+ifs by using elsif keywords.  Here is a skeleton
+
+         (xif (C1)
+             then (F1_1) (F1_2) (F1_3) ...
+         elsif (C2)
+             then (F2_1) (F2_2) (F2_3) ...
+         elsif (C3)
+             then (F3_1) (F3_2) (F3_3) ...
+         ...
+         else
+             (Fn_1) (Fn_2) (Fn_3) ...
+         )
+
+where each (F1_1) is a whole LISP form, such as a setq, or even another xif.
+Note that you must use the "then" keywords.
+
+We could write our simple if form above now as:
+
+   (xif (member 'd x)                                
+    then (setq y (position 'd x))     
+         (setq counter (+ 1 counter))
+   )
+
+or 
+
+   (xif (member 'd x) then
+         (setq y (position 'd x))     
+         (setq counter (+ 1 counter))
+   )
+
+There is also a case statement as in Modula-2.  You can find it in the books.
+
+--------------------------------------------------------------------------------

@@ -1,0 +1,50 @@
+LISP Tutorial   by Mark Meyer Chapter 7
+Control structures; loops
+--------------------------------------------------------------------------------
+TOPICS:  dolist, dotimes, do, loop
+--------------------------------------------------------------------------------
+
+There are all sorts of looping constructs in Common LISP.  The most
+important of these is dolist.  It just runs through the list you give,
+assigning each element of the list to a variable:
+
+     (dolist (num '(5 6 3 10))
+        (setq sum (+ sum num))
+        (print (* num num))
+     )
+
+In this pathetic example, the list is a list of numbers.  The local
+variable "num" is assigned first 5, then 6, then 3, and finally 10.
+Each time it gets assigned, it does the two statements in the loop.
+
+Another useful loop is dotimes, which just does the statements in its
+body n times:
+
+     (dotimes (i 10)
+        (print i)
+     )
+
+This will print out 0, 1, 2, ..., 9.  Notice that it starts at 0, not 1.
+
+All LOOPS permit the use of tags, GO, and RETURN within their bodies.
+
+Another useful form of loop is the "loop loop" as it appears in Ada or
+Modula-2, or the while(1) loop of C:
+
+    (loop
+        ....
+        (if (< a b) (return))
+        ....
+    )
+
+Notice that the only way to get out of the loop is to use "return" which does
+NOT mean return the same thing that return in C means.  "return" in LISP just
+means leave this construct, this parenthesized control structure, not the 
+whole function.   Also note that the word return must be in parentheses!
+
+To get out of a function, such as a user-defined function that you may have
+created, use "return-from" followed by the name of the function:
+
+    (return-from myfunction)
+
+--------------------------------------------------------------------------------

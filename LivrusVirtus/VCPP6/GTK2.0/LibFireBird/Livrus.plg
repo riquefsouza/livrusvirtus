@@ -1,0 +1,96 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Livrus - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP1D.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /I "c:\gtk\include" /I "c:\gtk\include\gtk-2.0" /I "c:\gtk\include\glib-2.0" /I "c:\gtk\include\pango-1.0" /I "c:\gtk\include\atk-1.0" /I "c:\gtk\include\gtkglext-1.0" /I "c:\gtk\lib\gtk-2.0\include" /I "c:\gtk\lib\glib-2.0\include" /I "c:\gtk\lib\gtkglext-1.0\include" /I "c:\gtk\include\libglade-2.0" /I "c:\gtk\include\libxml2" /I "C:\Arquivos de programas\Firebird\Firebird_1_5\include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "HAVE_CONFIG_H" /Fo"Debug/" /Fd"Debug/" /FD /D /GZ /c 
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\AlterarSenha.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\CadAssuntos.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\Cadastros.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\CadAutores.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\CadClientes.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\CadEditoras.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\CadEnderecos.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\CadIdiomas.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\CadLivros.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\CadPaises.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\CadProfissoes.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConAssuntos.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConAutores.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConClientes.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConEditoras.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConEnderecos.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConIdiomas.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConLivros.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConPaises.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConProfissoes.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\Consultas.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConsultasSQL.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\ConVendas.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\Livrus.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\Login.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\Principal.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\RotinasGlobais.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\Sobre.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\Splash.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibFireBird\VenderLivros.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP1D.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP1E.tmp" with contents
+[
+fbclient_ms.lib art_lgpl_2.lib asprintf.lib atk-1.0.lib charset.lib fontconfig.lib gdk-win32-2.0.lib gdkglext-win32-1.0.lib gdk_pixbuf-2.0.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib gtk-win32-2.0.lib gtkglext-win32-1.0.lib iconv.lib intl.lib libbz2.lib libfreetype.lib libglade-2.0.lib libiconv.lib libindent.lib libindent_d.lib libintl.lib libjpeg.lib libpng.lib libtiff.lib libxml2.lib libz.lib pango-1.0.lib pangoft2-1.0.lib pangowin32-1.0.lib /nologo /incremental:yes /pdb:"C:\GTK\bin/Livrus.pdb" /debug /machine:I386 /out:"C:\GTK\bin/Livrus.exe" /pdbtype:sept /libpath:"C:\GTK\Lib" /libpath:"C:\Arquivos de programas\Firebird\Firebird_1_5\lib" 
+.\Debug\AlterarSenha.obj
+.\Debug\CadAssuntos.obj
+.\Debug\Cadastros.obj
+.\Debug\CadAutores.obj
+.\Debug\CadClientes.obj
+.\Debug\CadEditoras.obj
+.\Debug\CadEnderecos.obj
+.\Debug\CadIdiomas.obj
+.\Debug\CadLivros.obj
+.\Debug\CadPaises.obj
+.\Debug\CadProfissoes.obj
+.\Debug\ConAssuntos.obj
+.\Debug\ConAutores.obj
+.\Debug\ConClientes.obj
+.\Debug\ConEditoras.obj
+.\Debug\ConEnderecos.obj
+.\Debug\ConIdiomas.obj
+.\Debug\ConLivros.obj
+.\Debug\ConPaises.obj
+.\Debug\ConProfissoes.obj
+.\Debug\Consultas.obj
+.\Debug\ConsultasSQL.obj
+.\Debug\ConVendas.obj
+.\Debug\Livrus.obj
+.\Debug\Login.obj
+.\Debug\Principal.obj
+.\Debug\RotinasGlobais.obj
+.\Debug\Sobre.obj
+.\Debug\Splash.obj
+.\Debug\VenderLivros.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP1E.tmp"
+<h3>Output Window</h3>
+Compiling...
+AlterarSenha.c
+c:\livrusvirtus\vcpp6\gtk2.0\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadAssuntos.c
+c:\livrusvirtus\vcpp6\gtk2.0\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+Cadastros.c
+c:\livrusvirtus\vcpp6\gtk2.0\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadAutores.c
+c:\livrusvirtus\vcpp6\gtk2.0\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadClientes.c
+c:\livrusvirtus\vcpp6\gtk2.0\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadEditoras.c
+cl.exe terminated at user request.
+
+</pre>
+</body>
+</html>

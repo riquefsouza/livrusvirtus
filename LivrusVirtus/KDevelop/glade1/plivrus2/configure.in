@@ -1,0 +1,22 @@
+# generated 2005/1/16 14:10:45 BRST by hfs@localhost.(none)
+# using glademm V1.1.2
+
+AC_INIT(src/livrus.cc)
+AM_INIT_AUTOMAKE(livrus, 0.0)
+AM_CONFIG_HEADER(config.h)
+
+AC_ISC_POSIX
+AC_PROG_CC
+AM_PROG_CC_STDC
+AC_HEADER_STDC
+AC_PROG_CPP
+AC_PROG_CXX
+AC_PROG_CXXCPP
+AM_PROG_LIBTOOL
+
+AC_LANG_CPLUSPLUS
+
+AM_PATH_GTKMM(1.2.10,,
+	AC_MSG_ERROR(Cannot find a matching GTK-- library: Please install version 1.2.10 or newer))
+
+AC_OUTPUT(Makefile src/Makefile )

@@ -1,0 +1,10 @@
+(defun demo ()
+     ; generates new random state object from clock
+     (setq *random-state*
+          (make-random-state t)    
+     )
+
+     (dotimes (i 100)
+        (format t "~D " (random 100))
+     )
+)

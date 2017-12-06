@@ -1,0 +1,35 @@
+                           Debugging LISP programs
+===============================================================================
+
+Use the (break) construct.  At points where you want the interpreter to stop,
+just put
+
+           (break "check out x variable")
+
+The string argument is just a message that gets printed out when you hit that 
+break statement; it is something you make up to remind yourself what to look 
+for at this break point.
+ 
+When you break, you will get a read-eval-print loop with an error prompt:
+For example:
+
+          >>Break: check out x variable
+          SILLY                        (IHS[11])
+         Arg 0 (X): 5
+         Restart options (Type :C <number>):
+              0: Return from BREAK.
+         :Q,  1: Lisp Top Level
+          Version 201  Delta 27
+          Type :H for a list of debugger commands.
+          ->
+
+To see what commands you can type here, use :h (help).  The commonest ones are:
+
+          :c   -- continue execution
+          :b   -- backtrace, shows all the functions that you're nested in
+          :v   -- verbose, show what function you're in, what the args are, etc
+          :q   -- quit, break out of this function altogether 
+
+And of course you can type in the name of any variable to see its value.  You 
+can even execute LISP functions or setq variables in here.  Beware of changing 
+variables, though!  You may screw up the function which you interrupted.

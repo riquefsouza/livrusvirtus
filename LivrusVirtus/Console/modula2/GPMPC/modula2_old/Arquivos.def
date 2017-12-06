@@ -1,0 +1,171 @@
+DEFINITION MODULE Arquivos;
+
+FROM Ascii IMPORT lf, cr, nul;
+FROM StdStrings IMPORT String;
+FROM UxFiles IMPORT File;
+
+TYPE
+  regAssunto = RECORD
+   codigo: String; (* ARRAY[1..10] OF CHAR; *)
+   assunto: String; (* ARRAY[1..30] OF CHAR; *)
+  END;
+  regAutor = RECORD
+   codigo: String; (* ARRAY[1..10] OF CHAR; *)
+   autor: String; (* ARRAY[1..30] OF CHAR; *)
+  END;
+  regEditora = RECORD
+   codigo: String; (* ARRAY[1..10] OF CHAR; *)
+   editora: String; (* ARRAY[1..50] OF CHAR; *)
+  END;
+  regIdioma = RECORD
+   codigo: String; (* ARRAY[1..10] OF CHAR; *)
+   idioma: String; (* ARRAY[1..20] OF CHAR; *)
+  END;
+  regUsuario = RECORD
+   login: String; (* ARRAY[1..10] OF CHAR; *)
+   senha: String; (* ARRAY[1..10] OF CHAR; *)
+  END;
+  regPais = RECORD
+   codigo: String; (* ARRAY[1..3] OF CHAR; *)
+   pais: String; (* ARRAY[1..50] OF CHAR; *)
+  END;
+  regProfissao = RECORD
+   codigo: String; (* ARRAY[1..10] OF CHAR; *)
+   profissao: String; (* ARRAY[1..50] OF CHAR; *)
+  END;
+  regLivro = RECORD
+   isbn: String; (* ARRAY[1..13] OF CHAR; *)
+   titulo: String; (* ARRAY[1..50] OF CHAR; *)
+   edicao: String; (* ARRAY[1..10] OF CHAR; *)
+   anopubli: String; (* ARRAY[1..10] OF CHAR; *)
+   codeditora: String; (* ARRAY[1..10] OF CHAR; *)
+   volume: String; (* ARRAY[1..10] OF CHAR; *)
+   codidioma: String; (* ARRAY[1..10] OF CHAR; *)
+   npaginas: String; (* ARRAY[1..10] OF CHAR; *)
+   preco: String; (* ARRAY[1..10] OF CHAR; *)
+   qtdestoque: String; (* ARRAY[1..10] OF CHAR; *)
+  END;
+  regLivroAss = RECORD
+   isbn: String; (* ARRAY[1..13] OF CHAR; *)
+   codassunto: String; (* ARRAY[1..10] OF CHAR; *)
+  END;
+  regLivroAut = RECORD
+   isbn: String; (* ARRAY[1..13] OF CHAR; *)
+   codautor: String; (* ARRAY[1..10] OF CHAR; *)
+  END;
+  regCliente = RECORD
+   cpf: String; (* ARRAY[1..14] OF CHAR; *)
+   nome: String; (* ARRAY[1..30] OF CHAR; *)
+   email: String; (* ARRAY[1..30] OF CHAR; *)
+   identidade: String; (* ARRAY[1..10] OF CHAR; *)
+   sexo: String; (* CHAR; *)
+   telefone: String; (* ARRAY[1..17] OF CHAR; *)
+   dtnascimento: String; (* ARRAY[1..10] OF CHAR; *)
+   codendereco: String; (* ARRAY[1..10] OF CHAR; *)
+   codpais: String; (* ARRAY[1..3] OF CHAR; *)
+   codprofissao: String; (* ARRAY[1..10] OF CHAR; *)
+  END;
+  regEndereco = RECORD
+   codigo: String; (* ARRAY[1..10] OF CHAR; *)
+   logradouro: String; (* ARRAY[1..40] OF CHAR; *)
+   bairro: String; (* ARRAY[1..15] OF CHAR; *)
+   cep: String; (* ARRAY[1..8] OF CHAR; *)
+   cidade: String; (* ARRAY[1..30] OF CHAR; *)
+   estado: String; (* ARRAY[1..20] OF CHAR; *)
+  END;
+  regVenda = RECORD   
+   dthrvenda: String; (* (19) data/hora da venda dd/mm/yyyy hh:mm:ss *)
+   cpf: String; (* ARRAY[1..14] OF CHAR; *)
+   isbn: String; (* ARRAY[1..13] OF CHAR; *)
+   precovenda: String; (* ARRAY[1..10] OF CHAR; *)
+  END; 
+
+  tregistro = ARRAY[0..145] OF CHAR;
+  ctTipo = (opTexto, opNumero, opData, opDataHora, opSenha);
+  ctArqs = (opAssunto, opAutor, opEditora, opEndereco, opIdioma, opPais,
+                opProfissao, opCliente, opLivro, opLivroAss, opLivroAut,
+                opUsuario, opVenda);
+  ctAcao = (opNovo, opAlterar, opPesquisar, opSalvarInclusao,
+              opSalvarAlteracao, opExcluir, opConfirmaExclusao, opListarTodos);
+
+CONST
+(* windows *)
+  CRLF = cr + lf;  
+  TAM_CRLF = 2;
+(* unix *)
+(*  CRLF = lf;
+   TAM_CRLF = 1; *) 
+(* macintosh *)
+(*  CRLF = cr;
+   TAM_CRLF = 1; *) 
+
+  MSG_ARQERRO = 'Erro: O arquivo não pode ser aberto.';
+  MSG_ARQCERRO = 'Erro: O arquivo não pode ser criado.';
+
+  ARQ_ASSUNTO = 'assunto.dat';
+  ARQ_AUTOR = 'autor.dat';
+  ARQ_EDITORA = 'editora.dat';
+  ARQ_IDIOMA = 'idioma.dat';
+  ARQ_USUARIO = 'usuario.dat';
+  ARQ_PAIS = 'pais.dat';
+  ARQ_PROFISSAO = 'profiss.dat';
+  ARQ_LIVRO = 'livro.dat';
+  ARQ_LIVASS = 'livroass.dat';
+  ARQ_LIVAUT = 'livroaut.dat';
+  ARQ_CLIENTE = 'cliente.dat';
+  ARQ_ENDERECO = 'endereco.dat';
+  ARQ_VENDA = 'venda.dat';
+
+  TAM_ASSUNTO = 40;
+  TAM_AUTOR = 40;
+  TAM_EDITORA = 60;
+  TAM_IDIOMA = 30;
+  TAM_USUARIO = 20;
+  TAM_PAIS = 53;
+  TAM_PROFISSAO = 60;
+  TAM_LIVRO = 143;
+  TAM_LIVASS = 23;
+  TAM_LIVAUT = 23;
+  TAM_CLIENTE = 135;
+  TAM_ENDERECO = 123;
+  TAM_VENDA = 56;
+
+VAR
+
+ tAssunto: regAssunto;
+ tAutor: regAutor;
+ tEditora: regEditora;
+ tIdioma: regIdioma;
+ tEndereco: regEndereco;
+ tPais: regPais;
+ tProfissao: regProfissao;
+ tLivro: regLivro;
+ tLivroAss: regLivroAss;
+ tLivroAut: regLivroAut;
+ tCliente: regCliente;
+ tUsuario: regUsuario;
+ tVenda: regVenda; 
+
+ tfAssunto, tfAutor, tfEditora, tfIdioma, tfEndereco, tfPais, tfProfissao,
+ tfLivro, tfLivroAss, tfLivroAut, tfCliente, tfUsuario, tfVenda: File;
+
+(*--- Rotinas de manipulação de arquivos ------------------------------------*)
+PROCEDURE tamArq(VAR sArq: File): CARDINAL;
+PROCEDURE fimArq(VAR sArq: File; ntam: CARDINAL): BOOLEAN;
+PROCEDURE lerArq(VAR sArq: File; nTamLinha, 
+          nTamCRLF: CARDINAL): String;
+PROCEDURE gravarArq(VAR sArq: File; nTamLinha, 
+          nTamCRLF: CARDINAL; sLinha: String);
+PROCEDURE abrecriaArqs(bAbre: BOOLEAN);
+PROCEDURE fechaArqs(); 
+PROCEDURE pesqArq(VAR sArq: File; sChave: String; nPosChave,
+         nTamChave, nTamLinha: CARDINAL): String;
+PROCEDURE pesqLinhaExcluida(VAR sArq: File; nTamLinha: CARDINAL);
+PROCEDURE pesqMaxCod(VAR sArq: File; nPosChave,
+        nTamChave, nTamLinha: CARDINAL): String;
+PROCEDURE escreveArq(VAR sArq: File; sTexto,
+	sMsgAcerto, sMsgErro: String);
+PROCEDURE tamReg(sreg: ctArqs): CARDINAL;
+PROCEDURE LinhaReg(sreg: ctArqs): String;
+
+END Arquivos.

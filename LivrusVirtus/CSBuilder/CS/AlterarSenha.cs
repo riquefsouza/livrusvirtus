@@ -1,0 +1,270 @@
+using System;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Data;
+
+namespace Livrus
+{
+	/// <summary>
+	/// Summary description for WinForm.
+	/// </summary>
+	public class frmAlterarSenha : System.Windows.Forms.Form
+	{
+		public static frmAlterarSenha fAlterarSenha;
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.Container components = null;
+		private System.Windows.Forms.Button btnSalvar;
+		private System.Windows.Forms.Button btnLimpar;
+		private System.Windows.Forms.Button btnFechar;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TextBox edtNovaSenha;
+		private System.Windows.Forms.TextBox edtLogin;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox edtConfirmarSenha;
+		private System.Windows.Forms.TextBox edtSenhaAtual;
+		private System.Windows.Forms.Label label4;
+		private System.Data.OleDb.OleDbCommand Arquiva;
+
+		public frmAlterarSenha()
+		{
+			//
+			// Required for Windows Form Designer support
+			//
+			InitializeComponent();
+
+			//
+			// TODO: Add any constructor code after InitializeComponent call
+			//
+		}
+
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		protected override void Dispose (bool disposing)
+		{
+			if (disposing)
+			{
+				if (components != null)
+				{
+					components.Dispose();
+				}
+			}
+			base.Dispose(disposing);
+		}
+
+		#region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			this.btnSalvar = new System.Windows.Forms.Button();
+			this.btnLimpar = new System.Windows.Forms.Button();
+			this.btnFechar = new System.Windows.Forms.Button();
+			this.label3 = new System.Windows.Forms.Label();
+			this.edtNovaSenha = new System.Windows.Forms.TextBox();
+			this.edtLogin = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.edtConfirmarSenha = new System.Windows.Forms.TextBox();
+			this.edtSenhaAtual = new System.Windows.Forms.TextBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.Arquiva = new System.Data.OleDb.OleDbCommand();
+			this.SuspendLayout();
+			// 
+			// btnSalvar
+			// 
+			this.btnSalvar.Location = new System.Drawing.Point(8, 104);
+			this.btnSalvar.Name = "btnSalvar";
+			this.btnSalvar.TabIndex = 8;
+			this.btnSalvar.Text = "&Salvar";
+			this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+			// 
+			// btnLimpar
+			// 
+			this.btnLimpar.Location = new System.Drawing.Point(88, 104);
+			this.btnLimpar.Name = "btnLimpar";
+			this.btnLimpar.TabIndex = 9;
+			this.btnLimpar.Text = "&Limpar";
+			this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+			// 
+			// btnFechar
+			// 
+			this.btnFechar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnFechar.Location = new System.Drawing.Point(168, 104);
+			this.btnFechar.Name = "btnFechar";
+			this.btnFechar.TabIndex = 10;
+			this.btnFechar.Text = "&Fechar";
+			this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
+			// 
+			// label3
+			// 
+			this.label3.Location = new System.Drawing.Point(16, 56);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(80, 16);
+			this.label3.TabIndex = 4;
+			this.label3.Text = "Nova senha:";
+			// 
+			// edtNovaSenha
+			// 
+			this.edtNovaSenha.Location = new System.Drawing.Point(16, 72);
+			this.edtNovaSenha.MaxLength = 10;
+			this.edtNovaSenha.Name = "edtNovaSenha";
+			this.edtNovaSenha.PasswordChar = '*';
+			this.edtNovaSenha.Size = new System.Drawing.Size(96, 20);
+			this.edtNovaSenha.TabIndex = 5;
+			this.edtNovaSenha.Text = "";
+			// 
+			// edtLogin
+			// 
+			this.edtLogin.Enabled = false;
+			this.edtLogin.Location = new System.Drawing.Point(16, 24);
+			this.edtLogin.MaxLength = 10;
+			this.edtLogin.Name = "edtLogin";
+			this.edtLogin.Size = new System.Drawing.Size(96, 20);
+			this.edtLogin.TabIndex = 1;
+			this.edtLogin.Text = "";
+			// 
+			// label2
+			// 
+			this.label2.Location = new System.Drawing.Point(16, 8);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(64, 16);
+			this.label2.TabIndex = 0;
+			this.label2.Text = "Login:";
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(128, 56);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(96, 16);
+			this.label1.TabIndex = 6;
+			this.label1.Text = "Confirmar senha:";
+			// 
+			// edtConfirmarSenha
+			// 
+			this.edtConfirmarSenha.Location = new System.Drawing.Point(128, 72);
+			this.edtConfirmarSenha.MaxLength = 10;
+			this.edtConfirmarSenha.Name = "edtConfirmarSenha";
+			this.edtConfirmarSenha.PasswordChar = '*';
+			this.edtConfirmarSenha.Size = new System.Drawing.Size(96, 20);
+			this.edtConfirmarSenha.TabIndex = 7;
+			this.edtConfirmarSenha.Text = "";
+			// 
+			// edtSenhaAtual
+			// 
+			this.edtSenhaAtual.Location = new System.Drawing.Point(128, 24);
+			this.edtSenhaAtual.MaxLength = 10;
+			this.edtSenhaAtual.Name = "edtSenhaAtual";
+			this.edtSenhaAtual.PasswordChar = '*';
+			this.edtSenhaAtual.Size = new System.Drawing.Size(96, 20);
+			this.edtSenhaAtual.TabIndex = 3;
+			this.edtSenhaAtual.Text = "";
+			// 
+			// label4
+			// 
+			this.label4.Location = new System.Drawing.Point(128, 8);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(80, 16);
+			this.label4.TabIndex = 2;
+			this.label4.Text = "Senha atual:";
+			// 
+			// frmAlterarSenha
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.ClientSize = new System.Drawing.Size(248, 133);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.edtConfirmarSenha);
+			this.Controls.Add(this.edtSenhaAtual);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.label3);
+			this.Controls.Add(this.edtNovaSenha);
+			this.Controls.Add(this.edtLogin);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.btnSalvar);
+			this.Controls.Add(this.btnLimpar);
+			this.Controls.Add(this.btnFechar);
+			this.Name = "frmAlterarSenha";
+			this.Text = "Alteração de Senha";
+			this.Closing += new System.ComponentModel.CancelEventHandler(this.frmAlterarSenha_Closing);
+			this.Load += new System.EventHandler(this.frmAlterarSenha_Load);
+			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmAlterarSenha_MouseMove);
+			this.ResumeLayout(false);
+		}
+		#endregion
+		
+		private void frmAlterarSenha_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			frmPrincipal.fPrincipal.mnuAlterarSenha.Enabled=true;
+			frmPrincipal.fPrincipal.statusBar1.Panels[1].Text="";
+		}
+		
+		private void btnFechar_Click(object sender, System.EventArgs e)
+		{
+			Close();
+		}
+		
+		private void btnLimpar_Click(object sender, System.EventArgs e)
+		{
+			edtNovaSenha.Text="";
+			edtConfirmarSenha.Text="";
+			edtSenhaAtual.Focus();
+		}
+
+		private bool ValidaDados()
+		{
+		  if (edtSenhaAtual.Text.Trim() !=
+			 RotinasGlobais.Rotinas.sUsuarioSenha.Trim()) {
+			MessageBox.Show("A Senha atual não confere com a senha do usuário!",
+			frmPrincipal.fPrincipal.Text, MessageBoxButtons.OK,
+			MessageBoxIcon.Error);
+			return false;
+		  }
+		  if (RotinasGlobais.Rotinas.ValidaCampo(edtNovaSenha.Text,
+				"Nova senha não informada!")) {
+			return false;
+		  }
+		  if (edtNovaSenha.Text.Trim() != edtConfirmarSenha.Text.Trim()) {
+			MessageBox.Show("A Nova senha não confere com a senha a confirmar!",
+			frmPrincipal.fPrincipal.Text, MessageBoxButtons.OK,
+			MessageBoxIcon.Error);
+			return false;
+		  }
+
+		  return true;
+		}
+
+		private void btnSalvar_Click(object sender, System.EventArgs e)
+		{
+			if (ValidaDados()) {
+			  Arquiva = frmPrincipal.fPrincipal.db.CreateCommand();
+
+			  Arquiva.CommandText=ConsultasSQL.ConsSQL.Usuario('U',
+			  RotinasGlobais.Rotinas.sUsuarioLogin, edtConfirmarSenha.Text);
+			  Arquiva.ExecuteNonQuery();
+			  Arquiva.Dispose();
+			  RotinasGlobais.Rotinas.sUsuarioSenha=edtNovaSenha.Text;
+			  MessageBox.Show("Senha alterada com sucesso!",
+			  frmPrincipal.fPrincipal.Text, MessageBoxButtons.OK,
+			  MessageBoxIcon.Information);
+			}
+		}
+		
+		private void frmAlterarSenha_Load(object sender, System.EventArgs e)
+		{
+			edtLogin.Text=RotinasGlobais.Rotinas.sUsuarioLogin;
+		}
+		
+		private void frmAlterarSenha_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+		{
+			frmPrincipal.fPrincipal.statusBar1.Panels[1].Text=Text;
+		}
+
+	}
+}

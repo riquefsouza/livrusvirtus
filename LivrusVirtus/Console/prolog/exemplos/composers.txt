@@ -1,0 +1,26 @@
+/*  This database is about composers */
+
+composer(monteverdi,1567,1643).      /* composer's last name, birth year,
+                                        death year */
+composer(bach,1685,1750).
+composer(vivaldi,1678,1741).
+composer(mozart,1756,1791).
+composer(haydn,1732,1809).
+composer(beethoven,1770,1827).
+composer(schubert,1797,1828).
+composer(schumann,1810,1856).
+composer(brahms,1833,1897).
+composer(verdi,1813,1901).
+composer(debussy,1862,1918).
+composer(stravinksy,1882,1971).
+
+    /* composer X is a contemporary of composer Y if the range of years
+       during which they were alive overlap */
+
+contemporary(X,Y) :- composer(X,B1,D1), composer(Y,B2,D2),
+                     not(X = Y), overlap(B1,D1,B2,D2).
+
+overlap(B1,D1,B2,D2) :- B2 >= B1, B2 =< D1.
+overlap(B1,D1,B2,D2) :- B1 >= B2, B1 =< D2.
+
+alive_during(C,Year) :- composer(C,B1,D1), overlap(B1,D1,Year,Year).

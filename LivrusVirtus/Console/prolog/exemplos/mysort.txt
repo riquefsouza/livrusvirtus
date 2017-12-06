@@ -1,0 +1,10 @@
+mysort([],[]).
+
+mysort([X|Tail],L) :- mysort(Tail,Tailsort),
+                      myinsert(X,Tailsort,L).
+
+myinsert(X,[],[X]).
+
+myinsert(X,[Y|Tail],[X,Y|Tail]) :- X < Y.
+
+myinsert(X,[Y|Tail],[Y|NewTail]) :- myinsert(X,Tail,NewTail).

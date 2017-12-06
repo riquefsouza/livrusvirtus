@@ -1,0 +1,7 @@
+#!/bin/csh
+
+adaclear
+adanew
+set dir=/mnt1/dept/meyer/HELP/ADA/PACKAGES
+adacomp $dir/strings_s.a
+adacomp $dir/strings_b.a

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="isbn">85-346-0237-9</column>
+        <column name="cpf">026.857.484-74</column>
+        <column name="datavenda">2004-10-29 00:00:00.000</column>
+        <column name="precovenda">34.55</column>
+    </row>
+    <row>
+        <column name="isbn">85-85588-17-9</column>
+        <column name="cpf">026.857.484-74</column>
+        <column name="datavenda">2004-12-09 00:00:00.000</column>
+        <column name="precovenda">45.62</column>
+    </row>
+</resultset>

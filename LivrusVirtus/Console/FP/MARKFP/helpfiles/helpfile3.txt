@@ -1,0 +1,615 @@
+                           General FP Tutorial
+                              By Mark Meyer
+                             March 31, 1994
+
+==============================================================================
+
+>>>>> SECTION ONE:  FP is a pure functional language.
+
+FP, which stands for Functional Programming, follows the functional model of
+programming completely, unlike LISP which is impure.  What is the functional
+model?
+
+    1.  There are no variables, or variables are used just as placeholders for
+        values that have already been computed.  Another way of saying this is
+        that any variable may be assigned exactly one value.
+
+    2.  Everything is a function application.  The essential operation is to
+        apply a function to some value.  The resulting value will most likely
+        be input to another function.
+
+    3.  Functions are manipulated by using function operators, sometimes called
+        higher order functions or second-degree functions.  These "meta-
+        functions" operate on other functions.
+
+==============================================================================
+
+>>>>> SECTION TWO:  Common Meta-functions:  Composition
+
+What is an example of a meta-function?  Composition is the most obvious one.
+It takes two functions and creates a new function.  The result of the new
+function is the same as if you applied the "inner" or second function to a
+value, and then applied the outer or first function to the result.  Here's a
+simple example:
+
+          Add1  :  This function just adds 1 to its input
+
+          Square : This function squares its input
+
+Now Add1 . Square is a new function.  We use the "dot" (here represented by a
+period) as the composition operator.  We can even give this new function a
+name:
+
+          Glorp == Add1 . Square
+
+In traditional math terms, this would look like
+
+          Add1 ( Square ( input ) )
+
+Let's try.  Glorp(5) would give us 26.  In FP we usually don't bother with the
+parentheses, but instead put the argument on the right side of the colon:
+
+          Glorp : 5
+
+gives us  26.
+
+Notice that Glorp is *NOT* the same function as Square . Add1.  For example:
+
+          Square . Add1 : 5
+
+gives us 36, which is most certainly not 25.
+
+Thus composition is not commutative.
+
+If you have three functions, they can be composed two at a time.  The compo-
+sition operator is usually thought to associate to the right, so that
+
+          f . g . h : x
+
+is the same as getting a value for g . h : x and then doing f : this value,
+or
+
+          f ( g ( h (x) ) )
+
+          
+
+==============================================================================
+
+>>>>> SECTION THREE:  An algebra of functions
+
+In FP, we don't care too much about data!  No siree.  We play with functions
+instead, and in fact FP is just an algebra of functions.  Functions are now
+the "data," and the functional operators, often called functional forms,
+produce new functions.  These functional forms, such as composition, are
+really just operators and they have their own precedence and associativity
+rules.  We use parentheses to override this.  For example, to change the
+associativity of composition, i.e. to override its right associativity in
+the f . g . h example above, we could write:
+
+         (f . g) . h 
+
+Now if we evaluated (f . g) . h, we would do h(x) first, and then do f.g on
+this value.
+
+Question?  Is composition associative?  That is, for all f, g, and h, is it
+true that
+
+        (f . g) . h  ==  f . (g . h)
+
+Think about it!
+
+==============================================================================
+
+>>>>> SECTION FOUR:  Primitive functions
+
+We always need a base from which to start, which is what the primitive
+functions are.  They are the tinker toys from which we construct more 
+marvelous things.  Primitive functions often deal with arithmetic, boolean
+algebra, comparisons and selection of data items.
+
+In most FP systems, you are given a fixed number of functional forms -- you
+are not free to create your own new ones.  The functions that you get as a
+result of applying the functional forms are essentially new "primitive"
+functions.  That is, they work on data inputs and outputs.
+
+Another way to look at this is by "orders".  First order functions are closest
+to actual data.  Second order functions manipulate "values" which are first
+order functions.  Yes, I suppose we could have third and fourth, and nth order
+functions.  But what would they look like?
+
+==============================================================================
+
+>>>>> SECTION FIVE:  Data Structures
+
+As always, the list is the ubiquitous data structure in FP.  Many FP systems
+use brackets and commas, such as 
+
+        <5,3,2>
+
+or
+
+        <<Mark,37>,<Kathy,26>,<Sally,56>,<alfie,8>,<anthony,0>>
+
+But parentheses would work equally well.
+
+We have to have ways to get things out of lists, put things in and do other
+usual things like count the number of elements in lists or discover whether
+or not a piece of data is a list or not.
+
+The non-lists in FP are just numbers or character strings.  These strings are
+often called atoms.
+
+A special atom is the upside down T, which stands for "undefined" or sort of
+a generic error atom.  It is *NOT* the empty list.
+
+The empty list is called nil.
+
+==============================================================================
+
+>>>>> SECTION SIX:  All the primitive functions
+
+Simple Selection and Structure
+------------------------------
+
+   i:list           Select the ith component of list       2:<1,5,3>  is 5
+   tl:list          tail of list                          tl:<1,5,3>  is <5,3>
+                                                          tl:<3>      is nil
+   cons:<x,list>    Make a new list by inserting x      cons:<2,<1,5,3>>  is
+                    into list at the head                           <2,1,5,3>
+   length:list      Return length of list             length:<1,5,3>  is 3
+   id:anything      identity function                     id:5 is 5
+                                                          id:<1,5,3> is <1,5,3>
+   i:num            iota function, returns list of         i:3       is <1,2,3>
+                    numbers from 1 up to num
+   
+
+Arithmetic
+----------
+
+   +:<num1,num2>    add two numbers together              +:<5,6>   is  11
+       Similarly for -, * and / for subtraction, multiplication and division
+
+   =:<num1,num2>    compares num1 to num2, if equal,     =:<5,6>    is F
+                    it returns T, else F
+       Similarly for the other relational operators
+
+          ne  -- not equal      lt  --  less than     le -- less than or equal
+          gt  -- greater than   ge  --  greater than or equal
+
+Boolean
+-------
+
+   atom:x           test if x is an atom or not         atom:5  is  T
+                                                        atom:<5,3> is F
+   null:x           test if x is nil (empty list)       null:nil is T
+                                                        null:5   is F
+   eq:<v1,v2>       test for equality                   eq:<T,F> is F
+   and:<v1,v2>      boolean and                         and:<T,F> is F
+   or:<v1,v2>       boolean or                          or:<T,F> is T
+   not:v1           boolean negation                    not:F  is  T
+
+Complex Selection and Structure
+-------------------------------
+
+   distl:<x,list>   distribute on the left, put x into  distl:<5,<3,2,1>> is
+                    a list with every element of list      <<5,3>,<5,2>,<5,1>>
+   distr:<list,x>   distribute on the right, put x into distl:<5,<3,2,1>> is
+                    a list with every element of list      <<3,5>,<2,5>,<1,5>>
+   apndl:<x,list>   append on the left                  apndl:<a,<b,c,d>> is
+                    WARNING: this is just cons, not        <a,b,c,d>
+                       the true LISP append
+   apndr:<list,x>   append on the right                 apndl:<<b,c,d>,a> is
+                                                           <b,c,d,a>
+   tlr:list         tail right, take off last element   tlr:<a,b,c> is <a,b>
+   ir:list          ith from the right                  2r:<a,b,c,d> is c
+   
+
+==============================================================================
+
+>>>>> SECTION SEVEN:  The functional forms
+
+Composition:     f1 . f2                     2.tl:<a,b,c,d> is c
+                                             tl.tl:<a,b,c,d> is b
+
+     This composes two functions f1 and f2.  The result of the new function
+     is the same as first doing f2, then f1 on that result.
+
+Constant:        #n                          #3:<a,b,c,d> is 3
+
+     Just return the constant "n" no matter what the argument is!!
+     Though this seems ridiculous, it is very useful!
+
+Constructions    [f1,f2,f3]:x                [+,*,2]:<3,2> is <5,6,2>
+
+     This applies each function in the list to the same input.
+     In the example above, just think of replicating the input <3,2> three
+     times and then doing +, * and 2 (select element 2).
+
+         +:<3,2>       *:<3,2>     2:<3,2>
+
+     Then bundle up all three answers and put into a list:   <5,6,2>
+
+     You can also make a list out of something this way:
+
+             [id]:5   is   <5>
+
+Apply to all:    @f1:list                   @+:<<3,2>,<6,1>,<8,14>> is <5,7,22>
+
+     This is truly like LISP's mapcar.  It does function f1 on each element of
+     list.  If f1 is id (the identity) function, then you get the same value
+     back.
+
+Insertion:       /f1:list                   /+:<5,2,6,3,4> is 20
+
+     f1 must be a binary function.  Just think of putting f1 between each
+     element of "list" and then evaluating it.  The above example boils down
+     to   5 + 2 + 6 + 3 + 4, which is 20.
+
+Condition:      (p->f;g):x                 (eq0.1 -> 2;3):<5,mark,sally> is
+                                                  sally
+
+     This is the "if" statement.  First perform the function p on x to get
+     either T or F.  If T, then perform f on x.  Otherwise perform g on x.
+
+     In the above example, we do eq0.1:<5,mark,sally>.  Pretend that eq0 is
+     a simple function that tests for equality to 0.  Notice that eq0.1 is
+     actually a composed function that tests the first element of a list to
+     see if it is equal to 0.
+
+     If it is then do 2, or select the second element, which is "mark".
+     If not, then do 3, or select the third element, which is "sally".
+     Since 5 is not equal to 0, we select sally.
+
+==============================================================================
+
+>>>>> SECTION EIGHT:  Defining functions
+
+We often need to do the same set of functions or functional forms over and 
+over, so it makes sense to just give them a name.  It also simplifies our
+programs a lot.  The eq0 in the above is an example.
+
+You merely define a name and say that that name can be textually replaced by
+a functional form or name.  Do not use the colon, since you are not actually
+evaluating a function!
+
+In the simplest case, you can rename a function.  Unfortunately, you cannot
+rename a functional form, nor can you give parameters in any way.
+
+Here's how to rename tl as cdr:
+
+    (def cdr == tl)
+
+Here's how to define eq0:
+
+    (def eq0 == eq.[id,#0])
+
+Let's analyze this for practice.  This is a function composition, so let's
+look at the [id,#0] first.  This is a construction, which says to take the
+input and give it to two different functions.  These are id (leave unchanged)
+and constant 0.  Thus [id,#0], when applied to a number, gives a list.
+For example:
+
+     [id,#0]:5   gives   <5,0>
+
+Now that list is given to eq, which compares the two numbers in the list.
+5 is not equal to 0, so eq:<5,0> is F.
+
+==============================================================================
+
+>>>>> SECTION NINE:  The role of UNDEFINED, nil, and null
+
+The special value "undefined" usually results from an error.  If undefined is
+used as an argument (input), the result is always undefined, too.  Thus,
+undefined propagates and "spoils" any output so that you do cannot get an
+erroneous or misleading answer.
+
+     +:<5,undefined>   is  undefined
+
+Undefined is also a function!  It usually results from an error in using a
+special form.  If you apply undefined to any value, you only get the returned
+value of undefined.
+
+The special value "nil" stands for the empty list.  It, too, is a function,
+and when it is applied to any value, it gives the value "nil" (not undefined.)
+The book uses a circle with a slash through it.
+
+Null is a predicate function that tests to see if a value is null, and returns
+T if it is, F otherwise.
+
+==============================================================================
+
+>>>>> SECTION TEN:  Recursion
+
+Recursion is the main way of doing things in FP, although there is an explicit
+while loop.  Recursion, as always, requires a decision to determine whether
+the recursion should continue or end.  This means that the essential feature
+of all recursive functions is the condition, or ->.  Let's work through an
+example of finding the length of a list.
+
+First, we write down in English the recursive definition which will guide us:
+
+    Given a list, to find the length of that list, first ask if the list
+        is empty.  If so, then the length is 0.
+    If the list is not empty, then add 1 to the length of the sublist that
+        results from removing the first element.
+
+In FP, you can also remove just the last element by using tlr, so you are not
+straightjacketed like you are in LISP.  But we will go with the "forward"
+version since that will afford the maximum comparison with LISP.
+
+So, let us write an FP expression that checks to see if a list is null.  If so,
+then return 0, else return 1.
+
+    null->#0;#1
+
+Remember the syntax of FP?  These are all functions and functional forms.
+The constant functions #0 and #1 return 0 and 1, respectively, no matter what
+their inputs are.
+
+    null->#0;#1 : <2,3>
+
+returns 1.
+
+    null->#0;#1 : nil
+
+returns 0.
+
+How would you add 1 to the length of the sublist?  Well, this involves a
+sequence of applying different functions, and that means function composition.
+First, lop off the first element, then apply length to it.  Then add 1.  But
+what, are there are functions for these things?  Only for lopping off the
+first element.  Length is what we are writing anyway, so it is natural to
+define length in terms of itself.  
+
+But what about add 1?  This really requires a new function.  Since our input
+is only a single number, and addition is a binary operator, we have to take
+that single number and split it into two numbers.  It would be convenient to
+have one of those numbers be the original number itself, and the other be 1.
+Then we could just apply +.  But wait!  We can do this with construction!
+
+      [id,#1]
+
+This is a list of functions (as opposed to a list of data values).  Each
+function is applied to its input, and the list of results is returned.
+Here's an example:
+
+      [id,#1]:5
+
+does id:5 and #1:5, which yields 5 and 1.  So our answer is
+
+      <5,1>
+
+That's great, because add wants a list consisting of two numbers.  Now we
+just apply +:
+
+     +:<5,1>
+
+and get 6.  To bundle this all together, we compose + onto [id,#1]:
+
+     +.[id,#1]
+
+and this would add 1.  Let's formally attach a name to this expression:
+
+     (def add1 == +.[id,#1])
+
+Now we can do
+
+     add1 : 5
+
+and get 6.
+
+We are almost there.  Lopping off the first element is, you remember, tl
+or tail.  Then we take the length of the remaining list, which gives us the
+composition   length.tl.   This gives us a value, to which we add 1 using our
+new tool:
+
+     add1.length.tl
+
+This is the recursive part.  As is always true with recursion, we use a function
+(length) that has not yet been fully defined.
+
+The base case is still just #0 when the input is nil:
+
+     null->#0;add1.length.tl
+
+Let's formally attach a name to this expression:
+
+     (def length == null->#0;add1.length.tl)
+
+Notice that the name "length" appears in the implemention.
+
+     length : <a,b,c,d>
+
+returns 4.
+
+What happens if we try to take the length of an atom?  Then we will probably
+be in trouble because we haven't designed a way to catch that error.  Let's
+do that.  This would involve just adding another condition to check to see if
+the input is a list or not.  If it is not a list, we could define the length
+to be 0, but a better alternative is to use undefined, since that is a special
+value which is a sort of general error signal.  Another good reason to use
+undefined is that it will propagate from that point on so that the final
+result will be undefined and no one will be fooled into thinking that 0 is
+a legal value, or that something erroneous didn't happen along the way.
+
+     atom->xlength;undefined
+
+Now what the heck is xlength?  It is just shorthand for the actual length
+that we wrote above.  By isolating the non-error checking version from this
+error-checking shell, we make our lives a bit cleaner.  However, we have to
+make sure to change "length" to "xlength" everywhere.
+
+     (def xlength == (null->#0;add1.xlength.tl))
+
+Now we define length as
+
+     (def length == (atom->undefined;xlength))
+
+The function "undefined" always returns undefined, remember?
+
+Now "length" is built into FP, so if you want to test the above, just change
+length to something like zlength in the last def.
+
+================================================================================ 
+>>>>> SECTION ELEVEN:  Another example
+
+In this example, we will develop a function in two different ways.  The purpose
+of the function is to take a list of numbers and return t if they are all equal.
+This may sound like a purely academic waste of time, but it has lots of appli-
+cations.
+
+First, let's do it recursively.  Calling our function "alleq" for "all of them
+are equal" (just like citizens of the United States :-)), here's what we want
+it to look like when we use it:
+
+    alleq:<5,5,5,5>
+
+returns T, whereas
+
+    alleq:<5,2,5,5>
+
+returns NIL.
+
+In recursion, there are several ways to go, but they all involve the base case
+and the continuation case (recursive step).  The base case is something like
+a list that has 0 or 1 elements, in which case we return T.  Recursively, we
+could say that if the first two elements are equal and all the rest of the
+elements are equal, then the whole list is equal.  Let's do the base case first.
+We really have two disjoint cases, but we can combine them with "OR":
+
+   or.[null,eq.[#1,length]] -> #t; ....
+
+The four dots are where the recursive step will go.  This says that if our
+argument is the empty list or if the length of it is equal to the constant 1,
+then just return T.  We could also use length < 2:
+
+   lt.[length,#2] -> #t; ....
+
+Now the recursive step.  We want to check to see if the first two elements
+are equal, and that is done by
+
+     eq.[1,2]
+
+Remember that "1" and "2" are not the constants 1 and 2, but selectors.  In
+terms of LISP, 1 is "car" and 2 is "cadr" or "second".
+
+If the first two elements are equal and if alleq applied to the tail of the
+list returns T, then all elements are equal.  This may seem obvious but it
+relies upon a property of the equality relation, namely that it is transitive.
+See how all your schooling fits together?
+
+Since we have two conditions that must both be true, we use "AND":
+
+    and.[eq.[1,2],alleq.tl]
+
+Notice that first we apply the construction to our argument:
+
+    [eq.[1,2],alleq.tl]
+
+This means that we take our one single argument (which is a list of numbers)
+and apply two different functions to it:
+
+    eq.[1,2] : our list
+
+    alleq.tl : our list
+
+And again, alleq.tl is really "apply alleq to the tail of the argument."
+And eq.[1,2] says "take the first two elements of our list and see if they
+are equal."  The construction [1,2] creates a little list of its own, and
+then applies eq to that.  Let's see that in action just to bolster our
+understanding of how this very strange language works:
+
+    eq.[1,2]:<5,5,3,5,2>
+
+[1,2]:<5,5,3,5,2>  takes out the first two 5's and makes a list <5,5>.  This
+list exists only in hyperspace while we are evaluating it, just like LISP
+does it.  Then we do eq:<5,5> and get t, so the whole thing gives t.
+
+Ok, so now we can put this all together:
+
+   (def alleq == or.[null,eq.[#1,length]] ->#t;and.[eq.[1,2],alleq.tl])
+
+Isn't it fun to be able to look at something as forbidding and cryptic as
+the above and actually say to someone else, "Hey I really understand that!"
+
+
+Now we will do this non-recursively, using some typical FP tricks.
+
+First, we will use a very handy little built-in function called distl which
+stands for "distribute left".  It takes its first argument, and prepends it
+to a each of many little lists formed by putting the elements of the second
+argument, which must be a list, into lists.  Sounds horrible, but here's an
+example:
+
+     distl:<5,<apple,orange,kiwi>>
+
+This gives us
+
+     <<5,apple>,<5,orange>,<5,kiwi>>
+
+In fact, it is very much like traditional algebra's distributivity law of
+multiplication over addition:
+
+     5 * (x + y + z)    =   (5 * x) + (5 * y) + (5 * z)
+
+The trick is to take the first element and distribute it over the rest of
+the elements of the list, giving us a bunch of pairs.  Then we apply good
+old eq (equality test) on each of those pairs, which we can do quickly by
+using the apply-to-all functional form.  This will give us a list of t's
+and nil's.  Then we take the boolean AND of all those.
+
+Here's a go at it:
+
+     and.@eq.distl.[1,id]
+
+There are number of problems here.  First of all, the precedence and 
+associativity of these operators is such that it will parse the @eq....
+as 
+
+     @(eq.distl.[1,id])
+
+which is not right at all (try it).  We need to put parens areound @eq:
+
+     (@eq).distl.[1,id]
+
+Next, we note that the first element is always equal to itself, so why
+waste the computer's time by forming a pair out of the first element twice?
+For example:
+
+     distl.[1,id] : <a,b,c>
+
+gives us <<a,a>,<a,b>,<a,c>>.  So we replace the id with tl to just distribute
+the first element over the tail.  It isn't a huge savings, but it's nice to see
+these things since you never know when they might come in useful.
+
+Third, the and function is binary, meaning it can only take a list of two
+values.  For example:
+
+     and:<t,t,nil>
+
+will return t because it will ignore the nil.  It should return an error
+because there are more than two values, but it doesn't.  However, this is
+easy to rectify using the insert functional form:
+
+     /and:<t,t,nil>
+
+is equivalent to  t and t and nil  Remember that "insert" quite literally
+inserts the binary operator between each element of the list.  Not so obvious
+is the fact that it then evaluates it right to left:
+
+     t and (t and nil)
+
+which gives expressions like /-:<5,2,3> a strange value.  In fact, this works
+out to 5 - (2 - 3) or 6, rather than (5 - 2) - 3 or 0.  But if the binary
+operator is commutative, as is +, * and and and or, then it works out ok.
+
+So our final form is:
+
+     (/and).(@eq).distl.[1,tl]
+
+to which, of course, we need to attach a name:
+
+     (def alleq == (/and).(@eq).distl.[1,tl])
+
+And now it works just like the old alleq, except it ain't recursive.
+Clever, huh?

@@ -1,0 +1,80 @@
+Hi all
+I am referencing Microsoft ActiveX Data Objects 2.5 library.
+My form has a Command Button which moves to the next record. But when it reaches the next i.e EOF i get error(see title)
+The code is below:
+Public cnNotes as Connection
+Public rsNotes as Recordset
+
+Private Sub_Form_Load()
+set cnNotes = New Connection
+With cnNotes
+.Connection String
+.Open
+End with
+
+Set rsNotes = New Recordset
+rsNotes.Open"Select * from Notes ",cnNotes,adOpenDynamic,adLockOptimistic
+
+
+Text1.Text = rsNotes("Text")
+
+
+end Sub
+
+Private Sub Command1_Click()
+
+If Not rsNotes.eof then
+rsNotes.MoveNext
+text1.text = rsNotes("Text")
+
+End if
+
+----------------
+CORRECAO
+----------------
+
+Public cnNotes as Connection
+Public rsNotes as Recordset
+
+Private Sub_Form_Load()
+set cnNotes = New Connection
+With cnNotes
+.Connection String
+.Open
+End with
+
+Set rsNotes = New Recordset
+rsNotes.Open"Select * from Notes ",cnNotes,adOpenDynamic,adLockOptimistic
+
+If Not rsNotes.eof then 'Check here too as the error will start prompt out if no records are selected
+   Text1.Text = rsNotes("Text")
+end if
+
+end Sub
+
+Private Sub Command1_Click()
+
+if cnNotes  is nothing then exit sub
+
+If Not rsNotes.eof then
+  rsNotes.MoveNext
+  text1.text = rsNotes("Text")
+Else
+  rsNotes.MoveLast
+End if
+
+End Sub
+		 
+
+ Private Sub Command1_Click()
+    If Not rsNotes.eof then
+      rsNotes.MoveNext
+      If Not rsNotes.eof
+        text1.text = rsNotes("Text")
+      else
+        (bonus slick trick)
+        rsNotes.movefirst
+        Msgbox "starting at beginning"..... (this could be an option with vbyesno msg)
+      endif
+    End if
+  End Sub

@@ -1,0 +1,24 @@
+unit CadIdiomas;
+
+interface
+
+uses
+  SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
+  QDialogs, QStdCtrls, Cadastros, FMTBcd, Provider, DBClient, DB, SqlExpr;
+
+type
+  TfrmCadIdiomas = class(TfrmCadastros)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadIdiomas: TfrmCadIdiomas;
+
+implementation
+
+{$R *.xfm}
+
+end.

@@ -1,0 +1,101 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:611: checking host system type
+configure:632: checking target system type
+configure:650: checking build system type
+configure:710: checking for a BSD compatible install
+configure:767: checking for -p flag to install
+configure:790: checking whether build environment is sane
+configure:828: checking whether make sets ${MAKE}
+configure:874: checking for working aclocal-1.4
+configure:887: checking for working autoconf
+configure:900: checking for working automake-1.4
+configure:913: checking for working autoheader
+configure:926: checking for working makeinfo
+configure:1031: checking for gcc
+configure:1144: checking whether the C compiler (gcc  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0) works
+configure:1160: gcc -o conftest  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3   -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 conftest.c  1>&5
+configure:1186: checking whether the C compiler (gcc  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0) is a cross-compiler
+configure:1191: checking whether we are using GNU C
+configure:1200: gcc -E conftest.c
+configure:1219: checking whether gcc accepts -g
+configure:1348: checking how to run the C preprocessor
+configure:1464: checking whether g++ supports -frepo
+configure:1491: rm -rf SunWS_cache; g++ -o conftest  -frepo  -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 conftest.C  1>&5
+conftest.C:1: warning: -frepo must be used with -c
+configure:1720: checking for ld used by GCC
+configure:1788: checking if the linker (/usr/bin/ld) is GNU ld
+GNU ld version 2.13.90.0.18 20030121
+configure:1805: checking for /usr/bin/ld option to reload object files
+configure:1817: checking for BSD-compatible nm
+configure:1855: checking whether ln -s works
+configure:1876: checking how to recognise dependant libraries
+configure:2197: checking for ranlib
+configure:2264: checking for strip
+configure:2436: checking for Cygwin environment
+configure:2452: gcc -c -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3   conftest.c 1>&5
+configure: In function `main':
+configure:2448: `__CYGWIN32__' undeclared (first use in this function)
+configure:2448: (Each undeclared identifier is reported only once
+configure:2448: for each function it appears in.)
+configure: failed program was:
+#line 2441 "configure"
+#include "confdefs.h"
+
+int main() {
+
+#ifndef __CYGWIN__
+#define __CYGWIN__ __CYGWIN32__
+#endif
+return __CYGWIN__;
+; return 0; }
+configure:2469: checking for mingw32 environment
+configure:2481: gcc -c -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3   conftest.c 1>&5
+configure: In function `main':
+configure:2477: `__MINGW32__' undeclared (first use in this function)
+configure:2477: (Each undeclared identifier is reported only once
+configure:2477: for each function it appears in.)
+configure: failed program was:
+#line 2474 "configure"
+#include "confdefs.h"
+
+int main() {
+return __MINGW32__;
+; return 0; }
+ltcf-c.sh:need_lc: gcc -c -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3   conftest.c 1>&5
+ltcf-c.sh:need_lc: gcc -shared conftest.  -v -Wl,-soname -Wl,conftest -o conftest
+ltconfig:678:checking for gcc option to produce PIC
+ltconfig:687:checking that gcc PIC flag -fPIC -DPIC works.
+ltconfig:697: gcc -c -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -fPIC -DPIC -DPIC  conftest.c 1>&5
+ltconfig:749: checking if gcc static flag -static works
+ltconfig:758: gcc -o conftest -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3   -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 -static conftest.c  1>&5
+/usr/bin/ld: cannot find -lodbc
+collect2: ld returned 1 exit status
+ltconfig:780: finding the maximum length of command line arguments
+ltconfig:@lineno@: result: 73729
+ltconfig:829: checking if gcc supports -c -o file.o
+ltconfig:830: gcc -c -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -o out/conftest2.o  conftest.c 1>&5
+ltconfig:883: checking if gcc supports -fno-rtti -fno-exceptions
+ltconfig:884: gcc -c -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -fno-rtti -fno-exceptions -c conftest.c  conftest.c 1>&5
+ltconfig:1423: checking if global_symbol_pipe works
+ltconfig:1424: gcc -c -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3   conftest.c 1>&5
+ltconfig:1427: eval "/usr/bin/nm -B conftest.o | sed -n -e 's/^.*[ 	]\([ABCDGISTW]\)[ 	][ 	]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' > conftest.nm"
+ltconfig:1479: gcc -o conftest -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -fno-builtin -fno-rtti -fno-exceptions  -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 conftest.c conftstm.o 1>&5
+ltconfig:1583: checking for dlopen in -ldl
+ltconfig:1603: gcc -o conftest -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -fno-builtin -fno-rtti -fno-exceptions  -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 conftest.c -ldl   1>&5
+ltconfig:1863: checking for dlfcn.h
+ltconfig:1874: gcc -c -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -fno-builtin -fno-rtti -fno-exceptions  conftest.c 1>&5 >/dev/null 2>conftest.out
+ltconfig:1902: checking whether a program can dlopen itself
+ltconfig:1957: gcc -o conftest -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -fno-builtin -fno-rtti -fno-exceptions  -DHAVE_DLFCN_H -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 -Wl,--export-dynamic conftest.c -ldl  1>&5
+ltconfig:1976: checking whether a statically linked program can dlopen itself
+ltconfig:2031: gcc -o conftest -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3  -fno-builtin -fno-rtti -fno-exceptions  -DHAVE_DLFCN_H -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 -Wl,--export-dynamic  conftest.c -ldl  1>&5
+configure:2594: checking for object suffix
+configure:2600: gcc -c -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3   conftest.c 1>&5
+configure:2620: checking for executable suffix
+configure:2630: gcc -o conftest -O2  -I/usr/local/include -DHAVE_CONFIG_H -DPACKAGE_DATA_DIR="/usr/local/share" -DPACKAGE_LOCALE_DIR="/usr/local/share/locale" -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -O2 -O0 -g3   -Wl,--export-dynamic -lodbc -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0 conftest.c  1>&5
+configure:2803: checking for ranlib
+configure:2870: checking for strip
+configure:3050: checking for extra includes
+configure:3081: checking for extra libs
+configure:3140: checking if livrus should be compiled

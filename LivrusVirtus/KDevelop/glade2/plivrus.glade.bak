@@ -1,0 +1,599 @@
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd">
+
+<glade-interface>
+
+<widget class="GtkWindow" id="frmPrincipal">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes">Livrus Virtus</property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_CENTER</property>
+  <property name="modal">False</property>
+  <property name="default_width">500</property>
+  <property name="default_height">400</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">True</property>
+  <signal name="show" handler="on_frmPrincipal_show" last_modification_time="Sat, 07 Aug 2004 03:36:46 GMT"/>
+  <signal name="destroy" handler="on_frmPrincipal_destroy" last_modification_time="Sat, 07 Aug 2004 03:37:07 GMT"/>
+
+  <child>
+    <widget class="GtkVBox" id="vbox1">
+      <property name="visible">True</property>
+      <property name="homogeneous">False</property>
+      <property name="spacing">0</property>
+
+      <child>
+	<widget class="GtkMenuBar" id="menubar1">
+	  <property name="visible">True</property>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="mnuCadastros">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">_Cadastros</property>
+	      <property name="use_underline">True</property>
+
+	      <child>
+		<widget class="GtkMenu" id="mnuCadastros_menu">
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuCadAssuntos">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Assuntos</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuCadAssuntos_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuCadAutores">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">A_utores</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuCadAutores_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuCadEditoras">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Editoras</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuCadEditoras_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuCadEnderecos">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">E_ndereços</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuCadEnderecos_activate" last_modification_time="Tue, 03 Aug 2004 18:15:02 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuCadIdiomas">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Idiomas</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuCadIdiomas_activate" last_modification_time="Tue, 03 Aug 2004 18:15:02 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuCadPaises">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Países</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuCadPaises_activate" last_modification_time="Tue, 03 Aug 2004 18:17:36 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuCadProfissoes">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">P_rofissões</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuCadProfissoes_activate" last_modification_time="Tue, 03 Aug 2004 18:17:36 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separator2">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuCadClientes">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Clientes</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuCadClientes_activate" last_modification_time="Tue, 03 Aug 2004 18:22:13 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuCadLivros">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Livros</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuCadLivros_activate" last_modification_time="Tue, 03 Aug 2004 18:22:13 GMT"/>
+		    </widget>
+		  </child>
+		</widget>
+	      </child>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="mnuPesquisas">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">_Pesquisas</property>
+	      <property name="use_underline">True</property>
+
+	      <child>
+		<widget class="GtkMenu" id="mnuPesquisas_menu">
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuConAssuntos">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Assuntos</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuConAssuntos_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuConAutores">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">A_utores</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuConAutores_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuConEditoras">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Editoras</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuConEditoras_activate" last_modification_time="Tue, 03 Aug 2004 18:15:02 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuConEnderecos">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">E_ndereços</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuConEnderecos_activate" last_modification_time="Tue, 03 Aug 2004 18:15:02 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuConIdiomas">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Idiomas</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuConIdiomas_activate" last_modification_time="Tue, 03 Aug 2004 18:15:02 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuConPaises">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Países</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuConPaises_activate" last_modification_time="Tue, 03 Aug 2004 18:17:36 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuConProfissoes">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">P_rofissões</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuConProfissoes_activate" last_modification_time="Tue, 03 Aug 2004 18:17:36 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separator3">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuConClientes">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Clientes</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuConClientes_activate" last_modification_time="Tue, 03 Aug 2004 18:22:13 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuConLivros">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Livros</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuConLivros_activate" last_modification_time="Tue, 03 Aug 2004 18:22:13 GMT"/>
+		    </widget>
+		  </child>
+		</widget>
+	      </child>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="mnuVendas">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">_Vendas</property>
+	      <property name="use_underline">True</property>
+	      <signal name="activate" handler="on_mnuVendas_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+
+	      <child>
+		<widget class="GtkMenu" id="mnuVendas_menu">
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuVenderLivros">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Vender Livros</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuVenderLivros_activate" last_modification_time="Tue, 03 Aug 2004 18:22:13 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuVendasRealizadas">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Vendas _realizadas</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuVendasRealizadas_activate" last_modification_time="Tue, 03 Aug 2004 18:22:13 GMT"/>
+		    </widget>
+		  </child>
+		</widget>
+	      </child>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="mnuJanelas">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">_Janelas</property>
+	      <property name="use_underline">True</property>
+	      <signal name="activate" handler="on_mnuJanelas_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+
+	      <child>
+		<widget class="GtkMenu" id="mnuJanelas_menu">
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuJanHorizontal">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Lado a lado _horizontal</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuJanHorizontal_activate" last_modification_time="Tue, 03 Aug 2004 18:32:37 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuJanVertical">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Lado a lado _vertical</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuJanVertical_activate" last_modification_time="Tue, 03 Aug 2004 18:32:37 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuJanCascata">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Em _cascata</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuJanCascata_activate" last_modification_time="Tue, 03 Aug 2004 18:32:37 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuJanOrganizarIcones">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Organizar Ícones</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuJanOrganizarIcones_activate" last_modification_time="Tue, 03 Aug 2004 18:32:37 GMT"/>
+		    </widget>
+		  </child>
+		</widget>
+	      </child>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="mnuOpcoes">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">_Opções</property>
+	      <property name="use_underline">True</property>
+
+	      <child>
+		<widget class="GtkMenu" id="mnuOpcoes_menu">
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuAlterarsenha">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Alterar Senha</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuAlterarsenha_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separator1">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuSobre">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Sobre</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuSobre_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="mnuSair">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Sa_ir</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_mnuSair_activate" last_modification_time="Tue, 03 Aug 2004 18:11:00 GMT"/>
+		    </widget>
+		  </child>
+		</widget>
+	      </child>
+	    </widget>
+	  </child>
+	</widget>
+	<packing>
+	  <property name="padding">0</property>
+	  <property name="expand">False</property>
+	  <property name="fill">False</property>
+	</packing>
+      </child>
+
+      <child>
+	<widget class="GtkToolbar" id="toolbar1">
+	  <property name="visible">True</property>
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
+	  <property name="toolbar_style">GTK_TOOLBAR_ICONS</property>
+	  <property name="tooltips">True</property>
+
+	  <child>
+	    <widget class="button" id="button1">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">button1</property>
+	      <property name="use_underline">True</property>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="button" id="button2">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">button2</property>
+	      <property name="use_underline">True</property>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="button" id="button3">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">button3</property>
+	      <property name="use_underline">True</property>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkVSeparator" id="vseparator1">
+	      <property name="visible">True</property>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="button" id="button4">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">button4</property>
+	      <property name="use_underline">True</property>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="button" id="button5">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">button5</property>
+	      <property name="use_underline">True</property>
+	    </widget>
+	  </child>
+	</widget>
+	<packing>
+	  <property name="padding">0</property>
+	  <property name="expand">False</property>
+	  <property name="fill">False</property>
+	</packing>
+      </child>
+
+      <child>
+	<widget class="GtkFixed" id="fixed1">
+	  <property name="visible">True</property>
+	</widget>
+	<packing>
+	  <property name="padding">0</property>
+	  <property name="expand">True</property>
+	  <property name="fill">True</property>
+	</packing>
+      </child>
+
+      <child>
+	<widget class="GtkHBox" id="hbox1">
+	  <property name="visible">True</property>
+	  <property name="homogeneous">False</property>
+	  <property name="spacing">0</property>
+
+	  <child>
+	    <widget class="GtkStatusbar" id="BarraStatus1">
+	      <property name="width_request">130</property>
+	      <property name="height_request">21</property>
+	      <property name="visible">True</property>
+	      <property name="has_resize_grip">False</property>
+	    </widget>
+	    <packing>
+	      <property name="padding">0</property>
+	      <property name="expand">False</property>
+	      <property name="fill">False</property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkStatusbar" id="BarraStatus2">
+	      <property name="width_request">130</property>
+	      <property name="height_request">21</property>
+	      <property name="visible">True</property>
+	      <property name="has_resize_grip">True</property>
+	    </widget>
+	    <packing>
+	      <property name="padding">0</property>
+	      <property name="expand">True</property>
+	      <property name="fill">True</property>
+	    </packing>
+	  </child>
+	</widget>
+	<packing>
+	  <property name="padding">0</property>
+	  <property name="expand">False</property>
+	  <property name="fill">False</property>
+	</packing>
+      </child>
+    </widget>
+  </child>
+</widget>
+
+<widget class="GtkWindow" id="frmCadastros">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+  <signal name="show" handler="on_frmCadastros_show" last_modification_time="Sat, 07 Aug 2004 03:40:01 GMT"/>
+  <signal name="destroy" handler="on_frmCadastros_destroy" last_modification_time="Sat, 07 Aug 2004 03:40:06 GMT"/>
+</widget>
+
+<widget class="GtkWindow" id="frmConsultas">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+  <signal name="show" handler="on_frmConsultas_show" last_modification_time="Sat, 07 Aug 2004 03:42:24 GMT"/>
+  <signal name="destroy" handler="on_frmConsultas_destroy" last_modification_time="Sat, 07 Aug 2004 03:42:34 GMT"/>
+</widget>
+
+<widget class="GtkWindow" id="frmLogin">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+  <signal name="show" handler="on_frmLogin_show" last_modification_time="Sat, 07 Aug 2004 03:43:07 GMT"/>
+  <signal name="destroy" handler="on_frmLogin_destroy" last_modification_time="Sat, 07 Aug 2004 03:43:12 GMT"/>
+</widget>
+
+<widget class="GtkWindow" id="frmSplash">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+  <signal name="show" handler="on_frmSplash_show" last_modification_time="Sat, 07 Aug 2004 03:43:34 GMT"/>
+  <signal name="destroy" handler="on_frmSplash_destroy" last_modification_time="Sat, 07 Aug 2004 03:43:39 GMT"/>
+</widget>
+
+<widget class="GtkWindow" id="frmAlterarSenha">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+</widget>
+
+<widget class="GtkWindow" id="frmSobre">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+</widget>
+
+<widget class="GtkWindow" id="frmCadEnderecos">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+</widget>
+
+<widget class="GtkWindow" id="frmCadClientes">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+</widget>
+
+<widget class="GtkWindow" id="frmCadLivros">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+</widget>
+
+<widget class="GtkWindow" id="frmVenderLivros">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+  <signal name="destroy_event" handler="on_frmVenderLivros_destroy_event" last_modification_time="Sun, 02 Jan 2005 23:26:31 GMT"/>
+</widget>
+
+<widget class="GtkWindow" id="frmConVendas">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes"></property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+  <signal name="destroy_event" handler="on_frmConVendas_destroy_event" last_modification_time="Mon, 03 Jan 2005 00:26:17 GMT"/>
+</widget>
+
+</glade-interface>

@@ -1,0 +1,61 @@
+              Hints and Tips for Debugging and cleaning up LISP programs
+===============================================================================
+
+
+1.  First, get rid of all unused code, especially functions that are defun'ed
+    but never called!  The simplest way to do this is to use the UNIX "grep"
+    command to find all occurrences of the function name.  Inspect the lines
+    that grep produces, and if any of them do NOT have "defun" before the
+    function's name, then it is used in at least one place, and therefore
+    must be kept.  E.g.
+
+            grep sillyfunc *
+
+    How do you find the names of all the functions?  Use 
+
+            grep defun *
+
+
+2.  Use the IBCL compiler on your source code files.  It will tell you if
+    there are variables that are never used, and it will also tell you about
+    all unintended global variables.  These are variables which are global
+    by default, because you forgot to put them into a "let" construct, so
+    the compiler thinks they are global.  This is generally bad because
+    those variables hang around and can have unintended effects.  I once
+    had a program that bombed solely because some unintended globals appeared
+    in a recursive function.  So remember to use Let all the time!  Here's
+    a typical use:
+
+          (defun silly (x y z)
+               (let (temp junk)
+                    ...
+                    (setq temp (+ x y))
+                    ...
+               )
+          )
+
+    I almost always have a let right inside my function so that I can declare
+    local variables.
+
+    Here's how to tell the compiler that a particular variable really is
+    meant to be global:
+
+          (defvar myglobal)
+
+    In this case, "myglobal" is a variable that I definitely want to be global.
+    This form appears outside all functions.
+
+    Using the IBCL compiler is kid's stuff:  Just get into ibcl and do
+
+          (compile-file "xyz")
+
+    where "xyz" is some file with LISP code in it.  You could just throw away
+    the "xyz.o" file after the compiler is done if you are just using the
+    compiler to catch your variables.
+
+3.  Beware of function names which are too similar, or parameter or variable
+    names that are too similar.  It can be especially hard to tell which
+    function you really meant, and when you go back and reread the code, your
+    mind skips over all the errors so you won't even see it!  That is, you
+    won't question your use of certain variables or funcnames, but it is 
+    precisely those which are invisible that are causing you problems.

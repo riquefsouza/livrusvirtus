@@ -1,0 +1,10 @@
+SQUARE: PROCEDURE OPTIONS (MAIN);
+
+   DECLARE nI FIXED DECIMAL(5) INIT(1);  
+
+   DO WHILE (nI <= 10);
+      PUT SKIP LIST(nI**2);
+      nI = nI + 1; 
+   END;
+
+END SQUARE;

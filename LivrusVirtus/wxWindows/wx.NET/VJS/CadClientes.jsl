@@ -1,0 +1,636 @@
+package Livrus;
+
+import System.*;
+import System.Drawing.*;
+import System.Collections.*;
+import wx.*;
+
+public class frmCadClientes extends frmCadastros
+{
+  private static int ID_FRMCADCLIENTES_BTNPENDERECO = 800;
+  private static int ID_FRMCADCLIENTES_SBENDERECO = 801;
+  private static int ID_FRMCADCLIENTES_BTNPPAIS = 802;
+  private static int ID_FRMCADCLIENTES_BTNPPROFISSAO = 803; 
+  private static int ID_FRMCADCLIENTES_EDTBAIRRO = 804; 
+  private static int ID_FRMCADCLIENTES_EDTCEP = 805; 
+  private static int ID_FRMCADCLIENTES_EDTCIDADE = 806; 
+  private static int ID_FRMCADCLIENTES_EDTCODENDERECO = 807; 
+  private static int ID_FRMCADCLIENTES_EDTCODPAIS = 808; 
+  private static int ID_FRMCADCLIENTES_EDTCODPROFISSAO = 809; 
+  private static int ID_FRMCADCLIENTES_EDTDTNASC = 810; 
+  private static int ID_FRMCADCLIENTES_EDTEMAIL = 811; 
+  private static int ID_FRMCADCLIENTES_EDTESTADO = 812; 
+  private static int ID_FRMCADCLIENTES_EDTIDENTIDADE = 813; 
+  private static int ID_FRMCADCLIENTES_EDTLOGRADOURO = 814; 
+  private static int ID_FRMCADCLIENTES_EDTPAIS = 815; 
+  private static int ID_FRMCADCLIENTES_EDTPROFISSAO = 816; 
+  private static int ID_FRMCADCLIENTES_EDTTELEFONE = 817; 
+  private static int ID_FRMCADCLIENTES_LABBAIRRO = 818; 
+  private static int ID_FRMCADCLIENTES_LABCEP = 819; 
+  private static int ID_FRMCADCLIENTES_LABCIDADE = 820; 
+  private static int ID_FRMCADCLIENTES_LABDTNASC = 821; 
+  private static int ID_FRMCADCLIENTES_LABEMAIL = 822; 
+  private static int ID_FRMCADCLIENTES_LABESTADO = 823; 
+  private static int ID_FRMCADCLIENTES_LABIDENTIDADE = 824; 
+  private static int ID_FRMCADCLIENTES_LABLOGRADOURO = 825; 
+  private static int ID_FRMCADCLIENTES_LABPAIS = 826; 
+  private static int ID_FRMCADCLIENTES_LABPROFISSAO = 827; 
+  private static int ID_FRMCADCLIENTES_LABTELEFONE = 828; 
+  private static int ID_FRMCADCLIENTES_RBSEXO = 829;
+
+  private wx.StaticText labEmail;
+  private wx.TextCtrl edtEmail;
+  private wx.StaticText labIdentidade;
+  private wx.TextCtrl edtIdentidade;
+  private wx.RadioBox rbSexo;
+  private wx.StaticText labTelefone;
+  private wx.TextCtrl edtTelefone;
+  private wx.StaticText labDtNasc;
+  private wx.TextCtrl edtDtNasc;
+  private wx.StaticBox sbEndereco;
+  private TextValidatorCtrl edtCodEndereco;
+  private wx.Button btnPEndereco;
+  private wx.StaticText labLogradouro;
+  private wx.TextCtrl edtLogradouro;
+  private wx.StaticText labBairro;
+  private wx.TextCtrl edtBairro;
+  private wx.StaticText labCEP;
+  private wx.TextCtrl edtCEP;
+  private wx.StaticText labCidade;
+  private wx.TextCtrl edtCidade;
+  private wx.StaticText labEstado;
+  private wx.TextCtrl edtEstado;
+  private wx.StaticText labPais;
+  private TextValidatorCtrl edtCodPais;
+  private wx.TextCtrl edtPais;
+  private wx.Button btnPPais;
+  private wx.StaticText labProfissao;
+  private TextValidatorCtrl edtCodProfissao;
+  private wx.TextCtrl edtProfissao;
+  private wx.Button btnPProfissao;
+
+	public frmCadClientes( Window parent ) {
+    super(parent, TextValidatorCtrl.FILTER_NONE, false);
+
+    labDescricao.set_Label("Nome: ");
+    edtDescricao.SetSize(new Size(312, 21));
+    edtCodigo.EVT_KILL_FOCUS( new EventListener( OnEdtCodigo_Killfocus ));
+
+    labEmail = new wx.StaticText(this, ID_FRMCADCLIENTES_LABEMAIL,
+               "E-mail: ", new Point(8, 88), new Size(34, 13), 0);
+    edtEmail = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTEMAIL,
+               "", new Point(8, 104), new Size(312, 21), 0);
+    edtEmail.set_Enabled(false);
+  
+    labIdentidade = new wx.StaticText(this, ID_FRMCADCLIENTES_LABIDENTIDADE,
+                "Identidade: ", new Point(322, 88), new Size(56, 13), 0);
+    edtIdentidade = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTIDENTIDADE,
+                "", new Point(322, 104), new Size(100, 21), 0);
+    edtIdentidade.set_Enabled(false);  
+
+    String[] sItems = { "Masculino", "Feminino" };
+    rbSexo = new wx.RadioBox(this, ID_FRMCADCLIENTES_RBSEXO, "Sexo",
+                new Point(9, 128), new Size(200, 44), sItems, 2, 
+                wx.RadioBox.wxRA_SPECIFY_COLS);
+    rbSexo.set_Enabled(false);
+  
+    labTelefone = new wx.StaticText(this, ID_FRMCADCLIENTES_LABTELEFONE,
+                "Telefone: ", new Point(216, 128), new Size(48, 13), 0);
+    edtTelefone = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTTELEFONE,
+                "", new Point(216, 144), new Size(104, 21), 0);
+    edtTelefone.set_Enabled(false);
+  
+    labDtNasc = new wx.StaticText(this, ID_FRMCADCLIENTES_LABDTNASC,
+                "Dt. Nascimento", new Point(322, 128), new Size(73, 13), 0);
+    edtDtNasc = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTDTNASC,
+              "", new Point(322, 144), new Size(100, 21), 0);
+    edtDtNasc.set_Enabled(false);
+    edtDtNasc.EVT_KILL_FOCUS( new EventListener( OnEdtDtNasc_Killfocus ));
+
+    sbEndereco = new wx.StaticBox(this, ID_FRMCADCLIENTES_SBENDERECO,
+      "Endereço", new Point(8, 176), new Size(432, 136), 0);
+  
+    edtCodEndereco = new TextValidatorCtrl(this, 
+      ID_FRMCADCLIENTES_EDTCODENDERECO,
+      "", new Point(16, 200), new Size(88, 21), 0, 
+      TextValidatorCtrl.FILTER_NUMERIC);
+    edtCodEndereco.set_Enabled(false);
+    edtCodEndereco.EVT_KILL_FOCUS( new EventListener( OnEdtCodEndereco_Killfocus ));
+  
+    btnPEndereco = new wx.Button(this, ID_FRMCADCLIENTES_BTNPENDERECO,
+                "...", new Point(104, 200), new Size(21, 21), 0);
+    btnPEndereco.set_Enabled(false);
+  
+    labLogradouro = new wx.StaticText(this, ID_FRMCADCLIENTES_LABLOGRADOURO,
+                "Logradouro: ", new Point(16, 224), new Size(60, 13), 0);
+    edtLogradouro = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTLOGRADOURO,
+                "", new Point(16, 240), new Size(264, 21), 0);
+    edtLogradouro.set_Enabled(false);
+  
+    labBairro = new wx.StaticText(this, ID_FRMCADCLIENTES_LABBAIRRO,
+                "Bairro:", new Point(284, 224), new Size(48, 13), 0);
+    edtBairro = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTBAIRRO,
+                "", new Point(284, 240), new Size(144, 21), 0);
+    edtBairro.set_Enabled(false);
+  
+    labCEP = new wx.StaticText(this, ID_FRMCADCLIENTES_LABCEP, "CEP: ",
+                new Point(16, 264), new Size(40, 13), 0);
+    edtCEP = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTCEP, "",
+                new Point(16, 280), new Size(78, 21), 0);
+    edtCEP.set_Enabled(false);
+  
+    labCidade = new wx.StaticText(this, ID_FRMCADCLIENTES_LABCIDADE,
+                "Cidade: ", new Point(96, 264), new Size(39, 13), 0);
+    edtCidade = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTCIDADE,
+                "", new Point(96, 280), new Size(184, 21), 0);
+    edtCidade.set_Enabled(false);
+  
+    labEstado = new wx.StaticText(this, ID_FRMCADCLIENTES_LABESTADO,
+                "Estado: ", new Point(284, 264), new Size(56, 13), 0);
+    edtEstado = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTESTADO,
+                "", new Point(284, 280), new Size(144, 21), 0);
+    edtEstado.set_Enabled(false);
+  
+    labPais = new wx.StaticText(this, ID_FRMCADCLIENTES_LABPAIS,
+      "País de origem: ", new Point(8, 320), new Size(77, 16), 0);
+    edtCodPais = new TextValidatorCtrl(this, ID_FRMCADCLIENTES_EDTCODPAIS,
+      "", new Point(8, 336), new Size(78, 21), 0, 
+      TextValidatorCtrl.FILTER_ALPHA);
+    edtCodPais.set_Enabled(false);
+    edtCodPais.EVT_KILL_FOCUS( new EventListener( OnEdtCodPais_Killfocus ));
+    edtPais = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTPAIS,
+                "", new Point(88, 336), new Size(240, 21), 0);
+    edtPais.set_Enabled(false);
+    btnPPais = new wx.Button(this, ID_FRMCADCLIENTES_BTNPPAIS, "...",
+                 new Point(328, 336), new Size(21, 21), 0);
+    btnPPais.set_Enabled(false);
+  
+    labProfissao = new wx.StaticText(this, ID_FRMCADCLIENTES_LABPROFISSAO,
+                "Profissão: ", new Point(8, 360), new Size(56, 13), 0);
+    edtCodProfissao = new TextValidatorCtrl(this, 
+      ID_FRMCADCLIENTES_EDTCODPROFISSAO,
+      "", new Point(8, 376), new Size(78, 21), 0, 
+      TextValidatorCtrl.FILTER_NUMERIC);
+    edtCodProfissao.set_Enabled(false);
+    edtCodProfissao.EVT_KILL_FOCUS( new EventListener( OnEdtCodProfissao_Killfocus ));
+    edtProfissao = new wx.TextCtrl(this, ID_FRMCADCLIENTES_EDTPROFISSAO,
+                "", new Point(88, 376), new Size(240, 21), 0);
+    edtProfissao.set_Enabled(false);
+    btnPProfissao = new wx.Button(this, ID_FRMCADCLIENTES_BTNPPROFISSAO,
+                "...", new Point(328, 376), new Size(21, 21), 0);
+    btnPProfissao.set_Enabled(false);
+  
+    IniciaBotoes();
+    btnPesquisar.SetSize(440, 8, 75, 25);
+    btnAnterior.SetSize(440, 40, 75, 25);
+    btnProximo.SetSize(440, 72, 75, 25);
+    btnSalvar.SetSize(200, 408, 75, 25);
+    btnExcluir.SetSize(280, 408, 75, 25);
+    btnLimpar.SetSize(360, 408, 75, 25);
+    btnFechar.SetSize(440, 408, 75, 25);
+  
+    //FazLayout();
+  
+  	edtCodigo.set_MaxLength(14);
+    edtDescricao.set_MaxLength(30);
+    edtEmail.set_MaxLength(30);
+    edtIdentidade.set_MaxLength(10);
+    edtCodEndereco.set_MaxLength(10);
+    edtTelefone.set_MaxLength(17);
+    edtCodPais.set_MaxLength(3);
+    edtCodProfissao.set_MaxLength(10);
+
+    EVT_BUTTON(ID_FRMCADASTROS_BTNNOVO, new EventListener( OnBtnNovo ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNPESQUISAR, 
+      new EventListener( OnBtnPesquisar ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNANTERIOR, 
+      new EventListener( OnBtnAnterior ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNPROXIMO, new EventListener( OnBtnProximo ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNSALVAR, new EventListener( OnBtnSalvar ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNEXCLUIR, new EventListener( OnBtnExcluir ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNLIMPAR, new EventListener( OnBtnLimpar ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNFECHAR, new EventListener( OnBtnFechar ));
+		EVT_CLOSE( new EventListener( OnClose ) );
+    EVT_BUTTON(ID_FRMCADCLIENTES_BTNPENDERECO, 
+      new EventListener( OnBtnPEndereco ));
+    EVT_BUTTON(ID_FRMCADCLIENTES_BTNPPAIS, new EventListener( OnBtnPPais ));
+    EVT_BUTTON(ID_FRMCADCLIENTES_BTNPPROFISSAO, 
+      new EventListener( OnBtnPProfissao ));
+  }
+
+  private void FazLayout(){
+    wx.BoxSizer sizer_1 = new wx.BoxSizer(wx.Orientation.wxVERTICAL);
+    wx.BoxSizer sizer_2 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.BoxSizer sizer_3 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.BoxSizer sizer_4 = new wx.BoxSizer(wx.Orientation.wxVERTICAL);
+    wx.BoxSizer sizer_5 = new wx.BoxSizer(wx.Orientation.wxVERTICAL);
+    wx.BoxSizer sizer_16 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_23 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_22 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_19 = new wx.GridSizer(2, 1, 0, 0);
+    wx.BoxSizer sizer_15 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_21 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_20 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_18 = new wx.GridSizer(2, 1, 0, 0);
+    wx.StaticBoxSizer sizer_11 = new wx.StaticBoxSizer(
+      new wx.StaticBox(this, -1, "Endereço"), wx.Orientation.wxVERTICAL);
+    wx.BoxSizer sizer_14 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_17 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_16 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_15 = new wx.GridSizer(2, 1, 0, 0);
+    wx.BoxSizer sizer_13 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_14 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_13 = new wx.GridSizer(2, 1, 0, 0);
+    wx.BoxSizer sizer_12 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.BoxSizer sizer_10 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_12 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_11 = new wx.GridSizer(2, 1, 0, 0);
+    wx.BoxSizer sizer_6 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_5 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_4 = new wx.GridSizer(2, 1, 0, 0);
+    wx.BoxSizer sizer_8 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_8 = new wx.GridSizer(2, 1, 0, 0);
+    wx.BoxSizer sizer_7 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_7 = new wx.GridSizer(2, 1, 0, 0);
+    grid_sizer_7.Add(labCodigo, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_7.Add(edtCodigo, 0, 0, 0);
+    sizer_7.Add(grid_sizer_7, 0, 0, 0);
+    sizer_7.Add(btnNovo, 0, wx.Direction.wxLEFT|wx.Alignment.wxALIGN_BOTTOM, 5);
+    sizer_5.Add(sizer_7, 1, 0, 0);
+    grid_sizer_8.Add(labDescricao, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_8.Add(edtDescricao, 0, 0, 0);
+    sizer_8.Add(grid_sizer_8, 0, 0, 0);
+    sizer_5.Add(sizer_8, 1, wx.Stretch.wxEXPAND, 0);
+    grid_sizer_4.Add(labEmail, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_4.Add(edtEmail, 0, 0, 0);
+    sizer_6.Add(grid_sizer_4, 0, 0, 0);
+    grid_sizer_5.Add(labIdentidade, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_5.Add(edtIdentidade, 0, 0, 0);
+    sizer_6.Add(grid_sizer_5, 0, wx.Direction.wxLEFT, 4);
+    sizer_5.Add(sizer_6, 0, 0, 0);
+    sizer_10.Add(rbSexo, 0, 0, 0);
+    grid_sizer_11.Add(labTelefone, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_11.Add(edtTelefone, 0, 0, 0);
+    sizer_10.Add(grid_sizer_11, 1, wx.Direction.wxLEFT|wx.Stretch.wxEXPAND, 4);
+    grid_sizer_12.Add(labDtNasc, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_12.Add(edtDtNasc, 0, 0, 0);
+    sizer_10.Add(grid_sizer_12, 1, wx.Direction.wxLEFT|wx.Stretch.wxEXPAND, 4);
+    sizer_5.Add(sizer_10, 1, wx.Stretch.wxEXPAND, 0);
+    sizer_12.Add(edtCodEndereco, 0, 0, 0);
+    sizer_12.Add(btnPEndereco, 0, 0, 0);
+    sizer_11.Add(sizer_12, 0, wx.Direction.wxALL, 2);
+    grid_sizer_13.Add(labLogradouro, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_13.Add(edtLogradouro, 0, 0, 0);
+    sizer_13.Add(grid_sizer_13, 0, 0, 0);
+    grid_sizer_14.Add(labBairro, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_14.Add(edtBairro, 0, 0, 0);
+    sizer_13.Add(grid_sizer_14, 0, wx.Direction.wxLEFT, 4);
+    sizer_11.Add(sizer_13, 0, 0, 0);
+    grid_sizer_15.Add(labCEP, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_15.Add(edtCEP, 0, 0, 0);
+    sizer_14.Add(grid_sizer_15, 0, 0, 0);
+    grid_sizer_16.Add(labCidade, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_16.Add(edtCidade, 0, 0, 0);
+    sizer_14.Add(grid_sizer_16, 0, wx.Direction.wxLEFT, 4);
+    grid_sizer_17.Add(labEstado, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_17.Add(edtEstado, 0, 0, 0);
+    sizer_14.Add(grid_sizer_17, 0, wx.Direction.wxLEFT, 4);
+    sizer_11.Add(sizer_14, 1, 0, 0);
+    sizer_5.Add(sizer_11, 0, 0, 0);
+    grid_sizer_18.Add(labPais, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_18.Add(edtCodPais, 0, 0, 0);
+    sizer_15.Add(grid_sizer_18, 0, 0, 0);
+    grid_sizer_20.Add(20, 20, 0, 0, 0);
+    grid_sizer_20.Add(edtPais, 0, 0, 0);
+    sizer_15.Add(grid_sizer_20, 0, wx.Direction.wxLEFT, 2);
+    grid_sizer_21.Add(20, 20, 0, 0, 0);
+    grid_sizer_21.Add(btnPPais, 0, 0, 0);
+    sizer_15.Add(grid_sizer_21, 0, 0, 0);
+    sizer_5.Add(sizer_15, 0, 0, 0);
+    grid_sizer_19.Add(labProfissao, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_19.Add(edtCodProfissao, 0, 0, 0);
+    sizer_16.Add(grid_sizer_19, 0, 0, 0);
+    grid_sizer_22.Add(20, 20, 0, 0, 0);
+    grid_sizer_22.Add(edtProfissao, 0, 0, 0);
+    sizer_16.Add(grid_sizer_22, 0, wx.Direction.wxLEFT, 2);
+    grid_sizer_23.Add(20, 20, 0, 0, 0);
+    grid_sizer_23.Add(btnPProfissao, 0, 0, 0);
+    sizer_16.Add(grid_sizer_23, 0, 0, 0);
+    sizer_5.Add(sizer_16, 0, 0, 0);
+    sizer_3.Add(sizer_5, 0, 0, 0);
+    sizer_4.Add(btnPesquisar, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT, 2);
+    sizer_4.Add(btnAnterior, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT, 2);
+    sizer_4.Add(btnProximo, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT, 2);
+    sizer_3.Add(sizer_4, 1, 0, 0);
+    sizer_1.Add(sizer_3, 1, wx.Direction.wxALL|wx.Stretch.wxEXPAND, 4);
+    sizer_2.Add(btnSalvar, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 2);
+    sizer_2.Add(btnExcluir, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 2);
+    sizer_2.Add(btnLimpar, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 2);
+    sizer_2.Add(btnFechar, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 2);
+    sizer_1.Add(sizer_2, 0, wx.Direction.wxRIGHT|wx.Direction.wxBOTTOM|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 4);
+    set_AutoLayout(true);
+    SetSizer(sizer_1);
+    sizer_1.Fit(this);
+    sizer_1.SetSizeHints(this);
+  }
+
+	private boolean ValidaDados(boolean bTodosDados){
+    if (RotinasGlobais.Rotinas.ValidaCampo(edtCodigo.get_Value(), 
+      Resource.STR_CODNINF))
+      return false;
+    if (bTodosDados) {
+      if (RotinasGlobais.Rotinas.ValidaCampo(edtDescricao.get_Value(), 
+        Resource.STR_CLININF))
+      	return false;
+      if (RotinasGlobais.Rotinas.ValidaCampo(edtEmail.get_Value(), 
+        Resource.STR_EMAILNINF))
+        return false;
+  	  if (RotinasGlobais.Rotinas.ValidaCampo(edtTelefone.get_Value(), 
+        Resource.STR_TELNINF))
+  		  return false;
+  	  if (RotinasGlobais.Rotinas.ValidaCampo(edtCodEndereco.get_Value(), 
+        Resource.STR_ENDNINF))
+  		  return false;
+  	  if (RotinasGlobais.Rotinas.ValidaCampo(edtCodPais.get_Value(), 
+        Resource.STR_PAISNINF))
+  		  return false;
+  	  if (RotinasGlobais.Rotinas.ValidaCampo(edtCodProfissao.get_Value(), 
+        Resource.STR_PROFNINF))
+  		  return false;
+    }
+		return true;
+	}
+
+	private void OnClose( System.Object sender, wx.Event e ){
+    this.get_Parent().Close();
+		e.Skip();
+	}
+
+  private void OnBtnNovo( System.Object sender, wx.Event e ){
+    btnNovoClick();
+    InformaLimpaDados(false);
+    HabilitaDados(true);
+    e.Skip();
+  }
+  
+  private void OnBtnPesquisar( System.Object sender, wx.Event e ){
+    if (PesquisarDados(ConsultasSQL.ConsSQL.Cliente('S', 
+     edtCodigo.get_Value(),"","","","","","","","",""), 
+     Resource.STR_CLINENC)) {
+      InformaLimpaDados(true);
+      HabilitaDados(true);	
+    }
+    e.Skip();
+  }
+  
+  private void OnBtnAnterior( System.Object sender, wx.Event e ){
+    if (registroAnterior())
+      InformaLimpaDados(true);
+    e.Skip();
+  }
+  
+  private void OnBtnProximo( System.Object sender, wx.Event e ){
+    if (registroProximo())
+      InformaLimpaDados(true);
+    e.Skip();
+  }
+  
+  private void OnBtnSalvar( System.Object sender, wx.Event e ){
+    String sSexo, sDtNasc, sSqlInsert, sSqlUpdate;
+  
+    if (rbSexo.get_Selection() == 0)
+       sSexo = "M"; 
+    else   
+       sSexo = "F";
+  
+    sDtNasc = RotinasGlobais.Rotinas.ConverteDataHoraStr(
+      edtDtNasc.get_Value(),"MM/dd/yyyy");
+  
+    sSqlUpdate = ConsultasSQL.ConsSQL.Cliente('U', edtCodigo.get_Value(), 
+      edtDescricao.get_Value(), edtEmail.get_Value(),  
+      edtIdentidade.get_Value(), sSexo, edtTelefone.get_Value(), 
+      sDtNasc, edtCodEndereco.get_Value(), 
+      edtCodPais.get_Value(), edtCodProfissao.get_Value());
+  
+    sSqlInsert = ConsultasSQL.ConsSQL.Cliente('I', edtCodigo.get_Value(), 
+      edtDescricao.get_Value(), edtEmail.get_Value(),  
+      edtIdentidade.get_Value(), sSexo, edtTelefone.get_Value(), 
+      sDtNasc, edtCodEndereco.get_Value(), 
+      edtCodPais.get_Value(), edtCodProfissao.get_Value());
+  
+    if (SalvarDados(ValidaDados(true),
+      ConsultasSQL.ConsSQL.Cliente('S', edtCodigo.get_Value(),
+        "","","","","","","","",""), sSqlUpdate, sSqlInsert, true)) {
+      InformaLimpaDados(false);
+      HabilitaDados(false);	
+    }
+    e.Skip();
+  }
+  
+  private void OnBtnExcluir( System.Object sender, wx.Event e ){
+    if (ExcluirDados(ValidaDados(false),
+      ConsultasSQL.ConsSQL.Cliente('D', edtCodigo.get_Value(),
+      "","","","","","","","",""))){
+      InformaLimpaDados(false);
+      HabilitaDados(false);	
+    }  
+    e.Skip();
+  }
+  
+  private void OnBtnFechar( System.Object sender, wx.Event e ){
+    this.Close(true);
+    e.Skip();
+  }
+  
+  private void OnBtnLimpar( System.Object sender, wx.Event e ){
+    btnLimparClick();
+    InformaLimpaDados(false);
+    HabilitaDados(false);	
+    e.Skip();
+  }
+
+  protected void InformaLimpaDados(boolean bInformar){
+    super.InformaLimpaDados(bInformar);
+
+    if (bInformar) {
+      edtEmail.set_Value(Campos.get_Item(2).ToString());
+      edtIdentidade.set_Value(Campos.get_Item(3).ToString());
+      if (Campos.get_Item(4).ToString() == "M")
+        rbSexo.set_Selection(0);
+      else
+        rbSexo.set_Selection(1);
+      edtTelefone.set_Value(Campos.get_Item(5).ToString());
+      edtDtNasc.set_Value(Campos.get_Item(6).ToString().Substring(0,10));
+      edtCodEndereco.set_Value(Campos.get_Item(7).ToString());
+      edtLogradouro.set_Value(Campos.get_Item(8).ToString());
+      edtBairro.set_Value(Campos.get_Item(9).ToString());
+      edtCEP.set_Value(Campos.get_Item(10).ToString());
+      edtCidade.set_Value(Campos.get_Item(11).ToString());
+      edtEstado.set_Value(Campos.get_Item(12).ToString());
+      edtCodPais.set_Value(Campos.get_Item(13).ToString());
+      edtPais.set_Value(Campos.get_Item(14).ToString());
+      edtCodProfissao.set_Value(Campos.get_Item(15).ToString());
+      edtProfissao.set_Value(Campos.get_Item(16).ToString());
+    } else {
+      edtEmail.Clear();
+      edtIdentidade.Clear();
+      rbSexo.set_Selection(0);
+      edtTelefone.Clear();
+      edtDtNasc.Clear();
+      edtCodEndereco.Clear();
+      edtLogradouro.Clear();
+      edtBairro.Clear();
+      edtCEP.Clear();
+      edtCidade.Clear();
+      edtEstado.Clear();
+      edtCodPais.Clear();
+      edtPais.Clear();
+      edtCodProfissao.Clear();
+      edtProfissao.Clear();
+      edtCodigo.SetFocus();
+    }
+  } 
+  
+  protected void HabilitaDados(boolean bHabilita){
+		super.HabilitaDados(bHabilita);
+
+    edtEmail.set_Enabled(bHabilita);
+    edtIdentidade.set_Enabled(bHabilita);
+    rbSexo.set_Enabled(bHabilita);
+    edtTelefone.set_Enabled(bHabilita);
+    edtDtNasc.set_Enabled(bHabilita);
+    edtCodEndereco.set_Enabled(bHabilita);
+    btnPEndereco.set_Enabled(bHabilita);
+    edtCodPais.set_Enabled(bHabilita);
+    btnPPais.set_Enabled(bHabilita);
+    edtCodProfissao.set_Enabled(bHabilita);
+    btnPProfissao.set_Enabled(bHabilita);
+  }
+  
+  private void OnEdtCodigo_Killfocus( System.Object sender, wx.Event e ){
+    if (edtCodigo.get_Value().get_Length() > 0) {
+    	if (RotinasGlobais.Rotinas.ValidaCPF(edtCodigo.get_Value())==false) {
+        wx.MessageDialog.MessageBox(Resource.STR_CPFINV, "Erro", 
+          wx.Dialog.wxOK | wx.Dialog.wxICON_ERROR);
+        edtCodigo.Clear();
+    		edtCodigo.SetFocus();
+    	}
+    }	
+  }
+
+  private void OnEdtDtNasc_Killfocus( System.Object sender, wx.Event e ){
+    if (edtDtNasc.get_Value().get_Length() > 0) {
+      if (!RotinasGlobais.Rotinas.validaDataHora(edtDtNasc.get_Value(), true)) {
+        wx.MessageDialog.MessageBox(Resource.STR_DTHRINV, "Erro", 
+          wx.Dialog.wxOK | wx.Dialog.wxICON_ERROR);
+        edtDtNasc.set_Value(RotinasGlobais.Rotinas.retDataHoraStr(true,false));
+    		edtDtNasc.SetFocus();
+      }
+    } else
+        edtDtNasc.set_Value(RotinasGlobais.Rotinas.retDataHoraStr(true,false));
+    e.Skip();
+  }
+  
+  private void OnEdtCodEndereco_Killfocus( System.Object sender, wx.Event e ){
+    String sLogradouro;
+    ArrayList ConsCampo = new ArrayList();
+     
+    if (edtCodEndereco.get_Value().get_Length() > 0) {
+      sLogradouro = RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo, 
+        ConsultasSQL.ConsSQL.Endereco('S',
+        edtCodEndereco.get_Value(),"","","","",""),Resource.STR_ENDNENC);
+      if (sLogradouro.get_Length() > 0) {
+        edtLogradouro.set_Value(sLogradouro);
+        edtBairro.set_Value(ConsCampo.get_Item(2).ToString());
+        edtCEP.set_Value(ConsCampo.get_Item(3).ToString());
+        edtCidade.set_Value(ConsCampo.get_Item(4).ToString());
+        edtEstado.set_Value(ConsCampo.get_Item(5).ToString());
+      } else {
+    	  edtCodEndereco.SetFocus();
+        edtLogradouro.Clear();
+        edtBairro.Clear();
+        edtCEP.Clear();
+    	  edtCidade.Clear();
+    	  edtEstado.Clear();
+      }
+    } else {
+      edtLogradouro.Clear();
+      edtBairro.Clear();
+      edtCEP.Clear();
+  	  edtCidade.Clear();
+  	  edtEstado.Clear();
+    }
+  }
+  
+  private void OnEdtCodPais_Killfocus( System.Object sender, wx.Event e ){
+    String sPais;
+    ArrayList ConsCampo = new ArrayList();  
+  
+    if (edtCodPais.get_Value().get_Length() > 0) {
+      sPais = RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo, 
+        ConsultasSQL.ConsSQL.Pais('S',
+        edtCodPais.get_Value(),""),Resource.STR_PAISNENC);    
+      if (sPais.get_Length() > 0) {
+        edtPais.set_Value(sPais);
+      } else {
+        edtCodPais.Clear();
+        edtCodPais.SetFocus();
+      }
+    } else {
+      edtPais.Clear();
+    }
+  }
+  
+  private void OnEdtCodProfissao_Killfocus( System.Object sender, wx.Event e ){
+    String sProfissao;
+    ArrayList ConsCampo = new ArrayList();   
+  
+    if (edtCodProfissao.get_Value().get_Length() > 0) {
+      sProfissao = RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo, 
+        ConsultasSQL.ConsSQL.Profissao('S',
+        edtCodProfissao.get_Value(),""),Resource.STR_PROFNENC);    
+  
+      if (sProfissao.get_Length() > 0) {
+        edtProfissao.set_Value(sProfissao);
+      } else {
+        edtCodProfissao.Clear();
+        edtCodProfissao.SetFocus();
+      }
+    } else {
+      edtProfissao.Clear();
+    }
+  }
+
+  private void OnBtnPEndereco( System.Object sender, wx.Event e ){
+    frmConEnderecos fConEnderecos = new frmConEnderecos(this);
+    fConEnderecos.ShowModal();
+    edtCodEndereco.set_Value(RotinasGlobais.Rotinas.sCodigoSelecionado);
+    OnEdtCodEndereco_Killfocus(null,null);
+    e.Skip();
+  }
+  
+  private void OnBtnPPais( System.Object sender, wx.Event e ){
+    frmConPaises fConPaises = new frmConPaises(this);
+    fConPaises.ShowModal();
+    edtCodPais.set_Value(RotinasGlobais.Rotinas.sCodigoSelecionado);
+    OnEdtCodPais_Killfocus(null,null);
+    e.Skip();
+  }
+  
+  private void OnBtnPProfissao( System.Object sender, wx.Event e ){
+    frmConProfissoes fConProfissoes = new frmConProfissoes(this);
+    fConProfissoes.ShowModal();
+    edtCodProfissao.set_Value(RotinasGlobais.Rotinas.sCodigoSelecionado);
+    OnEdtCodProfissao_Killfocus(null,null);
+    e.Skip();
+  }
+
+}

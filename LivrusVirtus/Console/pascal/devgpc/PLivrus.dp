@@ -1,0 +1,12 @@
+[Project]
+FileName=C:\LivrusVirtus\Console\pascal\devgpc\PLivrus.dp
+Name=PLivrus
+MainUnit=C:\LivrusVirtus\Console\pascal\devgpc\Livrus.pas
+UnitCount=1
+ResFiles=C:\LivrusVirtus\Console\pascal\devgpc\rsrc.rc
+NoConsole=0
+IsDll=0
+Icon=C:\dev_gpc\Icon\Mainicon.ico
+[Unit1]
+FileName=C:\LivrusVirtus\Console\pascal\devgpc\Livrus.pas
+FileTime=823631161

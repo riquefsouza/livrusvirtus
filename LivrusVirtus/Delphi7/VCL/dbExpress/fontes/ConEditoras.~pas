@@ -1,0 +1,24 @@
+unit ConEditoras;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Consultas, Db, DBTables, Grids, DBGrids, StdCtrls, ExtCtrls;
+
+type
+  TfrmConEditoras = class(TfrmConsultas)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConEditoras: TfrmConEditoras;
+
+implementation
+
+{$R *.DFM}
+
+end.

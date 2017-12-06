@@ -1,0 +1,43 @@
+//  This is a very simple recursive function that adds 1 to every numeric
+//  atom in its argument list.  
+//
+//      bump:<5,2,6,4,3>     returns <6,3,7,5,4>
+
+     (def inc == +.[id,#1])
+     (def bump == (null -> id;apndl.[inc.1,bump.tl]))
+
+//  But here's a much simpler version that uses apply-to-all (@):
+
+     (def bumpx == @inc)     
+
+//  The following version does not try to add 1 to a non-numeric atom, but
+//  just leaves it alone.
+
+    (def bump2 == (null -> id;apndl.[(isanum.1->inc.1;1),bump2.tl]))
+
+//  The following is exactly like bump2, only it works slightly differently.
+
+    (def bump2x == 
+        (null -> id;
+                 (isanum.1->cons.[inc.1,bump2x.tl])
+        )
+    )
+
+//  Try it!
+
+    bump2:<3,mark,2,susan,6,1>
+
+//  Here's yet a third way to do it.
+
+    (def bump3 == 
+        (null -> id;
+                 (isanum.1 -> cons.[inc.1,bump3.tl];
+                        (atom.1 -> cons.[1,bump3.tl];
+                                   cons.[bump3.1,bump3.tl]
+                        )
+                 )
+        )
+    )
+    
+    bump3:<mark,36,a,<a,5>,16,<joe,12>>
+end

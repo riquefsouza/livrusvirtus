@@ -1,0 +1,31 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 1
+Introduction
+--------------------------------------------------------------------------------
+TOPICS:  Facts and rules and queries;  predicates
+--------------------------------------------------------------------------------
+
+In Prolog, we describe data and relationships between data, instead of proce-
+dures and actions.  Some say we tell what the answer to a problem should look
+like, rather than how to find it.  In any event, it is a completely different
+way of viewing programming than the so-called "imperative" languages like C or
+Modula-2.
+
+The logic comes into play when we notice that relationships between data follow
+traditional logical pathways:  "if this is true, then that must be true."  
+Further, these relationships use quantifiers, which tell if this relationship
+applies to every data element or just some.  Thus, Prolog directly implements
+a form of FOPC, the First-Order Predicate Calculus.  We will not worry too much
+herein what this means, however.
+
+Every Prolog "program" is a list of facts and rules.  That is all there is,
+FACTS and RULES!  Then we ask Prolog questions, called "queries".  Prolog has
+what is called an "inference engine" which is just a procedure that scans 
+through its known list of facts and rules, and tries to "put 2 and 2 together"
+using logic deductions.  Kind of like Sherlock Holmes.
+
+Prolog uses some strange symbols and strange conventions, which is a bit
+unfortunate, but once you get used to them, they will annoy you no longer
+and you will soon be very amazed at how easy it is to "program" in Prolog.
+
+-----------------------------------------------------------------------------

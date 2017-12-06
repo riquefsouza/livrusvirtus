@@ -1,0 +1,45 @@
+LISP Tutorial   by Mark Meyer
+Chapter 1
+Overview
+--------------------------------------------------------------------------------
+TOPICS:  Functional Programming
+--------------------------------------------------------------------------------
+
+LISP is one of the oldest programming languages, invented in 1960 by John
+McCarthy in order to write programs for Artificial Intelligence easily.
+
+Unlike Prolog, but like C, Ada, and Modula-2, LISP uses functions to compute
+new values.  Everything is done by a function, including control structures.
+Some of these functions are "pure" like the arithmetic functions, in that they
+take in some inputs and return a new value, but others have "side effects."
+That is, they do other things than just return a value.  Input and output
+functions are like this, as well as the control structure "functions" like
+if and dolist.
+
+The main mode of running LISP programs is interactive, like BASIC on some early
+micros.  You get a prompt and type in something to be evaluated.  LISP runs
+and produces a result, and displays the result on the screen.  Then you get
+another prompt and the cycle starts over.  This is called the read-eval-print
+loop:
+
+      read   -- LISP gives you a prompt, whereupon you type in an expression
+                and LISP then reads this
+
+      eval   -- LISP evaluates this expression and produces an answer
+
+      print  -- LISP displays its answer on your screen
+
+To do more complicated things, you define functions and then call those
+functions.  You can also put functions into a file and then load that file.
+
+As you are interacting with LISP, it is keeping your variables and functions
+in memory.  When you exit LISP, whatever is in memory is lost.  You must
+write any values to a file in order to permanently save them.
+
+It is said that LISP stands for Lots of Irritating and Silly Parentheses.
+There ARE a lot of parentheses in LISP, but it does simplify the language
+a lot!  You just have to be careful, and in your functions that you put in
+files, indent properly to see how the parens match up.  (I will often use
+the shortened version "parens" rather than "parentheses".)
+
+-----------------------------------------------------------------------------

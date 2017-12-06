@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="isbn">85-346-0237-9</column>
+        <column name="codassunto">8</column>
+    </row>
+    <row>
+        <column name="isbn">85-346-0237-9</column>
+        <column name="codassunto">9</column>
+    </row>
+    <row>
+        <column name="isbn">85-346-0237-9</column>
+        <column name="codassunto">10</column>
+    </row>
+    <row>
+        <column name="isbn">85-7307-608-9</column>
+        <column name="codassunto">19</column>
+    </row>
+    <row>
+        <column name="isbn">85-85588-17-9</column>
+        <column name="codassunto">11</column>
+    </row>
+</resultset>

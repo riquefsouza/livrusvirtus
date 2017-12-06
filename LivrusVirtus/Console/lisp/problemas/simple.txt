@@ -1,0 +1,18 @@
+                          Simple LISP problems
+-----------------------------------------------------------------------------
+1.  Write a function that will find the average age of a group of people
+    which are described by an association-list:
+
+         ((mark 40) (kathy 30) (sally 57) (doran 35) (anthony 3)
+          (madeline 1))
+
+    The age is the second item in each sublist.
+
+2.  Now write another function which does the same thing but does not use
+    any loops.
+
+3.  Write a function which reverses all the elements in an a-list.  For
+    example, given the a-list above, it would generate:
+
+         ((40 mark) (30 kathy) (57 sally) (35 doran) (3 anthony)
+          (1 madeline))

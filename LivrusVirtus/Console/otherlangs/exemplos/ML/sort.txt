@@ -1,0 +1,62 @@
+(* This is an implementation of simple selection sort: find the smallest
+   number in the list, and put it at the end of a new list.  The language
+   is standard ML. *)
+
+(* These are support functions needed. *)
+
+
+fun smaller(x:int,y:int) = if x < y then x else y;
+
+
+fun reduce (f,list) =
+  let val h::t = list in
+     if length list = 1 then
+          h
+     else
+          f(h,reduce(f,t))
+  end
+;
+
+(*  Examples of use:
+
+     fun plus(a:int, b:int) = a+b;
+
+     reduce(plus,[5,2,6,3,9]);
+
+     ML will not allow you to use an infix operator like + as
+     a prefix function, which is what reduce does.
+
+*)
+          
+
+
+fun min (list) = reduce(smaller,list);
+
+
+(*    min([7,2,5,9,4,8]);    *)
+
+
+(*  If you don't care about the order of the list, then the following
+    deletes one occurrence (the first one, in fact) of n in the list. *)
+
+fun delete (n, nil) = nil |
+    delete (n, h::t) =
+          if n = h then
+              t
+          else
+              delete (n, t @ [h])
+;
+     
+
+fun sortaux (nil, newlist) = newlist |
+    sortaux (oldlist, newlist) =
+        let 
+            val minvalue = min (oldlist)
+        in
+            sortaux (delete(minvalue,oldlist),newlist @ [minvalue])
+        end
+;
+
+fun sort (list) = sortaux (list, nil);
+
+sort([5,3,8,2,9,4,1,7]);

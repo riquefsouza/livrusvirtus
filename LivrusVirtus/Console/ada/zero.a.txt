@@ -1,0 +1,18 @@
+with text_io; use text_io;
+with strings; use strings;
+
+procedure main is
+
+     package io_int is new integer_io (integer);
+     use io_int;
+
+     temp : string(1..80);
+
+begin
+
+     strclear (temp);
+     itoa (89, temp);
+     put (temp);
+     new_line;
+
+end main;

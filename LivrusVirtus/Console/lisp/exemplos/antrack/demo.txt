@@ -1,0 +1,134 @@
+Script started on Wed Feb  3 21:23:58 1993
+warning: could not update utmp entry
+% ibcl
+
+
+IBUKI Common Lisp  Version 2 release 01.027.
+
+This software is provided by IBUKI pursuant to a written license agreement
+and may be used, copied, transmitted and stored only in accordance with the
+terms of such license.
+
+;; Copyright (c) 1990-86 IBUKI  All rights reserved.
+;; Copyright (c) 1986-84 T. Yuasa and M. Hagiya  All rights reserved.
+
+For more information: (describe 'copyright) or (describe 'acknowledgements)
+Loading init.lsp
+Finished loading init.lsp
+
+>(load "main")
+Loading main
+Finished loading main
+T
+
+>(main)
+
+Please enter a command enclosed in parentheses...(help)
+============================================================================
+add train          Add a new train to the trains list.
+
+remove train 211   Get rid of a train from the trains list.  The train to
+                   remove is number 211 in this example.
+
+change train       Change any of the values of an existing train.
+
+run train 211      Pretend that the train 211 has gone.  Effectively, this
+                   just removes all the passengers from the rider list.
+
+book seat          The program asks for a customer's last and first name,
+                   and then puts him/her on the specified train's seating
+                   list.  The customer is also added to the customer list
+                   if not already there.  If already there, add 1 to the
+                   frequent rider field.  If is 10, then reduce train fare
+                   by 50%, and reset frequent rider field to 0.
+
+unbook seat        Take a customer off a particular train, but not off
+                   the customer list.
+
+list customers     Print out all customers on the customer list.
+
+list trains        Print out all the trains.
+
+list riders 211    Print out all the customers on a particular train,
+                   trains are identified by a number, and the number of
+                   the train is 211 in this example.
+
+help               Print out this help message.
+
+quit               Quit the program, loses all the information!
+============================================================================
+
+Please enter a command enclosed in parentheses...(list trains)
+
+((105 CHICAGO BUFFALO 55.0 (1 3)) (210 LINCOLN DENVER 97.45 (2))
+ (999 NEWYORK SYRACUSE 23.33 NIL)) 
+
+Please enter a command enclosed in parentheses...(list riders 105)
+Doe, John
+Flintstone, Fred
+---end of list---
+
+
+Please enter a command enclosed in parentheses...(unbook seat)
+Name of customer? Doe, John
+Train number? 105
+Done!
+
+Please enter a command enclosed in parentheses...(list riders 105)
+Flintstone, Fred
+---end of list---
+
+
+Please enter a command enclosed in parentheses...(book seat)
+Enter name of customer as last name, comma, first name: Meyer, Mark
+Now adding new customer...
+What is the address? 195 Jewett
+Train number? 999
+The train from NEWYORK to SYRACUSE costs $23.33
+Is this ok? (y/n)  y
+You are booked!
+
+Please enter a command enclosed in parentheses...(list customers)
+
+((4 "Meyer, Mark" "195 Jewett" 1) (1 "Doe, John" "Greeley CO" 0)
+ (2 "Poppins, Mary" "195 Jewett Parkway, Buffalo NY" 5)
+ (3 "Flintstone, Fred" "Bedrock" 2)) 
+
+Please enter a command enclosed in parentheses...(list riders 999)
+Meyer, Mark
+---end of list---
+
+
+Please enter a command enclosed in parentheses...(add train)
+What is the new train number? 777
+From which city does it leave? Lincoln
+To which city does it go? Denver
+How much does it cost? 89.0
+
+Please enter a command enclosed in parentheses...(list trains)
+
+((777 "Lincoln" "Denver" 89.0) (105 CHICAGO BUFFALO 55.0 (3))
+ (210 LINCOLN DENVER 97.45 (2)) (999 NEWYORK SYRACUSE 23.33 (4))) 
+
+Please enter a command enclosed in parentheses...(remove train 210)
+
+Please enter a command enclosed in parentheses...(list trains)
+
+((777 "Lincoln" "Denver" 89.0) (105 CHICAGO BUFFALO 55.0 (3))
+ (999 NEWYORK SYRACUSE 23.33 (4))) 
+
+Please enter a command enclosed in parentheses...(run train 999)
+
+Please enter a command enclosed in parentheses...(list trains)
+
+((777 "Lincoln" "Denver" 89.0) (105 CHICAGO BUFFALO 55.0 (3))
+ (999 NEWYORK SYRACUSE 23.33 NIL)) 
+
+Please enter a command enclosed in parentheses...(quit)
+NIL
+
+>Bye.
+% 
+script done on Wed Feb  3 21:26:21 1993
+
+script done on Wed Feb  3 21:26:21 1993

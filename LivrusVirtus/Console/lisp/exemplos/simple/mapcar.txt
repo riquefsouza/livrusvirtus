@@ -1,0 +1,199 @@
+;  Mapcar is a handy way of specifying iteration without being
+;  grossly explicit about it.  However, it is often the case that
+;  the number of parameters doesn't mesh with your data structures.
+;  Let's look at some examples of that carefully, and figure out
+;  ways to work around it.  Unfortunately, real life examples where
+;  these problems are serious do exist, but are really too complicated
+;  to expound here.  So I will use a simple and contrived situation.
+
+;  First of all, Let us write a function which takes in a list and
+;  extracts the nth element, kind of like an array reference:
+;  For example, I want to be able to say 
+;
+;         (extract '(a b c d e f) 3)
+;
+;  and have LISP give me 
+;
+;             c
+
+(defun extract (somelist n)
+    (nth (1- n) somelist)
+)
+
+;  Simple, huh?  Now what if we have a list of lists, and we want
+;  the nth element of each list:
+
+(setq superlist '((hi there sam)
+                  (1 57 32 11 100)
+                  (Z Y X W V U T)
+                 )
+)
+
+;  If I want to pull out the 2nd element from each list, I could do
+;  this with a "dolist":
+
+(dolist (1list superlist)
+     (extract 1list 2)
+)
+
+;  Unfortunately, that doesn't do a heckuva lot because it just
+;  returns the result of applying "extract" to the last element of
+;  superlist.  What we want to do is to accumulate those in a new
+;  list:
+
+(setq result nil)
+(dolist (1list superlist)
+     (setq result (cons (extract 1list 2) result))
+)
+
+;  Actually, this is still a bit awkward because it returns the
+;  2nd elements BACKWARDS:
+
+result
+
+;  (Y 57 THERE)
+
+;  So we must either write an "anticons" or an append:
+
+(setq result nil)
+(dolist (1list superlist)
+     (setq result (append result (list (extract 1list 2))))
+)
+
+;  Alright, so that's how we do this with explicit recursive.
+;  Dolist really is a lot nicer than the equivalent PROG, but
+;  how could we do this with mapcar?
+;  Here's an attempt:
+
+(mapcar 'extract superlist 2)
+
+;  Hmmm... that didn't work!  What went wrong?  Well, precisely
+;  that the function "extract" requires two arguments, so let's
+;  enclose 2 in a list:
+
+(mapcar 'extract superlist '(2))
+
+;  Well, that didn't bomb, at least, but the result is just
+;  (THERE)
+;  which isn't right!
+
+;  We ran afoul of the little requirement that both lists of
+;  arguments have to have the same length, so let's try it again:
+
+
+(mapcar 'extract superlist '(2 2 2))
+
+;  Okay that worked great, but how do we know ahead of time that
+;  there are 3 arguments in superlist?  Well, we don't, so this
+;  sort of fixed number of 2's is bad.  Instead, we have to have
+;  a function that will produce any required number of 2's upon
+;  demand:
+
+
+(defun replicate (n item)
+       (let (retvalue)
+            (dotimes (i n retvalue)
+                 (setq retvalue (cons item retvalue))
+            )
+       )
+)
+
+;  Let's try it again:
+
+(mapcar 'extract superlist (replicate (length superlist) 2))
+
+;  Whew!  Finally, we have a general solution that works!  BUT!
+;  It has the nasty feature that we have to actually cons up a
+;  list of arguments where it is really the same argument used
+;  over and over again.  In other words, that function replicate
+;  is going to do a lot of work that the efficiency experts won't
+;  like (rightly so).  How can we get around all this?
+;
+;  The most obvious solution is not to let that 2 be an argument
+;  to function extract, but instead use a global variable.  
+;  Let's define another function which would call extract.
+;  Normally, you would NEVER just mapcar at the main level anyway,
+;  but instead you would always call it within some function.
+
+(defun bigger (somelist)
+     (setq n 2)
+     (mapcar 'extract somelist)
+)
+
+;  This means we have to rewrite extract:
+
+(defun extract (somelist)
+    (nth (1- n) somelist)
+)
+
+;  Will this now work?
+
+(bigger superlist)
+
+;  That works, but it now depends on a global variable "n".  If
+;  instead n were local to function bigger, watch what happens:
+
+(defun bigger (somelist n)
+     (mapcar 'extract somelist)
+)
+
+;  If you're following along at the keyboard, you will have to
+;  restart in order to get rid of the global variable "n".
+
+(bigger superlist 2)
+
+;  It says "n" is unbound.  Why?  Because "extract" refers to
+;  a global variable "n", whereas the "n" we want is local to
+;  "bigger."  Hmmm...what about using a lambda instead of
+;  function "extract?"
+
+(defun bigger (somelist n)
+     (mapcar '(lambda (1list)
+                    (nth (1- n) 1list)
+              )
+              somelist
+     )
+)
+
+;  Now it looks like that "n" will be visible inside the lambda,
+;  since the whole lambda is safely encased in function "bigger."
+;  Does it work? Sadly, no!
+
+(bigger superlist 2)
+
+;  You will certainly hear a complaint about global variable "n"
+;  is unbound.
+;  You may even get horrible messages about WHAT KIND OF A
+;  FUNCTION IS A LAMBDA?  What went wrong?  Well, it is the
+;  lexical scoping of variables in Common LISP that bit us in
+;  the butt.  That lambda is a function on equal par with other
+;  functions, so it is really declared at the top level.  In other
+;  words, functions really ARE NOT nested inside other functions
+;  in LISP.  Thus, the global variable "n" isn't declared and
+;  can't be used.  Good old dynamic scoping would have permitted
+;  this, but we are told that we mustn't use dynamic scoping
+;  because it is bad.  Well, how do we work around it here?
+
+(defun bigger (somelist n)
+     (declare (special n))
+     (mapcar '(lambda (1list)
+                    (nth (1- n) 1list)
+              )
+              somelist
+     )
+)
+
+;  This works, at last!!  The reason why it does is that the
+;  declaration of n as "special" lets it have dynamic scoping
+;  at least until the function "bigger" ends.  Thus, the special
+;  declaration itself has a scope, which is a lexical one!
+;  Whew!  This is getting complicated!  Why does Pascal, with its
+;  lexical scoping, seem easier?  It is because of several reasons:
+;
+;      1.  In Pascal, functions can be declared inside other
+;          functions, unlike LISP.
+;      2.  There is no equivalent of mapcar in Pascal.
+;      3.  Even though we could write our own mapcar in Pascal,
+;          we would be passing a function (or a procedure) as
+;          a parameter, so we might still have scoping problems.
+;          Just try it!

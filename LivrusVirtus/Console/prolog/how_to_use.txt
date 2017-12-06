@@ -1,0 +1,81 @@
+                          HOW TO USE PROLOG AT CANISIUS
+--------------------------------------------------------------------------------
+
+How to start C-Prolog on the SUNS:
+
+    % prolog
+
+The prompt is ?-
+
+To exit, type CONTROL-D.
+                                 ----+----
+
+If the Prolog program gets caught in an infinite loop, type CONTROL-C and you
+will get a prompt.  Type "a" and press RETURN to get back to the main ?-
+prompt.
+                                 ----+----
+
+If you need to temporarily escape to UNIX, do:
+
+    system("ls").
+    system("csh").
+                                 ----+----
+
+To enter facts and rules from the terminal, first type (after the prompt)
+the symbols [user] followed by a period:  (MAKE SURE NOT TO FORGET THE PERIOD!)
+
+    ?- [user].
+
+Then the prompt changes to a vertical bar.  Type in 1 or more facts or
+rules (each ends in a period).  When done, type CONTROL-D.  This puts you
+back in query mode, and the prompt changes to ?- again.
+
+To load facts and rules from a file, put the file's name in the square
+brackets.  You can load more than one such file:
+
+    ?- [queenvic].
+
+Again, don't forget the period!  Double quotes are not needed.  If the name of
+the file has one or more slashes in it (as it would if it included a UNIX 
+pathname), enclose the whole thing in single quotes.
+
+    ?- ['/mnt1/dept/meyer/PROLOG/xxx'].
+
+                                 ----+----
+
+To see the current database of facts and rules, type
+
+    ?- listing.
+
+Make sure to put a period after every clause!!!  Prolog will wait for you
+to type in a period if you forget one.  Do not be alarmed at how Prolog
+renames your variables as underscores followed by numbers.  This is 
+unavoidable, given the way that Prolog operates.
+
+You can also list the facts and rules pertaining to a particular functor:
+
+    listing(bird).
+                                 ----+----
+
+The facts and rules may include comments, and in fact, files should have
+comments.  They are anything inside C-style comment markers: /* and */.  
+Comments may span multiple lines.
+
+    /*  This is a
+       comment !*/
+
+                                 ----+----
+
+If you want a trace of all the backtracking as your program executes,
+type:
+
+      trace.
+
+(Always note the period.)  Then enter your expression to be evaluated
+and every time it says CALL ? just press RETURN.
+
+To turn off tracing, do
+
+      untrace.
+
+                                 ----+----

@@ -1,0 +1,19 @@
+//  This is a recursive function which gets the diagonal of a 2-dimensional
+//  matrix.  A 2-dimension matrix in FP is a list of lists.  Each sublist is
+//  the same length as all the others.
+//  The main function diag requires the use of an auxiliary function, diagaux.
+
+     (def diag == diagaux.[id,nil])
+
+     (def diagaux == null.1 -> 2; diagaux.[(@tl).tl.1,apndr.[2,1.1.1]])
+
+//  Try it!
+
+     diag:<<3,2,5>,<6,4,8>,<1,9,7>>
+
+//  This will return <3,4,7>, which is the diagonal of
+//
+//      3 2 5
+//      6 4 8
+//      1 9 7
+end

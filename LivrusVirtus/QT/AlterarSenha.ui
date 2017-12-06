@@ -1,0 +1,271 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>frmAlterarSenha</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>frmAlterarSenha</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>261</width>
+            <height>147</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Alteração de Senha</string>
+    </property>
+    <property name="icon">
+        <pixmap>Livrus.bmp</pixmap>
+    </property>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labLogin</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>8</y>
+                <width>49</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Login:</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtLogin</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>8</x>
+                <y>29</y>
+                <width>90</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="frameShape">
+            <enum>LineEditPanel</enum>
+        </property>
+        <property name="frameShadow">
+            <enum>Sunken</enum>
+        </property>
+        <property name="maxLength">
+            <number>10</number>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labNovaSenha</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>8</x>
+                <y>60</y>
+                <width>70</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Nova senha:</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtNovaSenha</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>8</x>
+                <y>80</y>
+                <width>90</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>10</number>
+        </property>
+        <property name="echoMode">
+            <enum>Password</enum>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtConfirmarSenha</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>122</x>
+                <y>80</y>
+                <width>90</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>10</number>
+        </property>
+        <property name="echoMode">
+            <enum>Password</enum>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labConfirmarSenha</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>121</x>
+                <y>60</y>
+                <width>90</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Confirmar senha:</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtSenhaAtual</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>123</x>
+                <y>29</y>
+                <width>90</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>10</number>
+        </property>
+        <property name="echoMode">
+            <enum>Password</enum>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labSenhaAtual</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>121</x>
+                <y>8</y>
+                <width>70</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Senha atual:</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnSalvar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>115</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Salvar</string>
+        </property>
+        <property name="accel">
+            <string>Alt+S</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnLimpar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>93</x>
+                <y>115</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Limpar</string>
+        </property>
+        <property name="accel">
+            <string>Alt+L</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnFechar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>175</x>
+                <y>115</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Fechar</string>
+        </property>
+        <property name="accel">
+            <string>Alt+F</string>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>btnSalvar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmAlterarSenha</receiver>
+        <slot>btnSalvar_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnLimpar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmAlterarSenha</receiver>
+        <slot>btnLimpar_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnFechar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmAlterarSenha</receiver>
+        <slot>btnFechar_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>frmAlterarSenha</sender>
+        <signal>destroyed(QObject*)</signal>
+        <receiver>frmAlterarSenha</receiver>
+        <slot>frmAlterarSenha_destroyed(QObject*)</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>edtLogin</tabstop>
+    <tabstop>edtSenhaAtual</tabstop>
+    <tabstop>edtNovaSenha</tabstop>
+    <tabstop>edtConfirmarSenha</tabstop>
+    <tabstop>btnSalvar</tabstop>
+    <tabstop>btnLimpar</tabstop>
+    <tabstop>btnFechar</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in implementation">AlterarSenha.ui.h</include>
+</includes>
+<slots>
+    <slot>btnSalvar_clicked()</slot>
+    <slot>btnLimpar_clicked()</slot>
+    <slot>btnFechar_clicked()</slot>
+    <slot>frmAlterarSenha_destroyed( QObject * )</slot>
+</slots>
+<pixmapinproject/>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

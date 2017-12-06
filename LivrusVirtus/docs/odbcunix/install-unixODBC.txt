@@ -1,0 +1,1 @@
+./configure --with-qt-dir=/usr/lib/qt3 --with-qt-includes=/usr/lib/qt3/include --with-qt-libraries=/usr/lib/qt3/lib --with-qt-bin=/usr/lib/qt3/bin

@@ -1,0 +1,44 @@
+Projeto Livrus Virtus
+
+Livrus Virtus
+       Sobre o Autor
+       A História do Projeto
+       Diagramas
+              MER (Modelo Entidade-Relacionamento)
+              UML (Unified Modeling Language)
+                 Estudo de casos
+                 Diagrama de classes
+       Scripts SQL (Structured Query Language)
+       Arquivos com Dados
+       Visão por Ambiente
+             Console
+             Console Gráfico
+             GUI (Graphical User Interfaces)
+       Visão por Tipo de Linguagem
+             Mnemônica
+                      Assembler
+             Imperativas
+                      C
+		      Pascal	
+             Orientadas a Objeto
+                      SmallTalk
+                      C++
+                      Delphi
+             Funcionais
+                      Lisp
+                      Haskell
+             Lógicas
+                      Prolog
+        Visão por Ferramenta de Desenvolvimento
+        Visão por API (Application Program Interface)
+              MFC (Microsoft Foundation Classes)
+              WINFORM (Windows Forms)
+              VCL (Visual Component Library)
+              SWING
+              wxWindows
+              GTK (GIMP Toolkit)
+              QT
+              TK
+              FOX (Ruby)
+              FT
+

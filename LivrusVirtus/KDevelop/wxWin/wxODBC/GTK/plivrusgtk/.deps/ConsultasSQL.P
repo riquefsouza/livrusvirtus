@@ -1,0 +1,429 @@
+ConsultasSQL.o: ConsultasSQL.cpp resource.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/wxprec.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/defs.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/platform.h \
+  /home/hfs/wxGTK-2.4.2/lib/wx/include/gtk-2.4/wx/setup.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/chkconf.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/features.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/version.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/debug.h /usr/include/assert.h \
+  /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/limits.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/wordsize.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/wxchar.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdarg.h \
+  /usr/include/wchar.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdio.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stddef.h \
+  /usr/include/bits/wchar.h /usr/include/xlocale.h /usr/include/ctype.h \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/string.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/wx.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/object.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/memory.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/string.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/gconv.h \
+  /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+  /usr/include/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/strings.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/buffer.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/strconv.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dynarray.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/list.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/hash.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/intl.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/fontenc.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/log.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/ioswrap.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/event.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/clntdata.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gdicmn.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/colour.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/colour.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gdiobj.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/gdiobj.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/palette.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/paletteg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/font.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/font.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/cursor.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/cursor.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/image.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/bitmap.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/bitmap.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/hashmap.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/stream.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/filefn.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/imagbmp.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/imagpng.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/imaggif.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/imagpcx.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/imagjpeg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/imagtiff.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/imagpnm.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/imagxpm.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/imagiff.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/utils.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/longlong.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/thread.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/module.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/app.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/window.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/region.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/region.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/validate.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dcclient.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/dcclient.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dc.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/brush.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/brush.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/pen.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/pen.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/dc.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/accel.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/accel.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/accel.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/window.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/icon.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/icon.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/build.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/app.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/frame.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/toplevel.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/iconbndl.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/toplevel.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/frame.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/panel.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/panelg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/containr.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dcmemory.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/dcmemory.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dcprint.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dcscreen.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/dcscreen.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/button.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/control.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/control.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/button.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/menu.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/menuitem.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/menuitem.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/menu.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dialog.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/dialog.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/timer.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/timer.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/settings.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/msgdlg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/msgdlgg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/cmndata.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/ctrlsub.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/bmpbuttn.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/bmpbuttn.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/checkbox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/checkbox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/checklst.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/listbox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/listbox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/checklst.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/choice.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/choice.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/scrolbar.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/scrolbar.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/stattext.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/stattext.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/statbmp.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/statbmp.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/statbox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/statbox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/radiobox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/radiobox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/radiobut.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/radiobut.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/textctrl.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/textctrl.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/slider.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/slider.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gauge.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/gauge.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/scrolwin.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/scrolwin.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dirdlg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/dirdlgg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/toolbar.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/tbarbase.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/tbargtk.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/combobox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/combobox.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/layout.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/sizer.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/mdi.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/mdi.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/statusbr.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/statusbr.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/choicdlg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/choicdgg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/textdlg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/textdlgg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/valtext.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/filedlg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/filedlgg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/db.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/isql.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/isqlext.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dbtable.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/variant.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/time.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/datetime.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/datetime.inl \
+  /home/hfs/wxGTK-2.4.2/include/wx/date.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dbkeyg.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/splash.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/splash.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/calctrl.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/calctrl.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/spinctrl.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/spinbutt.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/spinbutt.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/gtk/spinctrl.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/grid.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/grid.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/generic/gridctrl.h \
+  /home/hfs/wxGTK-2.4.2/include/wx/dbgrid.h ConsultasSQL.h \
+  RotinasGlobais.h
+ConsultasSQL.cpp :
+resource.h :
+/home/hfs/wxGTK-2.4.2/include/wx/wxprec.h :
+/home/hfs/wxGTK-2.4.2/include/wx/defs.h :
+/home/hfs/wxGTK-2.4.2/include/wx/platform.h :
+/home/hfs/wxGTK-2.4.2/lib/wx/include/gtk-2.4/wx/setup.h :
+/home/hfs/wxGTK-2.4.2/include/wx/chkconf.h :
+/home/hfs/wxGTK-2.4.2/include/wx/features.h :
+/home/hfs/wxGTK-2.4.2/include/wx/version.h :
+/home/hfs/wxGTK-2.4.2/include/wx/debug.h :
+/usr/include/assert.h :
+/usr/include/features.h :
+/usr/include/sys/cdefs.h :
+/usr/include/gnu/stubs.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/limits.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/syslimits.h :
+/usr/include/limits.h :
+/usr/include/bits/posix1_lim.h :
+/usr/include/bits/local_lim.h :
+/usr/include/linux/limits.h :
+/usr/include/bits/posix2_lim.h :
+/usr/include/bits/xopen_lim.h :
+/usr/include/bits/stdio_lim.h :
+/usr/include/bits/wordsize.h :
+/home/hfs/wxGTK-2.4.2/include/wx/wxchar.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdarg.h :
+/usr/include/wchar.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdio.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stddef.h :
+/usr/include/bits/wchar.h :
+/usr/include/xlocale.h :
+/usr/include/ctype.h :
+/usr/include/bits/types.h :
+/usr/include/bits/typesizes.h :
+/usr/include/endian.h :
+/usr/include/bits/endian.h :
+/usr/include/string.h :
+/home/hfs/wxGTK-2.4.2/include/wx/wx.h :
+/home/hfs/wxGTK-2.4.2/include/wx/object.h :
+/home/hfs/wxGTK-2.4.2/include/wx/memory.h :
+/home/hfs/wxGTK-2.4.2/include/wx/string.h :
+/usr/include/libio.h :
+/usr/include/_G_config.h :
+/usr/include/gconv.h :
+/usr/include/bits/sys_errlist.h :
+/usr/include/bits/stdio.h :
+/usr/include/stdlib.h :
+/usr/include/bits/waitflags.h :
+/usr/include/bits/waitstatus.h :
+/usr/include/sys/types.h :
+/usr/include/time.h :
+/usr/include/sys/select.h :
+/usr/include/bits/select.h :
+/usr/include/bits/sigset.h :
+/usr/include/bits/time.h :
+/usr/include/sys/sysmacros.h :
+/usr/include/bits/pthreadtypes.h :
+/usr/include/bits/sched.h :
+/usr/include/alloca.h :
+/usr/include/strings.h :
+/home/hfs/wxGTK-2.4.2/include/wx/buffer.h :
+/home/hfs/wxGTK-2.4.2/include/wx/strconv.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dynarray.h :
+/home/hfs/wxGTK-2.4.2/include/wx/list.h :
+/home/hfs/wxGTK-2.4.2/include/wx/hash.h :
+/home/hfs/wxGTK-2.4.2/include/wx/intl.h :
+/home/hfs/wxGTK-2.4.2/include/wx/fontenc.h :
+/home/hfs/wxGTK-2.4.2/include/wx/log.h :
+/home/hfs/wxGTK-2.4.2/include/wx/ioswrap.h :
+/home/hfs/wxGTK-2.4.2/include/wx/event.h :
+/home/hfs/wxGTK-2.4.2/include/wx/clntdata.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gdicmn.h :
+/home/hfs/wxGTK-2.4.2/include/wx/colour.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/colour.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gdiobj.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/gdiobj.h :
+/home/hfs/wxGTK-2.4.2/include/wx/palette.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/paletteg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/font.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/font.h :
+/home/hfs/wxGTK-2.4.2/include/wx/cursor.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/cursor.h :
+/home/hfs/wxGTK-2.4.2/include/wx/image.h :
+/home/hfs/wxGTK-2.4.2/include/wx/bitmap.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/bitmap.h :
+/home/hfs/wxGTK-2.4.2/include/wx/hashmap.h :
+/home/hfs/wxGTK-2.4.2/include/wx/stream.h :
+/home/hfs/wxGTK-2.4.2/include/wx/filefn.h :
+/home/hfs/wxGTK-2.4.2/include/wx/imagbmp.h :
+/home/hfs/wxGTK-2.4.2/include/wx/imagpng.h :
+/home/hfs/wxGTK-2.4.2/include/wx/imaggif.h :
+/home/hfs/wxGTK-2.4.2/include/wx/imagpcx.h :
+/home/hfs/wxGTK-2.4.2/include/wx/imagjpeg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/imagtiff.h :
+/home/hfs/wxGTK-2.4.2/include/wx/imagpnm.h :
+/home/hfs/wxGTK-2.4.2/include/wx/imagxpm.h :
+/home/hfs/wxGTK-2.4.2/include/wx/imagiff.h :
+/home/hfs/wxGTK-2.4.2/include/wx/utils.h :
+/home/hfs/wxGTK-2.4.2/include/wx/longlong.h :
+/home/hfs/wxGTK-2.4.2/include/wx/thread.h :
+/home/hfs/wxGTK-2.4.2/include/wx/module.h :
+/home/hfs/wxGTK-2.4.2/include/wx/app.h :
+/home/hfs/wxGTK-2.4.2/include/wx/window.h :
+/home/hfs/wxGTK-2.4.2/include/wx/region.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/region.h :
+/home/hfs/wxGTK-2.4.2/include/wx/validate.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dcclient.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/dcclient.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dc.h :
+/home/hfs/wxGTK-2.4.2/include/wx/brush.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/brush.h :
+/home/hfs/wxGTK-2.4.2/include/wx/pen.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/pen.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/dc.h :
+/home/hfs/wxGTK-2.4.2/include/wx/accel.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/accel.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/accel.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/window.h :
+/home/hfs/wxGTK-2.4.2/include/wx/icon.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/icon.h :
+/home/hfs/wxGTK-2.4.2/include/wx/build.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/app.h :
+/home/hfs/wxGTK-2.4.2/include/wx/frame.h :
+/home/hfs/wxGTK-2.4.2/include/wx/toplevel.h :
+/home/hfs/wxGTK-2.4.2/include/wx/iconbndl.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/toplevel.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/frame.h :
+/home/hfs/wxGTK-2.4.2/include/wx/panel.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/panelg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/containr.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dcmemory.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/dcmemory.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dcprint.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dcscreen.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/dcscreen.h :
+/home/hfs/wxGTK-2.4.2/include/wx/button.h :
+/home/hfs/wxGTK-2.4.2/include/wx/control.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/control.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/button.h :
+/home/hfs/wxGTK-2.4.2/include/wx/menu.h :
+/home/hfs/wxGTK-2.4.2/include/wx/menuitem.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/menuitem.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/menu.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dialog.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/dialog.h :
+/home/hfs/wxGTK-2.4.2/include/wx/timer.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/timer.h :
+/home/hfs/wxGTK-2.4.2/include/wx/settings.h :
+/home/hfs/wxGTK-2.4.2/include/wx/msgdlg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/msgdlgg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/cmndata.h :
+/home/hfs/wxGTK-2.4.2/include/wx/ctrlsub.h :
+/home/hfs/wxGTK-2.4.2/include/wx/bmpbuttn.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/bmpbuttn.h :
+/home/hfs/wxGTK-2.4.2/include/wx/checkbox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/checkbox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/checklst.h :
+/home/hfs/wxGTK-2.4.2/include/wx/listbox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/listbox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/checklst.h :
+/home/hfs/wxGTK-2.4.2/include/wx/choice.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/choice.h :
+/home/hfs/wxGTK-2.4.2/include/wx/scrolbar.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/scrolbar.h :
+/home/hfs/wxGTK-2.4.2/include/wx/stattext.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/stattext.h :
+/home/hfs/wxGTK-2.4.2/include/wx/statbmp.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/statbmp.h :
+/home/hfs/wxGTK-2.4.2/include/wx/statbox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/statbox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/radiobox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/radiobox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/radiobut.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/radiobut.h :
+/home/hfs/wxGTK-2.4.2/include/wx/textctrl.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/textctrl.h :
+/home/hfs/wxGTK-2.4.2/include/wx/slider.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/slider.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gauge.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/gauge.h :
+/home/hfs/wxGTK-2.4.2/include/wx/scrolwin.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/scrolwin.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dirdlg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/dirdlgg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/toolbar.h :
+/home/hfs/wxGTK-2.4.2/include/wx/tbarbase.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/tbargtk.h :
+/home/hfs/wxGTK-2.4.2/include/wx/combobox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/combobox.h :
+/home/hfs/wxGTK-2.4.2/include/wx/layout.h :
+/home/hfs/wxGTK-2.4.2/include/wx/sizer.h :
+/home/hfs/wxGTK-2.4.2/include/wx/mdi.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/mdi.h :
+/home/hfs/wxGTK-2.4.2/include/wx/statusbr.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/statusbr.h :
+/home/hfs/wxGTK-2.4.2/include/wx/choicdlg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/choicdgg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/textdlg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/textdlgg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/valtext.h :
+/home/hfs/wxGTK-2.4.2/include/wx/filedlg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/filedlgg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/db.h :
+/home/hfs/wxGTK-2.4.2/include/wx/isql.h :
+/home/hfs/wxGTK-2.4.2/include/wx/isqlext.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dbtable.h :
+/home/hfs/wxGTK-2.4.2/include/wx/variant.h :
+/home/hfs/wxGTK-2.4.2/include/wx/time.h :
+/home/hfs/wxGTK-2.4.2/include/wx/datetime.h :
+/home/hfs/wxGTK-2.4.2/include/wx/datetime.inl :
+/home/hfs/wxGTK-2.4.2/include/wx/date.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dbkeyg.h :
+/home/hfs/wxGTK-2.4.2/include/wx/splash.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/splash.h :
+/home/hfs/wxGTK-2.4.2/include/wx/calctrl.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/calctrl.h :
+/home/hfs/wxGTK-2.4.2/include/wx/spinctrl.h :
+/home/hfs/wxGTK-2.4.2/include/wx/spinbutt.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/spinbutt.h :
+/home/hfs/wxGTK-2.4.2/include/wx/gtk/spinctrl.h :
+/home/hfs/wxGTK-2.4.2/include/wx/grid.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/grid.h :
+/home/hfs/wxGTK-2.4.2/include/wx/generic/gridctrl.h :
+/home/hfs/wxGTK-2.4.2/include/wx/dbgrid.h :
+ConsultasSQL.h :
+RotinasGlobais.h :

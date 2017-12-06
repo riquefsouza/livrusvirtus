@@ -1,0 +1,33 @@
+with text_io; use text_io;
+with strings; use strings;
+
+procedure main is
+
+     package io_int is new integer_io (integer);
+     use io_int;
+
+     temp : string(1..6);
+
+begin
+
+     strclear (temp);
+     itoa (783, temp);
+     put (temp);
+     new_line;
+
+     strclear (temp);
+     itoa (-39231, temp);
+     put (temp);
+     new_line;
+
+     strclear (temp);
+     itoa (8, temp);
+     put (temp);
+     new_line;
+
+     strclear (temp);
+     itoa (12345678, temp);
+     put (temp);
+     new_line;
+
+end main;

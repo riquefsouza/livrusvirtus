@@ -1,0 +1,25 @@
+;==================================================================
+;  Sort is tricky to use.  You really should following the example
+;  below. Here are the steps:
+;
+;     1.  Identify the variable that contains the list to be sorted.
+;         Call it "var".
+;     2.  Use stable-sort, not sort.
+;     3.  Identify your predicate function.  By clever choice, you
+;         can get the sort to go in ascending order or descending.
+;     4.  (setq var (stable-sort var *predicate*))
+;
+;  ALL of these steps should be followed to avoid surprises!
+;==================================================================
+
+(defun demo1 ()
+    (setq numlist '(53 100 23 14 900 12 37 2300 720 18 53 97 37))
+    (setq numlist (stable-sort numlist #'<))
+    (format t "Sorted ascending...~S~%~%" numlist)
+
+    (setq numlist '(53 100 23 14 900 12 37 2300 720 18 53 97 37))
+    (setq numlist (stable-sort numlist #'>))
+    (format t "Sorted descending...~S~%~%" numlist)
+
+    nil
+)

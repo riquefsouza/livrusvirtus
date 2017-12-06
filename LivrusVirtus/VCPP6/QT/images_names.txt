@@ -1,0 +1,8 @@
+figuras\Livrus.bmp
+figuras\cliente.xpm
+figuras\Livro.xpm
+figuras\Livros.xpm
+figuras\LivrusVirtus.xpm
+figuras\Login.xpm
+figuras\Sair.xpm
+figuras\Sobre.xpm

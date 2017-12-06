@@ -1,0 +1,16 @@
+;  Given a string, find the first word in the string.  Also, determine
+;  where the rest of the string starts:
+
+(defun find-word (somestr)
+       (find-word-aux somestr 0 (length somestr))
+)
+
+(defun find-word-aux (somestr pos len)
+       (if (> pos (1- len))
+           -1
+           (if (string= (aref somestr pos) " ")
+               (1- pos)
+               (find-word-aux somestr (1+ pos) len)
+           )  
+       )
+)

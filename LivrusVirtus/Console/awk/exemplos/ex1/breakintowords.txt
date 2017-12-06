@@ -1,0 +1,28 @@
+
+{
+  DESIREDLINELENGTH = 75
+  line = $0
+  if (length(line) < DESIREDLINELENGTH) {
+      print line
+  }
+  else {
+      if (substr(line,1,1) == "\t")
+           newline = "      " $1
+      else
+           newline = $1
+      for (i=2; i<=NF; i++) {
+           if (substr($i,length($i),1) == ".")
+                temp = newline " " $i " "
+           else
+                temp = newline " " $i
+           if (length(temp) < DESIREDLINELENGTH)
+                newline = temp
+           else {
+                print newline
+                newline = $i
+           }
+      }
+      print newline
+  }
+}
+

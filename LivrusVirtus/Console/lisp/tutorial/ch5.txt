@@ -1,0 +1,69 @@
+LISP Tutorial   by Mark Meyer
+Chapter 5
+Variables and values
+--------------------------------------------------------------------------------
+TOPICS:  Variables, bindings, unbound variables
+--------------------------------------------------------------------------------
+
+LISP has variables, like other languages, but these variables do not have
+to be declared.  You just put something into a variable, and it is created
+on the spot.  To get back its value, you simply type in its name or use
+it in an expression.  If you want an atom such as mark to be thought of
+as a data item, rather than the variable whose name is mark, then you must
+use the quote.
+
+To put something into a variable, use the built-in function setq:
+
+        (setq mark 15)
+
+Now mark has the value 15, and you can see this by doing
+
+        mark
+
+You can change the types of a variable's contents by just assigning it a
+different value.  A variable could have at one moment an integer, the next
+time a float, the next time a symbolic value, and next a list.
+
+The variable "mark"'s value will change when you do another setq.  Here we
+put a list into it:
+
+        (setq mark '(sunday monday tuesday))
+
+Now if we type
+
+        mark
+
+we get the value, which is a list:
+
+        (sunday monday tuesday)
+
+If you type in a variable name but you have never yet assigned it a value,
+it is said to be "unbound" and you will get a nasty error message:
+
+        x
+        >>Error: The variable X is unbound.
+         EVAL                         (IHS[10])
+        Restart options (Type :C <number>):
+             0: Provide a value to store as the value of X
+             1: Retry getting the value of X
+        :Q,  2: Lisp Top Level
+         Version 201  Delta 27
+         Type :H for a list of debugger commands.
+         ->
+
+LISP actually gives you is another read-eval-print loop, and has
+interrupted the main read-eval-print loop that you got when you started.
+Just type :q and press RETURN to get back to the top level.
+
+What does it mean to evaluate a variable?  It means to return the current
+value bound to that variable.
+
+You can find out if a variable is bound to a value by using the function
+boundp.  This is a predicate function, which means that it returns t or nil.
+Here's an example:
+
+     (boundp 'x)
+
+Notice that the name of the atom must have the quote in front of it!
+
+--------------------------------------------------------------------------------

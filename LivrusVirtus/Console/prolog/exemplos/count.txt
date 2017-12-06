@@ -1,0 +1,5 @@
+/*  Count how many times a certain value occurs in a list */
+
+count(A,[],0).
+count(A,[A|Tail],N) :- count(A,Tail,N2), N is 1+N2.
+count(A,[X|Tail],N) :- count(A,Tail,N2), N is N2.

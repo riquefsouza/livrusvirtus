@@ -1,0 +1,859 @@
+package  Livrus;
+
+import System.*;
+import System.Drawing.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+
+/// <summary>
+/// Summary description for WinForm.
+/// </summary>
+public class frmCadLivros extends Livrus.frmCadastros
+{
+	public static frmCadLivros fCadLivros;
+	private ArrayList slIdiomas, slAssuntos, slAutores, ConsCampo, ConsLista;
+	/// <summary>
+	/// Required designer variable.
+	/// </summary>
+	private System.ComponentModel.Container components = null;
+	private System.Windows.Forms.Label labEdicao;
+	private System.Windows.Forms.NumericUpDown edtEdicao;
+	private System.Windows.Forms.NumericUpDown edtAnoPubli;
+	private System.Windows.Forms.Label labAnoPubli;
+	private System.Windows.Forms.Button btnPAssunto;
+	private System.Windows.Forms.TextBox edtAssunto;
+	private System.Windows.Forms.TextBox edtCodAssunto;
+	private System.Windows.Forms.Label labAssunto;
+	private System.Windows.Forms.Button btnPEditora;
+	private System.Windows.Forms.TextBox edtEditora;
+	private System.Windows.Forms.TextBox edtCodEditora;
+	private System.Windows.Forms.Label labEditora;
+	private System.Windows.Forms.Button btnAdAssuntos;
+	private System.Windows.Forms.NumericUpDown edtVolume;
+	private System.Windows.Forms.Label labVolume;
+	private System.Windows.Forms.NumericUpDown edtNPaginas;
+	private System.Windows.Forms.Label labNPaginas;
+	private System.Windows.Forms.Label labIdioma;
+	private System.Windows.Forms.ComboBox cmbIdioma;
+	private System.Windows.Forms.ListBox lstAssuntos;
+	private System.Windows.Forms.Label labPreco;
+	private System.Windows.Forms.TextBox edtPreco;
+	private System.Windows.Forms.NumericUpDown edtQtdEstoque;
+	private System.Windows.Forms.Label labQtdEstoque;
+	private System.Windows.Forms.ListBox lstAutores;
+	private System.Windows.Forms.Button btnAdAutores;
+	private System.Windows.Forms.Button btnPAutor;
+	private System.Windows.Forms.TextBox edtAutor;
+	private System.Windows.Forms.TextBox edtCodAutor;
+	private System.Windows.Forms.Label labAutor;
+
+	public frmCadLivros()
+	{
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent();
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+		slIdiomas = new ArrayList();
+		slAssuntos = new ArrayList();
+		slAutores = new ArrayList();
+		ConsCampo = new ArrayList();
+		ConsLista = new ArrayList();
+	}
+
+	/// <summary>
+	/// Clean up any resources being used.
+	/// </summary>
+	protected void Dispose (boolean disposing)
+	{
+		if (disposing)
+		{
+			if (components != null)
+			{
+				components.Dispose();
+			}
+		}
+		super.Dispose(disposing);
+	}
+
+	/// <summary>
+	/// Required method for Designer support - do not modify
+	/// the contents of this method with the code editor.
+	/// </summary>
+	private void InitializeComponent()
+	{
+          this.labEdicao = new System.Windows.Forms.Label();
+          this.edtEdicao = new System.Windows.Forms.NumericUpDown();
+          this.edtAnoPubli = new System.Windows.Forms.NumericUpDown();
+          this.labAnoPubli = new System.Windows.Forms.Label();
+          this.btnPAssunto = new System.Windows.Forms.Button();
+          this.edtAssunto = new System.Windows.Forms.TextBox();
+          this.edtCodAssunto = new System.Windows.Forms.TextBox();
+          this.labAssunto = new System.Windows.Forms.Label();
+          this.btnPEditora = new System.Windows.Forms.Button();
+          this.edtEditora = new System.Windows.Forms.TextBox();
+          this.edtCodEditora = new System.Windows.Forms.TextBox();
+          this.labEditora = new System.Windows.Forms.Label();
+          this.btnAdAssuntos = new System.Windows.Forms.Button();
+          this.edtVolume = new System.Windows.Forms.NumericUpDown();
+          this.labVolume = new System.Windows.Forms.Label();
+          this.edtNPaginas = new System.Windows.Forms.NumericUpDown();
+          this.labNPaginas = new System.Windows.Forms.Label();
+          this.labIdioma = new System.Windows.Forms.Label();
+          this.cmbIdioma = new System.Windows.Forms.ComboBox();
+          this.lstAssuntos = new System.Windows.Forms.ListBox();
+          this.labPreco = new System.Windows.Forms.Label();
+          this.edtPreco = new System.Windows.Forms.TextBox();
+          this.edtQtdEstoque = new System.Windows.Forms.NumericUpDown();
+          this.labQtdEstoque = new System.Windows.Forms.Label();
+          this.lstAutores = new System.Windows.Forms.ListBox();
+          this.btnAdAutores = new System.Windows.Forms.Button();
+          this.btnPAutor = new System.Windows.Forms.Button();
+          this.edtAutor = new System.Windows.Forms.TextBox();
+          this.edtCodAutor = new System.Windows.Forms.TextBox();
+          this.labAutor = new System.Windows.Forms.Label();
+          ((System.ComponentModel.ISupportInitialize)(this.edtEdicao)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.edtAnoPubli)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.edtVolume)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.edtNPaginas)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.edtQtdEstoque)).BeginInit();
+          this.SuspendLayout();
+          // 
+          // labCodigo
+          // 
+          this.labCodigo.set_Name("labCodigo");
+          this.labCodigo.set_Text("ISBN:");
+          // 
+          // edtCodigo
+          // 
+          this.edtCodigo.set_Name("edtCodigo");
+	  this.edtCodigo.set_MaxLength(13);
+          this.edtCodigo.add_Leave(new System.EventHandler(this.edtCodigo_Leave));
+          // 
+          // labDescricao
+          // 
+          this.labDescricao.set_Name("labDescricao");
+          this.labDescricao.set_Text("Título:");
+          // 
+          // edtDescricao
+          // 
+          this.edtDescricao.set_Name("edtDescricao");
+          this.edtDescricao.set_Size(new System.Drawing.Size(304, 20));
+          // 
+          // btnNovo
+          // 
+          this.btnNovo.set_Name("btnNovo");
+          // 
+          // btnPesquisar
+          // 
+          this.btnPesquisar.set_Location(new System.Drawing.Point(440, 8));
+          this.btnPesquisar.set_Name("btnPesquisar");
+          this.btnPesquisar.set_TabIndex(35);
+          this.btnPesquisar.add_Click(new System.EventHandler(this.btnPesquisar_Click));
+          // 
+          // btnAnterior
+          // 
+          this.btnAnterior.set_Location(new System.Drawing.Point(440, 40));
+          this.btnAnterior.set_Name("btnAnterior");
+          this.btnAnterior.set_TabIndex(36);
+          // 
+          // btnProximo
+          // 
+          this.btnProximo.set_Location(new System.Drawing.Point(440, 72));
+          this.btnProximo.set_Name("btnProximo");
+          this.btnProximo.set_TabIndex(37);
+          // 
+          // btnFechar
+          // 
+          this.btnFechar.set_Location(new System.Drawing.Point(440, 352));
+          this.btnFechar.set_Name("btnFechar");
+          this.btnFechar.set_TabIndex(41);
+          this.btnFechar.add_Click(new System.EventHandler(this.btnFechar_Click));
+          // 
+          // btnLimpar
+          // 
+          this.btnLimpar.set_Location(new System.Drawing.Point(360, 352));
+          this.btnLimpar.set_Name("btnLimpar");
+          this.btnLimpar.set_TabIndex(40);
+          // 
+          // btnExcluir
+          // 
+          this.btnExcluir.set_Location(new System.Drawing.Point(280, 352));
+          this.btnExcluir.set_Name("btnExcluir");
+          this.btnExcluir.set_TabIndex(39);
+          this.btnExcluir.add_Click(new System.EventHandler(this.btnExcluir_Click));
+          // 
+          // btnSalvar
+          // 
+          this.btnSalvar.set_Location(new System.Drawing.Point(200, 352));
+          this.btnSalvar.set_Name("btnSalvar");
+          this.btnSalvar.set_TabIndex(38);
+          this.btnSalvar.add_Click(new System.EventHandler(this.btnSalvar_Click));
+          // 
+          // labEdicao
+          // 
+          this.labEdicao.set_Location(new System.Drawing.Point(320, 48));
+          this.labEdicao.set_Name("labEdicao");
+          this.labEdicao.set_Size(new System.Drawing.Size(48, 16));
+          this.labEdicao.set_TabIndex(5);
+          this.labEdicao.set_Text("Edição");
+          // 
+          // edtEdicao
+          // 
+          this.edtEdicao.set_Enabled(false);
+          this.edtEdicao.set_Location(new System.Drawing.Point(320, 64));
+          this.edtEdicao.set_Maximum(new Decimal(new int[] {
+          			9999,
+          			0,
+          			0,
+          			0}));
+          this.edtEdicao.set_Minimum(new Decimal(new int[] {
+          			1,
+          			0,
+          			0,
+          			0}));
+          this.edtEdicao.set_Name("edtEdicao");
+          this.edtEdicao.set_Size(new System.Drawing.Size(104, 20));
+          this.edtEdicao.set_TabIndex(6);
+          this.edtEdicao.set_Value(new Decimal(new int[] {
+          			1,
+          			0,
+          			0,
+          			0}));
+          // 
+          // edtAnoPubli
+          // 
+          this.edtAnoPubli.set_Enabled(false);
+          this.edtAnoPubli.set_Location(new System.Drawing.Point(8, 104));
+          this.edtAnoPubli.set_Maximum(new Decimal(new int[] {
+          			9999,
+          			0,
+          			0,
+          			0}));
+          this.edtAnoPubli.set_Minimum(new Decimal(new int[] {
+          			1,
+          			0,
+          			0,
+          			0}));
+          this.edtAnoPubli.set_Name("edtAnoPubli");
+          this.edtAnoPubli.set_Size(new System.Drawing.Size(88, 20));
+          this.edtAnoPubli.set_TabIndex(8);
+          this.edtAnoPubli.set_Value(new Decimal(new int[] {
+          			2004,
+          			0,
+          			0,
+          			0}));
+          // 
+          // labAnoPubli
+          // 
+          this.labAnoPubli.set_Location(new System.Drawing.Point(8, 88));
+          this.labAnoPubli.set_Name("labAnoPubli");
+          this.labAnoPubli.set_Size(new System.Drawing.Size(88, 16));
+          this.labAnoPubli.set_TabIndex(7);
+          this.labAnoPubli.set_Text("Ano Publicação:");
+          // 
+          // btnPAssunto
+          // 
+          this.btnPAssunto.set_Enabled(false);
+          this.btnPAssunto.set_Location(new System.Drawing.Point(408, 184));
+          this.btnPAssunto.set_Name("btnPAssunto");
+          this.btnPAssunto.set_Size(new System.Drawing.Size(22, 20));
+          this.btnPAssunto.set_TabIndex(23);
+          this.btnPAssunto.set_Text("...");
+          this.btnPAssunto.add_Click(new System.EventHandler(this.btnPAssunto_Click));
+          // 
+          // edtAssunto
+          // 
+          this.edtAssunto.set_Enabled(false);
+          this.edtAssunto.set_Location(new System.Drawing.Point(184, 184));
+          this.edtAssunto.set_MaxLength(30);
+          this.edtAssunto.set_Name("edtAssunto");
+          this.edtAssunto.set_Size(new System.Drawing.Size(200, 20));
+          this.edtAssunto.set_TabIndex(21);
+          this.edtAssunto.set_Text("");
+          // 
+          // edtCodAssunto
+          // 
+          this.edtCodAssunto.set_Enabled(false);
+          this.edtCodAssunto.set_Location(new System.Drawing.Point(100, 184));
+          this.edtCodAssunto.set_MaxLength(10);
+          this.edtCodAssunto.set_Name("edtCodAssunto");
+          this.edtCodAssunto.set_Size(new System.Drawing.Size(80, 20));
+          this.edtCodAssunto.set_TabIndex(20);
+          this.edtCodAssunto.set_Text("");
+          this.edtCodAssunto.add_Leave(new System.EventHandler(this.edtCodAssunto_Leave));
+          // 
+          // labAssunto
+          // 
+          this.labAssunto.set_Location(new System.Drawing.Point(100, 168));
+          this.labAssunto.set_Name("labAssunto");
+          this.labAssunto.set_Size(new System.Drawing.Size(68, 16));
+          this.labAssunto.set_TabIndex(19);
+          this.labAssunto.set_Text("Assunto:");
+          // 
+          // btnPEditora
+          // 
+          this.btnPEditora.set_Enabled(false);
+          this.btnPEditora.set_Location(new System.Drawing.Point(400, 104));
+          this.btnPEditora.set_Name("btnPEditora");
+          this.btnPEditora.set_Size(new System.Drawing.Size(22, 20));
+          this.btnPEditora.set_TabIndex(12);
+          this.btnPEditora.set_Text("...");
+          this.btnPEditora.add_Click(new System.EventHandler(this.btnPEditora_Click));
+          // 
+          // edtEditora
+          // 
+          this.edtEditora.set_Enabled(false);
+          this.edtEditora.set_Location(new System.Drawing.Point(184, 104));
+          this.edtEditora.set_MaxLength(30);
+          this.edtEditora.set_Name("edtEditora");
+          this.edtEditora.set_Size(new System.Drawing.Size(216, 20));
+          this.edtEditora.set_TabIndex(11);
+          this.edtEditora.set_Text("");
+          // 
+          // edtCodEditora
+          // 
+          this.edtCodEditora.set_Enabled(false);
+          this.edtCodEditora.set_Location(new System.Drawing.Point(100, 104));
+          this.edtCodEditora.set_MaxLength(10);
+          this.edtCodEditora.set_Name("edtCodEditora");
+          this.edtCodEditora.set_Size(new System.Drawing.Size(80, 20));
+          this.edtCodEditora.set_TabIndex(10);
+          this.edtCodEditora.set_Text("");
+          this.edtCodEditora.add_Leave(new System.EventHandler(this.edtCodEditora_Leave));
+          // 
+          // labEditora
+          // 
+          this.labEditora.set_Location(new System.Drawing.Point(100, 88));
+          this.labEditora.set_Name("labEditora");
+          this.labEditora.set_Size(new System.Drawing.Size(52, 16));
+          this.labEditora.set_TabIndex(9);
+          this.labEditora.set_Text("Editora:");
+          // 
+          // btnAdAssuntos
+          // 
+          this.btnAdAssuntos.set_Enabled(false);
+          this.btnAdAssuntos.set_Location(new System.Drawing.Point(384, 184));
+          this.btnAdAssuntos.set_Name("btnAdAssuntos");
+          this.btnAdAssuntos.set_Size(new System.Drawing.Size(22, 20));
+          this.btnAdAssuntos.set_TabIndex(22);
+          this.btnAdAssuntos.set_Text("+");
+          this.btnAdAssuntos.add_Click(new System.EventHandler(this.btnAdAssuntos_Click));
+          // 
+          // edtVolume
+          // 
+          this.edtVolume.set_Enabled(false);
+          this.edtVolume.set_Location(new System.Drawing.Point(8, 144));
+          this.edtVolume.set_Maximum(new Decimal(new int[] {
+          			9999,
+          			0,
+          			0,
+          			0}));
+          this.edtVolume.set_Minimum(new Decimal(new int[] {
+          			1,
+          			0,
+          			0,
+          			0}));
+          this.edtVolume.set_Name("edtVolume");
+          this.edtVolume.set_Size(new System.Drawing.Size(88, 20));
+          this.edtVolume.set_TabIndex(14);
+          this.edtVolume.set_Value(new Decimal(new int[] {
+          			1,
+          			0,
+          			0,
+          			0}));
+          // 
+          // labVolume
+          // 
+          this.labVolume.set_Location(new System.Drawing.Point(8, 128));
+          this.labVolume.set_Name("labVolume");
+          this.labVolume.set_Size(new System.Drawing.Size(56, 16));
+          this.labVolume.set_TabIndex(13);
+          this.labVolume.set_Text("Volume:");
+          // 
+          // edtNPaginas
+          // 
+          this.edtNPaginas.set_Enabled(false);
+          this.edtNPaginas.set_Location(new System.Drawing.Point(8, 184));
+          this.edtNPaginas.set_Maximum(new Decimal(new int[] {
+          			9999,
+          			0,
+          			0,
+          			0}));
+          this.edtNPaginas.set_Minimum(new Decimal(new int[] {
+          			1,
+          			0,
+          			0,
+          			0}));
+          this.edtNPaginas.set_Name("edtNPaginas");
+          this.edtNPaginas.set_Size(new System.Drawing.Size(88, 20));
+          this.edtNPaginas.set_TabIndex(18);
+          this.edtNPaginas.set_Value(new Decimal(new int[] {
+          			1,
+          			0,
+          			0,
+          			0}));
+          // 
+          // labNPaginas
+          // 
+          this.labNPaginas.set_Location(new System.Drawing.Point(8, 168));
+          this.labNPaginas.set_Name("labNPaginas");
+          this.labNPaginas.set_Size(new System.Drawing.Size(64, 16));
+          this.labNPaginas.set_TabIndex(17);
+          this.labNPaginas.set_Text("Nº Páginas:");
+          // 
+          // labIdioma
+          // 
+          this.labIdioma.set_Location(new System.Drawing.Point(100, 128));
+          this.labIdioma.set_Name("labIdioma");
+          this.labIdioma.set_Size(new System.Drawing.Size(60, 16));
+          this.labIdioma.set_TabIndex(15);
+          this.labIdioma.set_Text("Idioma:");
+          // 
+          // cmbIdioma
+          // 
+          this.cmbIdioma.set_DropDownStyle(System.Windows.Forms.ComboBoxStyle.DropDownList);
+          this.cmbIdioma.set_Enabled(false);
+          this.cmbIdioma.set_Location(new System.Drawing.Point(100, 144));
+          this.cmbIdioma.set_Name("cmbIdioma");
+          this.cmbIdioma.set_Size(new System.Drawing.Size(328, 21));
+          this.cmbIdioma.set_TabIndex(16);
+          // 
+          // lstAssuntos
+          // 
+          this.lstAssuntos.set_Enabled(false);
+          this.lstAssuntos.set_Location(new System.Drawing.Point(100, 208));
+          this.lstAssuntos.set_Name("lstAssuntos");
+          this.lstAssuntos.set_Size(new System.Drawing.Size(332, 43));
+          this.lstAssuntos.set_TabIndex(24);
+          this.lstAssuntos.add_DoubleClick(new System.EventHandler(this.lstAssuntos_DoubleClick));
+          // 
+          // labPreco
+          // 
+          this.labPreco.set_Location(new System.Drawing.Point(8, 212));
+          this.labPreco.set_Name("labPreco");
+          this.labPreco.set_Size(new System.Drawing.Size(64, 16));
+          this.labPreco.set_TabIndex(25);
+          this.labPreco.set_Text("Preço:");
+          // 
+          // edtPreco
+          // 
+          this.edtPreco.set_Enabled(false);
+          this.edtPreco.set_Location(new System.Drawing.Point(8, 231));
+          this.edtPreco.set_Name("edtPreco");
+          this.edtPreco.set_Size(new System.Drawing.Size(88, 20));
+          this.edtPreco.set_TabIndex(26);
+          this.edtPreco.set_Text("");
+          this.edtPreco.add_Leave(new System.EventHandler(this.edtPreco_Leave));
+          // 
+          // edtQtdEstoque
+          // 
+          this.edtQtdEstoque.set_Enabled(false);
+          this.edtQtdEstoque.set_Location(new System.Drawing.Point(8, 272));
+          this.edtQtdEstoque.set_Maximum(new Decimal(new int[] {
+          			9999,
+          			0,
+          			0,
+          			0}));
+          this.edtQtdEstoque.set_Name("edtQtdEstoque");
+          this.edtQtdEstoque.set_Size(new System.Drawing.Size(88, 20));
+          this.edtQtdEstoque.set_TabIndex(28);
+          // 
+          // labQtdEstoque
+          // 
+          this.labQtdEstoque.set_Location(new System.Drawing.Point(8, 256));
+          this.labQtdEstoque.set_Name("labQtdEstoque");
+          this.labQtdEstoque.set_Size(new System.Drawing.Size(80, 16));
+          this.labQtdEstoque.set_TabIndex(27);
+          this.labQtdEstoque.set_Text("Qtd. Estoque:");
+          // 
+          // lstAutores
+          // 
+          this.lstAutores.set_Enabled(false);
+          this.lstAutores.set_Location(new System.Drawing.Point(100, 296));
+          this.lstAutores.set_Name("lstAutores");
+          this.lstAutores.set_Size(new System.Drawing.Size(332, 43));
+          this.lstAutores.set_TabIndex(34);
+          this.lstAutores.add_DoubleClick(new System.EventHandler(this.lstAutores_DoubleClick));
+          // 
+          // btnAdAutores
+          // 
+          this.btnAdAutores.set_Enabled(false);
+          this.btnAdAutores.set_Location(new System.Drawing.Point(384, 272));
+          this.btnAdAutores.set_Name("btnAdAutores");
+          this.btnAdAutores.set_Size(new System.Drawing.Size(22, 20));
+          this.btnAdAutores.set_TabIndex(32);
+          this.btnAdAutores.set_Text("+");
+          this.btnAdAutores.add_Click(new System.EventHandler(this.btnAdAutores_Click));
+          // 
+          // btnPAutor
+          // 
+          this.btnPAutor.set_Enabled(false);
+          this.btnPAutor.set_Location(new System.Drawing.Point(408, 272));
+          this.btnPAutor.set_Name("btnPAutor");
+          this.btnPAutor.set_Size(new System.Drawing.Size(22, 20));
+          this.btnPAutor.set_TabIndex(33);
+          this.btnPAutor.set_Text("...");
+          this.btnPAutor.add_Click(new System.EventHandler(this.btnPAutor_Click));
+          // 
+          // edtAutor
+          // 
+          this.edtAutor.set_Enabled(false);
+          this.edtAutor.set_Location(new System.Drawing.Point(184, 272));
+          this.edtAutor.set_MaxLength(30);
+          this.edtAutor.set_Name("edtAutor");
+          this.edtAutor.set_Size(new System.Drawing.Size(200, 20));
+          this.edtAutor.set_TabIndex(31);
+          this.edtAutor.set_Text("");
+          // 
+          // edtCodAutor
+          // 
+          this.edtCodAutor.set_Enabled(false);
+          this.edtCodAutor.set_Location(new System.Drawing.Point(100, 272));
+          this.edtCodAutor.set_MaxLength(10);
+          this.edtCodAutor.set_Name("edtCodAutor");
+          this.edtCodAutor.set_Size(new System.Drawing.Size(80, 20));
+          this.edtCodAutor.set_TabIndex(30);
+          this.edtCodAutor.set_Text("");
+          this.edtCodAutor.add_Leave(new System.EventHandler(this.edtCodAutor_Leave));
+          // 
+          // labAutor
+          // 
+          this.labAutor.set_Location(new System.Drawing.Point(100, 256));
+          this.labAutor.set_Name("labAutor");
+          this.labAutor.set_Size(new System.Drawing.Size(68, 16));
+          this.labAutor.set_TabIndex(29);
+          this.labAutor.set_Text("Autor:");
+          // 
+          // frmCadLivros
+          // 
+          this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+          this.set_ClientSize(new System.Drawing.Size(520, 381));
+          this.get_Controls().Add(this.lstAutores);
+          this.get_Controls().Add(this.btnAdAutores);
+          this.get_Controls().Add(this.btnPAutor);
+          this.get_Controls().Add(this.edtAutor);
+          this.get_Controls().Add(this.edtCodAutor);
+          this.get_Controls().Add(this.labAutor);
+          this.get_Controls().Add(this.edtQtdEstoque);
+          this.get_Controls().Add(this.labQtdEstoque);
+          this.get_Controls().Add(this.edtPreco);
+          this.get_Controls().Add(this.labPreco);
+          this.get_Controls().Add(this.lstAssuntos);
+          this.get_Controls().Add(this.cmbIdioma);
+          this.get_Controls().Add(this.labIdioma);
+          this.get_Controls().Add(this.edtNPaginas);
+          this.get_Controls().Add(this.labNPaginas);
+          this.get_Controls().Add(this.edtVolume);
+          this.get_Controls().Add(this.labVolume);
+          this.get_Controls().Add(this.btnAdAssuntos);
+          this.get_Controls().Add(this.btnPAssunto);
+          this.get_Controls().Add(this.edtAssunto);
+          this.get_Controls().Add(this.edtCodAssunto);
+          this.get_Controls().Add(this.labAssunto);
+          this.get_Controls().Add(this.btnPEditora);
+          this.get_Controls().Add(this.edtEditora);
+          this.get_Controls().Add(this.edtCodEditora);
+          this.get_Controls().Add(this.labEditora);
+          this.get_Controls().Add(this.edtAnoPubli);
+          this.get_Controls().Add(this.labAnoPubli);
+          this.get_Controls().Add(this.edtEdicao);
+          this.get_Controls().Add(this.labEdicao);
+          this.set_Name("frmCadLivros");
+          this.set_Text("Cadastro de Livros");
+          this.add_Closing(new System.ComponentModel.CancelEventHandler(this.frmCadLivros_Closing));
+          this.add_Load(new System.EventHandler(this.frmCadLivros_Load));
+          ((System.ComponentModel.ISupportInitialize)(this.edtEdicao)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.edtAnoPubli)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.edtVolume)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.edtNPaginas)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.edtQtdEstoque)).EndInit();
+          this.ResumeLayout(false);
+	}
+
+	protected boolean ValidaDados(boolean bTodosDados)
+	{
+		super.ValidaDados(bTodosDados);	
+
+		if (RotinasGlobais.Rotinas.ValidaCampo(edtCodigo.get_Text(),
+			"ISBN não informado!"))
+		  return false;
+		if (bTodosDados) {
+		  if (RotinasGlobais.Rotinas.ValidaCampo(edtDescricao.get_Text(),
+			"Título não informado!"))
+			return false;
+		  if (RotinasGlobais.Rotinas.ValidaCampo(edtEditora.get_Text(),
+			"Editora não informada!"))
+			return false;
+		  if (lstAssuntos.get_Items().get_Count() == 0){
+                    MessageBox.Show(this,"Assunto(s) não informado(s)!",
+                    frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    return false;
+		  }
+		  if (lstAutores.get_Items().get_Count() == 0){
+                    MessageBox.Show(this,"Autor(es) não informado(s)!",
+                    frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    return false;
+		  }
+		}
+		return true;
+	}
+
+        protected void InformaLimpaDados(boolean bInformar)
+        {
+          super.InformaLimpaDados(bInformar);
+          if (bInformar) {
+        	edtEdicao.set_Text(Campos.get_Item(2).ToString());
+        	edtAnoPubli.set_Text(Campos.get_Item(3).ToString());
+        	edtVolume.set_Text(Campos.get_Item(4).ToString());
+        	edtCodEditora.set_Text(Campos.get_Item(5).ToString());
+        	edtEditora.set_Text(Campos.get_Item(6).ToString());
+        	cmbIdioma.set_SelectedIndex(slIdiomas.IndexOf(Campos.get_Item(7).ToString()));
+        	edtNPaginas.set_Text(Campos.get_Item(9).ToString());
+        	edtPreco.set_Text(RotinasGlobais.Rotinas.
+        					 VirgulaParaPonto(Campos.get_Item(10).ToString(),true));
+        	edtQtdEstoque.set_Text(Campos.get_Item(11).ToString());
+        	RotinasGlobais.Rotinas.AdicionaValoresLista(ConsLista,ConsultasSQL.
+        	ConsSQL.LivroAss('S',edtCodigo.get_Text(),""),lstAssuntos,slAssuntos);
+        	RotinasGlobais.Rotinas.AdicionaValoresLista(ConsLista,ConsultasSQL.
+        	ConsSQL.LivroAut('S',edtCodigo.get_Text(),""),lstAutores,slAutores);
+        
+          } else {
+        	edtEdicao.set_Value(new Decimal(1));
+        	edtAnoPubli.set_Text(DateTime.get_Now().ToString("yyyy"));
+        	edtVolume.set_Value(new Decimal(1));
+        	edtCodEditora.Clear();
+        	edtEditora.Clear();
+        	edtNPaginas.set_Value(new Decimal(1));
+        	edtPreco.set_Text("0,00");
+        	edtQtdEstoque.set_Value(new Decimal(1));
+        	edtCodAssunto.Clear();
+        	lstAssuntos.get_Items().Clear();
+        	edtCodAutor.Clear();
+        	lstAutores.get_Items().Clear();
+        	slAssuntos.Clear();
+        	slAutores.Clear();
+          }
+        }
+        
+        protected void HabilitaDados(boolean bHabilita)
+        {
+           super.HabilitaDados(bHabilita);
+          
+           edtEdicao.set_Enabled(bHabilita);
+           edtAnoPubli.set_Enabled(bHabilita);
+           edtVolume.set_Enabled(bHabilita);
+           edtCodEditora.set_Enabled(bHabilita);
+           btnPEditora.set_Enabled(bHabilita);
+           cmbIdioma.set_Enabled(bHabilita);
+           edtNPaginas.set_Enabled(bHabilita);
+           edtPreco.set_Enabled(bHabilita);
+           edtQtdEstoque.set_Enabled(bHabilita);
+           edtCodAssunto.set_Enabled(bHabilita);
+           btnPAssunto.set_Enabled(bHabilita);
+           btnAdAssuntos.set_Enabled(bHabilita);
+           lstAssuntos.set_Enabled(bHabilita);
+           edtCodAutor.set_Enabled(bHabilita);
+           btnPAutor.set_Enabled(bHabilita);
+           btnAdAutores.set_Enabled(bHabilita);
+           lstAutores.set_Enabled(bHabilita);
+        }
+
+	private void btnExcluir_Click(Object sender, System.EventArgs e)
+	{
+		ExcluirDados(ConsultasSQL.ConsSQL.Livro('D',edtCodigo.get_Text(),
+		"","","","","","","","",""));
+	}
+
+	private void btnPesquisar_Click(Object sender, System.EventArgs e)
+	{
+		PesquisarDados(ConsultasSQL.ConsSQL.Livro('S',edtCodigo.get_Text(),
+		"","","","","","","","",""),"Livro não encontrado!");
+	}
+
+	private void btnSalvar_Click(Object sender, System.EventArgs e)
+	{
+		SalvarDados(ConsultasSQL.ConsSQL.Livro('S',edtCodigo.get_Text(),
+		"","","","","","","","",""),
+		ConsultasSQL.ConsSQL.Livro('U',edtCodigo.get_Text(),edtDescricao.get_Text(),
+		edtEdicao.get_Text(),edtAnoPubli.get_Text(),edtVolume.get_Text(),edtCodEditora.get_Text(),
+		slIdiomas.get_Item(cmbIdioma.get_SelectedIndex()).ToString(),edtNPaginas.get_Text(),
+		RotinasGlobais.Rotinas.VirgulaParaPonto(edtPreco.get_Text(),false),
+		edtQtdEstoque.get_Text()),
+		ConsultasSQL.ConsSQL.Livro('I',edtCodigo.get_Text(),edtDescricao.get_Text(),
+		edtEdicao.get_Text(),edtAnoPubli.get_Text(),edtVolume.get_Text(),edtCodEditora.get_Text(),
+		slIdiomas.get_Item(cmbIdioma.get_SelectedIndex()).ToString(),edtNPaginas.get_Text(),
+		RotinasGlobais.Rotinas.VirgulaParaPonto(edtPreco.get_Text(),false),
+		edtQtdEstoque.get_Text()), true);
+		SalvaLista('A');
+		SalvaLista('B');
+		btnLimpar_Click(this,null);
+	}
+
+	private void frmCadLivros_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
+	{
+		 frmPrincipal.fPrincipal.tlbLivros.set_Enabled(true);
+		 frmPrincipal.fPrincipal.mnuCadLivros.set_Enabled(true);
+	}
+
+	private void btnFechar_Click(Object sender, System.EventArgs e)
+	{
+		frmCadLivros_Closing(this,null);
+	}
+
+	private void frmCadLivros_Load(Object sender, System.EventArgs e)
+	{
+	  edtAnoPubli.set_Text(DateTime.get_Now().ToString("yyyy"));
+	  AdicionaCombo();
+	  cmbIdioma.set_SelectedIndex(0);
+	}
+
+	private void AdicionaCombo() {
+		ArrayList linhas = new ArrayList();
+		ArrayList regs = new ArrayList();
+
+		RotinasGlobais.Rotinas.ConsultaDados(regs,
+			ConsultasSQL.ConsSQL.Idioma('S',"",""));
+
+		for(int cont=0; cont < regs.get_Count(); cont++) {
+		  linhas = (ArrayList) regs.get_Item(cont);
+		  slIdiomas.Add(linhas.get_Item(0).ToString());
+		  cmbIdioma.get_Items().Add(linhas.get_Item(1).ToString());
+		}
+	}
+	private void SalvaLista(char sOpcao) {
+		if (sOpcao=='A') {
+		 RotinasGlobais.Rotinas.ConsultaDados(Arquiva,
+		 ConsultasSQL.ConsSQL.LivroAss('D',edtCodigo.get_Text(),""));
+
+		 for (int nCont=0; nCont < slAssuntos.get_Count(); nCont++)  {
+		  RotinasGlobais.Rotinas.ConsultaDados(Arquiva,
+		  ConsultasSQL.ConsSQL.LivroAss('I',
+				edtCodigo.get_Text(),slAssuntos.get_Item(nCont).ToString()));
+		 }
+		} else if (sOpcao=='B') {
+		  RotinasGlobais.Rotinas.ConsultaDados(Arquiva,
+		  ConsultasSQL.ConsSQL.LivroAut('D',edtCodigo.get_Text(),""));
+
+		  for (int nCont=0; nCont < slAutores.get_Count(); nCont++)  {
+		   RotinasGlobais.Rotinas.ConsultaDados(Arquiva,
+		   ConsultasSQL.ConsSQL.LivroAut('I',
+				 edtCodigo.get_Text(),slAssuntos.get_Item(nCont).ToString()));
+		  }
+		}
+	}
+
+	protected void edtCodigo_Leave(Object sender, System.EventArgs e)
+	{
+		if (edtCodigo.get_Text().Equals("")==false) {
+		  if (RotinasGlobais.Rotinas.ValidaISBN(edtCodigo.get_Text())==false) {
+			  MessageBox.Show(this,"ISBN inválido!",
+			  frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+			  MessageBoxIcon.Error);
+			  edtCodigo.Clear();
+			  edtCodigo.Focus();
+		  }
+		}
+	}
+
+	private void edtCodEditora_Leave(Object sender, System.EventArgs e)
+	{
+	  if (edtCodEditora.get_Text().Equals("")==false) {
+	   edtEditora.set_Text(RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+	   edtCodEditora.get_Text(),ConsultasSQL.ConsSQL.Editora('S',
+	   edtCodEditora.get_Text(),""),"Editora não encontrada!"));
+	   if (edtEditora.get_Text().Equals(""))
+		 edtCodEditora.Focus();
+	  } else
+		edtEditora.Clear();
+	}
+
+	private void btnPEditora_Click(Object sender, System.EventArgs e)
+	{
+		frmConEditoras pfConEditoras = new frmConEditoras();
+		pfConEditoras.ShowDialog();
+		edtCodEditora.set_Text(RotinasGlobais.Rotinas.sCodigoSelecionado);
+		edtCodEditora_Leave(this,null);
+	}
+
+	private void edtPreco_Leave(Object sender, System.EventArgs e)
+	{
+		if (RotinasGlobais.Rotinas.ValidaFloat(edtPreco.get_Text()))
+		  edtPreco.set_Text(RotinasGlobais.Rotinas.VirgulaParaPonto(
+			  edtPreco.get_Text(),true));
+		else
+		  edtPreco.set_Text("0,00");
+	}
+
+	private void edtCodAssunto_Leave(Object sender, System.EventArgs e)
+	{
+	  if (edtCodAssunto.get_Text().Equals("")==false) {
+	   edtAssunto.set_Text(RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+	   edtCodAssunto.get_Text(),ConsultasSQL.ConsSQL.Assunto('S',
+	   edtCodAssunto.get_Text(),""),"Assunto não encontrado!"));
+	   if (edtAssunto.get_Text().Equals(""))
+		 edtCodAssunto.Focus();
+	  } else
+		edtAssunto.Clear();
+	}
+
+	private void edtCodAutor_Leave(Object sender, System.EventArgs e)
+	{
+	  if (edtCodAutor.get_Text().Equals("")==false) {
+	   edtAutor.set_Text(RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+	   edtCodAutor.get_Text(),ConsultasSQL.ConsSQL.Autor('S',
+	   edtCodAutor.get_Text(),""),"Autor não encontrado!"));
+	   if (edtAutor.get_Text().Equals(""))
+		 edtCodAutor.Focus();
+	  } else
+		edtAutor.Clear();
+	}
+
+	private void btnPAssunto_Click(Object sender, System.EventArgs e)
+	{
+		frmConAssuntos pfConAssuntos = new frmConAssuntos();
+		pfConAssuntos.ShowDialog();
+		edtCodAssunto.set_Text(RotinasGlobais.Rotinas.sCodigoSelecionado);
+		edtCodAssunto_Leave(this,null);
+	}
+
+	private void btnPAutor_Click(Object sender, System.EventArgs e)
+	{
+		frmConAutores pfConAutores = new frmConAutores();
+		pfConAutores.ShowDialog();
+		edtCodAutor.set_Text(RotinasGlobais.Rotinas.sCodigoSelecionado);
+		edtCodAutor_Leave(this,null);
+	}
+
+	private void btnAdAssuntos_Click(Object sender, System.EventArgs e)
+	{
+		RotinasGlobais.Rotinas.AdicionaItemLista(
+		lstAssuntos,slAssuntos,edtCodAssunto,edtAssunto);
+	}
+
+	private void lstAssuntos_DoubleClick(Object sender, System.EventArgs e)
+	{
+		RotinasGlobais.Rotinas.RemoveItemLista(lstAssuntos,slAssuntos);
+	}
+
+	private void btnAdAutores_Click(Object sender, System.EventArgs e)
+	{
+		RotinasGlobais.Rotinas.AdicionaItemLista(
+		lstAutores,slAutores,edtCodAutor,edtAutor);
+	}
+
+	private void lstAutores_DoubleClick(Object sender, System.EventArgs e)
+	{
+          RotinasGlobais.Rotinas.RemoveItemLista(lstAutores,slAutores);
+	}
+
+}
+
+

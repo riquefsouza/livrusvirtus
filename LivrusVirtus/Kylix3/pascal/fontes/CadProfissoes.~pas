@@ -1,0 +1,24 @@
+unit CadProfissoes;
+
+interface
+
+uses
+  SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
+  QDialogs, QStdCtrls, Cadastros, FMTBcd, Provider, DBClient, DB, SqlExpr;
+
+type
+  TfrmCadProfissoes = class(TfrmCadastros)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadProfissoes: TfrmCadProfissoes;
+
+implementation
+
+{$R *.xfm}
+
+end.

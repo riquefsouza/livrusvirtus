@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0050)http://toodarkpark.org/computers/objc/grammar.html -->
+<HTML><HEAD><TITLE>Reference Manual for the Objective-C Language</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content="MSHTML 6.00.2800.1458" name=GENERATOR></HEAD>
+<BODY vLink=#8b4500 bgColor=#e0e0e0><A 
+href="http://toodarkpark.org/computers/objc/summary.html"><IMG 
+src="Reference Manual for the Objective-C Language_arquivos/DocsLeftArrow.gif"></A> 
+<A href="http://toodarkpark.org/computers/objc/objctoc.html"><IMG 
+src="Reference Manual for the Objective-C Language_arquivos/DocsContents.gif"></A> 
+<A href="http://toodarkpark.org/computers/objc/objcglos.html"><IMG 
+src="Reference Manual for the Objective-C Language_arquivos/DocsRightArrow.gif"></A> 
+
+<P><A name=320></A><A name=343></A><A name=467></A><A name=490></A><I><FONT 
+size=+3>A</FONT><FONT size=+2>ppendix B</FONT> </I>
+<CENTER><FONT size=+5><B>R</B></FONT><FONT size=+4><B>eference</B></FONT> <FONT 
+size=+5><B>M</B></FONT><FONT size=+4><B>anual for the</B></FONT> <FONT 
+size=+5><B>O</B></FONT><FONT size=+4><B>bjective-C</B></FONT> <FONT 
+size=+5><B>L</B></FONT><FONT size=+4><B>anguage</B></FONT> </CENTER>
+<HR>
+
+<P><A name=695></A>This appendix presents a formal grammar for the Objective-C 
+extensions to the C language--as the Objective-C language is implemented for the 
+OPENSTEP development environment. It adds to the grammar for ANSI standard C 
+found in Appendix A of <EM>The C Programming Language</EM> (second edition, 
+1988) by Brian W. Kernighan and Dennis M. Ritchie, published by Prentice Hall, 
+and should be read in conjunction with that book.
+<P><A name=449></A>The Objective-C extensions introduce some new symbols (such 
+as <EM>class-interface</EM>), but also make use of symbols (such as 
+<EM>function-definition</EM>) that are explained in the standard C grammar. The 
+symbols mentioned but not explained here are listed below:
+<P><A name=1850></A>
+<H4>Undefined Symbols</H4>
+<DL>
+  <DL><A name=1852></A>
+    <DT><EM>compound 
+    statement<BR>constant<BR>declaration<BR>declaration-list<BR>enum-specifier<BR>expression<BR>function-definition<BR>identifier<BR>parameter-type-list<BR>string<BR>struct-declaration-list<BR>struct-or-union<BR>typedef-name<BR>type-name</EM> 
+    </DT></DL></DL><A name=698></A>Of these, <EM>identifier</EM> and <EM>string</EM> 
+are undefined terminal symbols. Objective-C adds no undefined terminal symbols 
+of its own.
+<P><A name=699></A>Two notational conventions used here differ from those used 
+in <EM>The C Programming Language:</EM>
+<P>
+<UL><A name=700></A>
+  <LI>Literal symbols are shown in <STRONG>bold</STRONG> type. <A name=701></A>
+  <LI>Brackets enclose optional elements and are in <EM>italic</EM> type. 
+  Literal brackets, like other literal symbols, are non-italic and bold. 
+</LI></UL><A name=702></A>Otherwise, this appendix follows the conventions of 
+the C reference manual. Each part of the grammar consists of a symbol followed 
+by a colon and an indented list of mutually-exclusive possibilities for 
+expanding the symbol. For example:
+<P><A name=703></A><I>receiver:<BR>expression<BR>class-name</I><BR><B>super</B> 
+<P><A name=704></A>However, there is an exception: Even though they're not 
+mutually exclusive, the constituents of classes, categories, and protocols are 
+listed on separate lines to clearly show the ordering of elements. For example:
+<P><A name=705></A><I>protocol-declaration:</I><BR><B>@protocol</B> 
+<I>protocol-name<BR>[protocol-reference-list]<BR>[interface-declaration-list]</I><BR><B>@end</B> 
+
+<P><A name=706></A>This exception to the general rule is easily recognized since 
+each list terminates with <STRONG>@end</STRONG>.
+<P><A name=707></A>There are just four entry points where the Objective-C 
+language modifies the rules defined for standard C:
+<P>
+<UL><A name=708></A>
+  <LI>External declarations <A name=709></A>
+  <LI>Type specifiers <A name=710></A>
+  <LI>Type qualifiers <A name=711></A>
+  <LI>Primary expressions </LI></UL><A name=712></A>This appendix is therefore 
+divided into four sections corresponding to these points. Where a rule in the 
+standard C grammar is modified by an Objective-C extension, the entire rule is 
+repeated in its modified form.
+<P><A name=713></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>E</FONT><FONT size=+2>xternal</FONT> <FONT 
+size=+3>D</FONT><FONT size=+2>eclarations</FONT> </CENTER>
+<HR width="75%">
+
+<P><A 
+name=714></A><EM>external-declaration:<BR></EM><EM>function-definition<BR></EM><EM>declaration<BR></EM><EM>class-interface<BR></EM><EM>class-implementation<BR></EM><EM>category-interface<BR></EM><EM>category-implementation<BR></EM><EM>protocol-declaration<BR></EM><EM>class-declaration-list</EM>
+<P><A name=715></A><EM>class-interface:<BR></EM><STRONG>@interface</STRONG> 
+<EM>class-name</EM> <EM>[</EM> <STRONG>:</STRONG> <EM>superclass-name</EM> 
+<EM>]<BR></EM><EM>[</EM> <EM>protocol-reference-list</EM> 
+<EM>]<BR></EM><EM>[</EM> <EM>instance-variables</EM> <EM>]<BR></EM><EM>[</EM> 
+<EM>interface-declaration-list</EM> <EM>]<BR></EM><STRONG>@end</STRONG>
+<P><A 
+name=716></A><EM>class-implementation:<BR></EM><STRONG>@implementation</STRONG> 
+<EM>class-name</EM> <EM>[</EM> <STRONG>:</STRONG> <EM>superclass-name</EM> 
+<EM>]<BR></EM><EM>[</EM> <EM>instance-variables</EM> <EM>]<BR></EM><EM>[</EM> 
+<EM>implementation-definition-list</EM> <EM>]<BR></EM><STRONG>@end</STRONG>
+<P><A name=717></A><EM>category-interface:<BR></EM><STRONG>@interface</STRONG> 
+<EM>class-name</EM> <STRONG>(</STRONG> <EM>category-name</EM> 
+<STRONG>)<BR></STRONG><EM>[</EM> <EM>protocol-reference-list</EM> 
+<EM>]<BR></EM><EM>[</EM> <EM>interface-declaration-list</EM> 
+<EM>]<BR></EM><STRONG>@end</STRONG>
+<P><A 
+name=718></A><EM>category-implementation:<BR></EM><STRONG>@implementation</STRONG> 
+<EM>class-name</EM> <STRONG>(</STRONG> <EM>category-name</EM> 
+<STRONG>)<BR></STRONG><EM>[</EM> <EM>implementation-definition-list</EM> 
+<EM>]<BR></EM><STRONG>@end</STRONG>
+<P><A name=719></A><EM>protocol-declaration:<BR></EM><STRONG>@protocol</STRONG> 
+<EM>protocol-name<BR></EM><EM>[</EM> <EM>protocol-reference-list</EM> 
+<EM>]<BR></EM><EM>[</EM> <EM>interface-declaration-list</EM> 
+<EM>]<BR></EM><STRONG>@end</STRONG>
+<P><A name=720></A><EM>class-declaration-list:<BR></EM><STRONG>@class 
+</STRONG><EM>class-list</EM> <STRONG>;</STRONG>
+<P><A 
+name=721></A><EM>class-list:<BR></EM><EM>class-name<BR></EM><EM>class-list</EM> 
+<STRONG>,</STRONG> <EM>class-name</EM>
+<P><A name=722></A><EM>protocol-reference-list:<BR></EM><STRONG>&lt;</STRONG> 
+<EM>protocol-list</EM> <STRONG></STRONG><STRONG>&gt;</STRONG>
+<P><A 
+name=723></A><EM>protocol-list:<BR></EM><EM>protocol-name<BR></EM><EM>protocol-list</EM> 
+<STRONG>,</STRONG> <EM>protocol-name</EM>
+<P><A name=724></A><EM>class-name:<BR></EM><EM>identifier</EM>
+<P><A name=725></A><EM>superclass-name:<BR></EM><EM>identifier</EM>
+<P><A name=726></A><EM>category-name:<BR></EM><EM>identifier</EM>
+<P><A name=727></A><EM>protocol-name:<BR></EM><EM>identifier</EM>
+<P><A name=728></A><EM>instance-variables:<BR></EM><STRONG>{</STRONG> <EM>[ 
+visibility-specification ]</EM> <EM>struct-declaration-list</EM> <EM>[</EM> 
+<EM>instance-variables</EM> <EM>]</EM> <STRONG>}</STRONG>
+<P><A 
+name=729></A><EM>visibility-specification:<BR></EM><STRONG>@private<BR>@protected<BR>@public</STRONG>
+<P><A 
+name=730></A><EM>interface-declaration-list:<BR></EM><EM>declaration<BR></EM><EM>method-declaration<BR></EM><EM>interface-declaration-list</EM> 
+<EM>declaration<BR></EM><EM>interface-declaration-list</EM> 
+<EM>method-declaration</EM>
+<P><A 
+name=731></A><EM>method-declaration:<BR></EM><EM>class-method-declaration<BR></EM><EM>instance-method-declaration</EM>
+<P><A name=732></A><EM>class-method-declaration:<BR></EM><STRONG>+</STRONG> 
+<EM>[</EM> <EM>method-type</EM> <EM>]</EM> <EM>method-selector</EM> 
+<STRONG>;</STRONG>
+<P><A name=733></A><EM>instance-method-declaration:<BR></EM><STRONG>-</STRONG> 
+<EM>[</EM> <EM>method-type</EM> <EM>]</EM> <EM>method-selector</EM> 
+<STRONG>;</STRONG>
+<P><A 
+name=734></A><EM>implementation-definition-list:<BR></EM><EM>function-definition<BR></EM><EM>declaration<BR></EM><EM>method-definition<BR></EM><EM>implementation-definition-list</EM> 
+<EM>function-definition<BR></EM><EM>implementation-definition-list</EM> 
+<EM>declaration<BR></EM><EM>implementation-definition-list</EM> 
+<EM>method-definition</EM>
+<P><A 
+name=735></A><EM>method-definition:<BR></EM><EM>class-method-definition<BR></EM><EM>instance-method-definition</EM>
+<P><A name=736></A><EM>class-method-definition:<BR></EM><STRONG>+</STRONG> 
+<EM>[</EM> <EM>method-type</EM> <EM>]</EM> <EM>method-selector</EM> <EM>[</EM> 
+<EM>declaration-list</EM> <EM>]</EM> <EM>compound-statement</EM>
+<P><A name=737></A><EM>instance-method-definition:<BR></EM><STRONG>-</STRONG> 
+<EM>[</EM> <EM>method-type</EM> <EM>]</EM> <EM>method-selector</EM> <EM>[</EM> 
+<EM>declaration-list</EM> <EM>]</EM> <EM>compound-statement</EM>
+<P><A 
+name=738></A><EM>method-selector:<BR></EM><EM>unary-selector<BR></EM><EM>keyword-selector</EM> 
+<EM>[</EM><STRONG> , ...</STRONG> <EM>]<BR></EM><EM>keyword-selector</EM> 
+<EM>[</EM> <STRONG>,</STRONG> <EM>parameter-type-list</EM> <EM>]</EM>
+<P><A name=739></A><EM>unary-selector:<BR></EM><EM>selector</EM>
+<P><A 
+name=740></A><EM>keyword-selector:<BR></EM><EM>keyword-declarator<BR></EM><EM>keyword-selector</EM> 
+<EM>keyword-declarator</EM>
+<P><A name=741></A><EM>keyword-declarator:<BR></EM><STRONG>:</STRONG> <EM>[</EM> 
+<EM>method-type</EM> <EM>]</EM> <EM>identifier<BR></EM><EM>selector</EM> 
+<STRONG>:</STRONG> <EM>[</EM> <EM>method-type</EM> <EM>]</EM> 
+<EM>identifier</EM>
+<P><A name=742></A><EM>selector:<BR></EM><EM>identifier</EM>
+<P><A name=743></A><EM>method-type:<BR></EM><STRONG>(</STRONG> 
+<EM>type-name</EM> <STRONG>)</STRONG>
+<P><A name=744></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>T</FONT><FONT size=+2>ype</FONT> <FONT 
+size=+3>S</FONT><FONT size=+2>pecifiers</FONT> </CENTER>
+<HR width="75%">
+
+<P><A 
+name=745></A><EM>type-specifier:<BR></EM><STRONG>void<BR>char<BR>short<BR>int<BR>long<BR>float<BR>double<BR>signed<BR>unsigned<BR>id</STRONG> 
+<EM>[</EM> <EM>protocol-reference-list</EM> <EM>]<BR></EM><EM>class-name</EM> 
+<EM>[</EM> <EM>protocol-reference-list</EM> 
+<EM>]<BR></EM><EM>struct-or-union-specifier<BR></EM><EM>enum-specifier<BR></EM><EM>typedef-name</EM>
+<P><A 
+name=746></A><EM>struct-or-union-specifier:<BR></EM><EM>struct-or-union</EM> 
+<EM>[</EM> <EM>identifier</EM> <EM>]</EM> <STRONG>{</STRONG> 
+<EM>struct-declaration-list</EM> <STRONG>}<BR></STRONG><EM>struct-or-union</EM> 
+<EM>[</EM> <EM>identifier</EM> <EM>]</EM> <STRONG>{ @defs (</STRONG> 
+<EM>class-name</EM> <STRONG>) }<BR></STRONG><EM>struct-or-union</EM> 
+<EM>identifier</EM>
+<P><A name=747></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>T</FONT><FONT size=+2>ype</FONT> <FONT 
+size=+3>Q</FONT><FONT size=+2>ualifiers</FONT> </CENTER>
+<HR width="75%">
+
+<P><A 
+name=748></A><EM>type-qualifier:<BR></EM><STRONG>const<BR>volatile<BR></STRONG><EM>protocol-qualifier</EM>
+<P><A 
+name=749></A><EM>protocol-qualifier:<BR></EM><STRONG>in<BR>out<BR>inout<BR>bycopy<BR></STRONG><STRONG>byref<BR></STRONG><STRONG>oneway</STRONG>
+<P><A name=750></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>P</FONT><FONT size=+2>rimary</FONT> <FONT 
+size=+3>E</FONT><FONT size=+2>xpressions</FONT> </CENTER>
+<HR width="75%">
+
+<P><A 
+name=751></A><EM>primary-expression:<BR></EM><EM>identifier<BR></EM><EM>constant<BR></EM><EM>string<BR></EM><STRONG>(</STRONG> 
+<EM>expression</EM> 
+<STRONG>)<BR></STRONG><STRONG>self<BR></STRONG><EM>message-expression<BR></EM><EM>selector-expression<BR></EM><EM>protocol-expression<BR></EM><EM>encode-expression</EM>
+<P><A name=752></A><EM>message-expression:<BR></EM><STRONG>[</STRONG> 
+<EM>receiver</EM> <EM>message-selector</EM> <STRONG>]</STRONG>
+<P><A 
+name=753></A><EM>receiver:<BR></EM><EM>expression<BR></EM><EM>class-name<BR></EM><STRONG>super</STRONG>
+<P><A 
+name=754></A><EM>message-selector:<BR></EM><EM>selector<BR></EM><EM>keyword-argument-list</EM>
+<P><A 
+name=755></A><EM>keyword-argument-list:<BR></EM><EM>keyword-argument<BR></EM><EM>keyword-argument-list</EM> 
+<EM>keyword-argument</EM>
+<P><A name=756></A><EM>keyword-argument:<BR></EM><EM>selector</EM> 
+<STRONG>:</STRONG> <EM>expression<BR></EM><STRONG>:</STRONG> <EM>expression</EM>
+<P><A name=757></A><EM>selector-expression:<BR></EM><STRONG>@selector (</STRONG> 
+<EM>selector-name</EM> <STRONG>)</STRONG>
+<P><A 
+name=758></A><EM>selector-name:<BR></EM><EM>selector<BR></EM><EM>keyword-name-list</EM>
+<P><A 
+name=759></A><EM>keyword-name-list:<BR></EM><EM>keyword-name<BR></EM><EM>keyword-name-list</EM> 
+<EM>keyword-name</EM>
+<P><A name=760></A><EM>keyword-name:<BR></EM><EM>selector</EM> 
+<STRONG>:<BR></STRONG><STRONG>:</STRONG>
+<P><A name=761></A><EM>protocol-expression:<BR></EM><STRONG>@protocol (</STRONG> 
+<EM>protocol-name</EM> <STRONG>)</STRONG>
+<P><A name=762></A><EM>encode-expression:<BR></EM><STRONG>@encode (</STRONG> 
+<EM>type-name</EM> <STRONG>)</STRONG>
+<P><BR><A href="http://toodarkpark.org/computers/objc/summary.html"><IMG 
+src="Reference Manual for the Objective-C Language_arquivos/DocsLeftArrow.gif"></A> 
+<A href="http://toodarkpark.org/computers/objc/objctoc.html"><IMG 
+src="Reference Manual for the Objective-C Language_arquivos/DocsContents.gif"></A> 
+<A href="http://toodarkpark.org/computers/objc/objcglos.html"><IMG 
+src="Reference Manual for the Objective-C Language_arquivos/DocsRightArrow.gif"></A> 
+
+<P>
+<HR>
+<FONT size=-1>Last Modified: 03:52pm , January 13, 1996 
+<CENTER>
+<HR>
+<A href="http://www.next.com/HotNews/">Hot News</A> | <A 
+href="http://www.next.com/OpenStep/">OpenStep</A> | <A 
+href="http://www.next.com/WebObjects/">WebObjects</A> | <A 
+href="http://www.next.com/Services/">Services</A> | <A 
+href="http://www.next.com/BuyNow/">Buy Now</A> | <A 
+href="http://www.next.com/NeXTanswers/">NeXTanswers</A> | <A 
+href="http://www.next.com/Search/">Search</A> | <A 
+href="http://www.next.com/AboutNeXT/">About NeXT</A> 
+<HR>
+</CENTER>NeXT sales and product information inquiries? <A 
+href="http://www.next.com/AboutNeXT/Feedback.html">Click here</A><BR><A 
+href="http://www.next.com/Legal/">Copyright</A> 1996 <A 
+href="http://www.next.com/">NeXT Software, Inc.</A> <A 
+href="http://www.next.com/Legal/">Proprietary Notices.</A> </FONT></BODY></HTML>

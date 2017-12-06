@@ -1,0 +1,17 @@
+//  Replicate -- Make "n" copies of something:
+//
+//  replicate:<5,a>
+//        (A A A A A)
+//
+//  replicate just sets up the scene for replicate_aux by putting an
+//  empty list as the third parameter.  Replicate_aux does the real work.
+
+     (def replicate == replicate_aux.apndr.[id,nil])
+
+     (def replicate_aux == eq0.1 -> 3; replicate_aux.[dec.1,id.2,cons.[2,3]])
+
+//  Helper functions needed
+
+     (def eq0 == eq.[id,#0])
+     (def dec == -.[id,#1])
+end

@@ -1,0 +1,135 @@
+;============================================================
+;  ANALYZE
+;     This set of functions lists all the free variables in a
+;     function (those that are not parameters and are not local)
+;
+;     and also the functions that are used.
+;============================================================
+
+(defun analyze (sexpr)
+       (xif (or (equal 'defun (car sexpr))
+                (equal 'lambda-block (car sexpr))
+            )
+        then (list 
+                   "Free variables are: "
+                   (getfreevarlist (cdddr sexpr) (nth 2 sexpr))
+                   "Functions used herein: "
+                   (getfuncsused (cdddr sexpr))
+             )
+        else nil
+       )
+)
+
+
+;============================================================
+;  GETFREEVARLIST
+;
+;  *  Get list of variables which are free in the list of
+;     s-expressions, given a list of bound variables.
+;
+;  This function assumes that you are giving it the body of a
+;  function, which is a list of function calls.
+;
+;  WARNING:  This does NOT take into account functions which
+;            bind variables such as PROG, LET, etc.
+;            Nor does it handle macros.
+;
+;  EXAMPLE:
+;     (getfreevarlist '(car a b c) '(b))
+;           ==> (CAR A C)
+;     (getfreevarlist '(car '(a b c)) '(b))
+;           ==> (CAR)
+;     (getfreevarlist '((append '(a b) (list c d))) '(a d))
+;           ==> (C)
+;============================================================
+
+(defun getfreevarlist (sexpr-list boundvars)
+       (xif (null sexpr-list)
+        then nil
+        else (append (getfreevars1   (car sexpr-list) boundvars)
+                     (getfreevarlist (cdr sexpr-list) boundvars)
+             )
+       )
+)
+
+(defun getfreevars1 (sexpr boundlist)
+       (xif (atom sexpr)
+        then (xif (member sexpr boundlist)
+              then nil
+              else (list sexpr)
+             )
+        elsif (equal (car sexpr) 'quote)
+        then nil
+        else (getfreevarlist (cdr sexpr) boundlist)
+       )
+)
+
+
+;============================================================
+;  GETFUNCSUSED
+;============================================================
+
+(defun getfuncsused (sexpr-list)
+       (unique (getfuncsusedlist sexpr-list))
+)
+
+(defun getfuncsused1 (sexpr)
+       (xif (atom sexpr)
+        then nil
+        elsif (equal 'quote (car sexpr))
+        then (list 'quote)
+        else (cons (car sexpr)
+                   (getfuncsusedlist (cdr sexpr))
+             )            
+       )
+)
+
+(defun getfuncsusedlist (sexpr-list)
+       (xif (null sexpr-list)
+        then nil
+        else (append (getfuncsused1 (car sexpr-list))
+                     (getfuncsusedlist (cdr sexpr-list))
+             )
+       )
+)
+
+(defun unique (list)
+       (xif (null list)
+        then nil
+        elsif (member (car list) (cdr list))
+        then (unique (cdr list))
+        else (cons (car list) (unique (cdr list)))
+       )
+)
+
+
+
+;============================================================
+;  DEMO
+;============================================================
+
+(setq xlength '(defun length (list)
+                      (setq x (append list (list (quote q))))
+                      (if (zerop (length list))
+                          0
+                          (plus 1 (length (cdr list)))
+                      )
+               )
+)
+
+(defun demo nil 
+       (princ "This is the input function:")(terpri)
+       (print xlength)
+       (terpri)(terpri)
+       (setq x (analyze xlength))
+
+       (princ "These are the free variables mentioned:")
+       (terpri)(terpri)
+       (print (nth 1 x))
+       (terpri)(terpri)
+       
+       (princ "These are the functions used:")
+       (terpri)(terpri)
+       (print (nth 3 x))
+       (terpri)(terpri)
+)

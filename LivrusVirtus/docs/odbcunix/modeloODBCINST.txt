@@ -1,0 +1,34 @@
+[PostgreSQL]
+Description     = PostgreSQL driver for Linux & Win32
+Driver          = /usr/local/lib/libodbcpsql.so
+Setup           = /usr/local/lib/libodbcpsqlS.so
+
+[MySQL]
+Description     = MySQL driver
+Driver          = /usr/local/lib/libodbcmy.so
+Setup           = /usr/local/lib/libodbcmyS.so
+
+[MiniSQL]
+Description     = Mini SQL driver
+Driver          = /usr/local/lib/libodbcmini.so
+Setup           = /usr/local/lib/libodbcminiS.so
+
+[nntp]
+Description     = nntp driver
+Driver          = /usr/local/lib/libodbcnn.so
+Setup           = /usr/local/lib/libodbcnnS.so
+
+[FreeTDS]
+Description     = FreeTDS driver
+Driver          = /usr/local/lib/libodbctds.so
+Setup           = /usr/local/lib/libodbctdsS.so
+
+[Oracle]
+Description     = Oracle driver
+Driver          = /usr/local/lib/liboraodbc.so
+Setup           = /usr/local/lib/liboraodbcS.so
+
+[Sybase SQL Anywhere 5.0]
+Description     = Sybase SQL Anywhere 5.0
+Driver          = /usr/local/lib/libsapdb.so
+Setup           = /usr/local/lib/libsapdbS.so

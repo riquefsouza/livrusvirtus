@@ -1,0 +1,233 @@
+package Livrus;
+
+import java.awt.*;
+import java.sql.*;
+import java.util.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.table.*;
+
+
+public class frmConsultas extends JDialog {
+  ResultSet rsConsulta;
+  Vector Linhas = new Vector();
+
+  Component cp;
+  JPanel jPanel1 = new JPanel();
+  JPanel jPanel3 = new JPanel();
+  JScrollPane jScrollPane1 = new JScrollPane();
+  JTable gridConsulta = new JTable();
+  JPanel jPanel2 = new JPanel();
+  JPanel jPanel4 = new JPanel();
+  JLabel labRegistros = new JLabel();
+  FlowLayout flowLayout1 = new FlowLayout();
+  BorderLayout borderLayout1 = new BorderLayout();
+  JPanel jPanel5 = new JPanel();
+  JButton btnFechar = new JButton();
+  JButton btnLimpar = new JButton();
+  BorderLayout borderLayout2 = new BorderLayout();
+  FlowLayout flowLayout2 = new FlowLayout();
+  JPanel jPanel6 = new JPanel();
+  JLabel labDescricao = new JLabel();
+  JTextField edtDescricao = new JTextField();
+  JPanel jPanel7 = new JPanel();
+  JButton btnPesquisar = new JButton();
+  BorderLayout borderLayout3 = new BorderLayout();
+  FlowLayout flowLayout3 = new FlowLayout();
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+
+  public frmConsultas() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try  {
+      jbInit();
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void jbInit() throws Exception {
+    this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    this.setModal(true);
+    this.setSize(new Dimension(383, 264));
+    this.addWindowListener(new java.awt.event.WindowAdapter() {
+      public void windowClosing(WindowEvent e) {
+        this_windowClosing(e);
+      }
+    });
+    this.setTitle("Consulta de ");
+    jPanel1.setBorder(null);
+    jPanel1.setPreferredSize(new Dimension(458, 55));
+    jPanel1.setLayout(borderLayout3);
+    jPanel3.setLayout(borderLayout1);
+    jPanel4.setMinimumSize(new Dimension(80, 26));
+    jPanel4.setPreferredSize(new Dimension(140, 35));
+    jPanel4.setLayout(flowLayout1);
+    jPanel2.setLayout(borderLayout2);
+    jPanel2.setMinimumSize(new Dimension(1, 30));
+    jPanel2.setPreferredSize(new Dimension(1, 35));
+    labRegistros.setPreferredSize(new Dimension(110, 25));
+    labRegistros.setHorizontalAlignment(SwingConstants.LEADING);
+    labRegistros.setText("Registro 0 de 0 ");
+    labRegistros.setVerticalAlignment(SwingConstants.CENTER);
+    labRegistros.setVerticalTextPosition(SwingConstants.CENTER);
+    jPanel3.setPreferredSize(new Dimension(141, 40));
+    btnFechar.setText("Fechar");
+    btnFechar.setMnemonic('F');
+    btnFechar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnFechar_actionPerformed(e);
+      }
+    });
+    btnLimpar.setMnemonic('L');
+    btnLimpar.setText("Limpar");
+    jPanel5.setLayout(flowLayout2);
+    jPanel5.setMaximumSize(new Dimension(32767, 32767));
+    jPanel5.setMinimumSize(new Dimension(205, 35));
+    jPanel5.setPreferredSize(new Dimension(205, 35));
+    flowLayout2.setHgap(10);
+    flowLayout2.setVgap(8);
+    jPanel6.setLayout(gridBagLayout1);
+    labDescricao.setText("Descrição: ");
+    edtDescricao.setPreferredSize(new Dimension(300, 19));
+    edtDescricao.setText("");
+    btnPesquisar.setText("Pesquisar");
+    btnPesquisar.setMnemonic('P');
+    jPanel7.setLayout(flowLayout3);
+    flowLayout3.setHgap(10);
+    flowLayout3.setVgap(15);
+    jPanel6.setMinimumSize(new Dimension(245, 57));
+    jPanel6.setPreferredSize(new Dimension(280, 56));
+    jPanel7.setMinimumSize(new Dimension(120, 56));
+    jPanel7.setPreferredSize(new Dimension(120, 56));
+    jPanel2.add(jPanel5,  BorderLayout.EAST);
+    jPanel5.add(btnLimpar, null);
+    jPanel5.add(btnFechar, null);
+    jPanel3.add(jPanel4,  BorderLayout.WEST);
+    jPanel4.add(labRegistros, null);
+    jPanel3.add(jPanel2,  BorderLayout.CENTER);
+    this.getContentPane().add(jPanel1, BorderLayout.NORTH);
+    jPanel1.add(jPanel6, BorderLayout.WEST);
+    jPanel6.add(labDescricao,        new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(8, 8, 0, 0), 207, 5));
+    jPanel6.add(edtDescricao,           new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 8, 8, 8), 29, 0));
+    jPanel1.add(jPanel7,  BorderLayout.CENTER);
+    jPanel7.add(btnPesquisar, null);
+    this.getContentPane().add(jScrollPane1, BorderLayout.CENTER);
+    this.getContentPane().add(jPanel3, BorderLayout.SOUTH);
+    jScrollPane1.setBorder(null);
+    jScrollPane1.getViewport().add(gridConsulta, null);
+  }
+
+  protected DefaultTableModel modeloTabela(ResultSet rsConsulta, String[] colNomes) {
+    DefaultTableModel dtm = new DefaultTableModel();
+    Vector ColunasNome = new Vector(colNomes.length);
+
+    try {
+      for(int coluna = 0; coluna < colNomes.length; coluna++) {
+        ColunasNome.addElement(colNomes[coluna]);
+      }
+
+      Linhas.removeAllElements();
+
+      while (rsConsulta.next()) {
+       Vector novaLinha = new Vector();
+         for(int coluna = 0; coluna < colNomes.length; coluna++) {
+         novaLinha.addElement(rsConsulta.getObject(coluna+1));
+       }
+       Linhas.addElement(novaLinha);
+      }
+      dtm.setDataVector(Linhas,ColunasNome);
+
+    } catch (SQLException se) {
+    JOptionPane.showMessageDialog(null,se.getMessage(),"Erro",
+                                  JOptionPane.ERROR_MESSAGE);
+    }
+
+    return dtm;
+  }
+
+  protected void MostraTabela(ResultSet rsConsulta, String[] colNomes) {
+   DefaultTableModel dtm;
+
+   dtm = modeloTabela(rsConsulta,colNomes);
+   gridConsulta = new JTable(dtm);
+   gridConsulta.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+   RotinasGlobais.Rotinas.acomodaColunas(gridConsulta, 2);
+   RotinasGlobais.Rotinas.acomodaLinhas(gridConsulta, 0);
+
+   gridConsulta.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+     public void mouseMoved(MouseEvent e) {
+       gridConsulta_mouseMoved(e);
+     }
+   });
+   gridConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+     public void mouseClicked(MouseEvent e) {
+       gridConsulta_mouseClicked(e);
+     }
+   });
+   gridConsulta.addKeyListener(new java.awt.event.KeyAdapter() {
+     public void keyReleased(KeyEvent e) {
+       gridConsulta_keyReleased(e);
+     }
+   });
+   jScrollPane1.getViewport().add(gridConsulta, null);
+  }
+
+  void btnFechar_actionPerformed(ActionEvent e) {
+    this_windowClosing(null);
+    this.dispose();
+  }
+
+  protected void LimparDados(String sTextoSql, String[] colNomes)
+  {
+    labRegistros.setText("Registro 0 de 0");
+    rsConsulta = RotinasGlobais.Rotinas.ConsultaDados(sTextoSql);
+    MostraTabela(rsConsulta,colNomes);
+    btnPesquisar.setEnabled(true);
+    edtDescricao.setText("");
+    edtDescricao.requestFocus();
+  }
+
+  protected boolean PesquisarDados(String sTextoSql, String sMensagemErro,
+                                   String[] colNomes)
+  {
+    rsConsulta = RotinasGlobais.Rotinas.ConsultaDados(sTextoSql);
+    if (rsConsulta!=null) {
+           MostraTabela(rsConsulta,colNomes);
+           labRegistros.setText("Registro 0 de "+gridConsulta.getRowCount());
+           btnPesquisar.setEnabled(false);
+           return true;
+    } else {
+          JOptionPane.showMessageDialog(this,sMensagemErro,
+          frmPrincipal.fPrincipal.getTitle(), JOptionPane.OK_OPTION |
+          JOptionPane.ERROR_MESSAGE);
+          return false;
+    }
+  }
+
+  void gridConsulta_mouseMoved(MouseEvent e) {
+    frmPrincipal.fPrincipal.statusBar2.setText(this.getTitle());
+  }
+
+  void this_windowClosing(WindowEvent e) {
+      if (gridConsulta.getSelectedRowCount() > 0) {
+          RotinasGlobais.Rotinas.sCodigoSelecionado =
+          gridConsulta.getValueAt(gridConsulta.getSelectedRow(), 0).toString();
+      }
+      frmPrincipal.fPrincipal.statusBar2.setText("");
+
+  }
+
+  void gridConsulta_mouseClicked(MouseEvent e) {
+    labRegistros.setText("Registros "+(gridConsulta.getSelectedRow()+1)+
+                         " de "+gridConsulta.getRowCount());
+  }
+
+  void gridConsulta_keyReleased(KeyEvent e) {
+    gridConsulta_mouseClicked(null);
+  }
+
+}
+

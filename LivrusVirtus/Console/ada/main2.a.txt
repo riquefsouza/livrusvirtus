@@ -1,0 +1,112 @@
+with text_io; use text_io;
+with strings; use strings;
+
+
+procedure main is
+
+     package io_int is new integer_io (integer);
+     use io_int;
+
+     st1, st2 : string(1..50);
+     line : string(1..80);
+     word : string(1..25);
+
+begin
+
+     strcpy (st1, "hi there joe");
+     put (st1);
+     new_line;
+
+     strcpy (st2, st1);
+     put (st2);
+     new_line;
+
+     strclear (st1);
+     put (st1);
+     new_line;
+
+     put (strcmp ("abc", "abc"));
+     new_line;
+
+     put (strcmp ("abc", "abd"));
+     new_line;
+
+     put (strcmp ("abd", "abc"));
+     new_line;
+
+     put (strcmp ("abd", "ab"));
+     new_line;
+
+     put (strncmp ("abd", "ab", 2));
+     new_line;
+
+     strcpy (st1, "abd");
+     put (strcmp (st1, "abd"));
+     new_line;
+
+     put (st1);
+     put ("/");
+     new_line;
+
+     put (strncmp (st1, "abd", 3));
+     new_line;
+
+     strcpy (st1, "t hi there joe");
+     put ("before shifting left...");
+     put (st1);
+     new_line;
+
+     strshift (st1, -2);
+     put (" after shifting left...");
+     put (st1);
+     new_line;
+
+     strcpy (line, "mary had a little lamb");
+     put (line);
+     new_line;
+
+     strncpy (word, line(6..8), 3);
+     put (word(1..3));
+     new_line;
+
+     strcpy (st1, "abd");
+     put (strlen(st1));
+     new_line;
+
+     strcpy (st1, "     hallo    ");
+     put (strlen(st1));
+     new_line;
+     put (strlen1(st1));      -- doesn't work
+     new_line;
+
+     put (str_find_ch("my friend joe", 'r'));
+     new_line;
+
+     strcpy (st1, "my friend joe");
+     strupper (st1);
+     put_line (st1);
+
+     strcpy (st1, "MY FriEND JOE");
+     strlower (st1);
+     put_line (st1);
+
+     put (atoi ("536"));
+     new_line;
+
+     put (atoi ("53xyz"));
+     new_line;
+
+     put (atoi ("-53xyz"));
+     new_line;
+
+     strcpy (st1, "mark");
+     strcat (st1, " is a fine fellow.");
+     put (st1);
+     new_line;
+
+     strcpy (st1, "mark");
+     strncat (st1, " meyer is here....", 6);
+     put (st1);
+     new_line;
+
+end main;

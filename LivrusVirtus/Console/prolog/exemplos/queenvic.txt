@@ -1,0 +1,17 @@
+male(albert).
+male(edward).
+female(alice).
+female(victoria).
+
+    /* parents(X,Y,Z) means that Y and Z are the parents of X */
+
+parents(edward,victoria,albert).
+parents(alice,victoria,albert).
+
+    /* X is the sister of Y if X is a female and they have the same parents.
+       Note that Y might be a male. */
+
+sisterof(X,Y) :-
+     female(X),
+     parents(X,M,F),
+     parents(Y,M,F).

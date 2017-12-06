@@ -1,0 +1,12 @@
+#!/usr/local/bin/python
+#test db connection
+import MySQLdb
+conn = MySQLdb.connect(host='127.0.0.1', user='username', passwd='password', db='db_username')
+c = conn.cursor()
+c.execute("SELECT * FROM test")
+records = c.fetchall()
+import pprint
+print "Content-type: text\html"
+print
+pprint.pprint(records)
+

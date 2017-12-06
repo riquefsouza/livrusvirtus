@@ -1,0 +1,21 @@
+-- 
+-- compile with: smalleiffel compile helloworld
+-- 
+indexing
+   title: "Hello World";
+   author: "Michael Neumann";
+
+class HELLOWORLD
+
+creation {ANY}
+   make
+
+feature {ANY}
+
+   make is
+      do
+         std_output.put_string("Hello World");
+         std_output.put_new_line;
+      end -- make
+
+end -- class HELLOWORLD

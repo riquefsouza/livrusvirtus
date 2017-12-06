@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<nodeSet>
+  <view uin="1e5lfbjasyc23if">
+    <property name="$name" value="Principal" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="source:Livrus:Principal.TWinForm">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:Principal.TWinForm.Components" />
+      <reference referencedUin="source:Livrus:Principal.TWinForm.InitializeComponent" />
+      <reference referencedUin="source:Livrus:Principal.TWinForm.Dispose" />
+      <reference referencedUin="source:Livrus:Principal.TWinForm.Create" />
+    </reference>
+    <reference referencedUin="source:Livrus:Principal.TfrmPrincipal">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:System.ComponentModel.Container" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MainMenu" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:System.Windows.Forms.MenuItem" />
+      <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.InitializeComponent" />
+      <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.mnuSair_Click" />
+      <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.Dispose" />
+      <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.Create" />
+      <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.TfrmPrincipal_Closed" />
+      <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.TfrmPrincipal_Closing" />
+    </reference>
+  </view>
+</nodeSet>

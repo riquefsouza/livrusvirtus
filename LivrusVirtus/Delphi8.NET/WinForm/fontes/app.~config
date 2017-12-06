@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <appSettings>
+    <!--User application and configured property settings go here.-->
+    <!--Example: <add key="settingName" value="settingValue"/>-->
+    <add key="SqlConnection1.ConnectionString" value="" />
+    <add key="Database=" value="" />
+    <add key="Database=C:\LivrusVirtus\Bancos\access\Livrus2k.mdb" value="" />
+  </appSettings>
+</configuration>

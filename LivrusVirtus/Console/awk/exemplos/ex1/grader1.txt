@@ -1,0 +1,21 @@
+#
+#  This is a first attempt at a grader program.  There are four tests
+#  on each line after the two names.  Blank lines are ignored.
+#
+
+BEGIN {for (i=1; i<=4; i++)
+            test_totals[i] = 0
+       count = 0
+      }
+
+/^$/  {next}        # ignore blank lines
+
+{
+ count++
+ for (i=3; i<=6; i++)
+      test_totals[i-2] += $i
+}
+
+END   {for (i=1; i<=4; i++)
+           printf "Test %d average = %7.2f\n", i, test_totals[i]/count
+      }

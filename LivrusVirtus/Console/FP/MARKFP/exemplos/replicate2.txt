@@ -1,0 +1,14 @@
+// Another replicate
+
+     (def rep == repx.apndr.[id,#nil])
+     (def repx == (eq0.1 -> 3;repx.[dec.1,2,cons.[2,3]]))
+
+//  Helper functions
+
+     (def eq0 == =.[id,#0])
+     (def dec == -.[id,#1])
+
+rep:<3,mark>
+
+rep:<5,<a,b,c>>
+end

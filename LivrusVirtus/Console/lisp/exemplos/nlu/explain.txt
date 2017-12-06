@@ -1,0 +1,220 @@
+These notes attempt to explain a few things about the LISP functions in the
+file "nlu".
+
+Let's first look at is-true?
+
+  ;---------------------------------------------------------------
+  ;  (defun is-true? (proposition factlist)
+  ;       (dolist (fact factlist)
+  ;           (xif (equal fact proposition)
+  ;            then (format t "~S is true" proposition)
+  ;                 (return-from is-true?)
+  ;           )
+  ;       )
+  ;       (format t "~S is not known to be true" proposition)
+  ;  )
+  ;---------------------------------------------------------------
+
+There are two parameters:  proposition and factlist.  The documentation
+tells you that proposition must be a list of words, and that factlist must
+be a list of such propositions.
+
+The main loop iterates over this factlist, binding each thing in that list
+to the local variable fact:
+
+  ;       (dolist (fact factlist)
+  ;                                          
+  ;                                                       
+  ;       )
+
+That is, each time through the loop, local variable "fact" will be bound to
+a different value.  The first time through, it will get the first thing in
+the list "factlist."  The second time through, it will get the second thing
+in the list "factlist," etc. until factlist is exhausted.
+
+The body of this loop is simply an if-then statement.  If the fact is equal
+to the proposition, exactly the same lists, then do two statements following
+"then."  Note that in LISP, you can use the standard "equal" function with
+either atoms or lists.  If you compare two lists, then it compares them
+element by element.  (Spacing never matters, but the order of the list does.)
+
+The "then" part is
+
+  ;            then (format t "~S is true" proposition)
+  ;                 (return-from is-true?)
+
+which prints out the proposition followed by " is true."  Format is another
+built-in LISP function that acts like printf of C.  The "t" following the
+function name "format" says to print on the standard output device.  Next
+comes the formatting string, very much like printf, except that the little
+format specifiers begin with the tilde, instead of the percent sign.  Then
+whatever gets formatted, values from a variable in this case, follow.  So
+the value of variable (actually parameter) "proposition" substitutes the
+~S in the format.
+
+Once this is printed, we get the heck out of the entire function by using
+return-from, followed by the name of the function.
+
+On the other hand, if we make it through the entire fact list without finding
+our proposition, we simply declare it not to be true or not known to be true:
+
+  ;       (format t "~S is not known to be true" proposition)
+
+
+The next function, answer-question, is virtually identical to is-true?  
+
+  ;---------------------------------------------------------------
+  ;(defun answer-question (proposition factlist)
+  ;     (dolist (fact factlist)
+  ;          (xif (match-x proposition fact)
+  ;           then (print fact)
+  ;          )
+  ;     )
+  ;)
+  ;---------------------------------------------------------------
+
+It has the same number of parameters and the same loop structure.  Its only tiny
+difference is that when it finds a matching fact, it doesn't stop but rather
+continues on through the rest of the fact list.  This is done because this
+function is supposed to find *ALL* facts that match, not just answer yes or
+no as to whether or not there is a match.  It also uses the function match-x
+instead of equal.
+
+It would be possible to do away with is-true? entirely, and just let answer-
+question be used for yes/no answers, as long as we can be sure that the
+function match-x works like built-in function "equal" when both the proposition
+and the fact are the same and have no question-mark atoms.  Indeed, this is
+the case, so is-true? really is redundant and unnecessary.
+
+Let's now look at match-x, which is more complicated:
+
+  ;---------------------------------------------------------------
+  ; (defun match-x (proposition fact)
+  ;      (xif (not (= (length proposition) (length fact)))
+  ;       then (return-from match-x nil)
+  ;      )
+  ;      (dotimes (i (length proposition))
+  ;           (setq propword (nth i proposition))
+  ;           (setq factword (nth i fact))
+  ;           (xif (not (equal #\? (char (symbol-name propword) 0)))
+  ;                then (xif (not (equal factword propword))
+  ;                      then (return-from match-x nil)
+  ;                     )
+  ;           )
+  ;      )
+  ;      t
+  ; )
+  ;---------------------------------------------------------------
+
+Match-x compares two lists of words, one being the question (called the
+"proposition") and the other the fact.  The proposition may have 0 or more
+question-mark words, which are atoms whose names start with a question mark.
+These are a kind of logical variable.
+
+First, match-x asks if the length of the proposition is the same as the
+length of the fact.  If they are not the same length, we return from match-x
+with nil immediately, and do not waste further time.  
+
+Beware!  Some keywords may look the same in C and LISP but they are not the
+same.  Return is one such word.  In C, return gets you out of the function
+immediately.  In C, you must use return-from followed by the name of the
+function.  There is a return in LISP, but it does *NOT* return from a
+function.  Instead it just breaks out of a loop, like "break" in C.
+
+Now we can examine the main loop of match-x, which is a dotimes loop instead
+of dolist.  The reason for this is that we need to run through two lists of
+the same length in parallel, so a dolist would only go through one of the
+lists, leaving us to figure out how to get the corresponding value out of
+the other list.  Dotimes does this easily by just running through a bunch of
+numbers, starting with 0.  The upper limit will be the length of the list:
+
+  ;      (dotimes (i (length proposition))
+  ;
+  ;      )
+
+First, LISP evaluates the length of the proposition, which is the same as the
+length of the fact.  Suppose this is 3.  Then it assigns 0 to local variable i
+and cranks through the loop body (which is omitted right above us).  Then it
+assigns 1 to i and does the loop body again, and finally it assigns 2 to the
+loop body and executes it one last time.  Notice that it does *NOT* assign 3
+to i.  Common LISP is very much like C in that it is 0-based.  The 0th element
+of a list is the first thing in the list.
+
+Now let's see what is done inside the loop.  First we access the ith word of
+each list:
+
+  ;           (setq propword (nth i proposition))
+  ;           (setq factword (nth i fact))
+
+The built-in nth function is kind of like the array brackets of C.  If propo-
+sition were an array, then the first setq would look like:
+
+        propword = proposition[i];
+
+We put these words into two separate variables "propword" and "factword"
+merely for convenience's sake.  We could replace all instances of "propword"
+with (nth i proposition) but it would not be as clear or as compact.
+
+Once we identify the two words we are comparing, we ask if the propword starts
+with a question mark.  If it does, then by definition it matches factword.
+If it does not start with a question mark, then it matches factword only if it
+is identical to factword.  Again we use the equal function for this.  Here is
+the code in more English-like form:
+
+      if propword does not start with a question mark then
+           if propword is not exactly equal to factword
+                 then return nil from this function
+
+We only keep going through the loop to the end if we do not find a mismatch.
+The final "t" after the dotimes loop returns t if we get through the entire
+loop without exiting early.
+
+The LISP encoding of these if statements is tedious.  To ask if an atom starts
+with a question mark, we must first convert that atom to a character string by
+using symbol-name:
+
+     (symbol-name propword)
+
+For example, (symbol-name '?what) returns "?what".  Then we get the first 
+character from that string by using the built-in char function.  Again, since
+LISP is 0-based, this is the 0th character:
+
+     (char "?what" 0)
+
+which gives us the single character "question mark."  Now, just like C, single
+characters are not the same creatures as character strings.  LISP uses a weird
+notation for single characters, which is #\ followed by the character.  So
+#\? is a single character but "?" is a character string.
+
+Now these two nested if statements should be comprehensible to you if you
+carefully dive into the parentheses and match them up with their "meanings"
+as expressed in the English above.
+
+  ;           (xif (not (equal #\? (char (symbol-name propword) 0)))
+  ;                then (xif (not (equal factword propword))
+  ;                      then (return-from match-x nil)
+  ;                     )
+  ;           )
+
+As mentioned before, the purpose of the dotimes loop is to try to exit from
+the function early, and exit with a nil saying that the proposition does not
+match the fact in some word.  But if they all match, then the form following
+the dotimes loop will be executed.
+
+In LISP, unless you specificially exit early from a function using return-from,
+the value of the last form will be the return value of the function.  Since we
+want it to return t, we simply put t as the last form in the match-x function:
+
+  ;---------------------------------------------------------------
+  ; (defun match-x (proposition fact)
+  ;           .....
+  ;      (dotimes (i (length proposition))
+  ;           .....
+  ;      )
+  ;      t
+  ; )
+  ;---------------------------------------------------------------
+
+and match-x will proudly announce that the proposition matches the fact.
+
+Now you should understand everything and be able to use it.

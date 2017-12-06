@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.10"/>
+    <PROJECT value="/home/hfs/LivrusVirtus/Kylix3/cpp/produto/Livrus"/>
+    <OBJFILES value="../objs//Livrus.o ../objs//Principal.o ../objs//Cadastros.o 
+      ../objs//Consultas.o ../objs//CadAssuntos.o ../objs//AlterarSenha.o 
+      ../objs//CadAutores.o ../objs//CadClientes.o ../objs//CadEditoras.o 
+      ../objs//CadEnderecos.o ../objs//CadIdiomas.o ../objs//CadLivros.o 
+      ../objs//CadPaises.o ../objs//CadProfissoes.o ../objs//ConAssuntos.o 
+      ../objs//ConAutores.o ../objs//ConClientes.o ../objs//ConEditoras.o 
+      ../objs//ConEnderecos.o ../objs//ConIdiomas.o ../objs//ConLivros.o 
+      ../objs//ConPaises.o ../objs//ConProfissoes.o ../objs//ConsultasSQL.o 
+      ../objs//ConVendas.o ../objs//Login.o ../objs//RotinasGlobais.o 
+      ../objs//Sobre.o ../objs//Splash.o ../objs//VenderLivros.o"/>
+    <RESFILES value="Livrus.res"/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) Principal.xfm Cadastros.xfm Consultas.xfm CadAssuntos.xfm 
+      AlterarSenha.xfm CadAutores.xfm CadClientes.xfm CadEditoras.xfm 
+      CadEnderecos.xfm CadIdiomas.xfm CadLivros.xfm CadPaises.xfm 
+      CadProfissoes.xfm ConAssuntos.xfm ConAutores.xfm ConClientes.xfm 
+      ConEditoras.xfm ConEnderecos.xfm ConIdiomas.xfm ConLivros.xfm 
+      ConPaises.xfm ConProfissoes.xfm ConVendas.xfm Login.xfm Sobre.xfm 
+      Splash.xfm VenderLivros.xfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="visualdbclx.a dataclx.a visualclx.a rtl.a"/>
+    <SPARELIBS value="rtl.a visualclx.a dataclx.a visualdbclx.a"/>
+    <PACKAGES value="rtl.bpi visualclx.bpi dataclx.bpi visualdbclx.bpi netclx.bpi 
+      netdataclx.bpi xmlrtl.bpi indy.bpi webdsnapclx.bpi websnapclx.bpi 
+      soaprtl.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)/lib/debug"/>
+    <RELEASELIBPATH value="$(BCB)/lib/release"/>
+    <LINKER value="ilink"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value=""/>
+    <MAINSOURCE value="Livrus.cpp"/>
+    <INCLUDEPATH value="../../../..:$(BCB)/include/stlport:$(BCB)/include:$(BCB)/include/vcl:/usr/include"/>
+    <LIBPATH value="../../../..:$(BCB)/lib/obj:$(BCB)/lib:/usr/lib:/lib:/usr/X11R6/lib:$(BCB)/bin"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <CFLAG1 value="-t -Od -H=$(HOME)/.borland/clx69.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v 
+      -vi- -c"/>
+    <PFLAGS value="-N2/home/hfs/LivrusVirtus/Kylix3/cpp/objs 
+      -N0/home/hfs/LivrusVirtus/Kylix3/cpp/objs -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-I/home/hfs/LivrusVirtus/Kylix3/cpp/objs -D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="borinit.o crt1.o $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="rtle.a $(LIBFILES) $(LIBRARIES) libborcrtl.a libborstl.a libborunwind.a 
+      libpthread.so libX11.so libc.so libm.so libdl.so "/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="Livrus.res" FORMNAME="" UNITNAME="Livrus.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Livrus.cpp" FORMNAME="" UNITNAME="Livrus" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Principal.cpp" FORMNAME="frmPrincipal" UNITNAME="Principal" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Cadastros.cpp" FORMNAME="frmCadastros" UNITNAME="Cadastros" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Consultas.cpp" FORMNAME="frmConsultas" UNITNAME="Consultas" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadAssuntos.cpp" FORMNAME="frmCadAssuntos" UNITNAME="CadAssuntos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="AlterarSenha.cpp" FORMNAME="frmAlterarSenha" UNITNAME="AlterarSenha" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadAutores.cpp" FORMNAME="frmCadAutores" UNITNAME="CadAutores" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadClientes.cpp" FORMNAME="frmCadClientes" UNITNAME="CadClientes" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadEditoras.cpp" FORMNAME="frmCadEditoras" UNITNAME="CadEditoras" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadEnderecos.cpp" FORMNAME="frmCadEnderecos" UNITNAME="CadEnderecos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadIdiomas.cpp" FORMNAME="frmCadIdiomas" UNITNAME="CadIdiomas" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadLivros.cpp" FORMNAME="frmCadLivros" UNITNAME="CadLivros" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadPaises.cpp" FORMNAME="frmCadPaises" UNITNAME="CadPaises" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadProfissoes.cpp" FORMNAME="frmCadProfissoes" UNITNAME="CadProfissoes" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConAssuntos.cpp" FORMNAME="frmConAssuntos" UNITNAME="ConAssuntos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConAutores.cpp" FORMNAME="frmConAutores" UNITNAME="ConAutores" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConClientes.cpp" FORMNAME="frmConClientes" UNITNAME="ConClientes" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConEditoras.cpp" FORMNAME="frmConEditoras" UNITNAME="ConEditoras" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConEnderecos.cpp" FORMNAME="frmConEnderecos" UNITNAME="ConEnderecos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConIdiomas.cpp" FORMNAME="frmConIdiomas" UNITNAME="ConIdiomas" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConLivros.cpp" FORMNAME="frmConLivros" UNITNAME="ConLivros" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConPaises.cpp" FORMNAME="frmConPaises" UNITNAME="ConPaises" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConProfissoes.cpp" FORMNAME="frmConProfissoes" UNITNAME="ConProfissoes" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConsultasSQL.cpp" FORMNAME="" UNITNAME="ConsultasSQL.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConVendas.cpp" FORMNAME="frmConVendas" UNITNAME="ConVendas" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Login.cpp" FORMNAME="frmLogin" UNITNAME="Login" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="RotinasGlobais.cpp" FORMNAME="" UNITNAME="RotinasGlobais.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Sobre.cpp" FORMNAME="frmSobre" UNITNAME="Sobre" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Splash.cpp" FORMNAME="frmSplash" UNITNAME="Splash" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="VenderLivros.cpp" FORMNAME="frmVenderLivros" UNITNAME="VenderLivros" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[HistoryLists\hlIncludePath]
+Count=1
+Item0=../../../..:$(BCB)/include/stlport:$(BCB)/include:$(BCB)/include/vcl:/usr/include
+
+[HistoryLists\hlLibraryPath]
+Count=1
+Item0=../../../..:$(BCB)/lib/obj:$(BCB)/lib:/usr/lib:/lib:/usr/X11R6/lib:$(BCB)/bin
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=/home/hfs/LivrusVirtus/Kylix3/cpp/fontes
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_DEBUG
+
+[HistoryLists\hlIntOutputDir]
+Count=2
+Item0=/home/hfs/LivrusVirtus/Kylix3/cpp/objs/
+Item1=/home/hfs/LivrusVirtus/Kylix3/cpp/objs
+
+[HistoryLists\hlFinalOutputDir]
+Count=2
+Item0=/home/hfs/LivrusVirtus/Kylix3/cpp/produto/
+Item1=/home/hfs/LivrusVirtus/Kylix3/cpp/produto
+
+[Debugging]
+DebugSourceDirs=/home/hfs/LivrusVirtus/Kylix3/cpp/fontes
+
+[Parameters]
+RunParams=
+Launcher=/usr/X11R6/bin/xterm -T KylixDebuggerOutput -e bash -i -c %debuggee%
+UseLauncher=0
+DebugCWD=
+HostApplication=
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+  </IDEOPTIONS>
+</PROJECT>

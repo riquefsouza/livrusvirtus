@@ -1,0 +1,624 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>frmCadEnderecos</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>frmCadEnderecos</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>531</width>
+            <height>180</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Cadastro de Endereços</string>
+    </property>
+    <property name="icon">
+        <pixmap>Livrus.bmp</pixmap>
+    </property>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labCodigo</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>5</y>
+                <width>55</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Código:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labEstado</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>283</x>
+                <y>95</y>
+                <width>55</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Estado:</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtCodigo</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>25</y>
+                <width>121</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="frameShape">
+            <enum>LineEditPanel</enum>
+        </property>
+        <property name="frameShadow">
+            <enum>Sunken</enum>
+        </property>
+        <property name="maxLength">
+            <number>10</number>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnPesquisar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>449</x>
+                <y>10</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Pesquisar</string>
+        </property>
+        <property name="accel">
+            <string>Alt+P</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnLimpar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>369</x>
+                <y>148</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Limpar</string>
+        </property>
+        <property name="accel">
+            <string>Alt+L</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnFechar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>449</x>
+                <y>148</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Fechar</string>
+        </property>
+        <property name="accel">
+            <string>Alt+F</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnNovo</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>152</x>
+                <y>22</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Novo</string>
+        </property>
+        <property name="accel">
+            <string>Alt+N</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnAnterior</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>449</x>
+                <y>42</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Anterior</string>
+        </property>
+        <property name="accel">
+            <string>Alt+A</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnProximo</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>449</x>
+                <y>74</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Próxi&amp;mo</string>
+        </property>
+        <property name="accel">
+            <string>Alt+M</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnExcluir</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>289</x>
+                <y>148</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Excluir</string>
+        </property>
+        <property name="accel">
+            <string>Alt+E</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnSalvar</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>209</x>
+                <y>148</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Salvar</string>
+        </property>
+        <property name="accel">
+            <string>Alt+S</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtLogradouro</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>72</y>
+                <width>265</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="frameShape">
+            <enum>LineEditPanel</enum>
+        </property>
+        <property name="frameShadow">
+            <enum>Sunken</enum>
+        </property>
+        <property name="maxLength">
+            <number>50</number>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtBairro</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>283</x>
+                <y>72</y>
+                <width>153</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>14</number>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labCEP</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>95</y>
+                <width>55</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>CEP:</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtCEP</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>115</y>
+                <width>65</width>
+                <height>20</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtCidade</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>82</x>
+                <y>115</y>
+                <width>193</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>30</number>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labCidade</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>82</x>
+                <y>95</y>
+                <width>55</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Cidade:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labLogradouro</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>51</y>
+                <width>60</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Logradouro:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labBairro</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>283</x>
+                <y>51</y>
+                <width>55</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Bairro:</string>
+        </property>
+    </widget>
+    <widget class="QComboBox">
+        <item>
+            <property name="text">
+                <string>Pernambuco</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Acre</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Alagoas</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Amapá</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Amazonas</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Bahia</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Brasília</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Ceará</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Distrito Federal</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Espírito Santo</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Goiás</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Mato Grosso</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Mato Grosso do Sul</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Minas Gerais</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Pará</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Paraíba</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Paraná</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Santa Catarina</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Rio Grande do Norte</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Rio Grande do Sul</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Rio de Janeiro</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Rondônia</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Roraima</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>São Paulo</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Sergipe</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Tocantins</string>
+            </property>
+        </item>
+        <property name="name">
+            <cstring>cmbEstado</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>283</x>
+                <y>115</y>
+                <width>153</width>
+                <height>20</height>
+            </rect>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>edtCodigo</sender>
+        <signal>lostFocus()</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>edtCodigo_lostFocus()</slot>
+    </connection>
+    <connection>
+        <sender>btnNovo</sender>
+        <signal>clicked()</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>btnNovo_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnPesquisar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>btnPesquisar_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnAnterior</sender>
+        <signal>clicked()</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>btnAnterior_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnProximo</sender>
+        <signal>clicked()</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>btnProximo_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnSalvar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>btnSalvar_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnExcluir</sender>
+        <signal>clicked()</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>btnExcluir_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnLimpar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>btnLimpar_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnFechar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>btnFechar_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>frmCadEnderecos</sender>
+        <signal>destroyed(QObject*)</signal>
+        <receiver>frmCadEnderecos</receiver>
+        <slot>frmCadEnderecos_destroyed(QObject*)</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>edtCodigo</tabstop>
+    <tabstop>btnNovo</tabstop>
+    <tabstop>edtLogradouro</tabstop>
+    <tabstop>edtBairro</tabstop>
+    <tabstop>edtCEP</tabstop>
+    <tabstop>edtCidade</tabstop>
+    <tabstop>cmbEstado</tabstop>
+    <tabstop>btnPesquisar</tabstop>
+    <tabstop>btnAnterior</tabstop>
+    <tabstop>btnProximo</tabstop>
+    <tabstop>btnSalvar</tabstop>
+    <tabstop>btnExcluir</tabstop>
+    <tabstop>btnLimpar</tabstop>
+    <tabstop>btnFechar</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in implementation">CadEnderecos.ui.h</include>
+</includes>
+<slots>
+    <slot>edtCodigo_lostFocus()</slot>
+    <slot>btnNovo_clicked()</slot>
+    <slot>btnPesquisar_clicked()</slot>
+    <slot>btnAnterior_clicked()</slot>
+    <slot>btnProximo_clicked()</slot>
+    <slot>btnSalvar_clicked()</slot>
+    <slot>btnExcluir_clicked()</slot>
+    <slot>btnLimpar_clicked()</slot>
+    <slot>btnFechar_clicked()</slot>
+    <slot>frmCadEnderecos_destroyed( QObject * )</slot>
+</slots>
+<pixmapinproject/>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

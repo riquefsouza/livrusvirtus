@@ -1,0 +1,128 @@
+;--------------------------------------------------------------------------
+;  This file implements a very simple system for encoding facts and for
+;  querying this database of facts.  One might start to build a natural
+;  language system in this fashion.
+;--------------------------------------------------------------------------
+
+;--------------------------------------------------------------------------
+;  The variable "facts" is bound to a list of propositions.  Each proposition
+;  is a list of words of the form N V N where N=noun and V=verb.  We will take
+;  it to mean that these are facts which happened in the past sometime.
+;--------------------------------------------------------------------------
+
+(setq facts '(
+              (cat eat food)
+              (dog bark)
+              (car hit tree)
+              (tire burst)
+              (dog bite man)
+              (dog bite cat)
+              (cat bite dog)
+              (man hit dog)
+              (man eat cow)
+              (cow is mad)
+              (man is sick)
+             )
+)
+
+;--------------------------------------------------------------------------
+;  This function takes a proposition and returns t if it is a true fact,
+;  nil otherwise.  It does this by sequentially searching the fact list that
+;  is the second parameter.  (This will most often be the variable "facts"
+;  shown above, but it could be another list of facts.)  The proposition 
+;  must *EXACTLY* match a fact in the fact list in order for this function
+;  to return t.
+;  
+;  Actually, if the proposition cannot be found in the list, then the function
+;  returns nil which you might take to mean the proposition isn't true.  This
+;  is only the case if you are working under the "closed world assumption"
+;  which means that the fact list you give contains all the true assumptions
+;  and that every other assumption is false.
+;
+;  EXAMPLES:     (is-true?  '(car hit tree) facts)   ==> t
+;                (is-true?  '(car hit dog) facts)    ==> nil
+;--------------------------------------------------------------------------
+
+(defun is-true? (proposition factlist)
+     (dolist (fact factlist)
+         (xif (equal fact proposition)
+          then (format t "~S is true" proposition)
+               (return-from is-true?)
+         )
+     )
+     (format t "~S is not known to be true" proposition)
+)
+
+;--------------------------------------------------------------------------
+;  The following function is like is-true? except it can answer more open-
+;  ended questions, sort of like in English, "What does a man eat?"  or
+;  "Who hit the dog?"
+;
+;  It does this by exactly matching all atoms which do not start with the
+;  question mark against identical words in facts from the fact list, and
+;  by allowing a question mark atom in the proposition to match any word
+;  in the fact.  What follows the question mark is insignificant, and can 
+;  even be omitted.  Any word may be matched with a question mark, and the
+;  "question" proposition may even be all question mark words, as shown below.
+; 
+;  This function relies upon match-x (given below) to do most of its work.
+;
+;  EXAMPLES:     (answer-question '(car hit ?what) facts)   ==> (car hit tree)
+;                (answer-question '(?who eat ?what) facts)
+;                      ==> (man eat cow)
+;                          (cat eat food)
+;                (answer-question '(man is ?) facts) ==> (man is sick)
+;                (answer-question '(?1 ?2) facts) ==> (dog bark)
+;                                                     (tire burst)
+;--------------------------------------------------------------------------
+
+(defun answer-question (proposition factlist)
+     (dolist (fact factlist)
+          (xif (match-x proposition fact)
+           then (print fact)
+          )
+     )
+)
+
+;--------------------------------------------------------------------------
+;  This function, match-x, does most of the work for answer-question.
+;  It takes the proposition, which has question mark words in it, and
+;  one fact from the fact list,and compares them word for word.  If the
+;  atom in the proposition starts with a question mark, then the corresponding
+;  word in the fact automatically matches.  (Words from the fact cannot start
+;  with question marks.)  If the atom in the proposition does *NOT* start with
+;  a question mark, then it must match exactly with the corresponding word
+;  from the fact.
+;
+;  EXAMPLES:     (match-x '(man eat ?what) '(man eat cow)) ==> t
+;                (match-x '(man love ?what) '(man eat cow)) ==> nil
+;--------------------------------------------------------------------------
+
+(defun match-x (proposition fact)
+     (xif (not (= (length proposition) (length fact)))
+      then (return-from match-x nil)
+     )
+     (dotimes (i (length proposition))
+          (setq propword (nth i proposition))
+          (setq factword (nth i fact))
+          (xif (not (equal #\? (char (symbol-name propword) 0)))
+               then (xif (not (equal factword propword))
+                     then (return-from match-x nil)
+                    )
+          )
+     )
+     t
+)
+
+;--------------------------------------------------------------------------
+;  The following function merely clumps together several typical queries
+;  that you might submit to this simple program.
+;--------------------------------------------------------------------------
+
+(defun demo ()
+     (is-true? '(man eat cow) facts)
+     (is-true? '(man love computer) facts)
+     (answer-question '(?1 ?2) facts)
+     (answer-question '(?who eat cow) facts)
+     (answer-question '(?who bite ?whom) facts)
+)

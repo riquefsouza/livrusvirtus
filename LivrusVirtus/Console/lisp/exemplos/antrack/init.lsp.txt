@@ -1,0 +1,117 @@
+;>>>>>>>>>>>>>>>>>>>>>>  init.lsp  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+;
+;  This file is read whenever ibuki common lisp starts.  It contains
+;  functions that I find indispensible when using Common LISP, such
+;  as "xif" which implements a much more readable version of "if".
+
+
+;------------------------------------------------------------
+;  MACRO:    xif then elsif ... else
+;
+;
+;  This macro allows us to write CONDs using a more natural
+;  (at least to us old C programmers) notation.  For example:
+;
+;         (xif (C1)
+;             then (F1_1) (F1_2) (F1_3) ...
+;         elsif (C2)
+;             then (F2_1) (F2_2) (F2_3) ...
+;         elsif (C3)
+;             then (F3_1) (F3_2) (F3_3) ...
+;         ...
+;         else
+;             (Fn_1) (Fn_2) (Fn_3) ...
+;         )
+;         
+;  turns into this before evaluation:
+;         
+;         (cond ((C1) (F1_1) (F1_2) (F1_3) ...)
+;               ((C2) (F2_1) (F2_2) (F2_3) ...)
+;               ((C3) (F3_1) (F3_2) (F3_3) ...)
+;               (t    (Fn_1) (Fn_2) (Fn_3) ...)
+;         )
+;         
+;         
+
+
+(defmacro xif (&rest form)
+
+    (let (wholecond caselimb)
+
+         (setq wholecond '(cond))
+
+         (setq caselimb (list (car form)))   ; initial (C1)
+
+         (cond ((not (equal (cadr form) 'then))
+                  (print "missing then keyword")
+                  (return-from xif nil)
+               )
+         )
+
+         (setq form (cddr form))   ;go past "then" keyword
+
+         (dolist (x form)
+              (cond ((equal x 'elsif)
+                         (setq wholecond (append wholecond
+                                          (list caselimb)))
+                         (setq caselimb nil)
+                    )
+                    ((equal x 'then)
+                         nil   ; ignore then keywords
+                    )
+                    ((equal x 'else)
+                         (setq wholecond (append wholecond
+                                          (list caselimb)))
+                         (setq caselimb '(t))
+                    )
+                    (t
+                         (setq caselimb (append caselimb (list x)))
+                    )
+              )
+         )
+         (append wholecond (list caselimb))
+    )
+)
+
+
+(defun showfunc (xxxname)
+      (pprint (symbol-function xxxname))
+)
+
+(defmacro append-m (main-form &rest forms)
+  (let (formlist)
+     (dolist (one-form forms)
+         (setq formlist
+               (append formlist
+                       (list (list 'setq main-form
+                                 (list 'append main-form (list 'list one-form))
+                       ))
+               )
+         )
+     )
+     (append (list 'let 'nil) formlist)
+  )
+)
+
+(defun notequal (x y)
+     (not (equal x y))
+)
+
+(defun nthelem (n list)
+     (nth (1- n) list)
+)
+
+(defun notnull (x)
+     x
+)
+
+(defun rchar (xxxword index)
+    (char xxxword (1- (- (length xxxword) index)))
+)
+
+(defun putnth (sequence n newitem)
+    (if (>= n (length sequence))
+        (error "putnth went beyond the end of the sequence")
+    )
+    (replace sequence (list newitem) :start1 n :end1 (1+ n))
+)

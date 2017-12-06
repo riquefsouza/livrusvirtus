@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="ulogin">admin</column>
+        <column name="senha">temp</column>
+    </row>
+</resultset>

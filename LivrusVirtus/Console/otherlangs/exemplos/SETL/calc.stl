@@ -1,0 +1,226 @@
+--
+--  CALCULATOR
+--  ==========
+--
+--  This is a simple five function calculator.  It handles valid SETL2
+--  expressions made up of +, -, *, /, and **.  The error handling is
+--  rather crude.
+--
+
+program Calculator;
+
+   var Operator_Info;
+
+   --
+   -- Operator information map.  The general form is
+   --
+   --     [operator, [in-stack-priority,in-coming-priority,handler]]
+   --
+
+   Operator_Info := {["(",[0,4,om]],
+                     [")",[om,om,om]],
+                     ["+",[1,1,Binop_Plus]],
+                     ["-",[1,1,Binop_Minus]],
+                     ["*",[2,2,Binop_Times]],
+                     ["/",[2,2,Binop_Divide]],
+                     ["**",[3,4,Binop_Power]]};
+
+   --
+   --  main loop -- get a line, find the result, print it
+   --
+
+   while true loop
+
+      get(Input_Line);
+
+      if eof() then 
+         exit;
+      end if;
+
+      print(Input_Line," = ",Solve(Input_Line));
+
+   end loop;
+
+   --
+   --  Solve
+   --  -----
+   --
+   --  This procedure accepts a character string containing an
+   --  expression, evaluates it, and returns the result.
+   --
+
+   procedure Solve(Input_Line);
+
+      Work_Line := Input_Line;
+      Operand_Stack := [];
+      Operator_Stack := [];
+
+      while #Work_Line > 0 loop
+
+         -- skip white space
+
+         span(Work_Line,""+/[char(i) : i in [0 .. abs(" ")]]);
+
+         -- pick off the next operand
+
+         if Work_Line(1) in {str(i) : i in [0 .. 9]}+{"{","[","\""} then
+
+            reads(Work_Line,Token);
+            Operand_Stack with:= Token;
+            continue;
+
+         end if;
+         
+         -- we didn't find an operand, we had better find an operator
+
+         Token := "";
+         
+         while #Work_Line > 0 and
+               Operator_Info(Token+Work_Line(1)) /= om loop
+            Token +:= throwaway fromb Work_Line;
+         end loop;
+
+         if Operator_Info(Token) = om then
+            print("Invalid operator => ",Token);
+            stop;
+         end if;
+       
+         --
+         --  when we find a closing parenthesis, we evaluate until we
+         --  find the corresponding opening parentheses
+         --
+
+         if Token = ")" then
+
+            while #Operator_Stack > 0 and
+                  Operator_Stack(#Operator_Stack) /= "(" loop
+
+               Operator frome Operator_Stack;
+
+               if #Operand_Stack < 2 then
+                  print("Invalid expression");  
+                  stop;
+               end if;
+
+               right frome Operand_Stack;
+               left frome Operand_Stack;
+
+               Operand_Stack with :=
+                  Operator_Info(Operator)(3)(left,right);
+
+            end loop;
+
+            if #Operator_Stack = 0 then
+               print("Invalid expression");  
+               stop;
+            end if;
+
+            Operator frome Operator_Stack;
+            continue;
+
+         end if;
+          
+         --
+         --  we evaluate while the stack priority of the top operator is
+         --  greater than the incoming operator
+         --
+
+         while #Operator_Stack > 0 loop
+
+            Operator frome Operator_Stack;
+
+            if Operator_Info(Operator)(1) >= Operator_Info(Token)(2) then
+
+               if #Operand_Stack < 2 then
+                  print("Invalid expression");  
+                  stop;
+               end if;
+
+               right frome Operand_Stack;
+               left frome Operand_Stack;
+
+               Operand_Stack with :=
+                  Operator_Info(Operator)(3)(left,right);
+
+            else
+
+               Operator_Stack with:= Operator;
+               exit;
+
+            end if;
+
+         end loop;
+
+         Operator_Stack with:= Token;
+
+      end loop;
+
+      --
+      --  we've exhausted the input string, evaluate any remaining
+      --  operators
+      --
+
+      while #Operator_Stack > 0 loop
+
+         Operator frome Operator_Stack;
+
+         if Operator = "(" then
+            print("Invalid expression");  
+            stop;
+         end if;
+
+         if #Operand_Stack < 2 then
+            print("Invalid expression");  
+            stop;
+         end if;
+
+         right frome Operand_Stack;
+         left frome Operand_Stack;
+
+         Operand_Stack with :=
+            Operator_Info(Operator)(3)(left,right);
+
+      end loop;
+
+      if #Operand_Stack /= 1 then
+         print("Invalid expression");  
+         stop;
+      end if;
+
+      --
+      --  the result is on the top of the operand stack
+      --
+
+      return Operand_Stack(1);
+
+   end Solve;
+   
+   --
+   --  Operator Procedures
+   --  -------------------
+   --
+   --  The following simple procedures just implement the primitive
+   --  functions of the calculator.
+   --
+
+   procedure Binop_Plus(left,right);
+      return left + right;
+   end Binop_Plus;
+
+   procedure Binop_Minus(left,right);
+      return left - right;
+   end Binop_Minus;
+
+   procedure Binop_Times(left,right);
+      return left * right;
+   end Binop_Times;
+
+   procedure Binop_Divide(left,right);
+      return left / right;
+   end Binop_Divide;
+
+   procedure Binop_Power(left,right);
+      return left ** right;
+   end Binop_Power;
+
+end Calculator;

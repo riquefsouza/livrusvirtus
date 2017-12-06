@@ -1,0 +1,856 @@
+<?xml version="1.0"?>
+<nodeSet>
+  <view uin="601hq5n0b9ix3kg">
+    <property name="$name" value="default" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="source:Livrus:VenderLivros">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros">
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.slQtdEstoque" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.slISBNs" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.slPrecos" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.nPrecoTotal" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.labDtHrVenda" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.edtDtHrVenda" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.btnPCliente" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.labISBN" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.edtISBN" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.labLivro" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.edtLivro" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.btnAdLivros" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.btnPLivro" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.labLivros" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.lstLivros" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.labPrecoTotal" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.edtPrecoTotal" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.btnVender" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.FazLayout" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.LimpaDados" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.ValidaDados" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.SalvaLista" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnClose" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnBtnVender" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnEdtCodigo_Killfocus" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnBtnPCliente" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnEdtISBN_Killfocus" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnBtnPLivro" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnBtnAdLivros" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.OnLstLivros_Dblclk" />
+        <reference referencedUin="source:Livrus:VenderLivros.TfrmVenderLivros.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:CadAutores">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores">
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.ValidaDados" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.OnClose" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.OnBtnNovo" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.OnBtnAnterior" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.OnBtnProximo" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.OnBtnSalvar" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.OnBtnExcluir" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:CadAutores.TfrmCadAutores.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:AlterarSenha">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha">
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.labLogin" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.edtLogin" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.labSenhaAtual" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.edtSenhaAtual" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.labNovaSenha" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.edtNovaSenha" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.labConfirmarSenha" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.edtConfirmarSenha" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.btnSalvar" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.btnLimpar" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.btnFechar" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.FazLayout" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.Create" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.OnClose" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.OnBtnSalvarClick" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.OnBtnLimparClick" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.OnBtnFecharClick" />
+        <reference referencedUin="source:Livrus:AlterarSenha.TfrmAlterarSenha.ValidaDados" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:CadClientes">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes">
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labEmail" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtEmail" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labIdentidade" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtIdentidade" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.rbSexo" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labTelefone" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtTelefone" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labDtNasc" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtDtNasc" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.sbEndereco" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtCodEndereco" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.btnPEndereco" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labLogradouro" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtLogradouro" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labBairro" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtBairro" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labCEP" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtCEP" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labCidade" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtCidade" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labEstado" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtEstado" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labPais" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtCodPais" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtPais" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.btnPPais" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.labProfissao" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtCodProfissao" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.edtProfissao" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.btnPProfissao" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.FazLayout" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.ValidaDados" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnClose" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnNovo" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnAnterior" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnProximo" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnSalvar" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnExcluir" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnEdtCodigo_Killfocus" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnEdtDtNasc_Killfocus" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnEdtCodEndereco_Killfocus" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnEdtCodPais_Killfocus" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnEdtCodProfissao_Killfocus" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnPEndereco" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnPPais" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.OnBtnPProfissao" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.InformaLimpaDados" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.HabilitaDados" />
+        <reference referencedUin="source:Livrus:CadClientes.TfrmCadClientes.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConEditoras">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConEditoras.TfrmConEditoras">
+        <reference referencedUin="source:Livrus:ConEditoras.TfrmConEditoras.OnClose" />
+        <reference referencedUin="source:Livrus:ConEditoras.TfrmConEditoras.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConEditoras.TfrmConEditoras.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConEditoras.TfrmConEditoras.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConEditoras.TfrmConEditoras.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConEditoras.TfrmConEditoras.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConEditoras.TfrmConEditoras.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:CadEditoras">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras">
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.ValidaDados" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.OnClose" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.OnBtnNovo" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.OnBtnAnterior" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.OnBtnProximo" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.OnBtnSalvar" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.OnBtnExcluir" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:CadEditoras.TfrmCadEditoras.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:Splash">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:Splash.TfrmSplash">
+        <reference referencedUin="source:Livrus:Splash.TfrmSplash.Create" />
+        <reference referencedUin="source:Livrus:Splash.TfrmSplash.OnClose" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConIdiomas">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConIdiomas.TfrmConIdiomas">
+        <reference referencedUin="source:Livrus:ConIdiomas.TfrmConIdiomas.OnClose" />
+        <reference referencedUin="source:Livrus:ConIdiomas.TfrmConIdiomas.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConIdiomas.TfrmConIdiomas.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConIdiomas.TfrmConIdiomas.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConIdiomas.TfrmConIdiomas.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConIdiomas.TfrmConIdiomas.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConIdiomas.TfrmConIdiomas.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:Filha">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:Filha.TfrmFilha">
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.nLocalTelaAtiva" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fCadAssuntos" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fCadAutores" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fCadEditoras" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fCadEnderecos" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fCadIdiomas" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fCadPaises" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fCadProfissoes" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fCadClientes" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fCadLivros" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fVenderLivros" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fConVendas" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.fAlterarSenha" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.s_title" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.atitle" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.Create" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.OnActivate" />
+        <reference referencedUin="source:Livrus:Filha.TfrmFilha.OnClose" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConVendas">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas">
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.labDtHrVenda" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.edtDtHrVenda" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.labCPF" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.edtCPF" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.labCliente" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.edtCliente" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.btnPCliente" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.labISBN" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.edtISBN" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.labLivro" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.edtLivro" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.btnPLivro" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.labRegistro" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.gridVendas" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.labPrecoTotal" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.edtPrecoTotal" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.btnPesquisar" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.btnLimpar" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.btnFechar" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.FazLayout" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.ConsVenda" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnClose" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnEdtCPF_Killfocus" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnBtnPCliente" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnEdtISBN_Killfocus" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnBtnPLivro" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.setLabRegistros" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.OnEdtDtHrVenda_Killfocus" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.AtribuiLabRegistro" />
+        <reference referencedUin="source:Livrus:ConVendas.TfrmConVendas.Create" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:TextValidatorCtrl">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:TextValidatorCtrl.TTextValidatorCtrl">
+        <reference referencedUin="source:Livrus:TextValidatorCtrl.TTextValidatorCtrl.nLocalFiltro" />
+        <reference referencedUin="source:Livrus:TextValidatorCtrl.TTextValidatorCtrl.Create" />
+        <reference referencedUin="source:Livrus:TextValidatorCtrl.TTextValidatorCtrl.OnChar" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:RotinasGlobais">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais">
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.sUsuarioSenha" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.sUsuarioLogin" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.sBarraLogin" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.sQtdEstoque" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.sPreco" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.sCodigoSelecionado" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.gConexao" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.Create" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.ValidaFloat" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.ValidaCampo" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.VirgulaParaPonto" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.modulo11" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.ValidaCPF" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.ValidaISBN" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.validaDataHora" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.retDataHoraStr" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.ConverteDataHoraStr" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.ConectaBanco" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.DisconectaBanco" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.AtualizaDados" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.ConsultaDados" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.ConsultaDadosLista" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.ConsultaCampoDesc" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.PesquisaItemLista" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.AdicionaItemLista" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.RemoveItemLista" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.AdicionaValoresLista" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.AdicionaColunasGrid" />
+        <reference referencedUin="source:Livrus:RotinasGlobais.TRotinasGlobais.AdicionaLinhasGrid" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:CadAssuntos">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos">
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.ValidaDados" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.OnClose" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.OnBtnNovo" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.OnBtnAnterior" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.OnBtnProximo" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.OnBtnSalvar" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.OnBtnExcluir" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:CadAssuntos.TfrmCadAssuntos.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConClientes">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConClientes.TfrmConClientes">
+        <reference referencedUin="source:Livrus:ConClientes.TfrmConClientes.OnClose" />
+        <reference referencedUin="source:Livrus:ConClientes.TfrmConClientes.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConClientes.TfrmConClientes.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConClientes.TfrmConClientes.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConClientes.TfrmConClientes.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConClientes.TfrmConClientes.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConClientes.TfrmConClientes.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:CadIdiomas">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas">
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.ValidaDados" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.OnClose" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.OnBtnNovo" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.OnBtnAnterior" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.OnBtnProximo" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.OnBtnSalvar" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.OnBtnExcluir" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:CadIdiomas.TfrmCadIdiomas.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConAssuntos">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConAssuntos.TfrmConAssuntos">
+        <reference referencedUin="source:Livrus:ConAssuntos.TfrmConAssuntos.OnClose" />
+        <reference referencedUin="source:Livrus:ConAssuntos.TfrmConAssuntos.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConAssuntos.TfrmConAssuntos.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConAssuntos.TfrmConAssuntos.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConAssuntos.TfrmConAssuntos.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConAssuntos.TfrmConAssuntos.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConAssuntos.TfrmConAssuntos.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConAutores">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConAutores.TfrmConAutores">
+        <reference referencedUin="source:Livrus:ConAutores.TfrmConAutores.OnClose" />
+        <reference referencedUin="source:Livrus:ConAutores.TfrmConAutores.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConAutores.TfrmConAutores.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConAutores.TfrmConAutores.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConAutores.TfrmConAutores.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConAutores.TfrmConAutores.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConAutores.TfrmConAutores.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConPaises">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConPaises.TfrmConPaises">
+        <reference referencedUin="source:Livrus:ConPaises.TfrmConPaises.OnClose" />
+        <reference referencedUin="source:Livrus:ConPaises.TfrmConPaises.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConPaises.TfrmConPaises.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConPaises.TfrmConPaises.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConPaises.TfrmConPaises.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConPaises.TfrmConPaises.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConPaises.TfrmConPaises.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConEnderecos">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConEnderecos.TfrmConEnderecos">
+        <reference referencedUin="source:Livrus:ConEnderecos.TfrmConEnderecos.OnClose" />
+        <reference referencedUin="source:Livrus:ConEnderecos.TfrmConEnderecos.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConEnderecos.TfrmConEnderecos.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConEnderecos.TfrmConEnderecos.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConEnderecos.TfrmConEnderecos.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConEnderecos.TfrmConEnderecos.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConEnderecos.TfrmConEnderecos.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:Resource">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:Resource.TResource">
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMALTERARSENHA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCONVENDAS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMVENDERLIVROS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCADLIVROS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCADCLIENTES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCADPROFISSOES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCADPAISES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCADIDIOMAS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCADENDERECOS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCADEDITORAS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCADAUTORES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.FRMCADASSUNTOS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_OP_SAIR" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_OP_SOBRE" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_OP_ALTERARSENHA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_VEN_VENDASREALIZADAS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_VEN_VENDERLIVROS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CON_LIVROS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CON_CLIENTES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CON_PROFISSOES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CON_PAISES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CON_IDIOMAS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CON_ENDERECOS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CON_EDITORAS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CON_AUTORES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CON_ASSUNTOS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CAD_LIVROS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CAD_CLIENTES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CAD_PROFISSOES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CAD_PAISES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CAD_IDIOMAS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CAD_ENDERECOS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CAD_EDITORAS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CAD_AUTORES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.MNU_CAD_ASSUNTOS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.TLB_VENDERLIVROS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.TLB_CADLIVROS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.TLB_CADCLIENTES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CIDADENINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CEPNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_BAIRRONINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_VENNENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_VENRESUC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_LIVNEST" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_LIVVENNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NUMINV" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_ISBNINV" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_TITNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CPFINV" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_SEXNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CPFNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_TO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_SE" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_SP" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_RR" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_RO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_RJ" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_RS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_RN" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_SC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_PR" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_PB" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_PA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_MG" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_MS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_MT" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_GO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_ES" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_DF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CE" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_BR" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_BA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_AM" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_AP" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_AL" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_AC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_PE" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_LIVNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_LIVNENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CLININF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CLINENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_PROFNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_PROFNENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_PAISNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_PAISNENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_IDININF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_IDINENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_ENDNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_ENDNENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_EDTNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_EDTNENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_AUTNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_AUTNENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_ASSNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_ASSNENC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CODNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_ISBNNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_LOGSENINC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_USUARIO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_DTHRINV" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NSENNCCON" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NSENNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_SENNCSU" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_SENALTSUC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_DATINV" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NCEXECSQL" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NCPREPSQL" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NCCRIATELA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NREGTELA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_TELNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CERTEXCL" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NCCRIADLG" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_EMAILNINF" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_SAIRSIS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_OPSAIR" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_OPSOBRE" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_ALTSENHA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONVENLIVRO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_VENLIVRO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONLIVRO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONCLIENTE" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONPROFISS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONPAIS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONIDIOMA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONENDERECO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONEDITORA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONAUTOR" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CONASSUNTO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CADLIVRO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CADCLIENTE" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CADPROFISS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CADPAIS" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CADIDIOMA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CADENDERECO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CADEDITORA" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CADAUTOR" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_CADASSUNTO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NALOCODBC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NCONBANCO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_SEMJAN" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_NREGJAN" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_APPEXEC" />
+        <reference referencedUin="source:Livrus:Resource.TResource.STR_TITULO" />
+        <reference referencedUin="source:Livrus:Resource.TResource.Create" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:CadLivros">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros">
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.slAutores" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.slAssuntos" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.slIdiomas" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labEdicao" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtEdicao" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labAnoPubli" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtAnoPubli" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labEditora" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtCodEditora" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtEditora" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.btnPEditora" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labVolume" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtVolume" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labIdioma" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.cmbIdioma" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labNPaginas" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtNPaginas" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labAssunto" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtCodAssunto" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtAssunto" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.btnAdAssuntos" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.btnPAssunto" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.lstAssuntos" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labPreco" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtPreco" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labQtdEstoque" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtQtdEstoque" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.labAutor" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtCodAutor" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.edtAutor" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.btnAdAutores" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.btnPAutor" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.lstAutores" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.vsIdiomas" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.FazLayout" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.ValidaDados" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnClose" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnNovo" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnAnterior" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnProximo" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnSalvar" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnExcluir" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnEdtCodigo_Killfocus" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.AdicionaCombo" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.SalvaLista" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnEdtCodEditora_Killfocus" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnPEditora" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnEdtPreco_Killfocus" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnEdtCodAssunto_Killfocus" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnPAssunto" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnEdtCodAutor_Killfocus" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnPAutor" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnAdAssuntos" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnLstAssuntos_Dblclk" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnBtnAdAutores" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.OnLstAutores_Dblclk" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.InformaLimpaDados" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.HabilitaDados" />
+        <reference referencedUin="source:Livrus:CadLivros.TfrmCadLivros.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:Sobre">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:Sobre.TfrmSobre">
+        <reference referencedUin="source:Livrus:Sobre.TfrmSobre.labBmp" />
+        <reference referencedUin="source:Livrus:Sobre.TfrmSobre.labVersao" />
+        <reference referencedUin="source:Livrus:Sobre.TfrmSobre.labDireitos" />
+        <reference referencedUin="source:Livrus:Sobre.TfrmSobre.labSistema" />
+        <reference referencedUin="source:Livrus:Sobre.TfrmSobre.btnOk" />
+        <reference referencedUin="source:Livrus:Sobre.TfrmSobre.FazLayout" />
+        <reference referencedUin="source:Livrus:Sobre.TfrmSobre.Create" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:Login">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:Login.TfrmLogin">
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.bmpLogin" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.labLogin" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.edtLogin" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.labSenha" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.edtSenha" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.btnLogin" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.btnCancelar" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.bFechar" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.FazLayout" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.Create" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.OnClose" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.OnBtnLoginClick" />
+        <reference referencedUin="source:Livrus:Login.TfrmLogin.OnBtnCancelarClick" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:CadEnderecos">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos">
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.labBairro" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.edtBairro" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.edtCEP" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.labCEP" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.edtCidade" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.labCidade" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.labEstado" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.cmbEstado" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.vsEstados" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.FazLayout" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.ValidaDados" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.OnClose" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.OnBtnNovo" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.OnBtnAnterior" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.OnBtnProximo" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.OnBtnSalvar" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.OnBtnExcluir" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.AdicionaCombo" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.InformaLimpaDados" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.HabilitaDados" />
+        <reference referencedUin="source:Livrus:CadEnderecos.TfrmCadEnderecos.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConsultasSQL">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL">
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Assunto" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Autor" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Editora" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Idioma" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Usuario" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Livro" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Cliente" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Endereco" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Pais" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Profissao" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.LivroAss" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.LivroAut" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Venda" />
+        <reference referencedUin="source:Livrus:ConsultasSQL.TConsultasSQL.Create" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:Consultas">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:Consultas.TfrmConsultas">
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.sSelecionado" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.grid_sizer_2" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.FazLayout" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.AtribuiLabRegistro" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.Campos" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.Registros" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.labDescricao" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.edtDescricao" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.btnPesquisar" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.labRegistro" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.gridConsulta" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.btnFechar" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.btnLimpar" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.Fecha" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.LimparDados" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.PesquisarDados" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.setLabRegistros" />
+        <reference referencedUin="source:Livrus:Consultas.TfrmConsultas.Create" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConProfissoes">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConProfissoes.TfrmConProfissoes">
+        <reference referencedUin="source:Livrus:ConProfissoes.TfrmConProfissoes.OnClose" />
+        <reference referencedUin="source:Livrus:ConProfissoes.TfrmConProfissoes.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConProfissoes.TfrmConProfissoes.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConProfissoes.TfrmConProfissoes.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConProfissoes.TfrmConProfissoes.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConProfissoes.TfrmConProfissoes.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConProfissoes.TfrmConProfissoes.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:CadPaises">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises">
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.ValidaDados" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.OnClose" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.OnBtnNovo" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.OnBtnAnterior" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.OnBtnProximo" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.OnBtnSalvar" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.OnBtnExcluir" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:CadPaises.TfrmCadPaises.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:ConLivros">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros">
+        <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.OnClose" />
+        <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.OnGridSelectCell" />
+        <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.OnGridLabelLeftClick" />
+        <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:Principal">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:Principal.TfrmPrincipal">
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.mnuCadastros" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.mnuPesquisas" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.mnuVendas" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.mnuOpcoes" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.barraStatus" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.nLarguras" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.FazLayout" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnClose" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuCadAssuntos" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuCadAutores" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuCadEditoras" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuCadEnderecos" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuCadIdiomas" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuCadPaises" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuCadProfissoes" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuCadClientes" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuCadLivros" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuConAssuntos" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuConAutores" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuConEditoras" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuConEnderecos" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuConIdiomas" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuConPaises" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuConProfissoes" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuConClientes" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuConLivros" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuVenderLivros" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuVendasRealizadas" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuAlterarSenha" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.OnMnuSobre" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.barraMenu" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.barraFerra" />
+        <reference referencedUin="source:Livrus:Principal.TfrmPrincipal.Create" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:CadProfissoes">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes">
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.ValidaDados" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.OnClose" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.OnBtnNovo" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.OnBtnPesquisar" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.OnBtnAnterior" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.OnBtnProximo" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.OnBtnSalvar" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.OnBtnExcluir" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.OnBtnLimpar" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.OnBtnFechar" />
+        <reference referencedUin="source:Livrus:CadProfissoes.TfrmCadProfissoes.Create" />
+        <reference referencedUin="source:Livrus:I$TfrmCadastros" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:LivrusApp">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:LivrusApp.TLivrusApp">
+        <reference referencedUin="source:Livrus:LivrusApp.TLivrusApp.Create" />
+        <reference referencedUin="source:Livrus:LivrusApp.TLivrusApp.OnInit" />
+      </reference>
+    </reference>
+    <reference referencedUin="source:Livrus:Cadastros">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros">
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.FazLayout" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.Campos" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.Registros" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.nLinhaRegistro" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.labCodigo" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.edtCodigo" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.labDescricao" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.edtDescricao" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnNovo" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnPesquisar" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnAnterior" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnProximo" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnFechar" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnLimpar" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnExcluir" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnSalvar" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.Arquiva" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.IniciaBotoes" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.InformaLimpaDados" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.HabilitaDados" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnNovoClick" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.NovoDado" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.btnLimparClick" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.ExcluirDados" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.PesquisarDados" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.registroAnterior" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.registroProximo" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.SalvarDados" />
+        <reference referencedUin="source:Livrus:Cadastros.TfrmCadastros.Create" />
+      </reference>
+    </reference>
+  </view>
+</nodeSet>

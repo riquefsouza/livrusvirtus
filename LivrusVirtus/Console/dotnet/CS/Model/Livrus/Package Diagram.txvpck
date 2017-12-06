@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<nodeSet>
+  <view uin="g21g58muljci06p">
+    <property name="$name" value="Package Diagram" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="source:Livrus.Livrus">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus.CRLF">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_CRLF">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_ABRE">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_CRIA">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.QTD_MAX_LINHA">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_MAX_STR">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_MAX_REG">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_ARQERRO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_ERRO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_OPCAO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_PRESS">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_REGINC">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_REGNINC">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_REGALT">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_REGNALT">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_REGEXC">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_REGNEXC">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_REGEXST">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_NUMINV">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_DATAINV">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_DTHRINV">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_ISBNINV">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_CPFINV">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_SENCONFERE">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_SENCONFIRM">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_LOGINENCON">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.MSG_SEMESTOQUE">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_ASSUNTO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_AUTOR">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_EDITORA">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_IDIOMA">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_USUARIO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_PAIS">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_PROFISSAO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_LIVRO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_LIVASS">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_LIVAUT">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_CLIENTE">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_ENDERECO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.ARQ_VENDA">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_ASSUNTO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_AUTOR">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_EDITORA">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_IDIOMA">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_USUARIO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_PAIS">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_PROFISSAO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_LIVRO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_LIVASS">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_LIVAUT">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_CLIENTE">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_ENDERECO">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.TAM_VENDA">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.bopcao">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.opmenu">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.g_nTamChave">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.g_nPosChave">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.g_nPreco">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.g_SalvarInclusao">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tAssunto">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tAutor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tEditora">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tIdioma">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tEndereco">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tPais">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tProfissao">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tLivro">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tLivroAss">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tLivroAut">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tCliente">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tUsuario">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tVenda">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfVenda">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfUsuario">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfCliente">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfLivroAut">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfLivroAss">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfLivro">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfProfissao">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfPais">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfEndereco">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfIdioma">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfEditora">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfAutor">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.tfAssunto">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.copy">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.repete">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.esp">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.strRelativa">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.modulo11">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.ValidaCPF">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.ValidaISBN">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.digitaSenha">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.validaNumero">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.validaDataHora">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.retDataHora">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.tamArq">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+      <reference referencedUin="source:Livrus.Livrus.Main">
+        <property name="$shortcutReference" value="true" />
+      </reference>
+    </reference>
+  </view>
+</nodeSet>

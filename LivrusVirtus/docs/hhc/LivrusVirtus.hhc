@@ -1,0 +1,1223 @@
+<HTML><HEAD>
+	<META NAME="AUTHOR" CONTENT="">
+	<META NAME="GENERATOR" CONTENT="Henrique">
+<!-- Sitemap 1.0 -->
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+<UL>
+	<LI><OBJECT TYPE="text/sitemap">
+		<PARAM NAME="Name" VALUE="Livrus Virtus">
+	</OBJECT>
+	<UL>
+		<LI><OBJECT TYPE="text/sitemap">
+			<PARAM NAME="Name" VALUE="Sobre o Autor">
+			<PARAM NAME="Local" VALUE="html/vazio.htm">
+		</OBJECT>
+		<LI><OBJECT TYPE="text/sitemap">
+			<PARAM NAME="Name" VALUE="A História do Projeto">
+			<PARAM NAME="Local" VALUE="html/vazio.htm">
+		</OBJECT>
+		<LI><OBJECT TYPE="text/sitemap">
+			<PARAM NAME="Name" VALUE="Diagramas">
+		</OBJECT>
+		<UL>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="MER (Modelo Entidade-Relacionamento)">
+				<PARAM NAME="Local" VALUE="html/relacionamento.bmp">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="UML (Unified Modeling Language)">
+			</OBJECT>
+			<UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Estudo de casos">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Diagrama de classes">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+			</UL>
+		</UL>
+		<LI><OBJECT TYPE="text/sitemap">
+			<PARAM NAME="Name" VALUE="Scripts SQL (Structured Query Language)">
+		</OBJECT>
+		<UL>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Inclusão de dados">
+				<PARAM NAME="Local" VALUE="html/scripts_inclusao_dados.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Access">
+				<PARAM NAME="Local" VALUE="html/vazio.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Dbase 5.0">
+				<PARAM NAME="Local" VALUE="html/vazio.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="DbMaker">
+				<PARAM NAME="Local" VALUE="html/vazio.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Firebird">
+				<PARAM NAME="Local" VALUE="html/scripts_firebird.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="FoxPro 6.0">
+				<PARAM NAME="Local" VALUE="html/vazio.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Interbase">
+				<PARAM NAME="Local" VALUE="html/scripts_interbase.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="JDataStore">
+				<PARAM NAME="Local" VALUE="html/vazio.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="MySql">
+				<PARAM NAME="Local" VALUE="html/scripts_mysql.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Oracle">
+				<PARAM NAME="Local" VALUE="html/vazio.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Paradox 5.0">
+				<PARAM NAME="Local" VALUE="html/vazio.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Paradox 7.0">
+				<PARAM NAME="Local" VALUE="html/vazio.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="PostgreSql">
+				<PARAM NAME="Local" VALUE="html/scripts_postgresql.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Sqlbase">
+				<PARAM NAME="Local" VALUE="html/scripts_sqlbase.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Sql Server">
+				<PARAM NAME="Local" VALUE="html/scripts_sqlserver.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Sybase">
+				<PARAM NAME="Local" VALUE="html/scripts_sybase.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Sybase Stored Procedures">
+				<PARAM NAME="Local" VALUE="html/scripts_sybase_procedures.htm">
+			</OBJECT>
+		</UL>
+		<LI><OBJECT TYPE="text/sitemap">
+			<PARAM NAME="Name" VALUE="Arquivos com Dados">
+		</OBJECT>
+		<UL>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="dat">
+				<PARAM NAME="Local" VALUE="html/vazio.htm">
+			</OBJECT>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="xml">
+			</OBJECT>
+			<UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Assunto">
+					<PARAM NAME="Local" VALUE="html/xml_assunto.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Autor">
+					<PARAM NAME="Local" VALUE="html/xml_autor.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Cliente">
+					<PARAM NAME="Local" VALUE="html/xml_cliente.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Editora">
+					<PARAM NAME="Local" VALUE="html/xml_editora.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Endereço">
+					<PARAM NAME="Local" VALUE="html/xml_endereco.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Idioma">
+					<PARAM NAME="Local" VALUE="html/xml_idioma.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Livro">
+					<PARAM NAME="Local" VALUE="html/xml_livro.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="LivroAss">
+					<PARAM NAME="Local" VALUE="html/xml_livroass.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="LivroAut">
+					<PARAM NAME="Local" VALUE="html/xml_livroaut.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="País">
+					<PARAM NAME="Local" VALUE="html/xml_pais.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Profissão">
+					<PARAM NAME="Local" VALUE="html/xml_profissao.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Usuário">
+					<PARAM NAME="Local" VALUE="html/xml_usuario.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Venda">
+					<PARAM NAME="Local" VALUE="html/xml_venda.htm">
+				</OBJECT>
+			</UL>
+		</UL>
+		<LI><OBJECT TYPE="text/sitemap">
+			<PARAM NAME="Name" VALUE="Visão por Ambiente">
+		</OBJECT>
+		<UL>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Console">
+			</OBJECT>
+			<UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Visão por Tipo de Linguagem">
+				</OBJECT>
+				<UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Mnemônica">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="Assembler">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Imperativas">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="C">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Orientadas a Objeto">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="C++">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Funcionais">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="Lisp">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Lógicas">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="Prolog">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+				</UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Ada">
+					<PARAM NAME="Local" VALUE="html/console_ada.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Algol 60">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Assembler">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Awk">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="C">
+                                        <PARAM NAME="Local" VALUE="html/console_c.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Clipper 5">
+					<PARAM NAME="Local" VALUE="html/console_clipper.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Clips">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Cobol">
+					<PARAM NAME="Local" VALUE="html/console_cobol.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="C++">
+				</OBJECT>
+				<UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Cabeçalho">
+						<PARAM NAME="Local" VALUE="html/console_cpp_header.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Corpo">
+						<PARAM NAME="Local" VALUE="html/console_cpp.htm">
+					</OBJECT>
+				</UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Dot Net">
+				</OBJECT>
+				<UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="C#">
+						<PARAM NAME="Local" VALUE="html/console_csharp.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Delphi8.NET">
+						<PARAM NAME="Local" VALUE="html/console_objpascalnet.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="JScript.NET">
+						<PARAM NAME="Local" VALUE="html/console_jscriptnet.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="VB.NET">
+						<PARAM NAME="Local" VALUE="html/console_vbnet.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="VCPP.NET">
+					</OBJECT>
+        				<UL>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Cabeçalho">
+        						<PARAM NAME="Local" VALUE="html/console_vcppnet_header.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Corpo">
+        						<PARAM NAME="Local" VALUE="html/console_vcppnet.htm">
+        					</OBJECT>
+        				</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="VJ#.NET">
+						<PARAM NAME="Local" VALUE="html/console_vjsharp.htm">
+					</OBJECT>
+				</UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Eiffel">
+				</OBJECT>
+				<UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe livrus">
+						<PARAM NAME="Local" VALUE="html/console_eiffel.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de assunto">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regassunto.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de autor">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regautor.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de cliente">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regcliente.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de editora">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regeditora.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de endereço">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regendereco.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de idioma">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regidioma.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de livro">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_reglivro.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro dos assuntos dos livros">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_reglivroass.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro dos autores dos livros">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_reglivroaut.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de país">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regpais.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de profissão">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regprofissao.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de usuário">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regusuario.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Classe de registro de venda">
+						<PARAM NAME="Local" VALUE="html/console_eiffel_regvenda.htm">
+					</OBJECT>
+				</UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Extended Pascal">
+					<PARAM NAME="Local" VALUE="html/console_epascal.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Erlang">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Euphoria">
+					<PARAM NAME="Local" VALUE="html/console_euphoria.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Forth">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Fortran 77">
+				</OBJECT>
+				<UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Cabeçalho">
+						<PARAM NAME="Local" VALUE="html/console_fortran77_header.htm">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Corpo">
+						<PARAM NAME="Local" VALUE="html/console_fortran77.htm">
+					</OBJECT>
+				</UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Fortran 90">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="FP">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Haskell">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Icon">
+					<PARAM NAME="Local" VALUE="html/console_icon.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Java">
+					<PARAM NAME="Local" VALUE="html/console_java.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Lisp">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Lua 5">
+					<PARAM NAME="Local" VALUE="html/console_lua.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="ML">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Modula2">
+				</OBJECT>
+				<UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="FTS">
+					</OBJECT>
+        				<UL>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Definição de Rotinas">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_def_fts_rotinas.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Implementação de Rotinas">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_imp_fts_rotinas.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Definição de Arquivos">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_def_fts_arquivos.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Implementação de Arquivos">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_imp_fts_arquivos.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Definição de Sistema">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_def_fts_sistema.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Implementação de Sistema">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_imp_fts_sistema.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Definição de Telas">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_def_fts_telas.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Implementação de Telas">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_imp_fts_telas.htm">
+        					</OBJECT>
+        				</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="GPM">
+					</OBJECT>
+        				<UL>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Definição de Rotinas">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_def_gpm_rotinas.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Implementação de Rotinas">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_imp_gpm_rotinas.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Definição de Arquivos">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_def_gpm_arquivos.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Implementação de Arquivos">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_imp_gpm_arquivos.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Definição de Sistema">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_def_gpm_sistema.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Implementação de Sistema">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_imp_gpm_sistema.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Definição de Telas">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_def_gpm_telas.htm">
+        					</OBJECT>
+        					<LI><OBJECT TYPE="text/sitemap">
+        						<PARAM NAME="Name" VALUE="Módulo de Implementação de Telas">
+        						<PARAM NAME="Local" VALUE="html/console_modula2_imp_gpm_telas.htm">
+        					</OBJECT>
+        				</UL>
+				</UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Modula3">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="ObjectiveC">
+					<PARAM NAME="Local" VALUE="html/console_objectivec.html">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Pascal">
+					<PARAM NAME="Local" VALUE="html/console_pascal.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Perl">
+					<PARAM NAME="Local" VALUE="html/console_perl.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="PL1">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Prolog">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Python">
+					<PARAM NAME="Local" VALUE="html/console_python.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Qbasic">
+					<PARAM NAME="Local" VALUE="html/console_qbasic.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="R">
+					<PARAM NAME="Local" VALUE="html/console_r.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Rexx">
+					<PARAM NAME="Local" VALUE="html/console_rexx.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Ruby">
+					<PARAM NAME="Local" VALUE="html/console_ruby.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Scheme">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Smalltalk">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="xHarbour">
+					<PARAM NAME="Local" VALUE="html/console_xharbour.htm">
+				</OBJECT>
+			</UL>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="Console Gráfico">
+			</OBJECT>
+			<UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Ada">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="C">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Clipper">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Modula2">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Pascal">
+					<PARAM NAME="Local" VALUE="html/vazio.htm">
+				</OBJECT>
+			</UL>
+			<LI><OBJECT TYPE="text/sitemap">
+				<PARAM NAME="Name" VALUE="GUI (Graphical User Interfaces)">
+			</OBJECT>
+			<UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Visão por API (Application Program Interface)">
+				</OBJECT>
+				<UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="MFC (Microsoft Foundation Classes)">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="WINFORM (Windows Forms)">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="VCL (Visual Component Library)">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="SWING">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="wxWindows">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="GTK (GIMP Toolkit)">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="QT">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="TK">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="FOX (Ruby)">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="FT">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+				</UL>
+				<LI><OBJECT TYPE="text/sitemap">
+					<PARAM NAME="Name" VALUE="Visão por Ferramenta de Desenvolvimento">
+				</OBJECT>
+				<UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Boa Constructor">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="wxWindows">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="C++ Builder 5.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="VCL">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="ADO">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="BDE">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="C++ Builder 6.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="CLX">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="dbExpress">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="VCL">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="ADO">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="BDE">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="dbExpress">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="C# Builder">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="WinForm">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="ADO.NET">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Dot Net">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="WinForm">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="ADO.NET">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="JScript.NET">
+								</OBJECT>
+								<UL>
+									<LI><OBJECT TYPE="text/sitemap">
+										<PARAM NAME="Name" VALUE="AlterarSenha">
+										<PARAM NAME="Local" VALUE="html/vazio.htm">
+									</OBJECT>
+								</UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="Visual Basic.NET">
+								</OBJECT>
+								<UL>
+									<LI><OBJECT TYPE="text/sitemap">
+										<PARAM NAME="Name" VALUE="AlterarSenha">
+										<PARAM NAME="Local" VALUE="html/vazio.htm">
+									</OBJECT>
+								</UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="Visual C++.NET">
+								</OBJECT>
+								<UL>
+									<LI><OBJECT TYPE="text/sitemap">
+										<PARAM NAME="Name" VALUE="AlterarSenha">
+										<PARAM NAME="Local" VALUE="html/vazio.htm">
+									</OBJECT>
+								</UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="Visual J#.NET">
+								</OBJECT>
+								<UL>
+									<LI><OBJECT TYPE="text/sitemap">
+										<PARAM NAME="Name" VALUE="AlterarSenha">
+										<PARAM NAME="Local" VALUE="html/vazio.htm">
+									</OBJECT>
+								</UL>
+							</UL>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Delphi 5.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="VCL">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="ADO">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="BDE">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Delphi 7.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="CLX">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="dbExpress">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="VCL">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="ADO">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="BDE">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="dbExpress">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Delphi 8.0 .NET">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="VCL">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="BDE">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="dbExpress">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="WinForm">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="ADO.NET">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Dev-C++">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="GTK">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="wxWindows">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Glade">
+					</OBJECT>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="JBuilder 9.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="Swing">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="JDBC">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Kylix 3.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="C++">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="CLX">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="dbExpress">
+								</OBJECT>
+								<UL>
+									<LI><OBJECT TYPE="text/sitemap">
+										<PARAM NAME="Name" VALUE="AlterarSenha">
+										<PARAM NAME="Local" VALUE="html/vazio.htm">
+									</OBJECT>
+								</UL>
+							</UL>
+						</UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="Object Pascal">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="CLX">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="dbExpress">
+								</OBJECT>
+								<UL>
+									<LI><OBJECT TYPE="text/sitemap">
+										<PARAM NAME="Name" VALUE="AlterarSenha">
+										<PARAM NAME="Local" VALUE="html/vazio.htm">
+									</OBJECT>
+								</UL>
+							</UL>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="PowerBuilder 9.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="SQLWindows">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="16">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="32">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Visual Basic 4.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="32">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Visual Basic 5.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="DAO">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Visual Basic 6.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="ADO">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="DAO">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Visual C++ 6.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="GTK">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="MFC">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="ADO">
+							</OBJECT>
+							<UL>
+								<LI><OBJECT TYPE="text/sitemap">
+									<PARAM NAME="Name" VALUE="AlterarSenha">
+									<PARAM NAME="Local" VALUE="html/vazio.htm">
+								</OBJECT>
+							</UL>
+						</UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="wxWindows">
+						</OBJECT>
+						<UL>
+							<LI><OBJECT TYPE="text/sitemap">
+								<PARAM NAME="Name" VALUE="AlterarSenha">
+								<PARAM NAME="Local" VALUE="html/vazio.htm">
+							</OBJECT>
+						</UL>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="Visual Fox Pro 6.0">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+					<LI><OBJECT TYPE="text/sitemap">
+						<PARAM NAME="Name" VALUE="wxDesigner">
+					</OBJECT>
+					<UL>
+						<LI><OBJECT TYPE="text/sitemap">
+							<PARAM NAME="Name" VALUE="AlterarSenha">
+							<PARAM NAME="Local" VALUE="html/vazio.htm">
+						</OBJECT>
+					</UL>
+				</UL>
+			</UL>
+		</UL>
+	</UL>
+</UL>
+</BODY></HTML>

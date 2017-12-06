@@ -1,0 +1,32 @@
+Here is some information about getting LISP stuff on the Internet.
+This is courtesy of Matt Smith, more will be added later if we get it.
+
+ 
+                          Free Downloads
+                          --------------
+ 
+http://www.harlequin.com/freelisp/ (windows)
+ 
+http://www.franz.com/ (windows and linux version)
+ 
+http://www.digitool.com/ (mac)
+ 
+
+                          General LISP info
+                          -----------------
+ 
+http://user.glo.be:80/~algo/algoclr.htm
+ 
+http://eksl-www.cs.umass.edu:0080/lisp-resources.html
+ 
+http://www.cs.cmu.edu/afs/cs.cmu.edu/project/ai-repository/ai/html/cltl/clm/clm.
+html
+(common lisp manual)
+ 
+ 
+                             ShareWare
+                             ---------
+
+I found a pretty decent Common LISP for the Macintosh called Powerlisp.
+It costs something like $30 but it is pretty complete.  Will post details
+when I find them.  [Dr. Meyer]

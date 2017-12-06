@@ -1,0 +1,361 @@
+Imports System
+Imports System.Drawing
+Imports System.Collections
+Imports System.ComponentModel
+Imports System.Windows.Forms
+Imports System.Data
+Imports System.Data.OleDb
+
+Namespace Livrus
+
+Public Class frmCadastros
+    Inherits System.Windows.Forms.Form
+
+#Region " Windows Form Designer generated code "
+
+    Public Sub New()
+        MyBase.New()
+
+        'This call is required by the Windows Form Designer.
+        InitializeComponent()
+
+        'Add any initialization after the InitializeComponent() call
+		Registros = new ArrayList()
+		nLinhaRegistro = 0
+    End Sub
+
+    'Form overrides dispose to clean up the component list.
+    Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
+        If disposing Then
+            If Not (components Is Nothing) Then
+                components.Dispose()
+            End If
+        End If
+        MyBase.Dispose(disposing)
+    End Sub
+
+    protected Registros as ArrayList
+    protected Campos as ArrayList
+    protected nLinhaRegistro as integer
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    protected labCodigo As System.Windows.Forms.Label
+    protected WithEvents edtCodigo As System.Windows.Forms.TextBox
+    protected labDescricao As System.Windows.Forms.Label
+    protected edtDescricao As System.Windows.Forms.TextBox
+    protected WithEvents btnNovo As System.Windows.Forms.Button
+    protected WithEvents btnPesquisar As System.Windows.Forms.Button
+    protected WithEvents btnAnterior As System.Windows.Forms.Button
+    protected WithEvents btnProximo As System.Windows.Forms.Button
+    protected WithEvents btnFechar As System.Windows.Forms.Button
+    protected WithEvents btnLimpar As System.Windows.Forms.Button
+    protected WithEvents btnExcluir As System.Windows.Forms.Button
+    protected WithEvents btnSalvar As System.Windows.Forms.Button
+    protected Arquiva As System.Data.OleDb.OleDbCommand
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+        components = New System.ComponentModel.Container()
+
+        Me.labCodigo = new System.Windows.Forms.Label()
+        Me.edtCodigo = new System.Windows.Forms.TextBox()
+        Me.labDescricao = new System.Windows.Forms.Label()
+        Me.edtDescricao = new System.Windows.Forms.TextBox()
+        Me.btnNovo = new System.Windows.Forms.Button()
+        Me.btnPesquisar = new System.Windows.Forms.Button()
+        Me.btnAnterior = new System.Windows.Forms.Button()
+        Me.btnProximo = new System.Windows.Forms.Button()
+        Me.btnFechar = new System.Windows.Forms.Button()
+        Me.btnLimpar = new System.Windows.Forms.Button()
+        Me.btnExcluir = new System.Windows.Forms.Button()
+        Me.btnSalvar = new System.Windows.Forms.Button()
+        Me.Arquiva = new System.Data.OleDb.OleDbCommand()
+        Me.SuspendLayout()
+        '
+        ' labCodigo
+        '
+        Me.labCodigo.Location = new System.Drawing.Point(8, 8)
+        Me.labCodigo.Name = "labCodigo"
+        Me.labCodigo.Size = new System.Drawing.Size(56, 16)
+        Me.labCodigo.TabIndex = 0
+        Me.labCodigo.Text = "Código:"
+        '
+        ' edtCodigo
+        '
+        Me.edtCodigo.Location = new System.Drawing.Point(8, 24)
+        Me.edtCodigo.Name = "edtCodigo"
+	    Me.edtCodigo.MaxLength = 10
+        Me.edtCodigo.Size = new System.Drawing.Size(128, 20)
+        Me.edtCodigo.TabIndex = 1
+        Me.edtCodigo.Text = ""
+        '
+        ' labDescricao
+        ' 
+        Me.labDescricao.Location = new System.Drawing.Point(8, 48)
+        Me.labDescricao.Name = "labDescricao"
+        Me.labDescricao.Size = new System.Drawing.Size(64, 16)
+        Me.labDescricao.TabIndex = 3
+        Me.labDescricao.Text = "Descrição:"
+        ' 
+        ' edtDescricao
+        ' 
+        Me.edtDescricao.Enabled = false
+        Me.edtDescricao.Location = new System.Drawing.Point(8, 64)
+        Me.edtDescricao.Name = "edtDescricao"
+	Me.edtCodigo.MaxLength = 30
+        Me.edtDescricao.Size = new System.Drawing.Size(232, 20)
+        Me.edtDescricao.TabIndex = 4
+        Me.edtDescricao.Text = ""
+        ' 
+        ' btnNovo
+        ' 
+        Me.btnNovo.Location = new System.Drawing.Point(152, 24)
+        Me.btnNovo.Name = "btnNovo"
+        Me.btnNovo.TabIndex = 2
+        Me.btnNovo.Text = "&Novo"
+        '
+        ' btnPesquisar
+        ' 
+        Me.btnPesquisar.Location = new System.Drawing.Point(256, 8)
+        Me.btnPesquisar.Name = "btnPesquisar"
+        Me.btnPesquisar.TabIndex = 5
+        Me.btnPesquisar.Text = "&Pesquisar"
+        ' 
+        ' btnAnterior
+        '
+        Me.btnAnterior.Enabled = false
+        Me.btnAnterior.Location = new System.Drawing.Point(256, 40)
+        Me.btnAnterior.Name = "btnAnterior"
+        Me.btnAnterior.TabIndex = 6
+        Me.btnAnterior.Text = "&Anterior"
+        '
+        ' btnProximo
+        '
+        Me.btnProximo.Enabled = false
+        Me.btnProximo.Location = new System.Drawing.Point(256, 72)
+        Me.btnProximo.Name = "btnProximo"
+        Me.btnProximo.TabIndex = 7
+        Me.btnProximo.Text = "Próxi&mo"
+        '
+        ' btnFechar
+        '
+        Me.btnFechar.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnFechar.Location = new System.Drawing.Point(256, 104)
+        Me.btnFechar.Name = "btnFechar"
+        Me.btnFechar.TabIndex = 11
+        Me.btnFechar.Text = "&Fechar"
+        '
+        ' btnLimpar
+        '
+        Me.btnLimpar.Location = new System.Drawing.Point(176, 104)
+        Me.btnLimpar.Name = "btnLimpar"
+        Me.btnLimpar.TabIndex = 10
+        Me.btnLimpar.Text = "&Limpar"
+        '
+        ' btnExcluir
+        '
+        Me.btnExcluir.Enabled = false
+        Me.btnExcluir.Location = new System.Drawing.Point(96, 104)
+        Me.btnExcluir.Name = "btnExcluir"
+        Me.btnExcluir.TabIndex = 9
+        Me.btnExcluir.Text = "&Excluir"
+        '
+        ' btnSalvar
+        ' 
+        Me.btnSalvar.Enabled = false
+        Me.btnSalvar.Location = new System.Drawing.Point(16, 104)
+        Me.btnSalvar.Name = "btnSalvar"
+        Me.btnSalvar.TabIndex = 8
+        Me.btnSalvar.Text = "&Salvar"
+        ' 
+        ' frmCadastros
+        '
+        Me.AutoScaleBaseSize = new System.Drawing.Size(5, 13)
+        Me.CancelButton = Me.btnFechar
+        Me.ClientSize = new System.Drawing.Size(336, 133)
+        Me.Controls.Add(Me.btnSalvar)
+        Me.Controls.Add(Me.btnExcluir)
+        Me.Controls.Add(Me.btnLimpar)
+        Me.Controls.Add(Me.btnFechar)
+        Me.Controls.Add(Me.btnProximo)
+        Me.Controls.Add(Me.btnAnterior)
+        Me.Controls.Add(Me.btnPesquisar)
+        Me.Controls.Add(Me.btnNovo)
+        Me.Controls.Add(Me.edtDescricao)
+        Me.Controls.Add(Me.labDescricao)
+        Me.Controls.Add(Me.edtCodigo)
+        Me.Controls.Add(Me.labCodigo)
+        Me.Name = "frmCadastros"
+        Me.Text = "Cadastro de"
+        Me.ResumeLayout(false)
+    End Sub
+
+#End Region
+
+    private sub btnFechar_Click(sender as object, e as System.EventArgs) _
+        Handles btnFechar.Click
+
+        Close()
+    end sub
+
+    protected Overridable function ValidaDados(bTodosDados as boolean) as boolean
+        return true
+    end function
+
+    protected Overridable sub InformaLimpaDados(bInformar as boolean)
+        if (bInformar) then
+          Campos = CType(Registros(nLinhaRegistro),ArrayList)
+          edtCodigo.Text=Campos(0).ToString()
+          edtDescricao.Text=Campos(1).ToString()
+        else
+          edtCodigo.Text=""
+          edtDescricao.Text=""
+          edtCodigo.Enabled=true
+          edtCodigo.Focus()
+        end if
+    end sub
+
+    protected Overridable sub HabilitaDados(bHabilita as boolean)
+        edtDescricao.Enabled=bHabilita
+    end sub
+
+    private sub btnNovo_Click(sender as object, e as System.EventArgs) _
+        Handles btnNovo.Click
+
+        btnSalvar.Enabled=true
+        btnExcluir.Enabled=false
+        btnPesquisar.Enabled=false
+        btnAnterior.Enabled=false
+        btnProximo.Enabled=false
+        btnNovo.Enabled=false
+
+        InformaLimpaDados(false)
+        HabilitaDados(true)
+    end sub
+
+    protected sub NovoDado(sTextoSql as string)
+         if RotinasGlobais.Rotinas.ConsultaDados(Registros, sTextoSql) then
+            Campos = CType(Registros(0),ArrayList)
+            edtCodigo.Text = Campos(0).ToString()
+            edtCodigo.Enabled = false
+            edtDescricao.Focus()
+         end if
+    end sub
+
+    protected sub btnLimpar_Click(sender as object, e as System.EventArgs) _
+        Handles btnLimpar.Click
+
+        btnSalvar.Enabled=false
+        btnExcluir.Enabled=false
+        btnPesquisar.Enabled=true
+        btnAnterior.Enabled=false
+        btnProximo.Enabled=false
+        btnNovo.Enabled=true
+
+        InformaLimpaDados(false)
+        HabilitaDados(false)
+    end sub
+
+    protected sub ExcluirDados(sTextoSql as string)
+       if ValidaDados(false) then
+
+         dim res as DialogResult 
+         res = MessageBox.Show(Me, "Certeza de excluir?", _
+         frmPrincipal.fPrincipal.Text, MessageBoxButtons.YesNo, _
+         MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+         if (res = DialogResult.Yes) then
+              Arquiva = frmPrincipal.fPrincipal.db.CreateCommand()
+              Arquiva.CommandText = sTextoSql
+              Arquiva.ExecuteNonQuery()
+              Arquiva.Dispose()
+              btnLimpar_Click(Me,nothing)
+         end if
+       end if
+    end sub
+
+    protected sub PesquisarDados(sTextoSql as string, sMensagemErro as string)
+        if edtCodigo.Text="" then
+          btnAnterior.Enabled=true
+          btnProximo.Enabled=true
+        end if
+
+        if RotinasGlobais.Rotinas.ConsultaDados(Registros,sTextoSql) then
+             nLinhaRegistro=0
+             InformaLimpaDados(true)
+             HabilitaDados(true)
+
+             btnSalvar.Enabled=true
+             btnExcluir.Enabled=true
+             btnPesquisar.Enabled=false
+        else
+          MessageBox.Show(sMensagemErro, frmPrincipal.fPrincipal.Text, _
+          MessageBoxButtons.OK, MessageBoxIcon.Information)
+        end if
+    end sub
+
+    private sub btnAnterior_Click(sender as object, e as System.EventArgs) _
+        Handles btnAnterior.Click
+
+        if (nLinhaRegistro > 0) then
+            nLinhaRegistro=nLinhaRegistro - 1
+            InformaLimpaDados(true)
+        end if
+    end sub
+
+    private sub btnProximo_Click(sender as object, e as System.EventArgs) _
+        Handles btnProximo.Click
+
+        if nLinhaRegistro < (Registros.Count-1) then
+            nLinhaRegistro=nLinhaRegistro + 1
+            InformaLimpaDados(true)
+        end if
+    end sub
+
+    protected sub SalvarDados(sTextoSql as string, sTextoUpdate as string, _
+                              sTextoInsert as string, bLimparDados as boolean)
+        if ValidaDados(true) then
+           Arquiva = frmPrincipal.fPrincipal.db.CreateCommand()
+           if RotinasGlobais.Rotinas.ConsultaDados(Arquiva,sTextoSql) then
+             Arquiva.CommandText = sTextoUpdate
+           else
+             Arquiva.CommandText = sTextoInsert
+           end if
+           Arquiva.ExecuteNonQuery()
+           Arquiva.Dispose()
+           if bLimparDados then
+              btnLimpar_Click(Me,nothing)
+           end if
+        end if
+    end sub
+
+    protected Overridable sub edtCodigo_Leave(sender as object, e as System.EventArgs) _
+        Handles edtCodigo.Leave
+
+      if edtCodigo.Text<>"" then
+        if RotinasGlobais.Rotinas.ValidaInteger(edtCodigo.Text)=false then
+          edtCodigo.Text=""
+          edtCodigo.Focus()
+        end if
+      end if
+    end sub
+
+    private sub frmCadastros_MouseMove(sender as object, _
+        e as System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove
+
+        frmPrincipal.fPrincipal.statusBar1.Panels(1).Text=Text
+    end sub
+
+    private sub frmCadastros_Closing(sender as object, _
+        e as System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
+
+        frmPrincipal.fPrincipal.statusBar1.Panels(1).Text=""
+    end sub
+
+End Class
+
+End NameSpace

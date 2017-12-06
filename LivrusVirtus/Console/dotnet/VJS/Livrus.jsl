@@ -1,0 +1,2575 @@
+/*------------------------------------------------------------------------------
+ Sistema integrante do projeto Livrus Virtus.
+ Todos os direitos reservados para Henrique F. de Souza.
+ Versão programada na linguagem Visual J# .NET.
+------------------------------------------------------------------------------*/
+/* programa Livrus */
+
+package  Livrus;
+
+import System.*;
+import System.IO.*;
+import System.Text.*;
+
+public class Livrus {
+  /* Declaração de tipos */
+
+  class regAssunto {
+   String codigo; //10
+   String assunto; //30
+  }
+  class regAutor {
+   String codigo; //10
+   String autor; //30
+  }
+  class regEditora {
+   String codigo; //10
+   String editora; //50
+  }
+  class regIdioma {
+   String codigo; //10
+   String idioma; //20
+  }
+  class regUsuario {
+   String login; //10
+   String senha; //10
+  }
+  class regPais {
+   String codigo; //3
+   String pais; //50
+  }
+  class regProfissao {
+   String codigo; //10
+   String profissao; //50
+  }
+  class regLivro {
+   String isbn; //13
+   String titulo; //50
+   String edicao; //10
+   String anopubli; //10
+   String codeditora; //10
+   String volume; //10
+   String codidioma; //10
+   String npaginas; //10
+   String preco; //10
+   String qtdestoque; //10
+  }
+  class regLivroAss {
+   String isbn; //13
+   String codassunto; //10
+  }
+  class regLivroAut {
+   String isbn; //13
+   String codautor; //10
+  }
+  class regCliente {
+   String cpf; //14
+   String nome; //30
+   String email; //30
+   String identidade; //10
+   String sexo; //1
+   String telefone; //17
+   String dtnascimento; //10
+   String codendereco; //10
+   String codpais; //3
+   String codprofissao; //10
+  }
+  class regEndereco {
+   String codigo; //10
+   String logradouro; //40
+   String bairro; //15
+   String cep; //8
+   String cidade; //30
+   String estado; //20
+  }
+  class regVenda {
+   String dthrvenda; //19  /* data/hora da venda dd/mm/yyyy hh:mm:ss */
+   String cpf; //14
+   String isbn; //13
+   String precovenda; //10
+  }
+
+  static int opTexto = 1, opNumero = 2, opData = 3, opDataHora = 4, opSenha = 5;
+  static int opAssunto = 1, opAutor = 2, opEditora = 3, opEndereco = 4,
+      opIdioma = 5, opPais = 6, opProfissao = 7, opCliente = 8, opLivro = 9,
+      opLivroAss = 10, opLivroAut = 11, opUsuario = 12, opVenda = 13;
+  static int opNovo = 1, opAlterar = 2, opPesquisar = 3, opSalvarInclusao = 4,
+      opSalvarAlteracao = 5, opExcluir = 6, opConfirmaExclusao = 7,
+      opListarTodos = 8;
+
+  static String CRLF = "\r\n"; /* windows */
+  static int TAM_CRLF = 2;
+  /* static String CRLF = "\n";
+     static int TAM_CRLF = 1; */ /* unix */
+  /* static String CRLF = "\r";
+     static int TAM_CRLF = 1; */ /* macintosh */
+
+  static int QTD_MAX_LINHA = 18;
+  static int TAM_MAX_REG = 145;
+
+  static String MSG_ARQERRO = "Erro: O arquivo não pode ser aberto.";
+  static String MSG_ERRO = "Erro: opção inválida digite de novo.";
+  static String MSG_OPCAO = "Escolha uma opção: ";
+  static String MSG_PRESS = "pressione para continuar...";
+
+  static String MSG_REGINC = "registro incluido!";
+  static String MSG_REGNINC = "registro não incluido!";
+  static String MSG_REGALT = "registro alterado!";
+  static String MSG_REGNALT = "registro não alterado!";
+  static String MSG_REGEXC = "registro excluido!";
+  static String MSG_REGNEXC = "registro não excluido!";
+  static String MSG_REGEXST = "registro já existe!";
+
+  static String MSG_NUMINV = "Número inválido ou menor do que 1!";
+  static String MSG_DATAINV = "Data inválida!, formato correto (dd/mm/yyyy)";
+  static String MSG_DTHRINV =
+                  "Data/hora inválida!, formato correto (dd/mm/yyyy hh:mm:ss)";
+  static String MSG_ISBNINV = "ISBN inválido!";
+  static String MSG_CPFINV = "CPF inválido!";
+  static String MSG_SENCONFERE = "senha não confere com a senha atual!";
+  static String MSG_SENCONFIRM="nova senha não confere com a senha confirmada!";
+  static String MSG_LOGINENCON = "login não encontrado!";
+  static String MSG_SEMESTOQUE = "livro não existe no estoque!";
+
+  static String ARQ_ASSUNTO = "assunto.dat";
+  static String ARQ_AUTOR = "autor.dat";
+  static String ARQ_EDITORA = "editora.dat";
+  static String ARQ_IDIOMA = "idioma.dat";
+  static String ARQ_USUARIO = "usuario.dat";
+  static String ARQ_PAIS = "pais.dat";
+  static String ARQ_PROFISSAO = "profissao.dat";
+  static String ARQ_LIVRO = "livro.dat";
+  static String ARQ_LIVASS = "livroass.dat";
+  static String ARQ_LIVAUT = "livroaut.dat";
+  static String ARQ_CLIENTE = "cliente.dat";
+  static String ARQ_ENDERECO = "endereco.dat";
+  static String ARQ_VENDA = "venda.dat";
+
+  static int TAM_ASSUNTO = 40;
+  static int TAM_AUTOR = 40;
+  static int TAM_EDITORA = 60;
+  static int TAM_IDIOMA = 30;
+  static int TAM_USUARIO = 20;
+  static int TAM_PAIS = 53;
+  static int TAM_PROFISSAO = 60;
+  static int TAM_LIVRO = 143;
+  static int TAM_LIVASS = 23;
+  static int TAM_LIVAUT = 23;
+  static int TAM_CLIENTE = 135;
+  static int TAM_ENDERECO = 123;
+  static int TAM_VENDA = 56;
+
+  /* variaveis gerais */
+
+  boolean bopcao;
+  char opmenu;
+  int g_nPosChave, g_nTamChave;
+  double g_nPreco;
+  boolean g_SalvarInclusao;
+
+  regAssunto tAssunto = new regAssunto();
+  regAutor tAutor = new regAutor();
+  regEditora tEditora = new regEditora();
+  regIdioma tIdioma = new regIdioma();
+  regEndereco tEndereco = new regEndereco();
+  regPais tPais = new regPais();
+  regProfissao tProfissao = new regProfissao();
+  regLivro tLivro = new regLivro();
+  regLivroAss tLivroAss = new regLivroAss();
+  regLivroAut tLivroAut = new regLivroAut();
+  regCliente tCliente = new regCliente();
+  regUsuario tUsuario = new regUsuario();
+  regVenda tVenda = new regVenda();
+
+  FileStream tfAssunto, tfAutor, tfEditora, tfIdioma, tfEndereco,
+      tfPais, tfProfissao, tfLivro, tfLivroAss, tfLivroAut, tfCliente,
+      tfUsuario, tfVenda;
+
+/*--- Rotinas básicas --------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+Função que retorna um pedaço de uma string.
+str - indica a string
+nini - indica a posicao inicial do pedaco
+ntam - indica o tamanho do pedaco
+retorna - o pedaço da string
+------------------------------------------------------------------------------*/
+  String copy(String str,int nini,int ntam) {
+	return str.Substring(nini-1,ntam);
+  }
+
+/*------------------------------------------------------------------------------
+Repete um texto um número determinado de vezes.
+sTexto - o texto a ser repetido
+nQtd - a quantidade de vezes
+retorna - o texto repetido
+------------------------------------------------------------------------------*/
+  private String repete(String sTexto, int nQtd)
+  { int ncont;
+	String sret = "";
+
+    for(ncont = 1; ncont <= nQtd; ncont++) {
+		sret = sret + sTexto;
+    }
+    return sret;
+  }
+/*------------------------------------------------------------------------------
+Coloca espaços em branco a mais de acordo com o tamanho máximo do texto.
+sTexto - o texto
+nTam - tamanho máximo do texto
+retorna - o texto com espaços em branco a mais
+------------------------------------------------------------------------------*/
+  private String esp(String sTexto, int nTam) {
+   String sret;
+
+	sret = sTexto + repete(" ",nTam-sTexto.get_Length());
+	return sret;
+  }
+/*------------------------------------------------------------------------------
+Faz uma pesquisa relativa de um texto através de um valor chave.
+sTexto - o texto
+sChave - a chave a ser pesquisada
+retorna - se achou ou não a chave dentro do texto
+------------------------------------------------------------------------------*/
+  private boolean strRelativa(String sTexto, String sChave) {
+	int nCont, nTamChave, nTamTexto;
+	boolean bret;
+	String sPedaco;
+
+    bret = false;
+	nCont = 1;
+	nTamChave = sChave.get_Length();
+    nTamTexto = sTexto.get_Length();
+    if (nTamChave <= nTamTexto) {
+      while (nCont <= (nTamTexto-nTamChave+1)) {
+         sPedaco = copy(sTexto,nCont,nTamChave);
+         if (sPedaco.Equals(sChave))
+            bret = true;
+         nCont++;
+      }
+    }
+    return  bret;
+  }
+
+/*------------------------------------------------------------------------------
+Calcula o modulo11 de um valor qualquer.
+svalor - a string com o número a ser calculado
+ndig - dígito do valor a ser calculado
+retorna - o dígito correto
+------------------------------------------------------------------------------*/
+public int modulo11(String svalor, int ndig)
+{
+int ncont, nsoma, nvalor, npos;
+String slocal, sres;
+
+ ncont=0;
+ slocal="";
+ while (ncont < 11) {
+   slocal=svalor.Substring(ncont,1) + slocal;
+   ncont++;
+ }
+ nsoma=0;
+ if (ndig == 1)
+   ncont=2;
+ else
+   ncont=1;
+ npos=2;
+ while (ncont < 11) {
+   sres = slocal.Substring(ncont,1);
+   nvalor = Int32.Parse(sres);
+   nsoma=nsoma + (nvalor * npos);
+   ncont++;
+   npos++;
+ }
+ nsoma=(11 - (nsoma % 11));
+
+ if (nsoma > 9)
+   return 0;
+ else
+   return nsoma;
+}
+/*------------------------------------------------------------------------------
+Validação de um número de CPF qualquer.
+cpf - a mstring com o número do CPF
+retorna - se é valido ou não
+------------------------------------------------------------------------------*/
+public boolean ValidaCPF(String cpf)
+{
+String scpf;
+
+if (cpf.get_Length()==14) {
+  scpf=cpf.Substring(0,3)+cpf.Substring(4,3)+cpf.Substring(8,3)+
+	cpf.Substring(12,2);
+  if ( (modulo11(scpf,1)==Int32.Parse(cpf.Substring(12,1))) &&
+  (modulo11(scpf,2)==Int32.Parse(cpf.Substring(13,1))) )
+	return true;
+  else
+	return false;
+} else
+  return false;
+}
+/*------------------------------------------------------------------------------
+Validação de um número ISBN qualquer.
+isbn - a mstring com o número do ISBN
+retorna - se é valido ou não
+------------------------------------------------------------------------------*/
+public boolean ValidaISBN(String isbn)
+{
+ String sisbn, sdigito, snum;
+ int nvalor, nsoma, ncont;
+
+if (isbn.get_Length()==13) {
+  sdigito = isbn.Substring(isbn.get_Length()-1, 1);
+  sisbn="";
+  for(ncont = 0; ncont < isbn.get_Length()-1; ncont++)  {
+    if (isbn.Substring(ncont,1).Equals("-")==false)
+      sisbn = sisbn + isbn.Substring(ncont,1);
+  }
+  if (sdigito.Equals("X"))
+    nsoma = 10;
+  else {
+    nvalor = Int32.Parse(sdigito);
+    nsoma = nvalor;
+  }
+  for(ncont = 1; ncont <= 9; ncont++)  {
+    snum = sisbn.Substring(ncont-1, 1);
+    nvalor = Int32.Parse(snum);
+    nsoma=nsoma + (nvalor * (11 - ncont));
+  }
+  if ((nsoma % 11) == 0)
+    return true;
+  else
+    return false;
+} else
+  return false;
+}
+/*------------------------------------------------------------------------------
+Esconde a digitação da senha
+retorna - a senha digitada
+------------------------------------------------------------------------------*/
+String digitaSenha(String sRotulo,int nTamSenha) {
+ String sSenha = "";
+// char sLetra;
+// int ncont;
+
+  System.Console.Write(sRotulo);
+  sSenha = System.Console.get_In().ReadLine();
+/*
+  ncont  = 0;
+  sLetra = '\0';
+  while((sLetra!='\r') && (ncont < nTamSenha)) {
+	sLetra = (char) System.Console.Read();
+	if (sLetra!='\r') {
+	   sSenha = sSenha + sLetra;
+	}
+	ncont++;
+  }
+System.Console.WriteLine();
+*/
+return sSenha;
+}
+/*------------------------------------------------------------------------------
+Validação de um número qualquer.
+sRotulo - o texto antes de se digitar o número
+sNumero - a String com o valor do número
+retorna - o sNumero
+------------------------------------------------------------------------------*/
+String validaNumero(String sRotulo, String sNumero)
+{ double nnum;
+  int nStatus;
+
+nStatus = -1;
+ while (nStatus!=0) {
+  System.Console.Write(sRotulo);
+  sNumero = System.Console.get_In().ReadLine();
+  try {
+	  nnum = Single.Parse(sNumero);
+	  if (nnum < 1)
+		 System.Console.WriteLine(MSG_NUMINV);
+	  else
+		 nStatus=0;
+  } catch(System.Exception e) {
+	System.Console.WriteLine(MSG_NUMINV);
+  }
+}
+return(sNumero);
+}
+/*------------------------------------------------------------------------------
+Validação de uma data ou data/hora qualquer.
+sRotulo - o texto antes de se digitar a data/hora
+sDataHora - a String com o valor da data/hora
+bSoData - indica se vai validar somente uma data sem a hora
+retorna - a sDataHora
+------------------------------------------------------------------------------*/
+String validaDataHora(String sRotulo, String sDataHora, boolean bSoData)
+{ boolean bvalida, bdatavalida, bhoravalida;
+  String sdia, smes, sano, shora, smin, sseg;
+  int ndia, nmes, nano, nhora, nmin, nseg, nudiames, ntam;
+
+bvalida = false;
+bdatavalida = false;
+bhoravalida = false;
+nudiames = 0;
+if (bSoData==true) ntam=10;
+else ntam=19;
+while (bvalida==false) {
+  System.Console.Write(sRotulo);
+  sDataHora = System.Console.get_In().ReadLine();
+  if (sDataHora.get_Length()==ntam) {
+	sdia = copy(sDataHora,1,2);
+	ndia = Int32.Parse(sdia);
+	smes = copy(sDataHora,4,2);
+	nmes = Int32.Parse(smes);
+	sano = copy(sDataHora,7,4);
+	nano = Int32.Parse(sano);
+
+	if ((nano >= 1) && (nano <= 9999)) {
+	  if ((nmes >= 1) && (nmes <= 31)) {
+		  switch(nmes) {
+		   case 1: case 3: case 5: case 7: case 8:
+		   case 10: case 12: nudiames = 31; break;
+		   case 2: {
+			   /* ano bissexto */
+               if ((nano % 4)==0) nudiames = 29;
+               else nudiames = 28;
+			  } break;
+           case 4: case 6: case 9: case 11: nudiames = 30; break;
+          }
+		  if ((ndia >=1) && (ndia <=nudiames))
+             bdatavalida = true;
+      }
+    }
+
+    if (bSoData) {
+	   if (bdatavalida)
+		   bvalida = true;
+       else
+	   System.Console.WriteLine(MSG_DATAINV);
+	} else {
+	  if (bdatavalida) {
+		  shora = copy(sDataHora,12,2);
+		  nhora = Int32.Parse(shora);
+		  smin = copy(sDataHora,15,2);
+		  nmin = Int32.Parse(smin);
+		  sseg = copy(sDataHora,18,2);
+		  nseg = Int32.Parse(sseg);
+
+		  if ((nhora >= 0) && (nhora <= 23)) {
+			if ((nmin >= 0) && (nmin <= 59)) {
+			  if ((nseg >= 0) && (nseg <= 59))
+				 bhoravalida = true;
+			}
+		  }
+
+		  if (bhoravalida)
+		   bvalida = true;
+		  else
+		   System.Console.WriteLine(MSG_DTHRINV);
+	  } else
+        System.Console.WriteLine(MSG_DTHRINV);
+    }
+  } else {
+	if (bSoData==true) System.Console.WriteLine(MSG_DATAINV);
+	else System.Console.WriteLine(MSG_DTHRINV);
+  }
+}
+return sDataHora;
+}
+/*------------------------------------------------------------------------------
+Retorna a Data e a hora do sistema.
+retorna - a data e a hora
+------------------------------------------------------------------------------*/
+private String retDataHora() {
+  return DateTime.get_Now().ToString("dd/MM/yyyy hh:mm:ss");
+}
+/*------------------------------------------------------------------------------
+Calcula o tamanho do arquivo.
+sArq - o arquivo
+retorna - o tamanho do arquivo
+------------------------------------------------------------------------------*/
+long tamArq(FileStream sArq){
+  return sArq.get_Length();
+}
+/*------------------------------------------------------------------------------
+Verifica se chegou ao fim do arquivo.
+sArq - o arquivo
+ntam - o tamanho do arquivo
+retorna - se chegou ao fim do arquivo
+------------------------------------------------------------------------------*/
+boolean fimArq(FileStream sArq) {
+ if (sArq.get_Position() == sArq.get_Length())
+	return true;
+ else
+	return false;
+}
+/*------------------------------------------------------------------------------
+Lê uma linha do arquivo.
+sArq - o arquivo
+nTamLinha - o tamanho da linha
+nTamCRLF - o tamanho do retorno da linha
+npos - posicao dentro do arquivo
+retorna - o texto lido
+------------------------------------------------------------------------------*/
+String lerArq(FileStream sArq, int nTamLinha, int nTamCRLF) {
+int nLidos, ncont;
+ubyte[] slinha=new ubyte[TAM_MAX_REG];
+char[] slinha2=new char[TAM_MAX_REG];
+String sret = "";
+
+//StreamReader sLer = new StreamReader(sArq);
+//sret = sLer.ReadLine();
+
+nLidos = sArq.Read(slinha, 0,(nTamLinha + nTamCRLF));
+
+if (nLidos != (nTamLinha + nTamCRLF))
+  sret = "";
+else {
+  for(ncont=0; ncont < (nLidos - nTamCRLF); ncont++)
+	slinha2[ncont]=(char)slinha[ncont];
+  sret = new String(slinha2,0,(nLidos - nTamCRLF));
+}
+return sret;
+}
+/*------------------------------------------------------------------------------
+Abre ou cria os arquivos do sistema.
+bAbre - condição para abrir ou criar os arquivos do sistema
+------------------------------------------------------------------------------*/
+void abrecriaArqs(boolean bAbre)
+{
+if (bAbre) {
+  if (File.Exists(ARQ_ASSUNTO))
+	tfAssunto = new FileStream(ARQ_ASSUNTO,FileMode.Open,FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_ASSUNTO);
+  if (File.Exists(ARQ_AUTOR))
+	tfAutor = new FileStream(ARQ_AUTOR, FileMode.Open, FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_AUTOR);
+  if (File.Exists(ARQ_EDITORA))
+	tfEditora = new FileStream(ARQ_EDITORA,FileMode.Open,FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_EDITORA);
+  if (File.Exists(ARQ_IDIOMA))
+	tfIdioma = new FileStream(ARQ_IDIOMA, FileMode.Open, FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_IDIOMA);
+  if (File.Exists(ARQ_ENDERECO))
+	tfEndereco= new FileStream(ARQ_ENDERECO,FileMode.Open,FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_ENDERECO);
+  if (File.Exists(ARQ_PAIS))
+	tfPais = new FileStream(ARQ_PAIS, FileMode.Open, FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_PAIS);
+  if (File.Exists(ARQ_PROFISSAO))
+   tfProfissao=new FileStream(ARQ_PROFISSAO,FileMode.Open,FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_PROFISSAO);
+  if (File.Exists(ARQ_LIVRO))
+	tfLivro = new FileStream(ARQ_LIVRO, FileMode.Open, FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_LIVRO);
+  if (File.Exists(ARQ_LIVASS))
+	tfLivroAss = new FileStream(ARQ_LIVASS, FileMode.Open,FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_LIVASS);
+  if (File.Exists(ARQ_LIVAUT))
+	tfLivroAut = new FileStream(ARQ_LIVAUT, FileMode.Open,FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_LIVAUT);
+  if (File.Exists(ARQ_CLIENTE))
+	tfCliente = new FileStream(ARQ_CLIENTE, FileMode.Open,FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_CLIENTE);
+  if (File.Exists(ARQ_USUARIO))
+	tfUsuario = new FileStream(ARQ_USUARIO, FileMode.Open,FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_USUARIO);
+  if (File.Exists(ARQ_VENDA))
+	tfVenda = new FileStream(ARQ_VENDA, FileMode.Open, FileAccess.ReadWrite);
+  else
+	System.Console.WriteLine(MSG_ARQERRO+" --> "+ARQ_VENDA);
+} else {
+  tfAssunto = new FileStream(ARQ_ASSUNTO,FileMode.Create,FileAccess.ReadWrite);
+  tfAutor = new FileStream(ARQ_AUTOR,FileMode.Create,FileAccess.ReadWrite);
+  tfEditora = new FileStream(ARQ_EDITORA,FileMode.Create,FileAccess.ReadWrite);
+  tfIdioma = new FileStream(ARQ_IDIOMA,FileMode.Create,FileAccess.ReadWrite);
+  tfEndereco= new FileStream(ARQ_ENDERECO,FileMode.Create,FileAccess.ReadWrite);
+  tfPais = new FileStream(ARQ_PAIS,FileMode.Create,FileAccess.ReadWrite);
+  tfProfissao=new FileStream(ARQ_PROFISSAO,FileMode.Create,FileAccess.ReadWrite);
+  tfLivro = new FileStream(ARQ_LIVRO,FileMode.Create,FileAccess.ReadWrite);
+  tfLivroAss = new FileStream(ARQ_LIVASS,FileMode.Create,FileAccess.ReadWrite);
+  tfLivroAut = new FileStream(ARQ_LIVAUT,FileMode.Create,FileAccess.ReadWrite);
+  tfCliente = new FileStream(ARQ_CLIENTE,FileMode.Create,FileAccess.ReadWrite);
+  tfUsuario = new FileStream(ARQ_USUARIO,FileMode.Create,FileAccess.ReadWrite);
+  tfVenda = new FileStream(ARQ_VENDA,FileMode.Create,FileAccess.ReadWrite);
+}
+
+}
+/*------------------------------------------------------------------------------
+Fecha todos os arquivos abertos.
+------------------------------------------------------------------------------*/
+void fechaArqs()
+{
+   tfAssunto.Close();
+   tfAutor.Close();
+   tfEditora.Close();
+   tfIdioma.Close();
+   tfEndereco.Close();
+   tfPais.Close();
+   tfProfissao.Close();
+   tfLivro.Close();
+   tfLivroAss.Close();
+   tfLivroAut.Close();
+   tfCliente.Close();
+   tfUsuario.Close();
+   tfVenda.Close();
+}
+/*------------------------------------------------------------------------------
+Pesquisa um registro através de um valor chave num arquivo.
+sArq - o arquivo
+sChave - a chave a ser pesquisada
+nPosChave - a posicao inicial da chave dentro do registro
+nTamChave - o tamanho da chave dentro do registro
+nTamLinha - o tamanho do registro
+retorna - o registro pesquisado
+------------------------------------------------------------------------------*/
+String pesqArq(FileStream sArq, String sChave, int nPosChave,
+		int nTamChave, int nTamLinha){
+  String sres = "", slinha = "";
+  boolean bQuebra;
+  long nPosicao;
+
+	bQuebra = false;
+	sArq.Seek(0,SeekOrigin.Begin);
+	while (!fimArq(sArq) && bQuebra == false) {
+	  slinha = lerArq(sArq, nTamLinha, TAM_CRLF);
+	  if (slinha.Equals("")==false)
+		sres = copy(slinha, nPosChave, nTamChave).Trim();
+	  if (sres.Equals(sChave))
+		bQuebra = true;
+	}
+	nPosicao = sArq.get_Position() - (nTamLinha + TAM_CRLF);
+	if (nPosicao > 0)
+	  sArq.Seek(nPosicao, SeekOrigin.Current);
+	else
+	  sArq.Seek(0, SeekOrigin.Begin);
+	if (sres.Equals(sChave) == false)
+	  return ("");
+	else
+	  return (copy(slinha, 1, nTamLinha));
+
+}
+/*------------------------------------------------------------------------------
+Pesquisa se tem linha excluída senão vai para a última linha do arquivo.
+sArq - o arquivo
+nTamLinha - o tamanho do registro
+------------------------------------------------------------------------------*/
+void pesqLinhaExcluida(FileStream sArq, int nTamLinha){
+String sExcluido;
+
+  sExcluido = pesqArq(sArq, "*", 1, 1, nTamLinha);
+  if (sExcluido.Equals(""))
+	 sArq.Seek(tamArq(sArq),SeekOrigin.Begin);
+}
+/*------------------------------------------------------------------------------
+Pesquisa o maior código num arquivo.
+sArq - o arquivo
+nPosChave - a posicao inicial da chave dentro do registro
+nTamChave - o tamanho da chave dentro do registro
+nTamLinha - o tamanho do registro
+retorna - o maior código
+------------------------------------------------------------------------------*/
+String pesqMaxCod(FileStream sArq, int nPosChave,
+		int nTamChave, int nTamLinha) {
+  String sres = "", slinha = "";
+  boolean bQuebra;
+  int nMaior, nCod;
+
+	bQuebra = false;
+	nMaior = 0;
+	sArq.Seek(0,SeekOrigin.Begin);
+	while (!fimArq(sArq) && bQuebra == false) {
+	  slinha = lerArq(sArq, nTamLinha, TAM_CRLF);
+	  if (slinha.Equals("")==false) {
+		sres = copy(slinha,nPosChave,nTamChave).Trim();
+		nCod = Int32.Parse(sres);
+		if (nCod > nMaior)
+		   nMaior = nCod;
+	  }
+	}
+	pesqLinhaExcluida(sArq, nTamLinha);
+	nCod = (nMaior+1);
+	sres = Convert.ToString(nCod);
+
+return(sres);
+}
+/*------------------------------------------------------------------------------
+Grava os registros num determinado arquivo.
+sArq - o arquivo
+sTexto - o registro a ser gravado
+sMsgAcerto - a mensagem caso o registro foi gravado
+sMsgErro - a mensagem caso o registro não foi gravado
+------------------------------------------------------------------------------*/
+void escreveArq(FileStream sArq, String sTexto, String sMsgAcerto,
+	String sMsgErro){
+  ubyte[] slinha=new ubyte[TAM_MAX_REG];
+  int ntam, ncont;
+  try {
+//	StreamWriter sGravar = new StreamWriter(sArq);
+	sTexto = sTexto + CRLF;
+	ntam = sTexto.get_Length();
+	for (ncont=0; ncont < ntam; ncont++)
+		slinha[ncont] = (ubyte)sTexto.get_Chars(ncont);
+	sArq.Write(slinha, 0, ntam);
+//	sGravar.WriteLine(sTexto);
+	System.Console.WriteLine(sMsgAcerto);
+  } catch(System.Exception e) {
+	System.Console.WriteLine(sMsgErro);
+  }
+}
+/*------------------------------------------------------------------------------
+Monta o tamanho do registro no arquivo de acordo com o tipo de arquivo.
+sreg - o tipo de arquivo
+retorna - o registro montado
+------------------------------------------------------------------------------*/
+String LinhaReg(int sreg) {
+String slinha = "";
+
+if (sreg==opAssunto) {
+   slinha = esp(tAssunto.codigo,10)+esp(tAssunto.assunto,30);
+} else if (sreg==opAutor)
+   slinha = esp(tAutor.codigo,10)+esp(tAutor.autor,30);
+else if (sreg==opEditora)
+   slinha = esp(tEditora.codigo,10)+esp(tEditora.editora,50);
+else if (sreg==opEndereco)
+   slinha = esp(tEndereco.codigo,10)+esp(tEndereco.logradouro,40)+
+   esp(tEndereco.bairro,15)+esp(tEndereco.cep,8)+esp(tEndereco.cidade,30)+
+   esp(tEndereco.estado,20);
+else if (sreg==opIdioma)
+   slinha = esp(tIdioma.codigo,10)+esp(tIdioma.idioma,20);
+else if (sreg==opPais)
+   slinha = esp(tPais.codigo,3)+esp(tPais.pais,50);
+else if (sreg==opProfissao)
+   slinha = esp(tProfissao.codigo,10)+esp(tProfissao.profissao,50);
+else if (sreg==opUsuario)
+   slinha = esp(tUsuario.login,10)+esp(tUsuario.senha,10);
+else if (sreg==opLivro)
+   slinha = esp(tLivro.isbn,13)+esp(tLivro.titulo,50)+
+   esp(tLivro.edicao,10)+esp(tLivro.anopubli,10)+esp(tLivro.codeditora,10)+
+   esp(tLivro.volume,10)+esp(tLivro.codidioma,10)+esp(tLivro.npaginas,10)+
+   esp(tLivro.preco,10)+esp(tLivro.qtdestoque,10);
+else if (sreg==opLivroAss)
+   slinha = esp(tLivroAss.isbn,13)+esp(tLivroAss.codassunto,10);
+else if (sreg==opLivroAut)
+   slinha = esp(tLivroAut.isbn,13)+esp(tLivroAut.codautor,10);
+else if (sreg==opCliente)
+   slinha = esp(tCliente.cpf,14)+esp(tCliente.nome,30)+
+   esp(tCliente.email,30)+esp(tCliente.identidade,10)+esp(tCliente.sexo,1)+
+   esp(tCliente.telefone,17)+esp(tCliente.dtnascimento,10)+
+   esp(tCliente.codendereco,10)+esp(tCliente.codpais,3)+
+   esp(tCliente.codprofissao,10);
+else if (sreg==opVenda)
+   slinha = esp(tVenda.dthrvenda,19)+esp(tVenda.cpf,14)+
+   esp(tVenda.isbn,13)+esp(tVenda.precovenda,10);
+
+return(slinha);
+}
+/*------------------------------------------------------------------------------
+Retorna o tamanho do registro no arquivo de acordo com o tipo de arquivo.
+sreg - o tipo de arquivo
+retorna - o tamanho do registro
+------------------------------------------------------------------------------*/
+int tamReg(int sreg)
+{ int nret = 0;
+
+if (sreg==opAssunto) nret = TAM_ASSUNTO;
+else if (sreg==opAutor) nret = TAM_AUTOR;
+else if (sreg==opEditora) nret = TAM_EDITORA;
+else if (sreg==opEndereco) nret = TAM_ENDERECO;
+else if (sreg==opIdioma) nret = TAM_IDIOMA;
+else if (sreg==opPais) nret = TAM_PAIS;
+else if (sreg==opProfissao) nret = TAM_PROFISSAO;
+else if (sreg==opUsuario) nret = TAM_USUARIO;
+else if (sreg==opLivro) nret = TAM_LIVRO;
+else if (sreg==opLivroAss) nret = TAM_LIVASS;
+else if (sreg==opLivroAut) nret = TAM_LIVAUT;
+else if (sreg==opCliente) nret = TAM_CLIENTE;
+else if (sreg==opVenda) nret = TAM_VENDA;
+
+return(nret);
+}
+/*------------------------------------------------------------------------------
+Seleciona o rotulo de cada campo de acordo com o tipo de arquivo.
+sreg - o tipo de arquivo
+nNum - indica qual rotulo será retornado
+retorna - o rotulo
+------------------------------------------------------------------------------*/
+String rotulo(int sreg, int nNum)
+{  String sret = "";
+
+if (sreg==opAssunto) {
+   switch(nNum) {
+	 case 0: sret = "Assunto(s) não encontrado(s)!"; break;
+	 case 1: {
+		 sret = "Código do assunto: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 10;
+		} break;
+	 case 2: {
+		 sret = "Assunto: ";
+		 g_nPosChave = 11;
+		 g_nTamChave = 30;
+		} break;
+   }
+} else if (sreg==opAutor) {
+   switch(nNum) {
+	 case 0: sret = "Autor(es) não encontrado(s)!"; break;
+	 case 1: {
+		 sret = "Código do autor: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 10;
+		} break;
+	 case 2: {
+		 sret = "Autor: ";
+		 g_nPosChave = 11;
+		 g_nTamChave = 30;
+		} break;
+   }
+} else if (sreg==opEditora) {
+   switch(nNum) {
+	 case 0: sret = "Editora(s) não encontrada(s)!"; break;
+	 case 1: {
+		 sret = "Código da editora: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 10;
+		} break;
+	 case 2: {
+		 sret = "Editora: ";
+		 g_nPosChave = 11;
+		 g_nTamChave = 50;
+		} break;
+   }
+} else if (sreg==opEndereco) {
+   switch(nNum) {
+     case 0: sret = "Endereço(s) não encontrado(s)!"; break;
+     case 1: {
+         sret = "Código do endereço: ";
+         g_nPosChave = 1;
+		 g_nTamChave = 10;
+        } break;
+     case 2: {
+         sret = "Logradouro: ";
+         g_nPosChave = 11;
+		 g_nTamChave = 40;
+        } break;
+     case 3: {
+         sret = "Bairro: ";
+         g_nPosChave = 51;
+		 g_nTamChave = 15;
+		} break;
+     case 4: {
+         sret = "CEP: ";
+         g_nPosChave = 66;
+         g_nTamChave = 8;
+        } break;
+     case 5: {
+         sret = "Cidade: ";
+         g_nPosChave = 74;
+         g_nTamChave = 30;
+		} break;
+	 case 6: {
+         sret = "Estado: ";
+         g_nPosChave = 104;
+         g_nTamChave = 20;
+        } break;
+   }
+} else if (sreg==opIdioma) {
+   switch(nNum) {
+	 case 0: sret = "Idioma(s) não encontrado(s)!"; break;
+	 case 1: {
+		 sret = "Código do idioma: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 10;
+		} break;
+	 case 2: {
+		 sret = "Idioma: ";
+		 g_nPosChave = 11;
+		 g_nTamChave = 20;
+		} break;
+   }
+} else if (sreg==opPais) {
+   switch(nNum) {
+	 case 0: sret = "País(es) não encontrado(s)!"; break;
+	 case 1: {
+		 sret = "Código do país: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 3;
+		} break;
+	 case 2: {
+		 sret = "País: ";
+		 g_nPosChave = 4;
+		 g_nTamChave = 50;
+		} break;
+   }
+} else if (sreg==opProfissao) {
+   switch(nNum) {
+	 case 0: sret = "Profissão(es) não encontrada(s)!"; break;
+	 case 1: {
+		 sret = "Código da profissão: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 10;
+		} break;
+	 case 2: {
+		 sret = "Profissão: ";
+		 g_nPosChave = 11;
+		 g_nTamChave = 50;
+		} break;
+   }
+} else if (sreg==opUsuario) {
+   switch(nNum) {
+	 case 0: sret = "login ou senha incorreta, tente de novo!"; break;
+	 case 1: {
+		 sret = "Login: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 10;
+		} break;
+	 case 2: {
+		 sret = "Senha: ";
+		 g_nPosChave = 11;
+		 g_nTamChave = 10;
+		} break;
+   }
+} else if (sreg==opLivro) {
+   switch(nNum) {
+	 case 0: sret = "Livro(s) não encontrado(s)!"; break;
+	 case 1: {
+		 sret = "ISBN: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 13;
+		} break;
+	 case 2: {
+		 sret = "Título: ";
+		 g_nPosChave = 14;
+		 g_nTamChave = 50;
+		} break;
+	 case 3: {
+		 sret = "Edição: ";
+		 g_nPosChave = 64;
+		 g_nTamChave = 10;
+		} break;
+	 case 4: {
+		 sret = "Ano de Publicação: ";
+		 g_nPosChave = 74;
+		 g_nTamChave = 10;
+		} break;
+     case 5: {
+         sret = "Código da editora: ";
+         g_nPosChave = 84;
+         g_nTamChave = 10;
+        } break;
+	 case 6: {
+         sret = "Volume: ";
+         g_nPosChave = 94;
+         g_nTamChave = 10;
+        } break;
+	 case 7: {
+         sret = "Código do idioma: ";
+         g_nPosChave = 104;
+         g_nTamChave = 10;
+        } break;
+	 case 8: {
+		 sret = "Número de páginas: ";
+         g_nPosChave = 114;
+         g_nTamChave = 10;
+        } break;
+     case 9: {
+         sret = "Preço: ";
+         g_nPosChave = 124;
+         g_nTamChave = 10;
+        } break;
+     case 10: {
+          sret = "Qtd. Estoque: ";
+          g_nPosChave = 134;
+          g_nTamChave = 10;
+         } break;
+   }
+} else if (sreg==opLivroAss) {
+   switch(nNum) {
+	 case 0: sret = "Assunto(s) não encontrado(s)!"; break;
+	 case 1: {
+		 sret = "ISBN: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 13;
+		} break;
+	 case 2: {
+		 sret = "Código do assunto: ";
+		 g_nPosChave = 14;
+		 g_nTamChave = 10;
+		} break;
+   }
+} else if (sreg==opLivroAut) {
+   switch(nNum) {
+     case 0: sret = "Autor(s) não encontrado(s)!"; break;
+     case 1: {
+         sret = "ISBN: ";
+         g_nPosChave = 1;
+         g_nTamChave = 13;
+        } break;
+     case 2: {
+         sret = "Código do autor: ";
+         g_nPosChave = 14;
+         g_nTamChave = 10;
+        } break;
+   }
+} else if (sreg==opCliente) {
+   switch(nNum) {
+	 case 0: sret = "Cliente(s) não encontrado(s)!"; break;
+	 case 1: {
+		 sret = "CPF: ";
+		 g_nPosChave = 1;
+		 g_nTamChave = 14;
+		} break;
+	 case 2: {
+		 sret = "Nome: ";
+		 g_nPosChave = 15;
+		 g_nTamChave = 30;
+		} break;
+	 case 3: {
+		 sret = "E-mail: ";
+		 g_nPosChave = 45;
+         g_nTamChave = 30;
+        } break;
+     case 4: {
+         sret = "Identidade: ";
+         g_nPosChave = 75;
+         g_nTamChave = 10;
+        } break;
+     case 5: {
+         sret = "Sexo: ";
+         g_nPosChave = 85;
+         g_nTamChave = 1;
+        } break;
+	 case 6: {
+         sret = "Telefone: ";
+		 g_nPosChave = 86;
+         g_nTamChave = 17;
+        } break;
+     case 7: {
+         sret = "Dt. Nascimento: ";
+		 g_nPosChave = 103;
+         g_nTamChave = 10;
+        } break;
+     case 8: {
+         sret = "Código do endereço: ";
+		 g_nPosChave = 113;
+		 g_nTamChave = 10;
+        } break;
+     case 9: {
+         sret = "Código do país: ";
+         g_nPosChave = 123;
+         g_nTamChave = 3;
+        } break;
+     case 10: {
+          sret = "Código da Profissão: ";
+          g_nPosChave = 126;
+          g_nTamChave = 10;
+        } break;
+   }
+} else if (sreg==opVenda) {
+   switch(nNum) {
+	 case 0: sret = "Venda(s) não encontrada(s)!"; break;
+     case 1: {
+		 sret = "Data/Hora venda: ";
+         g_nPosChave = 1;
+         g_nTamChave = 19;
+        } break;
+     case 2: {
+		 sret = "CPF: ";
+         g_nPosChave = 20;
+         g_nTamChave = 14;
+        } break;
+     case 3: {
+		 sret = "ISBN: ";
+		 g_nPosChave = 34;
+         g_nTamChave = 13;
+        } break;
+     case 4: {
+         sret = "Preço de venda: ";
+         g_nPosChave = 47;
+         g_nTamChave = 10;
+        } break;
+   }
+}
+
+return(sret);
+}
+/*------------------------------------------------------------------------------
+Indica se continua ou não mostrando um número máximo de linhas.
+nlinha - a linha a ser continuada
+nQtdLinha - a quantidade de linhas a serem mostradas
+retorna - se continua ou não
+------------------------------------------------------------------------------*/
+boolean ContinuaSN(int nlinha, int nQtdLinha)
+{ boolean bSOp, bret;
+  char opCSubMenu;
+
+bret = false;
+if (nlinha > 0) {
+  if ((nlinha % nQtdLinha) == 0) {
+	  bSOp = true;
+	  while(bSOp) {
+	   menu(13);
+	   opCSubMenu = System.Console.get_In().ReadLine().get_Chars(0);
+	   if ((opCSubMenu=='S') || (opCSubMenu=='s')) bSOp = false;
+	   else if ((opCSubMenu=='N') || (opCSubMenu=='n')) {
+		  bret = true;
+		  bSOp = false;
+	   } else System.Console.WriteLine(MSG_ERRO);
+	  }
+  }
+}
+
+return(bret);
+}
+/*------------------------------------------------------------------------------
+Lista vários registros de acordo com a pesquisa feita.
+sArq - o arquivo
+sreg - o tipo de arquivo
+sChave - a chave a ser pesquisada
+nPosChave - a posicao inicial da chave dentro do registro
+nTamChave - o tamanho da chave dentro do registro
+nTamLinha - o tamanho do registro
+nQtdLinha - a quantidade de linhas a serem mostradas
+retorna - se encontrou algum registro
+------------------------------------------------------------------------------*/
+boolean ListarTodos(FileStream sArq, int sreg, String sChave,
+   int nPosChave, int nTamChave, int nTamLinha, int nQtdLinha,
+   boolean bPesqRelativa) {
+  boolean bQuebra, bAchou, bRet;
+  int nCont;
+  String sres = "", slinha = "";
+
+  bRet = false;
+
+	bQuebra = false;
+	nCont = 0;
+	mostrarDados(sreg, "", 2);
+	sArq.Seek(0,SeekOrigin.Begin);
+	while (!fimArq(sArq) && bQuebra == false) {
+	  slinha = lerArq(sArq, nTamLinha, TAM_CRLF);
+	  if (slinha.Equals("")==false) {
+		if (bPesqRelativa) {
+		  sres = copy(slinha,nPosChave,nTamChave).Trim();
+		  if (strRelativa(sres,sChave)==true) {
+			 bAchou = true;
+			 bRet = true;
+		  } else {
+			 bAchou = false;
+		  }
+		} else {
+		  bAchou = true;
+		  bRet = true;
+		}
+
+		if (bAchou) {
+		  mostrarDados(sreg, copy(slinha,1,nTamLinha), 3);
+		  nCont++;
+		}
+	  }
+	  bQuebra = ContinuaSN(nCont, nQtdLinha);
+	}
+
+return bRet;
+}
+/*------------------------------------------------------------------------------
+Lista vários registros entre arquivos de acordo com a pesquisa feita.
+sArq1 - o arquivo de ligação
+sreg1 - o tipo de arquivo de ligação
+nPosChave1 - a posicao inicial da primeira chave no arquivo de ligação
+nTamChave1 - o tamanho da primeira chave no arquivo de ligação
+nPosChave2 - a posicao inicial da segunda chave do arquivo de ligação
+nTamChave2 - o tamanho da segunda chave do arquivo de ligação
+sChave - a chave a ser pesquisada no arquivo de ligação
+sArq2 - o arquivo a ser pesquisado
+sreg2 - o tipo de arquivo a ser pesquisado
+nPosChave3 - a posicao inicial da chave do arquivo pesquisado
+nQtdLinha - a quantidade de linhas a serem mostradas
+------------------------------------------------------------------------------*/
+void ListarRegLigados(FileStream sArq1, int sreg1, int nPosChave1,
+int nTamChave1, int nPosChave2, int nTamChave2, String sChave,
+FileStream sArq2, int sreg2, int nPosChave3, int nQtdLinha) {
+  String slinha1 = "";
+  boolean bQuebra, bRet;
+  int nCont;
+  String sCodigo1, sCodigo2, slinha2;
+
+	bRet = false;
+	nCont = 0;
+	bQuebra = false;
+	mostrarDados(sreg2, "", 2);
+	sArq1.Seek(0,SeekOrigin.Begin);
+	while (!fimArq(sArq1) && bQuebra == false) {
+	  slinha1 = lerArq(sArq1, tamReg(sreg1), TAM_CRLF);
+	  if (slinha1.Equals("")==false) {
+		sCodigo1 = copy(slinha1,nPosChave1,nTamChave1).Trim();
+		if (sCodigo1.Equals(sChave)) {
+		  sCodigo2 = copy(slinha1,nPosChave2,nTamChave2).Trim();
+		  slinha2 = pesqArq(sArq2, sCodigo2, nPosChave3, nTamChave2, tamReg(sreg2));
+		  mostrarDados(sreg2, copy(slinha2, 1, tamReg(sreg2)), 3);
+		  bRet = true;
+		  nCont++;
+		}
+	  }
+	  bQuebra = ContinuaSN(nCont, nQtdLinha);
+	}
+	if (bRet==false)
+	   System.Console.WriteLine(rotulo(sreg2,0));
+}
+
+/*------------------------------------------------------------------------------
+Valida a entrada de registros de acordo com a pesquisa feita.
+sArq - o arquivo
+sreg - o tipo de arquivo
+nTexto - o numero do rótulo da entrada
+sEntrada - a chave a ser pesquisada e validada
+nTentativas - o número máximo de tentativas
+bPesqRelativa - indica se vai realizar uma pesquisa relativa
+bTipoEntrada - indica o tipo de entrada
+retorna - o registro pesquisado e validado
+------------------------------------------------------------------------------*/
+String validaEntrada(FileStream sArq, int sreg, int nTexto,
+		String sEntrada, int nTentativas,
+		boolean bPesqRelativa, int bTipoEntrada) {
+  boolean bQuebra;
+  String sres, sTexto, sMsgErro, sLocal;
+  int ncont, nPosChave, nTamChave, nTamLinha;
+
+sres = "";
+sLocal = sEntrada;
+
+nTamLinha = tamReg(sreg);
+sMsgErro = rotulo(sreg,0);
+sTexto = rotulo(sreg,nTexto);
+nPosChave = g_nPosChave;
+nTamChave = g_nTamChave;
+
+ncont = 1;
+bQuebra = false;
+  while ((bQuebra==false) && (ncont <= nTentativas )) {
+	if (bTipoEntrada==opTexto) {
+	  System.Console.Write(sTexto);
+	  sLocal = System.Console.get_In().ReadLine();
+	} else if (bTipoEntrada==opNumero)
+	   sLocal = validaNumero(sTexto,sLocal);
+	else if (bTipoEntrada==opData)
+	   sLocal = validaDataHora(sTexto,sLocal,true);
+	else if (bTipoEntrada==opDataHora)
+	   sLocal = validaDataHora(sTexto,sLocal,false);
+	else if (bTipoEntrada==opSenha) {
+	   sLocal = digitaSenha(sTexto, 10);
+	}
+
+    if (bPesqRelativa) {
+       if (ListarTodos(sArq, sreg, sLocal, nPosChave, nTamChave, nTamLinha,
+       QTD_MAX_LINHA, true))
+        sres = " ";
+    } else
+       sres = pesqArq(sArq, sLocal, nPosChave, nTamChave, nTamLinha);
+
+	if (sres.Equals(""))
+	   System.Console.WriteLine(sMsgErro);
+	else
+	   bQuebra = true;
+
+    ncont++;
+  }
+return(sres);
+}
+/*------------------------------------------------------------------------------
+Mostra a tela de splash do sistema.
+------------------------------------------------------------------------------*/
+void frmSplash()
+{ int cont;
+
+ System.Console.WriteLine("*---------------------------------------" +
+ "-------------------------------------*");
+ System.Console.WriteLine("| LL    II VV   VV RRRRR  UU  UU   SSSS " +
+ "VV   VV II RRRRR  TTTT UU  UU   SSSS |");
+ System.Console.WriteLine("| LL    II  VV VV  RR   R UU  UU  SS    " +
+ " VV VV  II RR   R  TT  UU  UU  SS    |");
+ System.Console.WriteLine("| LL    II   VVV   RRRRR  UU  UU    SS  " +
+ "  VVV   II RRRRR   TT  UU  UU    SS  |");
+ System.Console.WriteLine("| LLLLL II    V    RR   R  UUUU  SSSS   " +
+ "   V    II RR   R  TT   UUUU  SSSS   |");
+ System.Console.WriteLine("*---------------------------------------" +
+ "-------------------------------------*");
+ for(cont = 1; cont <= 18; cont++) System.Console.WriteLine();
+ System.Console.Write(MSG_PRESS);
+ System.Console.get_In().ReadLine();
+}
+/*------------------------------------------------------------------------------
+Mostra a tela de sobre do sistema.
+------------------------------------------------------------------------------*/
+void frmSobre()
+{ int cont;
+
+ System.Console.WriteLine("*------------------------------------------------------------*");
+ System.Console.WriteLine("|  LL        II  VV       VV  RRRRRRR   UU    UU   SSSSSSS   |");
+ System.Console.WriteLine("|  LL        II   VV     VV   RR     R  UU    UU  SS         |");
+ System.Console.WriteLine("|  LL        II    VV   VV    RR     R  UU    UU   SSSS      |");
+ System.Console.WriteLine("|  LL        II     VV VV     RRRRRRR   UU    UU     SSSS    |");
+ System.Console.WriteLine("|  LLLL      II      VVV      RR RR     UU    UU        SS   |");
+ System.Console.WriteLine("|  LLLLLLLL  II       V       RR   RR    UUUUUU   SSSSSSSS   |");
+ System.Console.WriteLine("|                                                            |");
+ System.Console.WriteLine("|  VV       VV  II  RRRRRRR   TTTTTTTT  UU    UU   SSSSSSS   |");
+ System.Console.WriteLine("|   VV     VV   II  RR     R     TT     UU    UU  SS         |");
+ System.Console.WriteLine("|    VV   VV    II  RR     R     TT     UU    UU   SSSS      |");
+ System.Console.WriteLine("|     VV VV     II  RRRRRRR      TT     UU    UU     SSSS    |");
+ System.Console.WriteLine("|      VVV      II  RR RR        TT     UU    UU        SS   |");
+ System.Console.WriteLine("|       V       II  RR   RR      TT      UUUUUU   SSSSSSSS   |");
+ System.Console.WriteLine("|                                                            |");
+ System.Console.WriteLine("|                                               Versao 1.0.0 |");
+ System.Console.WriteLine("| Sistema integrante do projeto Livrus Virtus.               |");
+ System.Console.WriteLine("| Todos os direitos reservados para Henrique F. de Souza.    |");
+ System.Console.WriteLine("| Versao programada na linguagem Visual J# .NET.             |");
+ System.Console.WriteLine("*------------------------------------------------------------*");
+ for(cont = 1; cont <= 4; cont++) System.Console.WriteLine();
+ System.Console.Write(MSG_PRESS);
+ System.Console.get_In().ReadLine();
+}
+/*------------------------------------------------------------------------------
+Mostra a tela de login do sistema.
+retorna - se o login foi validado corretamente
+------------------------------------------------------------------------------*/
+boolean frmLogin()
+{ boolean bret;
+  String slinha;
+
+  bret = false;
+  System.Console.WriteLine("*--------------------------------------------------------------*");
+  System.Console.WriteLine("| Login do sistema                                             |");
+  System.Console.WriteLine("*--------------------------------------------------------------*");
+  slinha = validaEntrada(tfUsuario, opUsuario, 1, tUsuario.login, 3,
+		false, opTexto);
+  if (slinha.Equals("")==false) {
+	 slinha = validaEntrada(tfUsuario, opUsuario, 2, tUsuario.senha, 3,
+		false, opSenha);
+	 if (slinha.Equals("")==false) {
+		tUsuario.login = copy(slinha, 1, 10).Trim();
+		tUsuario.senha = copy(slinha, 11, 10).Trim();
+        bret = true;
+     }
+  }
+  System.Console.WriteLine();
+  return(bret);
+}
+/*------------------------------------------------------------------------------
+Mostra os menus do sistema.
+num - o número do menu
+------------------------------------------------------------------------------*/
+void menu(int num)
+{
+ if (num==1) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| (C)adastros        (P)esquisas     (V)endas        (O)pções  |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ } else if (num==2) {
+   System.Console.WriteLine("*---------------------------------*");
+   System.Console.WriteLine("| 01. Cadastro de Assuntos        |");
+   System.Console.WriteLine("| 02. Cadastro de Autores         |");
+   System.Console.WriteLine("| 03. Cadastro de Editoras        |");
+   System.Console.WriteLine("| 04. Cadastro de Endereços       |");
+   System.Console.WriteLine("| 05. Cadastro de Idiomas         |");
+   System.Console.WriteLine("| 06. Cadastro de Países          |");
+   System.Console.WriteLine("| 07. Cadastro de Profissões      |");
+   System.Console.WriteLine("| 08. Cadastro de Clientes        |");
+   System.Console.WriteLine("| 09. Cadastro de Livros          |");
+   System.Console.WriteLine("| 10. Voltar ao menu              |");
+   System.Console.WriteLine("*---------------------------------*");
+ } else if (num==3) {
+   System.Console.WriteLine("*---------------------------------*");
+   System.Console.WriteLine("| 01. Consulta de Assuntos        |");
+   System.Console.WriteLine("| 02. Consulta de Autores         |");
+   System.Console.WriteLine("| 03. Consulta de Editoras        |");
+   System.Console.WriteLine("| 04. Consulta de Endereços       |");
+   System.Console.WriteLine("| 05. Consulta de Idiomas         |");
+   System.Console.WriteLine("| 06. Consulta de Países          |");
+   System.Console.WriteLine("| 07. Consulta de Profissões      |");
+   System.Console.WriteLine("| 08. Consulta de Clientes        |");
+   System.Console.WriteLine("| 09. Consulta de Livros          |");
+   System.Console.WriteLine("| 10. Voltar ao menu              |");
+   System.Console.WriteLine("*---------------------------------*");
+ } else if (num==4) {
+   System.Console.WriteLine("*---------------------------------*");
+   System.Console.WriteLine("| 01. Vender Livros               |");
+   System.Console.WriteLine("| 02. Vendas Realizadas           |");
+   System.Console.WriteLine("| 03. Voltar ao menu              |");
+   System.Console.WriteLine("*---------------------------------*");
+ } else if (num==5) {
+   System.Console.WriteLine("*---------------------------------*");
+   System.Console.WriteLine("| 01. Alterar senha               |");
+   System.Console.WriteLine("| 02. Sobre o sistema             |");
+   System.Console.WriteLine("| 03. Sair do sistema             |");
+   System.Console.WriteLine("| 04. Voltar ao menu              |");
+   System.Console.WriteLine("*---------------------------------*");
+ } else if (num==6) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| (1) Novo  (2) Pesquisar   (3) Voltar ao menu                 |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ } else if (num==7) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| (1) Salvar inclusão       (2) Voltar ao menu                 |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ } else if (num==8) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| (1) Alterar       (2) Excluir     (3) Voltar ao menu         |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ } else if (num==9) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| (1) Salvar alteração      (2) Voltar ao menu                 |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ } else if (num==10) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| Certeza de excluir? (S/N)                                    |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ } else if (num==11) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| Deseja sair do sistema? (S/N)                                |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ } else if (num==12) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| (1) Pesquisar  (2) Listar todos   (3) Voltar ao menu         |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ } else if (num==13) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| Deseja continuar? (S/N)                                      |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ } else if (num==14) {
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+   System.Console.WriteLine("| Salvar inclusão (S/N)                                        |");
+   System.Console.WriteLine("*--------------------------------------------------------------*");
+ }
+ System.Console.Write(MSG_OPCAO);
+}
+/*------------------------------------------------------------------------------
+Realiza os cadastros de acordo com o tipo de arquivo.
+sreg - o tipo de arquivo
+sacao - a ação a ser realizada
+------------------------------------------------------------------------------*/
+void frmCadastros(int sreg, int sacao)
+{ String slinha = "";
+
+if (sreg==opAssunto) {
+   if (sacao==opNovo) {
+	  tAssunto.codigo = pesqMaxCod(tfAssunto, 1, 10, tamReg(sreg));
+	  mostrarDados(sreg, "", 1);
+	  subMenu(7, sreg);
+   } else if (sacao==opPesquisar) {
+	 slinha = validaEntrada(tfAssunto,sreg,1,tAssunto.codigo,1,false,opNumero);
+	  if (slinha.Equals("")==false) {
+		mostrarDados(sreg, "", 2);
+		mostrarDados(sreg, slinha, 3);
+		subMenu(8, sreg);
+	  }
+   } else if (sacao==opAlterar) {
+	  mostrarDados(sreg, "", 1);
+	  subMenu(9, sreg);
+   } else if (sacao==opExcluir) {
+	  subMenu(10, sreg);
+   }
+} else if (sreg==opAutor) {
+   if (sacao==opNovo) {
+	  tAutor.codigo = pesqMaxCod(tfAutor, 1, 10, tamReg(sreg));
+	  mostrarDados(sreg, "", 1);
+	  subMenu(7, sreg);
+   } else if (sacao==opPesquisar) {
+	  slinha = validaEntrada(tfAutor, sreg, 1, tAutor.codigo,1,false,opNumero);
+	  if (slinha.Equals("")==false) {
+		mostrarDados(sreg, "", 2);
+		mostrarDados(sreg, slinha, 3);
+		subMenu(8, sreg);
+	  }
+   } else if (sacao==opAlterar) {
+	  mostrarDados(sreg, "", 1);
+	  subMenu(9, sreg);
+   } else if (sacao==opExcluir) {
+	  subMenu(10, sreg);
+   }
+} else if (sreg==opEditora) {
+   if (sacao==opNovo) {
+	  tEditora.codigo = pesqMaxCod(tfEditora, 1, 10, tamReg(sreg));
+	  mostrarDados(sreg, "", 1);
+	  subMenu(7, sreg);
+   } else if (sacao==opPesquisar) {
+	  slinha = validaEntrada(tfEditora,sreg,1,tEditora.codigo,1,false,opNumero);
+	  if (slinha.Equals("")==false) {
+		mostrarDados(sreg, "", 2);
+		mostrarDados(sreg, slinha, 3);
+		subMenu(8, sreg);
+	  }
+   } else if (sacao==opAlterar) {
+	  mostrarDados(sreg, "", 1);
+	  subMenu(9, sreg);
+   } else if (sacao==opExcluir) {
+	  subMenu(10, sreg);
+   }
+} else if (sreg==opEndereco) {
+   if (sacao==opNovo) {
+	  tEndereco.codigo = pesqMaxCod(tfEndereco, 1, 10, tamReg(sreg));
+	  mostrarDados(sreg, "", 1);
+	  subMenu(7, sreg);
+   } else if (sacao==opPesquisar) {
+	  slinha = validaEntrada(tfEndereco,sreg,1,tEndereco.codigo,1,
+			  false,opNumero);
+	  if (slinha.Equals("")==false) {
+		mostrarDados(sreg, "", 2);
+		mostrarDados(sreg, slinha, 3);
+		subMenu(8, sreg);
+	  }
+   } else if (sacao==opAlterar) {
+	  mostrarDados(sreg, "", 1);
+	  subMenu(9, sreg);
+   } else if (sacao==opExcluir) {
+	  subMenu(10, sreg);
+   }
+} else if (sreg==opIdioma) {
+   if (sacao==opNovo) {
+	  tIdioma.codigo = pesqMaxCod(tfIdioma, 1, 10, tamReg(sreg));
+	  mostrarDados(sreg, "", 1);
+	  subMenu(7, sreg);
+   } else if (sacao==opPesquisar) {
+	  slinha = validaEntrada(tfIdioma,sreg,1,tIdioma.codigo,1,false,opNumero);
+	  if (slinha.Equals("")==false) {
+		mostrarDados(sreg, "", 2);
+		mostrarDados(sreg, slinha, 3);
+		subMenu(8, sreg);
+	  }
+   } else if (sacao==opAlterar) {
+	  mostrarDados(sreg, "", 1);
+	  subMenu(9, sreg);
+   } else if (sacao==opExcluir) {
+	  subMenu(10, sreg);
+   }
+} else if (sreg==opPais) {
+   if (sacao==opNovo) {
+	  System.Console.Write(rotulo(sreg, 1));
+	  tPais.codigo = System.Console.get_In().ReadLine();
+	  slinha = pesqArq(tfPais, tPais.codigo, 1, 3, tamReg(sreg));
+	  if (slinha.Equals("")) {
+		 pesqLinhaExcluida(tfPais, tamReg(sreg));
+		 mostrarDados(sreg, "", 1);
+		 subMenu(7, sreg);
+	  } else System.Console.WriteLine(MSG_REGEXST);
+   } else if (sacao==opPesquisar) {
+	  slinha = validaEntrada(tfPais, sreg, 1, tPais.codigo, 1, false, opTexto);
+	  if (slinha.Equals("")==false) {
+		mostrarDados(sreg, "", 2);
+		mostrarDados(sreg, slinha, 3);
+		subMenu(8, sreg);
+	  }
+   } else if (sacao==opAlterar) {
+	  System.Console.WriteLine(rotulo(sreg, 1) + tPais.codigo);
+	  mostrarDados(sreg, "", 1);
+	  subMenu(9, sreg);
+   } else if (sacao==opExcluir) {
+	  subMenu(10, sreg);
+   }
+} else if (sreg==opProfissao) {
+   if (sacao==opNovo) {
+	  tProfissao.codigo = pesqMaxCod(tfProfissao, 1, 10, tamReg(sreg));
+	  mostrarDados(sreg, "", 1);
+	  subMenu(7, sreg);
+   } else if (sacao==opPesquisar) {
+	  slinha = validaEntrada(tfProfissao,sreg,1,tProfissao.codigo,1,
+			  false,opNumero);
+	  if (slinha.Equals("")==false) {
+		mostrarDados(sreg, "", 2);
+		mostrarDados(sreg, slinha, 3);
+		subMenu(8, sreg);
+	  }
+   } else if (sacao==opAlterar) {
+	  mostrarDados(sreg, "", 1);
+	  subMenu(9, sreg);
+   } else if (sacao==opExcluir) {
+	  subMenu(10, sreg);
+   }
+} else if (sreg==opLivro) {
+   if (sacao==opNovo) {
+	  System.Console.Write(rotulo(sreg, 1));
+	  tLivro.isbn = System.Console.get_In().ReadLine();
+	  if (ValidaISBN(tLivro.isbn)) {
+		  slinha = pesqArq(tfLivro, tLivro.isbn, 1, 13, tamReg(sreg));
+		  if (slinha.Equals("")) {
+			 pesqLinhaExcluida(tfLivro, tamReg(sreg));
+			 mostrarDados(sreg, "", 1);
+			 subMenu(7, sreg);
+			 frmCadLigados(opLivroAss, opNovo, tLivro.isbn);
+			 frmCadLigados(opLivroAut, opNovo, tLivro.isbn);
+		  } else System.Console.WriteLine(MSG_REGEXST);
+	  } else System.Console.WriteLine(MSG_ISBNINV);
+   } else if (sacao==opPesquisar) {
+	  slinha = validaEntrada(tfLivro, sreg, 1, tLivro.isbn, 1,false,opTexto);
+	  if (slinha.Equals("")==false) {
+		 mostrarDados(sreg, "", 2);
+		 mostrarDados(sreg, slinha, 3);
+		 subMenu(8, sreg);
+	  }
+   } else if (sacao==opAlterar) {
+	  System.Console.WriteLine(rotulo(sreg, 1) + tLivro.isbn);
+	  mostrarDados(sreg, "", 1);
+	  subMenu(9, sreg);
+	  frmCadLigados(opLivroAss, opExcluir, tLivro.isbn);
+	  System.Console.WriteLine("Assuntos dos livros excluídos, inclua novos!");
+	  frmCadLigados(opLivroAss, opNovo, tLivro.isbn);
+	  frmCadLigados(opLivroAut, opExcluir, tLivro.isbn);
+	  System.Console.WriteLine("Autores dos livros excluídos, inclua novos!");
+	  frmCadLigados(opLivroAut, opNovo, tLivro.isbn);
+   } else if (sacao==opExcluir) {
+	  subMenu(10, sreg);
+	  System.Console.WriteLine("Assuntos dos livros sendo excluídos!");
+	  frmCadLigados(opLivroAss, opExcluir, tLivro.isbn);
+	  System.Console.WriteLine("Autores dos livros sendo excluídos!");
+	  frmCadLigados(opLivroAut, opExcluir, tLivro.isbn);
+   }
+} else if (sreg==opCliente) {
+   if (sacao==opNovo) {
+	  System.Console.Write(rotulo(sreg, 1));
+	  tCliente.cpf = System.Console.get_In().ReadLine();
+	  if (ValidaCPF(tCliente.cpf)) {
+		  slinha = pesqArq(tfCliente, tCliente.cpf, 1, 14, tamReg(sreg));
+		  if (slinha.Equals("")) {
+			 pesqLinhaExcluida(tfCliente, tamReg(sreg));
+			 mostrarDados(sreg, "", 1);
+			 subMenu(7, sreg);
+		  } else System.Console.WriteLine(MSG_REGEXST);
+	  } else System.Console.WriteLine(MSG_CPFINV);
+   } else if (sacao==opPesquisar) {
+	  slinha = validaEntrada(tfCliente, sreg, 1, tCliente.cpf,1,false,opTexto);
+	  if (slinha.Equals("")==false) {
+		 mostrarDados(sreg, "", 2);
+		 mostrarDados(sreg, slinha, 3);
+		 subMenu(8, sreg);
+	  }
+   } else if (sacao==opAlterar) {
+	  System.Console.WriteLine(rotulo(sreg, 1) + tCliente.cpf);
+	  mostrarDados(sreg, "", 1);
+	  subMenu(9, sreg);
+   } else if (sacao==opExcluir) {
+	  subMenu(10, sreg);
+   }
+} else if (sreg==opVenda) {
+   if (sacao==opNovo) {
+	  tVenda.dthrvenda = retDataHora();
+	  System.Console.WriteLine(rotulo(sreg, 1) + tVenda.dthrvenda);
+	  slinha = pesqArq(tfVenda, tVenda.dthrvenda, 1, 19, tamReg(sreg));
+	  if (slinha.Equals("")) {
+		 slinha = validaEntrada(tfCliente,opCliente,1,tVenda.cpf,3,
+				 false,opTexto);
+		 if (slinha.Equals("")==false) {
+			tVenda.cpf = copy(slinha,1,14).Trim();
+			if (ValidaCPF(tVenda.cpf)) {
+			   System.Console.Write(" " + rotulo(opCliente, 2)); /* Nome */
+			   System.Console.WriteLine(copy(slinha, g_nPosChave, g_nTamChave));
+			   frmCadLigados(opVenda, opNovo, tVenda.cpf);
+			} else System.Console.WriteLine(MSG_CPFINV);
+		 }
+	  } else System.Console.WriteLine(MSG_REGEXST);
+   } else if (sacao==opPesquisar) {
+	  slinha = validaEntrada(tfVenda, sreg, 1, tVenda.dthrvenda,1,
+			  false,opDataHora);
+	  if (slinha.Equals("")==false) {
+		mostrarDados(sreg, "", 2);
+		mostrarDados(sreg, slinha, 3);
+		subMenu(8, sreg);
+	  }
+   }
+}
+
+}
+/*------------------------------------------------------------------------------
+Realiza as consultas de acordo com o tipo de arquivo.
+sreg - o tipo de arquivo
+sacao - a ação a ser realizada
+------------------------------------------------------------------------------*/
+void frmConsultas(int sreg, int sacao)
+{ String slinha = "";
+
+if (sreg==opAssunto) {
+   if (sacao==opPesquisar)
+	  slinha = validaEntrada(tfAssunto,sreg,2,tAssunto.assunto,1,true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfAssunto, sreg, "", 0, 0, tamReg(sreg),
+		QTD_MAX_LINHA, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+} else if (sreg==opAutor) {
+   if (sacao==opPesquisar)
+	  slinha = validaEntrada(tfAutor,sreg, 2, tAutor.autor, 1, true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfAutor, sreg, "", 0, 0, tamReg(sreg),
+		QTD_MAX_LINHA, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+} else if (sreg==opEditora) {
+   if (sacao==opPesquisar)
+	  slinha = validaEntrada(tfEditora,sreg,2,tEditora.editora,1,true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfEditora, sreg, "", 0, 0, tamReg(sreg),
+		QTD_MAX_LINHA, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+} else if (sreg==opEndereco) {
+   if (sacao==opPesquisar)
+	  slinha = validaEntrada(tfEndereco,sreg,2,tEndereco.logradouro,1,
+			  true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfEndereco, sreg, "", 0, 0, tamReg(sreg),
+		 3, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+} else if (sreg==opIdioma) {
+   if (sacao==opPesquisar)
+	  slinha = validaEntrada(tfIdioma, sreg, 2, tIdioma.idioma,1,true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfIdioma, sreg, "", 0, 0, tamReg(sreg),
+		QTD_MAX_LINHA, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+} else if (sreg==opPais) {
+   if (sacao==opPesquisar)
+	  slinha = validaEntrada(tfPais, sreg, 2, tPais.pais, 1, true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfPais, sreg, "", 0, 0, tamReg(sreg),
+		QTD_MAX_LINHA, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+} else if (sreg==opProfissao) {
+   if (sacao==opPesquisar)
+	 slinha = validaEntrada(tfProfissao,sreg,2,tProfissao.profissao,1,
+			 true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfProfissao, sreg, "", 0, 0, tamReg(sreg),
+		QTD_MAX_LINHA, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+} else if (sreg==opLivro) {
+   if (sacao==opPesquisar)
+	  slinha = validaEntrada(tfLivro, sreg, 2, tLivro.titulo, 1, true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfLivro, sreg, "", 0, 0, tamReg(sreg),
+		1, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+} else if (sreg==opCliente) {
+   if (sacao==opPesquisar)
+	  slinha = validaEntrada(tfCliente, sreg, 2, tCliente.nome,1,true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfCliente, sreg, "", 0, 0, tamReg(sreg),
+		1, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+} else if (sreg==opVenda) {
+   if (sacao==opPesquisar)
+	  slinha = validaEntrada(tfVenda, sreg, 2, tVenda.cpf, 1, true,opTexto);
+   else if (sacao==opListarTodos) {
+	  if (ListarTodos(tfVenda, sreg, "", 0, 0, tamReg(sreg),
+		QTD_MAX_LINHA, false) == false)
+		System.Console.WriteLine(rotulo(sreg, 0));
+   }
+}
+if (slinha.Equals(""))
+   System.Console.Write("");
+}
+/*------------------------------------------------------------------------------
+Mostra a tela de alteração de senha do sistema e realiza a alteração.
+------------------------------------------------------------------------------*/
+void frmAlterarSenha()
+{ boolean bQuebra;
+  String sres, sSenhaAtual, sNovaSenha, sConfirmaSenha;
+  int nopcao;
+
+sSenhaAtual = "";
+sNovaSenha = "";
+sConfirmaSenha = "";
+
+System.Console.WriteLine(rotulo(opUsuario, 1) + tUsuario.login);
+nopcao = 1;
+bQuebra = false;
+while (bQuebra==false) {
+  switch(nopcao) {
+   case 1: {
+       sSenhaAtual = digitaSenha("Senha Atual: ", 10);
+	   if (sSenhaAtual.Equals(tUsuario.senha)==false) {
+		  System.Console.WriteLine(MSG_SENCONFERE);
+		  bQuebra = true;
+	   } else nopcao = 2;
+	  } break;
+   case 2: {
+	   sNovaSenha = digitaSenha("Nova Senha: ", 10);
+	   sConfirmaSenha = digitaSenha("Confirma Senha: ", 10);
+	   if (sNovaSenha.Equals(sConfirmaSenha)==false) {
+		  System.Console.WriteLine(MSG_SENCONFIRM);
+		  bQuebra = true;
+	   } else nopcao = 3;
+	  } break;
+   case 3: {
+	   sres = pesqArq(tfUsuario, tUsuario.login, 1, 10, tamReg(opUsuario));
+	   if (sres.Equals(""))
+		 System.Console.WriteLine(MSG_LOGINENCON);
+	   else {
+		 tUsuario.senha = sConfirmaSenha;
+		 subMenu(9,opUsuario);
+		 bQuebra = true;
+	   }
+	  } break;
+  }
+}
+}
+/*------------------------------------------------------------------------------
+Executa uma ação de gravação de acordo com o tipo de arquivo.
+sreg - o tipo de arquivo
+sacao - a ação a ser realizada
+------------------------------------------------------------------------------*/
+void btnAcao(int sreg, int sacao)
+{
+if (sreg==opAssunto) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfAssunto, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfAssunto, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfAssunto, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opAutor) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfAutor, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfAutor, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfAutor, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opEditora) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfEditora, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfEditora, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfEditora, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opEndereco) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfEndereco, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfEndereco, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfEndereco, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opIdioma) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfIdioma, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfIdioma, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfIdioma, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opPais) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfPais, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfPais, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfPais, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opProfissao) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfProfissao, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfProfissao, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	 escreveArq(tfProfissao, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opLivro) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfLivro, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfLivro, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfLivro, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opLivroAss) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfLivroAss, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfLivroAss, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfLivroAss, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opLivroAut) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfLivroAut, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfLivroAut, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfLivroAut, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opCliente) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfCliente, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfCliente, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfCliente, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opVenda) {
+   if (sacao==opSalvarInclusao)
+	  escreveArq(tfVenda, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC);
+   else if (sacao==opSalvarAlteracao)
+	  escreveArq(tfVenda, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+   else if (sacao==opConfirmaExclusao)
+	  escreveArq(tfVenda, repete("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC);
+} else if (sreg==opUsuario) {
+   if (sacao==opSalvarAlteracao)
+	  escreveArq(tfUsuario, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT);
+}
+}
+/*------------------------------------------------------------------------------
+Seleciona o menu e/ou a tela certa de acordo com o tipo de arquivo.
+nmenu - o número do menu
+sreg - o tipo de arquivo
+------------------------------------------------------------------------------*/
+void subMenu(int nmenu, int sreg)
+{ String opSubMenu;
+  char opCSubMenu;
+  boolean bSOp;
+
+bSOp = true;
+switch(nmenu) {
+ case 6:{
+	while(bSOp) {
+	 menu(nmenu);
+	 opSubMenu = System.Console.get_In().ReadLine();
+	 if (opSubMenu.Equals("1")) frmCadastros(sreg, opNovo);
+	 else if (opSubMenu.Equals("2")) frmCadastros(sreg, opPesquisar); 
+	 else if (opSubMenu.Equals("3")) bSOp = false; 
+	 else System.Console.WriteLine(MSG_ERRO); 	 
+	}
+   } break;
+ case 7:{
+	while(bSOp) {
+	 menu(nmenu);
+	 opSubMenu = System.Console.get_In().ReadLine();
+	 if (opSubMenu.Equals("1")) { btnAcao(sreg, opSalvarInclusao); bSOp = false; }
+	 else if (opSubMenu.Equals("2")) bSOp = false;
+	 else System.Console.WriteLine(MSG_ERRO);
+	}
+   } break;
+ case 8:{
+	while(bSOp) {
+	 menu(nmenu);
+	 opSubMenu = System.Console.get_In().ReadLine();
+	 if (opSubMenu.Equals("1")) { frmCadastros(sreg, opAlterar); bSOp = false; }
+	 else if (opSubMenu.Equals("2")) { frmCadastros(sreg, opExcluir); bSOp = false; }
+	 else if (opSubMenu.Equals("3")) bSOp = false;
+	 else System.Console.WriteLine(MSG_ERRO);
+	}
+   } break;
+ case 9:{
+	while(bSOp) {
+	 menu(nmenu);
+	 opSubMenu = System.Console.get_In().ReadLine();
+	 if (opSubMenu.Equals("1")) { btnAcao(sreg, opSalvarAlteracao); bSOp = false; }
+	 else if (opSubMenu.Equals("2")) bSOp = false;
+	 else System.Console.WriteLine(MSG_ERRO);
+	}
+   } break;
+ case 10:{
+	while(bSOp) {
+	 menu(nmenu);
+	 opCSubMenu = System.Console.get_In().ReadLine().get_Chars(0);
+	 if ((opCSubMenu=='S') || (opCSubMenu=='s')) {
+		btnAcao(sreg, opConfirmaExclusao);
+		bSOp = false;
+	 } else if ((opCSubMenu=='N') || (opCSubMenu=='n')) bSOp = false;
+	 else System.Console.WriteLine(MSG_ERRO);
+	}
+   } break;
+ case 12:{
+	while(bSOp) {
+	 menu(nmenu);
+	 opSubMenu = System.Console.get_In().ReadLine();
+	 if (opSubMenu.Equals("1")) frmConsultas(sreg, opPesquisar);
+	 else if (opSubMenu.Equals("2")) frmConsultas(sreg, opListarTodos);
+	 else if (opSubMenu.Equals("3")) bSOp = false;
+	 else System.Console.WriteLine(MSG_ERRO);
+	}
+   } break;
+ case 14:{
+	while(bSOp) {
+	 menu(nmenu);
+	 opCSubMenu = System.Console.get_In().ReadLine().get_Chars(0);
+	 if ((opCSubMenu=='S') || (opCSubMenu=='s')) {
+		btnAcao(sreg, opSalvarInclusao);
+		bSOp = false;
+		g_SalvarInclusao = true;
+	 } else if ((opCSubMenu=='N') || (opCSubMenu=='n')) bSOp = false;
+	 else System.Console.WriteLine(MSG_ERRO);
+	}
+   } break;
+}
+
+}
+/*------------------------------------------------------------------------------
+Seleciona o submenu e/ou a tela certa de acordo com número do menu.
+nmenu - o número do menu
+------------------------------------------------------------------------------*/
+void usaMenu(int num)
+{ String opSubMenu;
+  boolean bSOp;
+  char opSair;
+
+ bSOp = true;
+ if (num == 1) { /* Cadastros */
+   while(bSOp) {
+	 menu(2);
+	 opSubMenu = System.Console.get_In().ReadLine();
+	 if (opSubMenu.Equals("1")) subMenu(6, opAssunto);
+	 else if (opSubMenu.Equals("2")) subMenu(6, opAutor);
+	 else if (opSubMenu.Equals("3")) subMenu(6, opEditora);
+	 else if (opSubMenu.Equals("4")) subMenu(6, opEndereco);
+	 else if (opSubMenu.Equals("5")) subMenu(6, opIdioma);
+	 else if (opSubMenu.Equals("6")) subMenu(6, opPais);
+	 else if (opSubMenu.Equals("7")) subMenu(6, opProfissao);
+	 else if (opSubMenu.Equals("8")) subMenu(6, opCliente);
+	 else if (opSubMenu.Equals("9")) subMenu(6, opLivro);
+	 else if (opSubMenu.Equals("10")) bSOp = false;
+         else System.Console.WriteLine(MSG_ERRO);
+   }
+ } else if (num == 2) { /* Pesquisas */
+   while(bSOp) {
+	 menu(3);
+	 opSubMenu = System.Console.get_In().ReadLine();
+	 if (opSubMenu.Equals("1")) subMenu(12, opAssunto);
+	 else if (opSubMenu.Equals("2")) subMenu(12, opAutor);
+	 else if (opSubMenu.Equals("3")) subMenu(12, opEditora);
+	 else if (opSubMenu.Equals("4")) subMenu(12, opEndereco);
+	 else if (opSubMenu.Equals("5")) subMenu(12, opIdioma);
+	 else if (opSubMenu.Equals("6")) subMenu(12, opPais);
+	 else if (opSubMenu.Equals("7")) subMenu(12, opProfissao);
+	 else if (opSubMenu.Equals("8")) subMenu(12, opCliente);
+	 else if (opSubMenu.Equals("9")) subMenu(12, opLivro);
+	 else if (opSubMenu.Equals("10")) bSOp = false;
+	 else System.Console.WriteLine(MSG_ERRO);
+   }
+ } else if (num == 3) { /* Vendas */
+   while(bSOp) {
+	 menu(4);
+	 opSubMenu = System.Console.get_In().ReadLine();
+	 if (opSubMenu.Equals("1")) subMenu(6, opVenda);
+	 else if (opSubMenu.Equals("2")) subMenu(12, opVenda);
+	 else if (opSubMenu.Equals("3")) bSOp = false;
+	 else System.Console.WriteLine(MSG_ERRO);
+   }
+ } else if (num == 4) { /* Opcoes */
+   while(bSOp) {
+	 menu(5);
+	 opSubMenu = System.Console.get_In().ReadLine();
+	 if (opSubMenu.Equals("1")) frmAlterarSenha();
+	 else if (opSubMenu.Equals("2")) frmSobre();
+	 else if (opSubMenu.Equals("3")) {
+		   menu(11);
+		   opSair = System.Console.get_In().ReadLine().get_Chars(0);
+		   if ((opSair=='S') || (opSair=='s')) {
+			  fechaArqs();
+			  System.Environment.Exit(0);
+		   }
+		 }
+	 else if (opSubMenu.Equals("4")) bSOp = false;
+	 else System.Console.WriteLine(MSG_ERRO);
+   }
+ }
+}
+/*------------------------------------------------------------------------------
+Mostra as entradas e as saídas do sistema.
+sreg - o tipo de arquivo
+slinha - o registro com os dados
+nOpcao - indica qual opção será mostrada
+------------------------------------------------------------------------------*/
+void mostrarDados(int sreg, String slinha, int nOpcao)
+{
+if (sreg==opAssunto) {
+   switch(nOpcao) {
+	case 1: {
+		System.Console.WriteLine(rotulo(sreg, 1) + tAssunto.codigo);
+		System.Console.Write(rotulo(sreg, 2));
+		tAssunto.assunto = System.Console.get_In().ReadLine();
+	   } break;
+	case 2: {
+		System.Console.WriteLine("Código     Assunto");
+		System.Console.WriteLine("------     -------");
+	   } break;
+	case 3: {
+		tAssunto.codigo = copy(slinha, 1, 10).Trim();
+		tAssunto.assunto = copy(slinha, 11, 30).Trim();
+		System.Console.WriteLine(esp(tAssunto.codigo,10) + " " +
+						   esp(tAssunto.assunto,30));
+	   } break;
+   }
+} else if (sreg==opAutor) {
+   switch(nOpcao) {
+	case 1: {
+		System.Console.WriteLine(rotulo(sreg, 1) + tAutor.codigo);
+		System.Console.Write(rotulo(sreg, 2));
+		tAutor.autor = System.Console.get_In().ReadLine();
+	   } break;
+	case 2: {
+		System.Console.WriteLine("Código     Autor");
+		System.Console.WriteLine("------     -----");
+	   } break;
+	case 3: {
+		tAutor.codigo = copy(slinha, 1, 10).Trim();
+		tAutor.autor = copy(slinha, 11, 30).Trim();
+		System.Console.WriteLine(esp(tAutor.codigo,10)+" "+esp(tAutor.autor,30));
+	   } break;
+   }
+} else if (sreg==opEditora) {
+   switch(nOpcao) {
+	case 1: {
+		System.Console.WriteLine(rotulo(sreg, 1) + tEditora.codigo);
+		System.Console.Write(rotulo(sreg, 2));
+		tEditora.editora = System.Console.get_In().ReadLine();
+	   } break;
+	case 2: {
+		System.Console.WriteLine("Código     Editora");
+		System.Console.WriteLine("------     -------");
+	   } break;
+	case 3: {
+		tEditora.codigo = copy(slinha, 1, 10).Trim();
+		tEditora.editora = copy(slinha, 11, 50).Trim();
+		System.Console.WriteLine(esp(tEditora.codigo,10)+" "+
+						   esp(tEditora.editora,50));
+       } break;
+   }
+} else if (sreg==opEndereco) {
+   switch(nOpcao) {
+	case 1: {
+		System.Console.WriteLine(rotulo(sreg, 1) + tEndereco.codigo);
+		System.Console.Write(rotulo(sreg, 2));
+		tEndereco.logradouro = System.Console.get_In().ReadLine();
+		System.Console.Write(rotulo(sreg, 3));
+		tEndereco.bairro = System.Console.get_In().ReadLine();
+		System.Console.Write(rotulo(sreg, 4));
+		tEndereco.cep = System.Console.get_In().ReadLine();
+		System.Console.Write(rotulo(sreg, 5));
+		tEndereco.cidade = System.Console.get_In().ReadLine();
+		System.Console.Write(rotulo(sreg, 6));
+		tEndereco.estado = System.Console.get_In().ReadLine();
+	   } break;
+	case 3: {
+		tEndereco.codigo = copy(slinha, 1, 10).Trim();
+		tEndereco.logradouro = copy(slinha, 11, 40).Trim();
+		tEndereco.bairro = copy(slinha, 51, 15).Trim();
+		tEndereco.cep = copy(slinha, 66, 8).Trim();
+		tEndereco.cidade = copy(slinha, 74, 30).Trim();
+		tEndereco.estado = copy(slinha, 104, 20).Trim();
+		System.Console.WriteLine("--------------------");
+		System.Console.WriteLine(rotulo(sreg, 1) + tEndereco.codigo);
+		System.Console.WriteLine(rotulo(sreg, 2) + tEndereco.logradouro);
+		System.Console.WriteLine(rotulo(sreg, 3) + tEndereco.bairro);
+		System.Console.WriteLine(rotulo(sreg, 4) + tEndereco.cep);
+		System.Console.WriteLine(rotulo(sreg, 5) + tEndereco.cidade);
+		System.Console.WriteLine(rotulo(sreg, 6) + tEndereco.estado);
+	   } break;
+   }
+} else if (sreg==opIdioma) {
+   switch(nOpcao) {
+	case 1: {
+		System.Console.WriteLine(rotulo(sreg, 1) + tIdioma.codigo);
+		System.Console.Write(rotulo(sreg, 2));
+		tIdioma.idioma = System.Console.get_In().ReadLine();
+	   } break;
+	case 2: {
+		System.Console.WriteLine("Código     Idioma");
+		System.Console.WriteLine("------     ------");
+	   } break;
+	case 3: {
+		tIdioma.codigo = copy(slinha, 1, 10).Trim();
+		tIdioma.idioma = copy(slinha, 11, 20).Trim();
+		System.Console.WriteLine(esp(tIdioma.codigo,10) + " " +
+						   esp(tIdioma.idioma,20));
+	   } break;
+   }
+} else if (sreg==opPais) {
+   switch(nOpcao) {
+	case 1: {
+		System.Console.Write(rotulo(sreg, 2));
+		tPais.pais = System.Console.get_In().ReadLine();
+	   } break;
+	case 2: {
+		System.Console.WriteLine("Código País");
+		System.Console.WriteLine("------ ----");
+	   } break;
+	case 3: {
+		tPais.codigo = copy(slinha, 1, 3).Trim();
+		tPais.pais = copy(slinha, 4, 50).Trim();
+		System.Console.WriteLine(esp(tPais.codigo,3)+"    "+esp(tPais.pais,50));
+	   } break;
+   }
+} else if (sreg==opProfissao) {
+   switch(nOpcao) {
+	case 1: {
+		System.Console.WriteLine(rotulo(sreg, 1) + tProfissao.codigo);
+		System.Console.WriteLine(rotulo(sreg, 2));
+		tProfissao.profissao = System.Console.get_In().ReadLine();
+	   } break;
+	case 2: {
+		System.Console.WriteLine("Código     Profissão");
+		System.Console.WriteLine("------     ---------");
+	   } break;
+	case 3: {
+		tProfissao.codigo = copy(slinha, 1, 10).Trim();
+		tProfissao.profissao = copy(slinha, 11, 50).Trim();
+		System.Console.WriteLine(esp(tProfissao.codigo,10)+" "+
+				esp(tProfissao.profissao,50));
+	   } break;
+   }
+} else if (sreg==opLivro) {
+   switch(nOpcao) {
+	case 1: {
+		System.Console.Write(rotulo(sreg, 2));
+		tLivro.titulo = System.Console.get_In().ReadLine();
+		tLivro.edicao = validaNumero(rotulo(sreg, 3), tLivro.edicao);
+		tLivro.anopubli = validaNumero(rotulo(sreg, 4), tLivro.anopubli);
+		mostrarSubDados(opLivro, opEditora, false);
+		tLivro.volume = validaNumero(rotulo(sreg, 6), tLivro.volume);
+		mostrarSubDados(opLivro, opIdioma, false);
+		tLivro.npaginas = validaNumero(rotulo(sreg, 8), tLivro.npaginas);
+		tLivro.preco = validaNumero(rotulo(sreg, 9), tLivro.preco);
+		tLivro.qtdestoque = validaNumero(rotulo(sreg, 10),
+		tLivro.qtdestoque);
+	   } break;
+	case 3: {
+		tLivro.isbn = copy(slinha, 1, 13).Trim();
+		tLivro.titulo = copy(slinha, 14, 50).Trim();
+		tLivro.edicao = copy(slinha, 64, 10).Trim();
+		tLivro.anopubli = copy(slinha, 74, 10).Trim();
+		tLivro.codeditora = copy(slinha, 84, 10).Trim();
+		tLivro.volume = copy(slinha, 94, 10).Trim();
+		tLivro.codidioma = copy(slinha, 104, 10).Trim();
+		tLivro.npaginas = copy(slinha, 114, 10).Trim();
+		tLivro.preco = copy(slinha, 124, 10).Trim();
+		tLivro.qtdestoque = copy(slinha, 134, 10).Trim();
+		System.Console.WriteLine("--------------------");
+		System.Console.WriteLine(rotulo(sreg, 1) + tLivro.isbn);
+		System.Console.WriteLine(rotulo(sreg, 2) + tLivro.titulo);
+		System.Console.WriteLine(rotulo(sreg, 3) + tLivro.edicao);
+		System.Console.WriteLine(rotulo(sreg, 4) + tLivro.anopubli);
+		System.Console.WriteLine(rotulo(sreg, 5) + tLivro.codeditora);
+		mostrarSubDados(opLivro, opEditora, true);
+		System.Console.WriteLine(rotulo(sreg, 6) + tLivro.volume);
+		System.Console.WriteLine(rotulo(sreg, 7) + tLivro.codidioma);
+		mostrarSubDados(opLivro, opIdioma, true);
+		System.Console.WriteLine(rotulo(sreg, 8) + tLivro.npaginas);
+		System.Console.WriteLine(rotulo(sreg, 9) + tLivro.preco);
+		System.Console.WriteLine(rotulo(sreg, 10) + tLivro.qtdestoque);
+		ListarRegLigados(tfLivroAss, opLivroAss, 1, 13, 14, 10, tLivro.isbn,
+						 tfAssunto, opAssunto, 1, 4);
+		ListarRegLigados(tfLivroAut, opLivroAut, 1, 13, 14, 10, tLivro.isbn,
+						 tfAutor, opAutor, 1, 4);
+	   } break;
+   }
+} else if (sreg==opCliente) {
+   switch(nOpcao) {
+	case 1: {
+		System.Console.Write(rotulo(sreg, 2));
+		tCliente.nome = System.Console.get_In().ReadLine();
+		System.Console.Write(rotulo(sreg, 3));
+		tCliente.email = System.Console.get_In().ReadLine();
+		System.Console.Write(rotulo(sreg, 4));
+		tCliente.identidade = System.Console.get_In().ReadLine();
+		System.Console.Write(rotulo(sreg, 5));
+		tCliente.sexo = System.Console.get_In().ReadLine();
+		System.Console.Write(rotulo(sreg, 6));
+		tCliente.telefone = System.Console.get_In().ReadLine();
+		tCliente.dtnascimento =
+				validaDataHora(rotulo(sreg, 7), tCliente.dtnascimento, true);
+		mostrarSubDados(opCliente, opEndereco, false);
+		mostrarSubDados(opCliente, opPais, false);
+		mostrarSubDados(opCliente, opProfissao, false);
+	   } break;
+	case 3: {
+		tCliente.cpf = copy(slinha, 1, 14).Trim();
+		tCliente.nome = copy(slinha, 15, 30).Trim();
+		tCliente.email = copy(slinha, 45, 30).Trim();
+		tCliente.identidade = copy(slinha, 75, 10).Trim();
+		tCliente.sexo = copy(slinha, 85, 1).Trim();
+		tCliente.telefone = copy(slinha, 86, 17).Trim();
+		tCliente.dtnascimento = copy(slinha, 103, 10).Trim();
+		tCliente.codendereco = copy(slinha, 113, 10).Trim();
+		tCliente.codpais = copy(slinha, 123, 3).Trim();
+		tCliente.codprofissao = copy(slinha, 126, 10).Trim();
+		System.Console.WriteLine("--------------------");
+		System.Console.WriteLine(rotulo(sreg, 1) + tCliente.cpf);
+		System.Console.WriteLine(rotulo(sreg, 2) + tCliente.nome);
+		System.Console.WriteLine(rotulo(sreg, 3) + tCliente.email);
+		System.Console.WriteLine(rotulo(sreg, 4) + tCliente.identidade);
+		System.Console.WriteLine(rotulo(sreg, 5) + tCliente.sexo);
+		System.Console.WriteLine(rotulo(sreg, 6) + tCliente.telefone);
+		System.Console.WriteLine(rotulo(sreg, 7) + tCliente.dtnascimento);
+		System.Console.WriteLine(rotulo(sreg, 8) + tCliente.codendereco);
+		mostrarSubDados(opCliente, opEndereco, true);
+		System.Console.WriteLine(rotulo(sreg, 9) + tCliente.codpais);
+		mostrarSubDados(opCliente, opPais, true);
+		System.Console.WriteLine(rotulo(sreg, 10) + tCliente.codprofissao);
+		mostrarSubDados(opCliente, opProfissao, true);
+	   } break;
+   }
+} else if (sreg==opVenda) {
+   switch(nOpcao) {
+    case 1: mostrarSubDados(opVenda,opVenda, false); break;
+    case 2: {
+		System.Console.WriteLine("DataHoraVenda       CPF            ISBN          " +
+		"PreçoVenda");
+		System.Console.WriteLine("-------------       ---            ----          " +
+		"----------");
+	   } break;
+	case 3: {
+		tVenda.dthrvenda = copy(slinha, 1, 19).Trim();
+		tVenda.cpf = copy(slinha, 20, 14).Trim();
+		tVenda.isbn = copy(slinha, 34, 13).Trim();
+		tVenda.precovenda = copy(slinha, 47, 10).Trim();
+		System.Console.WriteLine(esp(tVenda.dthrvenda,19)+" "+esp(tVenda.cpf,14)+" "+
+		esp(tVenda.isbn,13)+" "+esp(tVenda.precovenda,10));
+	   } break;
+   }
+}
+
+}
+/*------------------------------------------------------------------------------
+Mostra as sub informções de entrada e de saída.
+sreg - o tipo de arquivo
+ssubreg - o subtipo de arquivo
+bSoMostrar - se vai só mostrar na saída
+------------------------------------------------------------------------------*/
+void mostrarSubDados(int sreg, int ssubreg, boolean bSoMostrar) {
+String sRegistro, sPreco;
+int nMaxTentativas;
+
+nMaxTentativas = 3;
+if (sreg==opLivro) {
+  if (ssubreg==opEditora) {
+	if (bSoMostrar)
+	   sRegistro = pesqArq(tfEditora,tLivro.codeditora,1,10,tamReg(opEditora));
+	else
+	   sRegistro = validaEntrada(tfEditora,ssubreg,1,tLivro.codeditora,
+				  nMaxTentativas,false,opNumero);
+	if (sRegistro.Equals("")==false) {
+	  tLivro.codeditora = copy(sRegistro,1,10).Trim();
+	  System.Console.Write(" "+rotulo(opEditora, 2));
+	  System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	}
+  } else if (ssubreg==opIdioma) {
+	if (bSoMostrar)
+	   sRegistro = pesqArq(tfIdioma, tLivro.codidioma, 1, 10,tamReg(opIdioma));
+	else
+	   sRegistro = validaEntrada(tfIdioma,ssubreg,1,tLivro.codidioma,
+				  nMaxTentativas,false,opNumero);
+	if (sRegistro.Equals("")==false) {
+	  tLivro.codidioma = copy(sRegistro,1,10).Trim();
+	  System.Console.Write(" "+rotulo(opIdioma, 2));
+	  System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	}
+  }
+} else if (sreg==opCliente) {
+  if (ssubreg==opEndereco) {
+	if (bSoMostrar)
+	   sRegistro = pesqArq(tfEndereco, tCliente.codendereco, 1, 10,
+				  tamReg(opEndereco));
+	else
+	   sRegistro = validaEntrada(tfEndereco,ssubreg,1,tCliente.codendereco,
+				  nMaxTentativas,false,opNumero);
+	if (sRegistro.Equals("")==false) {
+	  tCliente.codendereco = copy(sRegistro,1,10).Trim();
+	  System.Console.Write(" "+rotulo(opEndereco, 2));
+	  System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	  System.Console.Write(" "+rotulo(opEndereco, 3));
+	  System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	  System.Console.Write(" "+rotulo(opEndereco, 4));
+	  System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	  System.Console.Write(" "+rotulo(opEndereco, 5));
+	  System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	  System.Console.Write(" "+rotulo(opEndereco, 6));
+	  System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	}
+  } else if (ssubreg==opPais) {
+	if (bSoMostrar)
+	   sRegistro = pesqArq(tfPais, tCliente.codpais, 1, 3, tamReg(opPais));
+	else
+	   sRegistro = validaEntrada(tfPais,ssubreg,1,tCliente.codpais,
+				  nMaxTentativas,false,opTexto);
+	if (sRegistro.Equals("")==false) {
+	  tCliente.codpais = copy(sRegistro,1,3).Trim();
+	  System.Console.Write(" "+rotulo(opPais, 2));
+	  System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	}
+  } else if (ssubreg==opProfissao) {
+	if (bSoMostrar)
+	   sRegistro = pesqArq(tfProfissao, tCliente.codprofissao, 1, 10,
+				  tamReg(opProfissao));
+	else
+	   sRegistro = validaEntrada(tfProfissao,ssubreg,1,tCliente.codprofissao,
+				  nMaxTentativas,false,opNumero);
+	if (sRegistro.Equals("")==false) {
+	  tCliente.codprofissao = copy(sRegistro,1,10).Trim();
+	  System.Console.Write(" "+rotulo(opProfissao, 2));
+	  System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	}
+  }
+} else if (sreg==opVenda) {
+  sRegistro = pesqArq(tfLivro, tVenda.isbn, 1, 13, tamReg(opLivro));
+  if (sRegistro.Equals("")==false) {
+	System.Console.Write(" "+rotulo(opLivro, 2)); /* Titulo */
+	System.Console.WriteLine(copy(sRegistro, g_nPosChave, g_nTamChave));
+	System.Console.Write(" "+rotulo(opLivro, 9)); /* Preco */
+	sPreco = copy(sRegistro, g_nPosChave, g_nTamChave);
+	g_nPreco = Single.Parse(sPreco);
+	System.Console.WriteLine(sPreco);
+  }
+}
+}
+/*------------------------------------------------------------------------------
+Realiza os cadastros dos arquivos que se ligam a outros arquivos.
+sreg - o tipo de arquivo
+sacao - a ação a ser realizada
+sCodigo - um das chaves do arquivo de ligação
+------------------------------------------------------------------------------*/
+void frmCadLigados(int sreg, int sacao, String sCodigo)
+{ int nQtd, nCont, nQtdEstoque;
+  double nTotalPreco;
+  String slinha, sTotalPreco, sPreco;
+  String sQtd = "";
+
+if (sacao==opNovo) {
+  nCont = 1;
+  if (sreg==opLivroAss) {
+	sQtd = validaNumero("Quantos assuntos quer cadastrar?: ",sQtd);
+	nQtd = Int32.Parse(sQtd);
+	tfLivroAss.Seek(0, SeekOrigin.Begin);
+	while (nCont <= nQtd) {
+	  tLivroAss.isbn = sCodigo;
+	  System.Console.Write(rotulo(opLivroAss, 2));
+	  tLivroAss.codassunto = System.Console.get_In().ReadLine();
+	  slinha = pesqArq(tfAssunto, tLivroAss.codassunto,1,10,tamReg(opAssunto));
+	  System.Console.Write(" "+rotulo(opAssunto, 2));
+	  System.Console.WriteLine(copy(slinha, g_nPosChave, g_nTamChave));
+	  pesqLinhaExcluida(tfLivroAss, tamReg(sreg));
+	  subMenu(14, sreg);
+	  nCont++;
+	}
+  } else if (sreg==opLivroAut) {
+	sQtd = validaNumero("Quantos autores quer cadastrar?: ",sQtd);
+	nQtd = Int32.Parse(sQtd);
+	tfLivroAut.Seek(0, SeekOrigin.Begin);
+	while (nCont <= nQtd) {
+	  tLivroAut.isbn = sCodigo;
+	  System.Console.Write(rotulo(opLivroAut, 2));
+	  tLivroAut.codautor = System.Console.get_In().ReadLine();
+	  slinha = pesqArq(tfAutor, tLivroAut.codautor,1,10,tamReg(opAutor));
+	  System.Console.Write(" "+rotulo(opAutor, 2));
+	  System.Console.WriteLine(copy(slinha, g_nPosChave, g_nTamChave));
+	  pesqLinhaExcluida(tfLivroAut, tamReg(sreg));
+	  subMenu(14, sreg);
+	  nCont++;
+	}
+  } else if (sreg==opVenda) {
+	sPreco = "";
+	sTotalPreco = "";
+	sQtd = validaNumero("Quantos livros quer vender?: ",sQtd);
+	nQtd = Int32.Parse(sQtd);
+	nTotalPreco = 0;
+	while (nCont <= nQtd) {
+	  slinha = validaEntrada(tfLivro,opLivro,1,tVenda.isbn,3,false,opTexto);
+	  if (slinha.Equals("")==false) {
+		tVenda.isbn = copy(slinha,1,13).Trim();
+		if (ValidaISBN(tVenda.isbn)) {
+		  mostrarDados(sreg, "", 1);
+		  tLivro.qtdestoque = copy(slinha,134,10).Trim();
+		  nQtdEstoque = Int32.Parse(tLivro.qtdestoque);
+		  if (nQtdEstoque > 0) {
+			 nTotalPreco = nTotalPreco + g_nPreco;
+			 sPreco = Convert.ToString(g_nPreco);
+			 tVenda.precovenda = sPreco;
+			 g_SalvarInclusao = false;
+			 subMenu(14, sreg);
+			 if (g_SalvarInclusao) {
+				slinha = pesqArq(tfLivro, tVenda.isbn, 1, 13, tamReg(opLivro));
+				if (slinha.Equals("")==false) {
+				   nQtdEstoque = nQtdEstoque-1;
+				   tLivro.qtdestoque = Convert.ToString(nQtdEstoque);
+				   slinha=copy(slinha,1,133) + esp(tLivro.qtdestoque,10);
+				   escreveArq(tfLivro, slinha, "", "");
+				}
+			 }
+			 nCont++;
+		  } else System.Console.WriteLine(MSG_SEMESTOQUE);
+		} else System.Console.WriteLine(MSG_ISBNINV);
+	  }
+	}
+	sTotalPreco = Convert.ToString(nTotalPreco);
+	System.Console.WriteLine("Total de "+rotulo(sreg,4)+sTotalPreco);
+  }
+} else if (sacao==opExcluir) {
+  if (sreg==opLivroAss) {
+	 ExcluirRegLigados(tfLivroAss, sreg, 1, 13, sCodigo);
+  } else if (sreg==opLivroAut) {
+	 ExcluirRegLigados(tfLivroAut, sreg, 1, 13, sCodigo);
+  }
+}
+
+}
+/*------------------------------------------------------------------------------
+Realiza a exclusão dos arquivos de ligação.
+sArq - o arquivo de ligação
+sreg - o tipo de arquivo de ligação
+nPosChave - a posicao inicial da chave dentro do registro
+nTamChave - o tamanho da chave dentro do registro
+sChave - a chave a ser excluida
+------------------------------------------------------------------------------*/
+void ExcluirRegLigados(FileStream sArq, int sreg, int nPosChave,
+int nTamChave, String sChave) {
+  String slinha = "";
+  String sCodigo;
+
+	sArq.Seek(0, SeekOrigin.Begin);
+	while (!fimArq(sArq)) {
+	  slinha = lerArq(sArq, tamReg(sreg), TAM_CRLF);
+	  if (slinha.Equals("")==false) {
+		sCodigo = copy(slinha,nPosChave,nTamChave).Trim();
+		if (sCodigo.Equals(sChave))
+		   btnAcao(sreg,opConfirmaExclusao);
+	  }
+	}
+
+}
+/*------------------------------------------------------------------------------
+Parte inicial do código
+------------------------------------------------------------------------------*/
+  static Livrus cl = new Livrus();
+
+  /** @attribute STAThreadAttribute() */
+  public static void main(String[] args)
+  {
+    if ((args.get_Length() > 0) && (args[0].Equals("-cria")))
+      cl.abrecriaArqs(false);
+    else {
+      cl.frmSplash();
+      cl.abrecriaArqs(true);
+      if (cl.frmLogin()) {
+    	cl.bopcao = true;
+    	while(cl.bopcao) {
+    	  cl.menu(1);
+    	  cl.opmenu = System.Console.get_In().ReadLine().get_Chars(0);
+    	  if ((cl.opmenu=='C') || (cl.opmenu=='c')) cl.usaMenu(1);
+    	  else if ((cl.opmenu=='P') || (cl.opmenu=='p')) cl.usaMenu(2);
+    	  else if ((cl.opmenu=='V') || (cl.opmenu=='v')) cl.usaMenu(3);
+    	  else if ((cl.opmenu=='O') || (cl.opmenu=='o')) cl.usaMenu(4);
+    	  else System.Console.WriteLine(MSG_ERRO);
+    	}
+      } else {
+    	cl.fechaArqs();
+    	System.Environment.Exit(0);
+      }
+    }
+    System.Environment.Exit(0);
+  }
+
+}

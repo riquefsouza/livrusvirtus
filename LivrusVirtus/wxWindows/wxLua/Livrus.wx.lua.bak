@@ -1,0 +1,25 @@
+sCaminho = "C:/LivrusVirtus/wxWindows/wxLua/"
+
+require(sCaminho .. "Resource.lua")
+require(sCaminho .. "RotinasGlobais.lua")
+require(sCaminho .. "ConsultasSQL.lua")
+require(sCaminho .. "Principal.lua")
+require(sCaminho .. "Login.lua")
+require(sCaminho .. "Splash.lua")
+require(sCaminho .. "Sobre.lua")
+require(sCaminho .. "Filha.lua")
+require(sCaminho .. "Cadastros.lua")
+require(sCaminho .. "CadAssuntos.lua")
+require(sCaminho .. "CadEnderecos.lua")
+require(sCaminho .. "CadClientes.lua")
+require(sCaminho .. "CadLivros.lua")
+require(sCaminho .. "VenderLivros.lua")
+require(sCaminho .. "ConVendas.lua")
+require(sCaminho .. "Consultas.lua")
+require(sCaminho .. "ConAssuntos.lua")
+
+function main()
+  frmSplash:Show(wx.TRUE)
+end
+
+main()

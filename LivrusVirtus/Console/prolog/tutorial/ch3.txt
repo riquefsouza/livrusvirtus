@@ -1,0 +1,73 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 3
+Queries
+--------------------------------------------------------------------------------
+TOPICS:  Queries; use of variables in questions
+--------------------------------------------------------------------------------
+
+
+Queries are questions that we ask the system.  It searches its database and 
+tries to find "answers" by looking at the facts and the rules.  Since we have
+only talked about facts so far, we will discuss those first.
+
+Let's say we have the following set of facts, which is called the "database" 
+in Prolog terminology:
+
+     male(albert).
+     male(edward).
+     female(alice).
+     female(victoria).
+     parents(edward,victoria,albert).
+     parents(alice,victoria,albert).
+
+Note that the male and female predicates are used as adjectives, while the
+parents predicate give crucial familial relationships.  We should really have
+added the comment
+
+     /* parents(X,Y,Z) means that Y and Z are the parents of X. */
+
+A common query is to ask Prolog if a predicate is true.  When you are the ?-
+prompt, you can type a predicate, and it will be interpreted as a query:
+
+     ?- male(edward).
+
+Since this fact is in the database, Prolog responds with yes.  If you type in
+a fact that is not there, Prolog says "no" meaning that the predicate is false.
+
+To ask what the names of all the males are, you must use a variable, which is
+any identifier beginning with a capital letter.  In this tutorial, we will
+most often use simple variable names like X, but other names like Name or
+NAME_OF_PERSON are valid, too.
+
+     ?- male(X).
+
+Remember to type the period and then press RETURN!  Prolog searches for all
+predicates that have male as the functor and 1 argument.  It then substitutes
+the name it finds for X, and prints out messages like
+
+     X = albert
+
+It then waits for you to either press RETURN or to type a semicolon.  If you
+type a semicolon and press RETURN, Prolog thinks you want to look for the next
+match, so it will find edward and print out
+
+     X = edward
+
+But if you are through with this query, simply press RETURN.
+
+Try the following queries:
+
+     ?- parents(X,Y,Z).
+     ?- parents(edward,A,B).
+     ?- parents(X,victoria,_).
+
+Each of these means something slightly different.  The first just says to show
+all facts about parents.  The second asks who the two parents of edward are,
+while the third asks who victoria's child is, without regard to the father.
+This is why there is an underscore in the third argument's place.  It is the
+anonymous variable and means "we don't care about the value here!"
+
+As you can see, Prolog can answer a surprisingly wide variety of questions about
+a database of facts, depending upon the values you put into the argument slots.
+
+-----------------------------------------------------------------------------

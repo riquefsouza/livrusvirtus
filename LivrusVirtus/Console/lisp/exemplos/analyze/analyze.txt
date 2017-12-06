@@ -1,0 +1,132 @@
+;==========================================================================
+;  ANALYZE
+;
+;  This program reads in a file of LISP code, extracts all the functions
+;  that are "defun'ed" in it, prints out which functions are called by those
+;  functions, and which functions call those functions.  Now this can be
+;  fooled by some problematical constructs, such as case and let, IF you
+;  use the name of a function also as the name of a variable (a bad thing
+;  to do, anyway!)  But it does seem to work. 
+;
+;  Note:  If your LISP program consists of several files, you must con-
+;  catenate all of them together before feeding it to analyze-file, since
+;  it must find all the defuns and the uses of those functions in the very
+;  same file.
+;==========================================================================
+
+(defvar ok-list '(eval-when defvar defparameter))
+
+;--------------------------------------------------------------------------
+;  (ANALYZE-FILE  input-filename   output-filename)
+;
+;  This reads in the LISP source code in input-filename, prints out all
+;  function names that are defun'ed, all the functions which those functions
+;  call, and which functions call those functions (think about it!)
+;
+;  The output-filename is optional, and if omitted, it defaults to the
+;  terminal screen.  (There is a shell script called "lispanalyze" that
+;  does this, too.)
+;--------------------------------------------------------------------------
+
+(defun analyze-file (filename &optional (output-file nil))
+   (let (infp outfp temp analyses program)
+
+        (setq funcnames nil)
+        (setq program nil)
+        (setq infp (open filename))
+
+        (xif (null output-file)
+         then (setq outfp *standard-output*)
+         else (setq outfp (open output-file :direction :output))
+        )
+
+        (loop
+             (setq form (read infp nil "endoffile"))
+             (if (and (stringp form) (string= "endoffile" form))
+                 (return)
+             )
+             (xif (equal 'defun (car form))
+              then (append-m funcnames (second form))
+                   (append-m program form)
+              elsif (not (member (car form) ok-list))
+              then (format outfp "WARNING!  This form is not a function defintion.~%")
+                   (format outfp "Rather, it is a form to evaluated when you load the file.~%")
+                   (format outfp "~S~%~%~%" form)
+             )
+        )
+             
+        (close infp)
+
+        (dolist (form program)
+            (format outfp "~S~%" (second form))
+            
+;           (break)
+            (setq temp (analyze form))
+            (format outfp "  This function probably calls:~%  ")
+            (dolist (x temp)
+                 (format outfp "~S  " x)
+            )
+            (format outfp "~%~%~%")
+            (append-m analyses (list (second form) temp))
+        )
+
+        (format outfp "~%~%~%~%~%CROSS REFERENCE OF FUNCTIONS:~%~%~%")
+
+        (dolist (func funcnames)
+            (format outfp "~%~S is called in:~%       " func)
+            (dolist (analysis analyses)
+                 (xif (member func (second analysis))
+                  then (format outfp "~S   " (first analysis))
+                 )
+            )
+            (format outfp "~%")
+        )
+        (format outfp "~%")
+   )
+)
+
+(defun analyze (form)
+   (intersection (unlist (remquotes (nthcdr 2 form))) funcnames)
+)
+
+(defun remquotes (sexpr)
+    (xif (atom sexpr)
+     then sexpr
+     elsif (equal 'quote (car sexpr))
+     then nil
+     else (cons (remquotes (car sexpr)) (remquotes (cdr sexpr)))
+    )
+)
+
+
+;-------------------------------------------------------------------
+;  This function returns a list of all the atomic elements in a
+;  list, thereby stripping away all list structures.
+;  If the argument is atomic, it returns a list with this argument:
+;  Examples:
+;
+;    >(unlist 'a)
+;    (A)
+;
+;    >(unlist '(a b c))
+;    (A B C)
+;
+;    >(unlist '((a)))
+;    (A)
+;
+;    >(unlist '(a (b) ((c)) (d e)))
+;    (A B C D E)
+;-------------------------------------------------------------------
+
+
+(defun unlist (something)
+     (if (atom something)
+         (if (null something)
+             something
+             (list something)
+         )
+         (append (unlist (car something))
+                 (unlist (cdr something))
+         )
+     )
+)

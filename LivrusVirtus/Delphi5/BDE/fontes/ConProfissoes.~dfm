@@ -1,0 +1,11 @@
+inherited frmConProfissoes: TfrmConProfissoes
+  Caption = 'Consulta de Profissões'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited Label2: TLabel
+      Width = 46
+      Caption = 'Profissão:'
+    end
+  end
+end

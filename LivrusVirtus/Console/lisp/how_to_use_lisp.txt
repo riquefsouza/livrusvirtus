@@ -1,0 +1,281 @@
+                         IBUKI COMMON LISP on the Suns
+
+How to start Common Lisp
+------------------------
+    Just type in 
+
+          % ibcl
+
+    Your path must include /usr/local/bin.
+    Ibcl is kind of slow in getting started, so give it at least 20 seconds.
+
+Can I customize ibcl?
+---------------------
+    Yes you can by putting functions and macros into a file called 
+    "init.lsp".  When you start ibcl in that directory, it reads the
+    init.lsp file in that directory.  You must copy your init.lsp file
+    into any new directory in which you want to use ibcl.  There is a
+    nice init.lsp file available for your use, containing several useful
+    macros.  It is in /usr/local/doc/HELP/PROGLANGS/LISP/EXAMPLES/init.lsp.
+
+How do I stop ibcl?
+-------------------
+    Just press CONTROL - D to exit back to the C shell.  Or you can type
+    
+          > (bye)
+
+    to exit.  This is no better than CONTROL-D.
+
+How do I use ibcl?
+------------------
+    When you first start ibcl, you will get a prompt which is just a 
+    greater than sign (>).  This is called the main read-eval-print loop
+    because the lisp interpreter reads the next s-expression, evaluates
+    it, and prints the result.  You can either just type in s-expressions
+    for their immediate evaluation, or you can load in a file of LISP
+    forms.  This is done by using the load function.  Suppose that you
+    have edited a file using "vi" and put a bunch of function definitions
+    and setqs and other expressions in it.  This file is called "pgm1".
+    To load it, do
+
+          > (load "pgm1")
+
+    where the double quotes are important.  The LISP interpreter reads and
+    evaluates, but doesn't print, the s-expressions in that file, just as
+    if you had typed them in at the keyboard.  Most of the time, lengthy
+    function definitions or complicated setqs are put in these files.
+
+What happens when I get an error?
+---------------------------------
+    You will get an error message and a new read-eval-print loop with a
+    new prompt.  This new prompt also indicates the level of the error.
+    It is normally -> with a leading space.  But if you make another error
+    in some s-expression, it becomes ->>.  For example, suppose you type 
+    in "x" to try to get the value of atom x:
+
+       >x
+       >>Error: The variable X is unbound.
+        EVAL                         (IHS[10])
+       Restart options (Type :C <number>):
+            0: Provide a value to store as the value of X
+            1: Retry getting the value of X
+       :Q,  2: Lisp Top Level
+        Version 201  Delta 27
+        Type :H for a list of debugger commands.
+        ->
+
+    But since x is unbound (has no value yet), you will get the above
+    error.  
+
+    The -> prompt is ready for you to enter more forms.  You are actually 
+    in a sub-interpreter and can type in s-expressions to find your error 
+    or do something else.  To get out of the sub-interpreter, type 
+    :q (colon followed by q) and you will get the regular prompt.
+
+    Usually, you just want to quit this read-eval-print loop and go back 
+    to the top one, the one you started out with.  Just type in :q and press
+    return.  But there are a number of debugging things you can do in
+    this new read-eval-print loop.  If you type :h, you will get a list
+    of these commands.  They all start with a colon.
+
+      :p[count or symbol]  Previous: nth or named older frame.
+      :n[count or symbol]  Next nth or named newer frame.
+      :<Go to base frame
+      :>Go to newest frame
+      :fGet the whole expression and save it in *.
+      :a[number or symbol]  Get the specified argument and save it in *.
+      :lsymbol   Local:  Prints the named variable in an interpreted frame.
+      :vVerbose:  Show detailed information about this stack frame.
+      :b[count]  Back-trace: Show names of the most recent events on the stack.
+      :b![count]  Back-trace all: Show names of all events on the stack.
+      :qQuit:  Restart using the nearest ABORT restart handler.
+      :q!Quit all:  Abort back to Lisp Top Level.
+      :c[number]  Continue:  Take the indicated restart (default: 0)
+      :hd[symbol*]  Hide: Make the named events be invisible.
+      :uhd[symbol*]  UnHide:  Make the named hidden events be visible.
+      :uhd!UnHide Everything:  Make all events visible.
+      :hdp[pkg*]  Hide Packages:  Make events in some packages be invisible.
+      :uhdp[pkg*]  UnHide Packages:  Make events in some packages be visible.
+      :hHelp:  Commands list.
+      :sStack:  Show stacks, from current frame back to the base.
+      :mMessage:  Print the error report and restart options again.
+      :wfWrite File:  [namestring] Write a file with the debugger's stack trace.
+      :hsHelp Stack:   Print info on functions to access the stacks.
+      ->:q
+
+Is there on-line help?
+----------------------
+    You betcha!   The command
+
+       > (help)
+
+    just tells how to access the other helps.  Most help in Ibuki centers
+    around the built-in functions, so you almost have to know what they are
+    before you ask for help.  Help then proves most useful to reminding you
+    what the parameters are and the exact details of the function.  For example
+    if you want to know about the ASSOC function, do
+
+    Unfortunately, you must know the name of the function first.
+    If you do know the name, give the quoted name to the help function:
+
+       > (help 'nconc)
+
+    (Yes, that is a single quote in front of the function's name.)
+    In this example, you know there is a function named "nconc" but you want
+    a short description of what it does and what its parameters are.  The
+    help command will show you.
+
+How can I do UNIX commands while in LISP?
+-----------------------------------------
+
+    Just use the "system" function and pass it a character string.  For
+    example:
+ 
+          (system "ls")
+
+    To create a shell, do
+
+          (system "csh")
+
+    When you do CONTROL-D to stop the shell, you will be returned to LISP.
+
+    If you want to capture the results of these operating system calls
+    and process them in LISP, you will have to redirect the output to a
+    file and then read the file using "read-line" (see below).
+
+
+How can I compile a Common LISP program?
+----------------------------------------
+    It is surprisingly easy.  Just combine all the functions you need into
+    one big file, if you have them spread out over several files.  For every
+    global variable, put a  "defvar" statement in your big file:
+
+          (defvar myvariable)
+
+    You do NOT have to declare its type!  Now get into ibcl and once in,
+    enter the command "compile-file", giving it the name of the UNIX file
+    that has all your LISP code to be compiled:
+
+          % ibcl
+          > (compile-file "bigfile")
+
+    If there are no errors, a new file is created with a .o suffix,
+    "bigfile.o" in this example.  Now you can load that file and use the
+    functions defined therein, just like you do with the uncompiled version:
+
+          > (load "bigfile.o")
+
+    Of course, you do NOT have to compile the file ever again, unless there is
+    a change in the code.  You will notice as much as a ten-fold speedup in
+    your lisp program!
+
+How to do I use CLOS (Common LISP Object System)?
+-------------------------------------------------
+
+    Instead of starting ibcl with the "ibcl" command, use "ibcl-clos":
+
+    % ibcl-clos
+    >
+
+    Now all the CLOS functions can be used in addition to the regular Common
+    LISP functions.
+
+Catching errors at run-time
+---------------------------
+
+    You have to first use the CONDITIONS package:
+    
+        (use-package "CONDITIONS")
+    
+    Then there are a number of macros in it.  The macro ignore-errors is
+    one you will often use.  It returns two values, and you can ignore the
+    second value if you want.  The first value is the actual return value
+    of the form, while the second is the return code.  Here's an example:
+    
+        (ignore-errors (setq x y))
+    
+    In this setup, the user tried to setq variable x to the value of y.
+    If there was an error, such as y being unbound, NIL is returned.
+    (Actually two values are returned and the second is the error code.)
+    If you are using the result of this, or printing it out, then this
+    error code will be swallowed up.
+    
+    In some case, you want to catch the error and print it out if it
+    occurs, without stopping the program.  The best way to do this is to
+    provide a handler-case construct.  For example:
+    
+         (setq zzz '(setq x 5))
+         (handler-case (eval zzz)
+            (error (condition) (format t "ERROR! ~S~%" condition))
+            (:no-error (symbol status) symbol)
+         )
+    
+    The form is executed, in this case (eval zzz) although it could be
+    any LISP form, and if an error occurs, an error message is printed
+    and NIL is returned.  If no error occurs, the return value of the
+    form is returned by the "symbol" form in the :no-error condition
+    clause.  Here's an example of guarding against division by 0:
+    
+         (setq y 5)
+         (setq m (handler-case (/ 10 y)
+                    (error (condition) (format t "ERROR! ~S~%" condition))
+                    (:no-error (symbol status) symbol)
+                 )
+         )
+    
+    When you run this, everything works find, just as if you did
+    
+         (setq m (/ 10 y))
+    
+    But if you setq y to 0 now and try the (setq m (handler-case ...
+    it will print out an error message and setq m to NIL.  In this case,
+    your error message does not get ignored or swallowed, but neither is
+    your program interrupted.  And if there is no error, you'll never
+    know there wasn't an error.
+    
+    You can put the ignore-errors or handler-case forms at any level that
+    encloses the form that may give a run-time error, and the error message 
+    will travel "up" to the nearest enclosing ignore-errors form.
+
+
+
+The Stepper
+===========
+
+    LISP gives you a simple, but often painful, way of examining the
+    execution of a function.  Just enclose the ordinary function call
+    in a step function call, for example:
+    
+          (step (car '(a b c))
+    
+    You will get a partial printing of the form that is about to be evaluated
+    and a prompt.  If you type a question mark, you will see what commands
+    the stepper accepts.  Here is an example:
+    
+    >(step (car '(a b c)))
+    
+    Type ? and a newline for help.
+      (CAR '(A B ...)) ?
+    
+    Stepper commands:
+    n (or N or Newline):    advances to the next form.
+    s (or S):               skips the form.
+    p (or P):               pretty-prints the form.
+    f (or F) FUNCTION:      skips until the FUNCTION is called.
+    q (or Q):               quits.
+    u (or U):               goes up to the enclosing form.
+    e (or E) FORM:          evaluates the FORM and prints the value(s).
+    r (or R) FORM:          evaluates the FORM and returns the value(s).
+    b (or B):               prints backtrace.
+    ?:                      prints this.
+    
+      (CAR '(A B ...))
+    
+    If you know what the enclosed form will do and you do not want to
+    go into all the messy details, use "s" for skip.  Although "skip"
+    sounds like it wouldn't evaluate the form, it really means "evaluate
+    the form in silence and just return the result."  Otherwise, "n"
+    takes you deeper into the form until it finally reaches an atom.
+    Thus, "n" is the normal way to work your way through the form,
+    inspecting it while it evaluates, whereas "s" just evaluates the
+    form without going into its details.

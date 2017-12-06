@@ -1,0 +1,65 @@
+// generated 2005/1/16 14:04:21 BRST by hfs@localhost.(none)
+// using glademm V1.1.2
+//
+// newer (non customized) versions of this file go to plivrus.cc_new
+
+// This file is for your program, I won't touch it again!
+
+#include <gtk--/main.h>
+
+#include "frmPrincipal.hh"
+#include "frmCadastros.hh"
+#include "frmConsultas.hh"
+#include "frmLogin.hh"
+#include "frmSplash.hh"
+#include "frmAlterarSenha.hh"
+#include "frmSobre.hh"
+#include "frmCadEnderecos.hh"
+#include "frmCadClientes.hh"
+#include "frmCadLivros.hh"
+#include "frmVenderLivros.hh"
+#include "frmConVendas.hh"
+
+int main(int argc, char **argv)
+{  
+   
+   Gtk::Main m(&argc, &argv);
+
+frmPrincipal *frmPrincipal = new class frmPrincipal();
+
+frmCadastros *frmCadastros = new class frmCadastros();
+
+frmConsultas *frmConsultas = new class frmConsultas();
+
+frmLogin *frmLogin = new class frmLogin();
+
+frmSplash *frmSplash = new class frmSplash();
+
+frmAlterarSenha *frmAlterarSenha = new class frmAlterarSenha();
+
+frmSobre *frmSobre = new class frmSobre();
+
+frmCadEnderecos *frmCadEnderecos = new class frmCadEnderecos();
+
+frmCadClientes *frmCadClientes = new class frmCadClientes();
+
+frmCadLivros *frmCadLivros = new class frmCadLivros();
+
+frmVenderLivros *frmVenderLivros = new class frmVenderLivros();
+
+frmConVendas *frmConVendas = new class frmConVendas();
+   m.run();
+delete frmPrincipal;
+delete frmCadastros;
+delete frmConsultas;
+delete frmLogin;
+delete frmSplash;
+delete frmAlterarSenha;
+delete frmSobre;
+delete frmCadEnderecos;
+delete frmCadClientes;
+delete frmCadLivros;
+delete frmVenderLivros;
+delete frmConVendas;
+   return 0;
+}

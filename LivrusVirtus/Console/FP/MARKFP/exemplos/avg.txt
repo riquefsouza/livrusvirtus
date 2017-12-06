@@ -1,0 +1,36 @@
+// Simple arithmetic average  (% could be used instead of div)
+
+    (def average == div.[/+,length])
+
+
+//------------------------------------------------------------------------
+// Subavg is a recursive function that takes in 3 arguments:
+//    a Number,  a list of numbers, and a new list of results
+// For example:
+//
+//        subavg:<5,<3,6,7>,nil>
+//
+// returns <-2,-1,2> because 5-3 is 2, 5-6 is -1 and 5-7 is -2.
+// Note that the result list is reversed.
+// We could have done this with distl, too.
+//
+//      (@-).distl
+
+    (def subavg == (null.2) -> 3 ; (subavg.[1,tl.2,apndl.[sub.[1,1.2],3]]))
+
+
+
+//------------------------------------------------------------------------
+// Notational convenience
+ 
+    (def square == mult.[id,id])
+
+
+
+//------------------------------------------------------------------------
+// Compute the variance of a list of numbers.  This is the sum of the
+// squares of the difference of each number in a list and the average 
+// of the list
+
+    (def variance == (/plus).(@square).subavg.[average,id,nil])
+end

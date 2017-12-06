@@ -1,0 +1,14 @@
+#  Does swap (since functions are passed by reference)
+
+function swap(input,temp) {
+    temp = input[1]
+    input[1] = input[2]
+    input[2] = temp
+}
+
+{
+   vals[1]=$1
+   vals[2]=$2
+   swap(vals)
+   printf ("x=%s  y=%s\n", vals[1], vals[2])
+}

@@ -1,0 +1,12 @@
+//A recursive version that discovers if all elements of a list are the
+//same or not.
+//
+//   alleq:<5,5,5,5>   returns T
+//   alleq:<5,5,2,5>   returns NIL
+
+     (def alleq == or.[null,eq.[#1,length]] -> #t; and.[eq.[1,2],alleq.tl])
+
+// another version that is not recursive
+
+     (def alleq2 == (/and).(@eq).distl.[1,tl])
+end

@@ -1,0 +1,6 @@
+reverse([],[]).
+reverse([X|Tail],L) :- reverse(Tail,Tailrev),
+                       append(Tailrev,[X],L).
+
+append([],Z,Z).
+append([A|X],Y,[A|Z]) :- append(X,Y,Z).

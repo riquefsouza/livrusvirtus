@@ -1,0 +1,90 @@
+package Livrus;
+
+import System.*;
+import System.Drawing.*;
+import wx.*;
+
+public class frmCadAssuntos extends frmCadastros
+{
+	public frmCadAssuntos( Window parent ) {
+    super(parent, TextValidatorCtrl.FILTER_NUMERIC, true);
+
+    labDescricao.set_Label("Assunto: ");
+
+    EVT_BUTTON(ID_FRMCADASTROS_BTNNOVO, new EventListener( OnBtnNovo ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNPESQUISAR, new EventListener( OnBtnPesquisar ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNANTERIOR, new EventListener( OnBtnAnterior ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNPROXIMO, new EventListener( OnBtnProximo ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNSALVAR, new EventListener( OnBtnSalvar ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNEXCLUIR, new EventListener( OnBtnExcluir ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNLIMPAR, new EventListener( OnBtnLimpar ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNFECHAR, new EventListener( OnBtnFechar ));
+		EVT_CLOSE( new EventListener( OnClose ) );
+	}
+
+	private boolean ValidaDados(boolean bTodosDados){
+    if (RotinasGlobais.Rotinas.ValidaCampo(edtCodigo.get_Value(), 
+      Resource.STR_CODNINF))
+      return false;
+    if (bTodosDados) {
+      if (RotinasGlobais.Rotinas.ValidaCampo(edtDescricao.get_Value(), 
+        Resource.STR_ASSNINF))
+      	return false;
+    }
+		return true;
+	}
+
+	private void OnClose( System.Object sender, wx.Event e ){
+    this.get_Parent().Close();
+		e.Skip();
+	}
+
+  private void OnBtnNovo( System.Object sender, wx.Event e ){
+    btnNovoClick();
+    NovoDado(ConsultasSQL.ConsSQL.Assunto('N', edtCodigo.get_Value(),""));
+    e.Skip();
+  }
+  
+  private void OnBtnPesquisar( System.Object sender, wx.Event e ){
+    PesquisarDados(ConsultasSQL.ConsSQL.Assunto('S', 
+      edtCodigo.get_Value(),""), Resource.STR_ASSNENC);
+    e.Skip();
+  }
+  
+  private void OnBtnAnterior( System.Object sender, wx.Event e ){
+    registroAnterior();	
+    e.Skip();
+  }
+  
+  private void OnBtnProximo( System.Object sender, wx.Event e ){
+    registroProximo();		
+    e.Skip();
+  }
+  
+  private void OnBtnSalvar( System.Object sender, wx.Event e ){
+    SalvarDados(ValidaDados(true),
+      ConsultasSQL.ConsSQL.Assunto('S', edtCodigo.get_Value(),""),
+      ConsultasSQL.ConsSQL.Assunto('U', edtCodigo.get_Value(), 
+        edtDescricao.get_Value()),
+      ConsultasSQL.ConsSQL.Assunto('I', edtCodigo.get_Value(), 
+        edtDescricao.get_Value()), true);
+    e.Skip();
+  }
+  
+  private void OnBtnExcluir( System.Object sender, wx.Event e ){
+    ExcluirDados(ValidaDados(false),
+      ConsultasSQL.ConsSQL.Assunto('D', edtCodigo.get_Value(),""));
+    e.Skip();
+  }
+  
+  private void OnBtnFechar( System.Object sender, wx.Event e ){
+    this.Close(true);
+    e.Skip();
+  }
+  
+  private void OnBtnLimpar( System.Object sender, wx.Event e ){
+    btnLimparClick();
+    e.Skip();
+  }
+
+}

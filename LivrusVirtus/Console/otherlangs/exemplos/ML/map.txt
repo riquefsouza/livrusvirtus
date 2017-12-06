@@ -1,0 +1,4 @@
+fun map(f,list) = 
+     case list of
+          nil => nil |
+          h::t => f(h) :: map(f,t);

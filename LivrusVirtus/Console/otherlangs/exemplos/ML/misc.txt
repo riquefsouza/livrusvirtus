@@ -1,0 +1,48 @@
+(*  These are simple little examples of functions in ML. *)
+
+
+(*  The type specifiers on the parameters are needed because the type
+    inference cannot deduce what the return type of the function is without
+    that hint. *)
+
+fun smaller (x:int, y:int) = if x < y then x else y;
+
+
+(* This is just like the built-in length function. *)
+
+fun zlen (nil) = 0 |
+    zlen (a::rest) = 1 + zlen(rest);
+
+
+
+(* Here's the ubiquitous factorial function. *)
+
+fun fact(n) = if n = 0 then 1 else n*fact(n-1);
+
+fact(12);  (* the largest in this ML system *)
+
+
+
+
+(*  fn is actually like the lambda of LISP.   It defines an anonymous
+    function. *)
+
+val f = (fn n => n+1);
+f 5;
+f (5);
+f (2+3);
+f true;
+
+
+
+(* The following illustrates how to 
+
+let val a = 1 in
+   let fun f(x) = x+a in
+       let val a = 3 in
+            f(4)
+       end
+   end
+end;
+
+

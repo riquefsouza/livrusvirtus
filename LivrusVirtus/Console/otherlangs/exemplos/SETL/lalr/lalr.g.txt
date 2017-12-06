@@ -1,0 +1,1001 @@
+--
+--  LALR Grammar
+--  ============
+--
+--  This file contains a grammar for a LALR parse table generator written
+--  in SETL2.  It was laboriously bootstrapped from an earlier version,
+--  so be very careful to save plenty of old copies of compiled versions,
+--  before changing this thing.
+--
+--  Implementation note:  At the time of bootstrapping, the LALR program
+--  is only able to handle LALR(1).  BNF grammars seem to be naturally
+--  expressed as LALR(2).  This very ugly thing will work, but should be
+--  fixed after the program is extended to handle multiple lookaheads!
+--
+
+%options
+
+   action_file = "semact.stl",
+   table_file = "parsetab.stl",
+   table_format = setl2
+
+%terminals
+
+   OPTIONS         :  keywords = ["options"]
+   TERMINALS       :  keywords = ["terminals"]
+   NONTERMINALS    :  keywords = ["nonterminals"]
+   RULES           :  keywords = ["rules"]
+   EPSILON         :  keywords = ["epsilon", "empty"]
+   ERRSYMBOL       :  keywords = ["error"]
+   COLON           :  specials = [":"],
+                      aliases  = [":"]
+   COMMA           :  specials = [","],
+                      aliases  = [","]
+   EQUAL           :  specials = ["="],
+                      aliases  = ["="]
+   PRODUCE         :  specials = ["::="],
+                      aliases  = ["::="]
+   ALTERNATE       :  specials = ["|"],
+                      aliases  = ["|"]
+   LBRACKET        :  specials = ["["],
+                      aliases  = ["["]
+   RBRACKET        :  specials = ["]"],
+                      aliases  = ["]"]
+   IDENTIFIER
+
+%rules
+/.
+--
+--  Semantic Actions
+--  ================
+--
+
+package semantic_actions;
+
+   procedure initialize_tables;
+   procedure semantic_action(rule);
+   procedure token_action(token);
+
+end semantic_actions;
+
+package body semantic_actions;
+
+   use globals, 
+       token_classes,
+       lexical_analyzer,
+       table_output;                   -- table output procedures
+
+   var semantic_stack,
+       symbol_map,
+       option_map;
+
+   --
+   --  initialize_tables
+   --  -----------------
+   --
+   --  This procedure clears all the tables to be loaded during the parse
+   --  phase, in preparation for loading a grammar file.
+   --
+
+   procedure initialize_tables;
+
+      semantic_stack := [];
+      symbol_desc := [];
+      option_map := {};
+      symbol_list := [];
+      symbol_map  := {};
+      alias_map := {};
+      lhs_list := [1];
+      rhs_list := [[1]];
+      num_rules := 1;
+      current_lhs := 1;
+      current_rhs := [];
+
+   end initialize_tables;
+
+   procedure semantic_action(rule);
+
+      case rule 
+
+./
+
+   grammar_file               ::= options_section
+                                  terminals_section
+                                  nonterminals_section
+                                  rules_section
+
+   options_section            ::= OPTIONS option_settings
+                              |   %epsilon
+
+   option_settings            ::= option_settings "," option_spec
+                              |   option_spec
+
+   option_spec                ::= IDENTIFIER "=" value_spec
+/.
+   --
+   --  Option values
+   --  -------------
+   --
+   --  When this rule is invoked, we have an option - value pair on the
+   --  top of the stack.  The option is an identifier token, and the
+   --  value is either an identifier token or a list of identifier
+   --  tokens.  No error checking has been done to this point, with the
+   --  exception of the weeding out of reserved words, etc., that the
+   --  parser is able to do.  We pop the two items and start decoding.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      value_list frome semantic_stack;
+      option_token frome semantic_stack;
+      option_name := tolower(option_token.tok_lexeme);
+
+      case option_name
+     
+         --
+         --  As on the command line, we allow the user to choose more
+         --  reasonable output file names than are provided by
+         --  default.
+         --
+
+         when "action_file" =>
+
+            if is_tuple(value_list(1)) then
+               if #value_list(1) = 1 then   
+                  value_list := value_list(1);
+               else
+                  error_message("A single action file name must be given",
+                                value_list(1).tok_line,
+                                value_list(1).tok_column);
+               end if;
+            end if;
+
+            action_file_name := cline_overrides("action_file_name") ?
+                                value_list.tok_lexeme;
+
+         when "table_file" =>
+
+            if is_tuple(value_list(1)) then
+               if #value_list(1) = 1 then   
+                  value_list := value_list(1);
+               else
+                  error_message("A single table file name must be given",
+                                value_list(1).tok_line,
+                                value_list(1).tok_column);
+               end if;
+            end if;
+
+            table_file_name := cline_overrides("table_file_name") ?
+                               value_list.tok_lexeme;
+
+         --
+         --  The C preprocessor will allow us to specify an original
+         --  source file and original line number, for preprocessors
+         --  like this.  This means that error messages in the
+         --  semantic actions will list the file and line of the
+         --  GRAMMAR file, not the resulting ACTION file, if this
+         --  option is chosen.
+         --
+
+         when "cpp_line_numbers" =>
+
+            if is_tuple(value_list(1)) then
+               if #value_list(1) = 1 then   
+                  value_list := value_list(1);
+               else
+                  error_message("A single boolean must be given",
+                                value_list(1).tok_line,
+                                value_list(1).tok_column);
+               end if;
+            end if;
+
+            value := tolower(value_list.tok_lexeme);
+
+            if value = "true" or value = "on" then
+               cpp_line_numbers := cline_overrides("cpp_line_numbers") ?
+                                   true;
+            elseif value = "false" or value = "off" then
+               cpp_line_numbers := cline_overrides("cpp_line_numbers") ?
+                                   false;
+            else
+               error_message("Invalid value for option " +
+                             "`cpp_line_numbers' => \"" + value + "\"",
+                             token.tok_line, token.tok_column);
+            end if;
+
+         --
+         --  We allow some control over the format of output tables.
+         --  As we write this comment, we only have plain text format
+         --  and SETL2 format, but we might add others.  The map of
+         --  valid choices should be in the `table_output' package.
+         --
+
+         when "table_format" =>
+
+            if is_tuple(value_list(1)) then
+               if #value_list(1) = 1 then   
+                  value_list := value_list(1);
+               else
+                  error_message("A single table file name must be given",
+                                value_list(1).tok_line,
+                                value_list(1).tok_column);
+               end if;
+            end if;
+
+            if table_procedure_map(value_list.tok_lexeme) = om then
+               error_message("Invalid value for option " +
+                             "`table_format' => \"" + 
+                             value_list.tok_lexeme + "\"",
+                             value_list.tok_line,
+                             value_list.tok_column);
+            else
+               table_format := value_list.tok_lexeme;
+            end if;
+
+         --
+         --  When `verbose' is on we'll print tons of junk about the
+         --  parse tables, which should hopefully be useful in
+         --  debugging a grammar.
+         --
+
+         when "verbose" =>
+
+            if token.tok_lexeme(1) = "'" then
+               value := token.tok_lexeme(2..#token.tok_lexeme-1);
+            else
+               value := token.tok_lexeme;
+            end if;
+            value := tolower(value);
+
+            if value = "true" or value = "on" then
+               verbose := cline_overrides("verbose") ? true;
+            elseif value = "false" or value = "off" then
+               verbose := cline_overrides("verbose") ? false;
+            else
+               error_message("Invalid value for option " +
+                             "`verbose' => \"" + value + "\"",
+                             token.tok_line, token.tok_column);
+            end if;
+
+         --
+         --  Actions_only is quite a useful mode.  The vast majority
+         --  of the changes typically made to a grammar file only
+         --  change a semantic action, not the grammar itself.  For
+         --  those cases it isn't necessary to re-analyze the grammar
+         --  and create parse tables, all we really want to do is
+         --  preprocess the grammar file and generate a semantic
+         --  action file.  This option does just that.
+         --
+
+         when "actions_only" =>
+
+            if token.tok_lexeme(1) = "'" then
+               value := token.tok_lexeme(2..#token.tok_lexeme-1);
+            else
+               value := token.tok_lexeme;
+            end if;
+            value := tolower(value);
+
+            if value = "true" or value = "on" then
+               actions_only := cline_overrides("actions_only") ? true;
+            elseif value = "false" or value = "off" then
+               actions_only := cline_overrides("actions_only") ? false;
+            else
+               error_message("Invalid value for option " +
+                             "`actions_only' => \"" + value + "\"",
+                             token.tok_line, token.tok_column);
+            end if;
+
+         --
+         --  Edit_only mode is comparable to actions_only, but is used
+         --  in the initial stages, in developing a grammar.  It
+         --  analyzes the grammar, finding conflicts, but does not
+         --  generate parse tables.  Since table compression is a time
+         --  consuming operation, this can greatly speed up work on a
+         --  grammar.
+         --
+
+         when "edit_only" =>
+
+            if token.tok_lexeme(1) = "'" then
+               value := token.tok_lexeme(2..#token.tok_lexeme-1);
+            else
+               value := token.tok_lexeme;
+            end if;
+            value := tolower(value);
+
+            if value = "true" or value = "on" then
+               edit_only := cline_overrides("edit_only") ? true;
+            elseif value = "false" or value = "off" then
+               edit_only := cline_overrides("edit_only") ? false;
+            else
+               error_message("Invalid value for option " +
+                             "`edit_only' => \"" + value + "\"",
+                             token.tok_line, token.tok_column);
+            end if;
+
+         --
+         --  This option controls whether default reduction rules will
+         --  be used to compress the parse tables.  The benefit is a
+         --  greatly reduced parse table size, but there is some
+         --  degradation in error recovery.  We won't actually miss
+         --  errors, but we might take an unjustified reduction.  This
+         --  can strip stuff from the parse stack, and result in too
+         --  much being discarded in the error recovery.  Overall, it
+         --  seems warranted, but others may disagree.
+         --
+
+         when "default_rules" =>
+
+            if token.tok_lexeme(1) = "'" then
+               value := token.tok_lexeme(2..#token.tok_lexeme-1);
+            else
+               value := token.tok_lexeme;
+            end if;
+            value := tolower(value);
+
+            if value = "true" or value = "on" then
+               default_rules := cline_overrides("default_rules") ? true;
+            elseif value = "false" or value = "off" then
+               default_rules := cline_overrides("default_rules") ? false;
+            else
+               error_message("Invalid value for option " +
+                             "`default_rules' => \"" + value + "\"",
+                             token.tok_line, token.tok_column);
+            end if;
+
+         --
+         --  Each of the special symbols in a grammar may be changed,
+         --  to accommodate the language of the semantic actions, and
+         --  to allow the user to use just about anything as a grammar
+         --  symbol.  Each of these things just lets the user change a
+         --  marker of some kind.
+         --
+         --  It's strongly recommended that you NOT do this, if
+         --  possible.  It slows down processing, since we do a lot of
+         --  reconstruction of the symbol trie.  It's simpler just to
+         --  use quotes around all the special symbols used in the
+         --  grammar, and doesn't look bad anyway.
+         --
+
+         when "comment" =>
+
+            comment_mark := token.tok_lexeme;
+
+         when "escape" =>
+
+            escape_mark := token.tok_lexeme;
+
+         --
+         --  The start symbol defaults to the left hand side of the
+         --  first rule.  This option lets the user choose something
+         --  else.
+         --
+
+         when "start" =>
+
+            start_symbol := token.tok_lexeme;
+
+         --
+         --  Thats all we accept.
+         --
+
+         otherwise =>
+            
+            error_message("Invalid option => " + option_name,
+                          token.tok_line, token.tok_column);
+
+      end case;
+      
+./
+
+   terminals_section          ::= TERMINALS terminals_list
+/.
+   --
+   --  Terminals section
+   --  -----------------
+   --
+   --  When this rule is invoked, we have finished scanning the terminals
+   --  section.  We add a few system generated symbols, and set the count
+   --  of terminals in the symbol list, dividing the terminals from the
+   --  non-terminals.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      symbol_list with:= escape_mark + "error";
+      error_symbol_number := #symbol_list;
+      symbol_map(symbol_list(#symbol_list)) := #symbol_list;
+
+      symbol_list with:= escape_mark + "eof";
+      eof_symbol_number := #symbol_list;
+      symbol_map(symbol_list(#symbol_list)) := #symbol_list;
+
+      num_terminals := #symbol_list;
+
+      symbol_list with:= escape_mark + "accept";
+      symbol_map(symbol_list(#symbol_list)) := #symbol_list;
+      accept_symbol_number := #symbol_list;
+
+./
+
+   terminals_list             ::= terminals_item terminals_list
+                              |   terminals_item
+
+   terminals_item             ::= IDENTIFIER terminal_description
+/.
+   --
+   --  Terminal declaration
+   --  --------------------
+   --
+   --  When this rule is invoked, we have a terminal name on the top of
+   --  the stack, but the description is empty.  If there were any
+   --  description entries, they are held in option_map, mapping options
+   --  to values.  Here we make sure the terminal hasn't already been
+   --  declared, and declare it.  We use the option map to build the
+   --  alias map as well.
+   --
+   --  We keep the option map in a symbol description table, for use by
+   --  the table output procedures.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      token frome semantic_stack;
+      if token.tok_class /= tok_identifier then
+
+         error_message("Terminal name is reserved => " + token.tok_lexeme,
+                       token.tok_line, token.tok_column);
+
+      elseif symbol_map(token.tok_lexeme) /= om then
+
+         error_message("Terminal defined twice => " +
+                       token.tok_lexeme,
+                       token.tok_line, token.tok_column);
+
+      else
+
+         symbol_list with:= token.tok_lexeme;
+         symbol_map(token.tok_lexeme) := #symbol_list;
+
+         for alias in (option_map("aliases") ? []) loop
+            alias_map(alias) := token.tok_lexeme;
+         end loop;
+
+         symbol_desc(#symbol_list) := option_map;
+
+      end if;
+
+      option_map := {};
+
+./
+
+   terminal_description       ::= ":" terminal_spec_list
+                              |   %epsilon
+
+   terminal_spec_list         ::= terminal_spec_list "," terminal_spec
+                              |   terminal_spec
+
+   terminal_spec              ::= IDENTIFIER "=" value_spec
+/.
+   --
+   --  Terminal values
+   --  ---------------
+   --
+   --  When this rule is invoked, we have an option - value pair on the
+   --  top of the stack, associated with a terminal description.  The
+   --  option is an identifier token, and the value is either an
+   --  identifier token or a list of identifier tokens.  No error
+   --  checking has been done to this point, with the exception of the
+   --  weeding out of reserved words, etc., that the parser is able to
+   --  do.  We pop the two items and start decoding.
+   --
+   --  The goal here is to build up a map from names to sets of values.
+   --  For the most part, these values are saved for table output
+   --  procedures, in order to help the programmer in creating
+   --  synchronized tables.  The only one of real interest to the
+   --  remainder of this program is the aliases.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      value_list frome semantic_stack;
+      option_token frome semantic_stack;
+      option_name := tolower(option_token.tok_lexeme);
+
+      case option_name
+
+         when "keywords", "specials", "aliases" =>
+
+            if is_tuple(value_list(1)) then
+               option_map(option_name) := 
+                  [token.tok_lexeme : token in value_list];
+            else
+               option_map(option_name) := [value_list.tok_lexeme];
+            end if;
+
+         otherwise =>
+
+            error_message("Invalid terminal option => " + option_name,
+                          option_token.tok_line,
+                          option_token.tok_column);
+      
+      end case;
+
+./
+
+   nonterminals_section       ::= NONTERMINALS nonterminals_list
+                              |   %epsilon
+
+   nonterminals_list          ::= nonterminals_item nonterminals_list
+                              |   nonterminals_item
+
+   nonterminals_item          ::= IDENTIFIER nonterminal_description
+/.
+   --
+   --  Nonterminal declaration
+   --  -----------------------
+   --
+   --  When this rule is invoked, we have a nonterminal name on the top
+   --  of the stack, but the description is empty.  If there were any
+   --  description entries, they are held in option_map, mapping options
+   --  to values.  Here we make sure the nonterminal hasn't already been
+   --  declared, and declare it.  We use the option map to build the
+   --  alias map as well.
+   --
+   --  We keep the option map in a symbol description table, for use by
+   --  the table output procedures.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      token frome semantic_stack;
+      if token.tok_class /= tok_identifier then
+
+         error_message("Nonterminal name is reserved => " +
+                       token.tok_lexeme,
+                       token.tok_line, token.tok_column);
+
+      elseif symbol_map(token.tok_lexeme) /= om then
+
+         error_message("Nonterminal defined twice => " +
+                       token.tok_lexeme,
+                       token.tok_line, token.tok_column);
+
+      else
+
+         symbol_list with:= token.tok_lexeme;
+         symbol_map(token.tok_lexeme) := #symbol_list;
+
+         for alias in (option_map("aliases") ? []) loop
+            alias_map(alias) := token.tok_lexeme;
+         end loop;
+
+         symbol_desc(#symbol_list) := option_map;
+
+      end if;
+
+      option_map := {};
+
+./
+
+   nonterminal_description    ::= ":" nonterminal_spec_list
+                              |   %epsilon
+
+   nonterminal_spec_list      ::= nonterminal_spec_list "," nonterminal_spec
+                              |   nonterminal_spec
+
+   nonterminal_spec           ::= IDENTIFIER "=" value_spec
+/.
+   --
+   --  Nonterminal values
+   --  ---------------
+   --
+   --  When this rule is invoked, we have an option - value pair on the
+   --  top of the stack, associated with a nonterminal description. The
+   --  option is an identifier token, and the value is either an
+   --  identifier token or a list of identifier tokens.  No error
+   --  checking has been done to this point, with the exception of the
+   --  weeding out of reserved words, etc., that the parser is able to
+   --  do.  We pop the two items and start decoding.
+   --
+   --  The goal here is to build up a map from names to sets of values.
+   --  For the most part, these values are saved for table output
+   --  procedures, in order to help the programmer in creating
+   --  synchronized tables.  The only one of real interest to the
+   --  remainder of this program is the aliases.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      value_list frome semantic_stack;
+      option_token frome semantic_stack;
+      option_name := tolower(option_token.tok_lexeme);
+
+      case option_name
+
+         when "aliases" =>
+
+            if is_tuple(value_list(1)) then
+               option_map(option_name) := 
+                  [token.tok_lexeme : token in value_list];
+            else
+               option_map(option_name) := [value_list.tok_lexeme];
+            end if;
+
+         otherwise =>
+
+            error_message("Invalid nonterminal option => " + option_name,
+                          option_token.tok_line,
+                          option_token.tok_column);
+      
+      end case;
+
+./
+
+   value_spec                 ::= IDENTIFIER
+                              |   "[" value_list "]"
+
+   value_list                 ::= value_list "," value_spec
+/.
+   --
+   --  Value specifications
+   --  --------------------
+   --
+   --  We have a number of places where we allow values to be specified,
+   --  either in the form of identifiers or lists of identifiers.  The
+   --  following two rules gather up lists of identifiers into tuples of
+   --  tokens.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      last frome semantic_stack;
+      semantic_stack(#semantic_stack) with:= last;
+
+./
+
+   value_list                 ::= value_spec
+/.
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      last frome semantic_stack;
+      semantic_stack with:= [last];
+
+./
+
+   rules_section              ::= RULES rule_list
+/.
+   --
+   --  Rules section
+   --  -------------
+   --
+   --  BRAIN DEATH ALERT!
+   --
+   --  The rules section of the grammar file is exceptionally ugly.  A
+   --  BNF grammar seems to be most naturally expressed as LALR(2), not
+   --  LALR(1).  As this is being written, the program doesn't handle
+   --  LALR(k), so we used LALR(1).  As a consequence the grammar doesn't
+   --  resemble the sentences it recognizes.  Yuck.
+   --
+   --  Anyway, at this particular rule we've seen the entire rule
+   --  section.  We have to finish the last rule and fix up the first.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      --
+      --  Write out any pending semantic actions.
+      --
+
+      for [line_number, action] in pending_actions loop
+         write_semantic_action(line_number, action);
+      end loop;
+      pending_actions := [];      
+
+      rhs_list with:= current_rhs;
+      lhs_list(1) := accept_symbol_number;
+      rhs_list(1) := [lhs_list(2)];
+      num_symbols := #symbol_list;
+
+./
+
+   rule_list                  ::= header
+/.
+   --
+   --  First rule
+   --  ----------
+   --
+   --  When we reduce by this rule we've seen the header of the very
+   --  first rule.  We write out any pending semantic actions and
+   --  initialize a rule.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      --
+      --  Write out any pending semantic actions.
+      --
+
+      for [line_number, action] in pending_actions loop
+         write_semantic_action(line_number, action);
+      end loop;
+      pending_actions := [];      
+
+      lhs_list with:= current_lhs;
+      num_rules +:= 1;
+      current_rhs := [];
+
+./
+
+   rule_list                  ::= rule_list grammar_symbol
+/.
+   --
+   --  Right hand side symbol
+   --  ----------------------
+   --
+   --  This rule tacks symbols on to the right hand side of rules.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      [symbol_number, -, -] frome semantic_stack;
+      current_rhs with:= symbol_number;
+
+./
+
+   rule_list                  ::= rule_list header
+/.
+   --
+   --  New rule
+   --  --------
+   --
+   --  When we reduce by this rule we've finished one rule and are
+   --  beginning another.  We write out any pending semantic actions and
+   --  initialize a rule.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      --
+      --  Write out any pending semantic actions.
+      --
+
+      for [line_number, action] in pending_actions loop
+         write_semantic_action(line_number, action);
+      end loop;
+      pending_actions := [];      
+
+      rhs_list with:= current_rhs;
+      lhs_list with:= current_lhs;
+      num_rules +:= 1;
+      current_rhs := [];
+
+./
+
+   rule_list                  ::= rule_list "|"
+/.
+   --
+   --  New rule
+   --  --------
+   --
+   --  When we reduce by this rule we've finished one rule and are
+   --  beginning another.  We write out any pending semantic actions and
+   --  initialize a rule.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      --
+      --  Write out any pending semantic actions.
+      --
+
+      for [line_number, action] in pending_actions loop
+         write_semantic_action(line_number, action);
+      end loop;
+      pending_actions := [];      
+
+      rhs_list with:= current_rhs;
+      lhs_list with:= current_lhs;
+      num_rules +:= 1;
+      current_rhs := [];
+
+./
+
+   header                     ::= grammar_symbol "::="
+/.
+   --
+   --  Rule headers
+   --  ------------
+   --
+   --  A rule header is just the left hand symbol followed by the produce
+   --  mark.  We make sure an epsilon or error is not used in a left hand
+   --  side position, then install as the new lhs.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      [symbol_number, line_number, column_number] frome semantic_stack;
+
+      if symbol_number = epsilon_symbol_number then
+         error_message("%epsilon can not be used as left hand side",
+                       line_number, column_number);
+      elseif symbol_number = error_symbol_number then
+         error_message("%error can not be used as left hand side",
+                       line_number, column_number);
+      else
+         current_lhs := symbol_number;
+      end if;
+      
+./
+
+   grammar_symbol             ::= IDENTIFIER
+/.
+   --
+   --  Grammar symbols
+   --  ---------------
+   --
+   --  We convert grammar symbols into indices into the symbol list.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      token frome semantic_stack;
+      lexeme := token.tok_lexeme;
+
+      --
+      --  Replace aliases by cannonical form.
+      --
+
+      if alias_map(lexeme) /= om then
+         lexeme := alias_map(lexeme);
+      end if;
+
+      --
+      --  Undefined symbols are automatically new nonterminals.
+      --
+
+      if symbol_map(lexeme) = om then
+         symbol_list with:= lexeme;
+         symbol_map(lexeme) := #symbol_list;
+      end if;
+
+      semantic_stack with:=
+         [symbol_map(lexeme), token.tok_line, token.tok_column];
+      
+./
+
+   grammar_symbol             ::= EPSILON
+/.
+   --
+   --  Empty symbols
+   --  -------------
+   --
+   --  We allow the empty symbol on the right hand side of productions.
+   --  Here we pop the empty symbol token and replace it with the index
+   --  of the empty symbol and the file position.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      [-, -, line_number, column_number] frome semantic_stack;
+      semantic_stack with:=
+         [epsilon_symbol_number, line_number, column_number];
+
+./
+
+   grammar_symbol             ::= ERRSYMBOL
+/.
+   --
+   --  Error symbols
+   --  -------------
+   --
+   --  We allow the error symbol on the right hand side of productions.
+   --  Here we pop the error symbol token and replace it with the index
+   --  of the error symbol and the file position.
+   --
+
+   --
+   --  RULE: %rule_text
+   --
+
+   when %rule =>
+
+      [-, -, line_number, column_number] frome semantic_stack;
+      semantic_stack with:=
+         [error_symbol_number, line_number, column_number];
+
+./
+
+/.
+      end case;
+
+   end semantic_action;
+
+   --
+   --  token_action
+   --  ------------
+   --
+   --  This procedure is called when shifting a token.  If it's a token
+   --  for which we need either the lexeme or the file position we push
+   --  it on to the stack.  Otherwise we do nothing.
+   --
+
+   procedure token_action(token);
+
+      if token.tok_class = tok_identifier or
+         token.tok_class = tok_epsilon or 
+         token.tok_class = tok_errsymbol then
+
+         semantic_stack with:= token;
+
+      end if;
+
+   end token_action;
+
+end semantic_actions;
+./

@@ -1,0 +1,174 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 8
+Pattern Matching
+--------------------------------------------------------------------------------
+TOPICS:  matching predicates, instantiating variables; substitutions;
+         substitution sets
+--------------------------------------------------------------------------------
+
+Pattern matching is one of the most fundamental operations in Prolog.  Indeed,
+it is at the heart of Prolog's inference engine.  Some have observed that in
+Prolog pattern matching IS computation!
+
+Pattern matching is very simple.  You have two predicates, possibly containing
+variables, and you want to see what substitutions you have to make in order for
+the two predicates to become textually identical.  
+
+First let's look at the substitution process.  Suppose you have the predicate
+
+      likes(cat,milk)
+
+There is no variability in this.  It is either entirely true or entirely false.
+Since there are no variables, you cannot substitute.
+
+On the other hand:
+
+      likes(mark,X)
+
+does have a variable, namely X, so this predicate is not true or false.  It is
+really a question, until we put some value in for X.  Suppose we let our
+substitution set be the pair:  (X,gold)
+This makes the predicate
+
+      likes(mark,gold)
+
+and this is either true or false, depending on whether the programmer put it 
+into the fact database.
+
+Here's a predicate with two variables:
+
+      likes(X,Y)
+
+Again, this is neither true nor false.  If our substitution set is (X,mark),
+we can apply this substitution set to the predicate, and get
+
+      likes(mark,Y)
+
+But this is not complete again, so it is still a query.  In fact we need to
+substitute some non-variable for both X and Y to get a predicate that we can
+test for truth.
+
+Here's a notation we will use to indicate that we have a predicate that is
+subject to a substitution:
+
+      predicates / { pairs of var = value }
+
+For example,
+
+      likes(mark,Y) / { Y = gold }
+
+or
+
+      likes(X,Y) / { X = mark, Y = gold }
+
+Substitution really just means rewrite the predicate, replacing all occurrences
+of variables with what they "stand for."  This is much trickier than it first
+sounds.  Try this one:
+
+      likes(X,likes(K,M)) / { X = mark }
+
+In this case, the predicate could contain another predicate as one of its argu-
+ments, which is legal.  We get:
+
+      likes(mark,likes(K,M))
+
+But now what happens when you do:
+  
+      likes(mark,X) / { X = likes(cat,X) }
+
+If we rewrite the first predicate, replacing X by likes(cat,X), we get
+
+      likes(mark,likes(cat,X))
+
+But the rules of substitution say that you must replace all occurrences of X
+with its value, so we have to replace the new X, thereby getting
+
+      likes(mark,likes(cat,likes(cat,X)))
+
+and this process will never stop.  So some substitutions can lead us into a
+sort of infinite loop!
+
+However, we won't worry too much about these crazy substitutions further.
+Let us get back on track.  
+
+What we want to do is to get a set of substitutions so that if its var/value
+pairs are applied to two predicates, they become textually identical.  For
+example:
+   
+      likes(mark,X), likes(Y,gold)
+
+We notice that the set {Y = mark, X = gold} works, because if we apply this
+
+      likes(mark,X), likes(Y,gold) / {Y = mark, X = gold}
+
+we get
+
+      likes(mark,gold), likes(mark,gold)
+
+and they are exactly the same in every way.  Thus the two predicates match
+given the substitution set {Y = mark, X = gold}.
+
+The goal of matching two predicates is to find a set of substitutions which
+will cause a perfect match.
+
+A predicate can have 0 arguments, such as "mark" or 5.  Some authors might not
+call these predicates, but we will treat them as such here.
+
+Here are the basic rule of matching.
+
+    A variable matches any predicate as long as that variable has not
+    already been matched to a different predicate.
+
+    Two variables can match each other, as long as neither has already
+    been matched to anything else.  We sometimes say they "share".
+
+    If two predicates have the same functor
+    and if two predicates have the same number of arguments
+    and if argument 1 of predicate 1 matches argument 1 of predicate 2,
+    and if argument 2 of predicate 1 matches argument 2 of predicate 2,
+    and so forth,
+
+    then they match.
+
+    The set of matchings of variables to predicates or other variables 
+    becomes the substitution set.
+
+Let's look at examples.  We will use the Prolog = sign to separate the
+two predicates that we wish to match.
+
+1.  X = Y            they match, and the variables share
+
+2.  X = 5            they match, {X = 5}
+
+3.  mark = susan     they do not match
+
+4.  likes(mark,X) = likes(susan,gold)     no match, because the first args
+                                          do not match
+
+5.  likes(mark,gold) = wants(mark,X)      no match, because the functors are
+                                          different
+
+6.  likes(mark,X) = likes(Y)              no match, different number of args
+
+7.  parents(robert,sally,mark) = parents(X,Y,X)
+                                          no match because X cannot be matched
+                                          to both robert and mark
+
+8.  likes(mark,wants(X,wine)) = likes(Y,wants(joe,wine))
+                                          they match, Y = mark, X = joe
+
+9.  likes(mark,wants(X,wine)) = likes(Y,Z)   they match, Y = mark, 
+                                             Z = wants(X,wine)
+
+
+How does Prolog use pattern matching?  When you ask a query of Prolog, you give
+it a predicate that may or may not have variables.  In either case, Prolog goes
+through its database, from first fact to last face, and attempts to match your
+query with each fact.  It stops at the first match, prints out the variable
+substitution set, and waits for you to type a semicolon, signalling that it 
+should continue looking for the next pattern match, or just RETURN, which tells
+Prolog it can go relax for a while.
+
+Rules cause a more complicated form of pattern matching.  See Chapter 10.
+
+--------------------------------------------------------------------------------

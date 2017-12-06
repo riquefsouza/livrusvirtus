@@ -1,0 +1,167 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Livrus - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x416 /fo"Debug/Livrus.res" /d "_DEBUG" "C:\LivrusVirtus\VCPP6\Win32\ADO\Livrus.rc"" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPC9.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/Livrus.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\LivrusVirtus\VCPP6\Win32\ADO\AlterarSenha.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\CadAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\Cadastros.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\CadAutores.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\CadClientes.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\CadEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\CadEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\CadIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\CadLivros.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\CadPaises.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\CadProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConAutores.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConClientes.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConLivros.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConPaises.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\Consultas.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConsultasSQL.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ConVendas.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\ListaStr.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\Livrus.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\Login.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\Principal.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\RotinasGlobais.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\Sobre.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\Splash.cpp"
+"C:\LivrusVirtus\VCPP6\Win32\ADO\VenderLivros.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPC9.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPCA.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/Livrus.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\LivrusVirtus\VCPP6\Win32\ADO\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPCA.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPCB.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comctl32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/Livrus.pdb" /debug /machine:I386 /out:"Debug/Livrus.exe" /pdbtype:sept 
+.\Debug\AlterarSenha.obj
+.\Debug\CadAssuntos.obj
+.\Debug\Cadastros.obj
+.\Debug\CadAutores.obj
+.\Debug\CadClientes.obj
+.\Debug\CadEditoras.obj
+.\Debug\CadEnderecos.obj
+.\Debug\CadIdiomas.obj
+.\Debug\CadLivros.obj
+.\Debug\CadPaises.obj
+.\Debug\CadProfissoes.obj
+.\Debug\ConAssuntos.obj
+.\Debug\ConAutores.obj
+.\Debug\ConClientes.obj
+.\Debug\ConEditoras.obj
+.\Debug\ConEnderecos.obj
+.\Debug\ConIdiomas.obj
+.\Debug\ConLivros.obj
+.\Debug\ConPaises.obj
+.\Debug\ConProfissoes.obj
+.\Debug\Consultas.obj
+.\Debug\ConsultasSQL.obj
+.\Debug\ConVendas.obj
+.\Debug\ListaStr.obj
+.\Debug\Livrus.obj
+.\Debug\Login.obj
+.\Debug\Principal.obj
+.\Debug\RotinasGlobais.obj
+.\Debug\Sobre.obj
+.\Debug\Splash.obj
+.\Debug\StdAfx.obj
+.\Debug\VenderLivros.obj
+.\Debug\Livrus.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPCB.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+AlterarSenha.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+CadAssuntos.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+Cadastros.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+CadAutores.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+CadClientes.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+CadEditoras.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+CadEnderecos.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+CadIdiomas.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+CadLivros.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+CadPaises.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+CadProfissoes.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConAssuntos.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConAutores.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConClientes.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConEditoras.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConEnderecos.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConIdiomas.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConLivros.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConPaises.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConProfissoes.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+Generating Code...
+Compiling...
+Consultas.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConsultasSQL.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ConVendas.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+ListaStr.cpp
+Livrus.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+Login.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+Principal.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+RotinasGlobais.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+Sobre.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+Splash.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+VenderLivros.cpp
+c:\livrusvirtus\vcpp6\win32\ado\debug\msado15.tlh(407) : warning C4146: unary minus operator applied to unsigned type, result still unsigned
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+Livrus.exe - 0 error(s), 30 warning(s)
+</pre>
+</body>
+</html>

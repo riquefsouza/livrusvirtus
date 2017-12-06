@@ -1,0 +1,556 @@
+//Titulo:    Livrus Virtus
+//Versao:    1.0.0
+//Autor:     Henrique Figueiredo de Souza
+//Linguagem: JAVA
+
+package Livrus;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
+
+//import WindowMenu;
+
+import java.sql.*;
+
+public class frmPrincipal extends JFrame {
+
+  public static frmPrincipal fPrincipal;
+  public static Connection db;
+  //Constroi o frame
+  BorderLayout borderLayout1 = new BorderLayout();
+  JMenuBar menuBar1 = new JMenuBar();
+  JMenu mnuCadastros = new JMenu();
+  JMenu mnuVendas = new JMenu();
+  JMenu mnuOpcoes = new JMenu();
+  JMenuItem mnuSobre = new JMenuItem();
+  JToolBar toolBar = new JToolBar();
+  public JButton tlbClientes = new JButton();
+  public JButton tlbLivros = new JButton();
+  public JButton tlbVender = new JButton();
+  public JButton tlbSobre = new JButton();
+  public JButton tlbSair = new JButton();
+  ImageIcon image0;
+  ImageIcon image1;
+  ImageIcon image2;
+  ImageIcon image3;
+  ImageIcon image4;
+  ImageIcon image5;
+  ImageIcon image6;
+  ImageIcon image7;
+  ImageIcon image8;
+  ImageIcon image9;
+  ImageIcon image10;
+  JMenu mnuPesquisas = new JMenu();
+  public JMenuItem mnuCadAssuntos = new JMenuItem();
+  JMenuItem mnuCadAutores = new JMenuItem();
+  JMenuItem mnuCadEditoras = new JMenuItem();
+  JMenuItem mnuCadIdiomas = new JMenuItem();
+  JMenuItem mnuCadLivros = new JMenuItem();
+  JMenuItem mnuCadPaises = new JMenuItem();
+  JMenuItem mnuCadProfissoes = new JMenuItem();
+  JMenuItem mnuConAssuntos = new JMenuItem();
+  JMenuItem mnuConAutores = new JMenuItem();
+  JMenuItem mnuConEditoras = new JMenuItem();
+  JMenuItem mnuConIdiomas = new JMenuItem();
+  JMenuItem mnuConLivros = new JMenuItem();
+  JMenuItem mnuConPaises = new JMenuItem();
+  JMenuItem mnuConProfissoes = new JMenuItem();
+  JMenuItem mnuVenderLivros = new JMenuItem();
+  JMenuItem mnuVendasRealizadas = new JMenuItem();
+  JMenuItem mnuSair = new JMenuItem();
+  MDIDesktopPane desktop = new MDIDesktopPane();
+  JScrollPane scrollpane = new JScrollPane();
+  JMenuItem mnuCadEnderecos = new JMenuItem();
+  JMenuItem mnuConEnderecos = new JMenuItem();
+  JMenuItem mnuCadClientes = new JMenuItem();
+  JMenuItem mnuConClientes = new JMenuItem();
+  JMenuItem mnuAlterarSenha = new JMenuItem();
+  JPanel jPanel1 = new JPanel();
+  JLabel statusBar1 = new JLabel();
+  JLabel statusBar2 = new JLabel();
+  BorderLayout borderLayout2 = new BorderLayout();
+
+  public frmPrincipal() {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try  {
+      jbInit();
+      RotinasGlobais.Rotinas.Conectar();
+
+      ConsultasSQL.ConsSQL = new ConsultasSQL();
+
+      frmSplash.fSplash = new frmSplash();
+      RotinasGlobais.Rotinas.CentralizaDlg(frmSplash.fSplash);
+      frmSplash.fSplash.show();
+
+      frmLogin.fLogin = new frmLogin();
+      RotinasGlobais.Rotinas.CentralizaDlg(frmLogin.fLogin);
+      frmLogin.fLogin.show();
+      statusBar1.setText("Usuário: "+RotinasGlobais.Rotinas.sUsuarioLogin);
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  //inicializacao de componentes
+
+  private void jbInit() throws Exception  {
+    image0 = new ImageIcon(getClass().getResource("Livrus.gif"));
+    image1 = new ImageIcon(getClass().getResource("Cliente.gif"));
+    image2 = new ImageIcon(getClass().getResource("dcliente.gif"));
+    image3 = new ImageIcon(getClass().getResource("Livro.gif"));
+    image4 = new ImageIcon(getClass().getResource("dlivro.gif"));
+    image5 = new ImageIcon(getClass().getResource("Livros.gif"));
+    image6 = new ImageIcon(getClass().getResource("dlivros.gif"));
+    image7 = new ImageIcon(getClass().getResource("Sobre.gif"));
+    image8 = new ImageIcon(getClass().getResource("dsobre.gif"));
+    image9 = new ImageIcon(getClass().getResource("Sair.gif"));
+    image10 = new ImageIcon(getClass().getResource("dsair.gif"));
+    this.getContentPane().setLayout(borderLayout1);
+    this.setSize(new Dimension(640, 480));
+    this.setTitle("Livrus Virtus");
+    this.setIconImage(image0.getImage());
+    mnuCadastros.setText("Cadastros");
+    mnuCadastros.setMnemonic('C');
+    mnuPesquisas.setText("Pesquisas");
+    mnuPesquisas.setActionCommand("Pesquisas");
+    mnuPesquisas.setMnemonic('P');
+    mnuVendas.setText("Vendas");
+    mnuVendas.setMnemonic('V');
+    mnuOpcoes.setText("Opções");
+    mnuOpcoes.setMnemonic('e');
+    mnuCadLivros.setText("Livros");
+    mnuCadLivros.setMnemonic('L');
+    mnuCadLivros.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuCadLivros_actionPerformed(e);
+      }
+    });
+    mnuSair.setText("Sair");
+    mnuSair.setMnemonic('r');
+    mnuSair.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuSair_actionPerformed(e);
+      }
+    });
+    mnuCadAssuntos.setText("Assuntos");
+    mnuCadAssuntos.setMnemonic('A');
+    mnuCadAssuntos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuCadAssuntos_actionPerformed(e);
+      }
+    });
+    mnuCadAutores.setText("Autores");
+    mnuCadAutores.setMnemonic('t');
+    mnuCadAutores.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuCadAutores_actionPerformed(e);
+      }
+    });
+    mnuCadEditoras.setText("Editoras");
+    mnuCadEditoras.setMnemonic('E');
+    mnuCadEditoras.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuCadEditoras_actionPerformed(e);
+      }
+    });
+    mnuCadIdiomas.setText("Idiomas");
+    mnuCadIdiomas.setMnemonic('I');
+    mnuCadIdiomas.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuCadIdiomas_actionPerformed(e);
+      }
+    });
+    mnuCadPaises.setText("Países");
+    mnuCadPaises.setMnemonic('P');
+    mnuCadPaises.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuCadPaises_actionPerformed(e);
+      }
+    });
+    mnuCadProfissoes.setText("Profissões");
+    mnuCadProfissoes.setMnemonic('R');
+    mnuCadProfissoes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuCadProfissoes_actionPerformed(e);
+      }
+    });
+    mnuConAssuntos.setText("Assuntos");
+    mnuConAssuntos.setMnemonic('A');
+    mnuConAssuntos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuConAssuntos_actionPerformed(e);
+      }
+    });
+    mnuConAutores.setText("Autores");
+    mnuConAutores.setMnemonic('t');
+    mnuConAutores.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuConAutores_actionPerformed(e);
+      }
+    });
+    mnuConEditoras.setText("Editoras");
+    mnuConEditoras.setMnemonic('E');
+    mnuConEditoras.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuConEditoras_actionPerformed(e);
+      }
+    });
+    mnuConIdiomas.setText("Idiomas");
+    mnuConIdiomas.setMnemonic('I');
+    mnuConIdiomas.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuConIdiomas_actionPerformed(e);
+      }
+    });
+    mnuConLivros.setText("Livros");
+    mnuConLivros.setMnemonic('L');
+    mnuConLivros.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuConLivros_actionPerformed(e);
+      }
+    });
+    mnuConPaises.setText("Países");
+    mnuConPaises.setMnemonic('P');
+    mnuConPaises.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuConPaises_actionPerformed(e);
+      }
+    });
+    mnuConProfissoes.setText("Profissões");
+    mnuConProfissoes.setActionCommand("Profissoes");
+    mnuConProfissoes.setMnemonic('R');
+    mnuConProfissoes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuConProfissoes_actionPerformed(e);
+      }
+    });
+    mnuVenderLivros.setText("Vender Livros");
+    mnuVenderLivros.setMnemonic('V');
+    mnuVenderLivros.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuVenderLivros_actionPerformed(e);
+      }
+    });
+    mnuVendasRealizadas.setText("Vendas Realizadas");
+    mnuVendasRealizadas.setMnemonic('R');
+    mnuVendasRealizadas.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuVendasRealizadas_actionPerformed(e);
+      }
+    });
+    mnuSobre.setText("Sobre");
+    mnuSobre.setMnemonic('S');
+    mnuSobre.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuSobre_actionPerformed(e);
+      }
+    });
+    tlbClientes.setToolTipText("Cadastro de Clientes");
+    tlbClientes.setIcon(image1);
+    tlbClientes.setDisabledIcon(image2);
+    tlbClientes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        tlbClientes_actionPerformed(e);
+      }
+    });
+    tlbLivros.setToolTipText("Cadastro de Livros");
+    tlbLivros.setIcon(image3);
+    tlbLivros.setDisabledIcon(image4);
+    tlbLivros.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        tlbLivros_actionPerformed(e);
+      }
+    });
+    tlbVender.setToolTipText("Vender Livros");
+    tlbVender.setIcon(image5);
+    tlbVender.setDisabledIcon(image6);
+    tlbVender.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        tlbVender_actionPerformed(e);
+      }
+    });
+    tlbSobre.setToolTipText("Sobre o Sistema");
+    tlbSobre.setIcon(image7);
+    tlbSobre.setDisabledIcon(image8);
+    tlbSobre.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        tlbSobre_actionPerformed(e);
+      }
+    });
+    tlbSair.setToolTipText("Sair do sistema");
+    tlbSair.setIcon(image9);
+    tlbSair.setDisabledIcon(image10);
+    tlbSair.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        tlbSair_actionPerformed(e);
+      }
+    });
+    mnuCadEnderecos.setMnemonic('N');
+    mnuCadEnderecos.setText("Endereços");
+    mnuCadEnderecos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuCadEnderecos_actionPerformed(e);
+      }
+    });
+    mnuConEnderecos.setMnemonic('N');
+    mnuConEnderecos.setText("Endereços");
+    mnuConEnderecos.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuConEnderecos_actionPerformed(e);
+      }
+    });
+    mnuCadClientes.setMnemonic('C');
+    mnuCadClientes.setText("Clientes");
+    mnuCadClientes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuCadClientes_actionPerformed(e);
+      }
+    });
+    mnuConClientes.setMnemonic('C');
+    mnuConClientes.setText("Clientes");
+    mnuConClientes.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuConClientes_actionPerformed(e);
+      }
+    });
+    mnuAlterarSenha.setMnemonic('A');
+    mnuAlterarSenha.setText("Alterar Senha");
+    mnuAlterarSenha.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        mnuAlterarSenha_actionPerformed(e);
+      }
+    });
+    statusBar1.setText(" Usuário: ");
+    statusBar1.setBorder(new BevelBorder(BevelBorder.LOWERED));
+    statusBar1.setPreferredSize(new Dimension(120, 19));
+    statusBar1.setRequestFocusEnabled(false);
+    statusBar2.setBorder(BorderFactory.createLoweredBevelBorder());
+    statusBar2.setMaximumSize(new Dimension(48, 19));
+    statusBar2.setMinimumSize(new Dimension(48, 19));
+    statusBar2.setPreferredSize(new Dimension(48, 19));
+    statusBar2.setRequestFocusEnabled(false);
+    statusBar2.setText("");
+    jPanel1.setLayout(borderLayout2);
+    toolBar.add(tlbClientes, null);
+    toolBar.add(tlbLivros, null);
+    toolBar.add(tlbVender, null);
+    toolBar.add(tlbSobre, null);
+    toolBar.add(tlbSair, null);
+    mnuCadastros.add(mnuCadAssuntos);
+    mnuCadastros.add(mnuCadAutores);
+    mnuCadastros.add(mnuCadEditoras);
+    mnuCadastros.add(mnuCadEnderecos);
+    mnuCadastros.add(mnuCadIdiomas);
+    mnuCadastros.add(mnuCadPaises);
+    mnuCadastros.add(mnuCadProfissoes);
+    mnuCadastros.addSeparator();
+    mnuCadastros.add(mnuCadClientes);
+    mnuCadastros.add(mnuCadLivros);
+    mnuPesquisas.add(mnuConAssuntos);
+    mnuPesquisas.add(mnuConAutores);
+    mnuPesquisas.add(mnuConEditoras);
+    mnuPesquisas.add(mnuConEnderecos);
+    mnuPesquisas.add(mnuConIdiomas);
+    mnuPesquisas.add(mnuConPaises);
+    mnuPesquisas.add(mnuConProfissoes);
+    mnuPesquisas.addSeparator();
+    mnuPesquisas.add(mnuConClientes);
+    mnuPesquisas.add(mnuConLivros);
+    mnuVendas.add(mnuVenderLivros);
+    mnuVendas.add(mnuVendasRealizadas);
+    mnuOpcoes.add(mnuAlterarSenha);
+    mnuOpcoes.addSeparator();
+    mnuOpcoes.add(mnuSobre);
+    mnuOpcoes.add(mnuSair);
+    menuBar1.add(mnuCadastros);
+    menuBar1.add(mnuPesquisas);
+    menuBar1.add(mnuVendas);
+    menuBar1.add(new WindowMenu(desktop));
+    menuBar1.add(mnuOpcoes);
+    this.setJMenuBar(menuBar1);
+    this.getContentPane().add(toolBar,  BorderLayout.NORTH);
+    this.getContentPane().add(jPanel1,  BorderLayout.SOUTH);
+    scrollpane.setAutoscrolls(true);
+    this.getContentPane().add(scrollpane, BorderLayout.CENTER);
+    jPanel1.add(statusBar1,  BorderLayout.WEST);
+    jPanel1.add(statusBar2,  BorderLayout.CENTER);
+    scrollpane.getViewport().add(desktop, null);
+  }
+
+  private boolean SairDoSistema() {
+    if (JOptionPane.showConfirmDialog(this,"Deseja sair do sistema?",
+       frmPrincipal.fPrincipal.getTitle(), JOptionPane.YES_NO_OPTION,
+       JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+       RotinasGlobais.Rotinas.Desconectar(db);
+       System.exit(0);
+       return true;
+    } else
+      return false;
+  }
+  protected void processWindowEvent(WindowEvent e) {
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      if (SairDoSistema()) {
+        super.processWindowEvent(e);
+      }
+    }
+  }
+  void mnuCadAssuntos_actionPerformed(ActionEvent e) {
+    mnuCadAssuntos.setEnabled(false);
+    frmCadAssuntos.fCadAssuntos = new frmCadAssuntos();
+    desktop.add(frmCadAssuntos.fCadAssuntos);
+    frmCadAssuntos.fCadAssuntos.show();
+  }
+  void mnuCadAutores_actionPerformed(ActionEvent e) {
+    mnuCadAutores.setEnabled(false);
+    frmCadAutores.fCadAutores = new frmCadAutores();
+    desktop.add(frmCadAutores.fCadAutores);
+    frmCadAutores.fCadAutores.show();
+  }
+  void mnuCadEditoras_actionPerformed(ActionEvent e) {
+    mnuCadEditoras.setEnabled(false);
+    frmCadEditoras.fCadEditoras = new frmCadEditoras();
+    desktop.add(frmCadEditoras.fCadEditoras);
+    frmCadEditoras.fCadEditoras.show();
+  }
+  void mnuCadIdiomas_actionPerformed(ActionEvent e) {
+    mnuCadIdiomas.setEnabled(false);
+    frmCadIdiomas.fCadIdiomas = new frmCadIdiomas();
+    desktop.add(frmCadIdiomas.fCadIdiomas);
+    frmCadIdiomas.fCadIdiomas.show();
+  }
+  void mnuCadPaises_actionPerformed(ActionEvent e) {
+    mnuCadPaises.setEnabled(false);
+    frmCadPaises.fCadPaises = new frmCadPaises();
+    desktop.add(frmCadPaises.fCadPaises);
+    frmCadPaises.fCadPaises.show();
+  }
+  void mnuCadProfissoes_actionPerformed(ActionEvent e) {
+    mnuCadProfissoes.setEnabled(false);
+    frmCadProfissoes.fCadProfissoes = new frmCadProfissoes();
+    desktop.add(frmCadProfissoes.fCadProfissoes);
+    frmCadProfissoes.fCadProfissoes.show();
+  }
+  void mnuCadLivros_actionPerformed(ActionEvent e) {
+    mnuCadLivros.setEnabled(false);
+    frmCadLivros.fCadLivros = new frmCadLivros();
+    desktop.add(frmCadLivros.fCadLivros);
+    frmCadLivros.fCadLivros.show();
+  }
+  void mnuCadClientes_actionPerformed(ActionEvent e) {
+    mnuCadClientes.setEnabled(false);
+    frmCadClientes.fCadClientes = new frmCadClientes();
+    desktop.add(frmCadClientes.fCadClientes);
+    frmCadClientes.fCadClientes.show();
+  }
+  void mnuConAssuntos_actionPerformed(ActionEvent e) {
+    mnuConAssuntos.setEnabled(false);
+    frmConAssuntos.fConAssuntos = new frmConAssuntos();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConAssuntos.fConAssuntos);
+    frmConAssuntos.fConAssuntos.show();
+  }
+  void mnuConAutores_actionPerformed(ActionEvent e) {
+    mnuConAutores.setEnabled(false);
+    frmConAutores.fConAutores = new frmConAutores();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConAutores.fConAutores);
+    frmConAutores.fConAutores.show();
+  }
+  void mnuConEditoras_actionPerformed(ActionEvent e) {
+    mnuConEditoras.setEnabled(false);
+    frmConEditoras.fConEditoras = new frmConEditoras();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConEditoras.fConEditoras);
+    frmConEditoras.fConEditoras.show();
+  }
+  void mnuConIdiomas_actionPerformed(ActionEvent e) {
+    mnuConIdiomas.setEnabled(false);
+    frmConIdiomas.fConIdiomas = new frmConIdiomas();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConIdiomas.fConIdiomas);
+    frmConIdiomas.fConIdiomas.show();
+  }
+  void mnuConLivros_actionPerformed(ActionEvent e) {
+    mnuConLivros.setEnabled(false);
+    frmConLivros.fConLivros = new frmConLivros();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConLivros.fConLivros);
+    frmConLivros.fConLivros.show();
+  }
+  void mnuConPaises_actionPerformed(ActionEvent e) {
+    mnuConPaises.setEnabled(false);
+    frmConPaises.fConPaises = new frmConPaises();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConPaises.fConPaises);
+    frmConPaises.fConPaises.show();
+  }
+  void mnuConProfissoes_actionPerformed(ActionEvent e) {
+    mnuConProfissoes.setEnabled(false);
+    frmConProfissoes.fConProfissoes = new frmConProfissoes();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConProfissoes.fConProfissoes);
+    frmConProfissoes.fConProfissoes.show();
+  }
+  void mnuSobre_actionPerformed(ActionEvent e) {
+    statusBar2.setText("Sobre o sistema.");
+    frmSobre.fSobre = new frmSobre();
+    frmSobre.fSobre.show();
+  }
+  void mnuVenderLivros_actionPerformed(ActionEvent e) {
+    mnuVenderLivros.setEnabled(false);
+    frmVenderLivros.fVenderLivros = new frmVenderLivros();
+    desktop.add(frmVenderLivros.fVenderLivros);
+    frmVenderLivros.fVenderLivros.show();
+  }
+  void mnuVendasRealizadas_actionPerformed(ActionEvent e) {
+    mnuVendasRealizadas.setEnabled(false);
+    frmConVendas.fConVendas = new frmConVendas();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConVendas.fConVendas);
+    frmConVendas.fConVendas.show();
+  }
+  void mnuSair_actionPerformed(ActionEvent e) {
+      statusBar2.setText("Sair do sistema.");
+      SairDoSistema();
+  }
+  void tlbClientes_actionPerformed(ActionEvent e) {
+    mnuCadClientes_actionPerformed(null);
+  }
+  void tlbLivros_actionPerformed(ActionEvent e) {
+    mnuCadLivros_actionPerformed(null);
+  }
+  void tlbVender_actionPerformed(ActionEvent e) {
+    mnuVenderLivros_actionPerformed(null);
+  }
+  void tlbSobre_actionPerformed(ActionEvent e) {
+    mnuSobre_actionPerformed(null);
+  }
+  void tlbSair_actionPerformed(ActionEvent e) {
+    mnuSair_actionPerformed(null);
+  }
+
+  void mnuAlterarSenha_actionPerformed(ActionEvent e) {
+    mnuAlterarSenha.setEnabled(false);
+    frmAlterarSenha.fAlterarSenha = new frmAlterarSenha();
+    desktop.add(frmAlterarSenha.fAlterarSenha);
+    frmAlterarSenha.fAlterarSenha.show();
+  }
+
+  void mnuCadEnderecos_actionPerformed(ActionEvent e) {
+    mnuCadEnderecos.setEnabled(false);
+    frmCadEnderecos.fCadEnderecos = new frmCadEnderecos();
+    desktop.add(frmCadEnderecos.fCadEnderecos);
+    frmCadEnderecos.fCadEnderecos.show();
+  }
+
+  void mnuConEnderecos_actionPerformed(ActionEvent e) {
+    mnuConEnderecos.setEnabled(false);
+    frmConEnderecos.fConEnderecos = new frmConEnderecos();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConEnderecos.fConEnderecos);
+    frmConEnderecos.fConEnderecos.show();
+  }
+
+  void mnuConClientes_actionPerformed(ActionEvent e) {
+    mnuConClientes.setEnabled(false);
+    frmConClientes.fConClientes = new frmConClientes();
+    RotinasGlobais.Rotinas.CentralizaDlg(this,frmConClientes.fConClientes);
+    frmConClientes.fConClientes.show();
+  }
+
+}
+

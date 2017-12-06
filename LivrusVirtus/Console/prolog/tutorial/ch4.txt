@@ -1,0 +1,88 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 4
+Rules
+--------------------------------------------------------------------------------
+TOPICS:  Rules; Prolog rule syntax; interpretation of rules as if thens
+         Infix predicates
+--------------------------------------------------------------------------------
+
+Rules express relationships between predicates.  For example, we might like to
+teach the computer that if we love something, then we like it.  Here's a rule
+for that:
+
+     like(X,Y) :- love(X,Y).
+
+Now this is a bit backward and needs quite a bit of explaining.  First, let us
+replace :- with "if" and turn things around:
+
+     if love(X,Y) then love(X,Y).
+
+X and Y are obviously placeholders, kind of like variables.  In fact, we say
+they are universally quantified, meaning that "for all X and all Y, if X loves
+Y, then X likes Y."
+
+Sometimes we need to add more qualifications, such as a set of admissions quali-
+fications for college:
+
+     can_enter(X) :- high_school_grad(X), gpa >= 2.0, has_money(X).
+
+The commas are interpreted as "AND" so that we might turn the above into English
+as follows:
+
+     X can enter our college if 
+            X is a high school graduate,
+        AND the gpa is greater than or equal to 2.0,
+        AND X has the money to pay tuition.
+
+In general, Prolog rules have the form:
+
+           consequent :- ante1, ante2, ante3.
+
+There may be 0 or more antecedents, not just 3 as shown above.  Antecedents are
+just predicates, and so is the consequent.  Some of the arguments may be vari-
+ables, instead of actual predicates.
+
+The way to interpret a rule is:
+
+       "The consequent is true IF antecedent1 is true, and antecedent2
+        is true, and ..."
+
+More than one rule can have the same antecedent.  This forms a logical OR 
+(rather than AND, which is the default).
+
+For example, to say that something is a bird if it flies and has feathers, we
+would write:
+
+        bird(X) :- flies(X), has(X,feathers).
+
+But some birds do not fly, like penguins and ostriches.  We could include those
+as special cases:
+
+        bird(penguin).
+        bird(ostrich).
+
+Now if we asked the query, is "robin" a bird, Prolog would say yes (assuming
+we told it that robins fly and have feathers.)  If we posed the query, is an
+ostrich a bird, Prolog would see the first rule and it would fail, because
+flies(ostrich) is not in the database.  But Prolog continues and soon enough
+it counters the special case of bird(ostrich), so it responds yes.
+
+A rule with no antecedents is identical to a fact.  You can also put the 
+true predicate after the consequent if it makes you more comfortable:
+
+        bird(penguin) :- true.
+        bird(ostrich) :- true.
+
+-----------------------------------------------------------------------------
+
+Before we continue, we need to clear up a possible source of confusion.  Some
+functors, such as > and =, do not seem to obey the usual rules about predicates.
+However, they are just special syntactic variations of two argument functors
+that are commonly seen as binary operators.  For example, we usually write 5<7
+instead of less_than(5,7).  Prolog has a way of rearranging the syntax of some
+predicates so that the two arguments appear on either side of the functor.
+These are built-in for Prolog so you shouldn't worry about them, nor try to 
+make such predicates yourself.  User-defined predicates should always be
+prefix ones, like likes(mark,music).
+
+-----------------------------------------------------------------------------

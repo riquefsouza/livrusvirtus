@@ -1,0 +1,6 @@
+# List of source files containing translatable strings.
+
+C\main.c
+C\interface.c
+C\callbacks.c
+C\support.c

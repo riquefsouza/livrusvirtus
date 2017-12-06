@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="codeditora">1</column>
+        <column name="editora">ABRIL</column>
+    </row>
+    <row>
+        <column name="codeditora">2</column>
+        <column name="editora">ATLAS</column>
+    </row>
+    <row>
+        <column name="codeditora">3</column>
+        <column name="editora">ATUAL</column>
+    </row>
+    <row>
+        <column name="codeditora">4</column>
+        <column name="editora">ALEPH</column>
+    </row>
+    <row>
+        <column name="codeditora">5</column>
+        <column name="editora">BOOKMAN</column>
+    </row>
+    <row>
+        <column name="codeditora">6</column>
+        <column name="editora">ERICA</column>
+    </row>
+    <row>
+        <column name="codeditora">7</column>
+        <column name="editora">GLOBO</column>
+    </row>
+    <row>
+        <column name="codeditora">8</column>
+        <column name="editora">HARBRA</column>
+    </row>
+    <row>
+        <column name="codeditora">9</column>
+        <column name="editora">LIVROS TECNICOS E CIENTIFICOS</column>
+    </row>
+    <row>
+        <column name="codeditora">10</column>
+        <column name="editora">CAMPUS</column>
+    </row>
+    <row>
+        <column name="codeditora">11</column>
+        <column name="editora">MAKRON BOOKS</column>
+    </row>
+    <row>
+        <column name="codeditora">12</column>
+        <column name="editora">MCGRAW HILL</column>
+    </row>
+    <row>
+        <column name="codeditora">13</column>
+        <column name="editora">GUANABARA KOOGAN</column>
+    </row>
+    <row>
+        <column name="codeditora">14</column>
+        <column name="editora">PHB</column>
+    </row>
+    <row>
+        <column name="codeditora">15</column>
+        <column name="editora">BRASPORT</column>
+    </row>
+    <row>
+        <column name="codeditora">16</column>
+        <column name="editora">IBPI PRESS</column>
+    </row>
+    <row>
+        <column name="codeditora">17</column>
+        <column name="editora">VISUAL BOOKS</column>
+    </row>
+    <row>
+        <column name="codeditora">18</column>
+        <column name="editora">WILEY</column>
+    </row>
+    <row>
+        <column name="codeditora">19</column>
+        <column name="editora">SARAIVA</column>
+    </row>
+    <row>
+        <column name="codeditora">20</column>
+        <column name="editora">MODERNA</column>
+    </row>
+    <row>
+        <column name="codeditora">21</column>
+        <column name="editora">ATICA</column>
+    </row>
+    <row>
+        <column name="codeditora">22</column>
+        <column name="editora">FTD</column>
+    </row>
+</resultset>

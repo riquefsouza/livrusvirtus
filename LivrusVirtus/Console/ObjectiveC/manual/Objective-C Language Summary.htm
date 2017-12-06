@@ -1,0 +1,463 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0050)http://toodarkpark.org/computers/objc/summary.html -->
+<HTML><HEAD><TITLE>Objective-C Language Summary</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content="MSHTML 6.00.2800.1458" name=GENERATOR></HEAD>
+<BODY vLink=#8b4500 bgColor=#e0e0e0><A 
+href="http://toodarkpark.org/computers/objc/runtime.html"><IMG 
+src="Objective-C Language Summary_arquivos/DocsLeftArrow.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/objctoc.html"><IMG 
+src="Objective-C Language Summary_arquivos/DocsContents.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/grammar.html"><IMG 
+src="Objective-C Language Summary_arquivos/DocsRightArrow.gif"></A> 
+<P><A name=345></A><A name=378></A><A name=492></A><A name=476></A><I><FONT 
+size=+3>A</FONT><FONT size=+2>ppendix A</FONT> </I>
+<CENTER><FONT size=+5><B>T</B></FONT><FONT size=+4><B>he</B></FONT> <FONT 
+size=+5><B>O</B></FONT><FONT size=+4><B>bjective-C</B></FONT> <FONT 
+size=+5><B>L</B></FONT><FONT size=+4><B>anguage</B></FONT> <FONT 
+size=+5><B>S</B></FONT><FONT size=+4><B>ummary</B></FONT> </CENTER>
+<HR>
+
+<P><A name=728></A>Objective-C adds a small number of constructs to the C 
+language and defines a handful of conventions for effectively interacting with 
+the run-time system. This appendix lists all the additions to the language, but 
+doesn't go into great detail. For more information, see <A 
+href="http://www.next.com/Pubs/Documents/OPENSTEP/ObjectiveC/coreobjc.htm#">Chapter 
+2</A> and <A 
+href="http://www.next.com/Pubs/Documents/OPENSTEP/ObjectiveC/moreobjc.htm#">Chapter 
+3</A> of this manual. For a more formal presentation of Objective-C syntax, see 
+<A 
+href="http://www.next.com/Pubs/Documents/OPENSTEP/ObjectiveC/grammar.htm#">Appendix 
+B</A>, ``<A 
+href="http://www.next.com/Pubs/Documents/OPENSTEP/ObjectiveC/grammar.htm#">Reference 
+Manual for the Objective-C Language</A>,'' which follows this summary.</P>
+<P><A name=729></A></P>
+<HR width="75%">
+
+<CENTER><FONT size=+3>M</FONT><FONT size=+2>essages</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=730></A>Message expressions are enclosed in square brackets:</P>
+<P><A name=1980></A></P><PRE>    [<I>receiver message</I>]
+</PRE>
+<P><A name=732></A>The <I>receiver</I> can be:</P>
+<P></P>
+<UL>
+  <P><A name=733></A></P>
+  <LI>A variable or expression that evaluates to an object (including the 
+  variable <B>self</B>) <A name=734></A>
+  <LI>A class name (indicating the class object) <A name=735></A>
+  <LI><B>super</B> (indicating an alternative search for the method 
+  implementation) </LI></UL>
+<P><A name=736></A>The <I>message</I> is the name of a method plus any arguments 
+passed to it.</P>
+<P><A name=737></A></P>
+<HR width="75%">
+
+<CENTER><FONT size=+3>D</FONT><FONT size=+2>efined</FONT> <FONT 
+size=+3>T</FONT><FONT size=+2>ypes</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=738></A>The principal types used in Objective-C are defined in 
+objc/objc.h. They are:</P><A name=2023></A><A name=2027></A><A name=2029></A><A 
+name=2031></A><A name=2033></A><A name=2035></A><A name=2037></A><A 
+name=2039></A><A name=2041></A><A name=2043></A><A name=2045></A>
+<TABLE cellSpacing=2 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD align=left width="20%"><FONT size=+1><B>Type</B></FONT> </TD>
+    <TD align=left><FONT size=+1><B>Definition</B></FONT> </TD></TR>
+  <TR>
+    <P></P></TR>
+  <TR>
+    <TD align=left><B>id</B> </TD>
+    <TD align=left>An object (a pointer to its data structure) </TD></TR>
+  <TR>
+    <TD align=left><B>Class</B></TD>
+    <TD align=left>A class object (a pointer to the class data 
+structure)</TD></TR>
+  <TR>
+    <TD align=left><B>SEL</B> </TD>
+    <TD align=left>A selector, a compiler-assigned code that identifies a 
+      method name </TD>
+  <TR>
+  <TR>
+    <TD align=left><B>IMP</B> </TD>
+    <TD align=left>A pointer to a method implementation that returns an 
+  id</TD></TR>
+  <TR>
+    <TD align=left><B>BOOL</B> </TD>
+    <TD align=left>A boolean value, either YES or NO </TD></TR></TBODY></TABLE>
+<P><A name=740></A><B>id</B> can be used to type any kind of object, class or 
+instance. In addition, class names can be used as type names to statically type 
+instances of a class. A statically typed instance is declared to be a pointer to 
+its class or to any class it inherits from.</P>
+<P><A name=741></A>The <B>objc.h</B> header file also defines these useful 
+terms:</P>
+<P><A name=2174></A></P><A name=2052></A><A name=2054></A><A name=2056></A><A 
+name=2058></A>
+<TABLE cellSpacing=2 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD align=left width="20%"><FONT size=+1><B>Term</B></FONT> </TD>
+    <TD align=left><FONT size=+1><B>Definition</B></FONT></TD></TR>
+  <TR>
+    <P></P></TR>
+  <TR>
+    <TD align=left><B>nil</B> </TD>
+    <TD align=left>A null object pointer, (id)0 </TD></TR>
+  <TR>
+    <TD align=left><B>NIL</B> </TD>
+    <TD align=left>A null class pointer, (Class)0 </TD></TR></TBODY></TABLE>
+<P><A name=2172></A></P>
+<P><A name=743></A></P>
+<HR width="75%">
+
+<CENTER><FONT size=+3>P</FONT><FONT size=+2>reprocessor</FONT> <FONT 
+size=+3>D</FONT><FONT size=+2>irectives</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=744></A>The preprocessor understands these new notations:</P>
+<P><A name=2083></A></P><A name=2087></A><A name=2089></A><A name=2091></A><A 
+name=2093></A>
+<TABLE cellSpacing=2 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD align=left width="20%"><FONT size=+1><B>Notation</B></FONT> </TD>
+    <TD align=left><FONT size=+1><B>Definition</B></FONT></TD></TR>
+  <TR>
+    <P></P></TR>
+  <TR>
+    <TD align=left><B>#import</B> </TD>
+    <TD align=left>Imports a header file. This directive is identical to 
+      #include, except that it won't include the same file more than once. 
+</TD></TR>
+  <TR>
+    <TD align=left><B>//</B> </TD>
+    <TD align=left>Begins a comment that continues to the end of the line. 
+  </TD></TR></TBODY></TABLE><A name=2183></A>
+<P><A name=747></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>C</FONT><FONT size=+2>ompiler</FONT> <FONT 
+size=+3>D</FONT><FONT size=+2>irectives</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=748></A>Directives to the compiler begin with ``@''. The following 
+directives are used to declare and define classes, categories, and 
+protocols:</P>
+<P><A name=2061></A><A name=2065></A><A name=2067></A><A name=2069></A><A 
+name=2071></A><A name=2073></A><A name=2075></A><A name=2077></A><A 
+name=2079></A>
+<TABLE cellSpacing=2 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD align=left width="20%"><FONT size=+1><B>Directive</B></FONT> </TD>
+    <TD align=left><FONT size=+1><B>Definition</B></FONT></TD></TR>
+  <TR>
+    <P></P></TR>
+  <TR>
+    <TD align=left><B>@interface</B> </TD>
+    <TD align=left>Begins the declaration of a class or category interface 
+  </TD></TR>
+  <TR>
+    <TD align=left><B>@implementation</B> </TD>
+    <TD align=left>Begins the definition of a class or category </TD></TR>
+  <TR>
+    <TD align=left><B>@protocol</B></TD>
+    <TD align=left>Begins the declaration of a formal protocol </TD></TR>
+  <TR>
+    <TD align=left><B>@end</B></TD>
+    <TD align=left>Ends the declaration/definition of a class, category, or 
+      protocol </TD></TR></TBODY></TABLE><A name=2186></A>
+<P><A name=2193></A>The following mutually-exclusive directives specify the 
+visibility of instance variables:</P>
+<P><A name=2198></A></P><A name=2196></A><A name=2102></A><A name=2104></A><A 
+name=2106></A><A name=2108></A><A name=2110></A>
+<TABLE cellSpacing=2 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD align=left width="20%"><FONT size=+1><B>Directive</B></FONT> </TD>
+    <TD align=left><FONT size=+1><B>Definition</B></FONT></TD></TR>
+  <TR>
+    <P></P></TR>
+  <TR>
+    <TD align=left><B>@private</B> </TD>
+    <TD align=left>Limits the scope of an instance variable to the class that 
+      declares it </TD></TR>
+  <TR>
+    <TD align=left><B>@protected</B> </TD>
+    <TD align=left>Limits instance variable scope to declaring and inheriting 
+      classes </TD></TR>
+  <TR>
+    <TD align=left><B>@public</B> </TD>
+    <TD align=left>Removes restrictions on the scope of instance variables 
+  </TD></TR></TBODY></TABLE>
+<P><A name=2189></A></P>
+<P><A name=752></A>The default is <B>@protected</B>.</P>
+<P><A name=2206></A>In addition, there are directives for these particular 
+purposes:</P>
+<P><A name=2215></A></P>
+<P><A name=2117></A></P><A name=2204></A><A name=2119></A><A name=2121></A><A 
+name=2123></A><A name=2125></A><A name=2127></A><A name=2129></A><A 
+name=2131></A><A name=2133></A><A name=2135></A><A name=2201></A>
+<TABLE cellSpacing=2 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD align=left width="20%"><FONT size=+1><B>Directive</B></FONT> </TD>
+    <TD align=left><FONT size=+1><B>Definition</B></FONT></TD></TR>
+  <TR>
+    <P></P></TR>
+  <TR>
+    <TD align=left><B>@class</B> </TD>
+    <TD align=left>Declares the names of classes defined elsewhere </TD></TR>
+  <TR>
+    <TD align=left><B>@selector(method)</B> </TD>
+    <TD align=left>Returns the compiled selector that identifies 
+    <I>method</I></TD></TR>
+  <TR>
+    <TD align=left><B>@protocol(name)</B> </TD>
+    <TD align=left>Returns the <I>name</I> protocol (an instance of the 
+      Protocol class) </TD></TR>
+  <TR>
+    <TD align=left><B>@encode(spec)</B> </TD>
+    <TD align=left>Yields a character string that encodes the type structure 
+      of <I>spec</I></TD></TR>
+  <TR>
+    <TD align=left><B>@defs(classname)</B> </TD>
+    <TD align=left>Yields the internal data structure of <I>classname</I> 
+      instances</TD></TR></TBODY></TABLE>
+<P><A name=755></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>C</FONT><FONT size=+2>lasses</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=1991></A>A new class is declared with the <B>@interface</B> 
+directive. It imports the interface file for its superclass: </P>
+<P><A name=348></A><PRE>    #import <B>"</B><I>ItsSuperclass</I>.h"
+
+    @interface <I>ClassName</I><B> : </B><I>ItsSuperclass </I><B>&lt;</B><I> protocol list </I><B>&gt; </B>
+    {
+	<I>instance variable declarations </I>
+    }
+</PRE>
+<P><A name=353></A>Everything but the compiler directives and class name is 
+optional. If the colon and superclass name are omitted, the class is declared to 
+be a new root class. If any protocols are listed, the header files where they're 
+declared must also be imported.</P>
+<P><A name=759></A>A class definition imports its own interface:</P>
+<P><A name=1996></A><PRE>    #import "<I>ClassName</I>.h"
+
+    @implementation <I>ClassName
+    
+	method definitions</I> 
+
+    @end
+</PRE>
+<P><A name=761></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>C</FONT><FONT size=+2>atergories</FONT> </CENTER>
+<HR width="75%">
+
+<P>
+<P><A name=762></A>A category is declared in much the same way as a class. It 
+imports the interface file that declares the class:</P>
+<P><A name=2002></A></P><PRE>    #import "<I>ClassName</I>.h"
+
+    @interface <I>ClassName</I> ( <I>CategoryName</I> ) &lt; <I>protocol list</I> &gt;
+    
+	<I>method definitions</I> 
+
+    @end
+</PRE>
+<P><A name=764></A>The protocol list and method declarations are optional. If 
+any protocols are listed, the header files where they're declared must also be 
+imported. 
+<P><A name=765></A>Like a class definition, a category definition imports its 
+own interface: 
+<P><A name=2008></A><PRE>    #import "<I>CategoryName</I>.h"
+
+    @implementation <I>ClassName</I> ( <I>CategoryName</I> )
+
+	<I>method definitions</I> 
+
+    @end
+</PRE>
+<P><A name=767></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>F</FONT><FONT size=+2>ormal</FONT> <FONT 
+size=+3>P</FONT><FONT size=+2>rotocols</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=768></A>Formal protocols are declared using the <B>@protocol</B> 
+directive:</P>
+<P><A name=2016></A><PRE>    @protocol <I>ProtocolName</I> &lt; <I>protocol list</I> &gt;
+
+	<I>method declarations</I> 
+
+    @end
+</PRE>
+<P><A name=770></A>The list of incorporated protocols and the method 
+declarations are optional. The protocol must import the header files that 
+declare any protocols it incorporates.</P>
+<P><A name=771></A>Within source code, protocols are referred to using the 
+similar <B>@protocol()</B> directive, where the parentheses enclose the protocol 
+name.</P>
+<P><A name=772></A>Protocol names listed within angle brackets 
+(<B>&lt;</B>...<B>&gt;</B>) are used to do three different things:</P>
+<P></P>
+<UL>
+  <P><A name=773></A></P>
+  <LI>In a protocol declaration, to incorporate other protocols (as shown above) 
+  <A name=774></A>
+  <LI>In a class or category declaration, to adopt the protocol (as shown under 
+  ``Classes'' and ``Categories'' above) <A name=775></A>
+  <LI>In a type specification, to limit the type to objects that conform to the 
+  protocol </LI></UL>
+<P><A name=776></A>Within protocol declarations, these type qualifiers support 
+remote messaging:</P>
+<P><A name=2139></A></P><A name=2143></A><A name=2145></A><A name=2147></A><A 
+name=2149></A><A name=2151></A><A name=2153></A><A name=2155></A><A 
+name=2157></A><A name=2159></A><A name=2161></A><A name=2163></A><A 
+name=2165></A><A name=2211></A>
+<TABLE cellSpacing=2 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD align=left width="20%"><FONT size=+1><B>Type Qualifier</B></FONT> </TD>
+    <TD align=left><FONT size=+1><B>Definition</B></FONT></TD></TR>
+  <TR>
+    <P></P></TR>
+  <TR>
+    <TD align=left><B>oneway</B> </TD>
+    <TD align=left>The method is for asynchronous messages and has no valid 
+      return. </TD></TR>
+  <TR>
+    <TD align=left><B>in</B> </TD>
+    <TD align=left>The argument passes information to the remote receiver. 
+  </TD></TR>
+  <TR>
+    <TD align=left><B>out</B> </TD>
+    <TD align=left>The argument gets information returned by reference </TD></TR>
+  <TR>
+    <TD align=left><B>inout</B> </TD>
+    <TD align=left>The argument both passes information and gets information 
+    </TD></TR>
+  <TR>
+    <TD align=left><B>bycopy</B> </TD>
+    <TD align=left>A copy of the object, not a proxy, should be passed or 
+      returned. </TD></TR>
+  <TR>
+    <TD align=left><B>byref</B> </TD>
+    <TD align=left>A reference to the object, not a copy, should be passed or 
+      returned. </TD></TR></TBODY></TABLE><A name=2143></A><A name=2145></A><A 
+name=2147></A><A name=2149></A><A name=2151></A><A name=2153></A><A 
+name=2155></A><A name=2157></A><A name=2159></A><A name=2161></A><A 
+name=2163></A><A name=2165></A><A name=2211></A>
+<P><A name=778></A></P>
+<HR width="75%">
+
+<CENTER><FONT size=+3>M</FONT><FONT size=+2>ethod</FONT> <FONT 
+size=+3>D</FONT><FONT size=+2>eclarations</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=779></A>The following conventions are used in method 
+declarations:</P>
+<P></P>
+<UL>
+  <P><A name=780></A></P>
+  <LI>A ``+'' precedes declarations of class methods. <A name=781></A>
+  <LI>A ``-'' precedes declarations of instance methods. <A name=782></A>
+  <LI>Arguments are declared after colons (<B>:</B>). Typically, a label 
+  describing the argument precedes the colon. Both labels and colons are 
+  considered part of the method name. <A name=783></A>
+  <LI>Argument and return types are declared using the C syntax for type 
+  casting. <A name=784></A>
+  <LI>The default return and argument type for methods is <B>id</B>, not 
+  <B>int</B> as it is for functions. (However, the modifier <B>unsigned</B> when 
+  used without a following type always means <B>unsigned int</B>) </LI></UL>
+<P><A name=785></A></P>
+<HR width="75%">
+
+<CENTER><FONT size=+3>M</FONT><FONT size=+2>ethod</FONT> <FONT 
+size=+3>I</FONT><FONT size=+2>mplementations</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=786></A>Each method implementation is passed two hidden 
+arguments:</P>
+<UL>
+  <P><A name=787></A></P>
+  <LI>The receiving object (<B>self</B>) <A name=788></A>
+  <LI>The selector for the method (<B>_cmd</B>) </LI></UL>
+<P><A name=789></A>Within the implementation, both <B>self</B> and <B>super</B> 
+refer to the receiving object. <B>super</B> replaces <B>self</B> as the receiver 
+of a message to indicate that only methods inherited by the implementation 
+should be performed in response to the message.</P>
+<P><A name=790></A>Methods with no other valid return typically return 
+<B>void</B>.</P>
+<P><A name=791></A></P>
+<HR width="75%">
+
+<CENTER><FONT size=+3>N</FONT><FONT size=+2>aming</FONT> <FONT 
+size=+3>C</FONT><FONT size=+2>onventions</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=792></A>The names of files that contain Objective-C source code have 
+a ``.m'' extension. Files that declare class and category interfaces or that 
+declare protocols have the ``.h'' extension typical of header files.</P>
+<P><A name=793></A>Class, category, and protocol names generally begin with an 
+uppercase letter; the names of methods and instance variables typically begin 
+with a lowercase letter. The names of variables that hold instances usually also 
+begin with lowercase letters.</P>
+<P><A name=794></A>In Objective-C, identical names that serve different purposes 
+don't clash. Within a class, names can be freely assigned:</P>
+<P></P>
+<UL>
+  <P><A name=795></A></P>
+  <LI>A class can declare methods with the same names as methods in other 
+  classes. <A name=796></A>
+  <LI>A class can declare instance variables with the same names as variables in 
+  other classes. <A name=797></A>
+  <LI>An instance method can have the same name as a class method. <A 
+  name=798></A>
+  <LI>A method can have the same name as an instance variable. </LI></UL>
+<P><A name=799></A>Likewise, protocols and categories of the same class have 
+protected name spaces:</P>
+<P></P>
+<UL>
+  <P><A name=800></A></P>
+  <LI>A protocol can have the same name as a class, a category, or anything 
+  else. <A name=801></A>
+  <LI>A category of one class can have the same name as a category of another 
+  class. </LI></UL>
+<P><A name=802></A>However, class names are in the same name space as variables 
+and defined types. A program can't have a global variable with the same name as 
+a class.</P>
+<P><A name=554></A></P>
+<P><BR></P><A href="http://toodarkpark.org/computers/objc/runtime.html"><IMG 
+src="Objective-C Language Summary_arquivos/DocsLeftArrow.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/objctoc.html"><IMG 
+src="Objective-C Language Summary_arquivos/DocsContents.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/grammar.html"><IMG 
+src="Objective-C Language Summary_arquivos/DocsRightArrow.gif"></A> 
+<P>
+<HR>
+<FONT size=-1>Last Modified: 01:34am , January 19, 1996 
+<CENTER>
+<HR>
+<A href="http://www.next.com/HotNews/">Hot News</A> | <A 
+href="http://www.next.com/OpenStep/">OpenStep</A> | <A 
+href="http://www.next.com/WebObjects/">WebObjects</A> | <A 
+href="http://www.next.com/Services/">Services</A> | <A 
+href="http://www.next.com/BuyNow/">Buy Now</A> | <A 
+href="http://www.next.com/NeXTanswers/">NeXTanswers</A> | <A 
+href="http://www.next.com/Search/">Search</A> | <A 
+href="http://www.next.com/AboutNeXT/">About NeXT</A> 
+<HR>
+</CENTER>NeXT sales and product information inquiries? <A 
+href="http://www.next.com/AboutNeXT/Feedback.html">Click here</A><BR><A 
+href="http://www.next.com/Legal/">Copyright</A> 1996 <A 
+href="http://www.next.com/">NeXT Software, Inc.</A> <A 
+href="http://www.next.com/Legal/">Proprietary Notices.</A> </FONT></BODY></HTML>

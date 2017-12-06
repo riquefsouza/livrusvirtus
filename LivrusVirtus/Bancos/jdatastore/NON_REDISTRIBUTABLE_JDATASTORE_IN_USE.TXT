@@ -1,0 +1,6 @@
+JDataStore:  Developer's License (no connection limit)
+JDataStore:  Copyright (c) 1996-2003 Borland Software Corporation.  All rights reserved.
+JDataStore:  License for JDataStore development only - not for redistribution
+JDataStore:  Registered to:
+JDataStore:  Development license
+JDataStore:  Borland

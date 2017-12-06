@@ -1,0 +1,116 @@
+# Project: Projeto1
+# Makefile created by Dev-C++ 4.9.8.0
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = obj/CadAssuntos.o obj/Cadastros.o obj/ConAssuntos.o obj/Consultas.o obj/ConsultasSQL.o obj/Livrus.o obj/Login.o obj/Principal.o obj/RotinasGlobais.o obj/Sobre.o obj/Splash.o obj/AlterarSenha.o obj/CadAutores.o obj/CadClientes.o obj/CadEditoras.o obj/CadEnderecos.o obj/CadIdiomas.o obj/CadLivros.o obj/CadPaises.o obj/CadProfissoes.o obj/ConAutores.o obj/ConClientes.o obj/ConEditoras.o obj/ConEnderecos.o obj/ConIdiomas.o obj/ConLivros.o obj/ConPaises.o obj/ConProfissoes.o obj/ConVendas.o obj/VenderLivros.o $(RES)
+LINKOBJ  = obj/CadAssuntos.o obj/Cadastros.o obj/ConAssuntos.o obj/Consultas.o obj/ConsultasSQL.o obj/Livrus.o obj/Login.o obj/Principal.o obj/RotinasGlobais.o obj/Sobre.o obj/Splash.o obj/AlterarSenha.o obj/CadAutores.o obj/CadClientes.o obj/CadEditoras.o obj/CadEnderecos.o obj/CadIdiomas.o obj/CadLivros.o obj/CadPaises.o obj/CadProfissoes.o obj/ConAutores.o obj/ConClientes.o obj/ConEditoras.o obj/ConEnderecos.o obj/ConIdiomas.o obj/ConLivros.o obj/ConPaises.o obj/ConProfissoes.o obj/ConVendas.o obj/VenderLivros.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -L"C:/Comps/harbour/LIB" -L"C:/gtkmm/lib" -L"C:/gtk/lib" ../../../../gtk/lib/libgtk-win32-2.0.dll.a ../../../../gtk/lib/libglib-2.0.dll.a ../../../../gtk/lib/libatk-1.0.dll.a ../../../../gtk/lib/libgdk-win32-2.0.dll.a ../../../../gtk/lib/libgobject-2.0.dll.a ../../../../gtkmm/lib/libsigc-1.2.dll.a ../../../../gtkmm/lib/libgdkmm-2.0.dll.a ../../../../gtkmm/lib/libglibmm-2.0.dll.a ../../../../gtkmm/lib/libgtkmm_generate_extra_defs-2.0.dll.a ../../../../gtkmm/lib/libgtkmm-2.0.dll.a ../../../../gtkmm/lib/libpangomm-1.0.dll.a ../../../../gtkmm/lib/libatkmm-1.0.dll.a ../../../../Dev-Cpp/lib/libodbccp32.a ../../../../Dev-Cpp/lib/libodbc32.a 
+INCS =  -I"C:/Comps/harbour/INCLUDE"  -I"C:/gtkmm/include/gtkmm-2.0"  -I"C:/gtkmm/lib/gtkmm-2.0/include"  -I"C:/GTK/include/glib-2.0"  -I"C:/GTK/lib/glib-2.0/include"  -I"C:/gtkmm/include/sigc++-1.2"  -I"C:/gtkmm/lib/sigc++-1.2/include"  -I"C:/GTK/include/gtk-2.0"  -I"C:/GTK/include/pango-1.0"  -I"C:/GTK/include/atk-1.0"  -I"C:/gtk/lib/gtk-2.0/include" 
+CXXINCS =  -I"C:/Dev-Cpp/include/c++"  -I"C:/Dev-Cpp/include/c++/mingw32"  -I"C:/Dev-Cpp/include/c++/backward"  -I"C:/Dev-Cpp/include"  -I"C:/gtkmm/include/gtkmm-2.0"  -I"C:/gtkmm/lib/gtkmm-2.0/include"  -I"C:/GTK/include/glib-2.0"  -I"C:/GTK/lib/glib-2.0/include"  -I"C:/gtkmm/include/sigc++-1.2"  -I"C:/gtkmm/lib/sigc++-1.2/include"  -I"C:/GTK/include/gtk-2.0"  -I"C:/GTK/include/pango-1.0"  -I"C:/GTK/include/atk-1.0"  -I"C:/gtk/lib/gtk-2.0/include" 
+BIN  = produto/Livrus.exe
+CXXFLAGS = $(CXXINCS)-DHAVE_CONFIG_H  
+CFLAGS = $(INCS)-DHAVE_CONFIG_H  
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before produto/Livrus.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(LINKOBJ)
+	$(CPP) $(LINKOBJ) -o "produto\Livrus.exe" $(LIBS)
+
+obj/CadAssuntos.o: CadAssuntos.cpp
+	$(CPP) -c CadAssuntos.cpp -o obj/CadAssuntos.o $(CXXFLAGS)
+
+obj/Cadastros.o: Cadastros.cpp
+	$(CPP) -c Cadastros.cpp -o obj/Cadastros.o $(CXXFLAGS)
+
+obj/ConAssuntos.o: ConAssuntos.cpp
+	$(CPP) -c ConAssuntos.cpp -o obj/ConAssuntos.o $(CXXFLAGS)
+
+obj/Consultas.o: Consultas.cpp
+	$(CPP) -c Consultas.cpp -o obj/Consultas.o $(CXXFLAGS)
+
+obj/ConsultasSQL.o: ConsultasSQL.cpp
+	$(CPP) -c ConsultasSQL.cpp -o obj/ConsultasSQL.o $(CXXFLAGS)
+
+obj/Livrus.o: Livrus.cpp
+	$(CPP) -c Livrus.cpp -o obj/Livrus.o $(CXXFLAGS)
+
+obj/Login.o: Login.cpp
+	$(CPP) -c Login.cpp -o obj/Login.o $(CXXFLAGS)
+
+obj/Principal.o: Principal.cpp
+	$(CPP) -c Principal.cpp -o obj/Principal.o $(CXXFLAGS)
+
+obj/RotinasGlobais.o: RotinasGlobais.cpp
+	$(CPP) -c RotinasGlobais.cpp -o obj/RotinasGlobais.o $(CXXFLAGS)
+
+obj/Sobre.o: Sobre.cpp
+	$(CPP) -c Sobre.cpp -o obj/Sobre.o $(CXXFLAGS)
+
+obj/Splash.o: Splash.cpp
+	$(CPP) -c Splash.cpp -o obj/Splash.o $(CXXFLAGS)
+
+obj/AlterarSenha.o: AlterarSenha.cpp
+	$(CPP) -c AlterarSenha.cpp -o obj/AlterarSenha.o $(CXXFLAGS)
+
+obj/CadAutores.o: CadAutores.cpp
+	$(CPP) -c CadAutores.cpp -o obj/CadAutores.o $(CXXFLAGS)
+
+obj/CadClientes.o: CadClientes.cpp
+	$(CPP) -c CadClientes.cpp -o obj/CadClientes.o $(CXXFLAGS)
+
+obj/CadEditoras.o: CadEditoras.cpp
+	$(CPP) -c CadEditoras.cpp -o obj/CadEditoras.o $(CXXFLAGS)
+
+obj/CadEnderecos.o: CadEnderecos.cpp
+	$(CPP) -c CadEnderecos.cpp -o obj/CadEnderecos.o $(CXXFLAGS)
+
+obj/CadIdiomas.o: CadIdiomas.cpp
+	$(CPP) -c CadIdiomas.cpp -o obj/CadIdiomas.o $(CXXFLAGS)
+
+obj/CadLivros.o: CadLivros.cpp
+	$(CPP) -c CadLivros.cpp -o obj/CadLivros.o $(CXXFLAGS)
+
+obj/CadPaises.o: CadPaises.cpp
+	$(CPP) -c CadPaises.cpp -o obj/CadPaises.o $(CXXFLAGS)
+
+obj/CadProfissoes.o: CadProfissoes.cpp
+	$(CPP) -c CadProfissoes.cpp -o obj/CadProfissoes.o $(CXXFLAGS)
+
+obj/ConAutores.o: ConAutores.cpp
+	$(CPP) -c ConAutores.cpp -o obj/ConAutores.o $(CXXFLAGS)
+
+obj/ConClientes.o: ConClientes.cpp
+	$(CPP) -c ConClientes.cpp -o obj/ConClientes.o $(CXXFLAGS)
+
+obj/ConEditoras.o: ConEditoras.cpp
+	$(CPP) -c ConEditoras.cpp -o obj/ConEditoras.o $(CXXFLAGS)
+
+obj/ConEnderecos.o: ConEnderecos.cpp
+	$(CPP) -c ConEnderecos.cpp -o obj/ConEnderecos.o $(CXXFLAGS)
+
+obj/ConIdiomas.o: ConIdiomas.cpp
+	$(CPP) -c ConIdiomas.cpp -o obj/ConIdiomas.o $(CXXFLAGS)
+
+obj/ConLivros.o: ConLivros.cpp
+	$(CPP) -c ConLivros.cpp -o obj/ConLivros.o $(CXXFLAGS)
+
+obj/ConPaises.o: ConPaises.cpp
+	$(CPP) -c ConPaises.cpp -o obj/ConPaises.o $(CXXFLAGS)
+
+obj/ConProfissoes.o: ConProfissoes.cpp
+	$(CPP) -c ConProfissoes.cpp -o obj/ConProfissoes.o $(CXXFLAGS)
+
+obj/ConVendas.o: ConVendas.cpp
+	$(CPP) -c ConVendas.cpp -o obj/ConVendas.o $(CXXFLAGS)
+
+obj/VenderLivros.o: VenderLivros.cpp
+	$(CPP) -c VenderLivros.cpp -o obj/VenderLivros.o $(CXXFLAGS)

@@ -1,0 +1,33 @@
+============================================================================
+add train          Add a new train to the trains list.
+
+remove train 211   Get rid of a train from the trains list.  The train to
+                   remove is number 211 in this example.
+
+change train       Change any of the values of an existing train.
+
+run train 211      Pretend that the train 211 has gone.  Effectively, this
+                   just removes all the passengers from the rider list.
+
+book seat          The program asks for a customer's last and first name,
+                   and then puts him/her on the specified train's seating
+                   list.  The customer is also added to the customer list
+                   if not already there.  If already there, add 1 to the
+                   frequent rider field.  If is 10, then reduce train fare
+                   by 50%, and reset frequent rider field to 0.
+
+unbook seat        Take a customer off a particular train, but not off
+                   the customer list.
+
+list customers     Print out all customers on the customer list.
+
+list trains        Print out all the trains.
+
+list riders 211    Print out all the customers on a particular train,
+                   trains are identified by a number, and the number of
+                   the train is 211 in this example.
+
+help               Print out this help message.
+
+quit               Quit the program, loses all the information!
+============================================================================

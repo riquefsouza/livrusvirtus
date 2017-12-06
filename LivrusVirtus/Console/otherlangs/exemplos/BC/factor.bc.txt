@@ -1,0 +1,20 @@
+define f(n) {
+     auto i, s
+     if (n%2 == 0) return(2)
+     i=3
+     s=sqrt(n)
+     while (i<=s) {
+          if (n%i == 0) return(i)
+          i=i+2
+     }
+     return(1)
+}
+define p(n) {
+     auto i
+     2
+     i=3
+     while (i<=n) {
+          if (f(i) == 1) i
+          i=i+2
+     }
+}

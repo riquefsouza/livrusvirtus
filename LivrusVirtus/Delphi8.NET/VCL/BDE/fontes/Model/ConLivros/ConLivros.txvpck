@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<nodeSet>
+  <view uin="0o2b7ufvr2a9jaj">
+    <property name="$name" value="ConLivros" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.FormClose" />
+      <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.btnLimparClick" />
+      <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.btnPesquisarClick" />
+      <reference referencedUin="source:Livrus:ConLivros.TfrmConLivros.FormShow" />
+      <reference referencedUin="source:Livrus:I$TfrmConsultas" />
+    </reference>
+  </view>
+</nodeSet>

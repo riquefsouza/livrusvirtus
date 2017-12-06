@@ -1,0 +1,584 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>frmPrincipal</class>
+<widget class="QMainWindow">
+    <property name="name">
+        <cstring>frmPrincipal</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>621</width>
+            <height>423</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Livrus Virtus</string>
+    </property>
+    <property name="icon">
+        <pixmap>Livrus.bmp</pixmap>
+    </property>
+</widget>
+<menubar>
+    <property name="name">
+        <cstring>MenuBar</cstring>
+    </property>
+    <item text="&amp;Cadastros" name="Cadastros">
+        <action name="cadastrosAssuntosAction"/>
+        <action name="cadastrosAutoresAction"/>
+        <action name="cadastrosEditorasAction"/>
+        <action name="cadastrosEnderecosAction"/>
+        <action name="cadastrosIdiomasAction"/>
+        <action name="cadastrosPaisesAction"/>
+        <action name="cadastrosProfissoesAction"/>
+        <separator/>
+        <action name="cadastrosClientesAction"/>
+        <action name="cadastrosLivrosAction"/>
+    </item>
+    <item text="&amp;Pesquisas" name="Pesquisas">
+        <action name="pesquisasAssuntosAction"/>
+        <action name="pesquisasAutoresAction"/>
+        <action name="pesquisasEditorasAction"/>
+        <action name="pesquisasEnderecosAction"/>
+        <action name="pesquisasIdiomasAction"/>
+        <action name="pesquisasPaisesAction"/>
+        <action name="pesquisasProfissoesAction"/>
+        <separator/>
+        <action name="pesquisasClientesAction"/>
+        <action name="pesquisasLivrosAction"/>
+    </item>
+    <item text="&amp;Vendas" name="Vendas">
+        <action name="vendasVenderLivrosAction"/>
+        <action name="vendasVendas_RealizadasAction"/>
+    </item>
+    <item text="&amp;Janelas" name="Janelas">
+        <action name="janelasLadoaladohorizontalAction"/>
+        <action name="janelasLadoaladoverticalAction"/>
+        <action name="janelasEmcascataAction"/>
+        <action name="janelasOrganizarIconesAction"/>
+    </item>
+    <item text="&amp;Opções" name="Opes">
+        <action name="opcoesAlterarSenhaAction"/>
+        <action name="opcoesSobreAction"/>
+        <action name="opcoesSairAction"/>
+    </item>
+</menubar>
+<toolbars>
+    <toolbar dock="2">
+        <property name="name">
+            <cstring>toolBar</cstring>
+        </property>
+        <property name="label">
+            <string>Tools</string>
+        </property>
+        <widget class="QToolButton">
+            <property name="name">
+                <cstring>tbClientes</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="iconSet">
+                <iconset>cliente.xpm</iconset>
+            </property>
+        </widget>
+        <widget class="QToolButton">
+            <property name="name">
+                <cstring>tbLivros</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="iconSet">
+                <iconset>Livro.xpm</iconset>
+            </property>
+        </widget>
+        <widget class="QToolButton">
+            <property name="name">
+                <cstring>tbVender</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="iconSet">
+                <iconset>Livros.xpm</iconset>
+            </property>
+        </widget>
+        <separator/>
+        <widget class="QToolButton">
+            <property name="name">
+                <cstring>tbSobre</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="iconSet">
+                <iconset>Sobre.xpm</iconset>
+            </property>
+        </widget>
+        <widget class="QToolButton">
+            <property name="name">
+                <cstring>tbSair</cstring>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+            <property name="iconSet">
+                <iconset>Sair.xpm</iconset>
+            </property>
+        </widget>
+    </toolbar>
+</toolbars>
+<actions>
+    <action>
+        <property name="name">
+            <cstring>cadastrosAssuntosAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Assuntos</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Assuntos</string>
+        </property>
+        <property name="toolTip">
+            <string>Cadastro de Assuntos.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>cadastrosAutoresAction</cstring>
+        </property>
+        <property name="text">
+            <string>Au&amp;tores</string>
+        </property>
+        <property name="menuText">
+            <string>Au&amp;tores</string>
+        </property>
+        <property name="toolTip">
+            <string>Cadastro de Autores.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>cadastrosEditorasAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Editoras</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Editoras</string>
+        </property>
+        <property name="toolTip">
+            <string>Cadastro de Editoras.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>cadastrosEnderecosAction</cstring>
+        </property>
+        <property name="text">
+            <string>E&amp;ndereços</string>
+        </property>
+        <property name="menuText">
+            <string>E&amp;ndereços</string>
+        </property>
+        <property name="toolTip">
+            <string>Cadastro de Endereços.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>cadastrosIdiomasAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Idiomas</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Idiomas</string>
+        </property>
+        <property name="toolTip">
+            <string>Cadastro de Idiomas.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>cadastrosPaisesAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Países</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Países</string>
+        </property>
+        <property name="toolTip">
+            <string>Cadastro de Países.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>cadastrosProfissoesAction</cstring>
+        </property>
+        <property name="text">
+            <string>P&amp;rofissões</string>
+        </property>
+        <property name="menuText">
+            <string>P&amp;rofissões</string>
+        </property>
+        <property name="toolTip">
+            <string>Cadastro de Profissões.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>cadastrosClientesAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Clientes</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Clientes</string>
+        </property>
+        <property name="toolTip">
+            <string>Cadastro de Clientes.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>cadastrosLivrosAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Livros</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Livros</string>
+        </property>
+        <property name="toolTip">
+            <string>Cadastro de Livros.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>pesquisasAssuntosAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Assuntos</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Assuntos</string>
+        </property>
+        <property name="toolTip">
+            <string>Consulta de Assuntos.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>pesquisasAutoresAction</cstring>
+        </property>
+        <property name="text">
+            <string>Au&amp;tores</string>
+        </property>
+        <property name="menuText">
+            <string>Au&amp;tores</string>
+        </property>
+        <property name="toolTip">
+            <string>Consulta de Autores.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>pesquisasEditorasAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Editoras</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Editoras</string>
+        </property>
+        <property name="toolTip">
+            <string>Consulta de Editoras.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>pesquisasEnderecosAction</cstring>
+        </property>
+        <property name="text">
+            <string>E&amp;ndereços</string>
+        </property>
+        <property name="menuText">
+            <string>E&amp;ndereços</string>
+        </property>
+        <property name="toolTip">
+            <string>Consulta de Endereços.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>pesquisasIdiomasAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Idiomas</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Idiomas</string>
+        </property>
+        <property name="toolTip">
+            <string>Consulta de Idiomas.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>pesquisasPaisesAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Países</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Países</string>
+        </property>
+        <property name="toolTip">
+            <string>Consulta de Países.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>pesquisasProfissoesAction</cstring>
+        </property>
+        <property name="text">
+            <string>P&amp;rofissões</string>
+        </property>
+        <property name="menuText">
+            <string>P&amp;rofissões</string>
+        </property>
+        <property name="toolTip">
+            <string>Consulta de Profissões.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>pesquisasClientesAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Clientes</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Clientes</string>
+        </property>
+        <property name="toolTip">
+            <string>Consulta de Clientes.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>pesquisasLivrosAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Livros</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Livros</string>
+        </property>
+        <property name="toolTip">
+            <string>Consulta de Livros.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>vendasVenderLivrosAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Vender Livros</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Vender Livros</string>
+        </property>
+        <property name="toolTip">
+            <string>Vender Livros.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>vendasVendas_RealizadasAction</cstring>
+        </property>
+        <property name="text">
+            <string>Vendas &amp;Realizadas</string>
+        </property>
+        <property name="menuText">
+            <string>Vendas &amp;Realizadas</string>
+        </property>
+        <property name="toolTip">
+            <string>Vendas Realizadas.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>janelasLadoaladohorizontalAction</cstring>
+        </property>
+        <property name="text">
+            <string>Lado a lado &amp;horizontal</string>
+        </property>
+        <property name="menuText">
+            <string>Lado a lado &amp;horizontal</string>
+        </property>
+        <property name="toolTip">
+            <string>Lado a lado horizontal.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>janelasLadoaladoverticalAction</cstring>
+        </property>
+        <property name="text">
+            <string>Lado a lado &amp;vertical</string>
+        </property>
+        <property name="menuText">
+            <string>Lado a lado &amp;vertical</string>
+        </property>
+        <property name="toolTip">
+            <string>Lado a lado vertical.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>janelasEmcascataAction</cstring>
+        </property>
+        <property name="text">
+            <string>Em &amp;cascata</string>
+        </property>
+        <property name="menuText">
+            <string>Em &amp;cascata</string>
+        </property>
+        <property name="toolTip">
+            <string>Em cascata.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>opcoesAlterarSenhaAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Alterar Senha</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Alterar Senha</string>
+        </property>
+        <property name="toolTip">
+            <string>Alteração de Senha.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>opcoesSobreAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Sobre</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Sobre</string>
+        </property>
+        <property name="toolTip">
+            <string>Sobre o Sistema.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>opcoesSairAction</cstring>
+        </property>
+        <property name="text">
+            <string>Sa&amp;ir</string>
+        </property>
+        <property name="menuText">
+            <string>Sa&amp;ir</string>
+        </property>
+        <property name="toolTip">
+            <string>Sair do sistema.</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>janelasOrganizarIconesAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Organizar ícones</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Organizar ícones</string>
+        </property>
+        <property name="toolTip">
+            <string>Organizar ícones.</string>
+        </property>
+    </action>
+</actions>
+<connections>
+    <connection>
+        <sender>cadastrosAssuntosAction</sender>
+        <signal>activated()</signal>
+        <receiver>frmPrincipal</receiver>
+        <slot>cadastrosAssuntosAction_activated()</slot>
+    </connection>
+    <connection>
+        <sender>cadastrosAutoresAction</sender>
+        <signal>activated()</signal>
+        <receiver>frmPrincipal</receiver>
+        <slot>cadastrosAutoresAction_activated()</slot>
+    </connection>
+    <connection>
+        <sender>cadastrosEditorasAction</sender>
+        <signal>activated()</signal>
+        <receiver>frmPrincipal</receiver>
+        <slot>cadastrosEditorasAction_activated()</slot>
+    </connection>
+    <connection>
+        <sender>cadastrosEnderecosAction</sender>
+        <signal>activated()</signal>
+        <receiver>frmPrincipal</receiver>
+        <slot>cadastrosEnderecosAction_activated()</slot>
+    </connection>
+    <connection>
+        <sender>cadastrosIdiomasAction</sender>
+        <signal>activated()</signal>
+        <receiver>frmPrincipal</receiver>
+        <slot>cadastrosIdiomasAction_activated()</slot>
+    </connection>
+    <connection>
+        <sender>cadastrosPaisesAction</sender>
+        <signal>activated()</signal>
+        <receiver>frmPrincipal</receiver>
+        <slot>cadastrosPaisesAction_activated()</slot>
+    </connection>
+    <connection>
+        <sender>cadastrosProfissoesAction</sender>
+        <signal>activated()</signal>
+        <receiver>frmPrincipal</receiver>
+        <slot>cadastrosProfissoesAction_activated()</slot>
+    </connection>
+    <connection>
+        <sender>cadastrosClientesAction</sender>
+        <signal>activated()</signal>
+        <receiver>frmPrincipal</receiver>
+        <slot>cadastrosClientesAction_activated()</slot>
+    </connection>
+    <connection>
+        <sender>cadastrosLivrosAction</sender>
+        <signal>activated()</signal>
+        <receiver>frmPrincipal</receiver>
+        <slot>cadastrosLivrosAction_activated()</slot>
+    </connection>
+</connections>
+<includes>
+    <include location="local" impldecl="in implementation">Principal.ui.h</include>
+</includes>
+<slots>
+    <slot>cadastrosAssuntosAction_activated()</slot>
+    <slot>cadastrosAutoresAction_activated()</slot>
+    <slot>cadastrosEditorasAction_activated()</slot>
+    <slot>cadastrosEnderecosAction_activated()</slot>
+    <slot>cadastrosIdiomasAction_activated()</slot>
+    <slot>cadastrosPaisesAction_activated()</slot>
+    <slot>cadastrosProfissoesAction_activated()</slot>
+    <slot>cadastrosClientesAction_activated()</slot>
+    <slot>cadastrosLivrosAction_activated()</slot>
+</slots>
+<pixmapinproject/>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

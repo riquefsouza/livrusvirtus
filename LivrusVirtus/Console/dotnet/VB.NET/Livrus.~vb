@@ -1,0 +1,7 @@
+Module Livrus
+
+    Sub Main()
+        System.Console.Out.WriteLn("oi")
+    End Sub
+
+End Module

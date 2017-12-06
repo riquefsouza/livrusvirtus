@@ -1,0 +1,3 @@
+LIVRUS_ICO		ICON	"Livrus.ico"
+
+#include "wx.rc"

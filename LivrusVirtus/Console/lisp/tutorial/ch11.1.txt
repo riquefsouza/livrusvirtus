@@ -1,0 +1,81 @@
+LISP Tutorial   by Mark Meyer
+Chapter 11.1
+Advanced Input and Output
+--------------------------------------------------------------------------------
+TOPICS:  streams, files, etc.
+--------------------------------------------------------------------------------
+
+You can read and write from and to files in LISP.  As always you must first open
+the file.  Always assign the file descriptor to a file variable for use in 
+later read, write and close statements.  To open a file for read only and save 
+its file descriptor, do
+
+     (setq myfile (open "somediskfile"))
+
+To open a file for write only and save its file descriptor, do
+
+     (setq myfile (open "somediskfile" :direction :output))
+
+These files are called "streams" in the official Common LISP literature, and 
+you will see the term "stream" in the on-line help.
+
+To close a file, just give the file variable to close:
+
+     (close myfile)
+
+What happens if the file does not exist?  You can specify that LISP should 
+create the file, i.e. for reading or read-write:
+
+     (setq myfile (open "somediskfile" :if-does-not-exist :create))
+
+But perhaps a better way is to use the :probe keyword in conjunction with the 
+:direction option:
+
+     (setq myfile (open "somediskfile" :direction :probe))
+
+If the file does not exist, the value returned by "open" will be NIL.  Otherwise
+the value returned is the file stream, opened in read mode.  This is not a NIL 
+value, so you can tell if the file existed or not.
+
+If you wanted to create a new file, you can just open it with :direction 
+:output, but if you want to make sure the file does not already exist, you could
+probe.  If it does exist, just close it right away.
+
+You can also read and write LISP forms to and from files.  Be sure to balance
+your parentheses!
+
+     (setq something (read myfile))
+     (write '(a b c) :stream myfile)
+
+Interactive I/O is not fundamentally different from that given above.  Just 
+leave off the stream variable (myfile in the examples) or use instead 
+*standard-input* or *standard-output* (Yes, the asterisks and dashes are part 
+of the atom!)  There seems to be a problem with (read-line) if reading from a 
+terminal.  You must always do one initial read-line and throw away its results.
+The second and subsequent read-lines will return values from the terminal 
+keyboard.
+
+You can also use read-line and write-line with streams.  To read a line from a 
+stream that is already open, do
+
+     (setq xline (read-line myfile))
+
+where "xline" is just a LISP variable that will get a character string, the 
+next one, from the file myfile. To write:
+
+     (write-line "hi there!" myfile)
+
+Detecting end of file during a read-line is a bit tricky.  Normally, if you do 
+a read-line after you've read the last line, LISP gives you an error.  This is 
+not convenient in a program, so you can tell LISP to return a special value 
+instead.  In this case, you have to put nil as the 3rd argument, followed by the
+value to return:
+
+     (setq xline (read-line myfile nil "end-of-file"))
+
+The format function can also be used to format output for files.  Just replace
+the "t" with the stream name:
+
+     (format myfile "The average of ~D numbers is ~E." count (/ sum count))
+
+--------------------------------------------------------------------------------

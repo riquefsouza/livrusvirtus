@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="codassunto">1</column>
+        <column name="assunto">ADMINISTRAÇÃO</column>
+    </row>
+    <row>
+        <column name="codassunto">2</column>
+        <column name="assunto">ARQUITETURA</column>
+    </row>
+    <row>
+        <column name="codassunto">3</column>
+        <column name="assunto">ARTES</column>
+    </row>
+    <row>
+        <column name="codassunto">4</column>
+        <column name="assunto">CIÊNCIAS COGNITIVAS</column>
+    </row>
+    <row>
+        <column name="codassunto">5</column>
+        <column name="assunto">CIÊNCIAS CONTÁBEIS</column>
+    </row>
+    <row>
+        <column name="codassunto">6</column>
+        <column name="assunto">CIÊNCIAS BIOLÓGICAS</column>
+    </row>
+    <row>
+        <column name="codassunto">7</column>
+        <column name="assunto">CIÊNCIAS DA TERRA</column>
+    </row>
+    <row>
+        <column name="codassunto">8</column>
+        <column name="assunto">CIÊNCIAS EXATAS</column>
+    </row>
+    <row>
+        <column name="codassunto">9</column>
+        <column name="assunto">CIÊNCIAS SOCIAIS</column>
+    </row>
+    <row>
+        <column name="codassunto">10</column>
+        <column name="assunto">COMUNICAÇÃO</column>
+    </row>
+    <row>
+        <column name="codassunto">11</column>
+        <column name="assunto">CULINÁRIA</column>
+    </row>
+    <row>
+        <column name="codassunto">12</column>
+        <column name="assunto">DICIONÁRIOS</column>
+    </row>
+    <row>
+        <column name="codassunto">13</column>
+        <column name="assunto">DIREITO</column>
+    </row>
+    <row>
+        <column name="codassunto">14</column>
+        <column name="assunto">ECONOMIA</column>
+    </row>
+    <row>
+        <column name="codassunto">15</column>
+        <column name="assunto">EDUCAÇÃO FÍSICA</column>
+    </row>
+    <row>
+        <column name="codassunto">16</column>
+        <column name="assunto">ENGENHARIA</column>
+    </row>
+    <row>
+        <column name="codassunto">17</column>
+        <column name="assunto">LÍNGUAS ESTRANGEIRAS</column>
+    </row>
+    <row>
+        <column name="codassunto">18</column>
+        <column name="assunto">ESOTERISMO</column>
+    </row>
+    <row>
+        <column name="codassunto">19</column>
+        <column name="assunto">FILOSOFIA</column>
+    </row>
+    <row>
+        <column name="codassunto">20</column>
+        <column name="assunto">GEOGRAFIA</column>
+    </row>
+    <row>
+        <column name="codassunto">21</column>
+        <column name="assunto">HISTÓRIA</column>
+    </row>
+    <row>
+        <column name="codassunto">22</column>
+        <column name="assunto">INFORMÁTICA</column>
+    </row>
+    <row>
+        <column name="codassunto">23</column>
+        <column name="assunto">LINGUÍSTICA</column>
+    </row>
+    <row>
+        <column name="codassunto">24</column>
+        <column name="assunto">LITERATURA BRASILEIRA</column>
+    </row>
+    <row>
+        <column name="codassunto">25</column>
+        <column name="assunto">LITERATURA ESTRANGEIRA</column>
+    </row>
+    <row>
+        <column name="codassunto">26</column>
+        <column name="assunto">MEDICINA E SAÚDE</column>
+    </row>
+    <row>
+        <column name="codassunto">27</column>
+        <column name="assunto">MODA</column>
+    </row>
+    <row>
+        <column name="codassunto">28</column>
+        <column name="assunto">PEDAGOGIA</column>
+    </row>
+    <row>
+        <column name="codassunto">29</column>
+        <column name="assunto">PSICOLOGIA</column>
+    </row>
+    <row>
+        <column name="codassunto">30</column>
+        <column name="assunto">RELIGIÕES</column>
+    </row>
+    <row>
+        <column name="codassunto">31</column>
+        <column name="assunto">TURISMO</column>
+    </row>
+</resultset>

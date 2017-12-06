@@ -1,0 +1,221 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Livrus - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP35.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /I "C:\fltk-1.1.6" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /Fp"Debug/Livrus.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\AlterarSenha.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\CadAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\Cadastros.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\CadAutores.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\CadClientes.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\CadEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\CadEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\CadIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\CadLivros.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\CadPaises.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\CadProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConAutores.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConClientes.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConLivros.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConPaises.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\Consultas.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConsultasSQL.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ConVendas.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\ListaStr.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\Livrus.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\Login.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\Principal.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\resource.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\RotinasGlobais.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\Sobre.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\Splash.cpp"
+"C:\LivrusVirtus\VCPP6\FLTK\ADO\VenderLivros.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP35.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP36.tmp" with contents
+[
+fltkd.lib wsock32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Livrus.pdb" /debug /machine:I386 /nodefaultlib:"libcd" /out:"Debug/Livrus.exe" /pdbtype:sept /libpath:"C:\fltk-1.1.6\lib" 
+.\Debug\AlterarSenha.obj
+.\Debug\CadAssuntos.obj
+.\Debug\Cadastros.obj
+.\Debug\CadAutores.obj
+.\Debug\CadClientes.obj
+.\Debug\CadEditoras.obj
+.\Debug\CadEnderecos.obj
+.\Debug\CadIdiomas.obj
+.\Debug\CadLivros.obj
+.\Debug\CadPaises.obj
+.\Debug\CadProfissoes.obj
+.\Debug\ConAssuntos.obj
+.\Debug\ConAutores.obj
+.\Debug\ConClientes.obj
+.\Debug\ConEditoras.obj
+.\Debug\ConEnderecos.obj
+.\Debug\ConIdiomas.obj
+.\Debug\ConLivros.obj
+.\Debug\ConPaises.obj
+.\Debug\ConProfissoes.obj
+.\Debug\Consultas.obj
+.\Debug\ConsultasSQL.obj
+.\Debug\ConVendas.obj
+.\Debug\ListaStr.obj
+.\Debug\Livrus.obj
+.\Debug\Login.obj
+.\Debug\Principal.obj
+.\Debug\resource.obj
+.\Debug\RotinasGlobais.obj
+.\Debug\Sobre.obj
+.\Debug\Splash.obj
+.\Debug\VenderLivros.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP36.tmp"
+<h3>Output Window</h3>
+Compiling...
+AlterarSenha.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+CadAssuntos.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+Cadastros.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+CadAutores.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+CadClientes.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+CadEditoras.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+CadEnderecos.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+CadIdiomas.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+CadLivros.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+CadPaises.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+CadProfissoes.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConAssuntos.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConAutores.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConClientes.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConEditoras.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConEnderecos.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConIdiomas.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConLivros.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConPaises.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConProfissoes.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+Consultas.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConsultasSQL.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ConVendas.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+ListaStr.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+Livrus.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+Login.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+Principal.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+resource.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+RotinasGlobais.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+Sobre.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+Splash.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+VenderLivros.cpp
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+c:\fltk-1.1.6\fl\fl_window.h(91) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+Linking...
+
+
+
+<h3>Results</h3>
+Livrus.exe - 0 error(s), 96 warning(s)
+</pre>
+</body>
+</html>

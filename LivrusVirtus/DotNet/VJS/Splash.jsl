@@ -1,0 +1,76 @@
+package  Livrus;
+
+import System.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Drawing.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+
+public class frmSplash extends System.Windows.Forms.Form
+{
+    public static frmSplash fSplash;
+    private System.ComponentModel.Container components;
+    private System.Windows.Forms.Timer timer1;
+    
+    public frmSplash()
+    {
+    	//
+    	// Required for Windows Form Designer support
+    	//
+    	InitializeComponent();
+    
+    	//
+    	// TODO: Add any constructor code after InitializeComponent call
+    	//
+    }
+    
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    protected void Dispose (boolean disposing)
+    {
+    	if (disposing)
+    	{
+    		if (components != null)
+    		{
+    			components.Dispose();
+    		}
+    	}
+    	super.Dispose(disposing);
+    }
+    
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
+    	this.components = new System.ComponentModel.Container();
+    	System.Resources.ResourceManager resources = new System.Resources.ResourceManager(GetType());
+    	this.timer1 = new System.Windows.Forms.Timer(this.components);
+    	// 
+    	// timer1
+    	// 
+    	this.timer1.set_Enabled(true);
+    	this.timer1.set_Interval(3000);
+    	this.timer1.add_Tick(new System.EventHandler(this.timer1_Tick));
+    	// 
+    	// frmSplash
+    	// 
+    	this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+    	this.set_BackgroundImage(((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage"))));
+    	this.set_ClientSize(new System.Drawing.Size(256, 69));
+    	this.set_FormBorderStyle(System.Windows.Forms.FormBorderStyle.None);
+    	this.set_Name("frmSplash");
+    	this.set_StartPosition(System.Windows.Forms.FormStartPosition.CenterScreen);
+    	this.set_Text("Splash");
+    	this.set_TransparencyKey(System.Drawing.Color.get_White());
+    }
+    
+    private void timer1_Tick(Object sender, System.EventArgs e)
+    {
+    	Close();
+    }
+
+}

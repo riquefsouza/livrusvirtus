@@ -1,0 +1,401 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>frmVenderLivros</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>frmVenderLivros</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>483</width>
+            <height>348</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Vender Livros</string>
+    </property>
+    <property name="icon">
+        <pixmap>Livrus.bmp</pixmap>
+    </property>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labDtHrVenda</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>8</y>
+                <width>100</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Data/Hora Venda:</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnPCliente</cstring>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>455</x>
+                <y>78</y>
+                <width>21</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>...</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnPLivro</cstring>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>455</x>
+                <y>128</y>
+                <width>21</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>...</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtCliente</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>137</x>
+                <y>78</y>
+                <width>313</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>30</number>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtISBN</cstring>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>128</y>
+                <width>121</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>13</number>
+        </property>
+    </widget>
+    <widget class="QListBox">
+        <property name="name">
+            <cstring>lstLivros</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>178</y>
+                <width>465</width>
+                <height>97</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labCliente</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>137</x>
+                <y>55</y>
+                <width>80</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Cliente:</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnVender</cstring>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>241</x>
+                <y>315</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Vender</string>
+        </property>
+        <property name="accel">
+            <string>Alt+V</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtCPF</cstring>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>78</y>
+                <width>121</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>14</number>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnLimpar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>321</x>
+                <y>315</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Limpar</string>
+        </property>
+        <property name="accel">
+            <string>Alt+L</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtPrecoTotal</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>355</x>
+                <y>281</y>
+                <width>121</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>R$ 0,00</string>
+        </property>
+        <property name="maxLength">
+            <number>10</number>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnAdLivros</cstring>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>430</x>
+                <y>128</y>
+                <width>21</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>+</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labCPF</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>55</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>CPF:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labLivro</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>137</x>
+                <y>105</y>
+                <width>80</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Livro:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labPrecoTotal</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>295</x>
+                <y>281</y>
+                <width>54</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Preço total:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labISBN</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>105</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>ISBN:</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>btnFechar</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>401</x>
+                <y>315</y>
+                <width>75</width>
+                <height>25</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&amp;Fechar</string>
+        </property>
+        <property name="accel">
+            <string>Alt+F</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtLivro</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>137</x>
+                <y>128</y>
+                <width>289</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>30</number>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>labCodAssunto_2_2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>155</y>
+                <width>120</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Livros para vender</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>edtDtHrVenda</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>30</y>
+                <width>121</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxLength">
+            <number>14</number>
+        </property>
+    </widget>
+</widget>
+<tabstops>
+    <tabstop>edtDtHrVenda</tabstop>
+    <tabstop>edtCPF</tabstop>
+    <tabstop>edtCliente</tabstop>
+    <tabstop>btnPCliente</tabstop>
+    <tabstop>edtISBN</tabstop>
+    <tabstop>edtLivro</tabstop>
+    <tabstop>btnAdLivros</tabstop>
+    <tabstop>btnPLivro</tabstop>
+    <tabstop>lstLivros</tabstop>
+    <tabstop>edtPrecoTotal</tabstop>
+    <tabstop>btnVender</tabstop>
+    <tabstop>btnLimpar</tabstop>
+    <tabstop>btnFechar</tabstop>
+</tabstops>
+<pixmapinproject/>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

@@ -1,0 +1,37 @@
+This file just contains a bunch of examples
+
+(subseq '(1 5 8 4) 0 2)  ==>  (1 5)
+(subseq '(1 5 8 4) 2)  ==>  (8 4)    You can leave off the 2nd number.
+
+(nth 3 '(a b c d e))  ==> d        Start at 0.
+
+(symbol-function 'funcname) ==> This prints out the lambda form of the
+                                function with name "funcname".
+                                It's a way to see the code of the function.
+
+(case something                "something" is a lisp form (maybe an atom)
+     (a  forms)                whose return-value is matched against the
+     (b  forms)                cases:  a, b, c, d, e, or anything else.
+     ((c d e) forms)
+     (t  otherwise-forms)
+)
+
+(setq x (read-from-string "(car y")) ==> puts the lisp list (car y) into
+                                         variable x.  You can treat it as a 
+                                         data object or you could evaluate it:
+
+    (eval x)    ==> This would take the car of y, whatever list y has in it.
+
+
+
+Here's a useful identity:
+
+        "x  is equivalent to  (subseq x 0 (length x))"
+
+    if x is a sequence (list, character string, etc)
+
+
+
+To create a new interned symbol:
+
+        (intern (symbol-name (gensym "XYZ")))

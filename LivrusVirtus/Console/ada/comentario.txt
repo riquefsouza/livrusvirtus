@@ -1,0 +1,70 @@
+-- por que não usar strings em lugar de ustrings, por que as strings 
+-- tem que ter uma tamanho que ao ser definido tem que ser atribuido 
+-- corretamente, ou seja com o mesmo tamanho.
+
+procedure itostr(num: in integer;str: in out ustring)
+
+   snum: Character;
+   dnum: integer;
+
+  dnum := num / 10;
+ 
+  case dnum is
+    when 0 => snum := Character'val(48);
+    when 1 => snum := Character'val(49);
+    when 2 => snum := Character'val(50);
+    when 3 => snum := Character'val(51);
+    when 4 => snum := Character'val(52);
+    when 5 => snum := Character'val(53);
+    when 6 => snum := Character'val(54);
+    when 7 => snum := Character'val(55);
+    when 8 => snum := Character'val(56);
+    when 9 => snum := Character'val(57);
+    when others => null;
+  end case;
+
+
+procedure itostr(num: double; var str: string; itam: integer);
+var snum: Char;
+    ncont, ncont2, ndez, tnum: integer;
+    dnum: double;
+begin
+str:='';
+dnum:=0;
+ndez:=1;
+tnum:=0;
+for ncont:=1 to itam do begin
+  if itam > 1 then begin
+     ndez:=1;
+     for ncont2:=1 to (itam-ncont - 3) do
+         ndez:=ndez * 10;
+
+     if ncont = 5 then begin
+       dnum := num * 10;
+       tnum := trunc(dnum);
+     end else begin
+       dnum := num / ndez;
+       tnum := trunc(dnum);
+     end;
+  end;
+  if ncont = 4 then
+     snum:='.';
+  else begin
+    case tnum of
+      0: snum := Chr(48);
+      1: snum := Chr(49);
+      2: snum := Chr(50);
+      3: snum := Chr(51);
+      4: snum := Chr(52);
+      5: snum := Chr(53);
+      6: snum := Chr(54);
+      7: snum := Chr(55);
+      8: snum := Chr(56);
+      9: snum := Chr(57);
+    end;
+  end;
+  str:=str + snum;
+  num:=dnum - tnum;
+  num:=num * ndez;
+end;
+end;

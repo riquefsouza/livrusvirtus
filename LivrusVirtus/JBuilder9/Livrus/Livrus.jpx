@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--JBuilder XML Project-->
+<project>
+  <property category="debug.0" name="SmartStepRedefineClasses" value="0"/>
+  <property category="debug.0" name="SmartStepSkipStaticInitializers" value="0"/>
+  <property category="debug.0" name="SmartStepSkipSynthetics" value="0"/>
+  <property category="javaFormatting" name="packageThreshold" value="0"/>
+  <property category="runtime" name="DefaultConfiguration" value="-1"/>
+  <property category="runtime.0" name="BuildTargetOnRun" value="com.borland.jbuilder.build.ProjectBuilder$ProjectBuildAction;make"/>
+  <property category="runtime.0" name="ConfigurationName" value="AppLivrus"/>
+  <property category="runtime.0" name="RunnableType" value="com.borland.jbuilder.runtime.ApplicationRunner"/>
+  <property category="runtime.0" name="application.class" value="Livrus.Livrus"/>
+  <property category="serverservices" name="single.server.name" value="Tomcat 4.0"/>
+  <property category="sys" name="AuthorLabel" value="@author"/>
+  <property category="sys" name="BackupPath" value="bak"/>
+  <property category="sys" name="CheckStable" value="1"/>
+  <property category="sys" name="Company" value=""/>
+  <property category="sys" name="CompanyLabel" value="Company:"/>
+  <property category="sys" name="Copyright" value="Todos os direitos reservados para: Henrique F. de Souza"/>
+  <property category="sys" name="CopyrightLabel" value="Copyright:"/>
+  <property category="sys" name="DefaultPath" value="src"/>
+  <property category="sys" name="Description" value="Sistema integrante do projeto Livrus Virtus, vers\u00e3o programada no JBuilder 9 em Java"/>
+  <property category="sys" name="DescriptionLabel" value="Description:"/>
+  <property category="sys" name="DocPath" value="doc"/>
+  <property category="sys" name="ExcludeClassEnabled" value="0"/>
+  <property category="sys" name="IncludeTestPath" value="1"/>
+  <property category="sys" name="InstanceVisibility" value="2"/>
+  <property category="sys" name="JDK" value="java version 1.4.1_02-b06"/>
+  <property category="sys" name="LastTag" value="0"/>
+  <property category="sys" name="Libraries" value="JDataStore;JDataStore Remote;JDataStore Server"/>
+  <property category="sys" name="MakeStable" value="0"/>
+  <property category="sys" name="OutPath" value="classes"/>
+  <property category="sys" name="SourcePath" value="src;test"/>
+  <property category="sys" name="TestPath" value="test"/>
+  <property category="sys" name="Title" value="Livrus Virtus"/>
+  <property category="sys" name="TitleLabel" value="Title:"/>
+  <property category="sys" name="Version" value="1.0.0"/>
+  <property category="sys" name="VersionLabel" value="@version"/>
+  <property category="sys" name="WorkingDirectory" value="."/>
+  <property category="sys" name="palette.bean.chooser.beans" value="Livrus.frmCadAssuntos;"/>
+  <property category="sys" name="uidesign.size.Livrus.frmCadAssuntos" value="343,164"/>
+  <property category="sys" name="uidesign.size.Livrus.frmCadEnderecos" value="537,198"/>
+  <property category="sys" name="uidesign.size.Livrus.frmCadLivros" value="484,497"/>
+  <property category="sys" name="uidesign.size.Livrus.frmLogin" value="208,139"/>
+  <property category="sys" name="uidesign.size.Livrus.frmSobre" value="349,253"/>
+  <property category="sys" name="uidesign.size.Livrus.frmSplash" value="259,76"/>
+  <property category="sys" name="uidesign.size.Livrus.frmVenderLivros" value="473,333"/>
+</project>

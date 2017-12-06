@@ -1,0 +1,110 @@
+LISP Tutorial   by Mark Meyer
+Chapter 9 
+Mapcar
+--------------------------------------------------------------------------------
+TOPICS:  Higher order functions, mapcar
+--------------------------------------------------------------------------------
+
+A higher order function is one which either returns functions as returned values
+or takes in functions as parameters.  We will just discuss the latter, especial-
+ly several built-in functions.
+
+Earlier we saw "apply" which is another built-in higher order function.  It 
+takes in a function's name, and a list, and applies that function to that list
+as if those were its parameters.  For example:
+
+     (apply '+ '(4 5 6 2 7))
+
+which gives the sum of that list of numbers, namely 24.  You could think of
+"apply" as a sort of "cons" that puts the function at the head of the list:
+
+     (+ 4 5 6 2 7)
+
+However, in many systems, the + is something special, which is why apply is
+needed.  (Notice that in Ibuki CL, as in other CLs (Common LISPs), we could
+actually do the following:
+
+     (eval (cons '+ '(4 5 6 2 7)))
+
+and get the right answer!)
+
+Now to be perfectly confusing, you will usually see #'+ instead of '+ when
+writing things like apply and mapcar:
+
+     (apply #'+ '(4 5 6 2 7))
+
+The reason for the weird quote mark in front of the +, or in front of ANY
+function's name, is that it tells LISP to take the "closure" of this function.
+This makes sure that the scope of variables for that function is treated proper-
+ly according to lexical scope rules.  If you don't understand all that, don't
+worry!  (I barely understand it myself!)  Just take it from the "authorities" 
+that this is what you are supposed to do!
+
+As a quick aside, why ever use apply?  Why not just write (+ 4 5 6 2 7)?
+The answer is that the list '(4 5 6 2 7) may be the output of some other 
+function, and you want to add up all the values in the list, but you don't know
+ahead of time what those numbers will be.
+
+Now for mapcar.  Mapcar obviates loops in that it travels through a list,
+applying the function you give to each member of that list.  It greatly simpli-
+fies writing some functions.  Here's a simple example.  The function 1+ adds
+one to a number:
+
+     (1+ 5)   ==>   6
+
+To add 1 to each number in a list, you could write a loop, but that involves
+building up the list tediously.  Assume that numlist is our list of numbers
+and result-list is the new list where all those numbers have been bumped up by
+1:
+
+     (setq numlist '(4 5 7 0))
+     (setq result-list ())
+     (dolist (n numlist)
+          (setq result-list (cons (1+ n) result-list))
+     )
+
+While this isn't too bad, it is very messy!  You have to pick apart the old list
+yourself, come up with a new variable name for the temporary (n), and then build
+up the new list by hand, using cons and remembering to setq the variable. 
+
+Here's the same thing using mapcar:
+
+     (mapcar #'1+ '(4 5 7 0))
+
+The result will be (5 6 8 1).  Isn't that easy?
+
+The general form of mapcar is
+
+     (mapcar function-name list-of-values)
+
+The named function is applied to each single element of that list-of-values, and
+the list of results is returned.
+
+Here's another:
+
+     (mapcar #'car '((8 0 1) (mark sally kathy) (a b c)))
+
+Remember that this is equivalent to using "car" three times, and pasting togeth-
+er the result, as in
+
+     ((car '(8 0 1)) (car '(mark sally kathy)) (car '(a b c))
+
+The result is
+
+     (8 mark a)
+
+Mapcar can work with functions that have 2 arguments, such as cons, but then you
+have to have TWO LISTS of arguments.  Here's an example:
+
+     (mapcar #'cons '(mark 9 x) '((sally kathy) (8 7 6) ()))
+
+You get
+
+     ((mark sally kathy) (9 8 7 6) (x))
+
+Now it may look like mapcar is just a toy, but when you are writing long chains
+of function compositions, it really helps to have a notation that sidesteps the
+clumsy loop notations, like dolist.  Mapcar is especially useful with lambda,
+discussed later.
+
+--------------------------------------------------------------------------------

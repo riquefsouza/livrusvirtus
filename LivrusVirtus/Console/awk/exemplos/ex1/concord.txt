@@ -1,0 +1,45 @@
+#  This awk program makes a concordance of words found in a text file.
+#  It uses an associative array of the words it finds, so the indices
+#  into the array are the words, and the values stored in the array are
+#  strings.  The strings contain a comma-separated list of line numbers
+#  where the word was found in the file.
+#
+#  To use, do
+#          awk -f thisfile textfile
+#
+
+function sort(array,size,    temp,i,j) {
+    for (i=1; i<=size; i++)
+        for (j=i+1; j<=size; j++)
+             if (array[i] > array[j]) {
+                  temp = array[i]
+                  array[i] = array[j]
+                  array[j] = temp
+             }
+}
+
+#  The following matches each line
+
+{
+   for (i=1; i<=NF; i++) {
+       placelist = words[$i];
+       if (placelist != "")
+            words[$i] = sprintf ("%s,%d", placelist, NR)
+       else
+            words[$i] = sprintf ("%d", NR)
+   }
+}
+
+#  after the last line has been read...
+
+END{
+    n = 0
+    for (item in words)
+        wordlist[++n] = item
+
+    sort(wordlist,n)
+
+    for (i=1; i<=n; i++) {
+        printf "%-10s: %s\n", wordlist[i], words[wordlist[i]]
+    }
+}

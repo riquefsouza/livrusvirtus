@@ -1,0 +1,1 @@
+D:\Comps\EUPHORIA\BIN\EX.exe %1

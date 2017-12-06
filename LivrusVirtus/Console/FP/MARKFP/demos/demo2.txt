@@ -1,0 +1,428 @@
+(def silly == +)
+
+          SILLY defined
+NIL
+
+silly:<5,6>
+ready...
+
+          11
+(def add1 == +.[id,#1])
+ready...
+
+          ADD1 defined
+NIL
+add1:5
+ready...
+
+          6
+add1:10
+ready...
+
+          11
+add1.add1:5
+ready...
+
+          7
+x <- 100
+
+syntax error
+resume
+ready...
+
+x <- id:100
+ready...
+
+          100
+id:{x}
+ready...
+
+          100
+add1:{x}
+ready...
+
+          101
+add1.add1:{x}
+ready...
+
+          102
+(def add2 == add1.add1)
+ready...
+
+          ADD2 defined
+NIL
+add2:100
+ready...
+
+          102
+y <- <<a,b,c>,<d,e,f,g>,nil,<a>>
+syntax error
+
+resume
+ready...
+y <- id: <<a,b,c>,<d,e,f,g>,nil,<a>>
+ready...
+
+          ((A B C) (D E F G) NIL (A))
+id:{y}
+ready...
+
+          ((A B C) (D E F G) NIL (A))
+length:{y}
+ready...
+
+          4
+@length:{y}
+ready...
+
+          (3 4 0 1)
+(def lengths == @length)
+ready...
+
+          LENGTHS defined
+NIL
+lengths:{y}
+ready...
+
+          (3 4 0 1)
+(def plusall == /+)
+ready...
+
+          PLUSALL defined
+NIL
+plusall:<5,6,1,2,33,4>
+ready...
+
+          51
+/+:<5,6,1,2,33,4>
+ready...
+
+          51
+plusall.lengths:{y}
+ready...
+
+          8
+(def average == div.[/+,length])
+ready...
+
+          AVERAGE defined
+NIL
+average:<5,1,2,3,10,4,6>
+ready...
+
+          4
+%:<10,3>
+ready...
+
+          3
+%:<10,5>
+ready...
+
+          2
+    (def subavg == (null.2) -> 3 ; (subavg.[1,tl.2,apndl.[sub.[1,1.2],3]]))
+
+ready...
+
+          SUBAVG defined
+NIL
+
+(def average == div.[/+,length])
+ready...
+
+          AVERAGE defined
+NIL
+ (def subavg == (null.2) -> 3 ; (subavg.[1,tl.2,apndl.[sub.[1,1.2],3]]))
+ready...
+
+          SUBAVG defined
+NIL
+ (def square == mult.[id,id])
+ready...
+
+          SQUARE defined
+NIL
+    (def variance == (/plus).(@square).subavg.[average,id,nil])
+ready...
+
+          VARIANCE defined
+NIL
+
+subavg:<5,<3,6,7,8>,nil>
+ready...
+
+          (-3 -2 -1 2)
+
+subavg:<5,<3,6,7>,nil>
+
+          (-2 -1 2)
+ready...
+distl:<5,<3,6,7>>
+
+ready...
+          ((5 3) (5 6) (5 7))
+(/-).distl:<5,<3,6,7>>
+ready...
+
+          
+distl:<5,<3,6,7>>
+ready...
+
+          ((5 3) (5 6) (5 7))
+
+(@-).distl:<5,<3,6,7>>
+ready...
+
+          (2 -1 -2)
+
+ready...
+(def concat == null.1 -> 2;cons.[1.1,concat.[tl.1,2]])
+ready...
+
+          CONCAT defined
+NIL
+concat:<<a,b,c>,<d,e,f>>
+ready...
+
+          (A B C D E F)
+(def eq0 == eq.[id,#0])
+(def dec == -.[id,#1])
+
+ready...
+ready...
+
+
+          EQ0 defined
+NIL
+
+          DEC defined
+NIL
+eq0:5
+ready...
+
+          NIL
+eq0.dec:2
+ready...
+
+          NIL
+eq0.dec:1
+ready...
+
+          T
+(def replicate == replicate_aux.apndr.[id,nil])
+ready...
+
+          REPLICATE defined
+NIL
+(def replicate_aux == eq0.1 -> 3; replicate_aux.[dec.1,id.2,cons.[2,3]])
+ready...
+
+          REPLICATE_AUX defined
+NIL
+replicate:<8,6>
+
+ready...          (6 6 6 6 6 6 6 6)
+
+replicate:<1,6>
+ready...
+
+          (6)
+replicate:<10,6>
+ready...
+
+          (6 6 6 6 6 6 6 6 6 6)
+replicate:<5,a>
+
+ready...
+          (A A A A A)
+[id,nil]:<5,a>
+
+          ((5 A) NIL)
+ready...
+apndr.[id,nil]:<5,a>
+ready...
+
+          (5 A NIL)
+(eq0.1 -> 2;3):<5,mark,sally>
+ready...
+
+          SALLY
+(eq0.1 -> 2;3):<0,mark,sally>
+ready...
+
+          MARK
+// You can see what forms the parser is sending to the LISP interpreter
+// by setting the variable showflag to t
+
+
+$(setq showflag t)$
+
+          T
+
+(eq0.1 -> 2;3):<5,mark,sally>
+ready...
+
+(X-APLY '(IF (COMPOSE EQ0 1) 2 3) '(5 MARK SALLY))
+          SALLY
+replicate:<5,a>
+ready...
+
+(X-APLY 'REPLICATE '(5 A))
+          (A A A A A)
+(def replicate == replicate_aux.apndr.[id,nil])
+ready...
+
+(X-DEF 'REPLICATE
+       '(COMPOSE REPLICATE_AUX (COMPOSE APNDR (CONSTRUCT ID NIL))))
+          REPLICATE is already defined.  Use undef.
+NIL
+$(setq showflag nil)$
+
+
+(SETQ SHOWFLAG NIL)
+          NIL
+
+
+// You can watch the evaluation proceed by showing the steps of each
+// function application if you set debuglevel to 1
+
+
+$(setq debuglevel 1)$
+
+
+          1
+(eq0.1 -> 2;3):<5,mark,sally>
+ready...
+
+          APPLYING>>> (IF (COMPOSE EQ0 1) 2 3)  :::  (5 MARK SALLY)
+
+APPLYING>>> (COMPOSE EQ0 1)  :::  (5 MARK SALLY)
+
+APPLYING>>> 1  :::  (5 MARK SALLY)
+
+APPLYING>>> EQ0  :::  5
+
+APPLYING>>> (COMPOSE EQ (CONSTRUCT ID (CONST 0)))  :::  5
+
+APPLYING>>> (CONSTRUCT ID (CONST 0))  :::  5
+
+APPLYING>>> ID  :::  5
+
+APPLYING>>> (CONST 0)  :::  5
+
+APPLYING>>> EQ  :::  (5 0)
+
+APPLYING>>> 3  :::  (5 MARK SALLY)
+
+SALLY
+add1.add1.add1:5
+ready...
+
+          APPLYING>>> (COMPOSE ADD1 (COMPOSE ADD1 ADD1))  :::  5
+
+APPLYING>>> (COMPOSE ADD1 ADD1)  :::  5
+
+APPLYING>>> ADD1  :::  5
+
+No such defined function: ADD1
+APPLYING>>> ADD1  :::  UNDEFINED
+
+APPLYING>>> ADD1  :::  UNDEFINED
+
+UNDEFINED
+(def add1 == +.[id,#1])
+ready...
+
+          ADD1 defined
+NIL
+add1.add1.add1:5
+ready...
+
+          APPLYING>>> (COMPOSE ADD1 (COMPOSE ADD1 ADD1))  :::  5
+
+APPLYING>>> (COMPOSE ADD1 ADD1)  :::  5
+
+APPLYING>>> ADD1  :::  5
+
+APPLYING>>> (COMPOSE + (CONSTRUCT ID (CONST 1)))  :::  5
+
+APPLYING>>> (CONSTRUCT ID (CONST 1))  :::  5
+
+APPLYING>>> ID  :::  5
+
+APPLYING>>> (CONST 1)  :::  5
+
+APPLYING>>> +  :::  (5 1)
+
+APPLYING>>> ADD1  :::  6
+
+APPLYING>>> (COMPOSE + (CONSTRUCT ID (CONST 1)))  :::  6
+
+APPLYING>>> (CONSTRUCT ID (CONST 1))  :::  6
+
+APPLYING>>> ID  :::  6
+
+APPLYING>>> (CONST 1)  :::  6
+
+APPLYING>>> +  :::  (6 1)
+
+APPLYING>>> ADD1  :::  7
+
+APPLYING>>> (COMPOSE + (CONSTRUCT ID (CONST 1)))  :::  7
+
+APPLYING>>> (CONSTRUCT ID (CONST 1))  :::  7
+
+APPLYING>>> ID  :::  7
+
+APPLYING>>> (CONST 1)  :::  7
+
+APPLYING>>> +  :::  (7 1)
+
+8
+i:6
+ready...
+
+          APPLYING>>> IOTA  :::  6
+
+(1 2 3 4 5 6)
+(/+).i:6
+ready...
+
+          APPLYING>>> (COMPOSE (INSERT +) IOTA)  :::  6
+
+APPLYING>>> IOTA  :::  6
+
+APPLYING>>> (INSERT +)  :::  (1 2 3 4 5 6)
+
+APPLYING>>> (INSERT +)  :::  (2 3 4 5 6)
+
+APPLYING>>> (INSERT +)  :::  (3 4 5 6)
+
+APPLYING>>> (INSERT +)  :::  (4 5 6)
+
+APPLYING>>> (INSERT +)  :::  (5 6)
+
+APPLYING>>> (INSERT +)  :::  (6)
+
+APPLYING>>> +  :::  (5 6)
+
+APPLYING>>> +  :::  (4 11)
+
+APPLYING>>> +  :::  (3 15)
+
+APPLYING>>> +  :::  (2 18)
+
+APPLYING>>> +  :::  (1 20)
+
+21
+@length:<<a,b>,<c>,<d,e,f,g>>
+ready...
+
+          APPLYING>>> (APPLY LENGTH)  :::  ((A B) (C) (D E F G))
+
+APPLYING>>> LENGTH  :::  (A B)
+
+APPLYING>>> LENGTH  :::  (C)
+
+APPLYING>>> LENGTH  :::  (D E F G)
+
+(2 1 4)

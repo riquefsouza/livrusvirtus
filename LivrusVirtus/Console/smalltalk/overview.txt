@@ -1,0 +1,62 @@
+1.  What is Smalltalk?
+----------------------
+
+     Smalltalk is a general purpose high level programming language.  It is the
+     original "pure" object oriented language, although it was not the first to
+     use the object concept (that was Simula 67).
+
+2.  How does Smalltalk differ from C++?
+---------------------------------------
+
+     Smalltalk is a pure OOP language, whereas C++ is a hybrid, that is a cross
+     between the traditional C language and the objects concept.  You can use
+     C++ with little attention to classes, and in fact some people use it merely
+     as a better C, since it has a number of clever extensions (like "VAR"
+     parameters.)  However, Smalltalk can only be used in an object oriented
+     fashion.
+
+3.  What are Smalltalk's weaknesses?
+-------------------------------
+
+     Smalltalk is an interpreted language, so its programs run slowly.
+
+     Smalltalk, as a language, does not have strong typing so some programming
+     errors cannot be caught easily without using a debugger at run-time.  This
+     is in sharp contract to C++ and Ada9X, both of which have strong type
+     checking.
+
+     But perhaps the worst thing about Smalltalk is that it is so different
+     from imperative languages, so the object paradigm must be swallowed whole
+     and at the outset.  New programmers may find it fun and easy to learn, but
+     hardened programmers will rail against what seem to be idiotic differences
+     between a pure OOP language and more traditional variabled-oriented 
+     languages.  Perhaps this is why C++ is so much more used and admired, 
+     because it admits a graceful movement into the OOP environment.
+
+     Smalltalk never really took off as a production language, but its devotees
+     are many and are not likely to give up.  It will undoubtedly continue to
+     influence future programming languages.
+
+4.  Reference Books
+-------------------
+
+     "Smalltalk-80 : the language and its implementation" by Adele Goldberg 
+          and David Robson, Addison-Wesley, 1983.
+
+      Bouwhuis call no. QA76.8.S635 G64 1983
+
+     This is the standard book on Smalltalk which acts as both a tutorial,
+     programming language reference manual and an explanation as to how 
+     Smalltalk is implemented.  At 700 pages, it is quite massive!
+
+     There are many other books about Smalltalk out there, although we have
+     none other in Bouwhuis.  Many books on programming language theory have
+     sections on Smalltalk.
+
+
+5.  How do we use Smalltalk here at Canisius?
+---------------------------------------------
+
+     We have a version of Smalltalk called GNU Smalltalk 1.1.1.  It can be
+     run under UNIX with no special graphics interface needed, although it does
+     have an interface to X Windows.

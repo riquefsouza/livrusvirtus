@@ -1,0 +1,120 @@
+Script started on Mon Jan 13 12:54:50 1997
+% ibcl
+
+
+IBUKI Common Lisp  Version 2 release 01.027.
+
+This software is provided by IBUKI pursuant to a written license agreement
+and may be used, copied, transmitted and stored only in accordance with the
+terms of such license.
+
+;; Copyright (c) 1990-86 IBUKI  All rights reserved.
+;; Copyright (c) 1986-84 T. Yuasa and M. Hagiya  All rights reserved.
+
+For more information: (describe 'copyright) or (describe 'acknowledgements)
+Loading init.lsp
+Finished loading init.lsp
+
+>(system "pwd")
+/mnt1/dept/meyer/csc350/LAB/jan13
+0
+
+>(system "ls")
+init.lsp	nlu		nlu-global	typescript
+0
+
+>(load "nlu")
+Loading nlu
+Finished loading nlu
+T
+
+>facts
+((CAT EAT FOOD) (DOG BARK) (CAR HIT TREE) (TIRE BURST) (DOG BITE MAN)
+ (DOG BITE CAT) (CAT BITE DOG) (MAN HIT DOG) (MAN EAT COW) (COW IS MAD)
+ (MAN IS SICK))
+
+>(car facts)
+(CAT EAT FOOD)
+
+>(length facts)
+11
+
+>(nth 0 facts)
+(CAT EAT FOOD)
+
+>(nth 1 facts)
+(DOG BARK)
+
+>(nth 10 facts)
+(MAN IS SICK)
+
+>(nth (1- (length facts)) facts)
+(MAN IS SICK)
+
+>(last facts)
+((MAN IS SICK))
+
+>(is-true? '(man hit dog))
+>>Error: IS-TRUE? requires two arguments,
+but only one was supplied.
+ IS-TRUE?                     (IHS[11])
+Arg 0 (PROPOSITION): NIL
+Arg 1 (FACTLIST): NIL
+Restart options (Type :C <number>):
+:Q,  0: Lisp Top Level
+ Version 201  Delta 27
+ Type :H for a list of debugger commands.
+ ->:q
+
+ Back to Lisp Top Level...
+>(is-true? '(man hit dog) facts)
+(MAN HIT DOG) is true
+NIL
+
+>(is-true? (man hit dog) facts)
+>>Error: The function MAN is undefined.
+ EVAL                         (IHS[10])
+Restart options (Type :C <number>):
+     0: Provide a value to store as the definition of MAN
+     1: Retry getting the definition of MAN
+:Q,  2: Lisp Top Level
+ Version 201  Delta 27
+ Type :H for a list of debugger commands.
+ ->:q
+
+ Back to Lisp Top Level...
+>(is-true? '(dog kill cat) facts)
+(DOG KILL CAT) is not known to be true
+NIL
+
+>(answer-question '(?who is sick) facts)
+
+(MAN IS SICK) 
+NIL
+
+>(answer-question '(?who bit ?whom) facts)
+NIL
+
+>(answer-question '(man eat ?what) facts)
+
+(MAN EAT COW) 
+NIL
+
+>(answer-question '(?who bite ?whom) facts)
+
+(DOG BITE MAN) 
+(DOG BITE CAT) 
+(CAT BITE DOG) 
+NIL
+
+>(answer-question '(man hit dog) facts)
+
+(MAN HIT DOG) 
+NIL
+
+>(answer-question '(boy see sun) facts)
+NIL
+
+>Bye.
+% 
+script done on Mon Jan 13 13:01:35 1997

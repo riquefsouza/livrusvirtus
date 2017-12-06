@@ -1,0 +1,92 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 12
+Accumulators
+--------------------------------------------------------------------------------
+TOPICS:  More rule writing techniques
+--------------------------------------------------------------------------------
+
+There are some programming techniques that we use in Prolog that are a bit
+strange compared to imperative languages.  One of them involves computing
+a result.
+
+We already saw that some predicates just return "yes" or "no", corresponding
+to "true" and "false."  For example, member is such a predicate.  It just
+says whether or not something is a member of a list:
+
+     member(N,[N|Tail]).
+     member(N,[X|Tail]) :- member(N,Tail).
+
+On the other hand, some predicates compute a value.  But in order to compute
+a value, there has to be a place to "store" that value, so we create another
+argument position in our predicate.  In "count" below, we designate the 
+third argument as the logical variable that holds the count of items in a
+list:
+
+     count(A,[A|Tail],N) :- count(A,Tail,N2), 
+     count(A,[A|Tail],N) :- count(A,Tail,N2), N is 1+N2.
+     count(A,[X|Tail],N) :- count(A,Tail,N2), N is N2.
+
+But how do we deal with predicates that compute whole lists?  We just
+what are called accumulators, which are arguments that are bound to lists.
+
+Let's write a predicate that takes in a list of numbers and adds 1 to
+each number in the list.  Naturally, this will be a recursive predicate
+because we have to do a repetitive action, i.e. process each element of
+the list, and the only way that Prolog allows us to do a repetitive action
+is to use recursion.
+
+The first clause is easy ... if the list is empty, then the result is also
+the empty list:
+
+     add1([],[]).
+
+This will be the base case that stops our recursion.
+
+The continuation case is when the list is non-empty, i.e. it has least
+a head:
+
+     add1([Head|Tail],L) :-
+
+The question becomes what is L?  Obviously it is a list where the head
+is Head+1.  But the tail is a new list that is the result of processing
+the old Tail with the add1 predicate.  (Remember that to do arithmetic
+we must use "is".)  So we get
+
+     add1([Head|Tail],L) :- N is Head+1, L = [N|Tail2], add1(Tail,Tail2).
+
+Prolog is fairly flexible in the order of its operations.  You could have
+changed the order of the three clauses on the right hand side and put
+them into any order, and the answer would have been the same.  The only
+difference is that the running time might have been longer for some of
+them, due to how Prolog saves values on the stack.
+
+Another simplication involves removing L.  Since L is identical to
+[N|Tail2], that could be used in place of L in the LHS (left hand side)
+thereby getting:
+
+     add1([Head|Tail],[N|Tail2]) :- N is Head+1, add1(Tail,Tail2).
+
+In fact, many people would prefer this formulation.
+
+The accumulator in this example is the second argument of the add1
+predicate, since it "accumulates" the answer.
+
+Any time you create a new list, you must define how it looks in terms of
+its head and tail.  Thus, the bracket/vertical bar expression, such as
+[Head|Tail], not only decomposes a list, but also builds one up.  This is
+part of the "reversible" nature of Prolog; everything has a dual inter-
+pretation.
+
+Here's a predicate to think about.  It uses an accumulator to append two
+lists together to form a new list:
+
+     append([],Z,Z).
+     append([A|X],Y,[A|Z]) :- append(X,Y,Z).
+
+This is extremely terse
+
+reverse([],[]).
+reverse([X|Tail],L) :- reverse(Tail,Tailrev),
+                       append(Tailrev,[X],L).
+
+-------------------------------------------------------------------------

@@ -1,0 +1,15 @@
+/*  This gets the average of a list of numbers.
+
+    How to use:
+
+          average([5,18,64,2,-6],X).
+
+    It will print out X = 16.6
+*/
+
+average([],0).
+average([X],X).
+average([X|Y],AV1) :- sumup(Y,SUM), length(Y,LEN), AV1 is (X + SUM)/(LEN + 1).
+
+sumup([X],X).
+sumup([X|Y],K) :- sumup(Y,SUM), K is X + SUM.

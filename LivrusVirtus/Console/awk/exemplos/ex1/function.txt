@@ -1,0 +1,14 @@
+#  Doesn't swap (all scalars are passed by value)
+
+function swap(a,b,temp) {
+    temp = a;
+    a = b;
+    b = temp;
+}
+
+{
+   x = $1
+   y = $2
+   swap(x,y)
+   printf ("x=%s  y=%s\n", x, y)
+}

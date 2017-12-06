@@ -1,0 +1,37 @@
+option explicit
+
+Include "Resource.inc"
+Include "RotinasGlobais.inc"
+Include "ConsultasSQL.inc"
+Include "Sobre.inc"
+Include "Cadastros.inc"
+Include "CadAssuntos.inc"
+Include "CadAutores.inc"
+Include "CadEditoras.inc"
+Include "CadEnderecos.inc"
+Include "CadIdiomas.inc"
+Include "CadPaises.inc"
+Include "CadProfissoes.inc"
+Include "CadClientes.inc"
+Include "CadLivros.inc"
+Include "VenderLivros.inc"
+Include "ConVendas.inc"
+Include "AlterarSenha.inc"
+Include "Filha.inc"
+Include "Consultas.inc"
+Include "ConAssuntos.inc"
+Include "ConAutores.inc"
+Include "ConEditoras.inc"
+Include "ConEnderecos.inc"
+Include "ConIdiomas.inc"
+Include "ConPaises.inc"
+Include "ConProfissoes.inc"
+Include "ConClientes.inc"
+Include "ConLivros.inc"
+Include "Principal.inc"
+Include "Login.inc"
+Include "Splash.inc"
+
+frmSplash.Show(True)
+
+'frmPrincipal.Show(True)

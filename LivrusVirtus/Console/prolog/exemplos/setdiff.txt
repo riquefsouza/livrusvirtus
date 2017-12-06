@@ -1,0 +1,6 @@
+setdiff([],B,[]).
+setdiff([H|T],B,X) :- member(H,B), setdiff(T,B,X).
+setdiff([H|T],B,[H|X]) :- setdiff(T,B,X).
+
+member(X,[X|H]).
+member(X,[H|T]) :- member(X,T).

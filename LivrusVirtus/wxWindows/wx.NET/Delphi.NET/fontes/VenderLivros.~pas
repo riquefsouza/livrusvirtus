@@ -1,0 +1,446 @@
+unit VenderLivros;
+
+interface
+
+uses
+  System.Drawing, wx, Cadastros, System.Collections, System.Data.OleDb;
+
+type
+  TfrmVenderLivros = class(TfrmCadastros)
+  private
+    slPrecos, slISBNs, slQtdEstoque: ArrayList;
+    nPrecoTotal: double;
+    labDtHrVenda: wx.StaticText;
+    edtDtHrVenda: wx.TextCtrl;
+    btnPCliente: wx.Button;
+    labISBN: wx.StaticText;
+    edtISBN: wx.TextCtrl;
+    labLivro: wx.StaticText;
+    edtLivro: wx.TextCtrl;
+    btnAdLivros: wx.Button;
+    btnPLivro: wx.Button;
+    labLivros: wx.StaticText;
+    lstLivros: wx.ListBox;
+    labPrecoTotal: wx.StaticText;
+    edtPrecoTotal: wx.TextCtrl;
+    btnVender: wx.Button;
+    procedure FazLayout();
+    procedure LimpaDados();
+    function ValidaDados(): boolean;
+    function SalvaLista(): boolean;
+    procedure OnClose(sender: System.Object; e: wx.Event);
+    procedure OnBtnVender(sender: System.Object; e: wx.Event);
+    procedure OnBtnLimpar(sender: System.Object; e: wx.Event);
+    procedure OnBtnFechar(sender: System.Object; e: wx.Event);
+    procedure OnEdtCodigo_Killfocus(sender: System.Object; e: wx.Event);
+    procedure OnBtnPCliente(sender: System.Object; e: wx.Event);
+    procedure OnEdtISBN_Killfocus(sender: System.Object; e: wx.Event);
+    procedure OnBtnPLivro(sender: System.Object; e: wx.Event);
+    procedure OnBtnAdLivros(sender: System.Object; e: wx.Event);
+    procedure OnLstLivros_Dblclk(sender: System.Object; e: wx.Event);
+  public
+    constructor Create(parent: wx.Window);
+  end;
+
+var
+  frmVenderLivros: TfrmVenderLivros;
+
+const
+  ID_FRMVENDERLIVROS_BTNVENDER: integer = 3000;
+  ID_FRMVENDERLIVROS_BTNLIMPAR: integer = 3001; 
+  ID_FRMVENDERLIVROS_BTNFECHAR: integer = 3002; 
+  ID_FRMVENDERLIVROS_BTNPCLIENTE: integer = 3003;
+  ID_FRMVENDERLIVROS_BTNPLIVRO: integer = 3004; 
+  ID_FRMVENDERLIVROS_LSTLIVROS: integer = 3005;
+  ID_FRMVENDERLIVROS_EDTDTHRVENDA: integer = 3006; 
+  ID_FRMVENDERLIVROS_EDTISBN: integer = 3007; 
+  ID_FRMVENDERLIVROS_EDTLIVRO: integer = 3008; 
+  ID_FRMVENDERLIVROS_EDTPRECOTOTAL: integer = 3009; 
+  ID_FRMVENDERLIVROS_LABDTHRVENDA: integer = 3010; 
+  ID_FRMVENDERLIVROS_LABISBN: integer = 3011; 
+  ID_FRMVENDERLIVROS_LABLIVRO: integer = 3012; 
+  ID_FRMVENDERLIVROS_LABLIVROS: integer = 3013; 
+  ID_FRMVENDERLIVROS_LABPRECOTOTAL: integer = 3014; 
+  ID_FRMVENDERLIVROS_BTNADLIVROS: integer = 3015;
+
+  [assembly: RuntimeRequiredAttribute(TypeOf(TfrmVenderLivros))]
+
+implementation
+
+uses Login, TextValidatorCtrl, RotinasGlobais, Resource, ConsultasSQL,
+  ConClientes, ConLivros;
+
+constructor TfrmVenderLivros.Create(parent: wx.Window);
+begin
+  inherited Create(parent, FILTER_NONE, false, 'CPF:', 'Cliente:');
+
+  slPrecos := ArrayList.Create();
+  slISBNs := ArrayList.Create();
+  slQtdEstoque := ArrayList.Create();
+  btnNovo.Hide();
+
+  labDtHrVenda := wx.StaticText.Create(self, ID_FRMVENDERLIVROS_LABDTHRVENDA,
+    'Data/Hora Venda: ', System.Drawing.Point.Create(8, 8),
+    System.Drawing.Size.Create(91, 13), 0);
+  edtDtHrVenda := wx.TextCtrl.Create(self, ID_FRMVENDERLIVROS_EDTDTHRVENDA,
+    '', System.Drawing.Point.Create(8, 24),
+    System.Drawing.Size.Create(128, 21), 0);
+  edtDtHrVenda.Enabled := false;
+
+  //labCodigo.Label := 'CPF: ';
+  labCodigo.SetSize(8, 48, 48, 13);
+  edtCodigo.SetSize(8, 64, 128, 21);
+  edtCodigo.EVT_KILL_FOCUS( OnEdtCodigo_Killfocus );
+
+  //labDescricao.Label := 'Cliente: ';
+  labDescricao.SetSize(142, 48, 56, 13);
+  edtDescricao.SetSize(142, 64, 306, 21);
+  edtDescricao.Enabled := false;
+ 
+  btnPCliente := wx.Button.Create(self, ID_FRMVENDERLIVROS_BTNPCLIENTE,'...',
+   System.Drawing.Point.Create(448, 64), System.Drawing.Size.Create(21, 21), 0);
+
+  labISBN := wx.StaticText.Create(self, ID_FRMVENDERLIVROS_LABISBN,'ISBN: ',
+    System.Drawing.Point.Create(8, 88), System.Drawing.Size.Create(48, 13), 0);
+  edtISBN := wx.TextCtrl.Create(self, ID_FRMVENDERLIVROS_EDTISBN,'',
+   System.Drawing.Point.Create(8, 104), System.Drawing.Size.Create(128, 21), 0);
+  edtISBN.EVT_KILL_FOCUS( OnEdtISBN_Killfocus );
+  
+  labLivro := wx.StaticText.Create(self, ID_FRMVENDERLIVROS_LABLIVRO,'Livro: ',
+   System.Drawing.Point.Create(142, 88), System.Drawing.Size.Create(40, 13), 0);
+  edtLivro := wx.TextCtrl.Create(self, ID_FRMVENDERLIVROS_EDTLIVRO,'',
+    System.Drawing.Point.Create(142, 104),
+    System.Drawing.Size.Create(282, 21), 0);
+  edtLivro.Enabled := false;
+
+  btnAdLivros := wx.Button.Create(self, ID_FRMVENDERLIVROS_BTNADLIVROS,'+',
+  System.Drawing.Point.Create(424, 104), System.Drawing.Size.Create(21, 21), 0);
+  
+  btnPLivro := wx.Button.Create(self, ID_FRMVENDERLIVROS_BTNPLIVRO,'...',
+  System.Drawing.Point.Create(448, 104), System.Drawing.Size.Create(21, 21), 0);
+  
+  labLivros := wx.StaticText.Create(self, ID_FRMVENDERLIVROS_LABLIVROS,
+    'Livros para vender: ', System.Drawing.Point.Create(8, 128), 
+    System.Drawing.Size.Create(120, 13), 0);
+  
+  lstLivros := wx.ListBox.Create(self, ID_FRMVENDERLIVROS_LSTLIVROS,
+    System.Drawing.Point.Create(8, 144), System.Drawing.Size.Create(464, 96));
+  
+  labPrecoTotal := wx.StaticText.Create(self, ID_FRMVENDERLIVROS_LABPRECOTOTAL,
+    'Preço Total: ', System.Drawing.Point.Create(280, 248),
+    System.Drawing.Size.Create(61, 13), 0);
+  edtPrecoTotal := wx.TextCtrl.Create(self, ID_FRMVENDERLIVROS_EDTPRECOTOTAL,
+    'R$ 0,00', System.Drawing.Point.Create(344, 246),
+    System.Drawing.Size.Create(127, 21), 0);
+  edtPrecoTotal.Enabled := false;
+
+  btnVender := wx.Button.Create(self, ID_FRMVENDERLIVROS_BTNVENDER,'&Vender',
+  System.Drawing.Point.Create(239, 275), System.Drawing.Size.Create(75, 25), 0);
+  btnLimpar := wx.Button.Create(self, ID_FRMVENDERLIVROS_BTNLIMPAR,'&Limpar',
+  System.Drawing.Point.Create(319, 275), System.Drawing.Size.Create(75, 25), 0);
+  btnFechar := wx.Button.Create(self, ID_FRMVENDERLIVROS_BTNFECHAR,'&Fechar',
+  System.Drawing.Point.Create(399, 275), System.Drawing.Size.Create(75, 25), 0);
+
+  //FazLayout();
+
+  edtDtHrVenda.Value := Rotinas.retDataHoraStr(true, true);
+  edtCodigo.MaxLength := 14;
+  edtISBN.MaxLength := 13;
+  nPrecoTotal := 0;
+
+  EVT_BUTTON(ID_FRMVENDERLIVROS_BTNVENDER, OnBtnVender );
+  EVT_BUTTON(ID_FRMVENDERLIVROS_BTNLIMPAR, OnBtnLimpar );
+  EVT_BUTTON(ID_FRMVENDERLIVROS_BTNFECHAR, OnBtnFechar );
+	EVT_CLOSE( OnClose );
+  EVT_BUTTON(ID_FRMVENDERLIVROS_BTNPCLIENTE, OnBtnPCliente );
+  EVT_BUTTON(ID_FRMVENDERLIVROS_BTNPLIVRO, OnBtnPLivro );
+  EVT_BUTTON(ID_FRMVENDERLIVROS_BTNADLIVROS, OnBtnAdLivros );
+  EVT_LISTBOX_DCLICK(ID_FRMVENDERLIVROS_LSTLIVROS, OnLstLivros_Dblclk );
+end;
+
+procedure TfrmVenderLivros.FazLayout();
+var sizer_1, sizer_2, sizer_3, sizer_4, sizer_5, sizer_6, 
+  sizer_7, sizer_8: wx.BoxSizer;
+  grid_sizer_1, grid_sizer_2, grid_sizer_3, grid_sizer_4, grid_sizer_5, 
+  grid_sizer_6, grid_sizer_7, grid_sizer_8: wx.GridSizer;
+begin
+  sizer_1 := wx.BoxSizer.Create(wx.Orientation.wxVERTICAL);
+  sizer_6 := wx.BoxSizer.Create(wx.Orientation.wxVERTICAL);
+  sizer_8 := wx.BoxSizer.Create(wx.Orientation.wxHORIZONTAL);
+  sizer_7 := wx.BoxSizer.Create(wx.Orientation.wxHORIZONTAL);
+  sizer_5 := wx.BoxSizer.Create(wx.Orientation.wxVERTICAL);
+  sizer_4 := wx.BoxSizer.Create(wx.Orientation.wxHORIZONTAL);
+  grid_sizer_8 := wx.GridSizer.Create(2, 1, 0, 0);
+  grid_sizer_7 := wx.GridSizer.Create(2, 1, 0, 0);
+  grid_sizer_6 := wx.GridSizer.Create(2, 1, 0, 0);
+  grid_sizer_5 := wx.GridSizer.Create(2, 1, 0, 0);
+  sizer_3 := wx.BoxSizer.Create(wx.Orientation.wxHORIZONTAL);
+  grid_sizer_4 := wx.GridSizer.Create(2, 1, 0, 0);
+  grid_sizer_3 := wx.GridSizer.Create(2, 1, 0, 0);
+  grid_sizer_2 := wx.GridSizer.Create(2, 1, 0, 0);
+  sizer_2 := wx.BoxSizer.Create(wx.Orientation.wxHORIZONTAL);
+  grid_sizer_1 := wx.GridSizer.Create(2, 1, 0, 0);
+  grid_sizer_1.Add(labDtHrVenda, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+  grid_sizer_1.Add(edtDtHrVenda, 0, 0, 0);
+  sizer_2.Add(grid_sizer_1, 0, wx.Direction.wxLEFT, 2);
+  sizer_2.Add(20, 20, 0, 0, 0);
+  sizer_1.Add(sizer_2, 0, 0, 0);
+  grid_sizer_2.Add(labCodigo, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+  grid_sizer_2.Add(edtCodigo, 0, 0, 0);
+  sizer_3.Add(grid_sizer_2, 0, wx.Direction.wxLEFT, 2);
+  grid_sizer_3.Add(labDescricao, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+  grid_sizer_3.Add(edtDescricao, 0, 0, 0);
+  sizer_3.Add(grid_sizer_3, 0, wx.Direction.wxLEFT, 2);
+  grid_sizer_4.Add(20, 20, 0, 0, 0);
+  grid_sizer_4.Add(btnPCliente, 0, 0, 0);
+  sizer_3.Add(grid_sizer_4, 0, 0, 0);
+  sizer_1.Add(sizer_3, 0, 0, 0);
+  grid_sizer_5.Add(labISBN, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+  grid_sizer_5.Add(edtISBN, 0, 0, 0);
+  sizer_4.Add(grid_sizer_5, 0, wx.Direction.wxLEFT, 2);
+  grid_sizer_6.Add(labLivro, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+  grid_sizer_6.Add(edtLivro, 0, 0, 0);
+  sizer_4.Add(grid_sizer_6, 0, wx.Direction.wxLEFT, 2);
+  grid_sizer_7.Add(20, 20, 0, 0, 0);
+  grid_sizer_7.Add(btnAdLivros, 0, 0, 0);
+  sizer_4.Add(grid_sizer_7, 1, wx.Stretch.wxEXPAND, 0);
+  grid_sizer_8.Add(20, 20, 0, 0, 0);
+  grid_sizer_8.Add(btnPLivro, 0, 0, 0);
+  sizer_4.Add(grid_sizer_8, 0, 0, 0);
+  sizer_1.Add(sizer_4, 0, 0, 0);
+  sizer_5.Add(labLivros, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+  sizer_5.Add(lstLivros, 1, wx.Direction.wxALL or wx.Stretch.wxEXPAND, 1);
+  sizer_1.Add(sizer_5, 1, wx.Stretch.wxEXPAND, 0);
+  sizer_7.Add(labPrecoTotal, 0, wx.Direction.wxALL, 2);
+  sizer_7.Add(edtPrecoTotal, 0, wx.Direction.wxALL, 2);
+  sizer_6.Add(sizer_7, 0, wx.Direction.wxALL or 
+    wx.Alignment.wxALIGN_RIGHT, 2);
+  sizer_8.Add(btnVender, 0, wx.Direction.wxALL or 
+    wx.Alignment.wxALIGN_RIGHT or wx.Alignment.wxALIGN_BOTTOM, 2);
+  sizer_8.Add(btnLimpar, 0, wx.Direction.wxALL or  
+    wx.Alignment.wxALIGN_RIGHT or wx.Alignment.wxALIGN_BOTTOM, 2);
+  sizer_8.Add(btnFechar, 0, wx.Direction.wxALL or 
+    wx.Alignment.wxALIGN_RIGHT or wx.Alignment.wxALIGN_BOTTOM, 2);
+  sizer_6.Add(sizer_8, 0, wx.Direction.wxALL, 2);
+  sizer_1.Add(sizer_6, 0, wx.Alignment.wxALIGN_RIGHT or 
+    wx.Alignment.wxALIGN_BOTTOM, 0);
+  AutoLayout := true;
+  SetSizer(sizer_1);
+  sizer_1.Fit(self);
+  sizer_1.SetSizeHints(self);
+end;
+
+procedure TfrmVenderLivros.LimpaDados();
+begin
+  edtDtHrVenda.Value := Rotinas.retDataHoraStr(true, true);
+  edtCodigo.Clear();
+  edtDescricao.Clear();
+  edtISBN.Clear();
+  edtLivro.Clear();
+  lstLivros.Clear();
+  nPrecoTotal := 0;
+  edtPrecoTotal.Value := 'R$ 0,00';
+  edtCodigo.SetFocus();
+end;
+
+function TfrmVenderLivros.ValidaDados(): boolean;
+begin
+	result:=true;
+  if Rotinas.ValidaCampo(edtCodigo.Value, Res.STR_CPFNINF) then
+    result:=false;
+  if lstLivros.Count = 0 then begin
+    wx.MessageDialog.MessageBox(Res.STR_LIVVENNINF, 'Erro', 
+      wx.Dialog.wxOK or wx.Dialog.wxICON_ERROR);
+    result:=false;
+  end;
+end;
+
+function TfrmVenderLivros.SalvaLista(): boolean;
+var sCPF, sISBN, sPrecoTotal, sDataHora, sQtdEstoque, sDTHR: String;
+  nCont, nQtd, nQtdEstoque: integer;
+  Arquiva: OleDbCommand;
+begin
+  Arquiva := OleDbCommand.Create();
+  nQtd := lstLivros.Count;
+  sCPF := edtCodigo.Value;
+  sPrecoTotal := Convert.ToString(nPrecoTotal);
+
+  sDTHR := edtDtHrVenda.Value;
+  sDataHora := Rotinas.ConverteDataHoraStr(sDTHR,'MM/dd/YYYY hh:mm:ss');
+
+  for nCont:=0 to nQtd-1 do begin
+    sISBN := slISBNs[nCont].ToString();
+
+    Rotinas.AtualizaDados(Arquiva,
+      ConsSQL.Venda('I',sISBN, sCPF, sDataHora,
+      Rotinas.VirgulaParaPonto(sPrecoTotal,false),''));
+
+    nQtdEstoque := Int32.Parse(slQtdEstoque[nCont].ToString());
+    if nQtdEstoque >= 0 then
+      nQtdEstoque := nQtdEstoque - 1;
+    sQtdEstoque := Convert.ToString(nQtdEstoque);
+    Rotinas.AtualizaDados(Arquiva,
+      ConsSQL.Venda('U',sISBN, '','','', sQtdEstoque));
+  end;
+  result:=true;
+end;
+
+procedure TfrmVenderLivros.OnClose(sender: System.Object; e: wx.Event);
+begin
+  self.Parent.Close();
+	e.Skip();
+end;
+
+procedure TfrmVenderLivros.OnBtnFechar(sender: System.Object; e: wx.Event);
+begin
+  e.Skip();
+end;
+
+procedure TfrmVenderLivros.OnEdtCodigo_Killfocus(sender: System.Object; 
+  e: wx.Event);
+var sCliente: string;
+  ConsCampo: ArrayList;
+begin
+  ConsCampo := ArrayList.Create();
+
+  if Length(edtCodigo.Value) > 0 then begin
+    if Rotinas.ValidaCPF(edtCodigo.Value) then begin
+      sCliente := Rotinas.ConsultaCampoDesc(ConsCampo, 
+        ConsSQL.Cliente('S', edtCodigo.Value,
+        '','','','','','','','',''),Res.STR_CLINENC); 
+      if Length(sCliente) = 0 then begin
+        edtCodigo.Clear();
+        edtCodigo.SetFocus();
+      end else
+        edtDescricao.Value := sCliente;
+    end else begin
+      wx.MessageDialog.MessageBox(Res.STR_CPFINV, 'Erro', 
+        wx.Dialog.wxOK or wx.Dialog.wxICON_ERROR);
+      edtCodigo.Clear();
+      edtCodigo.SetFocus();
+    end;
+  end else
+    edtDescricao.Clear();
+end;
+
+procedure TfrmVenderLivros.OnBtnPCliente(sender: System.Object; e: wx.Event);
+var fConClientes: TfrmConClientes;
+begin
+  fConClientes := TfrmConClientes.Create(self);
+  fConClientes.ShowModal();
+  edtCodigo.Value := Rotinas.sCodigoSelecionado;
+  OnEdtCodigo_Killfocus(nil,nil);
+  e.Skip();
+end;
+
+procedure TfrmVenderLivros.OnEdtISBN_Killfocus(sender: System.Object; 
+  e: wx.Event);
+var sLivro: string;
+  nQtdEstoque: integer;
+  ConsCampo: ArrayList;
+begin
+  ConsCampo := ArrayList.Create;
+
+  if Length(edtISBN.Value) > 0 then begin
+    if Rotinas.ValidaISBN(edtISBN.Value) then begin
+      sLivro := Rotinas.ConsultaCampoDesc(ConsCampo,
+        ConsSQL.Livro('Q',edtISBN.Value,
+        '','','','','','','','',''),Res.STR_LIVNENC);
+      if Length(sLivro) = 0 then begin
+        edtISBN.Clear();
+      	edtISBN.SetFocus();
+      end else begin
+         edtLivro.Value := sLivro;
+         nQtdEstoque := Int32.Parse(ConsCampo[3].ToString());
+         if nQtdEstoque > 0 then begin
+           Rotinas.sPreco := ConsCampo[2].ToString();
+           Rotinas.sQtdEstoque := ConsCampo[3].ToString();
+         end else
+           wx.MessageDialog.MessageBox(Res.STR_LIVNEST, 'Erro',
+             wx.Dialog.wxOK or wx.Dialog.wxICON_ERROR);
+      end;
+    end else begin
+      wx.MessageDialog.MessageBox(Res.STR_ISBNINV, 'Erro',
+        wx.Dialog.wxOK or wx.Dialog.wxICON_ERROR);
+      edtISBN.Clear();
+      edtISBN.SetFocus();
+    end;
+  end else
+    edtLivro.Clear();
+end;
+
+procedure TfrmVenderLivros.OnBtnPLivro(sender: System.Object; e: wx.Event);
+var fConLivros: TfrmConLivros;
+begin
+  fConLivros := TfrmConLivros.Create(self);
+  fConLivros.ShowModal();
+  edtISBN.Value := Rotinas.sCodigoSelecionado;
+  OnEdtISBN_Killfocus(nil,nil);
+  e.Skip();
+end;
+
+procedure TfrmVenderLivros.OnBtnAdLivros(sender: System.Object; e: wx.Event);
+var nPreco: double;
+  sLivros, sISBN, sEdtLivro, sPrecoTotal: string;
+begin
+ sISBN := edtISBN.Value;
+ sEdtLivro := edtLivro.Value;
+ if Length(sISBN) > 0 then begin
+   sLivros := sISBN + ' - ' + sEdtLivro + ' - R$ ' + Rotinas.sPreco;
+   if Rotinas.PesquisaItemLista(lstLivros, sLivros) = -1 then begin
+     slISBNs.Add(sISBN);
+     slPrecos.Add(Rotinas.sPreco);
+     slQtdEstoque.Add(Rotinas.sQtdEstoque);
+     lstLivros.Append(sLivros);
+     nPreco := Convert.ToDouble(Rotinas.sPreco);
+     nPrecoTotal := nPrecoTotal + nPreco;
+   end;
+   edtISBN.Clear();
+   edtLivro.Clear();
+   sPrecoTotal := 'R$ ' + Convert.ToString(nPrecoTotal);
+   edtPrecoTotal.Value := Rotinas.VirgulaParaPonto(sPrecoTotal,true);
+ end;
+ e.Skip();
+end;
+
+procedure TfrmVenderLivros.OnLstLivros_Dblclk(sender: System.Object; 
+  e: wx.Event);
+var sPrecoTotal: string;
+  nPreco: double;
+  nSelIndice: integer;
+begin
+  if lstLivros.Count > 0 then begin
+    nSelIndice := lstLivros.Selection;
+    if lstLivros.Selected(nSelIndice) then begin
+      nPreco := Convert.ToDouble(slPrecos[nSelIndice].ToString());
+      nPrecoTotal := nPrecoTotal-nPreco;
+      sPrecoTotal := 'R$ ' + Convert.ToString(nPrecoTotal);
+      edtPrecoTotal.Value := Rotinas.VirgulaParaPonto(sPrecoTotal,true);
+      slISBNs.RemoveAt(nSelIndice);
+      slPrecos.RemoveAt(nSelIndice);
+      slQtdEstoque.RemoveAt(nSelIndice);
+      lstLivros.Delete(nSelIndice);
+    end;
+  end;
+  e.Skip();
+end;
+
+procedure TfrmVenderLivros.OnBtnVender(sender: System.Object; e: wx.Event);
+begin
+  if ValidaDados() then begin
+    if SalvaLista() then begin
+      wx.MessageDialog.MessageBox(Res.STR_VENRESUC,
+      Res.STR_TITULO, wx.Dialog.wxOK or wx.Dialog.wxICON_INFORMATION);
+      LimpaDados();
+    end;
+  end;
+  e.Skip();
+end;
+
+procedure TfrmVenderLivros.OnBtnLimpar(sender: System.Object; e: wx.Event);
+begin
+  LimpaDados();
+  e.Skip();
+end;
+
+end.

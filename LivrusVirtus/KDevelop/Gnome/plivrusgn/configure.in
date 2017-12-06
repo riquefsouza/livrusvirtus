@@ -1,0 +1,28 @@
+AC_INIT(configure.in)
+
+AM_CONFIG_HEADER(config.h)
+
+AM_INIT_AUTOMAKE(plivrusgn, 0.1)
+
+AM_MAINTAINER_MODE
+AM_CONDITIONAL(INSIDE_GNOME_COMMON, true)
+
+GNOME_COMMON_INIT
+GNOME_INIT
+
+AC_ISC_POSIX
+AC_PROG_CC
+AC_PROG_CPP
+AC_STDC_HEADERS
+AM_PROG_LIBTOOL
+
+dnl ## internationalization support
+dnl ALL_LINGUAS=""
+dnl AM_GNOME_GETTEXT
+
+AC_SUBST(CFLAGS)
+AC_SUBST(CPPFLAGS)
+AC_SUBST(LDFLAGS)
+
+AC_OUTPUT(Makefile macros/Makefile pixmaps/Makefile plivrusgn/Makefile)
+

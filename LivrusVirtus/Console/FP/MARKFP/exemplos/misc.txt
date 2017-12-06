@@ -1,0 +1,15 @@
+//  These are just miscellaneous functions to illustrate various things
+
+     (def lengths == @length)
+
+     (def silly == #57)
+     
+     (def plusall == /+)
+     
+     (def listify == [id])
+
+// These are from page 298 of Dershem & Jipping's textbook
+
+     (def moveleft == [apndr.[1,1.2],tl.2])
+     (def append == 1.(while not.null.2 moveleft))
+end

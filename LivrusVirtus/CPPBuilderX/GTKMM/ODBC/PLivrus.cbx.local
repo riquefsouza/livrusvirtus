@@ -1,0 +1,6 @@
+buildhistory.MinGW_g++compile[0]=Options
+buildhistory.MinGW_g++link[0]=Options
+buildhistory.MinGW_windres[0]=Options
+buildtool_history_project.MinGW[0]=g++compile
+debugger.gdbAssemblyFlavor[0]=ATT disassembly
+editor.search.file_filter_history.1[0]=*.cpp; *.c; *.cc; *.hpp; *.h; *.hh

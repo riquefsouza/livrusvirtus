@@ -1,0 +1,106 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 7
+Uses and interpretation of Prolog programs
+--------------------------------------------------------------------------------
+TOPICS:  reverse predicate as an example; functional interpretation,
+         yes/no questions, English paraphrases of rules
+--------------------------------------------------------------------------------
+
+There are many ways to view the arguments of a predicate.  Let us examine the 
+reverse predicate as an example:
+
+    reverse ([],[]).
+    reverse ([X|Tail],L) :- reverse(Tail,Tailrev), append(Tailrev,[X],L).
+
+One way to read this is:
+
+    The reverse of the empty list is just the empty list.
+    The reverse of a non-empty list K, which is composed of a Head followed
+        by a tail, is a list L, which is
+            the reverse of the tail of L appended to a list just consisting
+            of the head of L.
+
+In general, we could look at a predicate
+
+    reverse(A,B).
+
+as a function, where the reverse of list A is list B.  That is, we compute
+the reverse of list A and put it into list B.  But curiously enough, the
+reverse of list B happens to be list A, so who's to say that the first
+argument of a predicate is the input and the second is the output?  It turns
+out that defining one argument to be the input and the other to be the output
+is just one interpretation that may help us to reason out the rule that we
+need to write.
+
+By the way, there are two separate clauses that define what reverse is.
+This is an example of pattern matching.  When Prolog is asked to "compute"
+the reverse relation, it searches for the first rule with reverse at the
+head.  It finds 
+
+      reverse([],[]).
+
+and it looks to see if the first argument is nil.  If so, then this applies.
+Otherwise, it looks for another reverse rule, and thus it comes to the second
+rule:
+
+      reverse ([X|Tail],L) :- reverse(Tail,Tailrev), append(Tailrev,[X],L).
+
+Here it matches a non-empty list to [X|Tail], decomposing it into a head
+and a tail.  Thus, if we asked Prolog
+
+      ?- reverse([mark,sally,kathy,alfie],Z).
+
+It would match X=mark, Tail=[sally,kathy,alfie].  Then it would try to
+satisfy the antecedents:
+
+      reverse([sally,kathy,alfie],Tailrev), append(Tailrev,[mark],Z).
+
+As you can see, this is a recursive rule.  Let us imagine that the reverse
+goes off on its own and reverses [sally,kathy,alfie], returning
+[alfie,kathy,sally].  This is then bound to the logical variable Tailrev, 
+and the second antecedent uses this value to try to append this new list to 
+[mark].  That is, it then does
+
+      append([alfie,kathy,sally],[mark],Z)
+
+and because append is defined, it binds Z=[alfie,kathy,sally,mark].
+
+
+Note that you could also check if two lists are reverses of each other by
+not using any logical variables:
+
+     reverse([a,b,c],[c,b,a]).
+
+Prolog will print Yes for this, while:
+
+     reverse([a,b,c],[c,a,b]).
+
+causes No to be printed.
+
+
+Let us now look at append's definition and try to describe it in English:
+
+      append([],Z,Z).
+      append([A|X],Y,[A|Z]) :- append(X,Y,Z).
+
+The first rule says that if you append the empty list, [], pronounced "nil", 
+to any other list, you get that list.  Note that this works even if Z is 
+also [].
+
+The second rule says, failing to match the first possibility, the first
+argument must be a non-empty list decomposable into a head called A and
+a tail called X.  Then define another list Z to be what you get when you
+append X to Y.  If you then attach A, the head of the first list, onto Z,
+then you have appended the first two arguments to get the third.  Of course
+this relies upon the fact that if you keep taking the tail of the first
+argument, via recursive calls of append(X,Y,Z), you will eventually get
+[], and the first rule which is not recursive will "kick in."
+
+Let's rephrase the append rules once again, slightly differently:
+
+     If you append the empty list to any other list, you get that other list.
+     Otherwise, appending two lists can be accomplished by appending the
+     tail of one to the other, and then inserting the head of the first list
+     into this result.
+
+-------------------------------------------------------------------------------

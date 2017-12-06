@@ -1,0 +1,14 @@
+                        EXAMPLE PROGRAMS
++==============================================================
+$startmenu
+|Perl
+   dirmenu PROGLANGS/OTHERLANGS/EXAMPLES/PERL
+|Bc
+   dirmenu PROGLANGS/OTHERLANGS/EXAMPLES/BC
+|ML
+   dirmenu PROGLANGS/OTHERLANGS/EXAMPLES/ML
+|SETL
+   dirmenu PROGLANGS/OTHERLANGS/EXAMPLES/SETL
+$endmenu
++===============================================================
+

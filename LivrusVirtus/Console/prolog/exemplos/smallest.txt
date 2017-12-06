@@ -1,0 +1,5 @@
+smallest([X],X).    /* only one element?  Then the smallest is that one */
+
+smallest([H|T],H) :- smallest(T,Smallest_in_T), H =< Smallest_in_T.
+
+smallest([H|T],Smallest_in_T) :- smallest(T,Smallest_in_T), H > Smallest_in_T.

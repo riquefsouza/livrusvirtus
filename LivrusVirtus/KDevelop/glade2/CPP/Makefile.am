@@ -1,0 +1,62 @@
+# generated 2005/1/16 13:56:35 BRST by hfs@localhost.(none)
+# using glademm V1.1.2
+#
+# newer (non customized) versions of this file go to Makefile.am_new
+bin_PROGRAMS = plivrus
+
+plivrus_SOURCES = \
+	plivrus.cc\
+	frmPrincipal_glade.cc \
+	frmPrincipal.cc \
+	frmCadastros_glade.cc \
+	frmCadastros.cc \
+	frmConsultas_glade.cc \
+	frmConsultas.cc \
+	frmLogin_glade.cc \
+	frmLogin.cc \
+	frmSplash_glade.cc \
+	frmSplash.cc \
+	frmAlterarSenha_glade.cc \
+	frmAlterarSenha.cc \
+	frmSobre_glade.cc \
+	frmSobre.cc \
+	frmCadEnderecos_glade.cc \
+	frmCadEnderecos.cc \
+	frmCadClientes_glade.cc \
+	frmCadClientes.cc \
+	frmCadLivros_glade.cc \
+	frmCadLivros.cc \
+	frmVenderLivros_glade.cc \
+	frmVenderLivros.cc \
+	frmConVendas_glade.cc \
+	frmConVendas.cc 
+
+noinst_HEADERS = \
+	frmPrincipal_glade.hh \
+	frmPrincipal.hh \
+	frmCadastros_glade.hh \
+	frmCadastros.hh \
+	frmConsultas_glade.hh \
+	frmConsultas.hh \
+	frmLogin_glade.hh \
+	frmLogin.hh \
+	frmSplash_glade.hh \
+	frmSplash.hh \
+	frmAlterarSenha_glade.hh \
+	frmAlterarSenha.hh \
+	frmSobre_glade.hh \
+	frmSobre.hh \
+	frmCadEnderecos_glade.hh \
+	frmCadEnderecos.hh \
+	frmCadClientes_glade.hh \
+	frmCadClientes.hh \
+	frmCadLivros_glade.hh \
+	frmCadLivros.hh \
+	frmVenderLivros_glade.hh \
+	frmVenderLivros.hh \
+	frmConVendas_glade.hh \
+	frmConVendas.hh 
+
+CXXFLAGS = @CXXFLAGS@ @GTKMM_CFLAGS@
+
+plivrus_LDADD = @LIBS@ @GTKMM_LIBS@

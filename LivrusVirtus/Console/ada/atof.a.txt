@@ -1,0 +1,21 @@
+with text_io; use text_io;
+with strings; use strings;
+
+procedure main is 
+
+package io_float is new float_io (float);
+use io_float;
+
+     x : float;
+
+begin
+     x := atof ("-273.28378");
+     put (x, 6, 3, 0);
+     new_line;
+     x := atof ("-273.28378e12");
+     put (x);
+     new_line;
+     x := atof ("-273.28378e-12");
+     put (x);
+     new_line;
+end main;

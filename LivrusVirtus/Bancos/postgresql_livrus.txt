@@ -1,0 +1,128 @@
+--> Como criar no CygWin 
+cd ..
+ipc-daemon2 &
+initdb /var/livrus
+/usr/bin/postmaster -i -D /var/livrus ou
+/usr/bin/pg_ctl -D /var/livrus -l logfile start
+/usr/bin/pg_ctl -D /var/livrus stop
+
+--> Como criar no Linux
+su postgres
+createuser hfs
+exit
+createdb livrus ou dropdb livrus
+psql livrus
+copiar os create tables e os inserts com os dados
+
+
+CREATE TABLE public.assunto (
+  codassunto int2 NOT NULL DEFAULT 0::smallint,
+  assunto varchar(30) ,
+  CONSTRAINT assunto_pk PRIMARY KEY (codassunto)
+) WITH OIDS;
+
+CREATE TABLE public.autor (
+  codautor int2 NOT NULL DEFAULT 0::smallint,
+  autor varchar(30) ,
+  CONSTRAINT autor_pk PRIMARY KEY (codautor)
+) WITH OIDS;
+
+CREATE TABLE public.editora (
+  codeditora int2 NOT NULL DEFAULT 0::smallint,
+  editora varchar(50) ,
+  CONSTRAINT editora_pk PRIMARY KEY (codeditora)
+) WITH OIDS;
+
+CREATE TABLE public.endereco (
+  codendereco int4 NOT NULL DEFAULT 0,
+  logradouro varchar(40) ,
+  bairro varchar(15) ,
+  cep varchar(8) ,
+  cidade varchar(30) ,
+  estado varchar(20) ,
+  CONSTRAINT endereco_pk PRIMARY KEY (codendereco)
+) WITH OIDS;
+
+CREATE TABLE public.idioma (
+  codidioma int2 NOT NULL DEFAULT 0::smallint,
+  idioma varchar(20) ,
+  CONSTRAINT idioma_pk PRIMARY KEY (codidioma)
+) WITH OIDS;
+
+CREATE TABLE public.pais (
+  codpais char(3) NOT NULL DEFAULT ''::bpchar,
+  pais varchar(50) ,
+  CONSTRAINT pais_pk PRIMARY KEY (codpais)
+) WITH OIDS;
+
+CREATE TABLE public.profissao (
+  codprofissao int4 NOT NULL DEFAULT 0,
+  profissao varchar(50) ,
+  CONSTRAINT profissao_pk PRIMARY KEY (codprofissao)
+) WITH OIDS;
+
+CREATE TABLE public.cliente (
+  cpf varchar(14) NOT NULL DEFAULT ''::character varying,
+  email varchar(30) ,
+  nome varchar(30) ,
+  identidade varchar(10) ,
+  codendereco int4 NOT NULL DEFAULT 0,
+  telefone varchar(17) ,
+  codpais char(3) ,
+  codprofissao int4 ,
+  sexo char(1) ,
+  datanasc timestamp ,
+  CONSTRAINT cliente_pk PRIMARY KEY (cpf),
+  CONSTRAINT cliente_endereco_fk FOREIGN KEY (codendereco) REFERENCES endereco(codendereco),
+  CONSTRAINT cliente_pais_fk FOREIGN KEY (codpais) REFERENCES pais(codpais),
+  CONSTRAINT cliente_profissao_fk FOREIGN KEY (codprofissao) REFERENCES profissao(codprofissao)
+) WITH OIDS;
+
+CREATE TABLE public.livro (
+  isbn varchar(13) NOT NULL DEFAULT ''::character varying,
+  titulo varchar(50) ,
+  edicao int2,
+  anopubli int2,
+  codeditora int2,
+  volume int2,
+  codidioma int2,
+  npaginas int2,
+  preco float8,
+  qtdestoque int2,
+  CONSTRAINT livro_pk PRIMARY KEY (isbn),
+  CONSTRAINT livro_editora_fk FOREIGN KEY (codeditora) REFERENCES editora(codeditora),
+  CONSTRAINT livro_idioma_fk FOREIGN KEY (codidioma) REFERENCES idioma(codidioma)
+) WITH OIDS;
+
+CREATE TABLE public.livroass (
+  isbn varchar(13) NOT NULL DEFAULT ''::character varying,
+  codassunto int2 NOT NULL DEFAULT 0::smallint,
+  CONSTRAINT livroass_pk PRIMARY KEY (codassunto,isbn),
+  CONSTRAINT livroass_livro_fk FOREIGN KEY (isbn) REFERENCES livro(isbn),
+  CONSTRAINT livroass_assunto_fk FOREIGN KEY (codassunto) REFERENCES assunto(codassunto)
+) WITH OIDS;
+
+CREATE TABLE public.livroaut (
+  isbn varchar(13) NOT NULL DEFAULT ''::character varying,
+  codautor int2 NOT NULL DEFAULT 0::smallint,
+  CONSTRAINT livroaut_pk PRIMARY KEY (codautor,isbn),
+  CONSTRAINT livroaut_livro_fk FOREIGN KEY (isbn) REFERENCES livro(isbn),
+  CONSTRAINT livroaut_autor_fk FOREIGN KEY (codautor) REFERENCES autor(codautor)
+) WITH OIDS;
+
+CREATE TABLE public.usuario (
+  login varchar(10) NOT NULL DEFAULT ''::character varying,
+  senha varchar(10) ,
+  CONSTRAINT usuario_pk PRIMARY KEY (login)
+) WITH OIDS;
+
+CREATE TABLE public.venda (
+  isbn varchar(13) NOT NULL DEFAULT ''::character varying,
+  cpf varchar(14) NOT NULL DEFAULT ''::character varying,
+  datavenda timestamp NOT NULL,
+  precovenda float8,
+  CONSTRAINT venda_pk PRIMARY KEY (cpf,datavenda,isbn),
+  CONSTRAINT venda_livro_fk FOREIGN KEY (isbn) REFERENCES livro(isbn),
+  CONSTRAINT venda_cliente_fk FOREIGN KEY (cpf) REFERENCES cliente(cpf)
+) WITH OIDS;
+

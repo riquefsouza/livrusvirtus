@@ -1,0 +1,181 @@
+LISP Tutorial   by Mark Meyer
+Chapter 10
+Introduction to Recursion
+--------------------------------------------------------------------------------
+TOPICS:
+--------------------------------------------------------------------------------
+
+Recursion is a very common and important programming technique, one that is 
+used in most language, but especially heavily in LISP.  The heart of recursion 
+is to take a complicated problem, break it down into smaller pieces, and solve 
+each piece using the same function, then put the answers back together.
+
+Functional programming relies heavily on recursion to do implicit iteration.
+Explicit iteration, such as Ada's for loop, requires defining and using
+variables.  Changing the value of variables is considered a NO NO in the land
+of true functional programming.  But most functional and logical programming
+languages do permit explicit iteration in the form of loop constructs, 
+usually for convenience and sometimes for efficiency.  But if the language
+is truly a functional language, explicit iteration should never be necessary!
+You should be able to do everything by recursion, with explicit loops just
+being optional.  Scheme, a drastic version of LISP, doesn't have any built-in
+loops, but uses recursive functions solely.
+
+In this chapter, I will demonstrate a couple problems that can be solved
+by recursion.  I also give loop versions to illustrate the difference.
+
+In a recursive solution, the main trick is to reduce the current problem to 
+a smaller instance of the same problem.  When you get down to the smallest 
+instance, you are done.  Much recursion in LISP is based on lists, and the 
+smallest list is the empty list, or () or NIL.  So a lot of recursive LISP 
+functions chop off the head of the list, do something to it, and then call
+themselves on the rest of the list, until the list is nil.
+
+The first problem is very trivial.  Take in a list, add 1 to every element,
+and print out the element.  Note that even though "list" is the name of a
+built-in function, it is okay to use it as a parameter because the context
+of use makes it clear if we are referring to the parameter or the function.
+
+    (defun add1 (list)
+         (xif (null list)
+          then nil                      ; we are done, return nil
+          else (print (+ 1 (car list))) ; otherwise add 1 to first element
+               (add1 (cdr list))        ; and keep going
+         )
+    )
+
+Here's the same thing using explicit iteration:
+
+    (defun add1 (list)
+         (doloop (x list)
+              (print (+ 1 (car list)))
+         )
+    )
+
+While it looks like the version that uses doloop is shorter and easier
+to understand, in general iteration is much harder to use and get right
+than recursion.  This often happens because your task requires combining
+the results of earlier calculations, rather than the totally independent
+tasks in add1.
+
+To get the sum of a list of numbers, you might encode the following
+function:
+
+    (defun addup (list)
+         (setq sum 0)
+         (doloop (x list)
+              (setq sum (+ sum x))
+         )
+         sum
+    )
+
+The last "sum" all by itself merely requests that the variable "sum" be
+evaluated, and this value is then used as the final return value of addup.
+Note that we changed a global variable sum.  We really should have used a
+let statement to make sum be a local variable.  X is actually a local
+variable because the doloop creates a new local variable with the name you
+give it.
+
+    (defun addup (list)
+       (let (sum)            ; same as above, except sum is local
+         (setq sum 0)
+         (doloop (x list)
+              (setq sum (+ sum x))
+         )
+         sum
+       )
+    )
+
+Let us analyze this task recursively:
+
+    1.  If the list has no elements, return 0.
+    2.  Otherwise, add the first element to the result you get
+            from applying this function to the rest of the list.
+
+Let's encode it:
+
+    (defun addup (list)
+        (xif (null list)
+         then 0
+         else (+ (car list) (addup (cdr list)))
+        )
+    )
+
+Here's a recursive function that takes in a list and a value to find
+in the list.  If it finds the value, it returns t, otherwise nil.
+This is very much like the built-in member function that tells if 
+some item is a member of a list.  Our function has two arguments:
+the value to search for and the list of values.  Each recursive call
+will pass the same value to search for, but a smaller list of values:
+Here's the outline:
+
+    1.  If the list has no elements, the value cannot be in it 
+        so return nil.
+    2.  Otherwise, if the value is equal to the first element in the
+        list, return t.  If not equal, then it might be in the rest
+        of the list, so search that.
+
+    (defun search (value list)
+         (xif (null list)
+          then nil
+          elsif (equal value (car list))
+          then t
+          else (search value (cdr list))
+         )
+    )
+
+Sometimes you have to advance two elements in the list at a time in the
+recursive step, rather than just one, especially if the structure of the
+list consists of conceptual clumps bigger than just one item.
+
+Here's an example.  Suppose that you have a list of numbers that are 
+interspersed with + and - signs and you have to come up with the value 
+formed by applying the addition and subtraction operators to the numbers.
+Here's an example input list:
+
+        (5 + 4 - 2 + 8 - 6 - 1 + 9)
+
+Each pair of values, separated by operator symbol, is a "chunk" that
+you have to take off.  Here's our strategy.  For simplicity, we
+will assume that our expressions are well-formed and have only + and
+- signs in the right places.
+
+     1.  If the list consists of just one element, then return that
+         element.  It should be a number, and in fact it will be the
+         last number.
+     2.  Else take off the first and second things in the list.  
+         Check the second thing to find out if it is + or -, and
+         apply the appropriate function to the first thing and the
+         value returned by a recursive call to the rest of the list.
+
+Here's the same thing, only in LISP:
+
+    (defun evaluate (list)
+         (xif (= 1 (length list))
+          then (car list)
+          else (case (second list)
+                  (+ (+ (first list) (evaluate (cdr (cdr list)))))
+                  (- (- (first list) (evaluate (cdr (cdr list)))))
+               )
+         )
+    )
+
+Note that we had to take the cdr of the cdr of the list to get the
+smaller version of the list because we have to take off the leading
+value followed by the operator, which is two items from the list.
+(A built-in function called "nthcdr" could be useful at times like
+this.)
+
+Our solution has the peculiar property that it really evaluates
+the expression from right to left, although that does not cause prob-
+lems with only + and -.  But for * and /, it would not work because
+the order of operations is important.  
+
+One way to do left to right evaluation by recursion would be to
+basically use the function above, but to reverse the list before you
+call evaluate.  Then, you have to be careful of the minus sign, since
+subtraction is not commutative.  That can be handled by reversing the
+order of evaluation inside the new evaluate function:
+
+                  (+ (+ (evaluate (cdr (cdr list))) (first list)))
+--------------------------------------------------------------------------------

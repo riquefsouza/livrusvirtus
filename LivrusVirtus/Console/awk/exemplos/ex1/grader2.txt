@@ -1,0 +1,35 @@
+#
+#  This is a second attempt at a grader program
+#  It determines which field is the first test score by looking for
+#  a numeric field.  Thus it can accomodate students who have names with
+#  or without middle initials, or who have only one name like "Cher", or
+#  those with several middle names.
+#
+
+BEGIN {for (i=1; i<=4; i++)
+            test_totals[i] = 0
+       count = 0
+      }
+
+/^$/  {next}        # ignore blank lines
+
+{
+    for (i=2; i<=NF; i++)
+         if ($i ~ /[0-9]+/) {
+             start = i
+             break
+         }
+
+    count++
+
+    j = 1
+    for (i=start; i<=NF; i++) {
+         if ($i < 0 || $i > 100)
+              printf ("Better check out test %d in line %d\n", i, NR)
+         test_totals[j++] += $i
+    }
+}
+
+END   {for (i=1; i<=4; i++)
+           printf "Test %d average = %7.2f\n", i, test_totals[i]/count
+      }

@@ -1,0 +1,34 @@
+DEFINITION MODULE Rotinas;
+
+FROM StdStrings IMPORT String;
+
+CONST
+  MSG_NUMINV = 'Número inválido ou menor do que 1!';
+  MSG_DATAINV = 'Data inválida!, formato correto (dd/mm/yyyy)';
+  MSG_DTHRINV = 'Data/hora inválida!, formato correto (dd/mm/yyyy hh:mm:ss)'; 
+
+VAR
+ stemp: ARRAY[0..10] OF String;
+
+(*--- Rotinas básicas -------------------------------------------------------*)
+
+PROCEDURE WriteLinha(sTexto: ARRAY OF CHAR);
+PROCEDURE ReadLinha(VAR sTexto: ARRAY OF CHAR);
+PROCEDURE Ss(str1,str2:ARRAY OF CHAR):String;
+PROCEDURE SomaStr(num: CARDINAL; strs: ARRAY  OF String): String;
+PROCEDURE copy(str: String; ini,tam: CARDINAL): String;
+PROCEDURE trim(sTexto: String): String;
+PROCEDURE repete(sTexto: String; nQtd: INTEGER): String;
+PROCEDURE esp(sTexto: String; nTam: CARDINAL):String;
+PROCEDURE zeros(stexto:String; ntam: CARDINAL): String;
+PROCEDURE strRelativa(sTexto, sChave: String):BOOLEAN;
+PROCEDURE modulo11(svalor: String; ndig: INTEGER):INTEGER;
+PROCEDURE validaCPF(cpf: String): BOOLEAN;
+PROCEDURE validaISBN(isbn: String): BOOLEAN;
+PROCEDURE digitaSenha(sRotulo: String; nTamSenha: INTEGER): String;
+PROCEDURE validaNumero(sRotulo, sNumero: String): String;
+PROCEDURE validaDataHora(sRotulo, sDataHora: String;
+         bSoData: BOOLEAN): String;
+PROCEDURE retDataHora(): String; 
+
+END Rotinas.

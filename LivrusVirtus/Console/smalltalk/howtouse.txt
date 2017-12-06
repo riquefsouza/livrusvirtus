@@ -1,0 +1,163 @@
+                     How to use GNU Smalltalk
+                     ------------------------
+
+GNU Smalltalk may be invoked via the following command:
+
+     mst [ flags ... ] [ file ... ]
+
+Please be patient!  Smalltalk takes approximately 18 seconds to load
+and begin.
+
+When you first invoke GNU Smalltalk, it will attempt to see if any of
+the kernel method definition files are newer than the last saved binary
+image in the current directory (if there is one).  If there is a newer
+kernel method definition file, or if the binary image file (called
+mst.im) does not exist, a new binary image will be built by
+loading in all the kernel method definition files, performing a full
+garbage collection in order to compact the space in use, and then saving
+the resulting data in a position independent format.  Your first
+invocation should look something like this:
+
+     "GC flipping to space 1...copied space = 100.0%...done"
+     Smalltalk 1.1.1 Ready
+
+     st> 
+
+If you specify file, that file will be read and executed and
+Smalltalk will exit when end of file is reached.  If you specify more
+than one file, each will be read and processed in turn. If you don't
+specify file, standard input is read, and if the standard input is
+a terminal, a prompt is issued.  You may specify - or --
+for the name of a file to invoke an explicit read from standard input.
+
+The flags may be specified one at a time, or in a group.  A flag or a
+group of flags always starts off with a dash to indicate that what
+follows is a flag or set of flags instead of a file name.  In the
+current implementation the flags can be intermixed with file names, but
+their effect is as if they were all specified first.
+The various flags are interpreted as follows:
+
+-c
+     When this flag is set and a fatal signal occurs, a core dump is produced
+     after an error message is printed and the stack has been backtraced.
+     Normally, the backtrace is produced and the system terminates without
+     dumping core.
+
+-d
+     Declaration tracing...prints the class name, the method name, and the 
+     byte codes that the compiler is generating as it compiles methods.  Only 
+     for files that are named explicitly on the command line; kernel files
+     that are loaded automatically as part of rebuilding the image file do
+     not have their declarations traced.
+
+-D
+     Like the -d flag, but also includes declarations processed for the
+     kernel files.
+
+-e
+     Prints the byte codes being executed as the interpreter operates.  Only
+     works for those executions that occur after the kernel files have been
+     loaded and the image file dumped.
+
+-E
+     Like the -e flag, but includes all byte codes executed, whether they
+     occur during the loading of the kernel method definition files, or
+     during the loading and execution of user files.
+
+-h or -H
+     Prints out a brief summary of the command line syntax of GNU Smalltalk,
+     including the definitions of all of the option flags, and then exits.
+
+-i
+     Ignore the saved image file; always load from the kernel method definition
+     files.  Setting this flag bypasses the normal checks for kernel files
+     newer than the image file, or the image file's version stamp out of date
+     with respect to the Smalltalk version.  After the kernel definitions
+     have been loaded, a new image file will be saved.
+
+-I file
+     Use the image file named file as the image file to load.  Completely
+     bypasses checking the file dates on the kernel files and standard
+     image file.
+
+-p
+     This flag is typically not used by the user; it is for the Smalltalk 
+     interactor mode within GNU Emacs (see st.el).
+
+-q
+     Suppress the printing of execution information while GNU Smalltalk
+     runs.  Messages about the beginning of execution or how many byte codes
+     were executed are completely suppressed when this flag is set.
+
+-r
+     Disables certain informative I/O; this is used by the regression
+     testing system and is probably not of interest to the general user.
+
+-v
+     Prints out the Smalltalk version number.  Has no other effect on execution.
+
+-V
+     Enables verbose mode.  When verbose mode is on, various diagnostic
+     messages are printed, such as the name of each file as it's loaded.
+
+-y
+     Turns on parser debugging.  Not typically used.
+
+
+Startup, Syntax, Command line, Invocation
+=========================================
+
+Startup sequence
+
+When GNU Smalltalk is invoked, it tries to find the saved binary image
+file.  If this is found, it compares the write dates of all of the
+kernel method definition files against the write date of the binary
+image file.  If any of the kernel files are newer, or if the image file
+cannot be found, or if the -i flag is set, the image file is
+ignored, all of the kernel method definition files are loaded and then
+the binary image file is saved.
+
+Smalltalk first looks for the saved image file, called mst.im in
+the current directory, to allow for overriding the system default image
+file.  If that doesn't exist, it checks the SMALLTALK_IMAGE environment
+variable, and if that's defined, it tries to find the image file in the
+directory given by SMALLTALK_IMAGE, which again allows individual users
+to override the system default location for the image file.  If
+SMALLTALK_IMAGE is not defined, Smalltalk will use the definition of
+IMAGE_PATH, as defined in mstpaths.h, which is compiled in when
+the Smalltalk system is first built.
+
+In a similar fashion, Smalltalk looks for each of the kernel method
+definition files in the current directory, to allow for explicit
+overriding of the installed method definition files.  If they cannot be
+found in the current directory, and the SMALLTALK_KERNEL environment
+variable is defined, the directory that environment variable refers to
+is examined for the kernel file(s), which again allows individual users
+to override the system default location for kernel files.  If
+SMALLTALK_KERNEL is not defined, Smalltalk uses the definition of
+KERNEL_PATH, which is also defined in mstpaths.h and compiled
+into the system.
+
+Even if the image file is more recent than all the kernel definition
+files, if the version of Smalltalk that created the image file is
+different from the one that's trying to load it, or if the size of the
+OOP table is different between image save time and image load time, 
+or if the -I flag is specified, the image file will be ignored.
+
+The set of files that make up the kernel method definitions can be found
+in mstmain.c, in the standardFiles variable.  Each file is
+loaded in turn.  Once they have all been loaded, a full garbage
+collection is performed, and the entire contents of the object table and
+object memory are dumped to a file called mst.im in the current
+directory. 
+
+At this point, independent of whether the binary image file was loaded
+or created, any blocks that were marked as init blocks are invoked (in 
+the order of their declaration).
+
+After the init blocks have been executed, the user initialization file
+(if any) is loaded.
+
+Finally, if there were any files specified on the command line, they are
+loaded, otherwise standard input is read and executed until an EOF is
+detected.

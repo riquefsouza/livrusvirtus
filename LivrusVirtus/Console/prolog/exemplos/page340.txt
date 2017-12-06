@@ -1,0 +1,25 @@
+/*
+    This is taken from page 340 of "Programming Languages" by
+    Dershem and Jipping.
+*/
+
+spec(mach1,ibmpc,320).
+spec(mach2,mac,1000).
+spec(mach3,ibmpc,640).
+
+runs(ibmpc,spreadsheet,500).
+runs(ibmpc,basic,128).
+runs(ibmpc,pascal,256).
+runs(mac,basic,200).
+runs(mac,smalltalk,1000).
+
+access(sue,mach1).
+access(jerry,mach3).
+access(sam,mach1).
+access(sam,mach2).
+
+written_in(spreadsheet,pascal).
+
+can_use(P,Sw) :- access(P,Mach), can_run(Mach,Sw).
+can_run(Mach,Sw) :- spec(Mach,Hw,Mem1), runs(Hw,Sw,Mem2), Mem1 >= Mem2.
+can_run(Mach,Sw) :- written_in(Sw,L), can_run(M,L).

@@ -1,0 +1,17 @@
+with text_io; use text_io;
+with strings; use strings;
+
+
+procedure main is
+
+     package io_int is new integer_io (integer);
+     use io_int;
+
+     st1, st2 : string(1..50);
+     line : string(1..80);
+     word : string(1..25);
+
+begin
+     put (strlen("abc"));
+     put (strlen("   abc"));
+end main;

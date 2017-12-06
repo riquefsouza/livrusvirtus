@@ -1,0 +1,146 @@
+set server server1;
+
+create database livrus;
+
+connect livrus;
+
+use livrus;
+
+select * from systables where type='T' and system='N';
+
+CREATE TABLE assunto (
+  codassunto smallint NOT NULL WITH DEFAULT,
+  assunto varchar(30) ,
+  PRIMARY KEY (codassunto)
+);
+
+CREATE UNIQUE INDEX assunto_pk on assunto(codassunto);
+
+CREATE TABLE autor (
+  codautor smallint NOT NULL WITH DEFAULT ,
+  autor varchar(30) ,
+  PRIMARY KEY (codautor)
+);
+
+CREATE UNIQUE INDEX autor_pk on autor(codautor);
+
+CREATE TABLE editora (
+  codeditora smallint NOT NULL WITH DEFAULT ,
+  editora varchar(50) ,
+  PRIMARY KEY (codeditora)
+);
+
+CREATE UNIQUE INDEX editora_pk on editora(codeditora);
+
+CREATE TABLE endereco (
+  codendereco integer NOT NULL WITH DEFAULT ,
+  logradouro varchar(40) ,
+  bairro varchar(15) ,
+  cep varchar(8) ,
+  cidade varchar(30) ,
+  estado varchar(20) ,
+  PRIMARY KEY (codendereco)
+);
+
+CREATE UNIQUE INDEX endereco_pk on endereco(codendereco);
+
+CREATE TABLE idioma (
+  codidioma smallint NOT NULL WITH DEFAULT ,
+  idioma varchar(20) ,
+  PRIMARY KEY (codidioma)
+);
+
+CREATE UNIQUE INDEX idioma_pk on idioma(codidioma);
+
+CREATE TABLE pais (
+  codpais char(3)  NOT NULL WITH DEFAULT,
+  pais varchar(50) ,
+  PRIMARY KEY (codpais)
+);
+
+CREATE UNIQUE INDEX pais_pk on pais(codpais);
+
+CREATE TABLE profissao (
+  codprofissao integer NOT NULL WITH DEFAULT ,
+  profissao varchar(50) ,
+  PRIMARY KEY (codprofissao)
+);
+
+CREATE UNIQUE INDEX profissao_pk on profissao(codprofissao);
+
+CREATE TABLE cliente (
+  cpf varchar(14) NOT NULL WITH DEFAULT,
+  email varchar(30) ,
+  nome varchar(30) ,
+  identidade varchar(10) ,
+  codendereco integer NOT NULL WITH DEFAULT ,
+  telefone varchar(17) ,
+  codpais char(3) ,
+  codprofissao integer ,
+  sexo char(1) ,
+  datanasc timestamp ,
+  PRIMARY KEY (cpf),
+  FOREIGN KEY cli_ende(codendereco) REFERENCES endereco,
+  FOREIGN KEY cli_pais(codpais) REFERENCES pais,
+  FOREIGN KEY cli_prof(codprofissao) REFERENCES profissao
+);
+
+CREATE UNIQUE INDEX cliente_pk on cliente(cpf);
+
+CREATE TABLE livro (
+  isbn varchar(13) NOT NULL WITH DEFAULT,
+  titulo varchar(50) ,
+  edicao smallint,
+  anopubli smallint,
+  codeditora smallint,
+  volume smallint,
+  codidioma smallint,
+  npaginas smallint,
+  preco float ,
+  qtdestoque smallint,
+  PRIMARY KEY (isbn),
+  FOREIGN KEY liv_edit(codeditora) REFERENCES editora,
+  FOREIGN KEY liv_idio(codidioma) REFERENCES idioma
+);
+
+CREATE UNIQUE INDEX livro_pk on livro(isbn);
+
+CREATE TABLE livroass (
+  isbn varchar(13) NOT NULL WITH DEFAULT,
+  codassunto smallint NOT NULL WITH DEFAULT,
+  PRIMARY KEY (codassunto,isbn),
+  FOREIGN KEY lass_liv(isbn) REFERENCES livro,
+  FOREIGN KEY lass_ass(codassunto) REFERENCES assunto
+);
+
+CREATE UNIQUE INDEX livroass_pk on livroass(codassunto,isbn);
+
+CREATE TABLE livroaut (
+  isbn varchar(13)  NOT NULL WITH DEFAULT,
+  codautor smallint NOT NULL WITH DEFAULT,
+  PRIMARY KEY (codautor,isbn),
+  FOREIGN KEY laut_liv(isbn) REFERENCES livro,
+  FOREIGN KEY laut_aut(codautor) REFERENCES autor
+);
+
+CREATE UNIQUE INDEX livroaut_pk on livroaut(codautor,isbn);
+
+CREATE TABLE usuario (
+  login varchar(10)  NOT NULL WITH DEFAULT,
+  senha varchar(10) ,
+  PRIMARY KEY (login)
+);
+
+CREATE UNIQUE INDEX usuario_pk on usuario(login);
+
+CREATE TABLE venda (
+  isbn varchar(13) NOT NULL WITH DEFAULT,
+  cpf varchar(14) NOT NULL WITH DEFAULT,
+  datavenda timestamp NOT NULL,
+  precovenda float ,
+  PRIMARY KEY (cpf,datavenda,isbn),
+  FOREIGN KEY ven_liv(isbn) REFERENCES livro,
+  FOREIGN KEY ven_cli(cpf) REFERENCES cliente
+);
+
+CREATE UNIQUE INDEX venda_pk on venda(cpf,datavenda,isbn);

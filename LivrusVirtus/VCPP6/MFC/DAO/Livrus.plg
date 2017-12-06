@@ -1,0 +1,137 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Livrus - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x416 /fo"Debug/Livrus.res" /d "_DEBUG" "C:\LivrusVirtus\VCPP6\MFC\DAO\Livrus.rc"" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP1E.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/Livrus.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\LivrusVirtus\VCPP6\MFC\DAO\AlterarSenha.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\CadAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\Cadastros.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\CadAutores.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\CadClientes.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\CadEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\CadEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\CadIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\CadLivros.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\CadPaises.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\CadProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConAutores.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConClientes.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConLivros.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConPaises.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\Consultas.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConsultasSQL.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\ConVendas.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\Filha.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\Livrus.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\Login.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\Principal.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\RotinasGlobais.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\Sobre.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\Splash.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\DAO\VenderLivros.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP1E.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP1F.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/Livrus.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\LivrusVirtus\VCPP6\MFC\DAO\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP1F.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP20.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/Livrus.pdb" /debug /machine:I386 /out:"Debug/Livrus.exe" /pdbtype:sept 
+.\Debug\AlterarSenha.obj
+.\Debug\CadAssuntos.obj
+.\Debug\Cadastros.obj
+.\Debug\CadAutores.obj
+.\Debug\CadClientes.obj
+.\Debug\CadEditoras.obj
+.\Debug\CadEnderecos.obj
+.\Debug\CadIdiomas.obj
+.\Debug\CadLivros.obj
+.\Debug\CadPaises.obj
+.\Debug\CadProfissoes.obj
+.\Debug\ConAssuntos.obj
+.\Debug\ConAutores.obj
+.\Debug\ConClientes.obj
+.\Debug\ConEditoras.obj
+.\Debug\ConEnderecos.obj
+.\Debug\ConIdiomas.obj
+.\Debug\ConLivros.obj
+.\Debug\ConPaises.obj
+.\Debug\ConProfissoes.obj
+.\Debug\Consultas.obj
+.\Debug\ConsultasSQL.obj
+.\Debug\ConVendas.obj
+.\Debug\Filha.obj
+.\Debug\Livrus.obj
+.\Debug\Login.obj
+.\Debug\Principal.obj
+.\Debug\RotinasGlobais.obj
+.\Debug\Sobre.obj
+.\Debug\Splash.obj
+.\Debug\StdAfx.obj
+.\Debug\VenderLivros.obj
+.\Debug\Livrus.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP20.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+AlterarSenha.cpp
+CadAssuntos.cpp
+Cadastros.cpp
+CadAutores.cpp
+CadClientes.cpp
+CadEditoras.cpp
+CadEnderecos.cpp
+CadIdiomas.cpp
+CadLivros.cpp
+CadPaises.cpp
+CadProfissoes.cpp
+ConAssuntos.cpp
+ConAutores.cpp
+ConClientes.cpp
+ConEditoras.cpp
+ConEnderecos.cpp
+ConIdiomas.cpp
+ConLivros.cpp
+ConPaises.cpp
+ConProfissoes.cpp
+Generating Code...
+Compiling...
+Consultas.cpp
+ConsultasSQL.cpp
+ConVendas.cpp
+Filha.cpp
+Livrus.cpp
+Login.cpp
+Principal.cpp
+RotinasGlobais.cpp
+Sobre.cpp
+Splash.cpp
+VenderLivros.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+Livrus.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

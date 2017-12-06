@@ -1,0 +1,347 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 10
+Rule matching
+--------------------------------------------------------------------------------
+TOPICS:  Order of rule satisfaction, special exception facts, goalsets,
+         backtracking
+--------------------------------------------------------------------------------
+
+In chapter 8 we discussed pattern matching and mentioned how Prolog tries to
+answer a query by attempting to match your query against all its facts, starting
+with the first in its database.
+
+What happens when it comes to a rule?  A rule is more complicated than a simple
+fact because it says that the LHS (left hand side) is true if the RHS (right
+hand side) is true.  Thus, the truth of the LHS depends on the truth of the
+RHS.  Let's look at a simple example:
+
+Here is a Prolog program, which is really just a database of facts and rules:
+
+     flies(robin).
+     hasfeathers(robin).
+     hasfeathers(ostrich).
+     bird(X) :- flies(X), hasfeathers(X).
+
+The rule says that if it flies and has feathers, then it is a bird.  (Note very
+carefully that it does say, or imply, the converse, which would be
+
+    "if it is a bird, then it flies and has feathers."
+)
+
+Suppose we ask Prolog:
+
+     ?- bird(robin).
+
+which amounts to asking "Is a Robin a bird?"  Prolog attempts to find the fact
+bird(robin), but fails.  However, it does find bird(X), and by the rules of
+pattern matching, these match and {X = robin}.  However, there's a catch!  Since
+it matched only the LHS of the rule, Prolog cannot declare that bird(robin) is
+true until it can prove true all the things on the right hand side of the rule.
+
+First of all, it substitutes {X = robin} throughout the rule, because after all
+it would make so sense to say that a robin is a bird if an eagle flies and an
+ostrich has feathers!  Thus, it replaces bird(robin) with
+
+     flies(robin), hasfeathers(robin)
+
+and it attempts to find these facts, which it does.  Therefore, both things on
+the RHS of the rule were true, so the LHS is true, and bird(robin) is true.
+
+Now what happens when we ask?
+
+     ?- bird(ostrich).
+
+Again, there is no bald fact that bird(ostrich) is true, but there is that rule
+about birds, so Prolog attempts to prove the rule true.  This time, it uses the
+substitution set {X = ostrich} and it replaces its original "goal"
+
+      bird(ostrich)
+
+by
+
+      flies(ostrich), hasfeathers(ostrich)
+
+Prolog, being only human, has to choose some ordering to its work, so it always
+starts at the "left" end of its goal list and tries to prove that true before
+continuing down the list.  In this case, it fails to find flies(ostrich), so
+bird(ostrich) must be false.  Notice that even though hasfeathers(ostrich) is
+true, Prolog never finds that because that goal comes second, and it doesn't
+matter anyway, because if X can't fly, then, by definition, it is not a bird.
+
+Now this is a pretty narrow-minded view of birds!  In the "real world" some 
+birds fly, but some only swim, and some only walk or run.  In fact, some do
+all three like ducks!  Some fish even fly, and a few, like certain weird
+catfish, can walk on dry land.  We would get totally bogged down if we tried
+to encode into Prolog the exact rules that make scientists think that some
+animals are birds, while others aren't.
+
+Therefore, we resort to just adding special facts, like:
+
+      bird(ostrich).
+      bird(penguin).
+
+which short-circuits the rule.  Here's our final database:
+
+     flies(robin).
+     hasfeathers(robin).
+     hasfeathers(ostrich).
+     bird(X) :- flies(X), hasfeathers(X).
+     bird(ostrich).
+     bird(penguin).
+
+Now when we ask 
+
+     ?- bird(ostrich).
+
+Prolog will hit the bird rule first, and then fail.  But it doesn't give up.
+Instead, it proceeds on to the next line and voila!  there is a convenient
+little fact that bird(ostrich) is true.
+
+It doesn't matter logically if you put the special exception facts before or 
+after the general purpose rule, but to save Prolog's time, it is better to 
+put the special exception facts first in order to prevent Prolog from trying
+to solve a rule that it cannot:
+
+  1  flies(robin).
+  2  hasfeathers(robin).
+  3  hasfeathers(ostrich).
+  4  bird(ostrich).
+  5  bird(penguin).
+  6  bird(X) :- flies(X), hasfeathers(X).
+
+Note that the solution to a RHS of a rule may involve checking other rules.
+Here are some more facts and rules, telling what an animal is:
+
+  7  fish(X) :- swims(X), hasscales(X).
+  8  mammal(X) :- hasfur(X), sucklesyoung(X).
+  9  animal(X) :- fish(X).
+ 10  animal(X) :- bird(X).
+ 11  animal(X) :- mammal(X).
+ 12  animal(X) :- canmove(X).
+ 13  plant(tree).
+ 14  plant(flower).
+ 15  canmove(amoeba).
+
+This database says a lot more; it tries to define what an animal is by saying
+that all birds, fish and mammals are animals, and if it can move then it is
+an animal, ignoring such carnivorous plants as mimosa and Venus fly trap!
+
+Note what happens when we ask if a robin is an animal.  We will present it in
+terms of the current goal set and the numbered rules above.
+
+     ?- animal(robin).
+
+This sets up the goal set as
+
+     { animal(robin) }
+
+and Prolog finds rule 9, and attempts first to show that robin is a fish:
+
+     { fish(robin) }
+
+which requires
+
+     { swims(robin), hasscales(robin) }
+
+This fails, because robin cannot swim, we go back one step and try to find some
+other way to prove robin is a fish.  But we cannot, so we go back to 
+animal(robin), and try rule 10.  This is called "backtracking" because we are
+going back over our previous tracks and taking the other "fork in the road."
+
+Now we try rule 10 and get
+
+     { bird(robin) }
+
+and we know from above that this is true, although it requires Prolog to go
+through a lot of shenanigans with its goal set.  Let's continue, just for the
+sake of illustration.
+
+bird(robin) would work if we could use fact 4 or 5, but we cannot, so we back-
+track and try rule 6.  This replaces bird(robin) in our goalset with
+
+     { flies(robin), hasfeathers(robin) }
+
+We pick flies(robin), just because it is first, and attempt to match it against
+our database.  Sure enough, it is true.  When we find a true fact, we actually
+remove it from our goalset, because it is already true.  Now we have:
+
+     { hasfeathers(robin) }
+
+and likewise we can prove this true, getting an empty goalset:
+
+     { }
+
+Whenever we have an empty goalset, we have proved that the query was true.
+In addition to announcing that the user's question was true in this universe,
+we print out the variable bindings that cropped up in our substitution set
+while we were matching.  This is how Prolog comes up with those lists of 
+var = value that we use as part of the "answer" to our computational question.
+
+As you can see, Prolog goes through an enormously tedious series of steps, 
+but then so does every program.
+
+
+Let's look at another example of backtracking, involving variables.  Here's
+out database that describes some "fishy" facts:
+
+ 1   liveinsea(X) :- fish(X).    /* If it is a fish, then it lives in the sea*/
+ 2   fish(X) :- cod(X).          /* All cods are fish */
+ 3   fish(X) :- mackerel(X).     /* ... and so are mackerel! */
+ 4   liveinsea(X) :- whale(X).   /* Whales live in the sea (even though they are
+                                    not fish. */
+ 5   cod(homer).                 /* Homer is the name of a cod (not a cad) */
+ 6   whale(willie).              /* and Willie is a whale. */
+
+[ ASIDE: Please note what these rules really say, for it is all too easy to
+         get confused by the weird ordering.  For example,
+
+             liveinsea(X) :- whale(X).
+
+         reads "X lives in the sea IF X is a whale."  Or you could turn this
+         around to read, "IF X is a whale, then X lives in the sea."   From
+         there we get "Whales live in the sea."  This does not imply that 
+         if it lives in the sea then it is a whale!  That would be a whale of
+         a mistake!
+ENDofASIDE ]
+
+Let's follow what happens when we ask
+
+    ?- liveinsea(willie).
+
+First, it puts this in the goal set and tries to match it with some fact, which
+it cannot do.
+
+    Goalset = { liveinsea(willie) }     
+
+Thus, it finds rule 1 which says that if you can prove willie is a fish, then
+you can prove willie lives in the sea.  Well, we humans can easily see this is a
+dead end, but the computer blindly follows the trail.  It first instantiates
+the rule
+
+     liveinsea(X) :- fish(X)
+     liveinsea(willie) :- fish(willie)      { X = willie }
+
+and then replaces the goalset with fish(willie).
+
+    Goalset = { fish(willie) }     
+
+It tries to prove this and hits rule 2, so it instantiates that rule and its
+variables.  NOTICE carefully that when you start a new rule, you rename all the
+variables in the rule so that you are always working with unique variable names.
+This keeps the variables from getting mixed up, even when the same variable is
+used in different rules.
+
+For example, the X in rule 1 has nothing to do with the X in rule 2, and in fact
+Prolog renames them to some number preceded by an underscore:
+
+ 1   liveinsea(_0) :- fish(_0).
+ 2   fish(_1) :- cod(_1).
+ 3   fish(_2) :- mackerel(_2).
+
+Thus, all the X's in the same rule mean the same thing, but any X's in different
+rules are completely different variables.
+
+Now that we have that cleared up, let's continue.  We need to try rule 2 and see
+if willie is a cod:
+
+    Goalset = { cod(willie) }
+
+But this fails.  So we backup to our previous goalset, the one that asks about
+willie being a fish, and try any other rule that defines what is a fish.  Rule
+3 leaps out of the water at us, and if we can show that willie is a mackerel,
+then willie is a fish.  But, holy mackerel!  (Boy Wonder speaking...) there are
+no mackerels in our database!  So willie can't be a mackerel, hence not a fish,
+either.
+
+Thus, the goalset about willie being a fish fails, and we go all the way back to
+
+    Goalset = { liveinsea(willie) }     
+
+Is there any other rule that defines what lives in the sea?  Yes, rule 4 says
+that if willie is a whale, then willie lives in the sea, so we try that:
+
+    liveinsea(X) :- whale(X).
+    liveinsea(willie) :- whale(willie)  { X = willie }
+
+and we replace our goalset with 
+
+    Goalset = { whale(willie) }     
+
+From here it is trivial to look up in fact 6 that willie is a whale, so our
+goalset becomes empty, that is, there are no unsatisfied goals in our set; hence
+we declare victory and go out for fish fry!
+
+    Goalset = { }     
+
+Let's do one last thing.  Let's see what happens when we give Prolog a query 
+with a variable in it.  For example:
+
+    ?- fish(Y).
+
+This is basically saying, "Who is a fish?"  Prolog scans through its database,
+trying to find a predicate that can match fish(Y), that is, can satisfy the 
+first (and only) item in its goalset:
+
+    Goalset = { fish(Y) }
+
+Rule 2 says that fish(X) :- cod(X), or if it is a cod, then it is a fish.  So
+we replace our goal with cod() after we match the variables.  
+
+Matching fish(Y) and fish(X), the first from our goalset, the second from the
+rule 2 pattern, we get { Y = X }, that is, they share.  These variables are
+now locked together.  Whenever one is bound to some value, so is the other.
+Now our goalset is
+
+    Goalset = { cod(X) }   /  { Y = X }
+
+and we try to find something that is a cod, and sure enough fact 5 says that
+homer is a cod.  We match:
+
+     cod(X) = cod(homer)
+
+and get { Y = X = homer }.  Notice that cod(homer) is true, so we remove it
+from our goalset, which becomes empty:
+
+     Goalset = { }
+
+and what do we do when our goalset zeroes out?  We yell for joy, but outwardly
+we just demurely print "yes" along with our substitution set:
+
+     Y = homer
+
+But what the user thinks is that Prolog is telling her that homer is a fish,
+which is indeed true.  Now Prolog sits and waits.  If you are satisfied knowing
+only one fishy character, you just press return and Prolog goes back to the
+query prompt:
+
+     ?-
+
+But if you want another fish, you type a semicolon and Prolog will in effect
+pretend that the last answer wasn't good enough, that it failed you somehow.
+Whenever Prolog fails, it backtracks.  [ If, during the course of backtracking
+it gets back to the original query, then it could find no way to answer your
+question, so it just prints out "no" and stops.  That is, it can't backtrack
+beyond a certain point, namely your original query! ]
+
+In this case, it backtracks to
+
+    Goalset = { cod(X) }   /  { Y = X }
+
+but it can find no other cods, so it backtracks to
+
+    Goalset = { fish(Y) }
+
+and attempts to find another way to test for "fishness," which it finds in 
+rule 3:
+
+    fish(X) :- mackerel(X).
+
+So it does essentially the same thing as before, and gets 
+
+    Goalset = { mackerel(X) }   /  { Y = X }
+
+But there are no mackerel, so this fails, and it tries to find another rule or
+fact that mentions fish.  When it finds none, it backtracks one more level up,
+but this was the user's original query, so it just prints "no" and stops.
+
+--------------------------------------------------------------------------------

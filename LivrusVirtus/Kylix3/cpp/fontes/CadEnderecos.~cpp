@@ -1,0 +1,149 @@
+//---------------------------------------------------------------------------
+
+#include <clx.h>
+#pragma hdrstop
+
+#include "CadEnderecos.h"
+#include "ConsultasSQL.h"
+#include "Principal.h"
+#include "RotinasGlobais.h"
+//---------------------------------------------------------------------------
+#pragma link "Cadastros"
+#pragma resource "*.xfm"
+TfrmCadEnderecos *frmCadEnderecos;
+//---------------------------------------------------------------------------
+__fastcall TfrmCadEnderecos::TfrmCadEnderecos(TComponent* Owner)
+        : TfrmCadastros(Owner)
+{
+}
+//---------------------------------------------------------------------------
+Boolean TfrmCadEnderecos::ValidaDados(Boolean bTodosDados)
+{
+if (Rotinas->ValidaCampo(edtCodigo->Text.c_bstr(),"Código não informado!"))
+  return false;
+if (bTodosDados) {
+  if (Rotinas->ValidaCampo(edtDescricao->Text.c_bstr(),"Logradouro não informado!"))
+    return false;
+  if (Rotinas->ValidaCampo(edtBairro->Text.c_bstr(),"Bairro não informado!"))
+    return false;
+  if (Rotinas->ValidaCampo(edtCEP->Text.c_bstr(),"CEP não informado!"))
+    return false;
+  if (Rotinas->ValidaCampo(edtCidade->Text.c_bstr(),"Cidade não informada!"))
+    return false;
+}
+return true;
+}
+//---------------------------------------------------------------------------
+void TfrmCadEnderecos::InformaLimpaDados(Boolean bInformar)
+{
+TfrmCadastros::InformaLimpaDados(bInformar);
+if (bInformar) {
+  edtBairro->Text=CDSConsulta->Fields->Fields[2]->AsString;
+  edtCEP->Text=CDSConsulta->Fields->Fields[3]->AsString;
+  edtCidade->Text=CDSConsulta->Fields->Fields[4]->AsString;
+  RecuperaEstado(CDSConsulta->Fields->Fields[5]->AsString);
+} else {
+  edtBairro->Clear();
+  edtCEP->Clear();
+  edtCidade->Clear();
+  cmbEstado->ItemIndex=0;
+}
+}
+//---------------------------------------------------------------------------
+
+void TfrmCadEnderecos::HabilitaDados(Boolean bHabilita)
+{
+TfrmCadastros::HabilitaDados(bHabilita);
+edtBairro->Enabled=bHabilita;
+edtCEP->Enabled=bHabilita;
+edtCidade->Enabled=bHabilita;
+cmbEstado->Enabled=bHabilita;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmCadEnderecos::btnNovoClick(TObject *Sender)
+{
+TfrmCadastros::btnNovoClick(Sender);
+NovoDado(ConsSQL->Endereco('N',edtCodigo->Text.c_bstr(),"","","","",""));
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmCadEnderecos::btnExcluirClick(TObject *Sender)
+{
+ExcluirDados(ConsSQL->Endereco('D',edtCodigo->Text.c_bstr(),"","","","",""));
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmCadEnderecos::btnPesquisarClick(TObject *Sender)
+{
+PesquisarDados(ConsSQL->Endereco('S',edtCodigo->Text.c_bstr(),"","","","",""),
+"Endereço não encontrado!");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmCadEnderecos::btnSalvarClick(TObject *Sender)
+{
+SalvarDados(ConsSQL->Endereco('S',edtCodigo->Text,"","","","",""),
+ConsSQL->Endereco('U',edtCodigo->Text,edtDescricao->Text,
+edtBairro->Text,edtCEP->Text,edtCidade->Text,cmbEstado->Text),
+ConsSQL->Endereco('I',edtCodigo->Text,edtDescricao->Text,
+edtBairro->Text,edtCEP->Text,edtCidade->Text,cmbEstado->Text),true);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TfrmCadEnderecos::FormClose(TObject *Sender,
+      TCloseAction &Action)
+{
+  frmPrincipal->Enderecos1->Enabled=true;
+  TfrmCadastros::FormClose(Sender,Action);
+}
+//---------------------------------------------------------------------------
+void TfrmCadEnderecos::AdicionaCombo()
+{
+cmbEstado->Items->Append("Pernambuco");
+cmbEstado->Items->Append("Acre");
+cmbEstado->Items->Append("Alagoas");
+cmbEstado->Items->Append("Amapá");
+cmbEstado->Items->Append("Amazonas");
+cmbEstado->Items->Append("Bahia");
+cmbEstado->Items->Append("Brasília");
+cmbEstado->Items->Append("Ceará");
+cmbEstado->Items->Append("Distrito Federal");
+cmbEstado->Items->Append("Espírito Santo");
+cmbEstado->Items->Append("Goiás");
+cmbEstado->Items->Append("Mato Grosso");
+cmbEstado->Items->Append("Mato Grosso do Sul");
+cmbEstado->Items->Append("Minas Gerais");
+cmbEstado->Items->Append("Pará");
+cmbEstado->Items->Append("Paraíba");
+cmbEstado->Items->Append("Paraná");
+cmbEstado->Items->Append("Santa Catarina");
+cmbEstado->Items->Append("Rio Grande do Norte");
+cmbEstado->Items->Append("Rio Grande do Sul");
+cmbEstado->Items->Append("Rio de Janeiro");
+cmbEstado->Items->Append("Rondônia");
+cmbEstado->Items->Append("Roraima");
+cmbEstado->Items->Append("São Paulo");
+cmbEstado->Items->Append("Sergipe");
+cmbEstado->Items->Append("Tocantins");
+}
+//---------------------------------------------------------------------------
+void TfrmCadEnderecos::RecuperaEstado(AnsiString sEstado)
+{
+int nCont;
+
+ for(nCont=0; nCont <= cmbEstado->Items->Count-1; nCont++) {
+    if (cmbEstado->Items->Strings[nCont]==sEstado) {
+       cmbEstado->ItemIndex=nCont;
+       break;
+    }
+ }
+}
+
+void __fastcall TfrmCadEnderecos::FormShow(TObject *Sender)
+{
+AdicionaCombo();
+cmbEstado->ItemIndex=0;
+}
+//---------------------------------------------------------------------------
+

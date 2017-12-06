@@ -1,0 +1,11 @@
+friend(X,Y) :- likes(X,Y).
+friend(X,Y) :- parent(X,Y).
+
+likes(john,sue).
+likes(sue,tim).
+parent(john,sue).
+
+
+/*  try this... */
+
+setof(F,likes(john,F),Set).

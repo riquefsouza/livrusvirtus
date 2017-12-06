@@ -1,0 +1,82 @@
+LISP Tutorial   by Mark Meyer
+Chapter 13
+Lambda functions
+--------------------------------------------------------------------------------
+TOPICS:  
+--------------------------------------------------------------------------------
+
+You can create a function without giving it a name.  Such a function is called
+a "lambda-form" because Alonzo Church first described such functions in the 
+1930s in his lambda calculus.  The theoretical origins are not important to us,
+however.
+
+Lambda functions are mostly useful in conjunction with mapcar or apply.  For
+example, suppose you have a story that you want to spell check by looking up
+all the words in a dictionary.  Your story is a list of symbolic atoms like
+
+    (the lion sleeps in the dark green jungle)
+
+and your dictionary is also a list of symbolic atoms:
+
+    (apple axe baby bottle bye cat chalk ...)
+
+You might think that it would be a simple matter to use mapcar to just look up
+each word in the dictionary:
+
+    (setq story '(the lion sleeps in the dark green jungle))
+    (setq dictionary '(apple axe baby bottle bye cat chalk ...))
+
+and then
+
+    (mapcar #'member story)                             <=== WRONG
+
+But member requires TWO parameters!  So you try
+
+    (mapcar #'member story dictionary)                  <=== WRONG
+
+But this fails too because dictionary is a list of words, and what you need is
+a list of dictionaries, one per each word in story!  Though there is a duplicate
+function, it would enormously wasteful to create a list of identical dictionar-
+ies, one for each word in story! 
+
+You could make up your own new function to do this:
+
+    (defun lookup (word)
+         (member word dictionary)
+    )
+
+where dictionary is a global variable.  Now you can safely say:
+
+    (mapcar #'lookup story)                             <=== OKAY
+
+However, if you had more than one dictionary you would need many lookup 
+functions, each one customized and requiring its onw name.
+
+Enter lambda functions.  Patrick Henry Winston has suggested that we substitute
+(at least in our imaginations) the phrase 
+
+     defun-anonymous
+
+for "lambda," because that is what is really going on.  Here's how it would 
+look:
+
+     (mapcar #'(lambda (word) (member word dictionary)) story)   <=== GREAT!
+
+Note that instead of a function name, we give a function definition, with
+parameters and all!  This has saved us making up another name.
+
+There are many other ways to use lambda functions, but this is the most common
+and most useful situation I've encountered.
+
+As one last aside, note that defun could be done away with!  Just have setq
+assign a lambda function to a variable!  So instead of
+
+     (defun square (n) (* n n))
+         
+You would see
+
+     (setq square #'(lambda (n) (* n n)))
+
+In fact, that is exactly what defun really does!
+
+--------------------------------------------------------------------------------

@@ -1,0 +1,109 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Livrus - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x416 /fo"Debug/Livrus.res" /d "_DEBUG" "C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\Livrus.rc"" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP38.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /I "C:\fox-1.2.13\include" /I "C:\Arquivos de programas\Firebird\Firebird_1_5\include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\AlterarSenha.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\CadAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\Cadastros.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\CadAutores.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\CadClientes.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\CadEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\CadEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\CadIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\CadLivros.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\CadPaises.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\CadProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConAutores.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConClientes.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConLivros.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConPaises.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\Consultas.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConsultasSQL.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\ConVendas.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\Livrus.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\Login.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\Principal.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\resource.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\RotinasGlobais.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\Sobre.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\Splash.cpp"
+"C:\LivrusVirtus\VCPP6\FoxToolKit\LibFireBird\VenderLivros.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP38.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP39.tmp" with contents
+[
+FOXD-1.2.lib comctl32.lib wsock32.lib ws2_32.lib kernel32.lib user32.lib gdi32.lib advapi32.lib shell32.lib mpr.lib fbclient_ms.lib /nologo /entry:"mainCRTStartup" /subsystem:windows /incremental:yes /pdb:"Debug/Livrus.pdb" /debug /machine:I386 /nodefaultlib:"libcmtd.lib" /out:"Debug/Livrus.exe" /pdbtype:sept /libpath:"C:\fox-1.2.13\lib" /libpath:"C:\Arquivos de programas\Firebird\Firebird_1_5\lib" 
+.\Debug\AlterarSenha.obj
+.\Debug\CadAssuntos.obj
+.\Debug\Cadastros.obj
+.\Debug\CadAutores.obj
+.\Debug\CadClientes.obj
+.\Debug\CadEditoras.obj
+.\Debug\CadEnderecos.obj
+.\Debug\CadIdiomas.obj
+.\Debug\CadLivros.obj
+.\Debug\CadPaises.obj
+.\Debug\CadProfissoes.obj
+.\Debug\ConAssuntos.obj
+.\Debug\ConAutores.obj
+.\Debug\ConClientes.obj
+.\Debug\ConEditoras.obj
+.\Debug\ConEnderecos.obj
+.\Debug\ConIdiomas.obj
+.\Debug\ConLivros.obj
+.\Debug\ConPaises.obj
+.\Debug\ConProfissoes.obj
+.\Debug\Consultas.obj
+.\Debug\ConsultasSQL.obj
+.\Debug\ConVendas.obj
+.\Debug\Livrus.obj
+.\Debug\Login.obj
+.\Debug\Principal.obj
+.\Debug\resource.obj
+.\Debug\RotinasGlobais.obj
+.\Debug\Sobre.obj
+.\Debug\Splash.obj
+.\Debug\VenderLivros.obj
+.\Debug\Livrus.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP39.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+AlterarSenha.cpp
+c:\livrusvirtus\vcpp6\foxtoolkit\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadAssuntos.cpp
+c:\livrusvirtus\vcpp6\foxtoolkit\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+Cadastros.cpp
+c:\livrusvirtus\vcpp6\foxtoolkit\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadAutores.cpp
+c:\livrusvirtus\vcpp6\foxtoolkit\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadClientes.cpp
+c:\livrusvirtus\vcpp6\foxtoolkit\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadEditoras.cpp
+c:\livrusvirtus\vcpp6\foxtoolkit\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadEnderecos.cpp
+c:\livrusvirtus\vcpp6\foxtoolkit\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadIdiomas.cpp
+c:\livrusvirtus\vcpp6\foxtoolkit\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadLivros.cpp
+c:\livrusvirtus\vcpp6\foxtoolkit\libfirebird\rotinasglobais.h(4) : fatal error C1083: Cannot open include file: 'ibase.h': No such file or directory
+CadPaises.cpp
+cl.exe terminated at user request.
+
+</pre>
+</body>
+</html>

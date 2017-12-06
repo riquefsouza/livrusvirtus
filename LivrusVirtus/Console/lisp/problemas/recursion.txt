@@ -1,0 +1,383 @@
+               EXERCISES IN WRITING RECURSIVE FUNCTIONS IN LISP
+==================================================================
+
+These are the rules to writing recursive only functions:
+
+  You may use "setq" to assign values to variables, but you can
+  assign a variable a value only once as a convenient way to give
+  a name to a value, and for the sake of efficiency.  By saving the
+  value in a variable, you don't have to recompute it again.
+  
+  DO NOT USE EXPLICIT ITERATION (LOOPS) TO SOLVE ANY OF THESE!
+  Only recursion and MAPCAR are permissible.
+
+To solve some of these problems, it is easier to define auxiliary 
+functions.  A good example is solving ANTICAR without using reverse 
+or length.  You will need 2 parameters.  One is the working parameter,
+which keeps getting smaller with each recursive call, and the other
+is the accumulator, which gets bigger.
+
+Any error checking of parameters should probably go into the main
+function, and not the recursive auxiliary.
+
+Have fun!!!
+=========================================================================
+
+*   Write a recursive function which finds if any two identical atoms are
+    adjacent in a list.  It returns the atom.  Otherwise NIL.
+
+      (find-adj '(a b c c d e a b))  == > c
+
+
+*   Write a replicate function which creates "n" occurrences of an item:
+
+      (replicate 4 'x) ==> (x x x x)
+      (replicate 3 '(a b c)) ==> ((a b c)(a b c)(a b c))
+
+
+*   Write a recursive function which takes in a list and an integer N
+    and returns the Nth element of the original list.
+
+      (nthelem 3 '(a b c d e)) ==> c
+
+
+*   Write ANTICAR, which returns the last item in a list.  This can be done
+    in several ways.  One way assumes there is a reverse function.  Another
+    way uses the length function.  The third way is the most primitive in
+    that just uses null, car and cdr.  Try to do this all 3 ways.
+
+       (anticar '(a b c)) ==> c
+
+
+*   Write ANTICDR, which returns the list except for the last element.
+
+       (anticdr '(a b c)) ==> (a b)
+
+
+*   Write ANTICONS which is like CONS except  that it inserts at the end
+    of the list.
+
+
+*   The "reverse" list function is itself fascinating.  It can be done quite
+    easily if we use "append" and "list".  But what if we don't?  We can
+    still do it using only car, cdr, cons and null.  Try it both ways!
+
+       (reverse '(a b c)) ==> (c b a)
+
+    Note it should not reverse EVERYTHING.  Thus,
+
+       (reverse '(a (b c d) e)) ==> (e (b c d) a)
+
+
+*   Now write recursive-reverse which DOES reverse everything, even in
+    inner lists.  This might be called "mirror" since it is like holding
+    a mirror to one end of the list and seeing the reflection.
+
+       (mirror '(a (b c d) e)) ==> (e (d c b) a)
+
+
+*   Write "sublist" which is kind of like a substring function in that
+    it cuts out the middle of a list.  It is easiest to define first a
+    "prefix" function and then a "suffix" function.  "Suffix" is like
+    the built-in function "nthcdr".
+
+       (sublist '(a b c d e) 2 4)  ==>  (b c d)
+
+    The suffix function is very easy but prefix is a bit tricky.
+    It can be done in several purely recursive ways...one with an
+    accumulator argument and one without.  Try both!
+
+*   Can you write append recursively, using only car, cdr, cons and null?
+    Assume there are only two arguments, both lists.
+
+
+*   Write a delete function called "del" (in order to keep it from
+    being confused with the built-in function delete) which
+    recursively which removes all instances of a given item from a list.
+    The item may be atomic or a list.
+
+        (del 'x '(a b (x y) x (x))) ==> (a b (y) ())
+        (del 'x '(a b (x) c d)) ==> (a b (x) c d)
+
+    Note that it does not "peek into" lists inside the main list to
+    delete occurrences of the item in them.
+
+
+*   Now fix the "del" function above so that it does peek inside
+    all lists and delete ALL instances of the item.
+
+        (del2 'x '(a b (x) c d)) ==> (a b () c d)
+
+*   Finally, add a 3rd parameter which is an atom name indicating
+    when to stop recursing into lists.  This is kind of like the
+    quote function.
+
+        (del3 'x '(a b (x y) (stop x k) x y) 'stop) ==>
+             (a b (y) (stop x k))
+
+*   Write a predicate is-binary-tree which returns t if the list
+    which is its argument is a binary tree, nil otherwise.  A binary
+    tree is either an atom (including nil) or is a list comprised of
+    1 or 2 binary trees.  Thus, the length of every list must be 1 or 2.
+
+        (is-binary-tree '(a b c)) ==> nil
+        (is-binary-tree '((a) (b c))) ==> t
+
+*   Write a sort function which is recursive.   Gear it toward sorting a
+    list of integers:
+
+       (sort '(5 1 2 9 7 6 4 8)) ==> (1 2 4 5 6 7 8 9)
+
+    You will probably have to write a helper function called 
+    "insert" which takes a sorted list of integers and inserts an
+    integer into this list in the right place.
+
+
+*   Simplify arithmetic expressions.  For example 
+
+       (simplify '(+ 3 (+ 6 4) 5)) ==>  (+ 3 6 4 5)
+
+    but
+
+       (simplify '(+ 3 (* 6 4) 5)) ==>  (+ 3 (* 6 4) 5)
+
+
+*   Write a "merge" function which takes two sorted lists of integers
+    and produces one sorted list of integers.  The lists may be of
+    different lengths.
+
+
+*   Write an "unmerge" function which takes any list and breaks it into
+    two lists, giving the 1st, 3rd, 5th, etc. elements to the 1st list
+    and the 2nd, 4th, 6th, etc. elements to the 2nd list.  (Kind of hard.)
+
+
+*   Write the set operations using recursive LISP functions.  For 
+    example, UNION, INTERSECTION and DIFFERENCE.  MEMBER is already
+    part of LISP.
+
+
+*   Write a package of functions for infinite precision arithmetic.
+    For example, SUMUP adds two integers together.  They are given
+    as lists of digits, and the result is a new list of digits:
+
+         (sumup '(3 5 8 5 0 9 2 4) '(7 8 2 7 6)) ==> (3 5 9 2 9 2 0 0)
+                
+    Can you also write subtract, multiply and divide?
+
+
+*   Write a function which pretty-prints lists using indentation.  One
+    version keeps the parentheses, while another version does away with them.
+    You will have to write an auxiliary function which has an additional
+    parameter--number of spaces to indent.  This starts out at 0.
+
+
+*   Write a function which takes any arithmetic expression and says whether
+    it COULD or WILL cause a run-time error.  Let's restrict ourselves to saying
+    that if it has a divide operator where the 2nd operand is 0, it WILL
+    cause a run-time error.  If the 2nd operand of divide is a variable, it
+    could cause an error.  If the 2nd operand of divide is a non-zero 
+    constant, it will not cause an error.  This status must percolate back
+    to the top.  For example:
+
+        (unsafep '(+ a (- (/ x y) 5))) ==> MAYBE-UNSAFE
+        (unsafep '(+ a (- (/ x 0) 5))) ==> UNSAFE
+        (unsafep '(+ a (- (/ x 4) 5))) ==> SAFE
+
+
+*   Searching is very interesting.  "Member" is a built-in searcher, as
+    is "assoc."  Try writing both "member" and "assoc".
+
+
+*   Simple searching returns T or NIL, depending on whether at least one
+    instance of the searched-for item appears in the search list.
+    Can you write a function which tells if at least N occurrences of the
+    searched-for item appears?  What about EXACTLY N occurrences?  (These
+    are kind of tricky!)
+
+
+*   A more useful searching function goes one step farther than
+    the built-in function "member".  It breaks the list in two at
+    the point of the 1st occurrence of searched-for item.  For example:
+
+        (find-break 'a '(b c d a k l m)) ==> ((b c d) (a k l m))
+
+    Can you generalize this so that some other function that equality
+    can be used?
+
+        (find-break-g '5 '(3 2 8 6 1 9) 'lessthan) ==> ((3 2) (8 6 1 9))
+
+
+*   Can you write a recursive version of equal, using EQ, CAR, CDR?
+
+
+*   Building on the equal function, write a function which tells if two
+    lists are isomorphic.
+    Two lists are ISOMORPHIC with respect to structure if they have the same
+    parenthesis pattern, regardless of which atoms are used.
+
+         (isop '(a (b c) d (e)) '(d (a x) r (m)))  ==> T
+         (isop '(a (b c) d e) '(d (a x) r (m)))  ==> NIL
+
+    This is really just a slight generalization of equal: the atoms
+    have to occur in the same spot but do not have to be EQ.
+
+*   Two lists are strongly isomorphic if they have the same parentheses
+    structure AND wherever atom X appears in list 1, its translation
+    appears in list 2. Thus
+
+         (strong-isop '(a (b c) c) '(d (x y) z)) ==> NIL
+
+    because the atom "c" is not uniformly translated.  In one place it
+    is a "y", and in another place a "z".
+    This is not a simple function to write, but it is made much easier
+    if you keep track of the atom translations via a translation table.
+    Maybe use "assoc" to do the table lookup.
+
+*   Two lists are homomorphic if they have the same translation structure
+    with regard to translations of atoms into other atoms or lists.
+    Two lists are not homomorphic unless they are identical in structure
+    and atoms.  For example:
+
+         (homop '(a (b c) a) '((d e) x (d e))) ==> T
+
+    because "a" got translated uniformly into "(d e)" while "x"
+    got translated into "(b c)".
+
+*   The SUBST function is built-in in Common Lisp.  Can you write it
+    yourself?
+
+*   Compression algorithms try to reduce the physical size of a file
+    (or data object) without losing any information.  One very simple
+    technique is called "run-length encoding".  You check for multiple
+    occurrences of a character or item and note how many there are.
+    For example:
+
+       (run-length '(a b b b c d d d d e e e e e)) =>
+               ((a 1) (b 3) (c 1) (d 4) (e 5))
+
+    A more clever algorithm would not "listify" the character if there
+    is only 1 occurrence.  What about 2 occurrences?  Since (c 2) is
+    the same size as "c c", you should only mark a character if there
+    are more than 3 of it.
+
+    
+*   Of course, you need a companion to run-length encoding above to
+    decode the encoding in order to recover the original.  Write this.
+    You will need a replicate function.
+
+
+*   Suppose that you have a list of variables and their types.  Develop
+    a function which infers the type of the expression from the types of
+    subexpressions.  Assume that (+ int int) gives int, but every other
+    combination gives float.  Assume that all operators are binary
+    (+, -, * and /).  Also, strings of digits are ints unless they have
+    a decimal point, in which case they are floats.
+
+        (setq types '((a int) (b float) (c int) (d float)))
+        (type-of '(+ (a 5) (* b c))) ==> float
+
+
+*   Write a function which takes a proposition in First Order Predicate
+    Calculus and returns all the free variables.  A variable is bound 
+    (and therefore not free) if its name appears in a FORALL or EXISTS
+    clause:
+
+        (free-vars '(EXISTS y (FORALL x (x > y)))) ==> NIL
+        (free-vars '(EXISTS y (FORALL x (x > y and z < x)))) ==> (z)
+
+
+*   Implement the BACKQUOTE mechanism.  This is the "reverse" of 
+    the usual LISP convention where everything is evaluated unless
+    it is surrounded by the QUOTE function.  In BACKQUOTE, nothing
+    is evaluated unless it is surrouned by the COMMA function,
+    which probably should be named UNQUOTE.  Let's call it that.
+
+       (eval-backquote '(BACKQUOTE (A (C D) 
+                             (UNQUOTE (CAR (QUOTE (X Y)))) 
+                             (CDR (QUOTE (X Y)))))
+       ==>
+           (A (C D) X (CDR (QUOTE (X Y))))
+
+
+*   Write a syntax checker for Pascal!  This is what is called a
+    "recursive descent parser" since it is highly recursive.
+    You can assume there are spaces between every Pascal token.
+
+    An easy version of this assumes that 'C' stands for condition,
+    'S' for simple statement, and all the keywords.  Then you are
+    to return T or NIL depending on whether the skeleton program is
+    well-formed.  You can surround unusual atom names with vertical
+    bars, as is necessary for commas and parentheses:
+    (parse.l)
+
+        (parse '(program main |(| input |,| |)| begin S end |.|))
+         ==> T
+
+*   Write a set of functions which manipulate equivalence classes.
+    An equivalence class is a set in which every element is equivalent
+    to every other member, by some definition of "equivalence."
+    For example, in modulo 3 arithmetic, 3, 6 and 9 are all
+    equivalent, whereas 1, 4, and 7 are also equivalent to each
+    other.
+
+    Let us define an eqlist as a list of equivalence classes.  Each
+    equivalence class is a list of equivalent elements.  For example,
+
+           ((a b c) (d e f) (g) (h k))
+
+    would be an eqlist.  In this eqlist a, b, and c are all equivalent
+    (to each other) but not to anything else.  g is not equivalent to
+    anything, whereas h and k are only equivalent to each other.
+
+    One of your functions should be able to check such an eqlist for
+    validity.  Each class should contain only one instance of each
+    letter, and no letter should occur more than once in the entire
+    eqlist.
+
+    Another function should take in a letter and an eqlist and return
+    the class in which the letter belongs, if any.
+
+    Yet another function would take a list of pairs of letters and
+    produce an eqlist.  For instance:
+
+        ((a b)(c d)(a x)(m c)(h j))
+
+    In this list, a is equivalent to b, c is equivalent to d, and
+    so on.  By transitivity, b is also equivalent to x because a
+    is equivalent to x and to b.  Thus, you should get
+
+        ((a b x)  (c d m) (h j))
+
+
+*   Write a "unify" function which unifies two lists of items.  Each
+    item is either a variable, which is just a name enclosed in a
+    list, an atom which represents a constant, or the atom ANY which
+    can unify with anything.  Unification attempts to match things
+    in two lists (which must be the same length).  If it succeeds, it
+    produces two lists:  a list of shared variables and a list of
+    variable assignments.  This is used in Prolog's instantiation of
+    logical variables. 
+
+    For example:
+        (unify '((x) y (z))
+               '(m   y (k)))
+
+    will succeed because variable "x" can be assigned the constant
+    value "m", the two "y"s are identical so they match, and variables
+    "z" and "k" can be matched together.  The side effects are the
+    production of the lists:
+
+        (assign (x m))
+        (share (z k))
+
+    But note that (unify '((x) y (z)) '(m k (k))) does not unify
+    because y is not equal to k (both constants in 2nd position.
+
+    The equivalence classes of #35 come in useful when you decide
+    which variables are shared.  Any two variables which are shared
+    are also equivalent.
+    
+    This is quite a complicated little pattern matching problem but
+    is quite interesting, especially since it is so important in
+    Prolog.

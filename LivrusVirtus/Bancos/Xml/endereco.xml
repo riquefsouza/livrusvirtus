@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="codendereco">1</column>
+        <column name="logradouro">RUA SANTOS COSME E DAMIAO N=130</column>
+        <column name="bairro">IPSEP</column>
+        <column name="cep">51350060</column>
+        <column name="cidade">Recife</column>
+        <column name="estado">Pernambuco</column>
+    </row>
+    <row>
+        <column name="codendereco">2</column>
+        <column name="logradouro">RUA DAS CAMELIAS N=234</column>
+        <column name="bairro">BOA VISTA</column>
+        <column name="cep">52689050</column>
+        <column name="cidade">Manaus</column>
+        <column name="estado">Amazonas</column>
+    </row>
+</resultset>

@@ -1,0 +1,399 @@
+package  Livrus;
+
+import System.*;
+import System.Data.*;
+import System.Data.OleDb.*;
+import System.Collections.*;
+import wx.*;
+
+public class RotinasGlobais
+{
+	public static RotinasGlobais Rotinas;
+	public String sUsuarioLogin, sUsuarioSenha, sBarraLogin;
+	public String sCodigoSelecionado, sPreco, sQtdEstoque;
+  public System.Data.OleDb.OleDbConnection gConexao;
+  public static String sepDTHR = "#"; /* SOMENTE ACCESS */
+  //public static String sepDTHR = "'"; /* OUTROS BANCOS */
+
+	public RotinasGlobais(){
+    gConexao = new System.Data.OleDb.OleDbConnection();
+	}
+  //---------------------------------------------------------------------------
+  public boolean ValidaFloat(String sNum){
+   if (sNum.Equals("")==false) {
+  	try {
+  	  Single.Parse(sNum);
+  	  return true;
+  	} catch(System.Exception e) {
+      MessageDialog.MessageBox(Resource.STR_NUMINV, "Erro", 
+        Dialog.wxOK|Dialog.wxICON_ERROR );
+  	  return false;
+  	}
+   } else
+     return false;
+  }
+  //---------------------------------------------------------------------------
+  public String VirgulaParaPonto(String sNum, boolean revertido)
+  {
+   if (revertido)
+     return sNum.Replace(".",",");
+   else
+     return sNum.Replace(",",".");
+  }
+  //---------------------------------------------------------------------------
+  public int modulo11(String svalor, int ndig)
+  {
+  int ncont, nsoma, nvalor, npos;
+  String slocal, sres;
+  
+   ncont=0;
+   slocal="";
+   while (ncont < 11) {
+     slocal=svalor.Substring(ncont,1) + slocal;
+     ncont++;
+   }
+   nsoma=0;
+   if (ndig == 1)
+     ncont=2;
+   else
+     ncont=1;
+   npos=2;
+   while (ncont < 11) {
+     sres = slocal.Substring(ncont,1);
+     nvalor = Int32.Parse(sres);
+     nsoma=nsoma + (nvalor * npos);
+     ncont++;
+     npos++;
+   }
+   nsoma=(11 - (nsoma % 11));
+  
+   if (nsoma > 9)
+     return 0;
+   else
+     return nsoma;
+  }
+  //---------------------------------------------------------------------------
+  public boolean ValidaCPF(String cpf)
+  {
+  String scpf;
+  
+  if (cpf.get_Length()==14) {
+    scpf=cpf.Substring(0,3)+cpf.Substring(4,3)+cpf.Substring(8,3)+
+  	cpf.Substring(12,2);
+    if ( (modulo11(scpf,1)==Int32.Parse(cpf.Substring(12,1))) &&
+    (modulo11(scpf,2)==Int32.Parse(cpf.Substring(13,1))) )
+  	return true;
+    else
+  	return false;
+  } else
+    return false;
+  }
+  //---------------------------------------------------------------------------
+  public boolean ValidaISBN(String isbn)
+  {
+   String sisbn, sdigito, snum;
+   int nvalor, nsoma, ncont;
+  
+  if (isbn.get_Length()==13) {
+    sdigito = isbn.Substring(isbn.get_Length()-1, 1);
+    sisbn="";
+    for(ncont = 0; ncont < isbn.get_Length()-1; ncont++)  {
+      if (isbn.Substring(ncont,1).Equals("-")==false)
+        sisbn = sisbn + isbn.Substring(ncont,1);
+    }
+    if (sdigito.Equals("X"))
+      nsoma = 10;
+    else {
+      nvalor = Int32.Parse(sdigito);
+      nsoma = nvalor;
+    }
+    for(ncont = 1; ncont <= 9; ncont++)  {
+      snum = sisbn.Substring(ncont-1, 1);
+      nvalor = Int32.Parse(snum);
+      nsoma=nsoma + (nvalor * (11 - ncont));
+    }
+    if ((nsoma % 11) == 0)
+      return true;
+    else
+      return false;
+  } else
+    return false;
+  }
+  //---------------------------------------------------------------------------
+  boolean validaDataHora(String sDataHora, boolean bSoData){
+   boolean bvalida, bdatavalida, bhoravalida;
+   String sdia, smes, sano, shora, smin, sseg;
+   int ndia, nmes, nano, nhora, nmin, nseg, nudiames, ntam;
+  
+   bvalida = false;
+   bdatavalida = false;
+   bhoravalida = false;
+   nudiames = 0;
+   if (bSoData==true) ntam=10;
+   else ntam=19;
+
+   if (sDataHora.get_Length()==ntam) {
+  	sdia = sDataHora.Substring(0,2);
+  	ndia = Int32.Parse(sdia);
+  	smes = sDataHora.Substring(3,2);
+  	nmes = Int32.Parse(smes);
+  	sano = sDataHora.Substring(6,4);
+  	nano = Int32.Parse(sano);
+  
+  	if ((nano >= 1) && (nano <= 9999)) {
+  	  if ((nmes >= 1) && (nmes <= 31)) {
+  		  switch(nmes) {
+  		   case 1: case 3: case 5: case 7: case 8:
+  		   case 10: case 12: nudiames = 31; break;
+  		   case 2: {
+  			   /* ano bissexto */
+                 if ((nano % 4)==0) nudiames = 29;
+                 else nudiames = 28;
+  			  } break;
+             case 4: case 6: case 9: case 11: nudiames = 30; break;
+            }
+  		  if ((ndia >=1) && (ndia <=nudiames))
+               bdatavalida = true;
+        }
+      }
+  
+      if (bSoData) {
+  	   if (bdatavalida)
+  		   bvalida = true;
+       else
+  	     bvalida = false;
+  	} else {
+  	  if (bdatavalida) {
+  		  shora = sDataHora.Substring(11,2);
+  		  nhora = Int32.Parse(shora);
+  		  smin = sDataHora.Substring(14,2);
+  		  nmin = Int32.Parse(smin);
+  		  sseg = sDataHora.Substring(17,2);
+  		  nseg = Int32.Parse(sseg);
+  
+  		  if ((nhora >= 0) && (nhora <= 23)) {
+    			if ((nmin >= 0) && (nmin <= 59)) {
+    			  if ((nseg >= 0) && (nseg <= 59))
+    				 bhoravalida = true;
+    			}
+  		  }
+  		  if (bhoravalida)
+  		    bvalida = true;
+  		  else
+   		    bvalida = false;
+  	  } else
+          bvalida = false;
+      }
+    } else 
+        bvalida = false;
+   
+    return bvalida;
+  }
+  //---------------------------------------------------------------------------
+  public String retDataHoraStr(boolean bData, boolean bHora) {
+    String sDataHora = "";
+    DateTime sTempo = DateTime.get_Now();
+    
+    if (bData && bHora)
+      sDataHora = sTempo.ToString("dd/MM/yyyy hh:mm:ss");
+    else if (bData)
+      sDataHora = sTempo.ToString("dd/MM/yyyy");
+    else if (bHora)
+      sDataHora = sTempo.ToString("hh:mm:ss");
+    
+    return sDataHora;
+  }
+  //---------------------------------------------------------------------------
+  public String ConverteDataHoraStr(String sData, String formato) {
+  	DateTime dtNasc = DateTime.Parse(sData);
+  	return dtNasc.ToString(formato);
+  } 
+  //---------------------------------------------------------------------------
+  public boolean ConectaBanco(String sFonteDeDados)
+  {
+		gConexao.set_ConnectionString(sFonteDeDados);
+    gConexao.Open();
+
+    if (gConexao.get_State().ToString().Equals("Open"))
+      return true;
+    else {
+      MessageDialog.MessageBox(Resource.STR_NCONBANCO, "Erro", 
+        Dialog.wxOK|Dialog.wxICON_ERROR );
+      return false;
+    }
+  }
+  //---------------------------------------------------------------------------    
+  public void DisconectaBanco(){
+    gConexao.Close();
+  }
+  //---------------------------------------------------------------------------    
+  public boolean AtualizaDados(OleDbCommand Arquiva, String sTextoSql){
+	  Arquiva = gConexao.CreateCommand();
+	  Arquiva.set_CommandText(sTextoSql);
+		if (Arquiva.ExecuteNonQuery() > 0) {
+		  Arquiva.Dispose();
+      return true;
+    } else {
+      //MessageDialog.MessageBox(Resource.STR_NCEXECSQL, "Erro", 
+      //  Dialog.wxOK|Dialog.wxICON_ERROR );
+      return false;
+    }
+  }
+  //---------------------------------------------------------------------------
+  public boolean ConsultaDados(OleDbCommand Consulta, String sTextoSql)
+  {
+  boolean nTemLinhas = false;
+  
+    Consulta = gConexao.CreateCommand();
+    Consulta.set_CommandText(sTextoSql);
+  
+    OleDbDataReader Leitor = Consulta.ExecuteReader();
+    nTemLinhas = Leitor.get_HasRows();
+    Leitor.Close();
+    return nTemLinhas;
+  
+  }
+  //---------------------------------------------------------------------------
+  public boolean ConsultaDadosLista(ArrayList Registros, String sTextoSql)
+  {
+  boolean nTemLinhas = false;
+  
+    OleDbCommand Consulta = gConexao.CreateCommand();
+    Consulta.set_CommandText(sTextoSql);
+  
+    Registros.Clear();
+    OleDbDataReader Leitor = Consulta.ExecuteReader();
+    while (Leitor.Read()) {
+  	 ArrayList Campos = new ArrayList();
+  	 for(int cont=0; cont < Leitor.get_FieldCount(); cont++) {
+  	   Campos.Add(Leitor.GetValue(cont).ToString());
+  	 }
+  	 Registros.Add(Campos);
+    }
+    nTemLinhas = Leitor.get_HasRows();
+    Leitor.Close();
+    return nTemLinhas;
+  
+  }
+  //---------------------------------------------------------------------------
+  public boolean ValidaCampo(String sCampo,String sMensagemErro)
+  {
+    if (sCampo.get_Length() == 0) {
+      MessageDialog.MessageBox(sMensagemErro, "Erro", 
+        Dialog.wxOK|Dialog.wxICON_ERROR );
+    	return true;
+    } else
+  	return false;
+  }
+  //---------------------------------------------------------------------------
+  public String ConsultaCampoDesc(ArrayList Campos,
+  				String sTextoSql, String sMensagemErro)
+  { 
+    OleDbCommand Consulta = gConexao.CreateCommand();
+    Consulta.set_CommandText(sTextoSql);
+  
+    Campos.Clear();
+    OleDbDataReader Leitor = Consulta.ExecuteReader();
+    if (Leitor.Read()) {
+  	 for(int cont=0; cont < Leitor.get_FieldCount(); cont++) {
+  	   Campos.Add(Leitor.GetValue(cont).ToString());
+  	 }
+    }
+    boolean nTemLinhas = Leitor.get_HasRows();
+    Leitor.Close();
+  
+    if (nTemLinhas)
+  	 return Campos.get_Item(1).ToString();
+    else {
+      MessageDialog.MessageBox(sMensagemErro, "Erro", 
+        Dialog.wxOK|Dialog.wxICON_ERROR );
+    	return "";
+    }
+  }
+  //---------------------------------------------------------------------------
+  public int PesquisaItemLista(wx.ListBox lstLista, String sItem){
+    int bret = -1;
+    int nLinha;
+    for (nLinha = 0; nLinha < lstLista.get_Count(); nLinha++){
+      if (lstLista.GetString(nLinha) == sItem) {
+        bret = 0;
+      }        
+    }
+    return bret;
+  }
+  //---------------------------------------------------------------------------
+  public void AdicionaItemLista(wx.ListBox lstLista,
+  	 ArrayList slCodLista, wx.TextCtrl sCampoCodigo, wx.TextCtrl sCampoDesc)
+  {
+  String sItems;
+  
+    if (sCampoDesc.get_Value().Equals("")==false) {
+     sItems=sCampoCodigo.get_Value()+" - "+sCampoDesc.get_Value();
+     if (PesquisaItemLista(lstLista, sItems)==-1) {
+      	slCodLista.Add(sCampoCodigo.get_Value());
+      	lstLista.Append(sItems);
+     }
+     sCampoCodigo.Clear();
+     sCampoDesc.Clear();
+    }
+  }
+  //---------------------------------------------------------------------------
+  public void RemoveItemLista(wx.ListBox lstLista, ArrayList slCodLista){
+    int nSelIndice = 0;
+    if (lstLista.get_Count() > 0){
+      nSelIndice = lstLista.get_Selection();
+      if (lstLista.Selected(nSelIndice)) {
+        slCodLista.RemoveAt(nSelIndice);
+        lstLista.Delete(nSelIndice);
+      }
+    }
+  }
+  //---------------------------------------------------------------------------
+  public void AdicionaValoresLista(String sTextoSql,  
+    wx.ListBox lstLista, ArrayList slCodLista){
+   lstLista.Clear();
+   slCodLista.Clear();
+  
+    OleDbCommand Consulta = gConexao.CreateCommand();
+    Consulta.set_CommandText(sTextoSql);
+  
+    OleDbDataReader Leitor = Consulta.ExecuteReader();
+    while (Leitor.Read()) {
+  	  slCodLista.Add(Leitor.GetValue(0).ToString());
+  	  lstLista.Append(Leitor.GetValue(0).ToString()+" - "+
+  	  Leitor.GetValue(1).ToString());
+    }
+    Leitor.Close();  
+  }
+  //---------------------------------------------------------------------------
+  public void AdicionaColunasGrid(wx.Grid grid, int nPosIni, int nQtdCols, 
+    int[] nLargura, String[] sRotulos){
+    int nPos, nCont;
+    
+    if (nPosIni > 0){
+      grid.AppendCols(nQtdCols);
+    }
+    nCont = 0;
+    for(nPos = nPosIni; nPos < (nPosIni+nQtdCols); nPos++){
+      grid.SetColSize(nPos, nLargura[nCont]);
+      grid.SetColLabelValue(nPos, sRotulos[nCont]);
+      nCont = nCont + 1;
+    }
+  }
+  //---------------------------------------------------------------------------  
+  public void AdicionaLinhasGrid(wx.Grid grid, ArrayList lstLinhas, int nQtdCol){
+    int nCol, nLinha;
+    ArrayList lstCampos;
+
+    grid.DeleteRows(0, grid.get_NumberRows(), true);
+    grid.AppendRows(lstLinhas.get_Count(), true);
+    for (nLinha = 0; nLinha < lstLinhas.get_Count(); nLinha++){
+		  lstCampos = (ArrayList)lstLinhas.get_Item(nLinha);  
+      for (nCol = 0; nCol < nQtdCol; nCol++){
+	      grid.SetCellValue(nLinha, nCol, lstCampos.get_Item(nCol).ToString());
+      }
+    }
+  }
+  //---------------------------------------------------------------------------  
+}
+

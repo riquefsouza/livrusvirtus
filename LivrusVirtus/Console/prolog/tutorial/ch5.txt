@@ -1,0 +1,136 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 5
+Relationship to Logic
+--------------------------------------------------------------------------------
+TOPICS:  Logical implication; quantification of Prolog variables;
+--------------------------------------------------------------------------------
+
+Let's take a short side trip in our efforts to tie Prolog into more traditional
+logic.  There are three important things to remember about Prolog RULES:
+
+    1.  They are actually instances of the logical implication operator
+
+              "P implies Q"     when is this statement true?  When
+                                P is false or Q is true.
+
+    2.  They are implicitly universally quantified.
+
+    3.  Any variables that appear in other predicates, but not in the
+        left hand side predicate, are implicitly existentially quantified.
+
+
+This all makes sense if you think about it and analyze it!  Let's take an
+example:
+
+ 
+     bird(X) :- hasfeathers(X).
+
+
+This can be rewritten in FOPC as:
+
+     For all X, if hasfeathers(X) is true, then bird(X) is true.
+
+Or in English:
+
+     Anything that has feathers must be a bird.
+
+
+We want our rules to be usable at any point in our computation, so they
+must be universally true!  That is, their variables must be universally
+quantified.  We don't want a rule that says "some birds have feathers
+but some don't":
+
+     NOT  (For all X, if hasfeathers(X) is true, then bird(X) is true)
+
+because then we wouldn't know when we could use the rule!  What extra
+criterion would be need to know when we are dealing with a featherless
+bird?  So to simplify things, Prolog forces us to write universally
+true rules.
+
+
+By the way, bird(X) is the left hand side or LHS of the rule above,
+while anything to the right, hasfeathers(X) in this case, is the right
+hand side, or RHS.  Remember that the order of the implication is
+
+      RHS ==> LHS      The right hand side implies the left hand side.
+
+Beware of logical implication!  This does not mean
+
+      LHS ==> RHS
+
+Let's take an example:
+
+
+      (it is raining today) ==> (the sun isn't shining)
+
+
+Well, that is true, mostly!   The real world is always messier than
+any formal, logical system which we can construct.  But is the following
+true?
+
+
+      (the sun isn't shining) ==> (it is raining today) 
+
+
+No, because it might just be a cloudy day, without it also be raining!
+Thus, if P=>Q is true, then Q=>P might be true, or it might be false!
+
+That is,
+
+        P=>Q does not imply Q=>P
+
+(Aside:  If P=>Q and also Q=>P, then we say that P is equivalent to Q.
+That is, whenever one is true, then the other is also true.)
+
+
+So the moral of this lesson is that the direction on the implication
+arrow is quite important, and cannot be casually flipped around without
+a drastic change in the meaning and, pardon the pun, implications.
+Also, Prolog made our life difficult by its own weird syntax.  In your
+mind, just translate the :- into <==, so that you can read our example
+rule above as
+
+        bird(X) <== hasfeathers(X)
+
+and still think of it as "hasfeathers(X) implies bird(X)."
+
+Now let's take a rule that has more than one term on the RHS.  Let's
+make up a rule that expresses the sentiment:  my friends are your
+friends (assuming we are friends), or in other words, if I like you
+and you like somebody else, then I also like that somebody else:
+
+     like(Me,Somebody) :- like(Me,You), like(You,Somebody).
+
+Note how we can use logical variables other than X, Y, and Z to clarify
+the intent of our rule.  We should always put comments in as well, just
+to make absolutely clear our intent.
+
+Notice that the predicate like requires two arguments, and we use the
+variables "Me" and "Somebody".  By our first rule above, "Me" and
+"Somebody" are universally quantified, or in other words:
+
+     For All "Me" and for all "Somebody"
+
+          if like(Me,You) and like(You,Somebody)
+              then like(Me,Somebody)
+
+But what happens to "You"?  Is it a free variable or is it universally
+quantified?  Actually, it is existentially quantified, and this makes
+the most intuitive sense because what this rule says is 
+
+    "If there is a You whom I like, and that You likes Somebody,
+          the I like Somebody, 
+
+        and this is true no matter who I am and who Somebody is,
+          as long as there can be found one You that fits."
+
+So as long as there is one value for You that appears as argument 2
+of like and also as argument 1 of another like clause, then the rule
+works.  here's the final formulation
+
+     For All "Me" and for all "Somebody", there exists a "You"
+        such that
+            if like(Me,You) and like(You,Somebody)
+                then like(Me,Somebody)
+
+-----------------------------------------------------------------------------

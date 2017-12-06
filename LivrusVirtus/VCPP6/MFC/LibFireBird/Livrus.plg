@@ -1,0 +1,137 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Livrus - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x416 /fo"Debug/Livrus.res" /d "_DEBUG" "C:\LivrusVirtus\VCPP6\MFC\LibFireBird\Livrus.rc"" 
+Creating temporary file "C:\DOCUME~1\hfs\CONFIG~1\Temp\RSP198.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /I "C:\Arquivos de programas\Firebird\Firebird_1_5\include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/Livrus.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\AlterarSenha.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\CadAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\Cadastros.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\CadAutores.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\CadClientes.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\CadEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\CadEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\CadIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\CadLivros.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\CadPaises.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\CadProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConAutores.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConClientes.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConLivros.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConPaises.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\Consultas.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConsultasSQL.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\ConVendas.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\Filha.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\Livrus.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\Login.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\Principal.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\RotinasGlobais.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\Sobre.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\Splash.cpp"
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\VenderLivros.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\hfs\CONFIG~1\Temp\RSP198.tmp" 
+Creating temporary file "C:\DOCUME~1\hfs\CONFIG~1\Temp\RSP199.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /I "C:\Arquivos de programas\Firebird\Firebird_1_5\include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/Livrus.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\LivrusVirtus\VCPP6\MFC\LibFireBird\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\hfs\CONFIG~1\Temp\RSP199.tmp" 
+Creating temporary file "C:\DOCUME~1\hfs\CONFIG~1\Temp\RSP19A.tmp" with contents
+[
+fbclient_ms.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/Livrus.pdb" /debug /machine:I386 /out:"Debug/Livrus.exe" /pdbtype:sept /libpath:"C:\Arquivos de programas\Firebird\Firebird_1_5\lib" 
+.\Debug\AlterarSenha.obj
+.\Debug\CadAssuntos.obj
+.\Debug\Cadastros.obj
+.\Debug\CadAutores.obj
+.\Debug\CadClientes.obj
+.\Debug\CadEditoras.obj
+.\Debug\CadEnderecos.obj
+.\Debug\CadIdiomas.obj
+.\Debug\CadLivros.obj
+.\Debug\CadPaises.obj
+.\Debug\CadProfissoes.obj
+.\Debug\ConAssuntos.obj
+.\Debug\ConAutores.obj
+.\Debug\ConClientes.obj
+.\Debug\ConEditoras.obj
+.\Debug\ConEnderecos.obj
+.\Debug\ConIdiomas.obj
+.\Debug\ConLivros.obj
+.\Debug\ConPaises.obj
+.\Debug\ConProfissoes.obj
+.\Debug\Consultas.obj
+.\Debug\ConsultasSQL.obj
+.\Debug\ConVendas.obj
+.\Debug\Filha.obj
+.\Debug\Livrus.obj
+.\Debug\Login.obj
+.\Debug\Principal.obj
+.\Debug\RotinasGlobais.obj
+.\Debug\Sobre.obj
+.\Debug\Splash.obj
+.\Debug\StdAfx.obj
+.\Debug\VenderLivros.obj
+.\Debug\Livrus.res
+]
+Creating command line "link.exe @C:\DOCUME~1\hfs\CONFIG~1\Temp\RSP19A.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+AlterarSenha.cpp
+CadAssuntos.cpp
+Cadastros.cpp
+CadAutores.cpp
+CadClientes.cpp
+CadEditoras.cpp
+CadEnderecos.cpp
+CadIdiomas.cpp
+CadLivros.cpp
+CadPaises.cpp
+CadProfissoes.cpp
+ConAssuntos.cpp
+ConAutores.cpp
+ConClientes.cpp
+ConEditoras.cpp
+ConEnderecos.cpp
+ConIdiomas.cpp
+ConLivros.cpp
+ConPaises.cpp
+ConProfissoes.cpp
+Generating Code...
+Compiling...
+Consultas.cpp
+ConsultasSQL.cpp
+ConVendas.cpp
+Filha.cpp
+Livrus.cpp
+Login.cpp
+Principal.cpp
+RotinasGlobais.cpp
+Sobre.cpp
+Splash.cpp
+VenderLivros.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+Livrus.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

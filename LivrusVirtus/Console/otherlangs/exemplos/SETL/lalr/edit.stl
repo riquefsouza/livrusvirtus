@@ -1,0 +1,204 @@
+
+package simple_edits;
+
+   procedure edit_grammar;
+   procedure print_grammar;
+
+end simple_edits;
+
+package body simple_edits;
+
+   use globals;                        -- global symbols
+
+   --
+   --  edit_rules
+   --  ----------
+   --
+   --  When this procedure is called we've read all the input, but only
+   --  done a few crude checks on its validity.  Now we do some more
+   --  rigorous checking, and build some additional tables.
+   --
+
+   procedure edit_grammar;
+
+      for i in [1 .. num_rules] loop
+         rhs_list(i) := [symbol in rhs_list(i) | symbol >= 0];
+      end loop;
+
+      --
+      --  We would like to warn the user about any non-reachable rules in
+      --  the grammar.  We'll first find all the reachable non-terminals.
+      --  Every rule whose left hand side is not in this set is
+      --  unreachable.
+      --
+      --  We first build a map from lhs symbols to rhs symbols, then
+      --  use a workpile algorithm to find the reachable non-terminals.
+      --
+
+      propagate_map := {[lhs_list(i), s] :
+                        i in [1 .. num_rules], s in rhs_list(i) |
+                        s > num_terminals};
+      workpile := {accept_symbol_number};
+      useful_symbols := {accept_symbol_number};
+      
+      while (symbol from workpile) /= om loop
+
+         for rhs_symbol in propagate_map{symbol} |
+             rhs_symbol notin useful_symbols loop
+
+            useful_symbols with:= rhs_symbol;
+            workpile with:= rhs_symbol;
+
+         end loop;
+
+      end loop;
+
+      --
+      --  With the useful symbols in hand, we can easily print the
+      --  unreachable rules.
+      --
+
+      lhs_temp := {[lhs_list(i), i] : i in [1 .. num_rules]};
+      lhs_map := [lhs_temp{i} : i in [1 .. num_symbols]];
+      useless_symbols := {num_terminals + 1 .. num_symbols} - useful_symbols;
+      useless_rules := {} +/ {lhs_map(i) : i in useless_symbols};
+
+      if #useless_rules > 0 then
+
+         print("\n*Warning* : The following rule" +
+               if #useless_rules = 1 then " is"
+               else "s are" end if +
+               " unreachable");
+        
+         lhs_width := (max/[#s : s in symbol_list]) + 2;
+
+         for i in [1 .. num_rules] | i in useless_rules loop
+
+            line := lpad(str(i), 4) + "  " + 
+                    rpad(symbol_list(lhs_list(i)), lhs_width) + " ::="; 
+
+            for s in rhs_list(i) loop
+
+               print_sym := " " + symbol_list(s);
+
+               if #line + #print_sym > 78 then
+                  print(line);
+                  line := (lhs_width + 10) * " ";
+               end if;
+
+               line +:= print_sym;
+
+            end loop;
+
+            print(line);
+
+         end loop;
+
+      end if;
+
+      --
+      --  Now we need to find out if there are any non-terminals which do
+      --  not appear on the left hand side of any rule.  These are
+      --  clearly errors.
+      --
+
+      if (undefined_nonterminals :=
+          {s in [num_terminals + 1 .. num_symbols] | lhs_map(s) = {}}) /= {}
+             then
+         
+         print("\n*ERROR* : The following non-terminal" +
+               if #undefined_nonterminals = 1 then " is"
+               else "s are" end if +
+               " undefined");
+         for s in undefined_nonterminals loop
+            print("   ", symbol_list(s));
+         end loop;
+
+         error_count +:= 1;
+
+      end if;
+
+      useful_terminals := {s : rhs in rhs_list, s in rhs | 
+                               s <= num_terminals} +
+                          {error_symbol_number, eof_symbol_number};
+
+      if (useless_terminals := {1 .. num_terminals} - useful_terminals)
+                                /= {} then
+         
+         print("\n*Warning* : The following terminal" +
+               if #useless_terminals = 1 then " is" 
+               else "s are" end if +
+               " unused");
+         for s in useless_terminals loop
+            print("   ", symbol_list(s));
+         end loop;
+
+      end if;
+
+   end edit_grammar;
+
+   --
+   --  print_grammar
+   --  ------------
+   --
+   --  If the user asked for verbose output, we print the contents of
+   --  (some) of the tables we've loaded.
+   --
+
+   procedure print_grammar;
+
+      --
+      --  Print the terminals.
+      --
+
+      print("\nTERMINALS");
+      print("=========\n");
+
+      line := ""; 
+      for s in symbol_list(1 .. num_terminals) loop
+
+         if #line + #s + 1 > 78 then
+            print(line);
+            line := "";
+         end if;
+
+         line +:= s + " ";
+
+      end loop;
+      print(line);
+
+      --
+      --  Print the list of rules.
+      --
+
+      print("\nRULES");
+      print("=====\n");
+
+      lhs_width := (max/[#s : s in symbol_list]) + 2;
+
+      for i in [1 .. num_rules] loop
+
+         line := lpad(str(i), 4) + "  " + 
+                 rpad(symbol_list(lhs_list(i)), lhs_width) + " " +
+                 "::=";
+
+         for s in rhs_list(i) loop
+
+            print_sym := " " + symbol_list(s);
+
+            if #line + #print_sym > 78 then
+               print(line);
+               line := (lhs_width + 10) * " ";
+            end if;
+
+            line +:= print_sym;
+
+         end loop;
+
+         print(line);
+
+      end loop;
+
+   end print_grammar;
+
+end simple_edits;

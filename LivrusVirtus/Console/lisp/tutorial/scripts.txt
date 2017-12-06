@@ -1,0 +1,90 @@
+>>>>Section 1:
+
+(car '(1 2 3 5))
+(setq num-list '(1 2 3 5))
+(car num-list)
+(cdr num-list)
+(cons (car num-list) (cdr num-list))
+num-list
+(setq num-list (cons (car num-list) (cdr num-list)))
+num-list
+
+>>>>Section 2:
+
+(setq x '(mark sally kathy))
+(atom x)
+(setq x 5)
+(atom x)
+(not (atom x))
+(setq y (append x '(joe susan albert)))
+(length x)
+(length y)
+(+ (length x) (length y))
+(first x)
+(second x)
+(third x)
+(last x)
+(car (last x))
+(nth 0 x)
+(nth 1 x)
+(nth 2 x)
+(nth 3 x)
+(nth 4 x)
+
+>>>>Section 3:
+
+(setq temp (list 5))
+temp
+(car temp)
+(cdr temp)
+(length ())
+(length nil)
+(equal () nil)
+(setq x (list 'mark 'bobbie 'robert))
+x
+(equal 'mark (car x))
+(equal 'bobbie (second x))
+(equal 'bobbie (first x))
+
+>>>>Section 4:
+
+(setq x '(mark kathy sally))
+(listp x)
+(atom x)
+(equal nil x)
+(length (cdr (cdr x)))
+(equal nil (cdr (cdr (cdr x))))
+(numberp (car x))
+(numberp (+ 5 3))
+
+>>>>Section 5:
+
+(+ 5 2)
+(* 5 2)
+(- 5 2)
+(/ 5 2)
+(/ 6 2)
+(coerce (/ 5 2) 'float)
+(zerop 5)
+(oddp 5)
+(evenp 4)
+(evenp 5)
+(< 5 2)
+(> 5 2)
+(>= 5 2)
+(= 5 2)
+(= 5 (- 11 6))
+
+>>>>Section 6:
+
+(setq db '((mark 36) (kathy 25) (sally 55) (robert 60) (doran 30)))
+db
+(length db)
+(assoc 'kathy db)
+(cadr (assoc 'kathy db))
+(second (assoc 'kathy db))
+(setq db (delete (assoc 'sally db) db))
+db
+(length db)
+
+

@@ -1,0 +1,57 @@
+//  This is simple selection sort.
+
+//  First, write a min function to find the smallest number in a list:
+
+     (def smaller == (lss -> 1;2))
+     (def min == /smaller)        
+
+//  Now write a full list append function.  There is no built-in function in
+//  FP to append 2 arbitrary lists!
+
+     (def append == (null.2 -> 1;append.[apndr.[1,1.2],tl.2]))
+
+//  Let's test it out!  It should return <a,b,c,d,e,f>
+
+     append:<<a,b,c>,<d,e,f>> 
+
+
+//  Now a function to delete the first occurrence in a list of something.
+//  Notice the style behind the parentheses, not unlike LISP:
+
+     (def delete == delaux.[1,2,#nil])
+ 
+     (def delaux == (=.[1,1.2] -> append.[3,tl.2];
+                                  delaux.[1,tl.2,apndr.[3,1.2]]
+                    )
+     )
+
+//  Test it out.  It should return <1,2,3,5>
+
+     delete:<4,<1,2,3,4,5>>
+
+//  Now the full sort function.  sort just sets up things for sortaux, the
+//  real worker.  It has two parameters, which are both lists.  The first 
+//  is the old list that we started with, and keeps getting smaller as we 
+//  pluck numbers off the front.
+//  The second is the new list that we are building up.
+//  During each recursive call, we find the smallest number in the old
+//  list, tack it onto the end of new list, and delete it from the old list.
+
+     (def sort == sortaux.[id,#nil])
+
+     (def sortaux == (null.1 -> 2;sortaux.[delete.[min.1,1],apndr.[2,min.1]]))
+
+//  Try it out!
+                
+     sort:<7,2,5,9,4,3>
+
+// The inefficiency in the above is that we need to find the min twice!
+// This may not seem like a lot of work, but it effectively means that we
+// have to run through the entire list twice for each recursive step, so
+// that our program should be about twice as slow as it should be!  If only
+// we could find the min once, give it a name, and then use it in 2 different
+// places, we would avoid this.  Unfortunately, FP doesn't give us this
+// ability.  LISP and ML let us do this.  Note that we don't violate our
+// rule that we assign only once, because each recurrence of the function
+// has a new tempmin variable.
+end

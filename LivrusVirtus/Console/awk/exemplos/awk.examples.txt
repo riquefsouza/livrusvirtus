@@ -1,0 +1,253 @@
+Do nothing to the file, just echo it back (if no pattern is specified, then any
+line will match)
+
+         awk '{print}' file
+
+==============================================================================
+
+like "grep", find string "fleece"  (the {print} command is the default if 
+nothing is specified)
+
+         awk '/fleece/' file
+
+==============================================================================
+
+select lines 14 through 30 of file
+
+         awk 'NR==14, NR==30' file          
+
+==============================================================================
+
+select just one line of a file
+
+         awk 'NR==12' file
+         awk "NR==$1" file
+
+==============================================================================
+
+rearrange fields 1 and 2 and put colon in between
+
+         awk '{print $2 ":" $1}' file       
+
+==============================================================================
+
+all lines between BEGIN and END lines (you can substitute any strings for 
+BEGIN and END, but they must be between slashes)
+
+         awk '/BEGIN/,/END/' file           
+
+==============================================================================
+
+print number of lines in file (of course wc -l does this, too)
+
+         awk 'END{print NR}' file           
+
+==============================================================================
+
+substitute every occurrence of a string XYZ by the new string ABC:
+Requires nawk.
+
+         nawk '{gsub(/XYZ/,"ABC"); print}' file
+
+==============================================================================
+
+print 3rd field from each line, but the colon is the field separate
+
+         awk -F: '{print $3}' file 
+
+==============================================================================
+
+Print out the last field in each line, regardless of how many fields:
+
+         awk '{print $NF}' file
+
+==============================================================================
+
+To print out a file with line numbers at the edge:
+
+         awk '{print NR, $0}' somefile
+
+This is less than optimal because as the line number gets longer in digits,
+the lines get shifted over.  Thus, use printf:
+
+         awk '{printf "%3d %s", NR, $0}' somefile
+
+==============================================================================
+
+Print out lengths of lines in the file
+
+         awk '{print length($0)}' somefile
+    or
+         awk '{print length}' somefile
+
+==============================================================================
+
+Print out lines and line numbers that are longer than 80 characters
+
+         awk 'length > 80 {printf "%3d. %s\n", NR, $0}' somefile
+
+==============================================================================
+
+Total up the lengths of files in characters that results from "ls -l"
+
+         ls -l | awk 'BEGIN{total=0} {total += $4} END{print total}'
+
+==============================================================================
+
+Print out the longest line in a file
+
+         awk 'BEGIN {maxlength = 0}                 \
+              {                                     \
+                    if (length($0) > maxlength) {   \
+                         maxlength = length($0)     \
+                         longest = $0               \
+                    }                               \
+              }                                     \
+              END   {print longest}' somefile
+            
+==============================================================================
+
+How many entirely blank lines are in a file?
+
+         awk  '/^$/ {x++} END {print x}' somefile
+
+==============================================================================
+
+Print out last character of field 1 of every line
+
+         awk '{print substr($1,length($1),1)}' somefile
+
+==============================================================================
+
+comment out only #include statements in a C file.  This is useful if you want 
+to run "cxref" which will follow the include links.
+
+         awk '/#include/{printf "/* %s */\n", $0; next} {print}'   \
+              file.c | cxref -c $*
+
+==============================================================================
+
+If the last character of a line is a colon, print out the line.  This would be 
+useful in getting the pathname from output of ls -lR:
+
+        awk '{                                      \
+              lastchar = substr($0,length($0),1)    \
+              if (lastchar == ":")                  \
+                    print $0                        \
+             }' somefile
+
+    Here is the complete thing....Note that it even sorts the final output
+
+       ls -lR |  awk '{                                              \
+                lastchar = substr($0,length($0),1)                   \
+                if (lastchar == ":")                                 \
+                     dirname = substr($0,1,length($0)-1)             \
+                else                                                 \
+                     if ($4 > 20000)                                 \
+                          printf "%10d %25s %s\n", $4, dirname, $8   \
+               }' | sort -r
+
+==============================================================================
+
+The following is used to break all long lines of a file into chunks of
+length 80:
+
+       awk '{ line = $0
+              while (length(line) > 80) {
+                    print substr(line,1,80)
+                    line = substr(line,81,length(line)-80)
+              }
+              if (length(line) > 0) print line
+            } somefile.with.long.lines > whatever
+
+==============================================================================
+
+If you want to use awk as a programming language, you can do so by not
+processing any file, but by enclosing a bunch of awk commands in curly braces, 
+activated upon end of file.  To use a standard UNIX "file" that has no lines, 
+use /dev/null.  Here's a simple example:
+
+       awk 'END{print "hi there everyone"}' < /dev/null
+
+Here's an example of using this to print out the ASCII characters:
+
+       awk 'END{for (i=32; i<127; i++)            \
+                    printf "%3d %3o %c\n", i,i,i  \
+               }' < /dev/null
+
+==============================================================================
+
+Sometimes you wish to find a field which has some identifying tag, like
+X= in front.  Suppose your file looked like:
+
+          50 30 X=10 Y=100 Z=-2
+          X=12 89 100 32 Y=900
+          1 2 3 4 5 6 X=1000
+
+Then to select out the X= numbers from each do
+
+       awk '{ for (i=1; i<=NF; i++)        \
+                  if ($i ~ /X=.*/)         \
+                      print substr($i,3)   \
+            }' playfile1
+
+Note that we used a regular expression to find the initial part: /X=.*/
+
+==============================================================================
+
+Pull an abbreviation out of a file of abbreviations and their translation.
+Actually, this can be used to translate anything, where the first field
+is the thing you are looking up and the 2nd field is what you want to 
+output as the translation.
+
+       nawk '$1 == abbrev{print $2}' abbrev=$1 translate.file
+
+==============================================================================
+
+Join lines in a file that end in a dash.  That is, if any line ends in
+-, join it to the next line.  This only joins 2 lines at a time.  The
+dash is removed.
+
+       awk '/-$/  {oldline = $0                                    \
+                   getline                                         \
+                   print substr(oldline,1,length(oldline)-1) $0    \
+                   next}                                           \
+            {print}' somefile
+
+==============================================================================
+
+Function in nawk to round:
+
+       function round(n)
+       {
+           return int(n+0.5)
+       }
+
+==============================================================================
+
+If you have a file of addresses with empty lines between the sections,
+you can use the following to search for strings in a section, and print
+out the whole section.  Put the following into a file called "section.awk":
+
+         BEGIN  {FS = "\n"; RS = ""; OFS = "\n"}
+         $0 ~ searchstring { print }
+
+Assume your names are in a file called "rolodex".
+Then use the following nawk command when you want to find a section
+that contains a string.  In this example, it is a person's name:
+
+         nawk -f section.awk searchstring=Wolf rolodex
+
+Here's a sample rolodex file:
+
+         Big Bad Wolf
+         101 Garden Lane
+         Dark Forest, NY  14214
+
+         Grandma
+         102 Garden Lane
+         Dark Forest, NY  14214
+         home phone:  471-1900
+         work phone:  372-8882
+
+==============================================================================

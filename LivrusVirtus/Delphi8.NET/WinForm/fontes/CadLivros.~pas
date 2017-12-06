@@ -1,0 +1,884 @@
+unit CadLivros;
+
+interface
+
+uses
+  System.Drawing, System.Collections, System.ComponentModel,
+  System.Windows.Forms, System.Data, Cadastros;
+
+type
+  frmCadLivros = class(Cadastros.frmCadastros)
+  {$REGION 'Designer Managed Code'}
+  strict private
+    /// <summary>
+    /// Required designer variable.
+    /// </summary>
+    Components: System.ComponentModel.Container;
+    labEdicao: System.Windows.Forms.Label;
+    edtEdicao: System.Windows.Forms.NumericUpDown;
+    edtAnoPubli: System.Windows.Forms.NumericUpDown;
+    labAnoPubli: System.Windows.Forms.Label;
+    btnPAssunto: System.Windows.Forms.Button;
+    edtAssunto: System.Windows.Forms.TextBox;
+    edtCodAssunto: System.Windows.Forms.TextBox;
+    labAssunto: System.Windows.Forms.Label;
+    btnPEditora: System.Windows.Forms.Button;
+    edtEditora: System.Windows.Forms.TextBox;
+    edtCodEditora: System.Windows.Forms.TextBox;
+    labEditora: System.Windows.Forms.Label;
+    btnAdAssuntos: System.Windows.Forms.Button;
+    edtVolume: System.Windows.Forms.NumericUpDown;
+    labVolume: System.Windows.Forms.Label;
+    edtNPaginas: System.Windows.Forms.NumericUpDown;
+    labNPaginas: System.Windows.Forms.Label;
+    labIdioma: System.Windows.Forms.Label;
+    cmbIdioma: System.Windows.Forms.ComboBox;
+    lstAssuntos: System.Windows.Forms.ListBox;
+    labPreco: System.Windows.Forms.Label;
+    edtPreco: System.Windows.Forms.TextBox;
+    edtQtdEstoque: System.Windows.Forms.NumericUpDown;
+    labQtdEstoque: System.Windows.Forms.Label;
+    lstAutores: System.Windows.Forms.ListBox;
+    btnAdAutores: System.Windows.Forms.Button;
+    btnPAutor: System.Windows.Forms.Button;
+    edtAutor: System.Windows.Forms.TextBox;
+    edtCodAutor: System.Windows.Forms.TextBox;
+    labAutor: System.Windows.Forms.Label;
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    procedure InitializeComponent;
+    procedure frmCadLivros_Closing(sender: System.Object; e: System.ComponentModel.CancelEventArgs);
+    procedure btnPesquisar_Click(sender: System.Object; e: System.EventArgs);
+    procedure btnSalvar_Click(sender: System.Object; e: System.EventArgs);
+    procedure btnExcluir_Click(sender: System.Object; e: System.EventArgs);
+    procedure btnFechar_Click(sender: System.Object; e: System.EventArgs);
+    procedure frmCadLivros_Load(sender: System.Object; e: System.EventArgs);
+    procedure AdicionaCombo;
+    procedure SalvaLista(sOpcao: char);
+    procedure edtCodigo_Leave(sender: System.Object; e: System.EventArgs);
+    procedure edtCodEditora_Leave(sender: System.Object; e: System.EventArgs);
+    procedure btnPEditora_Click(sender: System.Object; e: System.EventArgs);
+    procedure edtPreco_Leave(sender: System.Object; e: System.EventArgs);
+    procedure edtCodAssunto_Leave(sender: System.Object; e: System.EventArgs);
+    procedure edtCodAutor_Leave(sender: System.Object; e: System.EventArgs);
+    procedure btnPAssunto_Click(sender: System.Object; e: System.EventArgs);
+    procedure btnPAutor_Click(sender: System.Object; e: System.EventArgs);
+    procedure btnAdAssuntos_Click(sender: System.Object; e: System.EventArgs);
+    procedure lstAssuntos_DoubleClick(sender: System.Object; e: System.EventArgs);
+    procedure btnAdAutores_Click(sender: System.Object; e: System.EventArgs);
+    procedure lstAutores_DoubleClick(sender: System.Object; e: System.EventArgs);
+  {$ENDREGION}
+  strict protected
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    procedure Dispose(Disposing: Boolean); override;
+    function ValidaDados(bTodosDados: boolean): boolean; override;
+    procedure InformaLimpaDados(bInformar: boolean); override;
+    procedure HabilitaDados(bHabilita: boolean); override;
+  private
+    { Private Declarations }
+    slIdiomas, slAssuntos, slAutores, ConsCampo, ConsLista: ArrayList;
+  public
+    constructor Create;
+  end;
+
+  [assembly: RuntimeRequiredAttribute(TypeOf(frmCadLivros))]
+
+var fCadLivros: frmCadLivros;
+
+implementation
+
+uses Principal, ConsultasSQL, RotinasGlobais, ConEditoras, ConAssuntos,
+  ConAutores;
+
+{$AUTOBOX ON}
+
+{$REGION 'Windows Form Designer generated code'}
+/// <summary>
+/// Required method for Designer support -- do not modify
+/// the contents of this method with the code editor.
+/// </summary>
+procedure frmCadLivros.InitializeComponent;
+type
+  TArrayOfInteger = array of Integer;
+begin
+  Self.labEdicao := System.Windows.Forms.Label.Create;
+  Self.edtEdicao := System.Windows.Forms.NumericUpDown.Create;
+  Self.edtAnoPubli := System.Windows.Forms.NumericUpDown.Create;
+  Self.labAnoPubli := System.Windows.Forms.Label.Create;
+  Self.btnPAssunto := System.Windows.Forms.Button.Create;
+  Self.edtAssunto := System.Windows.Forms.TextBox.Create;
+  Self.edtCodAssunto := System.Windows.Forms.TextBox.Create;
+  Self.labAssunto := System.Windows.Forms.Label.Create;
+  Self.btnPEditora := System.Windows.Forms.Button.Create;
+  Self.edtEditora := System.Windows.Forms.TextBox.Create;
+  Self.edtCodEditora := System.Windows.Forms.TextBox.Create;
+  Self.labEditora := System.Windows.Forms.Label.Create;
+  Self.btnAdAssuntos := System.Windows.Forms.Button.Create;
+  Self.edtVolume := System.Windows.Forms.NumericUpDown.Create;
+  Self.labVolume := System.Windows.Forms.Label.Create;
+  Self.edtNPaginas := System.Windows.Forms.NumericUpDown.Create;
+  Self.labNPaginas := System.Windows.Forms.Label.Create;
+  Self.labIdioma := System.Windows.Forms.Label.Create;
+  Self.cmbIdioma := System.Windows.Forms.ComboBox.Create;
+  Self.lstAssuntos := System.Windows.Forms.ListBox.Create;
+  Self.labPreco := System.Windows.Forms.Label.Create;
+  Self.edtPreco := System.Windows.Forms.TextBox.Create;
+  Self.edtQtdEstoque := System.Windows.Forms.NumericUpDown.Create;
+  Self.labQtdEstoque := System.Windows.Forms.Label.Create;
+  Self.lstAutores := System.Windows.Forms.ListBox.Create;
+  Self.btnAdAutores := System.Windows.Forms.Button.Create;
+  Self.btnPAutor := System.Windows.Forms.Button.Create;
+  Self.edtAutor := System.Windows.Forms.TextBox.Create;
+  Self.edtCodAutor := System.Windows.Forms.TextBox.Create;
+  Self.labAutor := System.Windows.Forms.Label.Create;
+  (System.ComponentModel.ISupportInitialize(Self.edtEdicao)).BeginInit;
+  (System.ComponentModel.ISupportInitialize(Self.edtAnoPubli)).BeginInit;
+  (System.ComponentModel.ISupportInitialize(Self.edtVolume)).BeginInit;
+  (System.ComponentModel.ISupportInitialize(Self.edtNPaginas)).BeginInit;
+  (System.ComponentModel.ISupportInitialize(Self.edtQtdEstoque)).BeginInit;
+  Self.SuspendLayout;
+  // 
+  // labCodigo
+  // 
+  Self.labCodigo.Name := 'labCodigo';
+  Self.labCodigo.Text := 'ISBN:';
+  // 
+  // edtCodigo
+  // 
+  Self.edtCodigo.MaxLength := 13;
+  Self.edtCodigo.Name := 'edtCodigo';
+  // 
+  // labDescricao
+  // 
+  Self.labDescricao.Name := 'labDescricao';
+  Self.labDescricao.Text := 'Título:';
+  // 
+  // edtDescricao
+  // 
+  Self.edtDescricao.Name := 'edtDescricao';
+  Self.edtDescricao.Size := System.Drawing.Size.Create(304, 20);
+  // 
+  // btnNovo
+  // 
+  Self.btnNovo.Name := 'btnNovo';
+  // 
+  // btnPesquisar
+  // 
+  Self.btnPesquisar.Location := System.Drawing.Point.Create(440, 8);
+  Self.btnPesquisar.Name := 'btnPesquisar';
+  // 
+  // btnAnterior
+  // 
+  Self.btnAnterior.Location := System.Drawing.Point.Create(440, 40);
+  Self.btnAnterior.Name := 'btnAnterior';
+  // 
+  // btnProximo
+  // 
+  Self.btnProximo.Location := System.Drawing.Point.Create(440, 72);
+  Self.btnProximo.Name := 'btnProximo';
+  // 
+  // btnFechar
+  // 
+  Self.btnFechar.Location := System.Drawing.Point.Create(440, 352);
+  Self.btnFechar.Name := 'btnFechar';
+  // 
+  // btnLimpar
+  // 
+  Self.btnLimpar.Location := System.Drawing.Point.Create(360, 352);
+  Self.btnLimpar.Name := 'btnLimpar';
+  // 
+  // btnExcluir
+  // 
+  Self.btnExcluir.Location := System.Drawing.Point.Create(280, 352);
+  Self.btnExcluir.Name := 'btnExcluir';
+  // 
+  // btnSalvar
+  // 
+  Self.btnSalvar.Location := System.Drawing.Point.Create(200, 352);
+  Self.btnSalvar.Name := 'btnSalvar';
+  // 
+  // labEdicao
+  // 
+  Self.labEdicao.Location := System.Drawing.Point.Create(320, 48);
+  Self.labEdicao.Name := 'labEdicao';
+  Self.labEdicao.Size := System.Drawing.Size.Create(48, 16);
+  Self.labEdicao.TabIndex := 5;
+  Self.labEdicao.Text := 'Edição';
+  // 
+  // edtEdicao
+  // 
+  Self.edtEdicao.Enabled := False;
+  Self.edtEdicao.Location := System.Drawing.Point.Create(320, 64);
+  Self.edtEdicao.Maximum := System.Decimal.Create(TArrayOfInteger.Create(9999, 
+          0, 0, 0));
+  Self.edtEdicao.Minimum := System.Decimal.Create(TArrayOfInteger.Create(1, 0, 
+          0, 0));
+  Self.edtEdicao.Name := 'edtEdicao';
+  Self.edtEdicao.Size := System.Drawing.Size.Create(104, 20);
+  Self.edtEdicao.TabIndex := 6;
+  Self.edtEdicao.Value := System.Decimal.Create(TArrayOfInteger.Create(1, 0, 
+          0, 0));
+  // 
+  // edtAnoPubli
+  // 
+  Self.edtAnoPubli.Enabled := False;
+  Self.edtAnoPubli.Location := System.Drawing.Point.Create(8, 104);
+  Self.edtAnoPubli.Maximum := System.Decimal.Create(TArrayOfInteger.Create(9999, 
+          0, 0, 0));
+  Self.edtAnoPubli.Minimum := System.Decimal.Create(TArrayOfInteger.Create(1, 
+          0, 0, 0));
+  Self.edtAnoPubli.Name := 'edtAnoPubli';
+  Self.edtAnoPubli.Size := System.Drawing.Size.Create(88, 20);
+  Self.edtAnoPubli.TabIndex := 8;
+  Self.edtAnoPubli.Value := System.Decimal.Create(TArrayOfInteger.Create(2004, 
+          0, 0, 0));
+  // 
+  // labAnoPubli
+  // 
+  Self.labAnoPubli.Location := System.Drawing.Point.Create(8, 88);
+  Self.labAnoPubli.Name := 'labAnoPubli';
+  Self.labAnoPubli.Size := System.Drawing.Size.Create(88, 16);
+  Self.labAnoPubli.TabIndex := 7;
+  Self.labAnoPubli.Text := 'Ano Publicação:';
+  // 
+  // btnPAssunto
+  // 
+  Self.btnPAssunto.Enabled := False;
+  Self.btnPAssunto.Location := System.Drawing.Point.Create(408, 184);
+  Self.btnPAssunto.Name := 'btnPAssunto';
+  Self.btnPAssunto.Size := System.Drawing.Size.Create(22, 20);
+  Self.btnPAssunto.TabIndex := 23;
+  Self.btnPAssunto.Text := '...';
+  Include(Self.btnPAssunto.Click, Self.btnPAssunto_Click);
+  // 
+  // edtAssunto
+  // 
+  Self.edtAssunto.Enabled := False;
+  Self.edtAssunto.Location := System.Drawing.Point.Create(184, 184);
+  Self.edtAssunto.MaxLength := 30;
+  Self.edtAssunto.Name := 'edtAssunto';
+  Self.edtAssunto.Size := System.Drawing.Size.Create(200, 20);
+  Self.edtAssunto.TabIndex := 21;
+  Self.edtAssunto.Text := '';
+  // 
+  // edtCodAssunto
+  // 
+  Self.edtCodAssunto.Enabled := False;
+  Self.edtCodAssunto.Location := System.Drawing.Point.Create(100, 184);
+  Self.edtCodAssunto.MaxLength := 10;
+  Self.edtCodAssunto.Name := 'edtCodAssunto';
+  Self.edtCodAssunto.Size := System.Drawing.Size.Create(80, 20);
+  Self.edtCodAssunto.TabIndex := 20;
+  Self.edtCodAssunto.Text := '';
+  Include(Self.edtCodAssunto.Leave, Self.edtCodAssunto_Leave);
+  // 
+  // labAssunto
+  // 
+  Self.labAssunto.Location := System.Drawing.Point.Create(100, 168);
+  Self.labAssunto.Name := 'labAssunto';
+  Self.labAssunto.Size := System.Drawing.Size.Create(68, 16);
+  Self.labAssunto.TabIndex := 19;
+  Self.labAssunto.Text := 'Assunto:';
+  // 
+  // btnPEditora
+  // 
+  Self.btnPEditora.Enabled := False;
+  Self.btnPEditora.Location := System.Drawing.Point.Create(400, 104);
+  Self.btnPEditora.Name := 'btnPEditora';
+  Self.btnPEditora.Size := System.Drawing.Size.Create(22, 20);
+  Self.btnPEditora.TabIndex := 12;
+  Self.btnPEditora.Text := '...';
+  Include(Self.btnPEditora.Click, Self.btnPEditora_Click);
+  // 
+  // edtEditora
+  // 
+  Self.edtEditora.Enabled := False;
+  Self.edtEditora.Location := System.Drawing.Point.Create(184, 104);
+  Self.edtEditora.MaxLength := 30;
+  Self.edtEditora.Name := 'edtEditora';
+  Self.edtEditora.Size := System.Drawing.Size.Create(216, 20);
+  Self.edtEditora.TabIndex := 11;
+  Self.edtEditora.Text := '';
+  // 
+  // edtCodEditora
+  // 
+  Self.edtCodEditora.Enabled := False;
+  Self.edtCodEditora.Location := System.Drawing.Point.Create(100, 104);
+  Self.edtCodEditora.MaxLength := 10;
+  Self.edtCodEditora.Name := 'edtCodEditora';
+  Self.edtCodEditora.Size := System.Drawing.Size.Create(80, 20);
+  Self.edtCodEditora.TabIndex := 10;
+  Self.edtCodEditora.Text := '';
+  Include(Self.edtCodEditora.Leave, Self.edtCodEditora_Leave);
+  // 
+  // labEditora
+  // 
+  Self.labEditora.Location := System.Drawing.Point.Create(100, 88);
+  Self.labEditora.Name := 'labEditora';
+  Self.labEditora.Size := System.Drawing.Size.Create(52, 16);
+  Self.labEditora.TabIndex := 9;
+  Self.labEditora.Text := 'Editora:';
+  // 
+  // btnAdAssuntos
+  // 
+  Self.btnAdAssuntos.Enabled := False;
+  Self.btnAdAssuntos.Location := System.Drawing.Point.Create(384, 184);
+  Self.btnAdAssuntos.Name := 'btnAdAssuntos';
+  Self.btnAdAssuntos.Size := System.Drawing.Size.Create(22, 20);
+  Self.btnAdAssuntos.TabIndex := 22;
+  Self.btnAdAssuntos.Text := '+';
+  Include(Self.btnAdAssuntos.Click, Self.btnAdAssuntos_Click);
+  // 
+  // edtVolume
+  // 
+  Self.edtVolume.Enabled := False;
+  Self.edtVolume.Location := System.Drawing.Point.Create(8, 144);
+  Self.edtVolume.Maximum := System.Decimal.Create(TArrayOfInteger.Create(9999, 
+          0, 0, 0));
+  Self.edtVolume.Minimum := System.Decimal.Create(TArrayOfInteger.Create(1, 0, 
+          0, 0));
+  Self.edtVolume.Name := 'edtVolume';
+  Self.edtVolume.Size := System.Drawing.Size.Create(88, 20);
+  Self.edtVolume.TabIndex := 14;
+  Self.edtVolume.Value := System.Decimal.Create(TArrayOfInteger.Create(1, 0, 
+          0, 0));
+  // 
+  // labVolume
+  // 
+  Self.labVolume.Location := System.Drawing.Point.Create(8, 128);
+  Self.labVolume.Name := 'labVolume';
+  Self.labVolume.Size := System.Drawing.Size.Create(56, 16);
+  Self.labVolume.TabIndex := 13;
+  Self.labVolume.Text := 'Volume:';
+  // 
+  // edtNPaginas
+  // 
+  Self.edtNPaginas.Enabled := False;
+  Self.edtNPaginas.Location := System.Drawing.Point.Create(8, 184);
+  Self.edtNPaginas.Maximum := System.Decimal.Create(TArrayOfInteger.Create(9999, 
+          0, 0, 0));
+  Self.edtNPaginas.Minimum := System.Decimal.Create(TArrayOfInteger.Create(1, 
+          0, 0, 0));
+  Self.edtNPaginas.Name := 'edtNPaginas';
+  Self.edtNPaginas.Size := System.Drawing.Size.Create(88, 20);
+  Self.edtNPaginas.TabIndex := 18;
+  Self.edtNPaginas.Value := System.Decimal.Create(TArrayOfInteger.Create(1, 0, 
+          0, 0));
+  // 
+  // labNPaginas
+  // 
+  Self.labNPaginas.Location := System.Drawing.Point.Create(8, 168);
+  Self.labNPaginas.Name := 'labNPaginas';
+  Self.labNPaginas.Size := System.Drawing.Size.Create(64, 16);
+  Self.labNPaginas.TabIndex := 17;
+  Self.labNPaginas.Text := 'Nº Páginas:';
+  // 
+  // labIdioma
+  // 
+  Self.labIdioma.Location := System.Drawing.Point.Create(100, 128);
+  Self.labIdioma.Name := 'labIdioma';
+  Self.labIdioma.Size := System.Drawing.Size.Create(60, 16);
+  Self.labIdioma.TabIndex := 15;
+  Self.labIdioma.Text := 'Idioma:';
+  // 
+  // cmbIdioma
+  // 
+  Self.cmbIdioma.Enabled := False;
+  Self.cmbIdioma.Location := System.Drawing.Point.Create(100, 144);
+  Self.cmbIdioma.Name := 'cmbIdioma';
+  Self.cmbIdioma.Size := System.Drawing.Size.Create(328, 21);
+  Self.cmbIdioma.TabIndex := 16;
+  // 
+  // lstAssuntos
+  // 
+  Self.lstAssuntos.Enabled := False;
+  Self.lstAssuntos.Location := System.Drawing.Point.Create(100, 208);
+  Self.lstAssuntos.Name := 'lstAssuntos';
+  Self.lstAssuntos.Size := System.Drawing.Size.Create(332, 43);
+  Self.lstAssuntos.TabIndex := 24;
+  Include(Self.lstAssuntos.DoubleClick, Self.lstAssuntos_DoubleClick);
+  // 
+  // labPreco
+  // 
+  Self.labPreco.Location := System.Drawing.Point.Create(8, 212);
+  Self.labPreco.Name := 'labPreco';
+  Self.labPreco.Size := System.Drawing.Size.Create(64, 16);
+  Self.labPreco.TabIndex := 25;
+  Self.labPreco.Text := 'Preço:';
+  // 
+  // edtPreco
+  // 
+  Self.edtPreco.Enabled := False;
+  Self.edtPreco.Location := System.Drawing.Point.Create(8, 231);
+  Self.edtPreco.Name := 'edtPreco';
+  Self.edtPreco.Size := System.Drawing.Size.Create(88, 20);
+  Self.edtPreco.TabIndex := 26;
+  Self.edtPreco.Text := '';
+  Include(Self.edtPreco.Leave, Self.edtPreco_Leave);
+  // 
+  // edtQtdEstoque
+  // 
+  Self.edtQtdEstoque.Enabled := False;
+  Self.edtQtdEstoque.Location := System.Drawing.Point.Create(8, 272);
+  Self.edtQtdEstoque.Maximum := System.Decimal.Create(TArrayOfInteger.Create(9999, 
+          0, 0, 0));
+  Self.edtQtdEstoque.Name := 'edtQtdEstoque';
+  Self.edtQtdEstoque.Size := System.Drawing.Size.Create(88, 20);
+  Self.edtQtdEstoque.TabIndex := 28;
+  // 
+  // labQtdEstoque
+  // 
+  Self.labQtdEstoque.Location := System.Drawing.Point.Create(8, 256);
+  Self.labQtdEstoque.Name := 'labQtdEstoque';
+  Self.labQtdEstoque.Size := System.Drawing.Size.Create(80, 16);
+  Self.labQtdEstoque.TabIndex := 27;
+  Self.labQtdEstoque.Text := 'Qtd. Estoque:';
+  // 
+  // lstAutores
+  // 
+  Self.lstAutores.Enabled := False;
+  Self.lstAutores.Location := System.Drawing.Point.Create(100, 296);
+  Self.lstAutores.Name := 'lstAutores';
+  Self.lstAutores.Size := System.Drawing.Size.Create(332, 43);
+  Self.lstAutores.TabIndex := 34;
+  Include(Self.lstAutores.DoubleClick, Self.lstAutores_DoubleClick);
+  // 
+  // btnAdAutores
+  // 
+  Self.btnAdAutores.Enabled := False;
+  Self.btnAdAutores.Location := System.Drawing.Point.Create(384, 272);
+  Self.btnAdAutores.Name := 'btnAdAutores';
+  Self.btnAdAutores.Size := System.Drawing.Size.Create(22, 20);
+  Self.btnAdAutores.TabIndex := 32;
+  Self.btnAdAutores.Text := '+';
+  Include(Self.btnAdAutores.Click, Self.btnAdAutores_Click);
+  // 
+  // btnPAutor
+  // 
+  Self.btnPAutor.Enabled := False;
+  Self.btnPAutor.Location := System.Drawing.Point.Create(408, 272);
+  Self.btnPAutor.Name := 'btnPAutor';
+  Self.btnPAutor.Size := System.Drawing.Size.Create(22, 20);
+  Self.btnPAutor.TabIndex := 33;
+  Self.btnPAutor.Text := '...';
+  Include(Self.btnPAutor.Click, Self.btnPAutor_Click);
+  // 
+  // edtAutor
+  // 
+  Self.edtAutor.Enabled := False;
+  Self.edtAutor.Location := System.Drawing.Point.Create(184, 272);
+  Self.edtAutor.MaxLength := 30;
+  Self.edtAutor.Name := 'edtAutor';
+  Self.edtAutor.Size := System.Drawing.Size.Create(200, 20);
+  Self.edtAutor.TabIndex := 31;
+  Self.edtAutor.Text := '';
+  // 
+  // edtCodAutor
+  // 
+  Self.edtCodAutor.Enabled := False;
+  Self.edtCodAutor.Location := System.Drawing.Point.Create(100, 272);
+  Self.edtCodAutor.MaxLength := 10;
+  Self.edtCodAutor.Name := 'edtCodAutor';
+  Self.edtCodAutor.Size := System.Drawing.Size.Create(80, 20);
+  Self.edtCodAutor.TabIndex := 30;
+  Self.edtCodAutor.Text := '';
+  Include(Self.edtCodAutor.Leave, Self.edtCodAutor_Leave);
+  // 
+  // labAutor
+  // 
+  Self.labAutor.Location := System.Drawing.Point.Create(100, 256);
+  Self.labAutor.Name := 'labAutor';
+  Self.labAutor.Size := System.Drawing.Size.Create(68, 16);
+  Self.labAutor.TabIndex := 29;
+  Self.labAutor.Text := 'Autor:';
+  // 
+  // frmCadLivros
+  // 
+  Self.AutoScaleBaseSize := System.Drawing.Size.Create(5, 13);
+  Self.ClientSize := System.Drawing.Size.Create(520, 381);
+  Self.Controls.Add(Self.lstAutores);
+  Self.Controls.Add(Self.btnAdAutores);
+  Self.Controls.Add(Self.btnPAutor);
+  Self.Controls.Add(Self.edtAutor);
+  Self.Controls.Add(Self.edtCodAutor);
+  Self.Controls.Add(Self.labAutor);
+  Self.Controls.Add(Self.edtQtdEstoque);
+  Self.Controls.Add(Self.labQtdEstoque);
+  Self.Controls.Add(Self.edtPreco);
+  Self.Controls.Add(Self.labPreco);
+  Self.Controls.Add(Self.lstAssuntos);
+  Self.Controls.Add(Self.cmbIdioma);
+  Self.Controls.Add(Self.labIdioma);
+  Self.Controls.Add(Self.edtNPaginas);
+  Self.Controls.Add(Self.labNPaginas);
+  Self.Controls.Add(Self.edtVolume);
+  Self.Controls.Add(Self.labVolume);
+  Self.Controls.Add(Self.btnAdAssuntos);
+  Self.Controls.Add(Self.btnPAssunto);
+  Self.Controls.Add(Self.edtAssunto);
+  Self.Controls.Add(Self.edtCodAssunto);
+  Self.Controls.Add(Self.labAssunto);
+  Self.Controls.Add(Self.btnPEditora);
+  Self.Controls.Add(Self.edtEditora);
+  Self.Controls.Add(Self.edtCodEditora);
+  Self.Controls.Add(Self.labEditora);
+  Self.Controls.Add(Self.edtAnoPubli);
+  Self.Controls.Add(Self.labAnoPubli);
+  Self.Controls.Add(Self.edtEdicao);
+  Self.Controls.Add(Self.labEdicao);
+  Self.Name := 'frmCadLivros';
+  Self.Text := 'Cadastro de Livros';
+  Include(Self.Closing, Self.frmCadLivros_Closing);
+  Include(Self.Load, Self.frmCadLivros_Load);
+  Self.Controls.SetChildIndex(Self.labCodigo, 0);
+  Self.Controls.SetChildIndex(Self.edtCodigo, 0);
+  Self.Controls.SetChildIndex(Self.labDescricao, 0);
+  Self.Controls.SetChildIndex(Self.edtDescricao, 0);
+  Self.Controls.SetChildIndex(Self.btnNovo, 0);
+  Self.Controls.SetChildIndex(Self.btnPesquisar, 0);
+  Self.Controls.SetChildIndex(Self.btnAnterior, 0);
+  Self.Controls.SetChildIndex(Self.btnProximo, 0);
+  Self.Controls.SetChildIndex(Self.btnFechar, 0);
+  Self.Controls.SetChildIndex(Self.btnLimpar, 0);
+  Self.Controls.SetChildIndex(Self.btnExcluir, 0);
+  Self.Controls.SetChildIndex(Self.btnSalvar, 0);
+  Self.Controls.SetChildIndex(Self.labEdicao, 0);
+  Self.Controls.SetChildIndex(Self.edtEdicao, 0);
+  Self.Controls.SetChildIndex(Self.labAnoPubli, 0);
+  Self.Controls.SetChildIndex(Self.edtAnoPubli, 0);
+  Self.Controls.SetChildIndex(Self.labEditora, 0);
+  Self.Controls.SetChildIndex(Self.edtCodEditora, 0);
+  Self.Controls.SetChildIndex(Self.edtEditora, 0);
+  Self.Controls.SetChildIndex(Self.btnPEditora, 0);
+  Self.Controls.SetChildIndex(Self.labAssunto, 0);
+  Self.Controls.SetChildIndex(Self.edtCodAssunto, 0);
+  Self.Controls.SetChildIndex(Self.edtAssunto, 0);
+  Self.Controls.SetChildIndex(Self.btnPAssunto, 0);
+  Self.Controls.SetChildIndex(Self.btnAdAssuntos, 0);
+  Self.Controls.SetChildIndex(Self.labVolume, 0);
+  Self.Controls.SetChildIndex(Self.edtVolume, 0);
+  Self.Controls.SetChildIndex(Self.labNPaginas, 0);
+  Self.Controls.SetChildIndex(Self.edtNPaginas, 0);
+  Self.Controls.SetChildIndex(Self.labIdioma, 0);
+  Self.Controls.SetChildIndex(Self.cmbIdioma, 0);
+  Self.Controls.SetChildIndex(Self.lstAssuntos, 0);
+  Self.Controls.SetChildIndex(Self.labPreco, 0);
+  Self.Controls.SetChildIndex(Self.edtPreco, 0);
+  Self.Controls.SetChildIndex(Self.labQtdEstoque, 0);
+  Self.Controls.SetChildIndex(Self.edtQtdEstoque, 0);
+  Self.Controls.SetChildIndex(Self.labAutor, 0);
+  Self.Controls.SetChildIndex(Self.edtCodAutor, 0);
+  Self.Controls.SetChildIndex(Self.edtAutor, 0);
+  Self.Controls.SetChildIndex(Self.btnPAutor, 0);
+  Self.Controls.SetChildIndex(Self.btnAdAutores, 0);
+  Self.Controls.SetChildIndex(Self.lstAutores, 0);
+  (System.ComponentModel.ISupportInitialize(Self.edtEdicao)).EndInit;
+  (System.ComponentModel.ISupportInitialize(Self.edtAnoPubli)).EndInit;
+  (System.ComponentModel.ISupportInitialize(Self.edtVolume)).EndInit;
+  (System.ComponentModel.ISupportInitialize(Self.edtNPaginas)).EndInit;
+  (System.ComponentModel.ISupportInitialize(Self.edtQtdEstoque)).EndInit;
+  Self.ResumeLayout(False);
+end;
+{$ENDREGION}
+
+procedure frmCadLivros.Dispose(Disposing: Boolean);
+begin
+  if Disposing then
+  begin
+    if Components <> nil then
+      Components.Dispose();
+  end;
+  inherited Dispose(Disposing);
+end;
+
+constructor frmCadLivros.Create;
+begin
+  inherited Create;
+  //
+  // Required for Windows Form Designer support
+  //
+  InitializeComponent;
+  //
+  // TODO: Add any constructor code after InitializeComponent call
+  //
+  slIdiomas := ArrayList.Create;
+  slAssuntos := ArrayList.Create;
+  slAutores := ArrayList.Create;
+  ConsCampo := ArrayList.Create;
+  ConsLista := ArrayList.Create;
+end;
+
+function frmCadLivros.ValidaDados(bTodosDados: boolean): boolean;
+begin
+  result:=true;
+  if (Rotinas.ValidaCampo(edtCodigo.Text,'ISBN não informado!')) then
+    result:=false;
+  if (bTodosDados) then begin
+    if (Rotinas.ValidaCampo(edtDescricao.Text,'Título não informado!')) then
+    result:=false;
+    if Rotinas.ValidaCampo(edtEditora.Text, 'Editora não informada!') then
+      result:=false;
+    if lstAssuntos.Items.Count = 0 then begin
+      MessageBox.Show(Self,'Assunto(s) não informado(s)!',
+      fPrincipal.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      result:=false;
+    end;
+    if lstAutores.Items.Count = 0 then begin
+      MessageBox.Show(Self,'Autor(es) não informado(s)!',
+      fPrincipal.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      result:=false;
+    end;
+  end;
+end;
+
+procedure frmCadLivros.InformaLimpaDados(bInformar: boolean);
+begin
+  inherited InformaLimpaDados(bInformar);
+
+  if (bInformar) then begin
+	edtEdicao.Text:=Campos.Item[2].ToString();
+	edtAnoPubli.Text:=Campos.Item[3].ToString();
+	edtVolume.Text:=Campos.Item[4].ToString();
+	edtCodEditora.Text:=Campos.Item[5].ToString();
+	edtEditora.Text:=Campos.Item[6].ToString();
+	cmbIdioma.SelectedIndex:=slIdiomas.IndexOf(Campos.Item[7].ToString());
+	edtNPaginas.Text:=Campos.Item[9].ToString();
+	edtPreco.Text:=RotinasGlobais.Rotinas.
+					 VirgulaParaPonto(Campos.Item[10].ToString(),true);
+	edtQtdEstoque.Text:=Campos.Item[11].ToString();
+	RotinasGlobais.Rotinas.AdicionaValoresLista(ConsLista,ConsultasSQL.
+	ConsSQL.LivroAss('S',edtCodigo.Text,''),lstAssuntos,slAssuntos);
+	RotinasGlobais.Rotinas.AdicionaValoresLista(ConsLista,ConsultasSQL.
+	ConsSQL.LivroAut('S',edtCodigo.Text,''),lstAutores,slAutores);
+  end else begin
+	edtEdicao.Value:=1;
+	edtAnoPubli.Text:=DateTime.Now.ToString('yyyy');
+	edtVolume.Value:=1;
+	edtCodEditora.Clear();
+	edtEditora.Clear();
+	edtNPaginas.Value:=1;
+	edtPreco.Text:='0,00';
+	edtQtdEstoque.Value:=1;
+	edtCodAssunto.Clear();
+	lstAssuntos.Items.Clear();
+	edtCodAutor.Clear();
+	lstAutores.Items.Clear();
+	slAssuntos.Clear();
+	slAutores.Clear();
+  end;
+end;
+
+procedure frmCadLivros.HabilitaDados(bHabilita: boolean);
+begin
+ inherited HabilitaDados(bHabilita);
+
+ edtEdicao.Enabled:=bHabilita;
+ edtAnoPubli.Enabled:=bHabilita;
+ edtVolume.Enabled:=bHabilita;
+ edtCodEditora.Enabled:=bHabilita;
+ btnPEditora.Enabled:=bHabilita;
+ cmbIdioma.Enabled:=bHabilita;
+ edtNPaginas.Enabled:=bHabilita;
+ edtPreco.Enabled:=bHabilita;
+ edtQtdEstoque.Enabled:=bHabilita;
+ edtCodAssunto.Enabled:=bHabilita;
+ btnPAssunto.Enabled:=bHabilita;
+ btnAdAssuntos.Enabled:=bHabilita;
+ lstAssuntos.Enabled:=bHabilita;
+ edtCodAutor.Enabled:=bHabilita;
+ btnPAutor.Enabled:=bHabilita;
+ btnAdAutores.Enabled:=bHabilita;
+ lstAutores.Enabled:=bHabilita;
+end;
+
+procedure frmCadLivros.btnExcluir_Click(sender: System.Object; e: System.EventArgs);
+begin
+  ExcluirDados(ConsSQL.Livro('D',edtCodigo.Text,'','','','','','','','',''));
+end;
+
+procedure frmCadLivros.btnSalvar_Click(sender: System.Object; e: System.EventArgs);
+begin
+  SalvarDados(ConsSQL.Livro('S',edtCodigo.Text,'','','','','','','','',''),
+  ConsSQL.Livro('U',edtCodigo.Text,edtDescricao.Text,
+  edtEdicao.Text,edtAnoPubli.Text,edtVolume.Text,edtCodEditora.Text,
+  slIdiomas.Item[cmbIdioma.SelectedIndex].ToString(),edtNPaginas.Text,
+  RotinasGlobais.Rotinas.VirgulaParaPonto(edtPreco.Text,false),
+  edtQtdEstoque.Text),
+  ConsSQL.Livro('I',edtCodigo.Text,edtDescricao.Text,
+  edtEdicao.Text,edtAnoPubli.Text,edtVolume.Text,edtCodEditora.Text,
+  slIdiomas.Item[cmbIdioma.SelectedIndex].ToString(),edtNPaginas.Text,
+  RotinasGlobais.Rotinas.VirgulaParaPonto(edtPreco.Text,false),
+  edtQtdEstoque.Text), true);
+  SalvaLista('A');
+  SalvaLista('B');
+  btnLimpar_Click(Self,nil);
+end;
+
+procedure frmCadLivros.btnPesquisar_Click(sender: System.Object; e: System.EventArgs);
+begin
+  PesquisarDados(ConsSQL.Livro('S',edtCodigo.Text,'','','','','','','','',''),
+  'Livro não encontrado!');
+end;
+
+procedure frmCadLivros.frmCadLivros_Closing(sender: System.Object; e: System.ComponentModel.CancelEventArgs);
+begin
+  fPrincipal.tlbLivros.Enabled:=true;
+  fPrincipal.mnuCadLivros.Enabled:=true;
+end;
+
+procedure frmCadLivros.btnFechar_Click(sender: System.Object; e: System.EventArgs);
+begin
+ frmCadLivros_Closing(Self,nil);
+end;
+
+procedure frmCadLivros.frmCadLivros_Load(sender: System.Object; e: System.EventArgs);
+begin
+  edtAnoPubli.Text:=DateTime.Now.ToString('yyyy');
+  AdicionaCombo;
+  cmbIdioma.SelectedIndex:=0;
+end;
+
+procedure frmCadLivros.AdicionaCombo;
+var linhas, regs: ArrayList;
+cont: integer;
+begin
+  linhas := ArrayList.Create;
+  regs := ArrayList.Create;
+  
+  Rotinas.ConsultaDados(regs, ConsSQL.Idioma('S','',''));
+  
+  for cont:=0 to regs.Count-1 do begin
+    linhas := ArrayList(regs[cont]);
+    slIdiomas.Add(linhas.Item[0].ToString);
+    cmbIdioma.Items.Add(linhas.Item[1].ToString);
+  end;
+end;
+
+procedure frmCadLivros.SalvaLista(sOpcao: char);
+var nCont: integer;
+begin
+  if (sOpcao='A') then begin
+     Rotinas.ConsultaDados(Arquiva, ConsSQL.LivroAss('D',edtCodigo.Text,''));
+    
+     for nCont:=0 to slAssuntos.Count-1 do begin
+      Rotinas.ConsultaDados(Arquiva,
+      ConsSQL.LivroAss('I',edtCodigo.Text,slAssuntos.Item[nCont].ToString));
+     end;
+  end else if (sOpcao='B') then begin
+      Rotinas.ConsultaDados(Arquiva, ConsSQL.LivroAut('D',edtCodigo.Text,''));
+    
+      for nCont:=0 to slAutores.Count-1 do begin
+       Rotinas.ConsultaDados(Arquiva,
+       ConsSQL.LivroAut('I', edtCodigo.Text,slAssuntos.Item[nCont].ToString));
+      end;
+  end;
+end;
+
+procedure frmCadLivros.edtCodigo_Leave(sender: System.Object; e: System.EventArgs);
+begin
+  if (edtCodigo.Text<>'') then begin
+    if (Rotinas.ValidaISBN(edtCodigo.Text)=false) then begin
+  	  MessageBox.Show(Self,'ISBN inválido!',
+  	  fPrincipal.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+  	  edtCodigo.Clear();
+  	  edtCodigo.Focus();
+    end;
+  end;
+end;
+
+procedure frmCadLivros.edtCodEditora_Leave(sender: System.Object; e: System.EventArgs);
+begin
+  if (edtCodEditora.Text<>'') then begin
+   edtEditora.Text:=Rotinas.ConsultaCampoDesc(ConsCampo,
+   edtCodEditora.Text,ConsSQL.Editora('S',
+   edtCodEditora.Text,''),'Editora não encontrada!');
+   if (edtEditora.Text='') then
+     edtCodEditora.Focus();
+  end else
+     edtEditora.Clear();
+end;
+
+procedure frmCadLivros.btnPEditora_Click(sender: System.Object; e: System.EventArgs);
+var pfConEditoras: frmConEditoras;
+begin
+  pfConEditoras := frmConEditoras.Create;
+  pfConEditoras.ShowDialog;
+  edtCodEditora.Text:=Rotinas.sCodigoSelecionado;
+  edtCodEditora_Leave(Self,nil);
+end;
+
+procedure frmCadLivros.edtPreco_Leave(sender: System.Object; e: System.EventArgs);
+begin
+  if Rotinas.ValidaFloat(edtPreco.Text) then
+    edtPreco.Text:=Rotinas.VirgulaParaPonto(edtPreco.Text,true)
+  else
+    edtPreco.Text:='0,00';
+end;
+
+procedure frmCadLivros.edtCodAssunto_Leave(sender: System.Object; e: System.EventArgs);
+begin
+  if (edtCodAssunto.Text<>'') then begin
+   edtAssunto.Text:=Rotinas.ConsultaCampoDesc(ConsCampo,
+   edtCodAssunto.Text,ConsSQL.Assunto('S',
+   edtCodAssunto.Text,''),'Assunto não encontrado!');
+   if (edtAssunto.Text='') then
+      edtCodAssunto.Focus;
+  end else
+   edtAssunto.Clear;
+end;
+
+procedure frmCadLivros.edtCodAutor_Leave(sender: System.Object; e: System.EventArgs);
+begin
+  if (edtCodAutor.Text<>'') then begin
+   edtAutor.Text:=Rotinas.ConsultaCampoDesc(ConsCampo,
+   edtCodAutor.Text,ConsSQL.Autor('S',
+   edtCodAutor.Text,''),'Autor não encontrado!');
+   if (edtAutor.Text='') then
+     edtCodAutor.Focus;
+  end else
+   edtAutor.Clear;
+end;
+
+procedure frmCadLivros.btnPAssunto_Click(sender: System.Object; e: System.EventArgs);
+var pfConAssuntos: frmConAssuntos;
+begin
+  pfConAssuntos := frmConAssuntos.Create;
+  pfConAssuntos.ShowDialog;
+  edtCodAssunto.Text:=Rotinas.sCodigoSelecionado;
+  edtCodAssunto_Leave(Self,nil);
+end;
+
+procedure frmCadLivros.btnPAutor_Click(sender: System.Object; e: System.EventArgs);
+var pfConAutores: frmConAutores;
+begin
+  pfConAutores := frmConAutores.Create;
+  pfConAutores.ShowDialog;
+  edtCodAutor.Text:=Rotinas.sCodigoSelecionado;
+  edtCodAutor_Leave(Self,nil);
+end;
+
+procedure frmCadLivros.btnAdAssuntos_Click(sender: System.Object; e: System.EventArgs);
+begin
+  Rotinas.AdicionaItemLista(lstAssuntos,slAssuntos,edtCodAssunto,edtAssunto);
+end;
+
+procedure frmCadLivros.lstAssuntos_DoubleClick(sender: System.Object; e: System.EventArgs);
+begin
+  Rotinas.RemoveItemLista(lstAssuntos,slAssuntos);
+end;
+
+procedure frmCadLivros.btnAdAutores_Click(sender: System.Object; e: System.EventArgs);
+begin
+  Rotinas.AdicionaItemLista(lstAutores,slAutores,edtCodAutor,edtAutor);
+end;
+
+procedure frmCadLivros.lstAutores_DoubleClick(sender: System.Object; e: System.EventArgs);
+begin
+  Rotinas.RemoveItemLista(lstAutores,slAutores);
+end;
+
+end.

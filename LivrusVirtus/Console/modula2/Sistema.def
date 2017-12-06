@@ -1,0 +1,43 @@
+DEFINITION MODULE Sistema;
+
+FROM Rotinas IMPORT String;
+FROM RndFile IMPORT ChanId;
+FROM Arquivos IMPORT ctArqs, ctAcao, ctTipo;
+
+CONST
+  QTD_MAX_LINHA = 18;
+
+  MSG_ERRO = 'Erro: opção inválida digite de novo';
+  MSG_OPCAO = 'Escolha uma opção: ';
+
+  MSG_REGINC = 'registro incluido!';
+  MSG_REGNINC = 'registro não incluido!';
+  MSG_REGALT = 'registro alterado!';
+  MSG_REGNALT = 'registro não alterado!';
+  MSG_REGEXC = 'registro excluido!';
+  MSG_REGNEXC = 'registro não excluido!';
+
+VAR
+ g_nPosChave, g_nTamChave: INTEGER;
+ g_nPreco: REAL;
+
+(*--- Rotinas de implementação do sistema -----------------------------------*)
+PROCEDURE rotulo(sreg: ctArqs; nNum: CARDINAL): String;
+PROCEDURE menu(num: CARDINAL);
+PROCEDURE ContinuaSN(nlinha, nQtdLinha: CARDINAL): BOOLEAN;
+PROCEDURE ListarTodos(VAR sArq: ChanId; sreg: ctArqs; sChave: String;
+          nPosChave, nTamChave, nTamLinha, nQtdLinha: CARDINAL;
+          bPesqRelativa: BOOLEAN): BOOLEAN;
+PROCEDURE ListarRegLigados(VAR sArq1: ChanId; sreg1: ctArqs; nPosChave1,
+          nTamChave1, nPosChave2, nTamChave2: CARDINAL; sChave: String;
+     VAR sArq2: ChanId; sreg2: ctArqs; nPosChave3, nQtdLinha: CARDINAL);
+PROCEDURE validaEntrada(VAR sArq: ChanId; sreg: ctArqs; nTexto: CARDINAL;
+        sEntrada: String; nTentativas: CARDINAL;
+        bPesqRelativa: BOOLEAN; bTipoEntrada: ctTipo): String;
+PROCEDURE mostrarDados(sreg: ctArqs; slinha: String; nOpcao: INTEGER);
+PROCEDURE mostrarSubDados(sreg, ssubreg: ctArqs; bSoMostrar: BOOLEAN);
+PROCEDURE btnAcao(sreg: ctArqs; sacao: ctAcao);
+PROCEDURE ExcluirRegLigados(VAR sArq: ChanId; sreg: ctArqs; nPosChave,
+          nTamChave: INTEGER; sChave: String);
+
+END Sistema.

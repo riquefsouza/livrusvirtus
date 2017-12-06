@@ -1,0 +1,24 @@
+;  Used to find out if every element of list1 is contained
+;  in list2.
+
+(defun all-members (list1 list2)
+       (setq a list1)
+       (setq b list2)
+       (cond ((member nil (mapcar 
+                              '(lambda (x) (member x b))
+                              a
+                          )
+              )
+                  nil
+              )
+              (t t)
+       )
+)
+
+(defun demo1 nil
+       (all-members '(c b e a) '(a b c d e))
+)
+
+(defun demo2 nil
+       (all-members '(c b e a g) '(a b c d e))
+)

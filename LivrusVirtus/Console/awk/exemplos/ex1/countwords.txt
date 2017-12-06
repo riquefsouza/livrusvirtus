@@ -1,0 +1,13 @@
+#  This awk program puts all the words it finds in the file into an
+#  associative array, and there is keeps a count of how many occurrences
+#  it found.
+
+{
+   for (i=1; i<=NF; i++)
+       words[$i]++;
+}
+
+END{
+   for (item in words)
+       printf "%-10s: %d\n", item, words[item]
+}

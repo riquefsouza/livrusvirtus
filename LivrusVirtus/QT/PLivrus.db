@@ -1,0 +1,327 @@
+<!DOCTYPE DB><DB version="1.0">
+<connection>
+    <property name="name">
+        <string>ACLivrus</string>
+    </property>
+    <property name="driver">
+        <string>QODBC3</string>
+    </property>
+    <property name="database">
+        <string>ACLivrus</string>
+    </property>
+    <property name="username">
+        <string></string>
+    </property>
+    <property name="hostname">
+        <string></string>
+    </property>
+    <property name="port">
+        <string>-1</string>
+    </property>
+    <table>
+        <property name="name">
+            <string>Assunto</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>codassunto</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>assunto</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Autor</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>codautor</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>autor</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Cliente</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>cpf</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>email</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>nome</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>identidade</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>codendereco</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>telefone</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>codpais</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>codprofissao</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>sexo</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>datanasc</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Editora</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>codeditora</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>editora</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Endereco</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>codendereco</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>logradouro</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>bairro</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>cep</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>cidade</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>estado</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Idioma</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>codidioma</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>idioma</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Livro</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>isbn</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>titulo</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>edicao</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>anopubli</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>codeditora</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>volume</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>codidioma</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>npaginas</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>preco</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>qtdestoque</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>LivroAss</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>isbn</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>codassunto</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>LivroAut</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>isbn</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>codautor</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Pais</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>codpais</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>pais</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Profissao</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>codprofissao</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>profissao</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Usuario</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>login</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>senha</string>
+            </property>
+        </field>
+    </table>
+    <table>
+        <property name="name">
+            <string>Venda</string>
+        </property>
+        <field>
+            <property name="name">
+                <string>isbn</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>cpf</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>datavenda</string>
+            </property>
+        </field>
+        <field>
+            <property name="name">
+                <string>precovenda</string>
+            </property>
+        </field>
+    </table>
+</connection>
+</DB>

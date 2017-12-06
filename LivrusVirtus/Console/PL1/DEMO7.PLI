@@ -1,0 +1,462 @@
+graf:
+	proc options(main);
+	%include 'diomod.dcl';
+	%include 'gsxmod.dcl';
+       /*******************************************************/
+	dcl	(i,k,x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6) fixed binary (15);
+	dcl	(x,y,z,x0,y0,a,b,e,d) fixed binary(15);
+	dcl	c char (1),
+		v char(254) var,
+		j fixed;
+	dcl	(A1,A2) char(254) var;
+
+	%replace
+		clear 	by 	'^z',
+		hollow  by 	0,
+		solid 	by 	1,
+		pattern by 	2,
+		hatch 	by 	3,
+		replace by 	1,
+		overstrike by 	2,
+		complement by 	3,
+		erase 	by 	4,
+		black	by	0,
+		red	by	1,
+		green	by	2,
+		blue	by	3,
+		cyan	by	4,
+		yellow	by	5,
+		magenta	by	6,
+		white	by	7;
+ 
+ /*****************************************************************
+  *                                                               *
+  *   DECISION MATE V   G R A F I C   DEMO  VERSION 1.4C  GERMAN  *
+  *                                                               *
+  *   WRITTEN BY  W. Felkel NCR Augsburg                          *
+  *                                                               *
+  *   LAST CHANGE  11.November 1983                               *
+  *                                                               *
+  *****************************************************************/ 
+	put list (clear,'N C R  GRAPHIC DEMO   Version 1.0 GERMAN');
+	DO i=1 TO 26000;
+	END;
+	/**********************************************************************
+	 *
+	 *     1 TITLE
+	 *
+	 *********************************************************************/
+	call gropen (1);
+begin_graf:
+	call grclear ();
+	call set_writing_mode (complement);
+	call set_fill_interior_style (solid);
+	call set_fill_color_index (green);
+	call screen_frame ();
+	x1=40;
+	y1=40;
+	x2=600;
+	y2=360;
+	call bar (x1,y1,x2,y2);
+	A1='NCR';
+	A2='DECISION MATE V';
+	x1=202;
+	y1=197;
+	x2=278;
+	y2=277;
+	call set_writing_mode (replace);
+	call set_fill_color_index (red);
+	do i=1 TO 3;
+	   CALL bar (x1,y1,x2,y2);
+	   x1=x1+80;
+	   x2=x2+80;
+	end;
+	x1=214;
+	y1=202;
+	call set_writing_mode (overstrike);
+	call set_text_color_index (white);
+	call set_character_height (72);
+	CALL text (A1,x1,y1);
+	x1=140;
+	y1=100;
+	call set_writing_mode (replace);
+	call set_character_height (24);
+	call set_text_color_index (yellow);
+	call text (A2,x1,y1);
+	call test_for_end ();
+	/*******************************************************************
+	 *
+	 *  2  PATTERN
+	 *
+	 *******************************************************************/
+	CALL grclear;
+	call set_writing_mode (replace);
+	x1=80;
+	y1=345;
+	x2=540;
+	y2=385;
+	call set_fill_interior_style (solid);
+	call set_fill_color_index (yellow);
+	call bar (x1,y1,x2,y2); 
+	call set_text_color_index (magenta); 
+	call set_character_height (22);
+	x1=125;
+	y1=355;
+	CALL text (A2,x1,y1);
+	call set_writing_mode (replace);
+	call set_fill_color_index (red);
+ 	call set_fill_interior_style (hollow);
+	call bar (80,290,140,330);
+	call set_polyline_linetype (solid);
+	call set_polyline_color_index (green);
+	call polyline (190,280,210,300);
+	call polyline (210,300,190,320);
+	call polyline (190,320,170,300);
+	call polyline (170,300,190,280);
+	call set_fill_color_index (blue);
+	call bar (292,280,312,340);
+	call set_fill_color_index (yellow);
+	call circle (382,300,35);
+	x1=100;
+	y1=220;
+	x2=140;
+	y2=260;
+	    do k=1 to 7;
+		call set_fill_interior_style (hatch);	
+	        call set_fill_style_index (k);
+		call set_fill_color_index (k);
+		call bar (x1,y1,x2,y2);
+		x1=x1+60;
+		x2=x2+60;
+	    end;
+	x1=100;
+	y1=150;
+	x2=140;
+	y2=190;
+	    do k=1 to 7;
+		call set_fill_interior_style (pattern);	
+	        call set_fill_style_index (k);
+		call set_fill_color_index (k);
+		call bar (x1,y1,x2,y2);
+		x1=x1+60;
+		x2=x2+60;
+	    end;
+	x1=95;
+	y1=120;
+	x2=545;
+	y2=120;
+	    do k=1 to 7;
+		call set_polyline_color_index (k);
+		call set_polyline_linetype (k);
+		call polyline (x1,y1,x2,y2);
+		y1=y1-15;
+		y2=y2-15;
+	    end;
+	call test_for_end ();
+	/**********************************************************
+	*
+	*
+	*
+	**********************************************************/
+	call grclear ();
+	A1=' SCHNELLE  GRAFIK  !';
+	A2='AUFLOESUNG 640 X 400 PUNKTE';
+	x1=136;
+	y1=350;
+	call set_character_height (14);
+	call set_text_color_index (cyan);
+ 	call text (A1,x1,y1);
+	x1=104;
+	y1=320;
+	call set_text_color_index (white);
+	call text (A2,x1,y1);
+	call set_writing_mode (overstrike);
+	call set_fill_interior_style (solid);
+	call set_fill_color_index (red);
+	call circle (320,190,80);
+	call set_fill_color_index (green);
+	call circle (270,110,80);
+	call set_fill_color_index (blue);
+	call circle (370,110,80);  
+	call test_for_end (); 
+	/*************************************************************
+	*
+	*   4  SQUARE ROTATE
+	*
+	*************************************************************/
+	call grclear ();
+	x1=120;
+	y1=390;
+        a=10;
+	b=390;
+	d=120;
+	e=488;
+	call set_polyline_linetype (solid);
+	call set_writing_mode (overstrike);
+	do i= 1 to 299 by 6;
+	   x2=e;
+	   y2=b-i;
+           call set_polyline_color_index (red);
+	   call polyline (x1,y1,x2,y2);
+	   x1=x2;
+	   y1=y2;
+	   x2=e-i;
+	   y2=a;
+	   call set_polyline_color_index (green);
+	   call polyline (x1,y1,x2,y2);
+	   x1=x2;
+	   y1=y2;
+	   x2=d;
+	   y2=a+i;
+	   call set_polyline_color_index (cyan);
+	   call polyline (x1,y1,x2,y2);
+	   x1=x2;
+	   y1=y2;
+	   x2=d+i;
+	   y2=b;
+	   call set_polyline_color_index (yellow);
+	   call polyline (x1,y1,x2,y2);
+	   x1=x2;
+	   y1=y2;
+	end;
+	call test_for_end;
+	/***************************************************************
+	*
+	*   5  SQUARE
+	*
+	***************************************************************/
+	call grclear ();
+	call set_writing_mode (overstrike);	x1=d;
+	y1=b;
+	do i= 1 to 299 by 5;
+	   x2=e-i;
+	   y2=b-i;
+	   call set_polyline_color_index (magenta);
+ 	   call polyline (x1,y1,x2,y2);
+	   x1=x2;
+	   y1=y2;
+	   x2=e-i;
+	   y2=a;
+	   call polyline (x1,y1,x2,y2);
+	   x1=x2;
+	   y1=y2;
+	   x2=d+i;
+	   y2=a+i;
+	   call set_polyline_color_index (yellow);
+	   call polyline (x1,y1,x2,y2);
+	   x1=x2;
+	   y1=y2;
+	   x2=d+i;
+	   y2=b;
+	   call polyline (x1,y1,x2,y2);
+	   x1=x2;
+	   y1=y2;
+	end;
+	call test_for_end ();
+	/************************************************************
+	*
+	*   6 TURNING SQUARES GETTING SMALLER
+	*
+	************************************************************/
+	call grclear ();
+	call set_writing_mode (overstrike);
+	ptsin (1) =130;
+	ptsin (2) =200;
+	ptsin (3) =320;
+	ptsin (4) =10;
+	ptsin (5) =510;
+	ptsin (6) =200;
+	ptsin (7) =320;
+	ptsin (8) =390;
+	ptsin (9) =130;
+	ptsin (10) = 200;
+	call set_polyline_color_index (red);
+	do i = 1 to 14;
+	   contrl (1) = 6;
+	   contrl (2) = 5;
+	   call outg (contrl,intin,ptsin,intout,ptsout);
+	   ptsin (1)=ptsin (1)+i;
+	   ptsin (4)=ptsin (4)+i;
+	   ptsin (5)=ptsin (5)-i;
+	   ptsin (8)=ptsin (8)-i;
+	   ptsin (9)=ptsin (1);
+	end;
+	x1=220;
+	y1=110;
+	x2=420;
+	y2=290;
+	call set_fill_interior_style (hollow);
+	call set_fill_color_index (cyan);
+	do i = 1 to 13;
+	   call bar (x1,y1,x2,y2);
+	   x1=x1+i;
+	   y1=y1+i;
+	   x2=x2-i;
+	   y2=y2-i;
+	end;
+	call test_for_end;	   
+	/***************************************************
+	*
+	*   SMALL CAD DEMO
+	*
+	***************************************************/
+	call grclear ();
+	call set_fill_color_index (green);
+	call set_polyline_color_index (green);
+	call set_text_color_index (yellow);
+	call set_fill_interior_style (hollow);
+	call circle (300,200,40);
+	call set_writing_mode (erase);
+	call set_fill_interior_style (solid);
+	call bar (250,150,300,250);
+	call set_writing_mode (overstrike);
+	call set_fill_interior_style (hollow);
+	call circle (300,200,20);
+	call circle (150,100,50);
+	call set_writing_mode (erase);
+	call set_fill_interior_style (solid);
+	call bar (90,100,210,160);
+	call set_writing_mode (overstrike);
+	call set_fill_interior_style (hollow);
+	call circle (150,100,40);
+	call circle (150,100,30);
+	call circle (150,200,30);
+	call circle (300,200,20);
+	call set_polyline_linetype (solid);
+	call polyline (120,200,180,200);
+	call polyline (150,170,150,230);
+	call set_polyline_linetype (3);
+	call polyline (110,100,190,100);
+	call polyline (150,60,150,140);
+	call set_polyline_linetype (solid);
+	call polyline (100,100,100,300);
+	call polyline (100,300,200,300);
+	call polyline (200,300,200,240);
+	call polyline (200,240,300,240);
+	call polyline (300,160,200,160);
+	call polyline (200,160,200,100);
+	call set_polyline_linetype (7);
+	call polyline (200,100,220,100);
+	call polyline (220,100,220,120);
+	call polyline (220,140,220,160);
+	call set_character_height (9);
+	call set_character_up_vector (2700);
+	call text ('60',224,138);
+	call polyline (310,100,300,100);
+	call polyline (300,100,300,160);
+	call polyline (300,160,380,160);
+	call polyline (300,160,380,180);
+	call polyline (330,100,340,100);
+	call polyline (340,100,340,200);
+	call set_character_up_vector (0);
+	call text ('40',310,104);
+	call polyline (320,120,320,200);
+	call text ('20',304,124);
+	call polyline (300,180,360,180);
+	call polyline (360,180,360,190);
+	call polyline (360,210,360,220);
+	call polyline (360,220,300,220);
+	call set_character_up_vector (2700);
+	call text ('40',364,210);
+	call text ('80',384,210);
+	call polyline (380,220,380,240);
+	call polyline (380,240,300,240);
+	call polyline (300,240,300,280);
+	call polyline (300,280,270,280);
+	call polyline (244,280,200,280);
+	call set_character_up_vector (0);
+	call text ('100',245,284);
+	call polyline (220,240,220,260);
+	call polyline (220,280,220,300);
+	call polyline (220,300,200,300);
+	call polyline (200,300,200,320);
+	call polyline (200,320,160,320);
+	call polyline (130,320,100,320);
+	call polyline (100,320,100,300);
+	call polyline (100,300,40,300);
+	call polyline (40,300,40,200);
+	call polyline (40,170,40,80);
+	call polyline (40,100,100,100);
+	call polyline (40,60,40,50);
+	call polyline (40,50,150,50);
+	call polyline (40,60,60,60);
+	call polyline (60,60,60,110);
+	call polyline (60,130,60,140);
+	call polyline (60,140,150,140);
+	call polyline (150,70,80,70);
+	call polyline (80,70,80,110);
+	call polyline (80,130,150,130);
+	call polyline (150,170,80,170);
+	call polyline (80,170,80,190);
+	call polyline (80,210,80,230);
+	call polyline (80,230,150,230);
+	call set_character_up_vector (2700);
+	call text ('60',224,280);
+	call set_character_up_vector (0);
+	call text ('100',130,324);
+	call set_character_up_vector (900);
+	call text ('220',36,170);
+	call text ('50',36,60);
+	call text ('80',56,110);
+	call text ('60',76,110);
+	call text ('60',76,190);
+	call set_character_up_vector (0);
+	call set_character_height (18);
+	call text ('PART.NR. 021-00102-99',100,360);
+	call test_for_end;
+	goto begin_graf;
+endgraf:
+	if  rdcon()~= ' ' then
+	    goto endgraf;
+	call wrcon (substr(v,j,1));
+	call grclose ();
+	stop;
+
+/***********************************
+*
+*   SMALL   N C R   LOGO
+*
+***********************************/
+sign_on:
+	proc (a,b);
+	dcl (a,b) fixed binary (15);	
+	call set_fill_interior_style (solid);
+	CALL set_writing_mode (replace); 
+	call set_fill_color_index (red);
+	x1=a;
+	y1=b;
+	x2=a+21;
+	y2=b+25;
+	do i=1 TO 3;
+	    call bar (x1,y1,x2,y2);
+	    x1=x1+24;
+	    x2=x2+24;
+	end;
+	x1=a+3;
+	y1=b+2;
+	call set_text_color_index (white);
+	CALL set_character_height (22);
+	A1='NCR';
+	call set_writing_mode (overstrike);
+	CALL text (A1,x1,y1);
+end sign_on;
+test_for_end:
+	proc;
+	call sign_on (540,375);
+	do i=1 TO 25000;
+	    do j=1 TO 4;
+	    end;
+	end;
+end test_for_end;
+screen_frame:
+	proc;
+	x1=30;
+	x2=610;
+	y2=370;
+	CALL bar (x1,x1,x2,y2);
+end screen_frame;
+ 	
+	%include 'gsxlib.pli';
+
+end graf;
+

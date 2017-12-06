@@ -1,0 +1,131 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 2
+Predicates
+--------------------------------------------------------------------------------
+TOPICS:  Predicates; number of arguments; meaning of predicates and functors;
+         how to craft predicates
+--------------------------------------------------------------------------------
+
+First, we need to describe predicates, because these are basic things that are
+used in facts, rules and queries.
+
+Here are some predicates:
+
+      hot                          likes(mark,music)
+      difficult(csc251)            5 < 7
+
+It is kind of hard to see the commonality here, but there is one.  All predi-
+cates have the form:
+
+           functor(arg1, arg2, arg3, ...).
+
+where "functor" is a name you make up.   Above, the functors are 
+
+      hot                          likes
+      difficult                    <
+
+Notice that one predicate, namely hot, did not have any arguments.  Another
+predicate, namely <, embedded the functor between the arguments.  There are
+strict rules that tell when these things can be done -- they are not totally
+arbitrary!
+      
+The arguments, that is the things inside the parenthese, denoted arg1, arg2,
+arg3 above are atoms or structures.  They must be numbers or strings, or atoms 
+that BEGIN with a lower-case letter, such as john.  John (starting with a 
+capital) is considered a variable, and not an atom.  Atoms are symbolic 
+constants, kind of like "true" or "nil" in imperative programming languages.
+They really stand for fixed values, just as much as 5 and 1.414 do.
+
+---------------------------------------------------------------------------
+
+Now here's the tricky part for us humans:  These predicates are assigned
+meaning by us and have to be used consistently.  This means that we fix the
+number of arguments that a particular functor has and what the ordering of
+the arguments means.  This is all arbitrary when we set it up, but once we
+do set it up, it has to remain fixed for the life of the program.
+
+For example, to say that john likes whiskey, we could write this fact:
+
+      likes(john,whiskey).
+
+There can be NO SPACES between the functor and the left parenthesis.
+
+Note that john and whiskey are atoms, that is, values.  They are NOT variables
+that "contain" values or stand for something else.
+
+It is a very different fact to say
+
+      likes(whiskey,john).
+
+This would mean that whiskey likes john, which is kind of silly.  Now we
+could have set it up so that the "liker" is argument 2 and the "likee" is
+argument 1, but once we decide on a pattern, we must stick with it or else
+we will get nonsense.
+
+Comments help us establish and maintain our patterns.  Thus, we should add
+
+      /*  likes(liker,likee).  */
+
+to our file that contains rules.
+
+If we enter a bunch of facts into a file, such as likes(john,whiskey) above,
+then these facts are said to be true and Prolog will count on them as being
+true, not false.
+
+There is no real reason to explicitly state that someone does NOT like some-
+thing, since if it is not in the database, then it is automatically false.
+But you can actually say that a statement is false.  Here's a way to say
+that mark does not like whiskey:
+
+     likes(mark,whiskey) :- fail,!.
+
+Weird, huh?
+
+Note that predicates have meaning only to use humans.  A computer does not know
+that when we love something, we usually like it, too, or that when we hate some-
+thing, then we do not like it.  The computer cannot peek "inside" the predicate
+like we can, to discern our intent.  But we can write rules that tell the
+computer what we mean.  We will talk about those soon.
+
+-----------------------------------------------------------------------------
+
+Now we must discuss the art of crafting predicates.
+
+Predicates are used to fulfill several common linguistic senses.  One of these
+is simply a relationship between two entities.  Here are some examples:
+
+     boss(mary,joe).            Mary is Joe's boss.
+     on(pencil,table).          The pencil is on the table.
+     in(buffalo,newyork).       Buffalo is in New York.
+     husband(joe,mary).         Joe is mary's husband.
+     rules(elizabeth,england).  Elizabeth rules the country of England.
+
+In these cases, the predicate's name (the functor) is either a preposition
+or a noun or sometimes a verb.
+
+Other times they describe an entity, in which case there is often just one
+argument.  Often the functor is an adjective:
+
+     alcoholic(whiskey).   Whiskey is alcoholic by content.
+     skinny(mark).         Mark is skinny.
+     hard(csc251).         Csc251 is a hard course to take!
+
+In other situations they are used to denote verbs.  Some verbs, such as "like,"
+could be thought of describing a relationship rather than performing some 
+action, but that is a matter of linguistic hair-splitting:
+
+     slap(mary,joe).       Mary slaps Joe.
+     eat(boy,icecream).    The boy ate the icecream.
+
+In these cases the functor is a verb, although it its tense is indeterminate --
+it might be past, present or future.  You could make up some other kind of
+predicate, such as "ate" or "will_eat", if the exact tense were important.
+
+Finally, predicates without arguments are used to denote conditions in the
+"world".  For example:
+
+      game_running.
+
+might mean the game is running, not stopped.
+     
+-----------------------------------------------------------------------------

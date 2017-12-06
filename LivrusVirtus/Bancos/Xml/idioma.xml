@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="codidioma">1</column>
+        <column name="idioma">Portugues</column>
+    </row>
+    <row>
+        <column name="codidioma">2</column>
+        <column name="idioma">Ingles</column>
+    </row>
+    <row>
+        <column name="codidioma">3</column>
+        <column name="idioma">Espanhol</column>
+    </row>
+    <row>
+        <column name="codidioma">4</column>
+        <column name="idioma">Frances</column>
+    </row>
+    <row>
+        <column name="codidioma">5</column>
+        <column name="idioma">Italiano</column>
+    </row>
+    <row>
+        <column name="codidioma">6</column>
+        <column name="idioma">Alemao</column>
+    </row>
+</resultset>

@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="codpais">ABW</column>
+        <column name="pais">Aruba</column>
+    </row>
+    <row>
+        <column name="codpais">AFG</column>
+        <column name="pais">Afeganistão</column>
+    </row>
+    <row>
+        <column name="codpais">AFR</column>
+        <column name="pais">África do Sul</column>
+    </row>
+    <row>
+        <column name="codpais">AIA</column>
+        <column name="pais">Anguilla</column>
+    </row>
+    <row>
+        <column name="codpais">ALB</column>
+        <column name="pais">Albânia</column>
+    </row>
+    <row>
+        <column name="codpais">ALE</column>
+        <column name="pais">Alemanha</column>
+    </row>
+    <row>
+        <column name="codpais">AND</column>
+        <column name="pais">Andorra</column>
+    </row>
+    <row>
+        <column name="codpais">ANG</column>
+        <column name="pais">Angola</column>
+    </row>
+    <row>
+        <column name="codpais">ARE</column>
+        <column name="pais">Emirados Árabes Unidos</column>
+    </row>
+    <row>
+        <column name="codpais">ARG</column>
+        <column name="pais">Argentina</column>
+    </row>
+    <row>
+        <column name="codpais">ARM</column>
+        <column name="pais">Armênia</column>
+    </row>
+    <row>
+        <column name="codpais">ASM</column>
+        <column name="pais">Samoa (EUA)</column>
+    </row>
+    <row>
+        <column name="codpais">ATG</column>
+        <column name="pais">Antígua e Barbuda</column>
+    </row>
+    <row>
+        <column name="codpais">AUS</column>
+        <column name="pais">Austrália</column>
+    </row>
+    <row>
+        <column name="codpais">AUT</column>
+        <column name="pais">Áustria</column>
+    </row>
+    <row>
+        <column name="codpais">AZE</column>
+        <column name="pais">Azerbaidjão</column>
+    </row>
+    <row>
+        <column name="codpais">BDI</column>
+        <column name="pais">Burundi</column>
+    </row>
+    <row>
+        <column name="codpais">BEL</column>
+        <column name="pais">Bélgica</column>
+    </row>
+    <row>
+        <column name="codpais">BEN</column>
+        <column name="pais">Benin</column>
+    </row>
+    <row>
+        <column name="codpais">BFA</column>
+        <column name="pais">Burkina Faso</column>
+    </row>
+    <row>
+        <column name="codpais">BGD</column>
+        <column name="pais">Bangladesh</column>
+    </row>
+    <row>
+        <column name="codpais">BGR</column>
+        <column name="pais">Bulgária</column>
+    </row>
+    <row>
+        <column name="codpais">BHR</column>
+        <column name="pais">Bahrain</column>
+    </row>
+    <row>
+        <column name="codpais">BHS</column>
+        <column name="pais">Bahamas</column>
+    </row>
+    <row>
+        <column name="codpais">BIH</column>
+        <column name="pais">Bósnia-Herzegóvina</column>
+    </row>
+    <row>
+        <column name="codpais">BLR</column>
+        <column name="pais">Bielarus</column>
+    </row>
+    <row>
+        <column name="codpais">BLZ</column>
+        <column name="pais">Belize</column>
+    </row>
+    <row>
+        <column name="codpais">BMU</column>
+        <column name="pais">Bermudas</column>
+    </row>
+    <row>
+        <column name="codpais">BOL</column>
+        <column name="pais">Bolívia</column>
+    </row>
+    <row>
+        <column name="codpais">BRA</column>
+        <column name="pais">Brasil</column>
+    </row>
+    <row>
+        <column name="codpais">BRB</column>
+        <column name="pais">Barbados</column>
+    </row>
+    <row>
+        <column name="codpais">BRN</column>
+        <column name="pais">Brunei</column>
+    </row>
+    <row>
+        <column name="codpais">BTN</column>
+        <column name="pais">Butão</column>
+    </row>
+    <row>
+        <column name="codpais">BWA</column>
+        <column name="pais">Botswana</column>
+    </row>
+    <row>
+        <column name="codpais">CAF</column>
+        <column name="pais">República Centro-Africana</column>
+    </row>
+    <row>
+        <column name="codpais">CAN</column>
+        <column name="pais">Canadá</column>
+    </row>
+    <row>
+        <column name="codpais">CBV</column>
+        <column name="pais">Cabo Verde</column>
+    </row>
+    <row>
+        <column name="codpais">CHI</column>
+        <column name="pais">Chile</column>
+    </row>
+    <row>
+        <column name="codpais">CHN</column>
+        <column name="pais">China</column>
+    </row>
+    <row>
+        <column name="codpais">CIN</column>
+        <column name="pais">Cingapura</column>
+    </row>
+    <row>
+        <column name="codpais">CIV</column>
+        <column name="pais">Costa do Marfim</column>
+    </row>
+    <row>
+        <column name="codpais">CMR</column>
+        <column name="pais">Camarões</column>
+    </row>
+    <row>
+        <column name="codpais">COD</column>
+        <column name="pais">República Democrática do Congo</column>
+    </row>
+    <row>
+        <column name="codpais">COG</column>
+        <column name="pais">Congo</column>
+    </row>
+    <row>
+        <column name="codpais">COL</column>
+        <column name="pais">Colômbia</column>
+    </row>
+    <row>
+        <column name="codpais">COM</column>
+        <column name="pais">Comores</column>
+    </row>
+    <row>
+        <column name="codpais">COS</column>
+        <column name="pais">Costa Rica</column>
+    </row>
+    <row>
+        <column name="codpais">CUB</column>
+        <column name="pais">Cuba</column>
+    </row>
+    <row>
+        <column name="codpais">CYM</column>
+        <column name="pais">Ilhas Cayman</column>
+    </row>
+    <row>
+        <column name="codpais">CYP</column>
+        <column name="pais">Chipre</column>
+    </row>
+    <row>
+        <column name="codpais">DIN</column>
+        <column name="pais">Dinamarca</column>
+    </row>
+    <row>
+        <column name="codpais">DJI</column>
+        <column name="pais">Djibouti</column>
+    </row>
+    <row>
+        <column name="codpais">DMA</column>
+        <column name="pais">Dominica</column>
+    </row>
+    <row>
+        <column name="codpais">DOM</column>
+        <column name="pais">República Dominicana</column>
+    </row>
+    <row>
+        <column name="codpais">DZA</column>
+        <column name="pais">Argélia</column>
+    </row>
+    <row>
+        <column name="codpais">EGI</column>
+        <column name="pais">Egito</column>
+    </row>
+    <row>
+        <column name="codpais">EQU</column>
+        <column name="pais">Equador</column>
+    </row>
+    <row>
+        <column name="codpais">ERI</column>
+        <column name="pais">Eritréia</column>
+    </row>
+    <row>
+        <column name="codpais">ESL</column>
+        <column name="pais">Eslováquia</column>
+    </row>
+    <row>
+        <column name="codpais">ESP</column>
+        <column name="pais">Espanha</column>
+    </row>
+    <row>
+        <column name="codpais">EST</column>
+        <column name="pais">Estônia</column>
+    </row>
+    <row>
+        <column name="codpais">ETH</column>
+        <column name="pais">Etiópia</column>
+    </row>
+    <row>
+        <column name="codpais">FIN</column>
+        <column name="pais">Finlândia</column>
+    </row>
+    <row>
+        <column name="codpais">FJI</column>
+        <column name="pais">Fiji</column>
+    </row>
+    <row>
+        <column name="codpais">FLK</column>
+        <column name="pais">Ilhas Falkand</column>
+    </row>
+    <row>
+        <column name="codpais">FRA</column>
+        <column name="pais">França</column>
+    </row>
+    <row>
+        <column name="codpais">FRO</column>
+        <column name="pais">Ilhas Faroe</column>
+    </row>
+    <row>
+        <column name="codpais">FSM</column>
+        <column name="pais">Micronésia</column>
+    </row>
+    <row>
+        <column name="codpais">GAB</column>
+        <column name="pais">Gabão</column>
+    </row>
+    <row>
+        <column name="codpais">GEO</column>
+        <column name="pais">Geórgia</column>
+    </row>
+    <row>
+        <column name="codpais">GHA</column>
+        <column name="pais">Gana</column>
+    </row>
+    <row>
+        <column name="codpais">GIB</column>
+        <column name="pais">Gilbratar</column>
+    </row>
+    <row>
+        <column name="codpais">GIN</column>
+        <column name="pais">Guiné</column>
+    </row>
+    <row>
+        <column name="codpais">GMB</column>
+        <column name="pais">Gâmbia</column>
+    </row>
+    <row>
+        <column name="codpais">GNB</column>
+        <column name="pais">Guiné Bissau</column>
+    </row>
+    <row>
+        <column name="codpais">GNQ</column>
+        <column name="pais">Guiné Equatorial</column>
+    </row>
+    <row>
+        <column name="codpais">GRD</column>
+        <column name="pais">Granada</column>
+    </row>
+    <row>
+        <column name="codpais">GRE</column>
+        <column name="pais">Grécia</column>
+    </row>
+    <row>
+        <column name="codpais">GRL</column>
+        <column name="pais">Groelândia</column>
+    </row>
+    <row>
+        <column name="codpais">GTM</column>
+        <column name="pais">Guatemala</column>
+    </row>
+    <row>
+        <column name="codpais">GUF</column>
+        <column name="pais">Guiana Francesa</column>
+    </row>
+    <row>
+        <column name="codpais">GUM</column>
+        <column name="pais">Guam</column>
+    </row>
+    <row>
+        <column name="codpais">GUY</column>
+        <column name="pais">Guiana</column>
+    </row>
+    <row>
+        <column name="codpais">HGK</column>
+        <column name="pais">Hong Kong</column>
+    </row>
+    <row>
+        <column name="codpais">HND</column>
+        <column name="pais">Honduras</column>
+    </row>
+    <row>
+        <column name="codpais">HOL</column>
+        <column name="pais">Holanda</column>
+    </row>
+    <row>
+        <column name="codpais">HRV</column>
+        <column name="pais">Croácia</column>
+    </row>
+    <row>
+        <column name="codpais">HTI</column>
+        <column name="pais">Haiti</column>
+    </row>
+    <row>
+        <column name="codpais">HUN</column>
+        <column name="pais">Hungria</column>
+    </row>
+    <row>
+        <column name="codpais">IDN</column>
+        <column name="pais">Indonésia</column>
+    </row>
+    <row>
+        <column name="codpais">IND</column>
+        <column name="pais">Índia</column>
+    </row>
+    <row>
+        <column name="codpais">ING</column>
+        <column name="pais">Inglaterra</column>
+    </row>
+    <row>
+        <column name="codpais">IRA</column>
+        <column name="pais">Irã</column>
+    </row>
+    <row>
+        <column name="codpais">IRL</column>
+        <column name="pais">Irlanda</column>
+    </row>
+    <row>
+        <column name="codpais">IRQ</column>
+        <column name="pais">Iraque</column>
+    </row>
+    <row>
+        <column name="codpais">ISL</column>
+        <column name="pais">Islândia</column>
+    </row>
+    <row>
+        <column name="codpais">ISR</column>
+        <column name="pais">Israel</column>
+    </row>
+    <row>
+        <column name="codpais">ITA</column>
+        <column name="pais">Itália</column>
+    </row>
+    <row>
+        <column name="codpais">IUG</column>
+        <column name="pais">Iugoslávia</column>
+    </row>
+    <row>
+        <column name="codpais">JAM</column>
+        <column name="pais">Jamaica</column>
+    </row>
+    <row>
+        <column name="codpais">JAP</column>
+        <column name="pais">Japão</column>
+    </row>
+    <row>
+        <column name="codpais">JOR</column>
+        <column name="pais">Jordânia</column>
+    </row>
+    <row>
+        <column name="codpais">KAZ</column>
+        <column name="pais">Cazaquistão</column>
+    </row>
+    <row>
+        <column name="codpais">KEN</column>
+        <column name="pais">Quênia</column>
+    </row>
+    <row>
+        <column name="codpais">KGZ</column>
+        <column name="pais">Quirguistão</column>
+    </row>
+    <row>
+        <column name="codpais">KHM</column>
+        <column name="pais">Camboja</column>
+    </row>
+    <row>
+        <column name="codpais">KIR</column>
+        <column name="pais">Kiribati</column>
+    </row>
+    <row>
+        <column name="codpais">KNA</column>
+        <column name="pais">São Cristóvão e Nevis</column>
+    </row>
+    <row>
+        <column name="codpais">KOR</column>
+        <column name="pais">Coréia do Sul</column>
+    </row>
+    <row>
+        <column name="codpais">KWT</column>
+        <column name="pais">Kuwait</column>
+    </row>
+    <row>
+        <column name="codpais">LAO</column>
+        <column name="pais">Laos</column>
+    </row>
+    <row>
+        <column name="codpais">LBR</column>
+        <column name="pais">Libéria</column>
+    </row>
+    <row>
+        <column name="codpais">LBY</column>
+        <column name="pais">Líbia</column>
+    </row>
+    <row>
+        <column name="codpais">LCA</column>
+        <column name="pais">Santa Lucia</column>
+    </row>
+    <row>
+        <column name="codpais">LIB</column>
+        <column name="pais">Líbano</column>
+    </row>
+    <row>
+        <column name="codpais">LIE</column>
+        <column name="pais">Liechtenstein</column>
+    </row>
+    <row>
+        <column name="codpais">LKA</column>
+        <column name="pais">Sri Lanka</column>
+    </row>
+    <row>
+        <column name="codpais">LSO</column>
+        <column name="pais">Lesoto</column>
+    </row>
+    <row>
+        <column name="codpais">LTU</column>
+        <column name="pais">Lituânia</column>
+    </row>
+    <row>
+        <column name="codpais">LUX</column>
+        <column name="pais">Luxemburgo</column>
+    </row>
+    <row>
+        <column name="codpais">LVA</column>
+        <column name="pais">Letônia</column>
+    </row>
+    <row>
+        <column name="codpais">MAC</column>
+        <column name="pais">Macau</column>
+    </row>
+    <row>
+        <column name="codpais">MAR</column>
+        <column name="pais">Marrocos</column>
+    </row>
+    <row>
+        <column name="codpais">MCO</column>
+        <column name="pais">Mônaco</column>
+    </row>
+    <row>
+        <column name="codpais">MDA</column>
+        <column name="pais">Moldova</column>
+    </row>
+    <row>
+        <column name="codpais">MDG</column>
+        <column name="pais">Madagáscar</column>
+    </row>
+    <row>
+        <column name="codpais">MDV</column>
+        <column name="pais">Maldivas</column>
+    </row>
+    <row>
+        <column name="codpais">MEX</column>
+        <column name="pais">México</column>
+    </row>
+    <row>
+        <column name="codpais">MHL</column>
+        <column name="pais">Ilhas Marshall</column>
+    </row>
+    <row>
+        <column name="codpais">MKD</column>
+        <column name="pais">Macedônia</column>
+    </row>
+    <row>
+        <column name="codpais">MLI</column>
+        <column name="pais">Mali</column>
+    </row>
+    <row>
+        <column name="codpais">MLT</column>
+        <column name="pais">Malta</column>
+    </row>
+    <row>
+        <column name="codpais">MMR</column>
+        <column name="pais">Myanmar</column>
+    </row>
+    <row>
+        <column name="codpais">MNG</column>
+        <column name="pais">Mongólia</column>
+    </row>
+    <row>
+        <column name="codpais">MOÇ</column>
+        <column name="pais">Moçambique</column>
+    </row>
+    <row>
+        <column name="codpais">MRT</column>
+        <column name="pais">Mauritânia</column>
+    </row>
+    <row>
+        <column name="codpais">MUS</column>
+        <column name="pais">Maurício</column>
+    </row>
+    <row>
+        <column name="codpais">MWI</column>
+        <column name="pais">Malawi</column>
+    </row>
+    <row>
+        <column name="codpais">MYS</column>
+        <column name="pais">Malásia</column>
+    </row>
+    <row>
+        <column name="codpais">NAM</column>
+        <column name="pais">Namíbia</column>
+    </row>
+    <row>
+        <column name="codpais">NCL</column>
+        <column name="pais">Nova Caledônia</column>
+    </row>
+    <row>
+        <column name="codpais">NER</column>
+        <column name="pais">Níger</column>
+    </row>
+    <row>
+        <column name="codpais">NGA</column>
+        <column name="pais">Nigéria</column>
+    </row>
+    <row>
+        <column name="codpais">NIC</column>
+        <column name="pais">Nicarágua</column>
+    </row>
+    <row>
+        <column name="codpais">NOR</column>
+        <column name="pais">Noruega</column>
+    </row>
+    <row>
+        <column name="codpais">NOV</column>
+        <column name="pais">Nova Zelândia</column>
+    </row>
+    <row>
+        <column name="codpais">NPL</column>
+        <column name="pais">Nepal</column>
+    </row>
+    <row>
+        <column name="codpais">NRU</column>
+        <column name="pais">Nauru</column>
+    </row>
+    <row>
+        <column name="codpais">OMN</column>
+        <column name="pais">Omã</column>
+    </row>
+    <row>
+        <column name="codpais">PAK</column>
+        <column name="pais">Paquistão</column>
+    </row>
+    <row>
+        <column name="codpais">PAN</column>
+        <column name="pais">Panamá</column>
+    </row>
+    <row>
+        <column name="codpais">PAR</column>
+        <column name="pais">Paraguai</column>
+    </row>
+    <row>
+        <column name="codpais">PER</column>
+        <column name="pais">Peru</column>
+    </row>
+    <row>
+        <column name="codpais">PHL</column>
+        <column name="pais">Filipinas</column>
+    </row>
+    <row>
+        <column name="codpais">PLW</column>
+        <column name="pais">Palau</column>
+    </row>
+    <row>
+        <column name="codpais">PNG</column>
+        <column name="pais">Papua Nova Guiné</column>
+    </row>
+    <row>
+        <column name="codpais">POL</column>
+        <column name="pais">Polônia</column>
+    </row>
+    <row>
+        <column name="codpais">POR</column>
+        <column name="pais">Portugal</column>
+    </row>
+    <row>
+        <column name="codpais">PRI</column>
+        <column name="pais">Porto Rico</column>
+    </row>
+    <row>
+        <column name="codpais">PRK</column>
+        <column name="pais">Coréia do Norte</column>
+    </row>
+    <row>
+        <column name="codpais">PYF</column>
+        <column name="pais">Polinésia Francesa</column>
+    </row>
+    <row>
+        <column name="codpais">QAT</column>
+        <column name="pais">Qatar</column>
+    </row>
+    <row>
+        <column name="codpais">ROM</column>
+        <column name="pais">Romênia</column>
+    </row>
+    <row>
+        <column name="codpais">RTC</column>
+        <column name="pais">República Tcheca</column>
+    </row>
+    <row>
+        <column name="codpais">RUS</column>
+        <column name="pais">Russia</column>
+    </row>
+    <row>
+        <column name="codpais">RWA</column>
+        <column name="pais">Ruanda</column>
+    </row>
+    <row>
+        <column name="codpais">SAU</column>
+        <column name="pais">Arábia Saudita</column>
+    </row>
+    <row>
+        <column name="codpais">SDN</column>
+        <column name="pais">Sudão</column>
+    </row>
+    <row>
+        <column name="codpais">SEN</column>
+        <column name="pais">Senegal</column>
+    </row>
+    <row>
+        <column name="codpais">SLB</column>
+        <column name="pais">Ilhas Salomão</column>
+    </row>
+    <row>
+        <column name="codpais">SLE</column>
+        <column name="pais">Serra Leoa</column>
+    </row>
+    <row>
+        <column name="codpais">SLV</column>
+        <column name="pais">El Salvador</column>
+    </row>
+    <row>
+        <column name="codpais">SME</column>
+        <column name="pais">Suriname</column>
+    </row>
+    <row>
+        <column name="codpais">SMR</column>
+        <column name="pais">San Marino</column>
+    </row>
+    <row>
+        <column name="codpais">SOM</column>
+        <column name="pais">Somália</column>
+    </row>
+    <row>
+        <column name="codpais">STP</column>
+        <column name="pais">São Tomé e Príncipe</column>
+    </row>
+    <row>
+        <column name="codpais">SUE</column>
+        <column name="pais">Suécia</column>
+    </row>
+    <row>
+        <column name="codpais">SUI</column>
+        <column name="pais">Suíça</column>
+    </row>
+    <row>
+        <column name="codpais">SVN</column>
+        <column name="pais">Eslovênia</column>
+    </row>
+    <row>
+        <column name="codpais">SWZ</column>
+        <column name="pais">Suazilândia</column>
+    </row>
+    <row>
+        <column name="codpais">SYC</column>
+        <column name="pais">Seichelas</column>
+    </row>
+    <row>
+        <column name="codpais">SYR</column>
+        <column name="pais">Síria</column>
+    </row>
+    <row>
+        <column name="codpais">TCD</column>
+        <column name="pais">Chade</column>
+    </row>
+    <row>
+        <column name="codpais">TGO</column>
+        <column name="pais">Togo</column>
+    </row>
+    <row>
+        <column name="codpais">THA</column>
+        <column name="pais">Tailândia</column>
+    </row>
+    <row>
+        <column name="codpais">TJK</column>
+        <column name="pais">Tadiquistão</column>
+    </row>
+    <row>
+        <column name="codpais">TKM</column>
+        <column name="pais">Turquemenistão</column>
+    </row>
+    <row>
+        <column name="codpais">TON</column>
+        <column name="pais">Tonga</column>
+    </row>
+    <row>
+        <column name="codpais">TTO</column>
+        <column name="pais">Trinidad e Tobago</column>
+    </row>
+    <row>
+        <column name="codpais">TUN</column>
+        <column name="pais">Tunísia</column>
+    </row>
+    <row>
+        <column name="codpais">TUR</column>
+        <column name="pais">Turquia</column>
+    </row>
+    <row>
+        <column name="codpais">TUV</column>
+        <column name="pais">Tuvalu</column>
+    </row>
+    <row>
+        <column name="codpais">TWN</column>
+        <column name="pais">Taiwan</column>
+    </row>
+    <row>
+        <column name="codpais">TZA</column>
+        <column name="pais">Tanzânia</column>
+    </row>
+    <row>
+        <column name="codpais">UGA</column>
+        <column name="pais">Uganda</column>
+    </row>
+    <row>
+        <column name="codpais">UKR</column>
+        <column name="pais">Ucrânia</column>
+    </row>
+    <row>
+        <column name="codpais">URU</column>
+        <column name="pais">Uruguai</column>
+    </row>
+    <row>
+        <column name="codpais">USA</column>
+        <column name="pais">Estados Unidos</column>
+    </row>
+    <row>
+        <column name="codpais">UZB</column>
+        <column name="pais">Uzbequistão</column>
+    </row>
+    <row>
+        <column name="codpais">VAT</column>
+        <column name="pais">Vaticano</column>
+    </row>
+    <row>
+        <column name="codpais">VCT</column>
+        <column name="pais">São Vicente e Granadinas</column>
+    </row>
+    <row>
+        <column name="codpais">VGB</column>
+        <column name="pais">Ilhas Virgens (Inglaterra)</column>
+    </row>
+    <row>
+        <column name="codpais">VIR</column>
+        <column name="pais">Ilhas Virgens (EUA)</column>
+    </row>
+    <row>
+        <column name="codpais">VNM</column>
+        <column name="pais">Vietnã</column>
+    </row>
+    <row>
+        <column name="codpais">VNZ</column>
+        <column name="pais">Venezuela</column>
+    </row>
+    <row>
+        <column name="codpais">VUT</column>
+        <column name="pais">Vanuatu</column>
+    </row>
+    <row>
+        <column name="codpais">WSM</column>
+        <column name="pais">Samoa</column>
+    </row>
+    <row>
+        <column name="codpais">YEM</column>
+        <column name="pais">Iêmen</column>
+    </row>
+    <row>
+        <column name="codpais">ZMB</column>
+        <column name="pais">Zâmbia</column>
+    </row>
+    <row>
+        <column name="codpais">ZWE</column>
+        <column name="pais">Zimbábue</column>
+    </row>
+</resultset>

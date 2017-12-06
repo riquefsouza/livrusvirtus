@@ -1,0 +1,159 @@
+package  Livrus;
+
+import System.*;
+import System.Drawing.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+
+/// <summary>
+/// Summary description for WinForm.
+/// </summary>
+public class frmSobre extends System.Windows.Forms.Form
+{
+  public static frmSobre fSobre;
+  /// <summary>
+  /// Required designer variable.
+  /// </summary>
+  private System.ComponentModel.Container components = null;
+  private System.Windows.Forms.GroupBox groupBox1;
+  private System.Windows.Forms.Button btnOk;
+  private System.Windows.Forms.PictureBox pictureBox1;
+  private System.Windows.Forms.Label label1;
+  private System.Windows.Forms.Label label2;
+  private System.Windows.Forms.Label label3;
+  
+  public frmSobre()
+  {
+  	//
+  	// Required for Windows Form Designer support
+  	//
+  	InitializeComponent();
+  
+  	//
+  	// TODO: Add any constructor code after InitializeComponent call
+  	//
+  }
+  
+  /// <summary>
+  /// Clean up any resources being used.
+  /// </summary>
+  protected void Dispose (boolean disposing)
+  {
+  	if (disposing)
+  	{
+  		if (components != null)
+  		{
+  			components.Dispose();
+  		}
+  	}
+  	super.Dispose(disposing);
+  }
+  
+  /// <summary>
+  /// Required method for Designer support - do not modify
+  /// the contents of this method with the code editor.
+  /// </summary>
+  private void InitializeComponent()
+  {
+  	System.Resources.ResourceManager resources = new System.Resources.ResourceManager(GetType());
+  	this.groupBox1 = new System.Windows.Forms.GroupBox();
+  	this.label3 = new System.Windows.Forms.Label();
+  	this.label2 = new System.Windows.Forms.Label();
+  	this.label1 = new System.Windows.Forms.Label();
+  	this.pictureBox1 = new System.Windows.Forms.PictureBox();
+  	this.btnOk = new System.Windows.Forms.Button();
+  	this.groupBox1.SuspendLayout();
+  	this.SuspendLayout();
+  	// 
+  	// groupBox1
+  	// 
+  	this.groupBox1.set_BackColor(System.Drawing.Color.get_Transparent());
+  	this.groupBox1.get_Controls().Add(this.label3);
+  	this.groupBox1.get_Controls().Add(this.label2);
+  	this.groupBox1.get_Controls().Add(this.label1);
+  	this.groupBox1.get_Controls().Add(this.pictureBox1);
+  	this.groupBox1.set_Location(new System.Drawing.Point(8, 8));
+  	this.groupBox1.set_Name("groupBox1");
+  	this.groupBox1.set_Size(new System.Drawing.Size(312, 176));
+  	this.groupBox1.set_TabIndex(0);
+  	this.groupBox1.set_TabStop(false);
+  	// 
+  	// label3
+  	// 
+  	this.label3.set_Location(new System.Drawing.Point(24, 128));
+  	this.label3.set_Name("label3");
+  	this.label3.set_Size(new System.Drawing.Size(256, 40));
+  	this.label3.set_TabIndex(3);
+  	this.label3.set_Text("Sistema integrante do projeto Livrus Virtus, versão programada no " +  
+  		"Microsoft .NET Framework em Visual J#.NET.");
+  	this.label3.set_TextAlign(System.Drawing.ContentAlignment.MiddleCenter);
+  	// 
+  	// label2
+  	// 
+  	this.label2.set_Location(new System.Drawing.Point(8, 112));
+  	this.label2.set_Name("label2");
+  	this.label2.set_Size(new System.Drawing.Size(296, 16));
+  	this.label2.set_TabIndex(2);
+  	this.label2.set_Text("Todos os direitos reservados para: Henrique F. de Souza");
+  	this.label2.set_TextAlign(System.Drawing.ContentAlignment.MiddleLeft);
+  	// 
+  	// label1
+  	// 
+  	this.label1.set_Location(new System.Drawing.Point(16, 96));
+  	this.label1.set_Name("label1");
+  	this.label1.set_Size(new System.Drawing.Size(280, 16));
+  	this.label1.set_TabIndex(1);
+  	this.label1.set_Text("Versão: 1.0.0");
+  	this.label1.set_TextAlign(System.Drawing.ContentAlignment.MiddleRight);
+  	// 
+  	// pictureBox1
+  	// 
+  	this.pictureBox1.set_BackColor(System.Drawing.Color.get_Transparent());
+  	this.pictureBox1.set_Image(((System.Drawing.Image)(resources.GetObject("pictureBox1.Image"))));
+  	this.pictureBox1.set_Location(new System.Drawing.Point(24, 16));
+  	this.pictureBox1.set_Name("pictureBox1");
+  	this.pictureBox1.set_Size(new System.Drawing.Size(264, 72));
+  	this.pictureBox1.set_SizeMode(System.Windows.Forms.PictureBoxSizeMode.StretchImage);
+  	this.pictureBox1.set_TabIndex(0);
+  	this.pictureBox1.set_TabStop(false);
+  	// 
+  	// btnOk
+  	// 
+  	this.btnOk.set_DialogResult(System.Windows.Forms.DialogResult.OK);
+  	this.btnOk.set_Location(new System.Drawing.Point(128, 192));
+  	this.btnOk.set_Name("btnOk");
+  	this.btnOk.set_TabIndex(1);
+  	this.btnOk.set_Text("OK");
+  	// 
+  	// frmSobre
+  	// 
+  	this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+  	this.set_ClientSize(new System.Drawing.Size(328, 221));
+  	this.get_Controls().Add(this.btnOk);
+  	this.get_Controls().Add(this.groupBox1);
+  	this.set_FormBorderStyle(System.Windows.Forms.FormBorderStyle.FixedDialog);
+  	this.set_MaximizeBox(false);
+  	this.set_MinimizeBox(false);
+  	this.set_Name("frmSobre");
+  	this.set_StartPosition(System.Windows.Forms.FormStartPosition.CenterParent);
+  	this.set_Text("Sobre o Sistema");
+  	this.add_Closing(new System.ComponentModel.CancelEventHandler(this.frmSobre_Closing));
+  	this.add_MouseMove(new System.Windows.Forms.MouseEventHandler(this.frmSobre_MouseMove));
+  	this.groupBox1.ResumeLayout(false);
+  	this.ResumeLayout(false);
+  }
+
+  
+  private void frmSobre_MouseMove(Object sender, System.Windows.Forms.MouseEventArgs e)
+  {
+  	  frmPrincipal.fPrincipal.statusBar1.get_Panels().get_Item(1).set_Text(this.get_Text());
+  }
+  
+  private void frmSobre_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
+  {
+  	frmPrincipal.fPrincipal.statusBar1.get_Panels().get_Item(1).set_Text("");
+  }
+
+}

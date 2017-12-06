@@ -1,0 +1,18 @@
+// This is quicksort in FP from pages 300-301 of Dershem & Jipping's textbook
+
+     (def pairup == distl.[1,tl])
+     
+     (def keep_le == (/append).@(geq->tl;nil))
+     
+     (def keep_gt == (/append).@(lss->tl;nil))
+     
+     (def keep_x == tlr.1)
+     
+     (def partition == [keep_le,keep_x,keep_gt].pairup)
+     
+     (def qsort == (leq.[length,#1]->id;(/append).[qsort.1,2,sort.3].partition))
+     
+     qsort:<5,3,2,8,4,3,9,7>
+     qsort:<1,2,3,4,5,6>
+     qsort:<6,5,4,3,2,1>
+end

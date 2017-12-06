@@ -1,0 +1,970 @@
+--
+--  Parse Table Calculations
+--  ========================
+--
+--  This package will examine the input grammar and produce parse tables.
+--  We will not try to go into much detail on LALR parsing in general,
+--  for general background see the dragon book (Aho, Sethi, and Ullman)
+--  or Crafting a Compiler (Fischer and LeBlanc).  The method used here
+--  draws mostly from Fischer and LeBlanc.
+--
+--  After the raw tables are constructed, we will make some effort to
+--  compress those tables.  The basic scheme for parse table compression
+--  is taken from another parse table program, written by Phillippe
+--  Charles.  In the comments of that program he credits Zeigler.
+--
+
+package table_calculations;
+
+   procedure calculate_tables;
+
+end table_calculations;
+
+package body table_calculations;
+
+   use globals;                        -- global symbols
+
+   var first              := [],       -- first set for each symbol
+       item_rule          := [],       -- rule number for each item
+       dot_position       := [],       -- dot position for each item 
+       dot_symbol         := [],       -- symbol in dot position for item
+       item_first         := [],       -- first set for item 
+       is_complete        := [],       -- true for complete items
+       first_rule_item    := [],       -- first item for each rule
+       num_items          := 0,        -- total number of items
+       state_list         := [],       -- a tuple of LR(0) states
+       state_map          := {},       -- a map from LR(0) kernals to indices
+                                       -- in state_list
+       closure_items      := [],       -- items added by a symbol appearing
+                                       -- in the dot position
+       goto_kernals       := [],       -- map from symbol -> goto kernal for
+                                       -- each state
+       complete_items     := [],       -- set of complete items in state
+       lr0_goto           := [],       -- forward transition map
+       lr0_lookback       := [],       -- backward transition map
+       lookaheads         := [],       -- lookahead symbols, for state, item
+       goto               := {},       -- the goto table for non-terminals
+       shift_reduce       := {};       -- shift-reduce table for terminals
+
+   --
+   --  calculate_tables
+   --  ----------------
+   --
+   --  This procedure drives the parse table calculation.  It just calls
+   --  other procedures to perform each phase of the operation.
+   --
+
+   procedure calculate_tables;
+
+      --
+      --  In some of the verbose output we'll need maximum symbol widths.
+      --  We'll calculate them once here, to speed things up.
+      --
+
+      max_symbol_width := 0 max/ {#s : s in symbol_list};
+      max_term_width := 0 max/ {#symbol_list(s) : s in [1 .. num_terminals]};
+
+      --
+      --  We have to make sure default_action is initialized to om.
+      --  Otherwise if we print conflicts we might get some spurious junk
+      --  when we print state data.
+      --
+
+      default_action := [];
+
+      --
+      --  This is really one long linear procedure.  We break it up a bit
+      --  just for readability.
+      --
+      
+      find_first_sets();
+      make_items();
+      build_lr0_automaton();
+      find_lookaheads();
+      make_action_tables();
+      if not edit_only and error_count = 0 then
+         compress_tables();
+      end if;
+      if verbose then
+         print_tables();      
+      end if;
+
+   end calculate_tables;
+
+   --
+   --  find_first_sets
+   --  ---------------
+   --
+   --  The `first' set of a grammar symbol is the set of terminals which
+   --  may appear as the first terminal in the expansion of that symbol.
+   --  The first set of a terminal is the terminal itself. The textbook
+   --  method of calculating first sets is to loop over the rules, adding
+   --  to the first set of the left hand side the first sets of the right
+   --  hand symbols, until we find one which can not produce epsilon. We
+   --  continue this until the first sets stabilize.
+   --
+   --  We're going to take a slightly different approach, although the
+   --  idea is the same.  We'll perform three phases:  In the first, we
+   --  find the set of nullable symbols, those which can produce
+   --  epsilon.  Using that set, we can in a single pass determine for
+   --  each symbol the other symbols to which first sets should be
+   --  propagated. Finally, we use a workpile algorithm to propagate the
+   --  first sets. The advantage of this apparent extra work is that
+   --  it's considerably faster, since we've eliminated a lot of looping
+   --  over the rules.
+   --
+   --  We'll store first sets as a tuple of sets, so the first set for
+   --  the symbol s is first(s).
+   --
+
+   procedure find_first_sets;
+
+      --
+      --  First we find the set of nullable symbols, using a workpile
+      --  algorithm.  We keep a map from non-terminals to [rule,
+      --  position] where the non-terminal is in the position of the rule
+      --  and we know that all preceeding symbols are nullable.  As we
+      --  add a symbol to the set of nullable symbols, we update this map
+      --  and add it to the workpile.
+      --
+
+      nullable_symbols := {lhs_list(i) : i in [1 .. num_rules] | 
+                           #rhs_list(i) = 0};
+      dependent_rules := {[rhs_list(r)(1), [r, 1]] : r in [1 .. num_rules] |
+                          #rhs_list(r) > 0 and
+                          rhs_list(r)(1) > num_terminals};
+      workpile := nullable_symbols;      
+
+      while (symbol from workpile) /= om loop
+
+         new_rule_set := {};
+         for [r, d] in dependent_rules{symbol} loop
+
+            continue when (lhs_symbol := lhs_list(r)) in nullable_symbols;
+
+            rhs := rhs_list(r);
+            d +:= 1;
+            while d <= #rhs and rhs(d) in nullable_symbols loop
+               d +:= 1;
+            end loop;
+
+            if d > #rhs then
+               nullable_symbols with:= lhs_symbol;
+               workpile with:= lhs_symbol;
+            elseif rhs(d) > num_terminals then
+               new_rule_set with:= [r, d];
+            end if;
+
+         end loop;
+         dependent_rules{symbol} := new_rule_set;
+
+      end loop;
+
+      --
+      --  Now we have a usable set of nullable rules.  We build a
+      --  multi-valued map propagate_map, in which all elements of the
+      --  first set of a domain element should propagate to the first set
+      --  of each range element.
+      --
+
+      propagate_map := {};
+      for r in [1 .. num_rules] loop
+         for s in rhs_list(r) loop
+            
+            propagate_map with:= [s, lhs_list(r)];
+            exit when s notin nullable_symbols;
+
+         end loop;
+      end loop;
+
+      --
+      --  We're finally ready to find the first sets.  We start with each
+      --  terminal in its own first set, and use a workpile algorithm to
+      --  propagate these until the first sets stabilize.
+      --
+
+      first := [{i} : i in [1 .. num_terminals]] + 
+               [{}  : i in [num_terminals + 1 .. num_symbols]];
+
+      workpile := {1 .. num_terminals};   
+      while (symbol from workpile) /= om loop
+         
+         for s in propagate_map{symbol} loop
+
+            if not (first(symbol) <= first(s)) then
+               first(s) +:= first(symbol);
+               workpile with:= s;
+            end if;
+
+         end loop;
+
+      end loop;
+
+      for i in nullable_symbols loop
+         first(i) with:= epsilon_symbol_number;
+      end loop;
+
+      print("First sets complete");
+
+      --
+      --  If the user asks for verbose output, we'll print the first sets
+      --  for him.  We suspect it's more for curiosity than anything
+      --  else.  The states are useful in debugging, but this probably
+      --  isn't.
+      --
+
+      if verbose then
+
+         print("\nFIRST SETS");
+         print("==========\n");
+
+         lhs_width := max_symbol_width + 2;
+
+         for s in [num_terminals + 1 .. num_symbols] loop
+      
+            line := rpad(symbol_list(s), lhs_width);
+            for t in first(s) loop
+
+               print_sym := " " + symbol_list(t);
+
+               if #line + #print_sym > 78 then
+                  print(line);
+                  line := lhs_width * " ";
+               end if;
+
+               line +:= print_sym;
+
+            end loop;
+
+            print(line);
+
+         end loop;
+
+      end if;
+
+   end find_first_sets;
+   
+   --
+   --  make_items
+   --  ----------
+   --
+   --  An `item' is a rule with a distinguished dot position,
+   --  conceptually the rhs in front of the dot is the portion seen at a
+   --  particular point.  We're going to need to manipulate these things
+   --  a lot, so rather than store items in a simple-minded form, i.e.
+   --  [rule, position], we'll make a bunch of tables by item number and
+   --  use that as needed.
+   --
+
+   procedure make_items;
+
+      item_rule     := [];
+      dot_position  := [];
+      dot_symbol    := [];
+      item_first    := [];
+      is_complete   := [];
+
+      for r in [1 .. num_rules] loop
+
+          rhs := rhs_list(r);
+          first_rule_item(r) := #item_rule + 1;
+
+          item := #item_rule + #rhs + 1;
+          item_rule(item) := r;
+          dot_position(item) := #rhs + 1;
+          dot_symbol(item) := epsilon_symbol_number;
+          item_first(item) := {epsilon_symbol_number};
+          is_complete(item) := true;
+          item -:= 1;
+
+          for d in [#rhs, #rhs - 1 .. 1] loop
+
+             item_rule(item) := r;
+             dot_position(item) := d;
+             dot_symbol(item) := rhs(d);
+             is_complete(item) := false;
+
+             item_first(item) := first(rhs(d));
+             if d <= #rhs and epsilon_symbol_number in first(rhs(d)) then
+                item_first(item) := item_first(item) less
+                                    epsilon_symbol_number +
+                                    item_first(item + 1);
+             end if;
+
+             item -:= 1;
+
+         end loop;
+
+      end loop;
+
+      num_items := #item_rule;
+
+   end make_items;
+
+   --
+   --  build_lr0_automaton
+   --  -------------------
+   --
+   --  Now we build the LR(0) automaton.  Again, we do this in two
+   --  phases, to speed up the calculation.  A simple-minded algorithm
+   --  would need to find the closure of an LR(0) item set frequently,
+   --  but these closure operations duplicate a lot of effort.  Instead
+   --  we'll find a closure set for each non-terminal.  We can take the
+   --  unions of many of these to find the closure of a set, given its
+   --  kernal.
+   --
+   --  There are several data structures we're trying to build here.
+   --  State_list is a list of kernal items for each state.  State_map
+   --  maps kernals to indices within state_list.  Goto_kernals
+   --  partitions the closure of a state into the kernal items of
+   --  successor states.  Lr0_goto and lr0_lookback represent the
+   --  transitions of the automaton.  Finally, complete_items is the set
+   --  of completed items in the closure of a state.
+   --
+
+   procedure build_lr0_automaton;
+
+      --
+      --  We use a workpile algorithm to build the tuple closure_items,
+      --  which maps non-terminals to LR(0) item sets. These will be
+      --  added to a closure when the non-terminal is in the dot position
+      --  of a kernal item.
+      --
+
+      closure_items := [{first_rule_item(r) : r in lhs_map(s)} :
+                        s in [1 .. num_symbols]];
+      propagate_map := {[rhs_list(r)(1), lhs_list(r)] : 
+                        r in [1 .. num_rules] | #rhs_list(r) > 0};
+      workpile := {num_terminals + 1 .. num_symbols};
+
+      while (symbol from workpile) /= om loop
+         for s in propagate_map{symbol} loop
+
+            if not (closure_items(s) <= closure_items(symbol)) then
+               closure_items(s) +:= closure_items(symbol);
+               workpile with:= s;
+            end if;
+
+         end loop;
+      end loop;
+
+      --
+      --  Now we can build the automaton.  We make a single state
+      --  consisting of `%accept ::= S $', and expand it until we have
+      --  nothing left to expand.
+      --
+
+      state_list         := [{1}];
+      state_map          := {[state_list(1), 1]};
+      transitions        := {};
+      goto_kernals       := [];
+      complete_items     := [];
+
+      state := 1;
+      while state <= #state_list loop
+
+         --
+         --  Form the LR(0) closure of the kernal.
+         --
+
+         closure := state_list(state) +/ {closure_items(dot_symbol(item)) :
+                                          item in state_list(state) |
+                                          not is_complete(item)};
+
+         --
+         --  We need to keep track of completed items in a state, and we
+         --  must do that now while we have the closure easily available.
+         --
+
+         complete_items(state) := {item in closure | is_complete(item)};
+
+         --
+         --  Find goto states.
+         --
+
+         goto_kernals(state) := {[dot_symbol(item), item + 1] :
+                                 item in closure |
+                                 not is_complete(item)};
+
+         --
+         --  Build the transition table for this state.
+         --
+
+         for kernal = goto_kernals(state){symbol} loop
+
+            if (goto_state := state_map(kernal)) = om then
+               state_list with:= kernal;
+               goto_state := state_map(kernal) := #state_list;
+            end if;
+            
+            transitions with:= [state, symbol, goto_state];
+               
+         end loop;
+
+         state +:= 1;
+
+      end loop;
+
+      num_states := #state_list;
+
+      --
+      --  Now we'll reorganize the transition map into forward and
+      --  backward maps.
+      --
+
+      lr0_goto      := [{} : i in [1 .. num_states]];
+      lr0_lookback  := [{} : i in [1 .. num_states]];
+      for [state, symbol, goto_state] in transitions loop
+         lr0_goto(state)(symbol) := goto_state;
+         lr0_lookback(goto_state) with:= state;
+      end loop;
+
+      print("LR(0) automaton built: ", num_states, " states");
+
+   end build_lr0_automaton;
+
+   --
+   --  find_lookaheads
+   --  ---------------
+   --
+   --  This procedure finds lookaheads for LR(1) items, which we will
+   --  eventually use to calculate reduce actions.  Here's the general
+   --  idea.  Given an LR(1) item `A ::= a.Xb,y' in the kernal of a
+   --  state, there will (possibly) be a bunch of rules like
+   --  `X ::= ???' in the closure of that state.  We follow these rules
+   --  to their completion, and place the first set of "b,y" in the
+   --  follow set of the completion of those items.
+   --
+   --  The following procedure does that, but backwards.  We start with
+   --  completed items, then look backwards to the place where those
+   --  items started.  Then we look for first sets of items generating
+   --  them.
+   --
+   --  This is horrible to explain in a comment, since it takes a lot of
+   --  explaining.  Look up the theory in a book.
+   --
+
+   procedure find_lookaheads;
+
+      var la_follow     := [{} : s in [1 .. num_states]];
+                                       -- maps non-terminals to the      
+                                       -- lookaheads generated by them in
+                                       -- a state 
+
+      lookaheads        := [{} : s in [1 .. num_states]];
+      la_follow(1)(rhs_list(1)(1)) := {eof_symbol_number};
+      lookaheads(lr0_goto(1)(rhs_list(1)(1)))(1) := {eof_symbol_number};
+
+      for state in [1 .. num_states] | #complete_items(state) > 0 loop
+
+         for item in complete_items(state) loop
+
+            --
+            --  Now we've got a completed item to handle.  We look
+            --  backward in the automaton to find the state where this
+            --  item originated.  We take the follow set generated by the
+            --  left hand side of this item in that state.
+            --
+
+            for s in lookback(state, dot_position(item) - 1) loop
+
+               if la_follow(s)(lhs_list(item_rule(item))) = om then
+                  compute_la_follow(s, lhs_list(item_rule(item)));
+               end if;
+               lookaheads(state)(item_rule(item)) :=
+                  (lookaheads(state)(item_rule(item)) ? {}) +
+                  la_follow(s)(lhs_list(item_rule(item)));
+
+            end loop;
+
+         end loop;
+
+      end loop;
+
+      print("Lookahead symbols found");
+
+      --
+      --  lookback
+      --  --------
+      --
+      --  This procedure returns the set of states a given distance back
+      --  in the automaton.
+      --
+
+      procedure lookback(state, distance);
+
+         starting_states := {state};
+         for i in [1 .. distance] loop
+            starting_states := {} +/ 
+                               {lr0_lookback(s) : s in starting_states};
+         end loop;
+
+         return starting_states;
+
+      end lookback;
+
+      --
+      --  compute_la_follow
+      --  -----------------
+      --
+      --  This procedure computes la_follow for a given state and left
+      --  hand side.  It's called recursively when that set contains
+      --  epsilon.
+      --
+
+      procedure compute_la_follow(state, lhs);
+               
+         la_follow(state)(lhs) := {};
+
+         for item in goto_kernals(state){lhs} loop
+
+            la_follow(state)(lhs) +:= item_first(item);
+            if epsilon_symbol_number in item_first(item) then
+
+               l := lhs_list(item_rule(item));
+               for s in lookback(state, dot_position(item) - 2) loop
+               
+                  if la_follow(s)(l) = om then
+                     compute_la_follow(s, l);
+                  end if;
+                  la_follow(state)(lhs) +:= la_follow(s)(l);    
+
+               end loop;
+
+            end if;
+
+         end loop;
+
+      end compute_la_follow;
+
+   end find_lookaheads; 
+
+   --
+   --  make_action_tables
+   --  ------------------
+   --
+   --  This procedure produces a `raw' form of the action tables and
+   --  checks for conflicts.  First we loop over the lr0_goto table,
+   --  making a shift entry for each terminal and a goto entry for each
+   --  non-terminal.  Then we examine the lookaheads, and for every one
+   --  attached to a completed rule we make a reduce entry.  If there is
+   --  already a reduce entry for the lookahead we recognize a conflict.
+   --
+
+   procedure make_action_tables; 
+
+      --
+      --  The lr0_goto table contains shift items for terminals, or just
+      --  goto's for non-terminals.
+      --
+
+      shift_reduce := [{} : i in [1 .. num_states]];
+      goto := [{} : i in [1 .. num_states]];
+
+      for state in [1 .. num_states] loop
+         for s = lr0_goto(state)(t) loop
+            if t <= num_terminals then
+               shift_reduce(state)(t) := s + num_rules;
+            else 
+               goto(state)(t) := s;
+            end if;
+         end loop;
+      end loop;
+
+      --
+      --  Lookaheads lead to reduce actions for terminals and expose
+      --  conflicts.
+      --
+
+      conflicts := {};
+      for s in [1 .. num_states], ts = lookaheads(s)(r), t in ts |
+          t /= epsilon_symbol_number loop
+
+         if shift_reduce(s)(t) /= om then
+            conflicts with:= [s, [t, r]];
+         else
+            shift_reduce(s)(t) := r;
+         end if;
+
+      end loop;
+
+      print("Action tables built: ",
+            if #conflicts = 0 then "No conflicts"
+            elseif #conflicts = 1 then "1 conflict"
+            else str(#conflicts) + " conflicts" end if);
+
+      --
+      --  Try to print a nice list of conflicts.  These are sometimes
+      --  nasty errors to find, so any help we can give the user will be
+      --  appreciated.
+      --
+
+      if #conflicts /= 0 then
+
+         lhs_width := max_term_width + 2;
+
+         print("\nCONFLICTS");
+         print("=========\n");
+
+         for state in [1 .. num_states] | #conflicts{state} /= 0 loop
+
+            --
+            --  Put the first action we found into the conflict set.
+            --
+
+            state_conflicts := conflicts{state};
+            for actions = state_conflicts{t} loop
+               state_conflicts{t} with:= shift_reduce(state)(t);
+               shift_reduce(state)(t) := om;
+            end loop;
+
+            --
+            --  Print the state.
+            --
+
+            print_state(state);
+
+            --
+            --  Print each terminal with a conflict.
+            --
+
+            terminals := domain(state_conflicts);
+            for t in [1 .. num_terminals] | t in terminals loop
+             
+               actions := easy_sort(state_conflicts{t});
+               line := "Conflict on " + rpad(symbol_list(t), lhs_width);
+               for a in actions loop
+
+                  if a <= num_rules then
+                     error_str := "Reduce " + str(a) + ",  ";
+                  else
+                     error_str := "Shift " + str(a) + ",  ";
+                  end if;
+
+                  if #line + #error_str > 78 then
+                     print(line);
+                     line := (lhs_width + 12) * " ";
+                  end if;
+
+                  line +:= error_str;
+
+               end loop;
+
+               print(line(1 .. #line - 3));
+
+            end loop;
+
+            print("");
+
+         end loop;
+
+         error_count +:= #conflicts;
+
+      end if;
+
+   end make_action_tables;
+
+   --
+   --  compress_tables
+   --  ---------------
+   --
+   --  This procedure compresses the parse tables into final form.  It
+   --  uses basically three tricks to do that.
+   --
+   --  The action table is divided into two distinct tables, one for
+   --  terminals and one for non-terminals.  For the terminal table, we
+   --  first try to find a default rule for each state, if the user
+   --  allows it.  Then we compress the table into a linear table using
+   --  Zeigler's method.  The non-terminal is made up of a bunch of goto
+   --  actions.  We first try to merge states with identical goto tables,
+   --  then we use Zeigler's method on that table as well.
+   --
+
+   procedure compress_tables;
+
+      default_action := [];
+      term_index  := []; 
+      term_action := [];
+      term_check  := [];
+      used_indices := {};
+
+      for state in [1 .. num_states] loop
+
+         --
+         --  Try to find a default reduction rule, the most common reduce
+         --  action.
+         --
+
+         if default_rules and 
+            error_symbol_number notin domain(shift_reduce(state)) then
+
+            if #shift_reduce(state) = 1 then
+
+               [t, a] := arb(shift_reduce(state));
+               if a <= num_rules then
+                  default_action(state) := a;
+                  shift_reduce(state) := {};
+               end if;
+             
+            else
+
+               inverse_map := {[r, t] : [t, r] in shift_reduce(state) |
+                                        r <= num_rules};
+               max_count := 0;
+               found_default := om;
+               for s = inverse_map{r} loop
+               
+                  if #s > max_count then
+                     max_count := #s;
+                     found_default := r;
+                  end if;
+
+               end loop;
+
+               if max_count > 1 then
+                  default_action(state) := found_default;
+                  shift_reduce(state) := 
+                     {[t, r] : [t, r] in shift_reduce(state) |
+                      r /= found_default};
+               end if;
+
+            end if;
+
+         end if;
+
+         --
+         --  We've finished finding a default reduction, look for an
+         --  unused spot in the linear table, with no conflicts.
+         --
+
+         terminal_set := domain(shift_reduce(state));
+         index := 1;
+         while index in used_indices or
+               (exists t in terminal_set | term_action(index + t) /= om) loop
+               index +:= 1;
+         end loop;
+
+         term_index(state) := index;
+         used_indices with:= index;
+         for t in terminal_set loop
+            term_action(index + t) := shift_reduce(state)(t);
+            term_check(index + t) := t;
+         end loop;
+
+      end loop;
+            
+      max_term_index := max/used_indices;
+
+      --
+      --  Now we're ready for the goto table.  First we merge any states
+      --  with identical maps.
+      --
+
+      merged := {};
+      remap := {[goto(state), state] : state in [1 .. num_states]};
+      for state_set = remap{junk} | #state_set > 1 loop
+
+         key from state_set;
+         merged +:= {[s, key] : s in state_set};
+
+      end loop;
+
+      --
+      --  Compress the goto table into a linear list, just as we did for
+      --  the terminal actions.
+      --
+
+      goto_index  := []; 
+      goto_action := [];
+      used_indices := {};
+
+      for state in [1 .. num_states] | merged(state) = om loop
+
+         terminal_set := domain(goto(state));
+         index := - num_terminals;
+         while index in used_indices or
+               (exists t in terminal_set | goto_action(index + t) /= om) loop
+            index +:= 1;
+         end loop;
+
+         goto_index(state) := index;
+         used_indices with:= index;
+
+         for t in terminal_set loop
+            goto_action(index + t) := goto(state)(t);
+         end loop;
+
+      end loop;
+
+      max_goto_index := max/used_indices;
+
+      --
+      --  Set the goto index for merged states.
+      --
+
+      for other = merged(state) loop
+         goto_index(state) := other;
+      end loop;
+
+      error_action := num_states + num_rules + 1;
+      default_action := [default_action(s) ? error_action :
+                         s in [1 .. num_states]];
+      term_check := [term_check(t) ? error_action :
+                     t in [1 .. max_term_index + num_terminals]];
+      term_action := [term_action(t) ? error_action :
+                     t in [1 .. max_term_index + num_terminals]];
+      goto_action := [goto_action(t) ? error_action :
+                     t in [1 .. max_goto_index + num_symbols]];
+
+      print("Tables compressed");
+
+   end compress_tables;
+
+   --
+   --  print_tables
+   --  ------------
+   --
+   --  In verbose mode we'll print out all the states.
+   --
+
+   procedure print_tables;
+
+      print("\nSTATES");
+      print("======\n");
+
+      for state in [1 .. num_states] loop
+         print_state(state);
+      end loop;
+
+   end print_tables;
+      
+   --
+   --  print_state
+   --  -----------
+   --
+   --  This procedure prints lots of stuff about a state in the final
+   --  automaton.  It's called for verbose printouts, or when we report
+   --  conflicts.
+   --
+
+   procedure print_state(state);
+
+      lhs_width := max_symbol_width + 2;
+
+      print("State ", state);
+      print(78 * "-");
+
+      --
+      --  Print the states with transitions into this one.
+      --
+
+      if #lr0_lookback(state) /= 0 then
+
+         line := "Incoming transitions: ";
+         for s in easy_sort(lr0_lookback(state)) loop
+
+            state_str := str(s) + ",  ";
+            if #line + #state_str > 78 then
+
+               print(line);
+               line := "                      ";
+         
+            end if;
+
+            line +:= state_str;
+
+         end loop;
+
+         print(line(1 .. #line - 3),"\n");
+
+      end if;
+
+      --
+      --  We print all the rules in the closure of the state (only
+      --  kernals are saved).
+      --
+
+      closure := state_list(state) +/ {closure_items(dot_symbol(item)) :
+                                       item in state_list(state) |
+                                       not is_complete(item)};
+      closure := easy_sort(closure);
+
+      for item in closure loop
+
+         rhs := rhs_list(item_rule(item));
+         line := lpad(str(item_rule(item)), 4) + "  " + 
+                 rpad(symbol_list(lhs_list(item_rule(item))), lhs_width) +
+                 " ::=";
+
+         for j in [1 .. #rhs] loop
+
+            s := rhs(j);
+            if j = dot_position(item) then
+               print_sym := " . " + symbol_list(s);
+            else
+               print_sym := " " + symbol_list(s);
+            end if;
+
+            if #line + #print_sym > 78 then
+               print(line);
+               line := (lhs_width + 10)*" ";
+            end if;
+
+            line +:= print_sym;
+
+         end loop;
+
+         if dot_position(item) = #rhs+1 then
+            print(line, " .");
+         else
+            print(line);
+         end if;
+
+      end loop;
+
+      print("");
+
+      --
+      --  Next, any shift, reduce, or goto actions.
+      --
+
+      for t in [1 .. num_terminals] loop
+
+         action := shift_reduce(state)(t);
+         if action = om then
+            continue;
+         elseif action <= num_rules then
+            print(rpad(symbol_list(t), lhs_width), "Reduce ",
+                  lpad(str(action), 4));
+         else
+            print(rpad(symbol_list(t), lhs_width), "Shift  ",
+                  lpad(str(action - num_rules), 4));
+         end if;
+
+      end loop;
+
+      for t in [num_terminals + 1 .. num_symbols] loop
+
+         action := goto(state)(t);
+         if action /= om then
+            print(rpad(symbol_list(t), lhs_width), "Goto   ",
+                  lpad(str(action), 4));
+         end if;
+
+      end loop;
+
+      if #shift_reduce(state) > 0 or #goto(state) > 0 then
+         print("");
+      end if;
+
+      --
+      --  If we have a default reduction print that as well.
+      --
+
+      if default_action(state) /= om then
+         print("Default reduce by ", default_action(state), "\n");
+      end if;
+
+   end print_state;
+
+end table_calculations;

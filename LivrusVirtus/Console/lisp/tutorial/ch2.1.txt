@@ -1,0 +1,42 @@
+LISP Tutorial   by Mark Meyer
+Chapter 2.1
+Special atoms and lists
+--------------------------------------------------------------------------------
+TOPICS:  Nil, the empty list, true and false
+--------------------------------------------------------------------------------
+
+There are two special atoms in LISP:
+
+     t
+     nil
+
+The first, pronounced "true", stands for true.  It cannot be assigned any new
+value, and its value is always simply t.
+
+The second, pronounced "nill" (rhymes with "dill"), stands for false or the
+empty list.  It cannot be assigned any new value, and its value is always
+simply nil.  The name "nil" was chosen because it means 0 or nothing in
+Swedish.
+
+Capitalization doesn't matter.  T is t, and Nil is NIL is nil.
+
+Nil is actually stranger than t.  We called it the empty list above, and it
+is actually identified with (), a list with 0 members, or of length 0.  If you
+write (), LISP might give you nil, and vice versa.  But do not be alarmed.
+They are entirely interchangeable.
+
+If you have a list of length 1 and you remove its element, or you take the cdr
+of it, you will get a list of length 0, which is the empty list, written as
+() or nil.  In fact, most of the time, LISP will show you NIL.  Here's an
+example:
+
+    (cdr '(a))
+
+LISP prints out
+
+    NIL
+
+NIL, the empty list, is the only s-expression that is *BOTH* an atom and a 
+list.
+
+--------------------------------------------------------------------------------

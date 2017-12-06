@@ -1,0 +1,299 @@
+using System;
+using System.Windows.Forms;
+using System.Data;
+using System.Data.OleDb;
+using System.Collections;
+
+namespace Livrus
+{
+	/// <summary>
+	/// Summary description for Class.
+	/// </summary>
+	public class RotinasGlobais
+	{
+		public static RotinasGlobais Rotinas;
+		public string sUsuarioLogin, sUsuarioSenha;
+		public string sCodigoSelecionado, sPreco, sQtdEstoque;
+
+		public RotinasGlobais()
+		{
+			//
+			// TODO: Add constructor logic here
+			//
+		}
+
+//---------------------------------------------------------------------------
+public Boolean ValidaInteger(string sNum)
+{
+ if (sNum!="") {
+	try {
+	  int.Parse(sNum);
+	  return true;
+	} catch {
+	  MessageBox.Show("Número inválido!", "Erro",
+	  MessageBoxButtons.OK,MessageBoxIcon.Error);
+	  return false;
+	}
+ } else
+   return false;
+}
+//---------------------------------------------------------------------------
+public Boolean ValidaFloat(string sNum)
+{
+ if (sNum!="") {
+	try {
+	  float.Parse(sNum);
+	  return true;
+	} catch {
+	  MessageBox.Show("Número inválido!", "Erro",
+	  MessageBoxButtons.OK,MessageBoxIcon.Error);
+	  return false;
+	}
+ } else
+   return false;
+}
+//---------------------------------------------------------------------------
+public string VirgulaParaPonto(string sNum, Boolean revertido)
+{
+ if (revertido)
+   return sNum.Replace(".",",");
+ else
+   return sNum.Replace(",",".");
+}
+//---------------------------------------------------------------------------
+public int modulo11(string valor, int dig, Boolean cond)
+{
+int cont, soma, num, ret, ndig;
+
+ndig=0;
+soma=0;
+switch (dig) {
+ case 1:{
+	  num=10;
+	  for(cont=0; cont < valor.Length; cont++) {
+		soma=soma+(num*int.Parse(valor.Substring(cont,1)));
+		num=num-1;
+	  }
+ } break;
+ case 2: soma=modulo11(valor,1,false)+(modulo11(valor,1,true)*2);
+ break;
+}
+if (cond==true) {
+  ret=(soma % 11);
+  if ((ret==0) || (ret==1))
+	ndig=0;
+  else if (ret > 1)
+	ndig=(11-ret);
+  return ndig;
+} else
+   return soma;
+}
+//---------------------------------------------------------------------------
+public Boolean ValidaCPF(string cpf)
+{
+string scpf;
+
+if (cpf.Length==14) {
+  scpf=cpf.Substring(0,3)+cpf.Substring(4,3)+cpf.Substring(8,3);
+  if ( (modulo11(scpf,1,true)==int.Parse(cpf.Substring(12,1))) &&
+  (modulo11(scpf,2,true)==int.Parse(cpf.Substring(13,1))) )
+	return true;
+  else
+	return false;
+} else
+  return false;
+}
+//---------------------------------------------------------------------------
+public Boolean ValidaISBN(string isbn)
+{
+string sisbn;
+int cont;
+
+if (isbn.Length==13) {
+  sisbn="";
+  for(cont=0;cont<isbn.Length-1;cont++) {
+	if (isbn.Substring(cont,1)!="-")
+	  sisbn=sisbn+isbn.Substring(cont,1);
+  }
+  cont=modulo11(sisbn,1,true);
+  if (cont==0) {
+	if (isbn.Substring(12,1)=="X" || isbn.SubString(12,1)=="0")
+	  return true;
+	else
+	  return false;
+  } else {
+	if (cont==int.Parse(isbn.Substring(12,1)))
+	  return true;
+	else
+	  return false;
+  }
+} else
+  return false;
+}
+//---------------------------------------------------------------------------
+public bool ConsultaDados(OleDbCommand Consulta, string sTextoSql)
+{
+bool nTemLinhas = false;
+
+  Consulta = frmPrincipal.fPrincipal.db.CreateCommand();
+  Consulta.CommandText = sTextoSql;
+
+  OleDbDataReader Leitor = Consulta.ExecuteReader();
+  nTemLinhas = Leitor.HasRows;
+  Leitor.Close();
+  return nTemLinhas;
+
+}
+//---------------------------------------------------------------------------
+public bool ConsultaDados(DataSet dsConsulta, ArrayList Registros,
+						  string sTextoSql)
+{
+bool nTemLinhas = false;
+
+  dsConsulta.Clear();
+  OleDbCommand Consulta = new OleDbCommand();
+  OleDbDataAdapter daConsulta = new OleDbDataAdapter();
+
+  daConsulta.TableMappings.Add("Table","Consulta");
+  Consulta = frmPrincipal.fPrincipal.db.CreateCommand();
+  Consulta.CommandText=sTextoSql;
+  daConsulta.SelectCommand = Consulta;
+  daConsulta.Fill(dsConsulta);
+
+  Registros.Clear();
+  OleDbDataReader Leitor = Consulta.ExecuteReader();
+  while (Leitor.Read()) {
+	 ArrayList Campos = new ArrayList();
+	 for(int cont=0; cont < Leitor.FieldCount; cont++) {
+	   Campos.Add(Leitor.GetValue(cont).ToString());
+	 }
+	 Registros.Add(Campos);
+  }
+  nTemLinhas = Leitor.HasRows;
+  Leitor.Close();
+  return nTemLinhas;
+}
+//---------------------------------------------------------------------------
+public bool ConsultaDados(ArrayList Registros, string sTextoSql)
+{
+bool nTemLinhas = false;
+
+  OleDbCommand Consulta = frmPrincipal.fPrincipal.db.CreateCommand();
+  Consulta.CommandText = sTextoSql;
+
+  Registros.Clear();
+  OleDbDataReader Leitor = Consulta.ExecuteReader();
+  while (Leitor.Read()) {
+	 ArrayList Campos = new ArrayList();
+	 for(int cont=0; cont < Leitor.FieldCount; cont++) {
+	   Campos.Add(Leitor.GetValue(cont).ToString());
+	 }
+	 Registros.Add(Campos);
+  }
+  nTemLinhas = Leitor.HasRows;
+  Leitor.Close();
+  return nTemLinhas;
+
+}
+//---------------------------------------------------------------------------
+public Boolean ValidaCampo(string sCampo,string sMensagemErro)
+{
+  if (sCampo=="") {
+	MessageBox.Show(sMensagemErro, "Erro",
+	MessageBoxButtons.OK,MessageBoxIcon.Error);
+	return true;
+  } else
+	return false;
+}
+//---------------------------------------------------------------------------
+public string ConsultaCampoDesc(ArrayList Campos,
+				string sTextoSql, string sMensagemErro)
+{
+
+  OleDbCommand Consulta = frmPrincipal.fPrincipal.db.CreateCommand();
+  Consulta.CommandText = sTextoSql;
+
+  Campos.Clear();
+  OleDbDataReader Leitor = Consulta.ExecuteReader();
+  if (Leitor.Read()) {
+	 for(int cont=0; cont < Leitor.FieldCount; cont++) {
+	   Campos.Add(Leitor.GetValue(cont).ToString());
+	 }
+  }
+  bool nTemLinhas = Leitor.HasRows;
+  Leitor.Close();
+
+  if (nTemLinhas)
+	 return Campos[1].ToString();
+  else {
+	MessageBox.Show(sMensagemErro, "Erro",
+	MessageBoxButtons.OK,MessageBoxIcon.Error);
+	return "";
+  }
+}
+//---------------------------------------------------------------------------
+public string ConsultaCampoDesc(ArrayList Campos,
+		  string sCampoCodigo,string sTextoSql,string sMensagemErro)
+{
+if (ValidaInteger(sCampoCodigo))
+  return ConsultaCampoDesc(Campos, sTextoSql, sMensagemErro);
+else
+  return "";
+}
+//---------------------------------------------------------------------------
+  public string retDataStr(DateTime sData, string formato) {
+	return sData.ToString(formato);
+  }
+//---------------------------------------------------------------------------
+  public string FormataDataStr(string sData, string formato) {
+	DateTime dtNasc = DateTime.Parse(sData);
+	return dtNasc.ToString(formato);
+  }
+
+//---------------------------------------------------------------------------
+public void AdicionaItemLista(ListBox lstLista,
+	 ArrayList slCodLista, TextBox sCampoCodigo, TextBox sCampoDesc)
+{
+string sItems;
+
+if (sCampoDesc.Text.Equals("")==false) {
+ sItems=sCampoCodigo.Text+" - "+sCampoDesc.Text;
+ if (lstLista.Items.IndexOf(sItems)==-1) {
+	slCodLista.Add(sCampoCodigo.Text);
+	lstLista.Items.Add(sItems);
+ }
+ sCampoCodigo.Clear();
+ sCampoDesc.Clear();
+}
+}
+//---------------------------------------------------------------------------
+public void RemoveItemLista(ListBox lstLista, ArrayList slCodLista)
+{
+ if (lstLista.Items.Count > 0) {
+   slCodLista.RemoveAt(lstLista.SelectedIndex);
+   lstLista.Items.RemoveAt(lstLista.SelectedIndex);
+ }
+}
+//---------------------------------------------------------------------------
+public void AdicionaValoresLista(ArrayList ConsLista,
+	 string sTextoSql,ListBox lstLista, ArrayList slCodLista)
+{
+ ConsLista.Clear();
+ lstLista.Items.Clear();
+ slCodLista.Clear();
+
+  OleDbCommand Consulta = frmPrincipal.fPrincipal.db.CreateCommand();
+  Consulta.CommandText = sTextoSql;
+
+  OleDbDataReader Leitor = Consulta.ExecuteReader();
+  while (Leitor.Read()) {
+	  slCodLista.Add(Leitor.GetValue(0).ToString());
+	  lstLista.Items.Add(Leitor.GetValue(0).ToString()+" - "+
+	  Leitor.GetValue(1).ToString());
+  }
+  Leitor.Close();
+
+}
+//---------------------------------------------------------------------------
+}
+}

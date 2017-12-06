@@ -1,0 +1,712 @@
+--
+--  BAGS
+--
+--  A bag, or multiset, is similar to a set except that we do not require
+--  all elements to be unique.  This has been one of the most-often
+--  requested additions to SETL, so it is a good application for the
+--  demonstration of objects.
+--
+--  An easy, but unacceptable, implementation is to store all the
+--  elements of bags in SETL2 tuples.  But a basic premise of bags is
+--  that membership tests should be fairly fast.  Testing for membership
+--  in a tuple is a linear time operation, and we would like to be closer
+--  to constant time if at all possible.
+--
+--  An obvious solution is to use maps to store bags, where the domain of
+--  the map is the unique elements of the bag, and the image is the count
+--  of the occurrences.  A problem with this idea concerns the possible
+--  use of bags in map contexts.  If b is a bag of pairs, should we be
+--  able to write b(x) or b{x}, and should the results be returned
+--  quickly?  The meaning of b{x} seems clear (it is the bag of the
+--  second components of pairs whose first component is x), but b(x) is
+--  not.  Since it makes a better demonstration of classes if we include
+--  this operation, we'll assume b(x) is the count of the occurrences of
+--  x in b.
+--
+--  Given all these decisions, we use two maps to represent bags.  One
+--  map contains all ordered pair values, and is stored as a multi-valued
+--  map of maps.  The domain of the outer map is the set of left hand
+--  elements of the pairs.  The image of each domain element is a map
+--  sending each domain element into its associated right-hand elements
+--  and counts.
+--
+--  The second map contains all non-pair values, and is just a map of
+--  values and counts.
+--
+--  We maintain the cardinality explicitly rather than recalculating it
+--  repeatedly, since it is an expensive calculation.
+--
+--  Many of these methods are quite similar, depending on a few
+--  expressions used repeatedly, so it's worth looking at them before
+--  examining the code.  The expression producing the count of a pair
+--  [x,y] is pairs{x}(y).  This expression never fails, but will produce om
+--  when the count is zero, so we generally use it as (pairs{x}(y) ? 0).
+--  The count of a non-pair x is others(x).  Again, this produces om when
+--  the count is zero so we use it as (others(x) ? 0).
+--
+--  We iterate over all elements in a bag with the following two loops:
+--
+--     for right_map in pairs{left}, count = right_map(right) loop
+--        -- produces successive left, right, count from pairs
+--     end loop;
+--
+--     for count = others(left) loop
+--        -- produces successive left, count from others
+--     end loop;
+--
+--  If you fully understand why these expressions work, the code should
+--  be quite clear.
+--
+
+class bag;
+
+   procedure create(source);
+
+end bag;
+
+class body bag;
+
+   var  pairs          := {},         -- pair values
+        others         := {},         -- non-pair values
+        cardinality    := 0;          -- cardinality
+
+   --
+   --  CREATE
+   --
+   --  The create function requires some kind of aggregate we can iterate
+   --  over with a for loop.  Each item produced will be placed in either
+   --  pairs or others, depending on whether or not it is a tuple of
+   --  length two.
+   --
+
+   procedure create(source);
+
+      cardinality := #source;
+
+      for x in source loop
+         if is_tuple(x) and #x = 2 then
+            [left,right] := x;     
+            pairs{left}(right) := (pairs{left}(right) ? 0) + 1;
+         else
+            others(x) := (others(x) ? 0) + 1;         
+         end if;
+      end loop;
+
+   end create;
+
+   --
+   --  CARDINALITY
+   --
+   --  The pound sign operation returns the cardinality of the bag.
+   --
+
+   procedure # self;
+
+      return cardinality;
+
+   end;
+
+   --
+   --  ARB
+   --
+   --  ARB returns an arbitrary element of the bag.
+   --
+
+   procedure arb self;
+
+      if cardinality = 0 then
+         return om;
+      end if;
+
+      if #pairs > 0 then
+         [left, [right, -]] := arb pairs;
+         return [left,right];
+      else
+         [operand, -] := arb others;
+         return operand;
+      end if;
+
+   end;
+
+   --
+   --  POW
+   --
+   --  POW returns the power set (kind of) of a bag.  We first form a
+   --  tuple of the elements in the bag, with a pair representing each
+   --  element.  The left element of the pair contains a flag, with 1
+   --  indicating that the element is in the current subset and a zero
+   --  indicating it does not.  We keep manipulating these flags as if we
+   --  were incrementing a binary number.
+   --
+
+   procedure pow self;
+
+      power_array := [[0,x] : x in self];
+      powerset := {};
+
+      loop
+
+         powerset with := bag([e : [s,e] in power_array | s = 1]);
+         
+         if not (exists n in [1 .. #power_array] | power_array(n)(1) = 0) then
+            exit;
+         end if;
+
+         for i in [1 .. n - 1] loop
+            power_array(i)(1) := 0;
+         end loop;
+
+         power_array(n)(1) := 1;
+
+      end loop;
+
+      return powerset;
+
+   end;
+         
+   --
+   --  DOMAIN
+   --
+   --  DOMAIN returns the set of all the left elements of pairs.
+   --
+
+   procedure domain self;
+
+      if #others /= 0 then
+         abort("May not find domain of non-map BAG:\n"+str(self));
+      end if;
+
+      return domain(pairs);
+
+   end;
+         
+   --
+   --  RANGE
+   --
+   --  RANGE returns the set of all the right elements of pairs.
+   --
+
+   procedure range self;
+
+      if #others /= 0 then
+         abort("May not find domain of non-map BAG:\n"+str(self));
+      end if;
+
+      return {right : [-, [right, -]] in pairs};
+
+   end;
+         
+   --
+   --  UNION
+   --
+   --  Addition of bags corresponds to union of sets.  We just union both
+   --  the pairs and others instance variables.
+   --
+
+   procedure self + right_bag;
+
+      if type(right_bag) /= "BAG" then
+         abort("Invalid operands for +:\nLeft => "+str(self)+
+               "\nRight => "+str(right_bag));
+      end if;
+
+      result := self;
+      result.cardinality +:= right_bag.cardinality;
+
+      for right_map = right_bag.pairs{left}, count = right_map(right) loop
+         result.pairs{left}(right) := (result.pairs{left}(right) ? 0) + count;
+      end loop;
+
+      for count = right_bag.others(left) loop
+         result.others(left) := (result.others(left) ? 0) + count;
+      end loop;
+
+      return result;
+
+   end;
+
+   --
+   --  DIFFERENCE
+   --
+   --  Subtraction of bags is like set difference.
+   --
+
+   procedure self - right_bag;
+
+      if type(right_bag) /= "BAG" then
+         abort("Invalid operands for -:\nLeft => "+str(self)+
+               "\nRight => "+str(right_bag));
+      end if;
+
+      result := bag([]);        -- prepare to insert into empty bag
+
+      for right_map = pairs{left}, count = right_map(right) loop
+         if (count := count - (right_bag.pairs{left}(right) ? 0)) > 0 then 
+            result.pairs{left}(right) := count;
+            result.cardinality +:= count;
+         end if;
+      end loop;
+
+      for count = others(left) loop
+         if (count := count - (right_bag.others(left) ? 0)) > 0 then 
+            result.others(left) := count;
+            result.cardinality +:= count;
+         end if;
+      end loop;
+
+      return result;
+
+   end;
+
+   --
+   --  INTERSECTION
+   --
+   --  Multiplication corresponds to intersection of bags.  We minimize
+   --  the counts of each value found in both bags.
+   --
+
+   procedure self * right_bag;
+
+      if type(right_bag) /= "BAG" then
+         abort("Invalid operands for *:\nLeft => "+str(self)+
+               "\nRight => "+str(right_bag));
+      end if;
+
+      result := bag([]);
+      for right_map = right_bag.pairs{left}, count = right_map(right) loop
+         if (count := (pairs{left}(right) ? 0) min count) > 0 then 
+            result.pairs{left}(right) := count;
+            result.cardinality +:= count;
+         end if;
+      end loop;            
+
+      for count = right_bag.others(left) loop
+         if (count := (others(left) ? 0) min count) > 0 then 
+            result.others(left) := count;
+            result.cardinality +:= count;
+         end if;
+      end loop;
+
+      return result;
+
+   end;
+
+   --
+   --  SYMMETRIC DIFFERENCE
+   --
+   --  MOD for bags means symmetric difference, just like sets.  We're
+   --  lazy here, and just call the union, intersection, and difference
+   --  procedures.  We could have done this more efficiently, but
+   --  symmetric difference isn't used much.
+   --
+
+   procedure self mod right_bag;
+
+      if type(right_bag) /= "BAG" then
+         abort("Invalid operands for MOD:\nLeft => "+str(self)+
+               "\nRight => "+str(right_bag));
+      end if;
+
+      return (self + right_bag) - (self * right_bag);
+
+   end;
+
+   --
+   --  NPOW
+   --
+   --  NPOW is the only commutative operator which ordinarily accepts
+   --  different types.  We need two versions.
+   --
+   --  The procedure we follow here is identical to the POW operator,
+   --  except that we only keep subsets with the correct cardinality.
+   --
+
+   procedure self npow right;
+
+      if not is_integer(right) then      
+         abort("Invalid operands for NPOW\nLeft => "+str(self)+
+               "\nRight => "+str(right));
+      end if;
+
+      return npower(right);
+
+   end;
+
+   procedure left npow self;
+
+      if not is_integer(left) then      
+         abort("Invalid operands for NPOW\nLeft => "+str(left)+
+               "\nRight => "+str(self));
+      end if;
+
+      return npower(left);
+
+   end;
+
+   procedure npower(i);
+
+      power_array := [[0,x] : x in self];
+      powerset := {};
+
+      loop
+
+         if +/{c : [c,-] in power_array} = i then
+            powerset with := bag([e : [s,e] in power_array | s = 1]);
+         end if;
+
+         if not (exists n in [1 .. #power_array] | power_array(n)(1) = 0) then
+            exit;
+         end if;
+
+         for i in [1 .. n - 1] loop
+            power_array(i)(1) := 0;
+         end loop;
+
+         power_array(n)(1) := 1;
+
+      end loop;
+
+      return powerset;
+
+   end npower;
+         
+   --
+   --  WITH
+   --
+   --  WITH just inserts its operand into the bag.
+   --
+
+   procedure self with operand;
+
+      result := self;
+      result.cardinality +:= 1;
+
+      if is_tuple(operand) and #operand = 2 then
+         [left,right] := operand;     
+         result.pairs{left}(right) := (pairs{left}(right) ? 0) + 1;
+      else
+         result.others(operand) := (others(operand) ? 0) + 1;         
+      end if;
+
+      return result;
+
+   end;
+
+   --
+   --  LESS
+   --
+   --  LESS removes its operand from the bag.
+   --
+
+   procedure self less operand;
+
+      result := self;
+
+      if is_tuple(operand) and #operand = 2 then
+         [left,right] := operand;     
+         if (count := pairs{left}(right) ? 0) > 1 then 
+            result.pairs{left}(right) := count - 1;         
+            result.cardinality -:= 1;
+         elseif count = 1 then
+            result.pairs{left} less:= [right,1];
+            result.cardinality -:= 1;
+         end if;            
+      else
+         if (count := others(operand) ? 0) > 1 then
+            result.others(operand) := count - 1;
+            result.cardinality -:= 1;
+         elseif count = 1 then
+            result.others(operand) := om;
+            result.cardinality -:= 1;
+         end if;
+      end if;
+
+      return result;
+
+   end;
+
+   --
+   --  LESSF
+   --
+   --  LESSF removes each pair with a given left element.
+   --
+
+   procedure self lessf operand;
+
+      if #others /= 0 then
+         abort("Attempt to use LESSF on non-map BAG:\n"+str(self));
+      end if;
+
+      result := self;
+
+      result.cardinality -:= +/{count : [count, -] in pairs{operand}};
+      result.pairs{operand} := {};
+
+      return result;
+
+   end;
+
+   --
+   --  FROM
+   --
+   --  From deletes and returns an arbitrary element from the bag.
+   --
+
+   procedure from self;
+
+      if cardinality = 0 then
+         return om;
+      end if;
+
+      cardinality -:= 1;
+
+      if #pairs > 0 then
+         [left, [right, count]] from pairs;
+         if count > 1 then
+            pairs{left}(right) := count - 1;
+         end if;
+         return [left,right];
+      elseif #others > 0 then
+         [operand, count] from others;
+         if count > 1 then
+            others(operand) := count - 1;
+         end if;
+         return operand;
+      end if;
+
+   end;
+
+   --
+   --  IN
+   --
+   --  In for bags is a membership test.
+   --
+
+   procedure operand in self;
+
+      if is_tuple(operand) and #operand = 2 then
+         [left,right] := operand;
+         return pairs{left}(right) /= om;
+      else
+         return others(operand) /= om;
+      end if;
+
+   end;
+
+   --
+   --  SUBSET (subbag?)
+   --
+   --  Less than is a subset test for bags.
+   --
+
+   procedure self < right_bag;
+
+      if type(right_bag) /= "BAG" then
+         abort("Invalid operands for <:\nLeft => "+str(self)+
+               "\nRight => "+str(right_bag));
+      end if;
+
+      if cardinality >= right_bag.cardinality then
+         return false;
+      end if;
+
+      for right_map = pairs{left}, count = right_map(right) loop
+         if count > right_bag.pairs{left}(right) ? 0 then 
+            return false;
+         end if;
+      end loop;
+
+      for count = others(left) loop
+         if count > right_bag.others(left) ? 0 then 
+            return false;
+         end if;
+      end loop;
+
+      return true;
+
+   end;
+
+   --
+   --  COUNT REFERENCE
+   --
+   --  We use map reference syntax, i.e. f(x) to denote count reference.
+   --
+
+   procedure self(element);
+
+      if is_tuple(element) and #element = 2 then
+         [left, right] := element;
+         return pairs{left}(right) ? 0;
+      else
+         return others(element) ? 0;
+      end if;
+
+   end;
+
+   --
+   --  COUNT ASSIGNMENT
+   --
+   --  We use map assignment syntax, i.e. f(x) := y to denote count
+   --  assignment.
+   --
+
+   procedure self(element) := count;
+
+      if is_tuple(element) and #element = 2 then
+         [left, right] := element;
+         cardinality -:= pairs{left}(right) ? 0;
+         pairs{left}(right) := count;
+         cardinality +:= count;
+      else
+         cardinality -:= others(element) ? 0;
+         others(element) := count;
+         cardinality +:= count;
+      end if;
+
+   end;
+
+   --
+   --  IMAGE SET REFERENCE
+   --
+   --  We return a bag of the image of an element.
+   --
+
+   procedure self{element};
+
+      if #others /= 0 then
+         abort("May not reference image set in non-map BAG:\n"+str(self));
+      end if;
+
+      result := bag([]);
+     
+      for count = pairs{element}(right) loop
+         if is_tuple(right) and #right = 2 then
+            [x,y] := right;     
+            result.pairs{x}(y) := (result.pairs{x}(y) ? 0) + count;
+         else
+            result.others(right) := (result.others(right) ? 0) + count;         
+         end if;
+         result.cardinality := count;
+      end loop;
+
+      return result;
+
+   end;
+
+   --
+   --  IMAGE SET ASSIGNMENT
+   --
+   --  We assign the right elements of pairs with a given left element.
+   --
+
+   procedure self{left} := value;
+
+      if type(value) /= "BAG" then
+         abort("Invalid value for f{x} assignment\nValue => "+str(value));
+      end if;
+
+      if #others /= 0 then
+         abort("May not assign image set to non-map BAG:\n"+str(self));
+      end if;
+
+      for count = pairs{left}(right) loop   -- remove old image set
+         cardinality -:= count;
+      end loop;
+      pairs{left} := {};
+
+      for right in value loop               -- and install a new one
+         pairs{left}(right) := (pairs{left}(right) ? 0) + 1;
+         cardinality +:= 1;
+      end loop;
+
+   end;      
+   
+   --
+   --  ITERATION
+   --
+   --  Iteration over a bag is nearly identical to iteration over a set.
+   --
+
+   procedure iterator_start;
+
+      null;
+
+   end iterator_start;
+
+   procedure iterator_next;
+
+      if cardinality = 0 then
+         return om;
+      end if;
+
+      cardinality -:= 1;
+
+      if #pairs > 0 then
+         [left, [right, count]] from pairs;
+         if count > 1 then
+            pairs{left}(right) := count - 1;
+         end if;
+         return [[left,right]];
+      else
+         [operand, count] from others;
+         if count > 1 then
+            others(operand) := count - 1;
+         end if;
+         return [operand];
+      end if;
+
+   end iterator_next;
+      
+   procedure set_iterator_start;
+
+      if #others /= 0 then
+         abort("Attempt to iterate over non-map BAG:\n"+str(self));
+      end if;
+
+   end set_iterator_start;
+
+   procedure set_iterator_next;
+
+      if #pairs = 0 then
+         return om;
+      end if;
+
+      result := bag([]);
+      [left, [right, count]] from pairs;
+      result.others := {[right,count]};
+      result.cardinality := count;
+      return [[left,result]];
+
+   end set_iterator_next;
+      
+   --
+   --  PRINT STRING
+   --
+   --  Our print string looks like a set, except we use the following
+   --  delimiters:  {> <}.
+   --
+
+   procedure selfstr;
+
+      first_element := true;
+      for x in self loop
+         if is_string(x) then
+            x := "\""+x+"\"";
+         end if;
+         if first_element then
+            first_element := false;
+            result := "{> "+str(x);
+         else
+            result +:= ", "+str(x);
+         end if;
+      end loop;
+      if first_element then
+         return "{> <}";
+      else
+         return result+" <}";
+      end if;
+
+   end selfstr;
+
+end bag;
+

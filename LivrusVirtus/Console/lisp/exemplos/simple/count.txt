@@ -1,0 +1,13 @@
+;  This is a neat definition of count.
+;
+;  Here's a use:
+;        (count 'mark '(sally mark kathy mark sally george mark))
+;
+;  it returns 3
+
+(defun count (what set)
+    (apply '+ (mapcar #'(lambda (x) (if (equal x what) 1 0)) set))
+)
+
+
+;  Can you write this using dolist?

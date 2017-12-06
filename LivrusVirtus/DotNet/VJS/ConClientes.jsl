@@ -1,0 +1,154 @@
+package  Livrus;
+
+import System.*;
+import System.Drawing.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+
+/// <summary>
+/// Summary description for WinForm.
+/// </summary>
+public class frmConClientes extends Livrus.frmConsultas
+{
+	public static frmConClientes fConClientes;
+	/// <summary>
+	/// Required designer variable.
+	/// </summary>
+	private System.ComponentModel.Container components = null;
+	private System.Windows.Forms.DataGridTableStyle dataGridTableStyle1;
+	private System.Windows.Forms.DataGridTextBoxColumn dataGridTextBoxColumn1;
+	private System.Windows.Forms.DataGridTextBoxColumn dataGridTextBoxColumn2;
+
+	public frmConClientes()
+	{
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent();
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+	}
+
+	/// <summary>
+	/// Clean up any resources being used.
+	/// </summary>
+	protected void Dispose (boolean disposing)
+	{
+		if (disposing)
+		{
+			if (components != null)
+			{
+				components.Dispose();
+			}
+		}
+		super.Dispose(disposing);
+	}
+
+	/// <summary>
+	/// Required method for Designer support - do not modify
+	/// the contents of this method with the code editor.
+	/// </summary>
+	private void InitializeComponent()
+	{
+		this.dataGridTableStyle1 = new System.Windows.Forms.DataGridTableStyle();
+		this.dataGridTextBoxColumn1 = new System.Windows.Forms.DataGridTextBoxColumn();
+		this.dataGridTextBoxColumn2 = new System.Windows.Forms.DataGridTextBoxColumn();
+//		((System.ComponentModel.ISupportInitialize)(this.gridConsulta)).BeginInit();
+//		((System.ComponentModel.ISupportInitialize)(this.dsConsulta)).BeginInit();
+		// 
+		// btnPesquisar
+		// 
+		this.btnPesquisar.set_Name("btnPesquisar");
+		this.btnPesquisar.add_Click(new System.EventHandler(this.btnPesquisar_Click));
+		// 
+		// labDescricao
+		// 
+		this.labDescricao.set_Name("labDescricao");
+		this.labDescricao.set_Text("Cliente:");
+		// 
+		// edtDescricao
+		// 
+		this.edtDescricao.set_Name("edtDescricao");
+		// 
+		// gridConsulta
+		// 
+		this.gridConsulta.set_Name("gridConsulta");
+		this.gridConsulta.get_TableStyles().AddRange(new System.Windows.Forms.DataGridTableStyle[] {
+					this.dataGridTableStyle1});
+		// 
+		// btnLimpar
+		// 
+		this.btnLimpar.set_Name("btnLimpar");
+		this.btnLimpar.add_Click(new System.EventHandler(this.btnLimpar_Click));
+		// 
+		// dsConsulta
+		// 
+		this.dsConsulta.set_DataSetName("Consulta");
+		this.dsConsulta.set_Locale(new System.Globalization.CultureInfo("pt-BR"));
+		// 
+		// dataGridTableStyle1
+		// 
+		this.dataGridTableStyle1.set_DataGrid(this.gridConsulta);
+		this.dataGridTableStyle1.get_GridColumnStyles().AddRange(new System.Windows.Forms.DataGridColumnStyle[] {
+					this.dataGridTextBoxColumn1,
+					this.dataGridTextBoxColumn2});
+		this.dataGridTableStyle1.set_HeaderForeColor(System.Drawing.SystemColors.get_ControlText());
+		this.dataGridTableStyle1.set_MappingName("");
+		this.dataGridTableStyle1.set_ReadOnly(true);
+		// 
+		// dataGridTextBoxColumn1
+		// 
+		this.dataGridTextBoxColumn1.set_Format("");
+		this.dataGridTextBoxColumn1.set_FormatInfo(null);
+		this.dataGridTextBoxColumn1.set_HeaderText("Código");
+		this.dataGridTextBoxColumn1.set_MappingName("");
+		this.dataGridTextBoxColumn1.set_Width(75);
+		// 
+		// dataGridTextBoxColumn2
+		// 
+		this.dataGridTextBoxColumn2.set_Format("");
+		this.dataGridTextBoxColumn2.set_FormatInfo(null);
+		this.dataGridTextBoxColumn2.set_HeaderText("Cliente");
+		this.dataGridTextBoxColumn2.set_MappingName("");
+		this.dataGridTextBoxColumn2.set_Width(75);
+		// 
+		// frmConClientes
+		// 
+		this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+		this.set_ClientSize(new System.Drawing.Size(360, 237));
+		this.set_Name("frmConClientes");
+		this.set_Text("Consulta de Clientes");
+		this.add_Closing(new System.ComponentModel.CancelEventHandler(this.frmConClientes_Closing));
+		this.add_Load(new System.EventHandler(this.frmConClientes_Load));
+//		((System.ComponentModel.ISupportInitialize)(this.gridConsulta)).EndInit();
+//		((System.ComponentModel.ISupportInitialize)(this.dsConsulta)).EndInit();
+	}
+
+	private void frmConClientes_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
+	{
+		frmPrincipal.fPrincipal.mnuConClientes.set_Enabled(true);
+	}
+
+	private void btnLimpar_Click(Object sender, System.EventArgs e)
+	{
+		LimparDados(ConsultasSQL.ConsSQL.Cliente('S',"0",
+		"","","","","","","","",""));
+	}
+
+	private void btnPesquisar_Click(Object sender, System.EventArgs e)
+	{
+		PesquisarDados(ConsultasSQL.ConsSQL.
+		Cliente('S',"", edtDescricao.get_Text(),
+		"","","","","","","",""),"Cliente não encontrado!");
+	}
+
+	private void frmConClientes_Load(Object sender, System.EventArgs e)
+	{
+           btnLimpar_Click(this, null);
+	}
+}
+

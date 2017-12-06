@@ -1,0 +1,323 @@
+inherited frmCadClientes: TfrmCadClientes
+  Caption = 'Cadastro de Clientes'
+  ClientHeight = 442
+  ClientWidth = 522
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Label1: TLabel
+    Caption = 'CPF:'
+    Width = 23
+  end
+  inherited Label2: TLabel
+    Caption = 'Nome:'
+    Width = 31
+  end
+  object Label3: TLabel [2]
+    Caption = 'Identidade:'
+    Left = 328
+    Top = 88
+    Width = 53
+    Height = 13
+  end
+  object Label7: TLabel [3]
+    Caption = 'Pa'#237's de origem:'
+    Left = 8
+    Top = 320
+    Width = 74
+    Height = 13
+  end
+  object Label4: TLabel [4]
+    Caption = 'Profiss'#227'o:'
+    Left = 8
+    Top = 360
+    Width = 46
+    Height = 13
+  end
+  object Label6: TLabel [5]
+    Caption = 'E-mail:'
+    Left = 8
+    Top = 88
+    Width = 31
+    Height = 13
+  end
+  object Label8: TLabel [6]
+    Caption = 'Telefone:'
+    Left = 208
+    Top = 128
+    Width = 45
+    Height = 13
+  end
+  object Label9: TLabel [7]
+    Caption = 'Dt. Nascimento:'
+    Left = 328
+    Top = 128
+    Width = 76
+    Height = 13
+  end
+  inherited btnSalvar: TButton
+    TabOrder = 18
+    Left = 200
+    Top = 410
+    OnClick = btnSalvarClick
+  end
+  inherited btnExcluir: TButton
+    TabOrder = 19
+    Left = 280
+    Top = 410
+    OnClick = btnExcluirClick
+  end
+  inherited btnLimpar: TButton
+    TabOrder = 20
+    Left = 360
+    Top = 410
+  end
+  inherited btnFechar: TButton
+    TabOrder = 21
+    Left = 440
+    Top = 410
+  end
+  inherited btnPesquisar: TButton
+    TabOrder = 15
+    Left = 440
+    OnClick = btnPesquisarClick
+  end
+  inherited btnAnterior: TButton
+    TabOrder = 16
+    Left = 440
+  end
+  inherited btnProximo: TButton
+    TabOrder = 17
+    Left = 440
+  end
+  inherited edtCodigo: TEdit
+    MaxLength = 14
+  end
+  inherited edtDescricao: TEdit
+    Width = 313
+  end
+  object edtCodPais: TEdit [18]
+    CharCase = ecUpperCase
+    Enabled = False
+    MaxLength = 10
+    TabOrder = 9
+    Left = 8
+    Top = 336
+    Width = 73
+    Height = 21
+    OnExit = edtCodPaisExit
+  end
+  object edtPais: TEdit [19]
+    Enabled = False
+    MaxLength = 13
+    TabOrder = 10
+    Left = 85
+    Top = 336
+    Width = 225
+    Height = 21
+  end
+  object btnPPais: TButton [20]
+    Caption = '...'
+    Enabled = False
+    TabOrder = 11
+    Left = 312
+    Top = 336
+    Width = 19
+    Height = 21
+    OnClick = btnPPaisClick
+  end
+  object edtCodProfissao: TEdit [21]
+    Enabled = False
+    MaxLength = 10
+    TabOrder = 12
+    Left = 8
+    Top = 376
+    Width = 73
+    Height = 21
+    OnExit = edtCodProfissaoExit
+  end
+  object edtProfissao: TEdit [22]
+    Enabled = False
+    MaxLength = 13
+    TabOrder = 13
+    Left = 85
+    Top = 376
+    Width = 225
+    Height = 21
+  end
+  object btnPProfissao: TButton [23]
+    Caption = '...'
+    Enabled = False
+    TabOrder = 14
+    Left = 312
+    Top = 376
+    Width = 19
+    Height = 21
+    OnClick = btnPProfissaoClick
+  end
+  object edtEmail: TEdit [24]
+    Enabled = False
+    MaxLength = 30
+    TabOrder = 3
+    Left = 8
+    Top = 104
+    Width = 313
+    Height = 21
+  end
+  object edtTelefone: TEdit [25]
+    Enabled = False
+    MaxLength = 17
+    TabOrder = 6
+    Left = 208
+    Top = 144
+    Width = 113
+    Height = 21
+  end
+  object rdgSexo: TRadioGroup [26]
+    Caption = 'Sexo'
+    Columns = 2
+    Enabled = False
+    Items.Strings = (
+      'Masculino'
+      'Feminino')
+    TabOrder = 5
+    Left = 8
+    Top = 128
+    Width = 193
+    Height = 41
+  end
+  object edtDtNascimento: TDateTimePicker [27]
+    Date = 38066.8448171644
+    Time = 38066.8448171644
+    Enabled = False
+    TabOrder = 7
+    Left = 328
+    Top = 144
+    Width = 105
+    Height = 21
+  end
+  object grpEndereco: TGroupBox [28]
+    Caption = 'Endere'#231'o'
+    TabOrder = 8
+    Left = 8
+    Top = 176
+    Width = 425
+    Height = 137
+    object Label5: TLabel
+      Caption = 'Logradouro:'
+      Left = 8
+      Top = 49
+      Width = 57
+      Height = 13
+    end
+    object Label10: TLabel
+      Caption = 'Cidade:'
+      Left = 80
+      Top = 88
+      Width = 36
+      Height = 13
+    end
+    object Label11: TLabel
+      Caption = 'CEP:'
+      Left = 8
+      Top = 88
+      Width = 24
+      Height = 13
+    end
+    object Label12: TLabel
+      Caption = 'Bairro:'
+      Left = 280
+      Top = 48
+      Width = 30
+      Height = 13
+    end
+    object Label13: TLabel
+      Caption = 'Estado:'
+      Left = 280
+      Top = 88
+      Width = 36
+      Height = 13
+    end
+    object edtCodEndereco: TEdit
+      Enabled = False
+      MaxLength = 10
+      TabOrder = 0
+      Left = 8
+      Top = 24
+      Width = 81
+      Height = 21
+      OnExit = edtCodEnderecoExit
+    end
+    object edtLogradouro: TEdit
+      Enabled = False
+      MaxLength = 13
+      TabOrder = 2
+      Left = 8
+      Top = 64
+      Width = 265
+      Height = 21
+    end
+    object btnPEndereco: TButton
+      Caption = '...'
+      Enabled = False
+      TabOrder = 1
+      Left = 94
+      Top = 24
+      Width = 19
+      Height = 21
+      OnClick = btnPEnderecoClick
+    end
+    object edtCidade: TEdit
+      Enabled = False
+      MaxLength = 30
+      TabOrder = 5
+      Left = 80
+      Top = 104
+      Width = 193
+      Height = 21
+    end
+    object edtCEP: TEdit
+      Enabled = False
+      MaxLength = 30
+      TabOrder = 4
+      Left = 8
+      Top = 104
+      Width = 65
+      Height = 21
+    end
+    object edtBairro: TEdit
+      Enabled = False
+      MaxLength = 14
+      TabOrder = 3
+      Left = 280
+      Top = 64
+      Width = 129
+      Height = 21
+    end
+    object edtEstado: TEdit
+      Enabled = False
+      MaxLength = 30
+      TabOrder = 6
+      Left = 280
+      Top = 104
+      Width = 129
+      Height = 21
+    end
+  end
+  object edtIdentidade: TEdit [29]
+    Enabled = False
+    MaxLength = 10
+    TabOrder = 4
+    Left = 328
+    Top = 104
+    Width = 105
+    Height = 21
+  end
+  inherited Consulta: TQuery
+    Left = 48
+    Top = 408
+  end
+  inherited Arquiva: TQuery
+    Left = 88
+    Top = 408
+  end
+end

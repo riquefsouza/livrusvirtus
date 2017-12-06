@@ -1,0 +1,92 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 9 
+Arithmetic
+--------------------------------------------------------------------------------
+TOPICS:  "is" predicate, instantiating arithmetic variables
+--------------------------------------------------------------------------------
+
+Arithmetic works slightly differently than standard Prolog.  In particular,
+values must be "computed" or "calculated" rather than looked up in a database.
+For example, 5 + 3, which could be rewritten as +(5,3,N) where N is the answer,
+could be looked up in a gigantic, possibly infinite table, of addition, where 
+the triple +(5,3,8) is found.  However, this is horribly inefficient of a com-
+puter's memory so it is never done this way.  Instead the native circuits for
+computer arithmetic are used to calculate the value and pretend that it was 
+looked up in an infinite table.
+
+Prolog uses the special predicate "is" to tell the computer to use its arithme-
+tic circuits to compute values.  For example:
+
+     N is 5 + 3.
+
+This tells Prolog that you want it to compute the value of the arithmetic ex-
+pression on the right and bind that resulting value to the logical variable on
+the left.
+
+The arithmetic expression can be arbitrarily complicated, and there is a prece-
+dence to the operators, just as in other programming languages.  Parentheses may
+also be used to override the precedence.  Here is another example:
+
+     K is N - 6 * X.
+
+In this example, N and X must already be instantiated, i.e. they must have some
+value already, or else this will fail.
+
+If you have several values to compute, put them together on the same line,
+separated by commas:
+
+     N is 5 + 3, X is 2, K is N - 6 * X.
+
+You will occasionally see the equals sign in places that looks suspiciously like
+the Prolog programmer is assigning values, but that is not what equality does.
+Instead, it causes Prolog to do its pattern matching (see Chapter 8).
+
+For example:
+
+     N = 5 + 3.
+
+This causes N to be instantiated to +(5,3), which is not all that useful.
+A likelier case is to find out how variables will be matched:
+
+     likes(mary,X) = likes(Y,john).
+
+Causes Y = mary and X = john to be printed out, because these are the variable
+substitutions that cause the two patterns to match perfectly.  So the point of
+this sidetrip is to alert you to the fact that "is" and "=" are NOT THE SAME
+THING!
+
+However, you occasionally need to use = to compare two numbers, along with the
+other relational operators like <, >, <=, and >=.  For example:
+
+     ?-  5 < 3.
+causes
+     no.
+
+to be printed.  Likewise,
+
+     ?-  5 = 3.
+causes
+     no.
+
+However, if you do
+
+     N = 3.
+
+Prolog just thinks you are matching the variable N to the "predicate" 3 and it
+works, returning N=3!  What you really want is to ask Prolog at some point if 
+the value to which N is currently bound is 3.  Here's a way to do this:
+
+     N is 2 + 1, N = 3.
+
+This will cause "yes" to be printed out.
+
+WARNING!  You cannot compare two expressions, as in the following
+
+     5 + N < X * 2
+
+because Prolog hasn't evaluated either 5+N or X*2 yet.  You must use the "is"
+predicate first:
+
+     Z1 = 5 + N, Z2 = X * 2, Z1 < Z2.
+
+--------------------------------------------------------------------------------

@@ -1,0 +1,20 @@
+DEFINE CLASS CAlterarSenha AS CUSTOM
+*------------------------------------------------------------------------------------
+function ValidaDados()
+LParameters frm
+
+if Trim(frm.edtSenhaAtual.Value) <> Trim(sUsuarioSenha)
+ MESSAGEBOX("A Senha atual não confere com a senha do usuário!", 16, _Screen.Caption)
+ return .F.
+Endif
+if Rotinas.ValidaCampo(frm.edtNovaSenha.Value, "Nova senha não informada!")
+  return .F.
+Endif
+if Trim(frm.edtNovaSenha.Value) <> Trim(frm.edtConfirmarSenha.Value)
+ MESSAGEBOX("A Nova senha não confere com a senha a confirmar!", 16, _Screen.Caption)
+ return .F.
+Endif
+
+EndFunc
+*------------------------------------------------------------------------------------
+ENDDEFINE

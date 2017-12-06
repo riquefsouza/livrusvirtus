@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="cpf">026.857.484-74</column>
+        <column name="email">hfs2000@bol.com.br</column>
+        <column name="nome">HENRIQUE FIGUEIREDO DE SOUZA</column>
+        <column name="identidade">45869868</column>
+        <column name="codendereco">1</column>
+        <column name="telefone">33393791</column>
+        <column name="codpais">BRA</column>
+        <column name="codprofissao">1</column>
+        <column name="sexo">M</column>
+        <column name="datanasc">1978-05-14 00:00:00.000</column>
+    </row>
+    <row>
+        <column name="cpf">432.456.123-65</column>
+        <column name="email">fred@ig.com.br</column>
+        <column name="nome">FREDERICO LINHARES</column>
+        <column name="identidade">6454878</column>
+        <column name="codendereco">2</column>
+        <column name="telefone">33394916</column>
+        <column name="codpais">BRA</column>
+        <column name="codprofissao">2</column>
+        <column name="sexo">M</column>
+        <column name="datanasc">1980-01-20 00:00:00.000</column>
+    </row>
+</resultset>

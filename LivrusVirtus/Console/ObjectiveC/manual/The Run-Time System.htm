@@ -1,0 +1,819 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0050)http://toodarkpark.org/computers/objc/runtime.html -->
+<HTML><HEAD><TITLE>The Run-Time System</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content="MSHTML 6.00.2800.1458" name=GENERATOR></HEAD>
+<BODY vLink=#8b4500 bgColor=#e0e0e0><A 
+href="http://toodarkpark.org/computers/objc/moreobjc.html"><IMG 
+src="The Run-Time System_arquivos/DocsLeftArrow.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/objctoc.html"><IMG 
+src="The Run-Time System_arquivos/DocsContents.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/summary.html"><IMG 
+src="The Run-Time System_arquivos/DocsRightArrow.gif"></A> <A name=695></A>
+<P><A name=819></A><A name=739></A>
+<P><A name=741></A><I><FONT size=+3>C</FONT><FONT size=+2>hapter 3</FONT> </I>
+<CENTER><FONT size=+5><B>T</B></FONT><FONT size=+4><B>he</B></FONT> <FONT 
+size=+5><B>R</B></FONT><FONT size=+4><B>un-</B></FONT><FONT 
+size=+5><B>T</B></FONT><FONT size=+4><B>ime</B></FONT> <FONT 
+size=+5><B>S</B></FONT><FONT size=+4><B>ystem</B></FONT> </CENTER>
+<HR>
+
+<P><A name=866></A>The Objective-C language defers as many decisions as it can 
+from compile time and link time to run time. Whenever possible, it does things 
+dynamically. This means that the language requires not just a compiler, but also 
+a run-time system to execute the compiled code. The run-time system acts as a 
+kind of operating system for the Objective-C language; it's what makes the 
+language work.
+<P><A name=867></A>Objective-C programs interact with the run-time system at 
+three distinct levels: 
+<P>
+<UL><A name=868></A>
+  <LI>Through Objective-C source code. For the most part, the run-time system 
+  works automatically and behind the scenes. You use it just by writing and 
+  compiling Objective-C source code. 
+  <DL><A name=869></A>
+    <DT>It's up to the compiler to produce the data structures that the run-time 
+    system requires and to arrange the run-time function calls that carry out 
+    language instructions. The data structures capture information found in 
+    class and category definitions and in protocol declarations; they include 
+    the class and protocol objects discussed earlier, as well as method 
+    selectors, instance variable templates, and other information distilled from 
+    source code. The principal run-time function is the one that sends messages, 
+    as described under ``<A 
+    href="http://toodarkpark.org/computers/objc/coreobjc.html#">HOW MESSAGING 
+    WORKS</A>'' in <A 
+    href="http://toodarkpark.org/computers/objc/coreobjc.html#">Chapter 2</A>. 
+    It's invoked by source-code message expressions. </DT></DL><A name=870></A>
+  <LI>Through a method interface defined in the NSObject class. Every object 
+  inherits from the NSObject class, so every object has access to the methods it 
+  defines. Most NSObject methods interact with the run-time system. 
+  <DL><A name=871></A>
+    <DT>Some of these methods simply query the system for information. The 
+    preceding chapters, for example, mentioned the <STRONG>class</STRONG> 
+    method, which asks an object to identify its class, 
+    <STRONG>isKindOfClass:</STRONG> and <STRONG>isMemberOfClass:</STRONG>, which 
+    test an object's position in the inheritance hierarchy, 
+    <STRONG>respondsToSelector:</STRONG>, which checks whether an object can 
+    accept a particular message, <STRONG>conformsToProtocol:</STRONG>, which 
+    checks whether it conforms to a protocol, and 
+    <STRONG>methodForSelector:</STRONG>, which asks for the address of a method 
+    implementation. Methods like these give an object the ability to introspect 
+    about itself. <A name=872></A>
+    <DT>Other methods set the run-time system in motion. For example, 
+    <STRONG>perform:</STRONG> and its companions initiate messages, and 
+    <STRONG>alloc</STRONG> produces a new object properly connected to its 
+    class. <A name=873></A>
+    <DT>All these methods were mentioned in previous chapters and are described 
+    in detail in the NSObject class specification in the <EM>Foundation 
+    Framework Reference</EM>. </DT></DL><A name=874></A>
+  <LI>Through direct calls to run-time functions. The run-time system has a 
+  public interface, consisting mainly of a set of functions. Many are functions 
+  that duplicate what you get automatically by writing Objective-C code or what 
+  the NSObject class provides with a method interface. Others manipulate 
+  low-level run-time processes and data structures. These functions make it 
+  possible to develop other interfaces to the run-time system and produce tools 
+  that augment the development environment; they're not needed when programming 
+  in Objective-C. 
+  <DL><A name=875></A>
+    <DT>However, a few of the run-time functions might on occasion be useful 
+    when writing an Objective-C program. These functions--such as 
+    <STRONG>sel_getUid()</STRONG>, which returns a method selector for a method 
+    name, and <STRONG>objc_msgSend()</STRONG>, which returns a class object for 
+    a class name--are defined in the Objective-C run time system described at 
+    various places in the text of this manual. </DT></DL></LI></UL><A 
+name=876></A>Because the NSObject class is at the root of all inheritance 
+hierarchies, the methods it defines are inherited by all classes. Its methods 
+therefore establish behaviors that are inherent to every instance and every 
+class object. However, in a few cases, the NSObject class merely defines a 
+framework for how something should be done; it doesn't provide all the necessary 
+code itself.
+<P><A name=2404></A>For example, the NSObject class defines a 
+<STRONG>description</STRONG> method that should return a character string 
+associated with the receiver:
+<P><A name=2420></A><PRE>    if ( !strcmp([anObject description], "Connochaetes taurinus") )
+	    . . .
+</PRE><A name=879></A>If you define a class of named objects, you must implement 
+a <STRONG>description</STRONG> method to return the specific character string 
+associated with the receiver. NSObject's version of the method can't know what 
+that name will be, so it merely returns the class name as a default.
+<P><A name=880></A>This chapter looks at three areas where the NSObject class 
+provides a framework and defines conventions, but where you may need to write 
+code to fill in the details:
+<P>
+<UL><A name=881></A>
+  <LI>Allocating and initializing new instances of a class, and deallocating 
+  instances when they're no longer needed <A name=882></A>
+  <LI>Forwarding messages to another object <A name=883></A>
+  <LI>Dynamically loading new modules into a running program </LI></UL><A 
+name=884></A>Other conventions of the NSObject class are described in the 
+NSObject class specification in the <EM>Foundation Framework Reference</EM>.
+<P><A name=885></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>A</FONT><FONT size=+2>llocation and</FONT> <FONT 
+size=+3>I</FONT><FONT size=+2>nitialization</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=886></A>It takes two steps to create an object in Objective-C. You 
+must both:
+<P>
+<UL><A name=887></A>
+  <LI>Dynamically allocate memory for the new object, and <A name=888></A>
+  <LI>Initialize the newly allocated memory to appropriate values. </LI></UL><A 
+name=889></A>An object isn't fully functional until both steps have been 
+completed. As discussed in <A 
+href="http://toodarkpark.org/computers/objc/coreobjc.html#">Chapter 2</A>, each 
+step is accomplished by a separate method, but typically in a single line of 
+code:
+<P><A name=2434></A><PRE>    id anObject = [[Rectangle alloc] init];
+</PRE><A name=891></A>Separating allocation from initialization gives you 
+individual control over each step so that each can be modified independently of 
+the other. The following sections look first at allocation and then at 
+initialization, and discuss how they are in fact controlled and modified.
+<P><A name=892></A>
+<HR width="50%">
+
+<CENTER><FONT size=+2>A</FONT><FONT size=+1>llocating</FONT> <FONT 
+size=+2>M</FONT><FONT size=+1>emory for</FONT> <FONT size=+2>O</FONT><FONT 
+size=+1>bjects</FONT> </CENTER>
+<HR width="50%">
+
+<P><A name=893></A>In Objective-C, memory for new objects is allocated using 
+class methods defined in the NSObject class. NSObject defines two principal 
+methods for this purpose, <STRONG>alloc</STRONG> and 
+<STRONG></STRONG><STRONG>allocWithZone:</STRONG>.
+<P><A name=2442></A><PRE>    + (id)alloc;
+    + (id)allocWithZone:(NSZone *)zone;
+</PRE><A name=895></A>These methods allocate enough memory to hold all the 
+instance variables for an object belonging to the receiving class. They don't 
+need to be overridden and modified in subclasses.
+<P><A name=896></A>The argument passed to <STRONG>allocWithZone:</STRONG> 
+determines where the new object will be located in memory. It permits you to 
+group related objects into the same region of memory for better performance.
+<P><A name=897></A>
+<H3>Zones</H3><A name=898></A>In a multitasking environment like OPENSTEP, users 
+typically run several applications at once. These applications can easily 
+require more memory than will physically fit on the user's system.
+<P><A name=899></A>To solve this problem, OPENSTEP, like most modern systems, 
+makes use of virtual memory--a system for addressing more information than can 
+actually be accommodated in main memory. Whenever an application references some 
+information, the system determines whether the memory page containing that 
+information resides in main memory. If it doesn't, the page with the requested 
+information must be read in. If there's no room for the new page, a page of 
+resident memory must be stored to the disk to make room.
+<P><A name=900></A>This swapping of pages in and out of main memory, to and from 
+the disk, is much slower than a direct memory reference. It slows the execution 
+of applications, and, in a multitasking environment, can degrade the overall 
+responsiveness of the system. Reducing swapping to a minimum can greatly 
+increase system performance.
+<P><A name=901></A>One way to reduce swapping is to improve <EM>locality of 
+reference</EM>, the chance that the next piece of information the system needs 
+to reference will be located close to the last piece of information referenced, 
+perhaps on the same page, or at least on a page recently referenced and so still 
+in main memory. The idea is to minimize the number of pages that must be 
+resident for a given operation by putting related information on the same page 
+(or the same few pages) and keeping unrelated, or rarely used, information on 
+other pages. 
+<P><A name=902></A>To this end, OPENSTEP lets you partition dynamic memory into 
+<EM>zones</EM> and direct which zone objects (and other data structures) should 
+be allocated from.
+<P><A name=903></A>Zones are recorded in NSZone structures, one per zone. These 
+structures are provided by the system; you don't have to allocate memory for 
+them or make copies. You also don't need to look inside the structure or 
+manipulate its fields. You can simply regard pointers to the structures as zone 
+identifiers.
+<P><A name=904></A>The system creates one default zone for each application, 
+which is returned by <STRONG>NSDefaultMallocZone()</STRONG>.
+<P><A name=2449></A><PRE>    NSZone *defaultZone = NSDefaultMallocZone();
+</PRE><A name=2454></A>Other zones can be created by the 
+<STRONG>NSCreateZone()</STRONG> function.
+<P><A name=2468></A><PRE>    NSZone *newZone = NSCreateZone(vm_page_size * 2, vm_page_size, YES);
+</PRE><A name=2465></A>This function takes three arguments:
+<P>
+<UL><A name=909></A>
+  <LI>The initial size of the zone in bytes. <A name=910></A>
+  <LI>The granularity of the zone (how much it should grow or shrink by). <A 
+  name=911></A>
+  <LI>Whether it's possible to free memory from the zone. For most zones, this 
+  normally is YES. However, it can be NO if a zone is to be used temporarily, 
+  then destroyed (with <STRONG>NSRecycleZone()</STRONG>). Recycling a zone 
+  effectively deallocates all the memory within it (although any objects within 
+  the zone that have not yet been deallocated are first moved to the default 
+  zone). </LI></UL><A name=912></A>The initial size of a zone and its granularity 
+should be set to small multiples of a page size, since a page is the smallest 
+amount of memory handled by the virtual memory system. The size of a page can 
+vary from installation to installation; its current value is stored in the 
+<STRONG>vm_page_size</STRONG> global variable declared in 
+<STRONG>mach/mach_init.h</STRONG>.
+<P><A name=913></A>Ideally, zones should be moderate in size. Large zones may 
+fail to group related data onto a small number of pages; they're prone to the 
+same problem that zone allocation is meant to correct: the fragmentation of data 
+across many pages.
+<P><A name=914></A>It's also not a good idea to have a large number of zones 
+with very little information in them. The free space in one zone won't be 
+available for allocation from other zones, so an application could end up using 
+more memory than it should.
+<P><A name=915></A>
+<H3>Allocating from a Zone</H3><A name=916></A>The 
+<STRONG>allocWithZone:</STRONG> method permits you to cluster related objects 
+(such as a drawing and the graphic objects that make up the drawing) in the same 
+region of memory. It takes a pointer to a zone as its argument:
+<P><A name=2480></A><PRE>    NSZone *myZone = NSCreateZone(vm_page_size, vm_page_size, YES);
+    id newObject = [[Rectangle allocWithZone:myZone] init];
+</PRE><A name=918></A>The <STRONG>zone</STRONG> method returns the zone of the 
+receiver and can be used to make sure one object is allocated from the same zone 
+as another object. For example, a Rectangle could be allocated from the same 
+zone as the Drawing it will be a part of:
+<P><A name=2493></A><PRE>    id aRect = [[Rectangle allocWithZone:[Drawing zone]] init];
+</PRE><A name=920></A>The <STRONG>NSZoneMalloc()</STRONG> function lets you 
+specify a zone when dynamically allocating memory for data structures that 
+aren't objects. It's arguments are a zone and the number of bytes to be 
+allocated:
+<P><A name=2500></A><PRE>    float *points = (float *)NSZoneMalloc(NSDefaultMallocZone(),
+	    sizeof(float) * numPoints);
+</PRE><A name=922></A>Allocation methods and functions that don't specify a 
+zone, such as the <STRONG>alloc</STRONG> method, take memory from the default 
+zone. The standard C <STRONG>malloc()</STRONG> function allocates from the 
+default zone, or from memory outside any zone.
+<P><A name=923></A>Objects that are commonly used together should be kept 
+together in the same zone, along with any related data structures the objects 
+use. For example, all the objects that contribute to a particular document and 
+its display (the NSWindow object, NSView objects, text data structures, and so 
+on) could be kept together in the same zone, one created just for the document. 
+When the document isn't open, none of the pages in the zone will clutter main 
+memory.
+<P><A name=924></A>It's equally important to keep rarely used objects separate 
+from those that are used more frequently. For example, users only occasionally 
+refer to an application's information panel (usually only when first becoming 
+familiar with the application). If the objects that contribute to the panel 
+share pages with objects that are used regularly, they will take up space in 
+main memory even when they're not needed.
+<P><A name=925></A>Frequent allocation and deallocation of objects can cause 
+memory fragmentation. If your application often both allocates and frees a 
+certain type of object, consider keeping all of those objects in the same zone 
+to prevent the fragmentation of other zones.
+<P><A name=926></A>
+<HR width="50%">
+
+<CENTER><FONT size=+2>I</FONT><FONT size=+1>nitializing new</FONT> <FONT 
+size=+2>O</FONT><FONT size=+1>bjects</FONT> </CENTER>
+<HR width="50%">
+
+<P><A name=927></A>The <STRONG>alloc</STRONG> and 
+<STRONG>allocWithZone:</STRONG> methods initialize a new object's 
+<STRONG>isa</STRONG> instance variable so that it points to the object's class 
+(the class object). All other instance variables are set to 0. Usually, an 
+object needs to be more specifically initialized before it can be safely used.
+<P><A name=928></A>This initialization is the responsibility of class-specific 
+instance methods that, by convention, begin with the abbreviation ``init''. If 
+the method takes no arguments, the method name is just those four letters, 
+<STRONG>init</STRONG>. If it takes arguments, labels for the arguments follow 
+the ``init'' prefix. For example, an NSView can be initialized with an 
+<STRONG>initWithFrame:</STRONG> method.
+<P><A name=929></A>Every class that declares instance variables must provide an 
+<STRONG>init...</STRONG> method to initialize them. The NSObject class declares 
+the <STRONG>isa</STRONG> variable and defines an <STRONG>init</STRONG> method. 
+However, since <STRONG>isa</STRONG> is initialized when memory for a new object 
+is allocated, all NSObject's <STRONG>init</STRONG> method does is return 
+<STRONG>self</STRONG>. NSObject declares the method mainly to establish the 
+naming convention described above.
+<P><A name=930></A>
+<H3>The Returned Object</H3><A name=931></A>An <STRONG>init...</STRONG> method 
+normally initializes the instance variables of the receiver, then returns it. 
+It's the responsibility of the method to return an object that can be used 
+without error.
+<P><A name=932></A>However, in some cases, this responsibility can mean 
+returning a different object than the receiver. For example, if a class keeps a 
+list of named objects, it might provide an <STRONG>initWithName:</STRONG> method 
+to initialize new instances. If there can be no more than one object per 
+name<STRONG>, </STRONG><STRONG>initWithName:</STRONG> might refuse to assign the 
+same name to two objects. When asked to assign a new instance a name that's 
+already being used by another object, it might free the newly allocated instance 
+and return the other object--thus ensuring the uniqueness of the name while at 
+the same time providing what was asked for, an instance with the requested name.
+<P><A name=933></A>In a few cases, it might be impossible for an <STRONG>init... 
+</STRONG>method to do what it's asked to do. For example, an 
+<STRONG>initFromFile:</STRONG> method might get the data it needs from a file 
+passed as an argument. If the file name it's passed doesn't correspond to an 
+actual file, it won't be able to complete the initialization. In such a case, 
+the<STRONG> init... </STRONG>method could free the receiver and return 
+<STRONG>nil</STRONG>, indicating that the requested object can't be created.
+<P><A name=934></A>Because an <STRONG>init...</STRONG> method might return an 
+object other than the newly allocated receiver, or even return 
+<STRONG>nil</STRONG>, it's important that programs use the value returned by the 
+initialization method, not just that returned by <STRONG>alloc</STRONG> or 
+<STRONG>allocWithZone:</STRONG>. The following code is very dangerous, since it 
+ignores the return of <STRONG>init</STRONG>.
+<P><A name=2507></A><PRE>    id anObject = [SomeClass alloc];
+    [anObject init];
+    [anObject someOtherMessage];
+</PRE><A name=936></A>It's recommended that you combine allocation and 
+initialization messages:
+<P><A name=2516></A><PRE>    id anObject = [[SomeClass alloc] init];
+    [anObject someOtherMessage];
+</PRE><A name=938></A>If there's a chance that the <STRONG>init...</STRONG> 
+method might return <STRONG>nil</STRONG>, the return value should be checked 
+before proceeding:
+<P><A name=2521></A><PRE>    id anObject = [[SomeClass alloc] init];
+    if ( anObject )
+	[anObject someOtherMessage];
+    else
+	    . . .
+</PRE><A name=940></A>
+<H3>Arguments</H3><A name=941></A>An <STRONG>init...</STRONG> method must ensure 
+that all of an object's instance variables have reasonable values. This doesn't 
+mean that it needs to provide an argument for each variable. It can set some to 
+default values or depend on the fact that (except for <STRONG>isa</STRONG>) all 
+bits of memory allocated for a new object are set to 0. For example, if a class 
+requires its instances to have a name and a data source, it might provide an 
+<STRONG>initWithName:fromFile:</STRONG> method, but set nonessential instance 
+variables to arbitrary values or allow them to have the null values set by 
+default. It could then rely on methods like <STRONG>setEnabled:</STRONG>, 
+<STRONG>setFriend:</STRONG>, and <STRONG>setDimensions:</STRONG> to modify 
+default values after the initialization phase had been completed.
+<P><A name=942></A>Any <STRONG>init...</STRONG> method that takes arguments must 
+be prepared to handle cases where an inappropriate value is passed. One option 
+is to substitute a default value, and to let a null argument explicitly evoke 
+the default.
+<P><A name=943></A>
+<H3>Coordinating Classes</H3><A name=944></A>Every class that declares instance 
+variables must provide an <STRONG>init...</STRONG> method to initialize them 
+(unless the variables require no initialization). The <STRONG>init...</STRONG> 
+methods the class defines initialize only those variables declared in the class. 
+Inherited instance variables are initialized by sending a message to 
+<STRONG>super</STRONG> to perform an initialization method defined somewhere 
+farther up the inheritance hierarchy:
+<P><A name=945></A><PRE>    - initName: (char *)string
+    {
+	if ( self = [super init] ) {
+	    name = (char *)NSZoneMalloc([self zone], 
+		strlen(string) + 1);
+	    strcpy(name, string);
+	    return self;
+        }
+	return nil;
+    }
+</PRE><A name=946></A>The message to <STRONG>super</STRONG> chains together 
+initialization methods in all inherited classes. Because it comes first, it 
+ensures that superclass variables are initialized before those declared in 
+subclasses. For example, a Rectangle object must be initialized as an NSObject, 
+an Graphic, and a Shape before it's initialized as a Rectangle. (See <A 
+href="http://toodarkpark.org/computers/objc/coreobjc.html#">Chapter 2</A> for a 
+figure illustrating the Rectangle inheritance hierarchy.)
+<P><A name=947></A>The connection between the <STRONG>initWithName:</STRONG> 
+method illustrated above and the inherited <STRONG>init</STRONG> method it 
+incorporates is diagrammed in the figure below:
+<P><A name=948></A>
+<P><IMG hspace=10 src="" align=left> <A name=949></A>A class must also make sure 
+that all inherited initialization methods work. For example, if class A defines 
+an <STRONG>init</STRONG> method and its subclass B defines an 
+<STRONG>initWithName:</STRONG> method, as shown in the figure above, B must also 
+make sure that an <STRONG>init</STRONG> message will successfully initialize B 
+instances. The easiest way to do that is to replace the inherited 
+<STRONG>init</STRONG> method with a version that invokes 
+<STRONG>initWithName:</STRONG>.
+<P><A name=2534></A><PRE>    - init
+    {
+	return [self initWithName:"default"];
+    }
+</PRE><A name=951></A>The <STRONG>initWithName:</STRONG> method would, in turn, 
+invoke the inherited method, as was shown in the example and figure above. That 
+figure can be modified to include B's version of <STRONG>init</STRONG>, as shown 
+below:
+<P><A name=952></A>
+<P><IMG hspace=10 src="" align=left> <A name=953></A>Covering inherited 
+initialization methods makes the class you define more portable to other 
+applications. If you leave an inherited method uncovered, someone else may use 
+it to produce incorrectly initialized instances of your class.
+<P><A name=954></A>
+<H3>The Designated Initializer</H3><A name=955></A>In the example above, 
+<STRONG>initWithName:</STRONG> would be the <EM>designated initializer</EM> for 
+its class (class B). The designated initializer is the method in each class that 
+guarantees inherited instance variables are initialized (by sending a message to 
+<STRONG>super</STRONG> to perform an inherited method). It's also the method 
+that does most of the work, and the one that other initialization methods in the 
+same class invoke. It's an OPENSTEP convention that the designated initializer 
+is always the method that allows the most freedom to determine the character of 
+a new instance (the one with the most arguments).
+<P><A name=956></A>It's important to know the designated initializer when 
+defining a subclass. For example, suppose we define class C, a subclass of B, 
+and implement an <STRONG>initWithName:fromFile:</STRONG> method. In addition to 
+this method, we have to make sure that the inherited <STRONG>init</STRONG> and 
+<STRONG>initWithName:</STRONG> methods also work for instances of C. This can be 
+done just by covering B's <STRONG>initWithName:</STRONG> with a version that 
+invokes <STRONG>initWithName:fromFile:</STRONG>.
+<P><A name=2543></A><PRE>    - initWithName:(char *)string&lt;
+    {
+	return [self initWithName:string fromFile:NULL];
+    }
+</PRE><A name=958></A>For an instance of the C class, the inherited 
+<STRONG>init</STRONG> method will invoke this new version of 
+<STRONG>initWithName:</STRONG> which will invoke 
+<STRONG>initWithName:fromFile:</STRONG>. The relationship between these methods 
+is diagrammed below.
+<P><A name=959></A>
+<P><IMG hspace=15 src="" align=left vspace=10> <A name=960></A>This figure omits 
+an important detail. The <STRONG>initWithName:fromFile:</STRONG> method, being 
+the designated initializer for the C class, will send a message to 
+<STRONG>super</STRONG> to invoke an inherited initialization method. But which 
+of B's methods should it invoke, <STRONG>init</STRONG> or 
+<STRONG>initWithName:</STRONG>? It can't invoke <STRONG>init</STRONG>, for two 
+reasons:
+<P>
+<UL><A name=961></A>
+  <LI>Circularity would result (<STRONG>init</STRONG> invokes C's 
+  <STRONG>initWithName:</STRONG>, which invokes 
+  <STRONG>initWithName:fromFile:</STRONG>, which invokes <STRONG>init</STRONG> 
+  again). <A name=962></A>
+  <LI>It won't be able to take advantage of the initialization code in B's 
+  version of <STRONG>initWithName:</STRONG>. </LI></UL><BR clear=all><A 
+name=963></A>Therefore, <STRONG>initWithName:fromFile:</STRONG> must invoke 
+<STRONG>initWithName:</STRONG>.
+<P><A name=2551></A><PRE>    - initWithName:(char *)string fromFile:(char *)pathname
+    {
+	if ( self = [super initWithName:string] )
+	    . . .
+    }
+</PRE><A name=965></A>The general principle is this:
+<P>
+<DL>
+  <DL><A name=966></A>
+    <DT><EM>The designated initializer in one class must, through a message to 
+    <STRONG>super</STRONG>, invoke the designated initializer in an inherited 
+    class.</EM> </DT></DL></DL><A name=967></A>
+<P><A name=969></A>
+<P><IMG hspace=10 src="" align=left> Designated initializers are chained to each 
+other through messages to <STRONG>super</STRONG>, while other initialization 
+methods are chained to designated initializers through messages to 
+<STRONG>self</STRONG>.
+<P><A name=968></A>This figure shows how all the initialization methods in 
+classes A, B, and C are linked. Messages to <STRONG>self</STRONG> are shown on 
+the left and messages to <STRONG>super</STRONG> are shown on the right.
+<P><A name=970></A>Note that B's version of <STRONG>init</STRONG> sends a 
+message to <STRONG>self</STRONG> to invoke the <STRONG>initWithName: 
+</STRONG>method. Therefore, when the receiver is an instance of the B class, it 
+will invoke B's version of <STRONG>initWithName:</STRONG>, and when the receiver 
+is an instance of the C class, it will invoke C's version.<BR clear=all>
+<P><A name=971></A>
+<HR width="50%">
+
+<CENTER><FONT size=+2>C</FONT><FONT size=+1>ombinig</FONT> <FONT 
+size=+2>A</FONT><FONT size=+1>llocation and</FONT> <FONT size=+2>I</FONT><FONT 
+size=+1>nitialization</FONT> </CENTER>
+<HR width="50%">
+
+<P><A name=972></A>By convention, in OPENSTEP classes define creation methods 
+that combine the two steps of allocating and initializing<STRONG> </STRONG>to 
+return new, initialized instances of the class. These methods typically take the 
+form + <EM>className</EM>... where <EM>className</EM> is the name of the class. 
+For instance, NSString has the following methods (among others):
+<P><A name=2559></A><PRE>    + (NSString *)stringWithCString:(const char *)bytes;
+    + (NSString *)stringWithFormat:(NSString *)format, ...;\
+</PRE><A name=974></A>Similarly, NSArray defines the following class methods 
+that combine allocation and initialization:
+<P><A name=2567></A><PRE>    + (id)array;
+    + (id)arrayWithObject:(id)anObject;
+    + (id)arrayWithObjects:(id)firstObj, ...;
+</PRE><A name=976></A>Instances created with any of these methods will be 
+deallocated automatically, so you don't have to release them unless you first 
+retain them.
+<P><A name=977></A>Methods that combine allocation and initialization are 
+particularly valuable if the allocation must somehow be informed by the 
+initialization. For example, if the data for the initialization is taken from a 
+file, and the file might contain enough data to initialize more than one object, 
+it would be impossible to know how many objects to allocate until the file is 
+opened. In this case, you might implement a <STRONG>listFromFile:</STRONG> 
+method that takes the name of the file as an argument. It would open the file, 
+see how many objects to allocate, and create a List object large enough to hold 
+all the new objects. It would then allocate and initialize the objects from data 
+in the file, put them in the List, and finally return the List.
+<P><A name=978></A>It also makes sense to combine allocation and initialization 
+in a single method if you want to avoid the step of blindly allocating memory 
+for a new object that you might not use. As mentioned under ``<A 
+href="http://toodarkpark.org/computers/objc/runtime.html#930">The Returned 
+Object</A>'' above, an <STRONG>init...</STRONG> method might sometimes 
+substitute another object for the receiver. For example, when 
+<STRONG>initWithName:</STRONG> is passed a name that's already taken, it might 
+free the receiver and in its place return the object that was previously 
+assigned the name. This means, of course, that an object is allocated and freed 
+immediately without ever being used.
+<P><A name=979></A>If the code that checks whether the receiver should be 
+initialized is placed inside the method that does the allocation instead of 
+inside <STRONG>init...</STRONG>, you can avoid the step of allocating a new 
+instance when one isn't needed.
+<P><A name=980></A>In the following example, the <STRONG>soloist</STRONG> method 
+ensures that there's no more than one instance of the Soloist class. It 
+allocates and initializes an instance only once:
+<P><A name=2580></A><PRE>    + soloist
+    {    
+	static Soloist *instance = nil;
+
+	if ( instance == nil )
+	    instance = [[self alloc] init];
+	return instance;
+    }
+</PRE>
+<P><A name=982></A>
+<HR width="50%">
+
+<CENTER><FONT size=+2>D</FONT><FONT size=+1>eallocation</FONT> </CENTER>
+<HR width="50%">
+
+<P><A name=983></A>The NSObject class defines a <STRONG>dealloc</STRONG> method 
+that relinquishes the memory that was originally allocated for an object. You 
+rarely invoke <STRONG>dealloc</STRONG> directly, however, because OPENSTEP 
+provides a mechanism for the automatic disposal of objects (which makes use of 
+<STRONG>dealloc</STRONG>). For more information on this automatic object 
+disposal mechanism, see the introduction to the <EM>Foundation Framework 
+Reference</EM>.
+<P><A name=984></A>The purpose of a <STRONG>dealloc</STRONG> message is to 
+deallocate all the memory occupied by the receiver. NSObject's version of the 
+method deallocates the receiver's instance variables, but doesn't follow any 
+variable that points to other memory. If the receiver allocated any additional 
+memory--to store a character string or an array of structures, for example--that 
+memory must also be deallocated (unless it's shared by other objects). 
+Similarly, if the receiver is served by another object that would be rendered 
+useless in its absence, that object must also be deallocated.
+<P><A name=985></A>Therefore, it's necessary for subclasses to override 
+NSObject's version of <STRONG>dealloc</STRONG> and implement a version that 
+deallocates all of the other memory the object occupies. Every class that has 
+its objects allocate additional memory must have its own 
+<STRONG>dealloc</STRONG> method. Each version of <STRONG>dealloc</STRONG> ends 
+with a message to <STRONG>super</STRONG> to perform an inherited version of the 
+method, as illustrated in the following example:
+<P><A name=2587></A><PRE>    - dealloc 
+    {
+	[companion release];
+	free(privateMemory);
+	vm_deallocate(task_self(), sharedMemory, memorySize);
+	[super dealloc];
+    }
+</PRE><A name=987></A>By working its way up the inheritance hierarchy, every 
+<STRONG>dealloc</STRONG> message eventually invokes NSObject's version of the of 
+the method.
+<P><A name=988></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>F</FONT><FONT size=+2>orwarding</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=989></A>It's an error to send a message to an object that can't 
+respond to it. However, before announcing the error, the run-time system gives 
+the receiving object a second chance to handle the message. It sends the object 
+a <STRONG>forwardInvocation:</STRONG> message with an NSInvocation object as its 
+sole argument--the NSInvocation object encapsulates the original message and the 
+arguments that were passed with it.
+<P><A name=990></A>You can implement a <STRONG>forwardInvocation:</STRONG> 
+method to give a default response to the message, or to avoid the error in some 
+other way. As its name implies, <STRONG>forwardInvocation:</STRONG> is commonly 
+used to forward the message to another object.
+<P><A name=991></A>To see the scope and intent of forwarding, imagine the 
+following scenarios: Suppose, first, that you're designing an object that can 
+respond to a <STRONG>negotiate</STRONG> message, and you want its response to 
+include the response of another kind of object. You could accomplish this easily 
+by passing a <STRONG>negotiate</STRONG> message to the other object somewhere in 
+the body of the <STRONG>negotiate</STRONG> method you implement.
+<P><A name=992></A>Take this a step further, and suppose that you want your 
+object's response to a <STRONG>negotiate</STRONG> message to be exactly the 
+response implemented in another class. One way to accomplish this would be to 
+make your class inherit the method from the other class. However, it might not 
+be possible to arrange things this way. There may be good reasons why your class 
+and the class that implements <STRONG>negotiate</STRONG> are in different 
+branches of the inheritance hierarchy.
+<P><A name=993></A>Even if your class can't inherit the 
+<STRONG>negotiate</STRONG> method, you can still ``borrow'' it by implementing a 
+version of the method that simply passes the message on to an instance of the 
+other class:
+<P><A name=2622></A><PRE>    - negotiate
+    {
+	if ( [someOtherObject respondsTo:@selector(negotiate)] )
+	    return [someOtherObject negotiate];
+	return self;
+    }
+</PRE><A name=995></A>This way of doing things could get a little cumbersome, 
+especially if there were a number of messages you wanted your object to pass on 
+to the other object. You'd have to implement one method to cover each method you 
+wanted to borrow from the other class. Moreover, it would be impossible to 
+handle cases where you didn't know, at the time you wrote the code, the full set 
+of messages that you might want to forward. That set might depend on events at 
+run time, and it might change as new methods and classes are implemented in the 
+future.
+<P><A name=996></A>The second chance offered by a 
+<STRONG>forwardInvocation:</STRONG> message provides a less ad hoc solution to 
+this problem, and one that's dynamic rather than static. It works like this: 
+When an object can't respond to a message because it doesn't have a method 
+matching the selector in the message, the run-time system informs the object by 
+sending it a <STRONG>forwardInvocation:</STRONG> message. Every object inherits 
+a <STRONG>forwardInvocation:</STRONG> method from the NSObject class. However, 
+NSObject's version of the method simply invokes 
+<STRONG>doesNotRecognizeSelector:</STRONG> due to the unrecognized message. By 
+overriding NSObject's version and implementing your own, you can take advantage 
+of the opportunity that the <STRONG>forwardInvocation:</STRONG> message provides 
+to forward messages to other objects.
+<P><A name=997></A>To forward a message, all a 
+<STRONG>forwardInvocation:</STRONG> method needs to do is:
+<P>
+<UL><A name=998></A>
+  <LI>Determine where the message should go, and <A name=999></A>
+  <LI>Send it there with its original arguments. </LI></UL><A name=1000></A>The 
+message can be sent with the <STRONG>invokeWithTarget:</STRONG> method:
+<P><A name=2640></A><PRE>    - (void)forwardInvocation:(NSInvocation *)anInvocation
+    {
+	if ([someOtherObject respondsToSelector:
+		[anInvocation selector]])
+	    [anInvocation invokeWithTarget:someOtherObject];
+	else
+	    [self doesNotRecognizeSelector:[anInvocation selector]];
+    }
+</PRE><A name=1002></A>The return value of the message that's forwarded is 
+returned to the original sender. All types of return values can be delivered to 
+the sender, including <STRONG>id</STRONG>s, structures, and double-precision 
+floating point numbers.
+<P><A name=1003></A>A <STRONG>forwardInvocation:</STRONG> method can act as a 
+distribution center for unrecognized messages, parceling them out to different 
+receivers. Or it can be a transfer station, sending all messages to the same 
+destination. It can translate one message into another, or simply ``swallow'' 
+some messages so there's no response and no error. A 
+<STRONG>forwardInvocation:</STRONG> method can also consolidate several messages 
+into a single response. What <STRONG>forwardInvocation:</STRONG> does is up to 
+the implementor. However, the opportunity it provides for linking objects in a 
+forwarding chain opens up possibilities for program design.
+<P><A name=1004></A>Note: The <STRONG>forwardInvocation:</STRONG> method gets to 
+handle messages only if they don't invoke an existing method in the nominal 
+receiver. If, for example, you want your object to forward 
+<STRONG>negotiate</STRONG> messages to another object, it can't have a 
+<STRONG>negotiate</STRONG> method of its own. If it does, the message will never 
+reach <STRONG>forwardInvocation:</STRONG>. 
+<P><A name=1005></A>
+<HR width="50%">
+
+<CENTER><FONT size=+2>F</FONT><FONT size=+1>orwarding and</FONT> <FONT 
+size=+2>M</FONT><FONT size=+1>ultiple</FONT> <FONT size=+2>I</FONT><FONT 
+size=+1>nheritance</FONT> </CENTER>
+<HR width="50%">
+
+<P><A name=1006></A>Forwarding mimics inheritance, and can be used to lend some 
+of the effects of multiple inheritance to Objective-C programs. As shown in the 
+figure below, an object that responds to a message by forwarding it appears to 
+borrow or ``inherit'' a method implementation defined in another class.
+<P><A name=1007></A>
+<P><IMG hspace=10 src="" align=left> <A name=1008></A>In this illustration, an 
+instance of the Warrior class forwards a <STRONG>negotiate</STRONG> message to 
+an instance of the Diplomat class. The Warrior will appear to negotiate like a 
+Diplomat. It will seem to respond to the <STRONG>negotiate</STRONG> message, and 
+for all practical purposes it does respond (although it's really a Diplomat 
+that's doing the work).
+<P><A name=1009></A>The object that forwards a message thus ``inherits'' methods 
+from two branches of the inheritance hierarchy--its own branch and that of the 
+object that responds to the message. In the example above, it will appear as if 
+the Warrior class inherits from Diplomat as well as its own superclass.
+<P><A name=1010></A>Forwarding addresses most needs that lead programmers to 
+value multiple inheritance. However, there's an important difference between the 
+two: Multiple inheritance combines different capabilities in a single object. It 
+tends toward large, multifaceted objects. Forwarding, on the other hand, assigns 
+separate responsibilities to separate objects. It decomposes problems into 
+smaller objects, but associates those objects in a way that's transparent to the 
+message sender.
+<P><A name=1011></A>
+<HR width="50%">
+
+<CENTER><FONT size=+2>S</FONT><FONT size=+1>urrogate</FONT> <FONT 
+size=+2>O</FONT><FONT size=+1>bjects</FONT> </CENTER>
+<HR width="50%">
+
+<P><A name=1012></A>Forwarding not only mimics multiple inheritance, it also 
+makes it possible to develop lightweight objects that represent or ``cover'' 
+more substantial objects. The surrogate stands in for the other object and 
+funnels messages to it.
+<P><A name=1013></A>The proxy discussed under ``<A 
+href="http://toodarkpark.org/computers/objc/moreobjc.html#">REMOTE 
+MESSAGING</A>'' in <A 
+href="http://toodarkpark.org/computers/objc/moreobjc.html#">Chapter 3</A> is 
+such an object. A proxy takes care of the administrative details of forwarding 
+messages to a remote receiver, making sure argument values are copied and 
+retrieved across the connection, and so on. But it doesn't attempt to do much 
+else; it doesn't duplicate the functionality of the remote object but simply 
+gives the remote object a local address, a place where it can receive messages 
+in another application.
+<P><A name=1014></A>Other kinds of surrogate objects are also possible. Suppose, 
+for example, that you have an object that manipulates a lot of data--perhaps it 
+creates a complicated image or reads the contents of a file on disk. Setting 
+this object up could be time-consuming, so you prefer to do it lazily--when it's 
+really needed or when system resources are temporarily idle. At the same time, 
+you need at least a placeholder for this object in order for the other objects 
+in the application to function properly.
+<P><A name=1015></A>In this circumstance, you could initially create, not the 
+full-fledged object, but a lightweight surrogate for it. This object could do 
+some things on its own, such as answer questions about the data, but mostly it 
+would just hold a place for the larger object and, when the time came, forward 
+messages to it. When the surrogate's <STRONG>forwardInvocation:</STRONG> method 
+first receives a message destined for the other object, it would check to be 
+sure that the object existed and would create it if it didn't All messages for 
+the larger object go through the surrogate, so as far as the rest of the program 
+is concerned, the surrogate and the larger object would be the same.
+<P><A name=1016></A>
+<HR width="50%">
+
+<CENTER><FONT size=+2>M</FONT><FONT size=+1>aking</FONT> <FONT 
+size=+2>F</FONT><FONT size=+1>orwarding</FONT> <FONT size=+2>T</FONT><FONT 
+size=+1>ransparent</FONT> </CENTER>
+<HR width="50%">
+
+<P><A name=1017></A>Although forwarding mimics inheritance, the NSObject class 
+never confuses the two. Methods like <STRONG>respondsToSelector:</STRONG> and 
+<STRONG>isKindOfClass:</STRONG> look only at the inheritance hierarchy, never at 
+the forwarding chain. If, for example, a Warrior object is asked whether it 
+responds to a <STRONG>negotiate</STRONG> message,
+<P><A name=2648></A><PRE>    if ( [aWarrior respondsToSelector:@selector(negotiate)] )
+	. . .
+</PRE><A name=1019></A>the answer will be NO, even though it can receive 
+<STRONG>negotiate</STRONG> messages without error and respond to them, in a 
+sense, by forwarding them to a Diplomat. (See the previous figure.)
+<P><A name=1020></A>In many cases, NO is the right answer. But it may not be. If 
+you use forwarding to set up a surrogate object or to extend the capabilities of 
+a class, the forwarding mechanism should probably be as transparent as 
+inheritance. If you want your objects to act as if they truly inherited the 
+behavior of the objects they forward messages to, you'll need to re-implement 
+the <STRONG>respondsToSelector:</STRONG> and <STRONG>isKindOfClass:</STRONG> 
+methods to include your forwarding algorithm:
+<P><A name=2653></A><PRE>    - (BOOL)respondsToSelector:(SEL)aSelector
+    {
+	if ( [super respondsToSelector:aSelector] )
+	    return YES;
+	else {
+	    /* <EM>Here, test whether the </EM>aSelector<EM> message can be</EM>     *
+	     * <EM>forwarded to another object and whether that object</EM> *
+	     * <EM>can respond to it.  Return YES if it can.</EM>           */
+	}
+	return NO;
+    }
+</PRE><A name=1022></A>In addition to <STRONG>respondsToSelector:</STRONG> and 
+<STRONG>isKindOfClass:</STRONG>, the 
+<STRONG>instancesRespondToSelector:</STRONG> method should also mirror the 
+forwarding algorithm. This method rounds out the set. If protocols are used, the 
+<STRONG>conformsToProtocol:</STRONG> method should likewise be added to the 
+list. Similarly, if an object forwards any remote messages it receives, it 
+should have a version of <STRONG>methodSignatureForSelector:</STRONG> that can 
+return accurate descriptions of the methods that ultimately respond to the 
+forwarded messages.
+<P><A name=1023></A>You might consider putting the forwarding algorithm 
+somewhere in private code and have all these methods, 
+<STRONG>forwardInvocation:</STRONG> included, call it.
+<P><A name=1024></A>Note: The methods mentioned above are described in the 
+NSObject class specification in the <EM>Foundation Framework Reference</EM>. For 
+information on <STRONG>invokeWithTarget:</STRONG>, see the NSInvocation class 
+specification in the <EM>Foundation Framework Reference</EM>. 
+<P><A name=1025></A>
+<HR width="75%">
+
+<CENTER><FONT size=+3>D</FONT><FONT size=+2>ynamic</FONT> <FONT 
+size=+3>L</FONT><FONT size=+2>oading</FONT> </CENTER>
+<HR width="75%">
+
+<P><A name=1026></A>An Objective-C program can load and link new classes and 
+categories while it's running. The new code is incorporated into the program and 
+treated identically to classes and categories loaded at the start.
+<P><A name=1027></A>Dynamic loading can be used to do a lot of different things. 
+For example, device drivers are dynamically loaded into the kernel. Adaptors for 
+database servers are dynamically loaded by the Enterprise Objects(tm) Framework.
+<P><A name=1028></A>In the OPENSTEP environment, dynamic loading is commonly 
+used to allow applications to be customized. Others can write modules that your 
+program will load at run time--much as Interface Builder loads custom palettes, 
+OPENSTEP's Preferences application loads custom displays, and its Workspace 
+Manager loads data inspectors. The loadable modules extend what your application 
+can do. They contribute to it in ways that you permit, but could not have 
+anticipated or defined yourself. You provide the framework, but others provide 
+the code.
+<P><A name=1029></A>Although there are run-time functions that enable dynamic 
+loading (<STRONG>objc_loadModules()</STRONG> and 
+<STRONG>objc_unloadModules()</STRONG>, defined in 
+<STRONG>objc/objc-load.h</STRONG>), OPENSTEP's NSBundle class provides a 
+significantly more convenient interface for dynamic loading--one that's 
+object-oriented and integrated with related services. See the NSBundle class 
+specification in the <EM>Foundation Framework Reference</EM> for information on 
+the NSBundle class and its use.
+<P><BR><A href="http://toodarkpark.org/computers/objc/moreobjc.html"><IMG 
+src="The Run-Time System_arquivos/DocsLeftArrow.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/objctoc.html"><IMG 
+src="The Run-Time System_arquivos/DocsContents.gif"></A> <A 
+href="http://toodarkpark.org/computers/objc/summary.html"><IMG 
+src="The Run-Time System_arquivos/DocsRightArrow.gif"></A> 
+<P>
+<HR>
+<FONT size=-1>Last Modified: 01:26pm , January 13, 1996 
+<CENTER>
+<HR>
+<A href="http://www.next.com/HotNews/">Hot News</A> | <A 
+href="http://www.next.com/OpenStep/">OpenStep</A> | <A 
+href="http://www.next.com/WebObjects/">WebObjects</A> | <A 
+href="http://www.next.com/Services/">Services</A> | <A 
+href="http://www.next.com/BuyNow/">Buy Now</A> | <A 
+href="http://www.next.com/NeXTanswers/">NeXTanswers</A> | <A 
+href="http://www.next.com/Search/">Search</A> | <A 
+href="http://www.next.com/AboutNeXT/">About NeXT</A> 
+<HR>
+</CENTER>NeXT sales and product information inquiries? <A 
+href="http://www.next.com/AboutNeXT/Feedback.html">Click here</A><BR><A 
+href="http://www.next.com/Legal/">Copyright</A> 1996 <A 
+href="http://www.next.com/">NeXT Software, Inc.</A> <A 
+href="http://www.next.com/Legal/">Proprietary Notices.</A> </FONT></BODY></HTML>

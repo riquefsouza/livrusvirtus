@@ -1,0 +1,157 @@
+Imports System
+Imports System.Drawing
+Imports System.Collections
+Imports Microsoft.VisualBasic
+Imports wx
+Imports System.IO
+
+Namespace Livrus
+	Public Class Resource
+    public shared FRMCADASSUNTOS as integer = 1000
+    public shared FRMCADAUTORES as integer = 1001
+    public shared FRMCADEDITORAS as integer = 1002
+    public shared FRMCADENDERECOS as integer = 1003
+    public shared FRMCADIDIOMAS as integer = 1004
+    public shared FRMCADPAISES as integer = 1005
+    public shared FRMCADPROFISSOES as integer = 1006
+    public shared FRMCADCLIENTES as integer = 1007
+    public shared FRMCADLIVROS as integer = 1008
+    public shared FRMVENDERLIVROS as integer = 1009
+    public shared FRMCONVENDAS as integer = 1010
+    public shared FRMALTERARSENHA as integer = 1111
+  
+    public shared MNU_CAD_ASSUNTOS as integer =	2000
+    public shared MNU_CAD_AUTORES as integer =	2001
+    public shared MNU_CAD_EDITORAS as integer =	2002
+    public shared MNU_CAD_ENDERECOS as integer =	2003
+    public shared MNU_CAD_IDIOMAS as integer =	2004
+    public shared MNU_CAD_PAISES as integer =	2005
+    public shared MNU_CAD_PROFISSOES as integer =	2006
+    public shared MNU_CAD_CLIENTES as integer =	2007
+    public shared MNU_CAD_LIVROS as integer =	2008
+    public shared MNU_CON_ASSUNTOS as integer =	2009
+    public shared MNU_CON_AUTORES as integer =	2010
+    public shared MNU_CON_EDITORAS as integer =	2011
+    public shared MNU_CON_ENDERECOS as integer =	2012
+    public shared MNU_CON_IDIOMAS as integer =	2013
+    public shared MNU_CON_PAISES as integer =	2014
+    public shared MNU_CON_PROFISSOES as integer =	2015
+    public shared MNU_CON_CLIENTES as integer =	2016
+    public shared MNU_CON_LIVROS as integer =	2017
+    public shared MNU_VEN_VENDERLIVROS as integer =	2018
+    public shared MNU_VEN_VENDASREALIZADAS as integer =	2019
+    public shared MNU_OP_ALTERARSENHA as integer =	2020
+    public shared MNU_OP_SOBRE as integer =	2021
+    public shared MNU_OP_SAIR	 as integer =	2022
+  
+    public shared TLB_CADCLIENTES as integer = 2023
+    public shared TLB_CADLIVROS as integer = 2024
+    public shared TLB_VENDERLIVROS as integer = 2025
+
+    public shared STR_TITULO       as string = "Livrus Virtus"
+    public shared STR_APPEXEC      as string = "A aplicação já está sendo executada."
+    public shared STR_NREGJAN      as string = "Não consigo registrar a janela principal."
+    public shared STR_SEMJAN       as string = "Sem janela principal"
+    public shared STR_NCONBANCO    as string = "Não consigo conectar com o banco de dados!"
+    public shared STR_NALOCODBC    as string = "Não foi possível alocar um manuseador para o ambiente ODBC"
+    public shared STR_CADASSUNTO   as string = "Cadastro de Assuntos"
+    public shared STR_CADAUTOR     as string = "Cadastro de Autores"
+    public shared STR_CADEDITORA   as string = "Cadastro de Editoras"
+    public shared STR_CADENDERECO  as string = "Cadastro de Endereços"
+    public shared STR_CADIDIOMA    as string = "Cadastro de Idiomas"
+    public shared STR_CADPAIS      as string = "Cadastro de Países"
+    public shared STR_CADPROFISS   as string = "Cadastro de Profissões"
+    public shared STR_CADCLIENTE   as string = "Cadastro de Clientes"
+    public shared STR_CADLIVRO     as string = "Cadastro de Livros"
+    public shared STR_CONASSUNTO   as string = "Consulta de Assuntos"
+    public shared STR_CONAUTOR     as string = "Consulta de Autores"
+    public shared STR_CONEDITORA   as string = "Consulta de Editoras"
+    public shared STR_CONENDERECO  as string = "Consulta de Endereços"
+    public shared STR_CONIDIOMA    as string = "Consulta de Idiomas"
+    public shared STR_CONPAIS      as string = "Consulta de Países"
+    public shared STR_CONPROFISS   as string = "Consulta de Profissões"
+    public shared STR_CONCLIENTE   as string = "Consulta de Clientes"
+    public shared STR_CONLIVRO     as string = "Consulta de Livros"
+    public shared STR_VENLIVRO     as string = "Vender Livros"
+    public shared STR_CONVENLIVRO  as string = "Vendas Realizadas"
+    public shared STR_ALTSENHA     as string = "Alteração de Senha"
+    public shared STR_OPSOBRE      as string = "Sobre o Sistema"
+    public shared STR_OPSAIR       as string = "Sair do Sistema"  
+    public shared STR_SAIRSIS      as string = "Deseja sair do sistema?"
+    public shared STR_EMAILNINF    as string = "E-mail não informado!"
+    public shared STR_NCCRIADLG    as string = "Não consigo criar a dialog!"
+    public shared STR_CERTEXCL     as string = "Certeza de excluir?"
+    public shared STR_TELNINF      as string = "Telefone não informado!"
+    public shared STR_NREGTELA     as string = "Não consigo registrar a tela!"
+    public shared STR_NCCRIATELA   as string = "Não consigo criar a tela!"
+    public shared STR_NCPREPSQL    as string = "Não conseguiu preparar o SQL!"
+    public shared STR_NCEXECSQL    as string = "Não conseguiu executar o SQL!"
+    public shared STR_DATINV       as string = "Data inválida!"
+    public shared STR_SENALTSUC    as string = "Senha alterada com sucesso!"
+    public shared STR_SENNCSU      as string = "A Senha atual não confere com a senha do usuário!"
+    public shared STR_NSENNINF     as string = "Nova senha não informada!"
+    public shared STR_NSENNCCON    as string = "A Nova senha não confere com a senha a confirmar!"
+    public shared STR_DTHRINV      as string = "Data/Hora inválida!"
+    public shared STR_USUARIO      as string = "Usuário: "
+    public shared STR_LOGSENINC    as string = "Login ou senha incorretos!"
+    public shared STR_ISBNNINF     as string = "ISBN não informado!"
+    public shared STR_CODNINF      as string = "Código não informado!"
+    public shared STR_ASSNENC      as string = "Assunto não encontrado!"
+    public shared STR_ASSNINF      as string = "Assunto não informado!"
+    public shared STR_AUTNENC      as string = "Autor não encontrado!"
+    public shared STR_AUTNINF      as string = "Autor não informado!"
+    public shared STR_EDTNENC      as string = "Editora não encontrada!"
+    public shared STR_EDTNINF      as string = "Editora não informada!"
+    public shared STR_ENDNENC      as string = "Endereço não encontrado!"
+    public shared STR_ENDNINF      as string = "Endereço não informado!"
+    public shared STR_IDINENC      as string = "Idioma não encontrado!"
+    public shared STR_IDININF      as string = "Idioma não informado!"
+    public shared STR_PAISNENC     as string = "País não encontrado!"
+    public shared STR_PAISNINF     as string = "País não informado!"
+    public shared STR_PROFNENC     as string = "Profissão não encontrada!"
+    public shared STR_PROFNINF     as string = "Profissão não informada!"
+    public shared STR_CLINENC      as string = "Cliente não encontrado!"
+    public shared STR_CLININF      as string = "Cliente não informado!"
+    public shared STR_LIVNENC      as string = "Livro não encontrado!"
+    public shared STR_LIVNINF      as string = "Livro não informado!"
+    public shared STR_PE           as string = "Pernambuco"
+    public shared STR_AC           as string = "Acre"
+    public shared STR_AL           as string = "Alagoas"
+    public shared STR_AP           as string = "Amapá"
+    public shared STR_AM           as string = "Amazonas"
+    public shared STR_BA           as string = "Bahia"
+    public shared STR_BR           as string = "Brasília"
+    public shared STR_CE           as string = "Ceará"
+    public shared STR_DF           as string = "Distrito Federal"
+    public shared STR_ES           as string = "Espírito Santo"
+    public shared STR_GO           as string = "Goiás"
+    public shared STR_MT           as string = "Mato Grosso"
+    public shared STR_MS           as string = "Mato Grosso do Sul"
+    public shared STR_MG           as string = "Minas Gerais"
+    public shared STR_PA           as string = "Pará"
+    public shared STR_PB           as string = "Paraíba"
+    public shared STR_PR           as string = "Paraná"
+    public shared STR_SC           as string = "Santa Catarina"
+    public shared STR_RN           as string = "Rio Grande do Norte"
+    public shared STR_RS           as string = "Rio Grande do Sul"
+    public shared STR_RJ           as string = "Rio de Janeiro"
+    public shared STR_RO           as string = "Rondônia"
+    public shared STR_RR           as string = "Roraima"
+    public shared STR_SP           as string = "São Paulo"
+    public shared STR_SE           as string = "Sergipe"
+    public shared STR_TO           as string = "Tocantins"
+    public shared STR_CPFNINF      as string = "CPF não informado!"
+    public shared STR_SEXNINF      as string = "Sexo não informado!"
+    public shared STR_CPFINV       as string = "CPF inválido!"
+    public shared STR_TITNINF      as string = "Título não informado!"
+    public shared STR_ISBNINV      as string = "ISBN inválido!"
+    public shared STR_NUMINV       as string = "Número inválido!"
+    public shared STR_LIVVENNINF   as string = "Livro(s) para vender não informado(s)!"
+    public shared STR_LIVNEST      as string = "Livro não existe no estoque!"
+    public shared STR_VENRESUC     as string = "Venda realizada com sucesso!"
+    public shared STR_VENNENC      as string = "Venda não encontrada!"
+    public shared STR_BAIRRONINF   as string = "Bairro não informado!"
+    public shared STR_CEPNINF      as string = "CEP não informado!"
+    public shared STR_CIDADENINF   as string = "Cidade não informada!"
+	End Class
+End Namespace

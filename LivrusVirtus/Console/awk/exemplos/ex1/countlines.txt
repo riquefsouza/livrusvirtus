@@ -1,0 +1,18 @@
+#  This counts the blank lines in a file, those with only white space,
+#  and all others (that have at least one non-blank, non-tab character).
+
+BEGIN { blanklines = 0
+        whitelines = 0
+        regularlines = 0
+      }
+
+/^$/         { blanklines++; next }
+/^[ 	]+$/ { whitelines++; next }
+             { regularlines++ }
+
+END   {
+        printf "Blank lines = %3d\n", blanklines
+        printf "White lines = %3d\n", whitelines
+        printf "Other lines = %3d\n", regularlines
+        printf "Total lines = %3d\n", blanklines+whitelines+regularlines
+      }

@@ -1,0 +1,16 @@
+;  This illustrates how you can declare "private" nested functions inside
+;  other functions.  In this example, function whatever has a nested
+;  function called "square" in it.  You need to surround the forms that
+;  are in the scope of function square with a "flet" form.  The only
+;  syntactic difference is that the defun keyword does not appear in front
+;  of any functions defined in the flet.
+
+(defun whatever (n)
+    (format t "Now in whatever, n=~D~%" n)
+    (flet ((square (k) (* k k)))
+          (print n)
+          (setq m 5)
+          (setq x (square m))
+          (format t "m=~D  x=~D~%" m x)
+    )
+)

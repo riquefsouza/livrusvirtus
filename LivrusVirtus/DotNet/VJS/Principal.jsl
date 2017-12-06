@@ -1,0 +1,726 @@
+package  Livrus;
+
+import System.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Drawing.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+import System.Data.OleDb.*;
+
+public class frmPrincipal extends System.Windows.Forms.Form
+{
+    public static frmPrincipal fPrincipal;
+    
+    public System.Windows.Forms.StatusBar statusBar1;
+    public System.Data.OleDb.OleDbConnection db;
+    /// <summary>
+    /// Required designer variable.
+    /// </summary>
+    private System.ComponentModel.Container components;
+    private System.Windows.Forms.MainMenu mainMenu1;
+    private System.Windows.Forms.MenuItem mnuCadastros;
+    public System.Windows.Forms.MenuItem mnuCadAssuntos;
+    private System.Windows.Forms.StatusBarPanel statusBarPanel1;
+    private System.Windows.Forms.StatusBarPanel statusBarPanel2;
+    private System.Windows.Forms.ToolBar toolBar1;
+    public System.Windows.Forms.ToolBarButton tlbClientes;
+    public System.Windows.Forms.ToolBarButton tlbLivros;
+    public System.Windows.Forms.ToolBarButton tlbVender;
+    private System.Windows.Forms.ToolBarButton toolBarButton4;
+    private System.Windows.Forms.ToolBarButton tlbSobre;
+    private System.Windows.Forms.ToolBarButton tlbSair;
+    private System.Windows.Forms.ImageList imageList1;
+    public System.Windows.Forms.MenuItem mnuCadAutores;
+    public System.Windows.Forms.MenuItem mnuCadEditoras;
+    public System.Windows.Forms.MenuItem mnuCadEnderecos;
+    public System.Windows.Forms.MenuItem mnuCadIdiomas;
+    public System.Windows.Forms.MenuItem mnuCadPaises;
+    public System.Windows.Forms.MenuItem mnuCadProfissoes;
+    private System.Windows.Forms.MenuItem menuItem1;
+    public System.Windows.Forms.MenuItem mnuCadClientes;
+    public System.Windows.Forms.MenuItem mnuCadLivros;
+    private System.Windows.Forms.MenuItem mnuPesquisas;
+    public System.Windows.Forms.MenuItem mnuConAssuntos;
+    public System.Windows.Forms.MenuItem mnuConAutores;
+    public System.Windows.Forms.MenuItem mnuConEditoras;
+    public System.Windows.Forms.MenuItem mnuConEnderecos;
+    public System.Windows.Forms.MenuItem mnuConIdiomas;
+    public System.Windows.Forms.MenuItem mnuConPaises;
+    public System.Windows.Forms.MenuItem mnuConProfissoes;
+    private System.Windows.Forms.MenuItem menuItem2;
+    public System.Windows.Forms.MenuItem mnuConClientes;
+    public System.Windows.Forms.MenuItem mnuConLivros;
+    private System.Windows.Forms.MenuItem mnuVendas;
+    public System.Windows.Forms.MenuItem mnuVenderLivros;
+    public System.Windows.Forms.MenuItem mnuVendasRealizadas;
+    private System.Windows.Forms.MenuItem mnuJanelas;
+    private System.Windows.Forms.MenuItem mnuLadoALadoHorizontal;
+    private System.Windows.Forms.MenuItem mnuLadoALadoVertical;
+    private System.Windows.Forms.MenuItem mnuEmCascata;
+    private System.Windows.Forms.MenuItem mnuOrganizarIcones;
+    private System.Windows.Forms.MenuItem mnuOpcoes;
+    public System.Windows.Forms.MenuItem mnuAlterarSenha;
+    private System.Windows.Forms.MenuItem menuItem3;
+    private System.Windows.Forms.MenuItem mnuSobre;
+    private System.Windows.Forms.MenuItem mnuSair;
+
+    public frmPrincipal()
+    {
+        //
+        // Required for Windows Form Designer support
+        //
+        InitializeComponent();
+    }
+
+    /**
+     * Clean up any resources being used.
+     */
+    protected void Dispose(boolean disposing)
+    {
+        if ( disposing )
+        {
+            if ( components  != null )
+            {
+                components.Dispose();
+            }
+        }
+        super.Dispose(disposing);
+    }
+
+    /**
+     * Required method for Designer support - do not modify
+     * the contents of this method with the code editor.
+    */
+    private void InitializeComponent()
+    {
+	this.components = new System.ComponentModel.Container();
+	System.Resources.ResourceManager resources = 
+		new System.Resources.ResourceManager(GetType());
+	this.mainMenu1 = new System.Windows.Forms.MainMenu();
+	this.mnuCadastros = new System.Windows.Forms.MenuItem();
+	this.mnuCadAssuntos = new System.Windows.Forms.MenuItem();
+	this.mnuCadAutores = new System.Windows.Forms.MenuItem();
+	this.mnuCadEditoras = new System.Windows.Forms.MenuItem();
+	this.mnuCadEnderecos = new System.Windows.Forms.MenuItem();
+	this.mnuCadIdiomas = new System.Windows.Forms.MenuItem();
+	this.mnuCadPaises = new System.Windows.Forms.MenuItem();
+	this.mnuCadProfissoes = new System.Windows.Forms.MenuItem();
+	this.menuItem1 = new System.Windows.Forms.MenuItem();
+	this.mnuCadClientes = new System.Windows.Forms.MenuItem();
+	this.mnuCadLivros = new System.Windows.Forms.MenuItem();
+	this.mnuPesquisas = new System.Windows.Forms.MenuItem();
+	this.mnuConAssuntos = new System.Windows.Forms.MenuItem();
+	this.mnuConAutores = new System.Windows.Forms.MenuItem();
+	this.mnuConEditoras = new System.Windows.Forms.MenuItem();
+	this.mnuConEnderecos = new System.Windows.Forms.MenuItem();
+	this.mnuConIdiomas = new System.Windows.Forms.MenuItem();
+	this.mnuConPaises = new System.Windows.Forms.MenuItem();
+	this.mnuConProfissoes = new System.Windows.Forms.MenuItem();
+	this.menuItem2 = new System.Windows.Forms.MenuItem();
+	this.mnuConClientes = new System.Windows.Forms.MenuItem();
+	this.mnuConLivros = new System.Windows.Forms.MenuItem();
+	this.mnuVendas = new System.Windows.Forms.MenuItem();
+	this.mnuVenderLivros = new System.Windows.Forms.MenuItem();
+	this.mnuVendasRealizadas = new System.Windows.Forms.MenuItem();
+	this.mnuJanelas = new System.Windows.Forms.MenuItem();
+	this.mnuLadoALadoHorizontal = new System.Windows.Forms.MenuItem();
+	this.mnuLadoALadoVertical = new System.Windows.Forms.MenuItem();
+	this.mnuEmCascata = new System.Windows.Forms.MenuItem();
+	this.mnuOrganizarIcones = new System.Windows.Forms.MenuItem();
+	this.mnuOpcoes = new System.Windows.Forms.MenuItem();
+	this.mnuAlterarSenha = new System.Windows.Forms.MenuItem();
+	this.menuItem3 = new System.Windows.Forms.MenuItem();
+	this.mnuSobre = new System.Windows.Forms.MenuItem();
+	this.mnuSair = new System.Windows.Forms.MenuItem();
+	this.statusBar1 = new System.Windows.Forms.StatusBar();
+	this.statusBarPanel1 = new System.Windows.Forms.StatusBarPanel();
+	this.statusBarPanel2 = new System.Windows.Forms.StatusBarPanel();
+	this.toolBar1 = new System.Windows.Forms.ToolBar();
+	this.tlbClientes = new System.Windows.Forms.ToolBarButton();
+	this.tlbLivros = new System.Windows.Forms.ToolBarButton();
+	this.tlbVender = new System.Windows.Forms.ToolBarButton();
+	this.toolBarButton4 = new System.Windows.Forms.ToolBarButton();
+	this.tlbSobre = new System.Windows.Forms.ToolBarButton();
+	this.tlbSair = new System.Windows.Forms.ToolBarButton();
+	this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+	this.db = new System.Data.OleDb.OleDbConnection();
+//	((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
+//	((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
+	this.SuspendLayout();
+	// 
+	// mainMenu1
+	// 
+	this.mainMenu1.get_MenuItems().AddRange(new System.Windows.Forms.MenuItem[] {
+				this.mnuCadastros,
+				this.mnuPesquisas,
+				this.mnuVendas,
+				this.mnuJanelas,
+				this.mnuOpcoes});
+	// 
+	// mnuCadastros
+	// 
+	this.mnuCadastros.set_Index(0);
+	this.mnuCadastros.get_MenuItems().AddRange(new System.Windows.Forms.MenuItem[] {
+				this.mnuCadAssuntos,
+				this.mnuCadAutores,
+				this.mnuCadEditoras,
+				this.mnuCadEnderecos,
+				this.mnuCadIdiomas,
+				this.mnuCadPaises,
+				this.mnuCadProfissoes,
+				this.menuItem1,
+				this.mnuCadClientes,
+				this.mnuCadLivros});
+	this.mnuCadastros.set_Text("&Cadastros");
+	// 
+	// mnuCadAssuntos
+	// 
+	this.mnuCadAssuntos.set_Index(0);
+	this.mnuCadAssuntos.set_Text("&Assuntos");
+	this.mnuCadAssuntos.add_Click(new System.EventHandler(this.mnuCadAssuntos_Click));
+	// 
+	// mnuCadAutores
+	// 
+	this.mnuCadAutores.set_Index(1);
+	this.mnuCadAutores.set_Text("Au&tores");
+	this.mnuCadAutores.add_Click(new System.EventHandler(this.mnuCadAutores_Click));
+	// 
+	// mnuCadEditoras
+	// 
+	this.mnuCadEditoras.set_Index(2);
+	this.mnuCadEditoras.set_Text("&Editoras");
+	this.mnuCadEditoras.add_Click(new System.EventHandler(this.mnuCadEditoras_Click));
+	// 
+	// mnuCadEnderecos
+	// 
+	this.mnuCadEnderecos.set_Index(3);
+	this.mnuCadEnderecos.set_Text("E&ndereços");
+	this.mnuCadEnderecos.add_Click(new System.EventHandler(this.mnuCadEnderecos_Click));
+	// 
+	// mnuCadIdiomas
+	// 
+	this.mnuCadIdiomas.set_Index(4);
+	this.mnuCadIdiomas.set_Text("&Idiomas");
+	this.mnuCadIdiomas.add_Click(new System.EventHandler(this.mnuCadIdiomas_Click));
+	// 
+	// mnuCadPaises
+	// 
+	this.mnuCadPaises.set_Index(5);
+	this.mnuCadPaises.set_Text("&Países");
+	this.mnuCadPaises.add_Click(new System.EventHandler(this.mnuCadPaises_Click));
+	// 
+	// mnuCadProfissoes
+	// 
+	this.mnuCadProfissoes.set_Index(6);
+	this.mnuCadProfissoes.set_Text("P&rofissões");
+	this.mnuCadProfissoes.add_Click(new System.EventHandler(this.mnuCadProfissoes_Click));
+	// 
+	// menuItem1
+	// 
+	this.menuItem1.set_Index(7);
+	this.menuItem1.set_Text("-");
+	// 
+	// mnuCadClientes
+	// 
+	this.mnuCadClientes.set_Index(8);
+	this.mnuCadClientes.set_Text("&Clientes");
+	this.mnuCadClientes.add_Click(new System.EventHandler(this.mnuCadClientes_Click));
+	// 
+	// mnuCadLivros
+	// 
+	this.mnuCadLivros.set_Index(9);
+	this.mnuCadLivros.set_Text("&Livros");
+	this.mnuCadLivros.add_Click(new System.EventHandler(this.mnuCadLivros_Click));
+	// 
+	// mnuPesquisas
+	// 
+	this.mnuPesquisas.set_Index(1);
+	this.mnuPesquisas.get_MenuItems().AddRange(new System.Windows.Forms.MenuItem[] {
+				this.mnuConAssuntos,
+				this.mnuConAutores,
+				this.mnuConEditoras,
+				this.mnuConEnderecos,
+				this.mnuConIdiomas,
+				this.mnuConPaises,
+				this.mnuConProfissoes,
+				this.menuItem2,
+				this.mnuConClientes,
+				this.mnuConLivros});
+	this.mnuPesquisas.set_Text("&Pesquisas");
+	// 
+	// mnuConAssuntos
+	// 
+	this.mnuConAssuntos.set_Index(0);
+	this.mnuConAssuntos.set_Text("&Assuntos");
+	this.mnuConAssuntos.add_Click(new System.EventHandler(this.mnuConAssuntos_Click));
+	// 
+	// mnuConAutores
+	// 
+	this.mnuConAutores.set_Index(1);
+	this.mnuConAutores.set_Text("Au&tores");
+	this.mnuConAutores.add_Click(new System.EventHandler(this.mnuConAutores_Click));
+	// 
+	// mnuConEditoras
+	// 
+	this.mnuConEditoras.set_Index(2);
+	this.mnuConEditoras.set_Text("&Editoras");
+	this.mnuConEditoras.add_Click(new System.EventHandler(this.mnuConEditoras_Click));
+	// 
+	// mnuConEnderecos
+	// 
+	this.mnuConEnderecos.set_Index(3);
+	this.mnuConEnderecos.set_Text("E&ndereços");
+	this.mnuConEnderecos.add_Click(new System.EventHandler(this.mnuConEnderecos_Click));
+	// 
+	// mnuConIdiomas
+	// 
+	this.mnuConIdiomas.set_Index(4);
+	this.mnuConIdiomas.set_Text("&Idiomas");
+	this.mnuConIdiomas.add_Click(new System.EventHandler(this.mnuConIdiomas_Click));
+	// 
+	// mnuConPaises
+	// 
+	this.mnuConPaises.set_Index(5);
+	this.mnuConPaises.set_Text("&Países");
+	this.mnuConPaises.add_Click(new System.EventHandler(this.mnuConPaises_Click));
+	// 
+	// mnuConProfissoes
+	// 
+	this.mnuConProfissoes.set_Index(6);
+	this.mnuConProfissoes.set_Text("P&rofissões");
+	this.mnuConProfissoes.add_Click(new System.EventHandler(this.mnuConProfissoes_Click));
+	// 
+	// menuItem2
+	// 
+	this.menuItem2.set_Index(7);
+	this.menuItem2.set_Text("-");
+	// 
+	// mnuConClientes
+	// 
+	this.mnuConClientes.set_Index(8);
+	this.mnuConClientes.set_Text("&Clientes");
+	this.mnuConClientes.add_Click(new System.EventHandler(this.mnuConClientes_Click));
+	// 
+	// mnuConLivros
+	// 
+	this.mnuConLivros.set_Index(9);
+	this.mnuConLivros.set_Text("&Livros");
+	this.mnuConLivros.add_Click(new System.EventHandler(this.mnuConLivros_Click));
+	// 
+	// mnuVendas
+	// 
+	this.mnuVendas.set_Index(2);
+	this.mnuVendas.get_MenuItems().AddRange(new System.Windows.Forms.MenuItem[] {
+				this.mnuVenderLivros,
+				this.mnuVendasRealizadas});
+	this.mnuVendas.set_Text("&Vendas");
+	// 
+	// mnuVenderLivros
+	// 
+	this.mnuVenderLivros.set_Index(0);
+	this.mnuVenderLivros.set_Text("&Vender Livros");
+	this.mnuVenderLivros.add_Click(new System.EventHandler(this.mnuVenderLivros_Click));
+	// 
+	// mnuVendasRealizadas
+	// 
+	this.mnuVendasRealizadas.set_Index(1);
+	this.mnuVendasRealizadas.set_Text("Vendas &Realizadas");
+	this.mnuVendasRealizadas.add_Click(new System.EventHandler(this.mnuVendasRealizadas_Click));
+	// 
+	// mnuJanelas
+	// 
+	this.mnuJanelas.set_Index(3);
+	this.mnuJanelas.set_MdiList(true);
+	this.mnuJanelas.get_MenuItems().AddRange(new System.Windows.Forms.MenuItem[] {
+				this.mnuLadoALadoHorizontal,
+				this.mnuLadoALadoVertical,
+				this.mnuEmCascata,
+				this.mnuOrganizarIcones});
+	this.mnuJanelas.set_Text("&Janelas");
+	// 
+	// mnuLadoALadoHorizontal
+	// 
+	this.mnuLadoALadoHorizontal.set_Index(0);
+	this.mnuLadoALadoHorizontal.set_Text("Lado a lado &horizontal");
+	this.mnuLadoALadoHorizontal.add_Click(new System.EventHandler(this.mnuLadoALadoHorizontal_Click));
+	// 
+	// mnuLadoALadoVertical
+	// 
+	this.mnuLadoALadoVertical.set_Index(1);
+	this.mnuLadoALadoVertical.set_Text("Lado a lado &vertical");
+	this.mnuLadoALadoVertical.add_Click(new System.EventHandler(this.mnuLadoALadoVertical_Click));
+	// 
+	// mnuEmCascata
+	// 
+	this.mnuEmCascata.set_Index(2);
+	this.mnuEmCascata.set_Text("Em &cascata");
+	this.mnuEmCascata.add_Click(new System.EventHandler(this.mnuEmCascata_Click));
+	// 
+	// mnuOrganizarIcones
+	// 
+	this.mnuOrganizarIcones.set_Index(3);
+	this.mnuOrganizarIcones.set_Text("&Organizar ícones");
+	this.mnuOrganizarIcones.add_Click(new System.EventHandler(this.mnuOrganizarIcones_Click));
+	// 
+	// mnuOpcoes
+	// 
+	this.mnuOpcoes.set_Index(4);
+	this.mnuOpcoes.get_MenuItems().AddRange(new System.Windows.Forms.MenuItem[] {
+				this.mnuAlterarSenha,
+				this.menuItem3,
+				this.mnuSobre,
+				this.mnuSair});
+	this.mnuOpcoes.set_Text("&Opções");
+	// 
+	// mnuAlterarSenha
+	// 
+	this.mnuAlterarSenha.set_Index(0);
+	this.mnuAlterarSenha.set_Text("&Alterar Senha");
+	this.mnuAlterarSenha.add_Click(new System.EventHandler(this.mnuAlterarSenha_Click));
+	// 
+	// menuItem3
+	// 
+	this.menuItem3.set_Index(1);
+	this.menuItem3.set_Text("-");
+	// 
+	// mnuSobre
+	// 
+	this.mnuSobre.set_Index(2);
+	this.mnuSobre.set_Text("&Sobre");
+	this.mnuSobre.add_Click(new System.EventHandler(this.mnuSobre_Click));
+	// 
+	// mnuSair
+	// 
+	this.mnuSair.set_Index(3);
+	this.mnuSair.set_Text("Sa&ir");
+	this.mnuSair.add_Click(new System.EventHandler(this.mnuSair_Click));
+	// 
+	// statusBar1
+	// 
+	this.statusBar1.set_Location(new System.Drawing.Point(0, 348));
+	this.statusBar1.set_Name("statusBar1");
+	this.statusBar1.get_Panels().AddRange(new System.Windows.Forms.StatusBarPanel[] {
+				this.statusBarPanel1,
+				this.statusBarPanel2});
+	this.statusBar1.set_ShowPanels(true);
+	this.statusBar1.set_Size(new System.Drawing.Size(480, 22));
+	this.statusBar1.set_TabIndex(1);
+	// 
+	// statusBarPanel1
+	// 
+	this.statusBarPanel1.set_AutoSize(System.Windows.Forms.StatusBarPanelAutoSize.Contents);
+	this.statusBarPanel1.set_Text("Usuário:");
+	this.statusBarPanel1.set_Width(56);
+	// 
+	// statusBarPanel2
+	// 
+	this.statusBarPanel2.set_AutoSize(System.Windows.Forms.StatusBarPanelAutoSize.Spring);
+	this.statusBarPanel2.set_Width(408);
+	// 
+	// toolBar1
+	// 
+	this.toolBar1.get_Buttons().AddRange(new System.Windows.Forms.ToolBarButton[] {
+				this.tlbClientes,
+				this.tlbLivros,
+				this.tlbVender,
+				this.toolBarButton4,
+				this.tlbSobre,
+				this.tlbSair});
+	this.toolBar1.set_DropDownArrows(true);
+	this.toolBar1.set_ImageList(this.imageList1);
+	this.toolBar1.set_Location(new System.Drawing.Point(0, 0));
+	this.toolBar1.set_Name("toolBar1");
+	this.toolBar1.set_ShowToolTips(true);
+	this.toolBar1.set_Size(new System.Drawing.Size(480, 28));
+	this.toolBar1.set_TabIndex(2);
+	this.toolBar1.add_ButtonClick(new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick));
+	// 
+	// tlbClientes
+	// 
+	this.tlbClientes.set_ImageIndex(0);
+	// 
+	// tlbLivros
+	// 
+	this.tlbLivros.set_ImageIndex(1);
+	// 
+	// tlbVender
+	// 
+	this.tlbVender.set_ImageIndex(2);
+	// 
+	// toolBarButton4
+	// 
+	this.toolBarButton4.set_Style(System.Windows.Forms.ToolBarButtonStyle.Separator);
+	// 
+	// tlbSobre
+	// 
+	this.tlbSobre.set_ImageIndex(3);
+	// 
+	// tlbSair
+	// 
+	this.tlbSair.set_ImageIndex(4);
+	// 
+	// imageList1
+	// 
+	this.imageList1.set_ImageSize(new System.Drawing.Size(16, 16));
+	this.imageList1.set_ImageStream((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+	this.imageList1.set_TransparentColor(System.Drawing.Color.get_Olive());
+	// 
+	// frmPrincipal
+	// 
+	this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+	this.set_ClientSize(new System.Drawing.Size(480, 370));
+	this.get_Controls().Add(this.toolBar1);
+	this.get_Controls().Add(this.statusBar1);
+	this.set_Icon((System.Drawing.Icon)(resources.GetObject("$this.Icon")));	
+	this.set_IsMdiContainer(true);
+	this.set_Menu(this.mainMenu1);
+	this.set_Name("frmPrincipal");
+	this.set_Text("Livrus Virtus");
+	this.add_Closing(new System.ComponentModel.CancelEventHandler(this.frmPrincipal_Closing));
+	this.add_Load(new System.EventHandler(this.frmPrincipal_Load));
+	this.add_MouseMove(new System.Windows.Forms.MouseEventHandler(this.frmPrincipal_MouseMove));
+//	((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).EndInit();
+//	((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).EndInit();
+	this.ResumeLayout(false);
+
+    }
+
+    /**
+     * The main entry point for the application.
+     */
+    /** @attribute STAThreadAttribute() */
+    public static void main(String[] args)
+    {
+	if (frmPrincipal.fPrincipal==null) {
+		frmPrincipal.fPrincipal = new frmPrincipal();
+
+		frmPrincipal.fPrincipal.db = new System.Data.OleDb.OleDbConnection();
+		frmPrincipal.fPrincipal.db.set_ConnectionString(
+		"File Name=C:\\LivrusVirtus\\bancos\\access\\Access2k_Livrus.udl");
+
+		Application.Run(frmPrincipal.fPrincipal);
+	} else
+	  MessageBox.Show("A Aplicação já está sendo executada.",
+	  "Livrus Virtus", MessageBoxButtons.OK);
+
+    }
+
+    private void frmPrincipal_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
+    {   
+    	DialogResult res;
+    	res = MessageBox.Show(this, "Deseja sair do sistema?",
+    	frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.YesNo,
+    	MessageBoxIcon.Question,MessageBoxDefaultButton.Button2);
+    
+    	if (res == DialogResult.Yes) {
+    		db.Close();
+    		e.set_Cancel(false);
+    	 } else
+    		e.set_Cancel(true);
+    
+    }
+
+    private void toolBar1_ButtonClick(Object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
+    {
+       switch(toolBar1.get_Buttons().IndexOf(e.get_Button()))
+       {
+    	  case 0:
+    		 mnuCadClientes_Click(this,null);
+    		 break;
+    	  case 1:
+    		 mnuCadLivros_Click(this,null);
+    		 break;
+    	  case 2:
+    		 mnuVenderLivros_Click(this,null);
+    		 break;
+    	  case 4:
+    		 mnuSobre_Click(this,null);
+    		 break;
+    	  case 5:
+    		 mnuSair_Click(this,null);
+    		 break;
+    	}
+    }
+    
+    private void frmPrincipal_Load(Object sender, System.EventArgs e)
+    {
+      db.Open();
+    
+      ConsultasSQL.ConsSQL = new ConsultasSQL();
+      RotinasGlobais.Rotinas = new RotinasGlobais();
+    
+      frmSplash.fSplash = new frmSplash();
+      frmSplash.fSplash.ShowDialog();
+    
+      frmLogin.fLogin = new frmLogin();
+      frmLogin.fLogin.ShowDialog();
+    
+    }
+    
+    private void mnuSair_Click(Object sender, System.EventArgs e)
+    {
+    	Close();
+    }
+    
+    private void mnuLadoALadoHorizontal_Click(Object sender, System.EventArgs e)
+    {
+    	this.LayoutMdi(MdiLayout.TileHorizontal);
+    }
+    
+    private void mnuLadoALadoVertical_Click(Object sender, System.EventArgs e)
+    {
+    	this.LayoutMdi(MdiLayout.TileVertical);
+    }
+    
+    private void mnuEmCascata_Click(Object sender, System.EventArgs e)
+    {
+    	this.LayoutMdi(MdiLayout.Cascade);
+    }
+    
+    private void mnuOrganizarIcones_Click(Object sender, System.EventArgs e)
+    {
+    	this.LayoutMdi(MdiLayout.ArrangeIcons);
+    }
+    
+    private void mnuSobre_Click(Object sender, System.EventArgs e)
+    {
+    	frmSobre.fSobre = new frmSobre();
+    	frmSobre.fSobre.ShowDialog();
+    }
+    
+    private void frmPrincipal_MouseMove(Object sender, System.Windows.Forms.MouseEventArgs e)
+    {
+    	fPrincipal.statusBar1.get_Panels().get_Item(1).set_Text(" ");
+    }   
+    private void mnuAlterarSenha_Click(Object sender, System.EventArgs e) {
+	mnuAlterarSenha.set_Enabled(false);    
+	frmAlterarSenha.fAlterarSenha = new frmAlterarSenha();
+    	frmAlterarSenha.fAlterarSenha.set_MdiParent(this);
+    	frmAlterarSenha.fAlterarSenha.Show();
+    }   
+    private void mnuCadAssuntos_Click(Object sender, System.EventArgs e) {
+	mnuCadAssuntos.set_Enabled(false);
+    	frmCadAssuntos.fCadAssuntos = new frmCadAssuntos();
+    	frmCadAssuntos.fCadAssuntos.set_MdiParent(this);
+    	frmCadAssuntos.fCadAssuntos.Show();
+    }
+    private void mnuConAssuntos_Click(Object sender, System.EventArgs e) {
+	mnuConAssuntos.set_Enabled(false);
+   	frmConAssuntos.fConAssuntos = new frmConAssuntos();
+    	frmConAssuntos.fConAssuntos.set_MdiParent(this);
+    	frmConAssuntos.fConAssuntos.Show();
+    }
+    private void mnuCadAutores_Click(Object sender, System.EventArgs e) {
+	mnuCadAutores.set_Enabled(false);
+    	frmCadAutores.fCadAutores = new frmCadAutores();
+    	frmCadAutores.fCadAutores.set_MdiParent(this);
+    	frmCadAutores.fCadAutores.Show();
+    }
+    private void mnuConAutores_Click(Object sender, System.EventArgs e) {
+	mnuConAutores.set_Enabled(false);
+   	frmConAutores.fConAutores = new frmConAutores();
+    	frmConAutores.fConAutores.set_MdiParent(this);
+    	frmConAutores.fConAutores.Show();
+    }
+    private void mnuCadEditoras_Click(Object sender, System.EventArgs e) {
+	mnuCadEditoras.set_Enabled(false);
+    	frmCadEditoras.fCadEditoras = new frmCadEditoras();
+    	frmCadEditoras.fCadEditoras.set_MdiParent(this);
+    	frmCadEditoras.fCadEditoras.Show();
+    }
+    private void mnuConEditoras_Click(Object sender, System.EventArgs e) {
+	mnuConEditoras.set_Enabled(false);
+   	frmConEditoras.fConEditoras = new frmConEditoras();
+    	frmConEditoras.fConEditoras.set_MdiParent(this);
+    	frmConEditoras.fConEditoras.Show();
+    }
+    private void mnuCadEnderecos_Click(Object sender, System.EventArgs e) {
+	mnuCadEnderecos.set_Enabled(false);
+    	frmCadEnderecos.fCadEnderecos = new frmCadEnderecos();
+    	frmCadEnderecos.fCadEnderecos.set_MdiParent(this);
+    	frmCadEnderecos.fCadEnderecos.Show();
+    }
+    private void mnuConEnderecos_Click(Object sender, System.EventArgs e) {
+	mnuConEnderecos.set_Enabled(false);
+   	frmConEnderecos.fConEnderecos = new frmConEnderecos();
+    	frmConEnderecos.fConEnderecos.set_MdiParent(this);
+    	frmConEnderecos.fConEnderecos.Show();
+    }
+    private void mnuCadIdiomas_Click(Object sender, System.EventArgs e) {
+	mnuCadIdiomas.set_Enabled(false);
+    	frmCadIdiomas.fCadIdiomas = new frmCadIdiomas();
+    	frmCadIdiomas.fCadIdiomas.set_MdiParent(this);
+    	frmCadIdiomas.fCadIdiomas.Show();
+    }
+    private void mnuConIdiomas_Click(Object sender, System.EventArgs e) {
+	mnuConIdiomas.set_Enabled(false);
+   	frmConIdiomas.fConIdiomas = new frmConIdiomas();
+    	frmConIdiomas.fConIdiomas.set_MdiParent(this);
+    	frmConIdiomas.fConIdiomas.Show();
+    }
+    private void mnuCadPaises_Click(Object sender, System.EventArgs e) {
+	mnuCadPaises.set_Enabled(false);
+    	frmCadPaises.fCadPaises = new frmCadPaises();
+    	frmCadPaises.fCadPaises.set_MdiParent(this);
+    	frmCadPaises.fCadPaises.Show();
+    }
+    private void mnuConPaises_Click(Object sender, System.EventArgs e) {
+	mnuConPaises.set_Enabled(false);
+   	frmConPaises.fConPaises = new frmConPaises();
+    	frmConPaises.fConPaises.set_MdiParent(this);
+    	frmConPaises.fConPaises.Show();
+    }
+    private void mnuCadProfissoes_Click(Object sender, System.EventArgs e) {
+	mnuCadProfissoes.set_Enabled(false);
+    	frmCadProfissoes.fCadProfissoes = new frmCadProfissoes();
+    	frmCadProfissoes.fCadProfissoes.set_MdiParent(this);
+    	frmCadProfissoes.fCadProfissoes.Show();
+    }
+    private void mnuConProfissoes_Click(Object sender, System.EventArgs e) {
+	mnuConProfissoes.set_Enabled(false);
+   	frmConProfissoes.fConProfissoes = new frmConProfissoes();
+    	frmConProfissoes.fConProfissoes.set_MdiParent(this);
+    	frmConProfissoes.fConProfissoes.Show();
+    }
+    private void mnuCadClientes_Click(Object sender, System.EventArgs e) {
+	mnuCadClientes.set_Enabled(false);
+	tlbClientes.set_Enabled(false);
+    	frmCadClientes.fCadClientes = new frmCadClientes();
+    	frmCadClientes.fCadClientes.set_MdiParent(this);
+    	frmCadClientes.fCadClientes.Show();
+    }
+    private void mnuConClientes_Click(Object sender, System.EventArgs e) {
+	mnuConClientes.set_Enabled(false);
+   	frmConClientes.fConClientes = new frmConClientes();
+    	frmConClientes.fConClientes.set_MdiParent(this);
+    	frmConClientes.fConClientes.Show();
+    }
+    private void mnuCadLivros_Click(Object sender, System.EventArgs e) {
+	mnuCadLivros.set_Enabled(false);
+	tlbLivros.set_Enabled(false);
+    	frmCadLivros.fCadLivros = new frmCadLivros();
+    	frmCadLivros.fCadLivros.set_MdiParent(this);
+    	frmCadLivros.fCadLivros.Show();
+    }
+    private void mnuConLivros_Click(Object sender, System.EventArgs e) {
+	mnuConLivros.set_Enabled(false);
+   	frmConLivros.fConLivros = new frmConLivros();
+    	frmConLivros.fConLivros.set_MdiParent(this);
+    	frmConLivros.fConLivros.Show();
+    }
+    private void mnuVenderLivros_Click(Object sender, System.EventArgs e) {
+	mnuVenderLivros.set_Enabled(false);
+	tlbVender.set_Enabled(false);
+    	frmVenderLivros.fVenderLivros = new frmVenderLivros();
+    	frmVenderLivros.fVenderLivros.set_MdiParent(this);
+    	frmVenderLivros.fVenderLivros.Show();
+    }
+    private void mnuVendasRealizadas_Click(Object sender, System.EventArgs e) {
+	mnuVendasRealizadas.set_Enabled(false);
+   	frmConVendas.fConVendas = new frmConVendas();
+    	frmConVendas.fConVendas.set_MdiParent(this);
+    	frmConVendas.fConVendas.Show();
+    }
+    
+}

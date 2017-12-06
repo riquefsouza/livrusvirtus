@@ -1,0 +1,236 @@
+SETL2(Local)            Setl2 Version 2.2            SETL2(Local)
+
+
+
+NAME
+     stll - library utility program
+     stlc - SETL2 compiler
+     stlx - SETL2 executor
+
+DESCRIPTIONS
+     There are three general steps to be performed before you can
+     use SETL2:
+
+         Your PATH environment string must include the  directory
+         where    SETL2's    executable   files   are   installed
+         (/usr/local/bin on this system).
+
+         You need to create an empty SETL2 library  to  hold  the
+         SETL2 objects you'll make.
+
+         You need to create an  environment  string  pointing  to
+         this library.
+
+
+  USING THE LIBRARY UTILITY
+     One of the command files distributed with SETL2 is  stll,  a
+     library  utility program.  Eventually, this should perform a
+     variety of functions, but at the moment it is only  used  to
+     create empty libraries.  To do that, change to any directory
+     where you keep data files and enter the following command:
+
+         stll -c ``library name''
+
+     A normal ``library name'' is setl2.lib.
+
+     Finally, you should set the environment string SETL2_LIB  to
+     tell SETL2 where your default library is.  The command to do
+     this, setenv SETL2_LIB ~setl2.lib, is best  placed  in  your
+     .login file.
+
+
+  EXECUTING THE COMPILER
+     The command to compile a SETL2 source program is:
+
+         stlc <options> <file specifier> [<file specifier>
+
+     You may use wild cards in specifying the files  to  be  com-
+     piled.  The following options are recognized:
+
+         -s            Produce a listing of the program with line
+                       numbers  and  error  messages.  By default
+                       errors will be printed on standard output.
+                       If  this  option  is  given a listing file
+                       with the extension .lis will be produced.
+
+         -t n          Set tab width to n. This is  generally  an
+                       unnecessary    option.    Error   messages
+                       include both line and column numbers,  and
+                       the  column  numbers  will be incorrect if
+                       the source file uses tabs not set at eight
+                       column  intervals.   If  an editor is used
+                       which can move the cursor to the line  and
+                       column  of  an  error,  it  will need that
+                       information.  By setting this  option  any
+                       tab  interval may be used.  If line number
+                       information is sufficient (which  is  gen-
+                       erally   the  case)  this  option  can  be
+                       ignored.
+
+         -i            Disable   implicit   declarations.    SETL
+                       implicitly declared any names for which it
+                       did  not  find  an  explicit  declaration.
+                       SETL2  continued  this by default, but for
+                       other than quick and dirty  programs  that
+                       may not be desirable.  When this option is
+                       set all variables must be declared.
+
+                       We  do  make  implicit   declarations   by
+                       default,  since  we  feel that the compile
+                       commands for  larger  programs  will  gen-
+                       erally be in make files, which do not have
+                       to be changed  very  often.   The  compile
+                       command  should  be  convenient  for short
+                       programs, in which case implicit  declara-
+                       tions  will  probably  be desired.  If you
+                       disagree with this philosophy, you can set
+                       the environment string to your own desired
+                       defaults.
+
+         -f            Toggle  use  of  intermediate  files.   By
+                       default,  the compiler stores intermediate
+                       forms of the program on  disk  for  MS-DOS
+                       systems and in core on Unix systems.  This
+                       option reverses that setting.  If you  are
+                       using  an  operating  system  with virtual
+                       memory, you will probably find  it  faster
+                       to compile in core only.  If you are using
+                       a PC, this is not  recommended,  since  at
+                       present  the compiler does not make use of
+                       extended or expanded memory and  there  is
+                       not  much  extra memory in a PC.  The best
+                       thing you can do with expanded or extended
+                       memory  is  to use a RAM disk, and set the
+                       environment option to  force  intermediate
+                       files to be stored there.
+
+         -l file name  Updated library name.  This string must be
+                       a  valid  file  name on the system you are
+                       using.  If there are embedded  spaces  you
+                       must  use  quotes  to make the file name a
+                       single string.
+
+         -p file path  Library search path.  This is  a  list  of
+                       semicolon-delimited  file specifiers which
+                       describe a list of files  to  be  searched
+                       for any imported packages.  Each specifier
+                       may contain  wildcards  if  desired.   You
+                       should  note that the compiler will search
+                       only until it finds  a  package  with  the
+                       name  given  in a use clause.  It will not
+                       check for duplicates.  When wildcards  are
+                       used,  the  order of search will depend on
+                       the disk subsystem (system calls are  used
+                       to expand the file specifiers).
+
+
+  EXECUTING THE INTERPRETER
+     After the program is successfully compiled it  may  be  exe-
+     cuted with the command:
+
+         stlx <options> <program name> [<argument> ...]
+
+     CAUTION: When you execute a program, you give  the  name  of
+     the  program,  not  the name of the file which contained it.
+     For example: if the following program:
+
+
+         program this_is_a_junk_program;
+         var some_trash;
+         ...
+         end this_is_a_junk_program;
+
+     is in the file junk.stl, then you would compile that program
+     with the command
+
+         stlc junk
+
+     but you would execute the program with the command
+
+         stlx this_is_a_junk_program
+
+     The arguments after the program name will be gathered into a
+     tuple,  and  will  be  available  to  the SETL2 program as "
+     command_line".
+
+     The options available are:
+
+
+         -a mode       This sets the assert mode.  There are  two
+                       possible  values  for  mode:  f is used if
+                       failing assertions should stop the program
+                       but   succeeding   assertions   should  be
+                       skipped,  and  l  is  used  if  succeeding
+                       assertions should be logged.
+
+
+         -l file name  Updated library name.  The library is  not
+                       actually  updated,  this  is  provided for
+                       consistency  with  the   compiler.    This
+                       library  will  be searched before those in
+                       the search path.
+
+
+         -p file path  Library search path.  This is  a  list  of
+                       semicolon  delimited file specifiers which
+                       describe a list of files  to  be  searched
+                       for any imported packages.  Each specifier
+                       may contain  wildcards  if  desired.   You
+                       should  note that the compiler will search
+                       only until it finds  a  package  with  the
+                       name  given  in a use clause.  It will not
+                       check for duplicates.  When wildcards  are
+                       used,  the  order of search will depend on
+                       the disk subsystem (system calls are  used
+                       to expand the file specifiers).
+
+ENVIRONMENT STRINGS
+     The following is a list of useful environment strings recog-
+     nized by the SETL2 compiler and interpreter.
+
+         SETL2_LIB         This lets you place the name  of  your
+                           update  library  in  the  environment,
+                           rather than specifying it on the  com-
+                           mand  line.  You should probably place
+                           a command in your .login script to set
+                           this for you when you log on.
+
+         SETL2_LIBPATH     This is a list of libraries which will
+                           be  searched  for  imported  packages.
+                           The default is empty, which will prob-
+                           ably  be  OK  generally.  It is just a
+                           string of comma-delimited file specif-
+                           iers, which may include wildcards.
+
+         SETL2_TMP         This  string  is  a  prefix  used   to
+                           specify  where  temporary files should
+                           be stored.  It is primarily useful  on
+                           a  PC,  where  you  should use this to
+                           hold the letter of your RAM  disk,  if
+                           you  have  one.   For example, if your
+                           RAM disk is logical drive d, you would
+                           place  in  your  autoexec.bat file the
+                           command set SETL2_TMP d:.
+
+         STLC_OPTIONS      This is a string of options which will
+                           be  read  in front of the command line
+                           by the compiler.  You can use this  to
+                           change   the   default   for  implicit
+                           declarations, tab width,  or  anything
+                           else.
+
+         STLX_OPTIONS      This is a used just like the  previous
+                           string,  but  is  used  by  the inter-
+                           preter.
+
+ACKNOWLEDGEMENTS
+     Many of the changes made in SETL2 were motivated by comments
+     and  ideas  voiced  in the SETL meetings at New York Univer-
+     sity.  I would like to thank all who attended those meetings
+     and  participated  in  the discussions, in particular Robert
+     Dewar, Fritz Henglein, Bob Paige, Ed Schonberg, and  Matthew
+     Smosna.
+
+     I would also like to thank Jack Schwartz, who  offered  many
+     helpful  comments  and  suggestions, and gave the system its
+     most thorough test.

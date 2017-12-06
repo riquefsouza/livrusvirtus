@@ -1,0 +1,693 @@
+;===============================================================
+;       STRING FUNCTIONS HEREIN
+;
+;   substring (oldstring start finish)
+;                  Return the substring of "oldstring"
+;
+;   substring-pos (main-string substring)
+;                  Returns the position of substring within main-
+;                  string, if found, otherwise -1.
+;
+;   change-string (dest dest-start src src-start src-end)
+;                  Change a string destructively "in place"
+;
+;   make-string-from-list (charlist)
+;                  Make a string from a list of characters.
+;
+;   make-char-list (somestring)
+;                  The inverse of make-string-from-list.
+;
+;   parse-string (somestring)
+;                  Break a string into a list of words.
+;                  Each word is a character string.
+;
+;   next-word (charlist)
+;                  Scans to the end of the list or to the next
+;                  blank and returns the list of characters
+;                  (not a character string.)
+;
+;   rempunc (string)
+;                  Removes all punctuation from the string.
+;   
+;   tail-substring (string1 string2)
+;                  Is string1 a substring of string2 at the end
+;                  of string2?  Returns nil or the stem with the
+;                  suffix removed.
+;
+;   chop-off-last-char (string)
+;                  Remove the last character of a character
+;                  string (non-destructively).
+;
+;   isvowel (character)
+;                  Determine if the character is a vowel
+;
+;   isconsonant (character)
+;                  Determine if the character is a consonant.
+;
+;   isdigit (character)
+;                  Determine if the character is a digit (0-9)
+;
+;   atoi (string)
+;                  Return the integer corresponding to the first
+;                  run of character in "string" that are all
+;                  digits (optional leading -).
+;
+;   find-char (string char-list)
+;                  Return the position within "string" of the 
+;                  first character found from "char-list" or -1
+;                  if none found.
+;
+;   span-char (string char-list)
+;                  Return the position within "string" of the 
+;                  first character not found in "char-list" or -1
+;                  if no such character was found.
+;
+;   trim-leading (string char-list)  
+;                  Trims off all instances of characters from 
+;                  char-list from the start of the string.
+;
+;   trim-trailing (string char-list)  
+;                  Trims off all instances of characters from 
+;                  char-list from the end of the string.
+;
+;   isa-integer (string)
+;                  Returns t if the characters in "string" make 
+;                  up a legal integer.
+;===============================================================
+
+;---------------------------------------------------------------
+;  A substring function.  It returns nil if there was an error.
+;  Examples:
+; 
+;         (substring "abcdef" 0 0)    ==> "a"
+;         (substring "abcdef" 0 2)    ==> "abc"
+;         (substring "abcdef" 3 5)    ==> "def"
+;         (substring "abcdef" 3)      ==> "def"
+;
+;  If the 3rd parameter is omitted, then the rest of the string
+;  is included, as shown above in the last example.
+;---------------------------------------------------------------
+
+(defun substring (oldstring start &optional (finish -1))
+
+;     (if (not (stringp oldstring))
+;          (progn (princ "The 1st argument must be a string")
+;                 (return-from substring nil)
+;          )
+;     )
+;
+;     (if (or (not (numberp start))
+;             (not (numberp finish))
+;         )
+;          (progn (princ "The 2nd and 3rd args must be numbers")
+;                 (return-from substring nil)
+;          )
+;     )
+;
+;     (if (> start finish)
+;          (progn (princ "Invalid substring numbers, start>finish")
+;                 (return-from substring nil)
+;          )
+;     )
+;
+;     (if (<= (length oldstring) finish)
+;          (setq finish (1- (length oldstring)))
+;     )
+;
+;     (if (< (length oldstring) start)
+;          (return-from substring "")
+;     )
+;
+;     (if (or (< start 0) (< finish 0))
+;          (progn (princ "Either start or finish are less than 0")
+;                 (return-from substring nil)
+;          )
+;     )
+
+     (if (< finish 0)
+         (subseq oldstring start)
+         (subseq oldstring start (1+ finish))
+     )
+)
+
+;-------------------------------------------------------------------
+;  Suppose you want to change a string in place?  You can do it
+;  with the following which specifies a source and a destination
+;  string, a starting position within both, and an ending position
+;  within the source.  The length of the copy is taken from  the
+;  difference of the start and end in the source.  If the length
+;  plus the start in the destination is greater than the current
+;  length of the destination, an error is reported.
+
+(defun change-string (dest dest-start
+                      src  src-start  src-end)
+   
+       (let ((lengthsrc (- src-end src-start)))
+
+            (if (< lengthsrc 0)
+                (let nil
+                    (princ "Invalid starting & ending for src string")
+                    (terpri)
+                    (return-from change-string)
+                )
+                nil
+            )
+
+            (if (> (+ dest-start lengthsrc) (length dest))
+                (let nil
+                    (princ "Src length too long, goes off end of dest.")
+                    (terpri)
+                    (return-from change-string)
+                )
+                nil
+            )
+
+            (dotimes (i lengthsrc)
+                (setf (aref dest (+ dest-start i)) (aref src i)))
+            )
+       )
+)
+
+;==================================================================
+;  MAKE-STRING-FROM-LIST
+;
+;  * Turn a list of characters into a character string.
+;
+;  EXAMPLE:
+;  (make-string-from-list
+;     '(#\h #\i #\Space #\t #\h #\e #\r #\e))
+;  ==>  "hi there"
+;==================================================================
+
+(defun make-string-from-list (charlist)
+       (let (x)
+            (setq x (make-string (length charlist)))
+            (dotimes (i (length charlist))
+                 (setf (aref x i) (nth i charlist))
+            )
+            x
+       )
+)
+
+(defun explode_1 (someatom)
+       (make-char-list (symbol-name someatom))
+)
+
+;==================================================================
+;  EXPLODE
+;
+;  * The following is like the old fashioned "explode" of earlier LISPs.
+;
+;  EXAMPLE:
+;     (explode 'mark)
+;     ==>  (M A R K)
+;==================================================================
+
+(defun explode (someatom)
+   (let (stringname atomlist)
+        (setq stringname (symbol-name someatom))
+        (dotimes (i (length stringname))
+            (setq atomlist 
+                (append atomlist (list (intern (subseq stringname i (1+ i))
+                                       )
+                                 )
+                )
+            )
+        )
+        atomlist
+   )
+)
+
+
+;==================================================================
+;  MAKE-CHAR-LIST
+;
+;  * Turn a string into a list of characters.
+;
+;  EXAMPLE:
+;  (make-char-list "hi there baby")
+;     (#\h #\i #\Space #\t #\h #\e #\r #\e #\Space #\b #\a #\b #\y)
+;==================================================================
+
+(defun make-char-list (somestring)
+       (let (x)
+            (dotimes (i (length somestring))
+                 (setq x (append x (list (aref somestring i))))
+            )
+            x
+       )
+)
+
+;==================================================================
+;  PARSE-STRING
+;
+;  *  Parse a string into its component words.  
+;
+;  A word is any string of characters between delimiter characters.
+;  The delimiters are not considered part of the word.  The default
+;  delimiter is the space character, but you can give your own
+;  delimiter, or a list of delimiters.  If the space is not in your
+;  own given set of delimiters then it is considered part of the
+;  word.
+;
+;  EXAMPLES:
+;     (parse-string "hello there friend")
+;            ("hello" "there" "friend")
+;     (parse-string "hello:there friend" #\:)
+;            ("hello" "there friend")
+;     (parse-string "hello:there,my friend" '(#\: #\; #\,))
+;            ("hello" "there" "my friend")
+;
+;  AUXILIARY FUNCTIONS:  next-word, parse-string-y, parse-string-x
+;==================================================================
+
+(defun parse-string (somestring &optional (delim-chars '(#\Space)))
+       (if (not (listp delim-chars))
+           (setq delim-chars (list delim-chars))
+       )
+       (mapcar 'make-string-from-list (parse-string-y somestring delim-chars))
+)
+
+(defun parse-string-y (somestring delim-chars)
+       (parse-string-x (make-char-list somestring) nil delim-chars)
+)
+
+(defun parse-string-x (charlist wordlist delim-chars)
+       (if (null charlist)
+           wordlist
+           (let* ((x (next-word charlist delim-chars))
+                  (nextword (car x))
+                  (restoflist (cadr x))
+                 )
+                 (if (null nextword)
+                     wordlist
+                     (parse-string-x restoflist
+                                (append wordlist (list nextword))
+                                delim-chars
+                     )
+                 )
+           )
+       )
+)
+
+;==================================================================
+;  NEXT-WORD
+;
+;  * Split a character list into the next word & remaining list.
+;    Allows you to specify a list of delimiters, but that defaults to
+;    just the space character.
+;
+;  EXAMPLES:
+;
+;  (next-word (make-char-list "hi there baby"))
+;     ((#\h #\i) (#\Space #\t #\h #\e #\r #\e #\Space #\b #\a #\b #\y))
+;
+;  (next-word (make-char-list "hi:there,baby") '(#\: #\,))
+;     ((#\h #\i) (#\: #\t #\h #\e #\r #\e #\, #\b #\a #\b #\y))
+;
+;  AUXILIARY FUNCTION:  next-word-x
+;==================================================================
+
+(defun next-word (charlist &optional (delim-chars '(#\Space)))
+       (if (member (car charlist) delim-chars)
+           (next-word (cdr charlist) delim-chars)
+           (next-word-x charlist nil delim-chars)
+       )
+)
+
+(defun next-word-x (charlist word delim-chars)
+       (if (or (null charlist) (member (car charlist) delim-chars))
+           (list word charlist)
+           (next-word-x (cdr charlist)
+                        (append word (list (car charlist)))
+                        delim-chars
+           )
+       )
+)
+
+
+;==================================================================
+;  REMPUNC
+;
+;  * Remove punctuation from a string.
+;
+;  EXAMPLE:
+;  (rempunc "hi,there.")
+;     "hithere")
+;
+;  AUXILIARY FUNCTION:  next-word-x
+;==================================================================
+
+(defun rempunc (word &optional (punclist nil))
+
+    (if (null punclist)
+        (setq punclist '(#\* #\. #\, #\' #\" #\: #\; #\? #\# #\@ #\!))
+    )
+                
+    (let ((xword (make-char-list word)) (result nil))
+
+         (dolist (ch xword)
+                 (if (member ch punclist)
+                     nil
+                     (setq result (cons ch result))
+                 )
+         )
+
+         (make-string-from-list (reverse result))
+    )
+)
+
+;==================================================================
+;   TAIL-SUBSTRING (string1 string2)
+;
+;   * Determine if a string matches the final substring (of the
+;   * same length) of another string.
+;
+;  EXAMPLES:
+;  (tail-substring "ing" "being")
+;     returns  "be"
+;  (tail-substring "ing" "thong")
+;     returns nil
+;
+;  AUXILIARY FUNCTION:  substring
+;==================================================================
+
+(defun tail-substring (string1 string2)
+     (let (size1 size2 temp)
+          (setq size1 (length string1))
+          (setq size2 (length string2))
+          (if (< size2 size1)
+              (return-from tail-substring nil)
+          )
+          (setq temp (subseq string2 (- size2 size1) size2))
+          (if (string= temp string1)
+              (subseq string2 0 (- size2 size1))
+              nil
+          )
+     )
+)
+
+
+;==================================================================
+;  CHOP-OFF-LAST-CHAR
+;
+;  *  remove last character from a string and return the remainder
+;
+;  EXAMPLES
+;     (chop-off-last-char "Mark")  ==>  "Mar"
+;==================================================================
+
+(defun chop-off-last-char (string1)
+     (make-string-from-list (butlast (make-char-list string1)))
+)
+
+;==================================================================
+;  ISVOWEL
+;
+;  *  return t if the single character is a vowel (a, e, i, o, u)
+;
+;  EXAMPLES
+;     (isvowel #\x)  ==>   nil
+;     (isvowel (char somestring i))  ==>   (depends)
+;==================================================================
+
+(defun isvowel (character)
+     (if (member character '(#\a #\e #\i #\o #\u))
+         t
+         nil
+     )
+)
+
+;==================================================================
+;  ISCONSONANT
+;
+;  *  return t if the single character is a consonant (NOT a, e, i, o, u)
+;
+;  EXAMPLES
+;     (isconsonant #\x)  ==>   t
+;     (isconsonant (char somestring i))  ==>   (depends)
+;==================================================================
+
+(defun isconsonant (character)
+     (if (member character '(#\b #\c #\d #\f #\g #\h #\j #\k #\l
+                             #\m #\n #\p #\q #\r #\s #\t #\v #\w
+                             #\x #\y #\z))
+         t
+         nil
+     )
+)
+
+(defun isalpha (character)
+     (or (isvowel character) (isconsonant character))
+)
+
+;==================================================================
+;  ISDIGIT
+;
+;  *  return t if the single character is a single digit (0 to 9)
+;
+;  EXAMPLES
+;     (isdigit #\x)  ==>   nil
+;     (isdigit #\1)  ==>   t
+;     (isdigit (char somestring i))  ==>   (depends)
+;==================================================================
+
+(defun isdigit (character)
+     (if (member character '(#\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9))
+         t
+         nil
+     )
+)
+
+;==================================================================
+;  ATOI
+;
+;  *  returns the integer value corresponding to the ASCII string
+;     it stops at the first nondigit (leading minus is OK, however)
+;
+;  EXAMPLES
+;     (atoi "567")   ==>   567
+;     (atoi "-5ABC")   ==> -5
+;==================================================================
+
+(defun atoi (string1)
+   (let (seq accum sign)
+        (setq seq (make-char-list string1))
+        (setq accum 0)
+        (setq sign 1)
+        (if (eql #\- (car seq))
+            (let () (setq seq (cdr seq)) (setq sign -1))
+        )
+        (dolist (ch seq)
+            (if (not (isdigit ch))
+                (return)
+            )
+            (setq accum (+ (* 10 accum) (position ch "0123456789")))
+        )
+        (return-from atoi (* sign accum))
+   )
+)
+
+
+;==================================================================
+;   FIND-CHAR (string char-list)
+;
+;   * Search string for first occurrence of any character in char-list
+;   * or returns -1 if none found.
+;
+;   The argument may be a single character, a list of characters, or a
+;   string.
+;
+;  EXAMPLES:
+;  (find-char "hi+there+xyz" #\+)
+;     returns 2
+;  (find-char "hi-there+xyz" '(#\+ #\-))
+;     returns 2
+;  (find-char "hi-there+xyz" #\?)
+;     returns -1
+;  (find-char "hi-there+xyz" "+-")
+;     returns 2
+;
+;  AUXILIARY FUNCTION:  make-char-list
+;==================================================================
+
+(defun find-char (astring chars-to-find)
+  (let (ch (found-at -1))
+       (xif (stringp chars-to-find)
+        then (setq chars-to-find (make-char-list chars-to-find))
+       )
+       (xif (not (listp chars-to-find))
+        then (setq chars-to-find (list chars-to-find))
+       )
+       (dotimes (i (length astring))
+           (setq ch (char astring i))
+           (xif (member ch chars-to-find)
+            then (setq found-at i)
+                 (return)
+           )
+       )
+       found-at
+  )
+)
+
+;==================================================================
+;   SPAN-CHAR (string char-list)
+;
+;   * Search string for first NONoccurrence of any character in char-list
+;   * or returns -1 if none found.  It is kind of the inverse of FIND-CHAR.
+;
+;   The argument may be a single character, a list of characters, or a
+;   string.
+;
+;  EXAMPLES:
+;  (span-char "   032   " #\Space)
+;     returns 3
+;  (span-char "hi-there+xyz" "abcdefghijklmnopqrstuvwxyz")
+;     returns 2
+;  (span-char "hi-there+xyz" #\?)
+;     returns 0
+;  (span-char "   x  x" " x")
+;     returns -1
+;
+;  AUXILIARY FUNCTION:  make-char-list
+;==================================================================
+
+(defun span-char (astring chars-to-find)
+  (let (ch (found-at -1))
+       (xif (stringp chars-to-find)
+        then (setq chars-to-find (make-char-list chars-to-find))
+       )
+       (xif (not (listp chars-to-find))
+        then (setq chars-to-find (list chars-to-find))
+       )
+       (dotimes (i (length astring))
+           (setq ch (char astring i))
+           (xif (not (member ch chars-to-find))
+            then (setq found-at i)
+                 (return)
+           )
+       )
+       found-at
+  )
+)
+
+;==================================================================
+;   TRIM-LEADING (string char-list)
+;
+;   * Return the string after leading characters have been removed.
+;   * (Does not change the original string.)
+;
+;   The argument may be a single character, or a list of characters.
+;
+;  EXAMPLES:
+;  (trim-leading "   032   " #\Space)
+;     returns "032   "
+;  (trim-leading "mark" '(#\. #\Space))
+;     returns "mark"
+;  (trim-leading "    " #\Space)
+;     returns ""
+;==================================================================
+
+(defun trim-leading (string char-list)
+  (let (pos)
+       (xif (not (listp char-list))
+        then (setq char-list (list char-list))
+       )
+       (dotimes (i (length string))
+           (xif (not (member (char string i) char-list))
+            then (setq pos i)
+                 (return)
+           )
+       )
+       (subseq string pos)
+  )
+)
+
+;==================================================================
+;   TRIM-TRAILING (string char-list)
+;
+;   * Return the string after trailing characters have been removed.
+;   * (Does not change the original string.)
+;
+;   The argument may be a single character, or a list of characters.
+;
+;  EXAMPLES:
+;  (trim-trailing "   032   " #\Space)
+;     returns "   032"
+;  (trim-trailing "mark" '(#\. #\Space))
+;     returns "mark"
+;  (trim-trailing "    " #\Space)
+;     returns ""
+;==================================================================
+
+(defun trim-trailing (string char-list)
+  (let (n)
+       (xif (not (listp char-list))
+        then (setq char-list (list char-list))
+       )
+       (setq n (1- (length string)))
+       (dotimes (i (length string))
+           (xif (not (member (char string n) char-list))
+            then (return)
+            else (decf n)
+           )
+       )
+       (subseq string 0 (1+ n))
+  )
+)
+
+;==================================================================
+;  SUBSTRING-POS (main-string substring)
+;
+;  * Returns the position of substring within main- string, if found, 
+;  * otherwise -1.
+;
+;  EXAMPLES:
+;   (substring-pos "mark loved the grey cat" "love")
+;        returns 5 
+;   (substring-pos "mark loved the grey cat" "loves")
+;        returns -1
+;==================================================================
+
+(defun substring-pos (main-string substring)
+   (let ((len_main (length main-string))
+         (len_sub  (length substring))
+        )
+        (dotimes (i (1+ (- len_main len_sub)))
+            (if (string= (subseq main-string i (+ i len_sub))
+                          substring)
+                (return-from substring-pos i)
+            )
+        )
+        -1
+   )
+)
+
+
+;==================================================================
+;  ISA-INTEGER (string)
+;
+;  * Returns t if the characters in "string" make up a legal integer.
+;
+;  The number can start with a + or - sign, but no spaces or periods.
+;
+;  EXAMPLES:
+;     (isa-integer "+15637")  ==>  t
+;     (isa-integer "99mark")  ==>  nil
+;==================================================================
+
+(defun isa-integer (string)
+   (let (ch)
+        (xif (or (eql #\- (char string 0))
+                 (eql #\+ (char string 0)))
+         then (setq string (subseq string 1))
+        )
+        (dotimes (i (length string))
+            (setq ch (char string i))
+            (if (not (member ch '(#\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9)))
+                (return-from isa-integer nil)
+            )
+        )
+        t
+   )
+)

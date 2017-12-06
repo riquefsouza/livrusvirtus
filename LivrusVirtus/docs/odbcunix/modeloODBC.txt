@@ -1,0 +1,62 @@
+[PostgreSQL]
+Description         = pgLivrus
+Driver              = PostgreSQL
+Trace               = Yes
+TraceFile           = sql.log
+Database            = livrus
+Servername          = localhost
+UserName            = root
+Password            = root
+Port                = 5432
+Protocol            = 6.4
+ReadOnly            = No
+RowVersioning       = No
+ShowSystemTables    = No
+ShowOidColumn       = No
+FakeOidIndex        = No
+ConnSettings        =
+
+[Mini SQL]
+Description     = MiniSQL
+Driver          = MiniSQL
+Trace           = No
+TraceFile       =
+Host            = localhost
+Database        =
+ConfigFile      =
+
+[MySQL-test]
+Description = myLivrus
+Trace       = Off
+TraceFile   = stderr
+Driver      = MySQL
+SERVER      = localhost
+USER        = pharvey
+PASSWORD    =
+PORT        = 3306
+DATABASE    = livrus
+
+[nntp Data Source]
+Description     = nntp Driver
+Driver          = nntp Driver
+Trace           = No
+TraceFile       =
+Host            = localhost
+Database        =
+Port            =
+
+[FreeTDS driver]
+Driver = TDS
+Description = Northwind sample database
+Trace = No
+Server = 192.168.1.25
+Database = Northwind
+UID = sa
+
+[Sybase SQL Anywhere 5.0]
+Driver=Sybase SQL Anywhere 5.0
+Description=Sybase SQL Anywhere 5.0 ODBC Driver
+Userid=dba
+Password=sql
+DatabaseFile=sademo.db
+

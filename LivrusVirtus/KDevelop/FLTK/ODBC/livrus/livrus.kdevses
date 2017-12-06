@@ -1,0 +1,41 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE KDevPrjSession>
+<KDevPrjSession>
+ <LastCompileConfig>(Default)</LastCompileConfig>
+ <Mainframe MaximizeMode="1" />
+ <DocsAndViews NumberOfDocuments="11" >
+  <Doc0 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/VenderLivros.h" >
+   <View0 Top="25" Width="400" Attach="1" Height="300" Left="3" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc0>
+  <Doc1 CursorPosLine="24" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="21" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/resource.h" >
+   <View0 Top="48" Width="735" Attach="1" Height="322" Left="26" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc1>
+  <Doc2 CursorPosLine="8" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="44" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/Livrus.cpp" >
+   <View0 Top="71" Width="735" Attach="1" Height="350" Left="49" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc2>
+  <Doc3 CursorPosLine="59" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/Principal.h" >
+   <View0 Top="94" Width="735" Attach="1" Height="350" Left="72" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc3>
+  <Doc4 CursorPosLine="17" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="25" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/RotinasGlobais.cpp" >
+   <View0 Top="117" Width="735" Attach="1" Height="350" Left="95" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc4>
+  <Doc5 CursorPosLine="57" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/ListaStr.h" >
+   <View0 Top="140" Width="735" Attach="1" Height="350" Left="118" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc5>
+  <Doc6 CursorPosLine="66" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="32" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/RotinasGlobais.h" >
+   <View0 Top="163" Width="735" Attach="1" Height="350" Left="141" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc6>
+  <Doc7 CursorPosLine="30" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="30" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/ConsultasSQL.h" >
+   <View0 Top="186" Width="735" Attach="1" Height="350" Left="164" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc7>
+  <Doc8 CursorPosLine="4" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/ConsultasSQL.cpp" >
+   <View0 Top="209" Width="735" Attach="1" Height="350" Left="187" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc8>
+  <Doc9 CursorPosLine="157" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="25" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/Cadastros.cpp" >
+   <View0 Top="232" Width="735" Attach="1" Height="350" Left="210" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc9>
+  <Doc10 CursorPosLine="379" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="32" FileName="/home/hfs/KDevelop/FLTK/ODBC/livrus/livrus/CadLivros.cpp" >
+   <View0 Top="46" Width="741" Attach="1" Height="240" Left="230" Focus="1" Type="KWriteView" MinMaxMode="2" />
+  </Doc10>
+ </DocsAndViews>
+</KDevPrjSession>

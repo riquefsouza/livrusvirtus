@@ -1,0 +1,67 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 6
+Structured Data
+--------------------------------------------------------------------------------
+TOPICS:  Lists; Pattern matching with head and tail
+--------------------------------------------------------------------------------
+
+Data is not always atomic or simple; it often has structure and at the very
+least we need to form groups or sets of objects.  Thus Prolog needs a way to
+talk about structured data, and its method of choice is by using lists.
+
+A Prolog list is a collection of values put into a particular order.  We write
+the list with square brackets and commas.  Here's a list of people.  Remember
+that we mean no disrespect to these persons by using lowercase letters, and we
+are not trying to upstage e.e. cummings.  But Prolog insists that only variables
+begin with capital letters:
+
+    [mark,sally,kathy,anthony]
+
+Lists can also contain other lists.  Here is a list of pairs, denoting the ages
+of these people:
+
+    [[mark,38],[sally,57],[kathy,28],[anthony,1]]
+
+There is one empty list, called nil and written as [].
+
+Every non-empty list contains a "head" and a "tail."  The head is the first
+element, and the tail is everything that follows.  If there is only one element
+in the list, then the tail will be nil.
+
+Prolog does not assign values to variables in the conventional way.  Instead
+it "matches" variables to values.  In the case of lists, this becomes rather
+interesting.  We saw this matching process above when we discussed queries
+regarding Queen Victoria's family.  Wherever we had a logical variable (such 
+as X or Y), Prolog tried to find a predicate that had the same functor, and if
+it did, it substituted the atom for the variable.  (You cannot match functors
+and variables!)
+
+You can experiment with matching by using the = functor.  The notation that is
+used in Prolog is for a vertical bar to separate the head from the tail of a
+list:
+
+     ?- [H|T] = [mark,sally,kathy,anthony].
+
+Prolog will try to match [H|T] with the list [mark,sally,kathy,anthony].  
+Since there are two variables, H and T, Prolog will try to find values that
+match those consistently.  The vertical bar between them says that H would be
+the head and T the tail.  Since "mark" is the head of the other list, H is
+matched to mark and the rest of the list is matched to T.  Thus we see:
+
+      H = mark, T = [sally,kathy,anthony]
+
+You could even get the head of the tail, as in:
+
+     ?- [H|[H2|T]] = [mark,sally,kathy,anthony].
+
+so that H = mark, H2 = sally, and T = [kathy,anthony].
+
+A simpler notation is to use commas, however:
+
+     ?- [H1,H2|T] = [mark,sally,kathy,anthony]
+
+and we get
+
+      H1 = mark, H2 = sally, T = [kathy,anthony]
+
+-----------------------------------------------------------------------------

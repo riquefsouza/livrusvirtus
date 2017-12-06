@@ -1,0 +1,88 @@
+LISP Tutorial   by Mark Meyer
+Chapter 11
+Input and Output
+--------------------------------------------------------------------------------
+TOPICS:  read, write, read-line, format
+--------------------------------------------------------------------------------
+
+Normally, you give input to functions by notating them as arguments and having
+LISP evaluate a function.  But LISP can do true run-time input as well.  The
+function (read) gets the next s-expression from the keyboard and returns it as
+its return value.  When I say "s-expression" be aware that this could be either
+a number, a symbolic atom or even a complicated list.  
+
+For output, you can use "princ" to print out s-expressions.  It does NOT put
+a newline at the end, so you could create any complicated output you desire.
+To insert a newline, use (terpri) or "terminal print".  The print function is
+just like princ except it DOES put a newline into the output stream.  Here are
+some output examples:
+
+    (princ "Mark Meyer")         ==>      "Mark Meyer"
+    (princ (1+ 90))              ==>      91
+    (princ (cons 'x '(w y z)))   ==>      (x w y z)
+    (terpri)                     ==>
+
+Here is code that gets data items from the user and builds up a list of them.
+It keeps going until the user types a "q":
+
+    (setq result ())
+    (loop
+         (princ "Please enter something: ")
+         (if (equal inputvalue 'q) (return))
+         (setq inputvalue (read))
+         (setq result (cons inputvalue result))
+    )
+
+The user could have typed in a long, complicated list for read, and it would 
+still have read it as one value.  
+
+When using read for input, LISP counts parentheses, so it doesn't consider your
+input to be over with until it has seen matching parentheses.  This means you
+can split your input over several lines, as well.  It also means that if you 
+forget to type a parenthesis, LISP will just wait patiently for more!  If you
+think you've forgotten a parenthesis, just type several and press RETURN.
+
+You can also read line by line, in which case you work with character strings.
+To read a line from the keyboard, do
+
+       (setq xline (read-line))
+
+where "xline" is just a LISP variable that will get a character string, the 
+next one, from the file myfile.  When using read-line, you do not need to worry
+about balancing parentheses, since what you are reading is a character string,
+not a list.
+
+To write:
+
+       (write-line "hi there!")
+       (write xline)
+
+There is a built-in function called "format" which is like printf in C insofar
+as it enables you to format output.  The general form is
+
+    (format t format-string sexpr1 sexpr2 ...)
+
+where t is needed to tell format to send the output to the terminal (standard
+output).  Format-string is a string that contains both literal information as
+well as embedded format descriptors that are used to format the 0 or more
+LISP s-expressions, sexpr1, sexpr2, etc.
+
+Here's an example:
+
+    (format t "~15A" xyz)     ==>     Hi there everyo
+
+"~15A" is the format string, where A stands for ASCII and the 15 means use 15
+spaces.  The tilde is like the percent sign of C -- it is the signal that a
+format descriptor is coming up.
+
+Here are the other descriptors:
+
+     ~D  -- decimal
+     ~E  -- float
+     ~O  -- octal
+
+Here are a few other examples:
+
+     (format t "The average of ~D numbers is ~E."  count  (/ sum count))
+
+-----------------------------------------------------------------------------

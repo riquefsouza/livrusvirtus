@@ -1,0 +1,9 @@
+/*  exclude -- given a list and some value, return the list with all instances
+               of that value removed */
+
+member(N,[N|Tail]).
+member(N,[X|Tail]) :- member(N,Tail).
+
+exclude(N,List,List) :- not member(N,List).
+exclude(N,[N|Tail],Tail2) :- exclude(N,Tail,Tail2).
+exclude(N,[Head|Tail],[Head|List3]) :- exclude(N,Tail,List3).

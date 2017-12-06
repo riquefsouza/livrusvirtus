@@ -1,0 +1,221 @@
+Prolog Tutorial   by Mark Meyer
+Chapter 11
+How to write Recursive Rules
+--------------------------------------------------------------------------------
+TOPICS:  Recursion, terminating conditions
+--------------------------------------------------------------------------------
+
+Prolog program writing requires that we write rules that process a list of data
+values.  In traditional languages, like Ada or Pascal or C, we would use a loop
+to run through elements of an array.  Since lists take the place of arrays in
+Prolog, we might think that we just write the equivalent of loops.
+
+However, Prolog does not work like traditional languages, and this becomes
+brutally clear when we investigate how to iteratively do the same thing.
+Prolog, like LISP, uses recursion.
+
+One of the reasons why Prolog uses recursion is that recursive definitions are
+more natural for declarative programming, which tells WHAT must be done, rather
+than HOW to do it.  Mathematics often uses recursive definitions, and logical
+expressions are just easier to match and process.
+
+Let's work through an example.  Suppose that you want to find out if a certain 
+value is a member of a list.  We could explain the definition to someone in
+English as follows:
+
+   N is a member of a list L if either N is the first thing in the list,
+   or N is a member of the new list that you get when you remove the first
+   thing from L.
+
+We know from an earlier chapter that Prolog allows a way to decompose a list
+into its Head an Tail.  Let's review:
+
+   [Head|Tail] =>   Head is the first thing in the list, if the list is 
+                        non-empty,
+                    Tail is what is left after removing the first thing.
+
+So [mark,sally,kathy] would match [Head|Tail] in such a way that
+
+    Head = mark       Tail = [sally,kathy]
+
+The one-element list [mark] would match [Head|Tail] by
+
+    Head = mark       Tail = []
+
+Here's a direct encoding into Prolog of the recursive definition above:
+
+    member(N,[N|Tail]).
+    member(N,[X|Tail]) :- N \== X, member(N,Tail).
+
+The first "rule" says that if you can match the predicate member(N,[N|Tail]),
+declare victory and go have a beer (or other favorite beverage).  Notice that
+N is the thing you are searching for, and N appears as the first element of
+the list.  Thus, Prolog would answer "yes" to the following query:
+
+    member(mark,[mark,sally,kathy]).
+
+But if N is not the first thing in the list, which is affirmed by putting an
+X into the head position and explicitly saying that they are not equal,
+then N may still be a member of that list if it is a member of the rest of
+the list, i.e. the Tail.
+
+Actually, you do not need the N \== X because this will always be true if you
+hit the second rule.  If N would equal X, then the first rule would "hit".
+
+Notice that the terminating condition is always a rule that is NOT recursive,
+that is, does not have the predicate being defined, member in this case, on
+the RHS (right hand side) of the rule.  Thus, 
+
+    member(N,[N|Tail]).
+
+is not recursive, but 
+
+    member(N,[X|Tail]) :- N \== X, member(N,Tail).
+   
+is.
+
+To recap, the member rule could look like
+
+    member(N,[N|Tail]).
+    member(N,[X|Tail]) :- member(N,Tail).
+
+And here are some query examples:
+
+    ?- member(mark,[sally,mark,kathy]).
+    yes
+    ?- member(mark,[mark,kathy,anthony]).
+    yes
+    ?- member(doran,[sally,mark,kathy]).
+    no
+
+Notice that we do not need to explicitly mention the empty list, [], because
+it would not match [N|Tail] or [X|Tail].  Thus, it is always false that N
+is a member of [].
+
+Let's take another example.  Suppose you wanted to count the number of
+occurrences of a value in a list.  Here's an English version of a recursive
+definition:
+
+    A occurs 0 times in the empty list.
+    Else, if A is the first element of the list, then it occurs 1 time,
+    plus the number of times that it occurs in the rest of the list.
+
+Before we translate that into Prolog, we need to decide on the order of 
+arguments in the count predicate.  We need at least two predicates: the
+thing being counted, and the list of things.  But we also need somewhere to
+return the count, since the use of this predicate is not just to return
+"yes" or "no."  Traditionally, this is the last argument in the predicate.
+Here's a template, therefore, of our count predicate:
+
+    count(thing, list of things, count of thing)
+
+For example:
+
+    count(mark,[mark,sally,kathy,joe,mark,susan],N)
+
+where N will get bound to the value 2 since there are two marks in the
+list.
+
+Note that in a way, count is a "function" that takes in two inputs, and
+returns one output, namely the count of things.  But this is only one way
+to look at this predicate.  Another value way would be to ask, "Are there
+2 marks in the list?" to which Prolog would, in this case, answer "yes":
+
+    count(mark,[mark,sally,kathy,joe,mark,susan],2)
+
+Getting back to actually defining the count predicate, here's the way to say 
+that A occurs 0 times in the empty list.
+
+    count(A,[],0).
+
+This will serve as the terminating condition to our recursion.
+
+Now we need to say that if the thing occurs at the front of the list, then
+the count is at least one.  But it might occur somewhere in the tail as well.
+Let us use the count predicate to determine that!  Here's part of our recursive
+rule:
+
+     count(A,[A|Tail],N) :- count(A,Tail,N2), 
+
+Notice that we split the list up into a head, which matches A in this case,
+and a tail, and then we use count to count the number of A's in the Tail,
+putting the answer into N2.  The only thing that remains to do is to add 1
+to N2, since we know that A occurred at the head of the original list:
+
+     count(A,[A|Tail],N) :- count(A,Tail,N2), N is 1+N2.
+
+Yet we are not done!  For A might not have occurred at the head of the original
+list.  If so, we count the number of times it occurred in the Tail (which might
+be 0) and return that:
+
+     count(A,[X|Tail],N) :- count(A,Tail,N2), N is N2.
+
+Again, we could have explicitly added the condition that X \== A, "X is not
+equal to A," but if this rule comes AFTER the previous rule, then there is no
+need to do this.
+
+Here is the final predicate, with all its rules grouped together for
+convenience.
+
+     count(A,[],0).
+     count(A,[A|Tail],N) :- count(A,Tail,N2), N is 1+N2.
+     count(A,[X|Tail],N) :- count(A,Tail,N2), N is N2.
+
+For another example, suppose that we want to write a remove predicate which
+is given a value and a list, and "returns" the list with all instances of
+this value removed.  For example:
+
+    remove(mark,[mark,sally,kathy,mark,joe,sally,susan],L)
+
+this would bind the new list [sally,kathy,joe,sally,susan] to L.
+
+Naturally we must write this recursively, since all repetitive action is
+done by means of recursion in Prolog.  Our first situation involves the
+empty list -- there is nothing to remove!
+
+    remove(X,[],[]).
+
+and the result is still the empty list.
+
+Our second situation is when the thing to be removed, X, occurs in the first
+location of the (non-empty) list.  In this case, we might be tempted to
+write:
+
+    remove(X,[X|Tail],Tail).
+
+which would certainly give us the list with the first element removed.
+But that would only remove the first element.  We need to remove X from
+the Tail as well, so we write:
+
+    remove(X,[X|Tail],L) :- remove(X,Tail,L).
+
+This says that if X is at the beginning of the list, then only consider
+the Tail, but remove X from the Tail.
+
+But what if X does not appear at the head?  Then the answer is to remove
+the X thing from the old Tail and paste together the old head:
+
+    remove(X,[Head|Tail],L) :- remove(X,Tail,L2), L = [Head|L2].
+
+This says that L is a list where the old head is at the head and the tail
+is the "clean-up" old tail, or L2, which is the result of removing X from
+the old Tail.
+
+Here is one final expample.  Suppose we wish to exclude a given value from a
+list, and create a new list, with the value expunged.  For example:
+
+     exclude(mark,[mark,sally,kathy,mark,joe,susan,kathy],L)
+
+this would bind L to the new list [sally,kathy,joe,susan,kathy], that is,
+all the marks are gone!
+
+Here is one possible way to write this predicate, using recursion.
+
+     exclude(N,List,List) :- not member(N,List).
+     exclude(N,[N|Tail],Tail).
+     exclude(N,[Head|Tail],Newlist) :- member(N,Tail), exclude(N,Tail,List3),
+                                       Newlist = [Head|List3].
+
+Can you figure out what this says and rephrase it into English?
+
+----------------------------------------------------------------------------

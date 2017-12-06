@@ -1,0 +1,8 @@
+minoflist([],0).
+minoflist([H|T],Minvalue) :- minoflist2(T,H,Minvalue).
+
+minoflist2([],Minsofar,Minsofar).
+
+minoflist2([H|Tail],Minsofar,Minvalue) :- H =< Minsofar, !,
+                                          minoflist2(Tail,H,Minvalue).
+minoflist2([H|Tail],Minsofar,Minvalue) :- minoflist2(Tail,Minsofar,Minvalue).

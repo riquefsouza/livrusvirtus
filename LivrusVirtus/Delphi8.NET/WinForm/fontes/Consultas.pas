@@ -1,0 +1,266 @@
+unit Consultas;
+
+interface
+
+uses
+  System.Drawing, System.Collections, System.ComponentModel,
+  System.Windows.Forms, System.Data, System.Globalization;
+
+type
+  frmConsultas = class(System.Windows.Forms.Form)
+  {$REGION 'Designer Managed Code'}
+  strict private
+    /// <summary>
+    /// Required designer variable.
+    /// </summary>
+    Components: System.ComponentModel.Container;
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    procedure InitializeComponent;
+    procedure btnFechar_Click(sender: System.Object; e: System.EventArgs);
+    procedure frmConsultas_Closing(sender: System.Object; e: System.ComponentModel.CancelEventArgs);
+    procedure gridConsulta_CurrentCellChanged(sender: System.Object; e: System.EventArgs);
+    procedure gridConsulta_MouseMove(sender: System.Object; e: System.Windows.Forms.MouseEventArgs);
+  {$ENDREGION}
+  strict protected
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+		panel1: System.Windows.Forms.Panel;
+		panel2: System.Windows.Forms.Panel;
+		btnFechar: System.Windows.Forms.Button;
+		labRegistros: System.Windows.Forms.Label;
+		btnPesquisar: System.Windows.Forms.Button;
+		labDescricao: System.Windows.Forms.Label;
+		edtDescricao: System.Windows.Forms.TextBox;
+		gridConsulta: System.Windows.Forms.DataGrid;
+		btnLimpar: System.Windows.Forms.Button;
+		dsConsulta: System.Data.DataSet;
+    Registros, Campos: ArrayList;
+    procedure Dispose(Disposing: Boolean); override;
+    procedure LimparDados(sTextoSql: string);
+    function PesquisarDados(sTextoSql, sMensagemErro: string): boolean;
+  private
+    { Private Declarations }
+  public
+    constructor Create;
+  end;
+
+  [assembly: RuntimeRequiredAttribute(TypeOf(frmConsultas))]
+
+implementation
+
+uses Principal, RotinasGlobais;
+
+{$AUTOBOX ON}
+
+{$REGION 'Windows Form Designer generated code'}
+/// <summary>
+/// Required method for Designer support -- do not modify
+/// the contents of this method with the code editor.
+/// </summary>
+procedure frmConsultas.InitializeComponent;
+begin
+  Self.panel1 := System.Windows.Forms.Panel.Create;
+  Self.btnPesquisar := System.Windows.Forms.Button.Create;
+  Self.edtDescricao := System.Windows.Forms.TextBox.Create;
+  Self.labDescricao := System.Windows.Forms.Label.Create;
+  Self.gridConsulta := System.Windows.Forms.DataGrid.Create;
+  Self.dsConsulta := System.Data.DataSet.Create;
+  Self.panel2 := System.Windows.Forms.Panel.Create;
+  Self.labRegistros := System.Windows.Forms.Label.Create;
+  Self.btnLimpar := System.Windows.Forms.Button.Create;
+  Self.btnFechar := System.Windows.Forms.Button.Create;
+  Self.panel1.SuspendLayout;
+  (System.ComponentModel.ISupportInitialize(Self.gridConsulta)).BeginInit;
+  (System.ComponentModel.ISupportInitialize(Self.dsConsulta)).BeginInit;
+  Self.panel2.SuspendLayout;
+  Self.SuspendLayout;
+  // 
+  // panel1
+  // 
+  Self.panel1.Controls.Add(Self.btnPesquisar);
+  Self.panel1.Controls.Add(Self.edtDescricao);
+  Self.panel1.Controls.Add(Self.labDescricao);
+  Self.panel1.Dock := System.Windows.Forms.DockStyle.Top;
+  Self.panel1.Location := System.Drawing.Point.Create(0, 0);
+  Self.panel1.Name := 'panel1';
+  Self.panel1.Size := System.Drawing.Size.Create(360, 56);
+  Self.panel1.TabIndex := 0;
+  // 
+  // btnPesquisar
+  // 
+  Self.btnPesquisar.Location := System.Drawing.Point.Create(280, 24);
+  Self.btnPesquisar.Name := 'btnPesquisar';
+  Self.btnPesquisar.TabIndex := 2;
+  Self.btnPesquisar.Text := '&Pesquisar';
+  // 
+  // edtDescricao
+  // 
+  Self.edtDescricao.Location := System.Drawing.Point.Create(8, 24);
+  Self.edtDescricao.Name := 'edtDescricao';
+  Self.edtDescricao.Size := System.Drawing.Size.Create(264, 20);
+  Self.edtDescricao.TabIndex := 1;
+  Self.edtDescricao.Text := '';
+  // 
+  // labDescricao
+  // 
+  Self.labDescricao.Location := System.Drawing.Point.Create(8, 8);
+  Self.labDescricao.Name := 'labDescricao';
+  Self.labDescricao.Size := System.Drawing.Size.Create(64, 16);
+  Self.labDescricao.TabIndex := 0;
+  Self.labDescricao.Text := 'Descrição:';
+  // 
+  // gridConsulta
+  // 
+  Self.gridConsulta.Anchor := (System.Windows.Forms.AnchorStyles((((System.Windows.Forms.AnchorStyles.Top 
+    or System.Windows.Forms.AnchorStyles.Bottom) or System.Windows.Forms.AnchorStyles.Left) 
+    or System.Windows.Forms.AnchorStyles.Right)));
+  Self.gridConsulta.CaptionVisible := False;
+  Self.gridConsulta.DataMember := '';
+  Self.gridConsulta.DataSource := Self.dsConsulta;
+  Self.gridConsulta.HeaderForeColor := System.Drawing.SystemColors.ControlText;
+  Self.gridConsulta.Location := System.Drawing.Point.Create(0, 56);
+  Self.gridConsulta.Name := 'gridConsulta';
+  Self.gridConsulta.ParentRowsVisible := False;
+  Self.gridConsulta.ReadOnly := True;
+  Self.gridConsulta.Size := System.Drawing.Size.Create(360, 144);
+  Self.gridConsulta.TabIndex := 1;
+  Include(Self.gridConsulta.CurrentCellChanged, Self.gridConsulta_CurrentCellChanged);
+  Include(Self.gridConsulta.MouseMove, Self.gridConsulta_MouseMove);
+  // 
+  // dsConsulta
+  // 
+  Self.dsConsulta.DataSetName := 'Consulta';
+  Self.dsConsulta.Locale := System.Globalization.CultureInfo.Create('pt-BR');
+  // 
+  // panel2
+  // 
+  Self.panel2.Anchor := (System.Windows.Forms.AnchorStyles(((System.Windows.Forms.AnchorStyles.Bottom 
+    or System.Windows.Forms.AnchorStyles.Left) or System.Windows.Forms.AnchorStyles.Right)));
+  Self.panel2.Controls.Add(Self.labRegistros);
+  Self.panel2.Controls.Add(Self.btnLimpar);
+  Self.panel2.Controls.Add(Self.btnFechar);
+  Self.panel2.Location := System.Drawing.Point.Create(0, 200);
+  Self.panel2.Name := 'panel2';
+  Self.panel2.Size := System.Drawing.Size.Create(360, 40);
+  Self.panel2.TabIndex := 2;
+  // 
+  // labRegistros
+  // 
+  Self.labRegistros.Location := System.Drawing.Point.Create(11, 12);
+  Self.labRegistros.Name := 'labRegistros';
+  Self.labRegistros.Size := System.Drawing.Size.Create(136, 16);
+  Self.labRegistros.TabIndex := 0;
+  Self.labRegistros.Text := 'Registro 0 de 0';
+  // 
+  // btnLimpar
+  // 
+  Self.btnLimpar.Location := System.Drawing.Point.Create(200, 8);
+  Self.btnLimpar.Name := 'btnLimpar';
+  Self.btnLimpar.TabIndex := 1;
+  Self.btnLimpar.Text := '&Limpar';
+  // 
+  // btnFechar
+  // 
+  Self.btnFechar.DialogResult := System.Windows.Forms.DialogResult.Cancel;
+  Self.btnFechar.Location := System.Drawing.Point.Create(280, 8);
+  Self.btnFechar.Name := 'btnFechar';
+  Self.btnFechar.TabIndex := 2;
+  Self.btnFechar.Text := '&Fechar';
+  Include(Self.btnFechar.Click, Self.btnFechar_Click);
+  // 
+  // frmConsultas
+  // 
+  Self.AutoScaleBaseSize := System.Drawing.Size.Create(5, 13);
+  Self.ClientSize := System.Drawing.Size.Create(360, 237);
+  Self.Controls.Add(Self.panel2);
+  Self.Controls.Add(Self.gridConsulta);
+  Self.Controls.Add(Self.panel1);
+  Self.Name := 'frmConsultas';
+  Self.Text := 'Consulta de';
+  Include(Self.Closing, Self.frmConsultas_Closing);
+  Self.panel1.ResumeLayout(False);
+  (System.ComponentModel.ISupportInitialize(Self.gridConsulta)).EndInit;
+  (System.ComponentModel.ISupportInitialize(Self.dsConsulta)).EndInit;
+  Self.panel2.ResumeLayout(False);
+  Self.ResumeLayout(False);
+end;
+{$ENDREGION}
+
+procedure frmConsultas.Dispose(Disposing: Boolean);
+begin
+  if Disposing then
+  begin
+    if Components <> nil then
+      Components.Dispose();
+  end;
+  inherited Dispose(Disposing);
+end;
+
+constructor frmConsultas.Create;
+begin
+  inherited Create;
+  //
+  // Required for Windows Form Designer support
+  //
+  InitializeComponent;
+  //
+  // TODO: Add any constructor code after InitializeComponent call
+  //
+  Registros:=ArrayList.Create;
+end;
+
+procedure frmConsultas.gridConsulta_MouseMove(sender: System.Object; e: System.Windows.Forms.MouseEventArgs);
+begin
+  Principal.fPrincipal.statusBar1.Panels.Item[1].Text:=Text;
+end;
+
+procedure frmConsultas.gridConsulta_CurrentCellChanged(sender: System.Object;
+  e: System.EventArgs);
+begin
+  labRegistros.Text:='Registro '+
+  Convert.ToString(gridConsulta.CurrentCell.RowNumber+1)+
+  ' de '+dsConsulta.Tables.Item['Consulta'].Rows.Count.ToString();
+end;
+
+procedure frmConsultas.frmConsultas_Closing(sender: System.Object; e: System.ComponentModel.CancelEventArgs);
+begin
+  if (dsConsulta.Tables.Item[0].Rows.Count > 0) then begin
+   Campos := (ArrayList(Registros.Item[gridConsulta.CurrentCell.RowNumber]));
+   RotinasGlobais.Rotinas.sCodigoSelecionado:=Campos.Item[0].ToString;
+  end;
+  Principal.fPrincipal.statusBar1.Panels.Item[1].Text:='';
+end;
+
+procedure frmConsultas.btnFechar_Click(sender: System.Object; e: System.EventArgs);
+begin
+  Close;
+end;
+
+procedure frmConsultas.LimparDados(sTextoSql: string);
+begin
+  labRegistros.Text:='Registro 0 de 0';
+  Rotinas.ConsultaDados(dsConsulta, Registros, sTextoSql);
+  btnPesquisar.Enabled:=true;
+  edtDescricao.Text:='';
+  edtDescricao.Focus;
+end;
+
+function frmConsultas.PesquisarDados(sTextoSql, sMensagemErro: string): boolean;
+begin
+  if (Rotinas.ConsultaDados(dsConsulta, Registros, sTextoSql)) then begin
+   gridConsulta.SetDataBinding(dsConsulta,'Consulta');
+   gridConsulta_CurrentCellChanged(self,nil);
+   btnPesquisar.Enabled:=false;
+   result:=true;
+  end else begin
+   MessageBox.Show(sMensagemErro, Principal.fPrincipal.Text,
+   MessageBoxButtons.OK, MessageBoxIcon.Error);
+   result:=false;
+  end;
+end;
+
+end.

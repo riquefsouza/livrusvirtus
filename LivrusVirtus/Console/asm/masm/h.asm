@@ -1,0 +1,13 @@
+.MODEL tiny
+.CODE
+        ORG 100h
+HELLO          PROC
+        MOV     AH,09h
+        LEA     DX,msg
+        INT     21h                     ;Display Hello World
+
+        MOV     AX,4C00h                ;Exit to DOS
+        INT     21h
+HELLO          ENDP
+        msg     DB      'Hello World$'
+        END     HELLO

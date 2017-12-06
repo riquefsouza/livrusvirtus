@@ -1,0 +1,116 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Livrus - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP6.tmp" with contents
+[
+/nologo /MDd /W4 /Zi /Od /I "C:/wxWin/include" /I "C:/wxWin/lib/mswd" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D WINVER=0x400 /D "_MT" /D wxUSE_GUI=1 /D "__WXDEBUG__" /D WXDEBUG=1 /Fp"Debug/Livrus.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /c 
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\AlterarSenha.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\CadAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\CadAutores.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\CadClientes.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\CadEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\CadEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\CadIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\CadLivros.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\CadPaises.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\CadProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConAssuntos.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConAutores.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConClientes.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConEditoras.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConEnderecos.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConIdiomas.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConLivros.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConPaises.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConProfissoes.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\Consultas.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConsultasSQL.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\ConVendas.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\Filha.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\Login.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\Principal.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\Sobre.cpp"
+"C:\LivrusVirtus\VCPP6\wxWin\ODBC\VenderLivros.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP6.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP7.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib comctl32.lib rpcrt4.lib wsock32.lib zlibd.lib regexd.lib pngd.lib jpegd.lib tiffd.lib wxmswd.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/Livrus.pdb" /debug /machine:I386 /out:"Debug/Livrus.exe" /pdbtype:sept /libpath:"C:/wxWin/lib" 
+.\Debug\AlterarSenha.obj
+.\Debug\CadAssuntos.obj
+.\Debug\Cadastros.obj
+.\Debug\CadAutores.obj
+.\Debug\CadClientes.obj
+.\Debug\CadEditoras.obj
+.\Debug\CadEnderecos.obj
+.\Debug\CadIdiomas.obj
+.\Debug\CadLivros.obj
+.\Debug\CadPaises.obj
+.\Debug\CadProfissoes.obj
+.\Debug\ConAssuntos.obj
+.\Debug\ConAutores.obj
+.\Debug\ConClientes.obj
+.\Debug\ConEditoras.obj
+.\Debug\ConEnderecos.obj
+.\Debug\ConIdiomas.obj
+.\Debug\ConLivros.obj
+.\Debug\ConPaises.obj
+.\Debug\ConProfissoes.obj
+.\Debug\Consultas.obj
+.\Debug\ConsultasSQL.obj
+.\Debug\ConVendas.obj
+.\Debug\DateCtrl.obj
+.\Debug\Filha.obj
+.\Debug\Livrus.obj
+.\Debug\Login.obj
+.\Debug\Principal.obj
+.\Debug\RotinasGlobais.obj
+.\Debug\Sobre.obj
+.\Debug\Splash.obj
+.\Debug\VenderLivros.obj
+.\Debug\Livrus.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSP7.tmp"
+<h3>Output Window</h3>
+Compiling...
+AlterarSenha.cpp
+CadAssuntos.cpp
+CadAutores.cpp
+CadClientes.cpp
+CadEditoras.cpp
+CadEnderecos.cpp
+CadIdiomas.cpp
+CadLivros.cpp
+CadPaises.cpp
+CadProfissoes.cpp
+ConAssuntos.cpp
+ConAutores.cpp
+ConClientes.cpp
+ConEditoras.cpp
+ConEnderecos.cpp
+ConIdiomas.cpp
+ConLivros.cpp
+ConPaises.cpp
+ConProfissoes.cpp
+Consultas.cpp
+ConsultasSQL.cpp
+ConVendas.cpp
+Filha.cpp
+Login.cpp
+Principal.cpp
+Sobre.cpp
+VenderLivros.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+Livrus.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,162 @@
+package  Livrus;
+
+import System.*;
+import System.Drawing.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+
+/// <summary>
+/// Summary description for WinForm.
+/// </summary>
+public class frmCadEditoras extends Livrus.frmCadastros
+{
+	public static frmCadEditoras fCadEditoras;
+	/// <summary>
+	/// Required designer variable.
+	/// </summary>
+	private System.ComponentModel.Container components = null;
+
+	public frmCadEditoras()
+	{
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent();
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+	}
+
+	/// <summary>
+	/// Clean up any resources being used.
+	/// </summary>
+	protected void Dispose (boolean disposing)
+	{
+		if (disposing)
+		{
+			if (components != null)
+			{
+				components.Dispose();
+			}
+		}
+		super.Dispose(disposing);
+	}
+
+	/// <summary>
+	/// Required method for Designer support - do not modify
+	/// the contents of this method with the code editor.
+	/// </summary>
+	private void InitializeComponent()
+	{
+		// 
+		// labCodigo
+		// 
+		this.labCodigo.set_Name("labCodigo");
+		// 
+		// edtCodigo
+		// 
+		this.edtCodigo.set_Name("edtCodigo");
+		// 
+		// labDescricao
+		// 
+		this.labDescricao.set_Name("labDescricao");
+		this.labDescricao.set_Text("Editora:");
+		// 
+		// edtDescricao
+		// 
+		this.edtDescricao.set_Name("edtDescricao");
+		// 
+		// btnNovo
+		// 
+		this.btnNovo.set_Name("btnNovo");
+		this.btnNovo.add_Click(new System.EventHandler(this.btnNovo_Click));
+		// 
+		// btnPesquisar
+		// 
+		this.btnPesquisar.set_Name("btnPesquisar");
+		this.btnPesquisar.add_Click(new System.EventHandler(this.btnPesquisar_Click));
+		// 
+		// btnAnterior
+		// 
+		this.btnAnterior.set_Name("btnAnterior");
+		// 
+		// btnProximo
+		// 
+		this.btnProximo.set_Name("btnProximo");
+		// 
+		// btnFechar
+		// 
+		this.btnFechar.set_Name("btnFechar");
+		// 
+		// btnLimpar
+		// 
+		this.btnLimpar.set_Name("btnLimpar");
+		// 
+		// btnExcluir
+		// 
+		this.btnExcluir.set_Name("btnExcluir");
+		this.btnExcluir.add_Click(new System.EventHandler(this.btnExcluir_Click));
+		// 
+		// btnSalvar
+		// 
+		this.btnSalvar.set_Name("btnSalvar");
+		this.btnSalvar.add_Click(new System.EventHandler(this.btnSalvar_Click));
+		// 
+		// frmCadEditoras
+		// 
+		this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+		this.set_ClientSize(new System.Drawing.Size(336, 133));
+		this.set_Name("frmCadEditoras");
+		this.set_Text("Cadastro de Editoras");
+		this.add_Closing(new System.ComponentModel.CancelEventHandler(this.frmCadEditoras_Closing));
+	}
+
+	protected boolean ValidaDados(boolean bTodosDados)
+	{
+		super.ValidaDados(bTodosDados);	
+
+		if (RotinasGlobais.Rotinas.ValidaCampo(edtCodigo.get_Text(),
+			"Código não informado!"))
+		  return false;
+		if (bTodosDados) {
+		  if (RotinasGlobais.Rotinas.ValidaCampo(edtDescricao.get_Text(),
+			"Editora não informada!"))
+			return false;
+		}
+		return true;
+	}
+
+	private void btnNovo_Click(Object sender, System.EventArgs e)
+	{
+		NovoDado(ConsultasSQL.ConsSQL.Editora('N',edtCodigo.get_Text(),""));
+	}
+
+	private void btnExcluir_Click(Object sender, System.EventArgs e)
+	{
+		ExcluirDados(ConsultasSQL.ConsSQL.Editora('D',edtCodigo.get_Text(),""));
+	}
+
+	private void btnPesquisar_Click(Object sender, System.EventArgs e)
+	{
+		PesquisarDados(ConsultasSQL.ConsSQL.Editora('S',edtCodigo.get_Text(),""),
+		"Editora não encontrada!");
+	}
+
+	private void btnSalvar_Click(Object sender, System.EventArgs e)
+	{
+		SalvarDados(ConsultasSQL.ConsSQL.Editora('S',edtCodigo.get_Text(),""),
+		ConsultasSQL.ConsSQL.Editora('U',edtCodigo.get_Text(),edtDescricao.get_Text()),
+		ConsultasSQL.ConsSQL.Editora('I',edtCodigo.get_Text(),edtDescricao.get_Text()),
+		true);
+	}
+
+	private void frmCadEditoras_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
+	{
+		  frmPrincipal.fPrincipal.mnuCadEditoras.set_Enabled(true);
+	}
+}
+
+

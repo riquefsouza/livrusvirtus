@@ -1,0 +1,161 @@
+1.  What are SED and AWK?
+-------------------------
+
+    Both are data manipulation tools in UNIX.  But they are so complex and have
+    a language associated with that they are in another sense programming
+    languages.  Sed is definitely the simpler of the two, having grown out of
+    "substitute" commands of ex and vi.  AWK is much more mature, complete, and
+    it shares a number of syntactic features with C.  Awk could be thought of as
+    an interpreted version of C, with extra data manipulation characteristics
+    thrown in.
+
+    Perl is another language that is akin to sed and awk, and gaining popular-
+    ity.  
+
+
+2.  Where do the AWKward names come from?
+-----------------------------------------
+
+    Sed stands for "stream editor" because it was meant to change or edit a
+    data stream.  Awk was invented as an upgrade to sed.  In the words of the
+    authors:
+
+      Alfred V. Aho
+      Peter J. Weinberger
+      Brian W. Kernighan
+
+    "It was developed as part of an experiment to see how the UNIX
+     tools grep and sed could be generalized to manipulate text as easily
+     as numbers."
+
+3.  How do these run?  Strengths and weaknesses
+-----------------------------------------------
+
+     All of these languages (sed, awk, perl) are interpreted, not compiled, so
+     they tend to be slower at run time.  However, they are fast in terms of
+     programmers' time.  That is, you can usually develop an extremely compli-
+     cated program quickly with them, so they are usually used for one-shot
+     data manipulations, or as prototypes.  There are even AWK to C compilers,
+     in case you are so happy with your AWK program that you want to reuse it
+     many times.
+
+     Most often, UNIX users write the "program" inside the command itself,
+     rather than put it into a file like a C program, although this can be done,
+     too.
+
+     Sed and awk are UNIX filter programs so they do not change a file "in
+     place" but rather produce a new data stream which could be piped into
+     another command or captured into a new file with output redirection.
+
+
+4.  Show me a quick example:  change all occurrences of "Unix" to "UNIX(TM)"
+----------------------------------------------------------------------------
+
+     sed 's/Unix/UNIX(TM)/g' somefile > newfile
+
+     awk '{gsub(/Unix/,"UNIX(TM)"); print}' somefile > newfile
+
+
+5.  What is the command loop?
+-----------------------------
+
+     Most data processing tasks are very similar.  They work on every line or
+     record of a file and do about the same thing to each line.  Thus, there is
+     a standard loop that runs through every record of a file and has the
+     following general form:
+
+          for every record (line) in the data file do
+               read in the record
+               if this record matches some selection criterion then
+                    modify this record
+               print the (possibly modified) record out
+
+     Both sed and awk use this model, so the programmer does not have to write
+     the general loop, whereas a C programmer would.
+              
+
+5.  What are nawk and gawk?
+---------------------------
+
+     The original awk had lots of weaknesses, so later versions were created.
+     "Nawk" is "new awk" but it is not standardized.  The version on the SUN
+     is different from other versions, and also inferior.  Gawk is GNU's Awk
+     and it is probably the most powerful to date.
+
+6.  What are the similarities between awk and C?
+------------------------------------------------
+
+      a.  Syntax.
+      b.  Control structures
+      c.  Many built-in functions (printf, sprintf, etc.)
+
+7.  What are the differences from C?
+------------------------------------
+
+      a.  Main control loop is automatically given.
+      b.  Pattern matching.
+      c.  Loose typing.
+      d.  Dynamically sized arrays.
+      e.  Associative arrays.
+      f.  Mixed type arrays.
+      g.  Syntax differences (semicolons not always needed, etc)
+      h.  Automatic parsing of input line into fields
+
+8.  When is awk preferred over sed?
+-----------------------------------
+
+      a.  Commands are very long
+      b.  Need to generate reports
+      c.  Join lines, any multi-line operation
+      d.  When you need variables and references between far away lines
+
+9.  When is awk preferred over C?
+--------------------------------
+
+      a.  Quick solution/rapid prototyping
+      b.  One-time used program
+      c.  When pattern matching is most obvious choice
+
+10.  What can nawk do more than awk?
+------------------------------------
+
+      a.  user-defined functions
+      b.  more built-in functions
+      c.  reading input from any file
+      d.  various new array operations (testing membership,
+          deleting elements, multi-dimensional arrays)
+
+11.  What are typical tasks for which you might use awk?
+--------------------------------------------------------
+
+      print out lines where a string is found like grep
+      select a certain subset of lines
+      edit a file, such as rearrange fields & replace strings
+      pull out a range of lines based on found strings
+      count lines, show length of lines, find longest line
+      display line numbers at left edge of line
+      count blank lines
+      break apart long lines or reassemble
+      edit the output of UNIX commands such as ls -l
+      change format of lines from variable tagged format to fixed # of flds
+
+   (Code to do all of these in awk is given in the TUTORIAL examples.)
+
+12.  Where can I read more about sed and awk?
+---------------------------------------------
+
+   1) "The AWK Programming Language" by Alfred V. Aho, Addison-Wesley, 1988.
+     
+      CALL NUMBER: QA76.73.A95 A35 1988   (Bouwhuis Library)
+
+
+   2) "Sed and Awk" by Dale Dougherty, O'Reilley and Associates, 1991.
+
+      (not in Bouwhuis, but available at many area bookstores likes Barnes and
+       Noble.)
+      This excellent and very complete book even discusses nawk and gawk.
+
+   3) Many UNIX books have nice chapters on sed and awk.  One that we have in
+      Bouwhuis is:
+
+      "An Introduction to Berkeley UNIX" by Paul Wang.  Wadsworth, 1988.

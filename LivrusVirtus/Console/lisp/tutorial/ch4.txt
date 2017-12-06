@@ -1,0 +1,133 @@
+LISP Tutorial   by Mark Meyer
+Chapter 4
+Built-in functions
+--------------------------------------------------------------------------------
+TOPICS:  list functions
+--------------------------------------------------------------------------------
+
+In the previous chapters, we looked at LISP function syntax using arithmetic
+functions.  In this chapter we will concentrate on list processing functions.
+
+The three basic list manipulation functions are:
+
+     car -- return the first element of a list (also called first)
+
+     cdr -- return the rest of the list after the first element is gone
+
+     cons -- take an item and a list, and construct a new list that
+             contains the item at the front of the list
+
+However, before we show examples, we have to note that s-expressions which
+are lists look a lot of like function expressions.  How does LISP tell the
+difference?  That is one of the flexibilities of the language, namely that
+data and programs look just the same, namely they are lists.  So to evaluate
+a function, just type in the function at the prompt.  This works for
+arithmetic just fine, but presents a problem with other things that aren't
+numbers.  So we use a special mark called the quote ('), which is a single
+quote, and put it in front of anything that we wish to be treated as data
+rather than as a function to be evaluated.  Now we can show examples:
+
+        (car '(mark sally kathy))    -- gives us mark
+
+        (cdr '(mark sally kathy))    -- gives us (sally kathy)
+
+        (cons 'mark '(sally kathy))  -- gives us (mark sally kathy)
+
+It should be obvious that quoting the list (mark sally kathy) keeps LISP
+from thinking this is a function to be evaluated, with the function name
+being "mark".  But what does 'mark mean?
+
+The names "car" and "cdr" are not mnemonic because they are actually
+assembler instructions for the ancient IBM 7090 computer, on which LISP
+was first implemented.  You can use "first" and "rest" instead, although
+people affectionately cling to car and cdr.
+
+Here are some examples:
+
+     (car '(a b c))                 ==>   a
+     (cdr '(a b c))                 ==>   (b c)
+     (car '())                      ==>   ()
+     (cdr '())                      ==>   ()
+     (car '(mark))                  ==>   mark
+     (cdr '(mark))                  ==>   ()
+ 
+(Note that you could subsitute "first" for "car" above and the answers
+would be exactly the same.  Similarly, "rest" and "cdr" are equivalent.)
+
+Here are some examples that build up new lists using "cons":
+
+     (cons 'a '(b c))               ==>   (a b c)
+     (cons '(a) '(b c))             ==>   ((a) b c)
+     (cons 'a '())                  ==>   (a)
+     (cons '() '())                 ==>   (())
+
+Notice that IN EVERY CASE ABOVE, the second argument of cons is a list.  Is
+this absolutely necessary?  No, it turns out.  For example:
+
+     (cons 'a 'b)                   ==>   (a . b)
+
+The notation (a . b) is called a "dotted pair," and is an earlier form of
+data structure in LISP.  However, it is no longer needed and you never need
+to use it for any purpose.  So just forget that it exists and pretend that you
+never saw it.  Consequently, NEVER LET THE SECOND ARGUMENT OF CONS BE AN ATOM!
+
+Another handy function is called "nth" which is kind of like an array index.
+If you want the nth element of a list, just say (nth somelist).  Beware!  
+Nth considers the first element to be the 0th element.  Common LISP is very 
+much like C in this regard.
+
+       (nth 0 '(a b c d))       ==>   give a
+       (nth 1 '(a b c d))       ==>   give b
+       (nth 3 '(a b c d))       ==>   give d
+
+There is also a "last" function which is handy.
+
+       (last '(a b c d))        ==>  d
+
+There are an enormous number of built-in LISP functions to do lots of
+things to lists and atoms and numbers.  The best way to learn about them
+is just to use them.  Try evaluating the following functions in the order
+given and figure out what the built-in functions do.  The following is
+divided into sections to keep the variable dependencies to a minimum.
+You can start any section you wish, but once you start a section, you
+should follow it through to the end.  If you ever get an error, do not
+worry about it!  Just type :q and return to the next item in the section.
+Some of the errors have been planted for your edification.
+
+There are a huge number of other built-in functions, not all of which can be
+discussed in detail.  Here's some more:
+
+1.  reverse  -- reverses a list
+
+        (reverse '(a b c d))  ==>   (d c b a)
+
+2.  member -- find out if something is a member of another list
+
+        (member 'c '(a b c d)) ==>  t
+
+    NOTE:  t means "true" and NIL means "false" in LISP.
+
+3.  random  -- returns a random number
+
+        (random 10)  ==>  7   (or some other number between 0 and 10)
+
+4.  subseq -- return a subsequence of a list
+
+        (subseq '(3 8 2 5 6) 0 3) ==>  (3 8 2)
+
+5.  help -- get help about built-in functions
+
+        (help 'subseq)  ==>  read about subseq
+
+6.  position -- find out what the position of an element is in a list
+
+        (position 'mark '(sally kathy mark charlie)) ==> 2
+
+7.  sort -- sort a list of things
+
+        (sort '(5 1 8 2) '<)  ==>  (1 2 5 8)
+
+    Note that you must give a "less-than" function that is appropriate to
+    your data type.
+
+--------------------------------------------------------------------------------

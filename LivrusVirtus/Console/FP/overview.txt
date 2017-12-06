@@ -1,0 +1,66 @@
+1.  What is FP?
+---------------
+
+     FP is a pure functional programming language.  It is the brainchild of
+     John Backus, who believed that traditional imperative languages, like
+     FORTRAN which he helped to build, were doomed, so he defined a simple
+     and pure functional programming language as a prototype.  Many people
+     have implemented FP, or some version of it, but it is not a true standard-
+     ized programming language like FORTRAN, LISP or C.  Nevertheless, it was
+     extremely influential.
+
+2.  What is functional programming?
+-----------------------------------
+
+     Functional programming is a technique that can be used with many program-
+     ming languages, but which is explicitly supported by only certain 
+     languages.  These include FP, ML, APL, LISP, HOPE and a few others.
+
+     In functional programming, we do not think about variables and their
+     values.  Instead, we think about things called "functions" which are
+     black boxes into which we put inputs and get outputs.  These outputs
+     are more than likely to be used as inputs to yet other functions.
+
+     Strict functional programming prohibits using variables, as in FP.  But
+     that may necessitate recomputing a value, which is costly, so many 
+     functional programming languages allow you to save that value in a 
+     "variable" for later reference.  But you can never change its value.
+     Thus, such programming languages are often called "assign-once" languages.
+
+     Of course this rule makes it difficult to do actions that require loops
+     and intermediate values such as summing elements of an array.  However,
+     this can be done by using recursion only, or higher order functions like
+     "mapcar" of LISP.
+
+     Most computer scientists agree that proofs of program correctness are
+     easier with functional languages than with traditional imperative languages
+     such as C.  Therefore, they are advocating use of functional languages as
+     an aid to software engineering's goal of building highly reliable and
+     reusable software.
+ 
+     However, we are a still ways from the day when functional languages may
+     displace imperative languages because they are still slower and use more
+     memory than traditional languages. 
+
+
+3.  What implementations do we have at Canisius?
+------------------------------------------------
+   
+     At Canisius, we have two:  MARK-FP is a locally written implementation
+     done by Mark Meyer, using LISP, Yacc and Lex.  AVFP is an implementation
+     by Andrew Valencia at Stanford using C.  AVFP is better in many ways
+     because it is a unified environment rather than Mark-FP's two window
+     approach.  However, AVFP does not permit symbolic atoms like names, but
+     only numbers.
+
+
+4.  Reference Books
+-------------------
+
+     FP is discussed in many "programming languages" type of textbooks.
+     One that we have in Bouwhuis Library is
+
+         "Comparative programming languages" by  Leslie B. Wilson and 
+                  Robert G. Clark, Addison-Wesley, 1988.
+
+      Bouwhuis call no. QA76.7 .W55 1988

@@ -1,0 +1,122 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Livrus - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPD.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /I "c:\gtk\include" /I "c:\gtk\include\gtk-2.0" /I "c:\gtk\include\glib-2.0" /I "c:\gtk\include\pango-1.0" /I "c:\gtk\include\atk-1.0" /I "c:\gtk\include\gtkglext-1.0" /I "c:\gtk\lib\gtk-2.0\include" /I "c:\gtk\lib\glib-2.0\include" /I "c:\gtk\lib\gtkglext-1.0\include" /I "c:\gtk\include\libglade-2.0" /I "c:\gtk\include\libxml2" /I "C:\Arquivos de programas\PostgreSQL\8.0.0-rc1\include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "HAVE_CONFIG_H" /Fo"Debug/" /Fd"Debug/" /FD /D /GZ /c 
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\AlterarSenha.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\CadAssuntos.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\Cadastros.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\CadAutores.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\CadClientes.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\CadEditoras.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\CadEnderecos.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\CadIdiomas.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\CadLivros.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\CadPaises.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\CadProfissoes.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConAssuntos.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConAutores.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConClientes.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConEditoras.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConEnderecos.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConIdiomas.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConLivros.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConPaises.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConProfissoes.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\Consultas.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConsultasSQL.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\ConVendas.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\Livrus.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\Login.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\Principal.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\RotinasGlobais.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\Sobre.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\Splash.c"
+"C:\LivrusVirtus\VCPP6\GTK2.0\LibPostgreSQL\VenderLivros.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPD.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPE.tmp" with contents
+[
+libpq.lib art_lgpl_2.lib asprintf.lib atk-1.0.lib charset.lib fontconfig.lib gdk-win32-2.0.lib gdkglext-win32-1.0.lib gdk_pixbuf-2.0.lib glib-2.0.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib gtk-win32-2.0.lib gtkglext-win32-1.0.lib iconv.lib intl.lib libbz2.lib libfreetype.lib libglade-2.0.lib libiconv.lib libindent.lib libindent_d.lib libintl.lib libjpeg.lib libpng.lib libtiff.lib libxml2.lib libz.lib pango-1.0.lib pangoft2-1.0.lib pangowin32-1.0.lib /nologo /incremental:yes /pdb:"C:\GTK\bin/Livrus.pdb" /debug /machine:I386 /out:"C:\GTK\bin/Livrus.exe" /pdbtype:sept /libpath:"C:\GTK\Lib" /libpath:"C:\Arquivos de programas\PostgreSQL\8.0.0-rc1\lib\ms" 
+.\Debug\AlterarSenha.obj
+.\Debug\CadAssuntos.obj
+.\Debug\Cadastros.obj
+.\Debug\CadAutores.obj
+.\Debug\CadClientes.obj
+.\Debug\CadEditoras.obj
+.\Debug\CadEnderecos.obj
+.\Debug\CadIdiomas.obj
+.\Debug\CadLivros.obj
+.\Debug\CadPaises.obj
+.\Debug\CadProfissoes.obj
+.\Debug\ConAssuntos.obj
+.\Debug\ConAutores.obj
+.\Debug\ConClientes.obj
+.\Debug\ConEditoras.obj
+.\Debug\ConEnderecos.obj
+.\Debug\ConIdiomas.obj
+.\Debug\ConLivros.obj
+.\Debug\ConPaises.obj
+.\Debug\ConProfissoes.obj
+.\Debug\Consultas.obj
+.\Debug\ConsultasSQL.obj
+.\Debug\ConVendas.obj
+.\Debug\Livrus.obj
+.\Debug\Login.obj
+.\Debug\Principal.obj
+.\Debug\RotinasGlobais.obj
+.\Debug\Sobre.obj
+.\Debug\Splash.obj
+.\Debug\VenderLivros.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\CONFIG~1\Temp\RSPE.tmp"
+<h3>Output Window</h3>
+Compiling...
+AlterarSenha.c
+CadAssuntos.c
+Cadastros.c
+CadAutores.c
+CadClientes.c
+CadEditoras.c
+CadEnderecos.c
+CadIdiomas.c
+CadLivros.c
+CadPaises.c
+CadProfissoes.c
+ConAssuntos.c
+ConAutores.c
+ConClientes.c
+ConEditoras.c
+ConEnderecos.c
+ConIdiomas.c
+ConLivros.c
+ConPaises.c
+ConProfissoes.c
+Generating Code...
+Compiling...
+Consultas.c
+ConsultasSQL.c
+ConVendas.c
+Livrus.c
+Login.c
+Principal.c
+RotinasGlobais.c
+Sobre.c
+Splash.c
+VenderLivros.c
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+Livrus.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

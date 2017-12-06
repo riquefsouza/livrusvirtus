@@ -1,0 +1,297 @@
+package Livrus;
+
+import System.*;
+import System.Drawing.*;
+import wx.*;
+
+public class frmCadEnderecos extends frmCadastros
+{
+
+  private static int ID_FRMCADENDERECOS_CMBESTADO = 700;
+  private static int ID_FRMCADENDERECOS_EDTBAIRRO = 701; 
+  private static int ID_FRMCADENDERECOS_EDTCEP = 702;
+  private static int ID_FRMCADENDERECOS_EDTCIDADE = 703; 
+  private static int ID_FRMCADENDERECOS_LABBAIRRO = 704;
+  private static int ID_FRMCADENDERECOS_LABCEP = 705; 
+  private static int ID_FRMCADENDERECOS_LABCIDADE = 706;
+  private static int ID_FRMCADENDERECOS_LABESTADO = 707;
+
+	private wx.StaticText labBairro;
+	private wx.TextCtrl edtBairro;
+	private wx.TextCtrl edtCEP;
+	private wx.StaticText labCEP;
+	private wx.TextCtrl edtCidade;
+	private wx.StaticText labCidade;
+	private wx.StaticText labEstado;
+	private wx.Choice cmbEstado;
+  private String[] vsEstados;
+
+	public frmCadEnderecos( Window parent ) {
+    super(parent, TextValidatorCtrl.FILTER_NUMERIC, false);
+
+    set_ClientSize(new Size(523, 171));
+    labDescricao.set_Label("Logradouro:");
+    labDescricao.set_Size(new Size(57, 13));
+    edtDescricao.set_Size(new Size(264, 21));
+
+  	labBairro = new wx.StaticText(this, ID_FRMCADENDERECOS_LABBAIRRO, 
+      "Bairro:", new Point(280, 48), new Size(48, 13) );
+  	edtBairro = new wx.TextCtrl(this, ID_FRMCADENDERECOS_EDTBAIRRO,
+      "", new Point(280, 64), new Size(144, 21) );
+    edtBairro.set_Enabled(false);
+  	labCEP = new wx.StaticText(this, ID_FRMCADENDERECOS_LABCEP, 
+      "CEP: ", new Point(8, 88), new Size(40, 13) );
+  	edtCEP = new wx.TextCtrl(this, ID_FRMCADENDERECOS_EDTCEP, 
+      "", new Point(8, 104), new Size(72, 21) );
+    edtCEP.set_Enabled(false);
+  	labCidade = new wx.StaticText(this, ID_FRMCADENDERECOS_LABCIDADE, 
+      "Cidade: ", new Point(88, 88), new Size(39, 13) );
+  	edtCidade = new wx.TextCtrl(this, ID_FRMCADENDERECOS_EDTCIDADE, 
+      "", new Point(88, 104), new Size(184, 21) );
+    edtCidade.set_Enabled(false);
+  	labEstado = new wx.StaticText(this, ID_FRMCADENDERECOS_LABESTADO, 
+      "Estado: ", new Point(280, 88), new Size(56, 13) ); 
+    AdicionaCombo();
+  	cmbEstado = new wx.Choice(this, ID_FRMCADENDERECOS_CMBESTADO, 
+      new Point(280, 104), new Size(144, 21), vsEstados );
+    cmbEstado.set_Enabled(false);
+
+    IniciaBotoes();
+  
+    btnPesquisar.SetSize(440, 8, 75, 25);
+    btnAnterior.SetSize(440, 40, 75, 25);
+    btnProximo.SetSize(440, 72, 75, 25);
+    btnSalvar.SetSize(200, 136, 75, 25);
+    btnExcluir.SetSize(280, 136, 75, 25);
+    btnLimpar.SetSize(360, 136, 75, 25);
+    btnFechar.SetSize(440, 136, 75, 25);
+  
+    //FazLayout();
+  
+    edtDescricao.set_MaxLength(40);
+    edtBairro.set_MaxLength(15);
+    edtCEP.set_MaxLength(8);
+    edtCidade.set_MaxLength(30);
+
+    EVT_BUTTON(ID_FRMCADASTROS_BTNNOVO, new EventListener( OnBtnNovo ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNPESQUISAR, new EventListener( OnBtnPesquisar ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNANTERIOR, new EventListener( OnBtnAnterior ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNPROXIMO, new EventListener( OnBtnProximo ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNSALVAR, new EventListener( OnBtnSalvar ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNEXCLUIR, new EventListener( OnBtnExcluir ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNLIMPAR, new EventListener( OnBtnLimpar ));
+    EVT_BUTTON(ID_FRMCADASTROS_BTNFECHAR, new EventListener( OnBtnFechar ));
+		EVT_CLOSE( new EventListener( OnClose ) );
+	}
+
+  private void FazLayout(){
+    wx.BoxSizer sizer_1 = new wx.BoxSizer(wx.Orientation.wxVERTICAL);
+    wx.BoxSizer sizer_2 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.BoxSizer sizer_3 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.BoxSizer sizer_4 = new wx.BoxSizer(wx.Orientation.wxVERTICAL);
+    wx.BoxSizer sizer_5 = new wx.BoxSizer(wx.Orientation.wxVERTICAL);
+    wx.BoxSizer sizer_6 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_6 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_5 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_4 = new wx.GridSizer(2, 1, 0, 0);
+    wx.BoxSizer sizer_8 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_9 = new wx.GridSizer(2, 1, 0, 0);
+    wx.GridSizer grid_sizer_8 = new wx.GridSizer(2, 1, 0, 0);
+    wx.BoxSizer sizer_7 = new wx.BoxSizer(wx.Orientation.wxHORIZONTAL);
+    wx.GridSizer grid_sizer_7 = new wx.GridSizer(2, 1, 0, 0);
+    grid_sizer_7.Add(labCodigo, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_7.Add(edtCodigo, 0, 0, 0);
+    sizer_7.Add(grid_sizer_7, 0, 0, 0);
+    sizer_7.Add(btnNovo, 0, wx.Direction.wxLEFT|wx.Alignment.wxALIGN_BOTTOM, 5);
+    sizer_5.Add(sizer_7, 1, 0, 0);
+    grid_sizer_8.Add(labDescricao, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_8.Add(edtDescricao, 0, 0, 0);
+    sizer_8.Add(grid_sizer_8, 0, 0, 0);
+    grid_sizer_9.Add(labBairro, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_9.Add(edtBairro, 0, 0, 0);
+    sizer_8.Add(grid_sizer_9, 0, wx.Direction.wxLEFT, 2);
+    sizer_5.Add(sizer_8, 1, wx.Stretch.wxEXPAND, 0);
+    grid_sizer_4.Add(labCEP, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_4.Add(edtCEP, 0, 0, 0);
+    sizer_6.Add(grid_sizer_4, 0, 0, 0);
+    grid_sizer_5.Add(labCidade, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_5.Add(edtCidade, 0, 0, 0);
+    sizer_6.Add(grid_sizer_5, 0, wx.Direction.wxLEFT, 4);
+    grid_sizer_6.Add(labEstado, 0, wx.Alignment.wxALIGN_BOTTOM, 0);
+    grid_sizer_6.Add(cmbEstado, 0, 0, 0);
+    sizer_6.Add(grid_sizer_6, 0, wx.Direction.wxLEFT, 5);
+    sizer_5.Add(sizer_6, 0, 0, 0);
+    sizer_3.Add(sizer_5, 0, 0, 0);
+    sizer_4.Add(btnPesquisar, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT, 2);
+    sizer_4.Add(btnAnterior, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT, 2);
+    sizer_4.Add(btnProximo, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT, 2);
+    sizer_3.Add(sizer_4, 1, 0, 0);
+    sizer_1.Add(sizer_3, 1, wx.Direction.wxALL|wx.Stretch.wxEXPAND, 4);
+    sizer_2.Add(btnSalvar, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 2);
+    sizer_2.Add(btnExcluir, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 2);
+    sizer_2.Add(btnLimpar, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 2);
+    sizer_2.Add(btnFechar, 0, wx.Direction.wxALL|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 2);
+    sizer_1.Add(sizer_2, 0, wx.Direction.wxRIGHT|wx.Direction.wxBOTTOM|
+      wx.Alignment.wxALIGN_RIGHT|wx.Alignment.wxALIGN_BOTTOM, 4);
+    set_AutoLayout(true);
+    SetSizer(sizer_1);
+    sizer_1.Fit(this);
+    sizer_1.SetSizeHints(this);
+  }
+
+	private boolean ValidaDados(boolean bTodosDados){
+    if (RotinasGlobais.Rotinas.ValidaCampo(edtCodigo.get_Value(), 
+      Resource.STR_CODNINF))
+      return false;
+    if (bTodosDados) {
+      if (RotinasGlobais.Rotinas.ValidaCampo(edtDescricao.get_Value(), 
+        Resource.STR_ENDNINF))
+      	return false;
+      if (RotinasGlobais.Rotinas.ValidaCampo(edtBairro.get_Value(), 
+        Resource.STR_BAIRRONINF))
+      	return false;
+      if (RotinasGlobais.Rotinas.ValidaCampo(edtCEP.get_Value(), 
+        Resource.STR_CEPNINF))
+      	return false;
+      if (RotinasGlobais.Rotinas.ValidaCampo(edtCidade.get_Value(), 
+        Resource.STR_CIDADENINF))
+      	return false;
+    }
+		return true;
+	}
+
+	private void OnClose( System.Object sender, wx.Event e ){
+    this.get_Parent().Close();
+		e.Skip();
+	}
+
+  private void OnBtnNovo( System.Object sender, wx.Event e ){
+    btnNovoClick();
+    InformaLimpaDados(false);
+    HabilitaDados(true);
+    NovoDado(ConsultasSQL.ConsSQL.Endereco('N', edtCodigo.get_Value(),
+      "","","","",""));
+    e.Skip();
+  }
+  
+  private void OnBtnPesquisar( System.Object sender, wx.Event e ){
+    if (PesquisarDados(ConsultasSQL.ConsSQL.Endereco('S', 
+      edtCodigo.get_Value(),"","","","",""), Resource.STR_ENDNENC)) {
+      InformaLimpaDados(true);
+      HabilitaDados(true);
+    }
+    e.Skip();
+  }
+  
+  private void OnBtnAnterior( System.Object sender, wx.Event e ){
+    if (registroAnterior())
+      InformaLimpaDados(true);
+    e.Skip();
+  }
+  
+  private void OnBtnProximo( System.Object sender, wx.Event e ){
+    if (registroProximo())
+      InformaLimpaDados(true);
+    e.Skip();
+  }
+  
+  private void OnBtnSalvar( System.Object sender, wx.Event e ){
+    if (SalvarDados(ValidaDados(true),
+      ConsultasSQL.ConsSQL.Endereco('S', edtCodigo.get_Value(),
+        "","","","",""),
+      ConsultasSQL.ConsSQL.Endereco('U', edtCodigo.get_Value(), 
+        edtDescricao.get_Value(),edtBairro.get_Value(),edtCEP.get_Value(),
+        edtCidade.get_Value(),cmbEstado.get_StringSelection()),
+      ConsultasSQL.ConsSQL.Endereco('I', edtCodigo.get_Value(), 
+        edtDescricao.get_Value(),edtBairro.get_Value(),edtCEP.get_Value(),
+        edtCidade.get_Value(),cmbEstado.get_StringSelection()), true)) {
+      InformaLimpaDados(false);
+      HabilitaDados(false);
+    }
+    e.Skip();
+  }
+  
+  private void OnBtnExcluir( System.Object sender, wx.Event e ){
+    if (ExcluirDados(ValidaDados(false),
+      ConsultasSQL.ConsSQL.Endereco('D', edtCodigo.get_Value(),
+      "","","","",""))){
+      InformaLimpaDados(false);
+      HabilitaDados(false);
+    }
+    e.Skip();
+  }
+  
+  private void OnBtnFechar( System.Object sender, wx.Event e ){
+    this.Close(true);
+    e.Skip();
+  }
+  
+  private void OnBtnLimpar( System.Object sender, wx.Event e ){
+    btnLimparClick();
+    InformaLimpaDados(false);
+    HabilitaDados(false);
+    e.Skip();
+  }
+
+  protected void InformaLimpaDados(boolean bInformar){
+    super.InformaLimpaDados(bInformar);
+
+    if (bInformar) {
+      edtBairro.set_Value(Campos.get_Item(2).ToString());
+      edtCEP.set_Value(Campos.get_Item(3).ToString());
+      edtCidade.set_Value(Campos.get_Item(4).ToString());
+      cmbEstado.set_StringSelection(Campos.get_Item(5).ToString());
+    } else {
+      edtBairro.Clear();
+      edtCEP.Clear();
+      edtCidade.Clear();
+      cmbEstado.set_Selection(0);
+    }
+  }
+  
+  protected void HabilitaDados(boolean bHabilita){
+		super.HabilitaDados(bHabilita);
+
+    edtBairro.set_Enabled(bHabilita);
+    edtCEP.set_Enabled(bHabilita);  
+    edtCidade.set_Enabled(bHabilita);
+    cmbEstado.set_Enabled(bHabilita);  
+  }
+
+  private void AdicionaCombo(){
+    vsEstados = new String[26]; 
+    vsEstados.SetValue(Resource.STR_PE, 0);
+    vsEstados.SetValue(Resource.STR_AC, 1);
+    vsEstados.SetValue(Resource.STR_AL, 2);
+    vsEstados.SetValue(Resource.STR_AP, 3);
+    vsEstados.SetValue(Resource.STR_AM, 4);
+    vsEstados.SetValue(Resource.STR_BA, 5);
+    vsEstados.SetValue(Resource.STR_BR, 6);
+    vsEstados.SetValue(Resource.STR_CE, 7);
+    vsEstados.SetValue(Resource.STR_DF, 8);
+    vsEstados.SetValue(Resource.STR_ES, 9);
+    vsEstados.SetValue(Resource.STR_GO, 10);
+    vsEstados.SetValue(Resource.STR_MT, 11);
+    vsEstados.SetValue(Resource.STR_MS, 12);
+    vsEstados.SetValue(Resource.STR_MG, 13);
+    vsEstados.SetValue(Resource.STR_PA, 14);
+    vsEstados.SetValue(Resource.STR_PB, 15);
+    vsEstados.SetValue(Resource.STR_PR, 16);
+    vsEstados.SetValue(Resource.STR_SC, 17);
+    vsEstados.SetValue(Resource.STR_RN, 18);
+    vsEstados.SetValue(Resource.STR_RS, 19);
+    vsEstados.SetValue(Resource.STR_RJ, 20);
+    vsEstados.SetValue(Resource.STR_RO, 21);
+    vsEstados.SetValue(Resource.STR_RR, 22);
+    vsEstados.SetValue(Resource.STR_SP, 23);
+    vsEstados.SetValue(Resource.STR_SE, 24);
+    vsEstados.SetValue(Resource.STR_TO, 25);
+  }
+}

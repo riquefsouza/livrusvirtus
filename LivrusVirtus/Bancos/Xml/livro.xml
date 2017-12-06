@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="isbn">85-346-0237-9</column>
+        <column name="titulo">ENGENHARIA DE SOFTWARE COM CMM</column>
+        <column name="edicao">1</column>
+        <column name="anopubli">1999</column>
+        <column name="codeditora">15</column>
+        <column name="volume">1</column>
+        <column name="codidioma">1</column>
+        <column name="npaginas">1234</column>
+        <column name="preco">34.56</column>
+        <column name="qtdestoque">10</column>
+    </row>
+    <row>
+        <column name="isbn">85-7307-525-2</column>
+        <column name="titulo">NOSSO FUTURO E O COMPUTADOR</column>
+        <column name="edicao">3</column>
+        <column name="anopubli">2000</column>
+        <column name="codeditora">5</column>
+        <column name="volume">1</column>
+        <column name="codidioma">1</column>
+        <column name="npaginas">234</column>
+        <column name="preco">45.34</column>
+        <column name="qtdestoque">5</column>
+    </row>
+    <row>
+        <column name="isbn">85-7307-608-9</column>
+        <column name="titulo">CONCEITOS DE LINGUAGEM DE PROGRAMACAO</column>
+        <column name="edicao">4</column>
+        <column name="anopubli">2000</column>
+        <column name="codeditora">5</column>
+        <column name="volume">1</column>
+        <column name="codidioma">1</column>
+        <column name="npaginas">431</column>
+        <column name="preco">32.21</column>
+        <column name="qtdestoque">8</column>
+    </row>
+    <row>
+        <column name="isbn">85-85588-17-9</column>
+        <column name="titulo">MELHORANDO A QUALIDADE DO SOFTWARE</column>
+        <column name="edicao">1</column>
+        <column name="anopubli">1994</column>
+        <column name="codeditora">16</column>
+        <column name="volume">1</column>
+        <column name="codidioma">1</column>
+        <column name="npaginas">180</column>
+        <column name="preco">45.67</column>
+        <column name="qtdestoque">3</column>
+    </row>
+</resultset>

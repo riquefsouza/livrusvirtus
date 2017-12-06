@@ -1,0 +1,25 @@
+unit ConLivros;
+
+interface
+
+uses
+  SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
+  QDialogs, QStdCtrls, Consultas, FMTBcd, Provider, DBClient, DB, SqlExpr,
+  QGrids, QDBGrids, QExtCtrls;
+
+type
+  TfrmConLivros = class(TfrmConsultas)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConLivros: TfrmConLivros;
+
+implementation
+
+{$R *.xfm}
+
+end.

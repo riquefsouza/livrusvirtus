@@ -1,0 +1,9 @@
+#  This also breaks file into sections but it changes the Field Separator
+#  (FS).  Also requires nawk and a searchstring= clause:
+#
+#    nawk -f thisfile searchstring=ifoundit somefile
+
+
+BEGIN  {FS = "\n"; RS = ""; OFS = "\n"}
+
+$0 ~ searchstring { print }

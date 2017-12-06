@@ -1,0 +1,111 @@
+1.  What is LISP?
+-----------------
+
+    LISP is a very old language, invented in 1960 by John McCarthy of MIT.
+    It was originally intended to make it easier to write Artificial Intelli-
+    gence programs.  Though still used for AI, LISP has uses in many other
+    areas, so it is really now a general purpose programming language.
+
+    The name LISP stands for "Lots of Irritating Silly Parentheses" because
+    the language is so rife with them...  No, actually, LISP stands for
+    LISt Processing because McCarthy organized all his data structures into
+    linked lists and made up a language that would manipulate them easily.
+
+    The flexibility of linked lists is that they can grow or shrink in size,
+    can be attached to other lists or included inside them, and can be cross
+    referenced in still other lists.  In short, lists provide an extremely
+    flexible and easy to use way of creating complex data structures quickly.
+    Such data structures are at the core of AI programs.
+
+2.  What is Common LISP?
+------------------------
+
+    Shortly after McCarthy's original LISP 1.5 appeared, many variations arose.
+    To put an end to the turmoil and incompatibility that these various LISPs
+    cause, the ANSI group initiated a standardized LISP, called Common LISP.
+    So it is the latest and, perhaps, greatest variety of LISP.  At Canisius,
+    we use an implementation of Common LISP called Ibuki Common LISP.  Some-
+    times we abbreviate this to "ibcl."
+    
+3.  What other languages are related to LISP?
+---------------------------------------------
+
+    LOGO -- the popular turtle graphics language used to teach kids 
+              about computers,
+    Scheme -- an even simpler, cleaner version of LISP used at MIT
+              in its beginning programming course
+    Franz LISP -- a version of LISP that used to come with all UNIXes
+    MacLISP -- another MIT version of LISP
+    InterLISP -- another big version of LISP, mostly for IBM mainframes
+    CLOS -- Common LISP Object System, an OOP version of LISP
+
+4.  What is the paradigm of LISP?
+---------------------------------
+
+    At its heart, LISP is a functional programming language, unlike Pascal
+    or C which are imperative languages.  A functional language relies heavily
+    on functions and their evaluations, passing results of computations from
+    one function to the next, instead of storing intermediate results into
+    variables as in C.
+
+    LISP, however, does have variables and can be used like an imperative
+    language.  Thus it is a kind of hybrid, or a non-pure functional language,
+    which is seen as a weakness by some and a strength by others.
+
+5.  How are LISP programs compiled and run?
+-------------------------------------------
+
+    LISP programs are often interactive and interpreted, but many systems
+    including Ibuki Common LISP have a compiler that generates code which
+    is often 10 times faster than its interpreted counterpart.
+
+6.  Where can I learn how to use LISP?
+--------------------------------------
+
+    A very good textbook is "Common LISPcraft" by Robert Wilensky.  To get 
+    started with elementary information, you should read Chapters 1-6 
+    thoroughly.
+   
+    For sample LISP programs, look in the directory
+
+       /usr1/local/doc/HELP/LANGUAGE-RESOURCES/LISP
+
+    There is also a neat program called analyze in the ANALYZE directory that 
+    you should study.  It reads a LISP program and does sophisticated error 
+    checking on the code.
+
+    A brief tutorial on LISP is also provided in this help system.
+
+7.  Who uses LISP today?
+------------------------
+
+    LISP is still widely used by AI researchers in the USA, whereas Prolog is
+    more common overseas.  Other people use LISP for a wide range of purposes,
+    from missile control in military systems to databases to scientific
+    programming.  LISP's ability to organize and manipulate complex data
+    structures makes it the language of choice for such applications, although
+    it is often much slower in pure "number crunching" than FORTRAN or C.
+
+8.  How do I use Common LISP at Canisius?
+-----------------------------------------
+
+    To use Ibuki Common LISP, type the command "ibcl" and wait for a new prompt,
+    the greater than sign:
+
+        % ibcl
+        >
+
+    You will see some copyright messages before the prompt.  To leave ibcl,
+    press CONTROL-D or type
+
+        > (bye)
+
+    Remember, the parentheses are important!
+
+9.  What is the future of LISP?
+-------------------------------
+
+    LISP is still going strong and not likely to die anytime soon.  However,
+    object oriented technology will undoubtedly cause it to change.  We have
+    a version of the Common LISP Object System, or CLOS (pronounced variously
+    as "clothes" or "closs") here at Canisius.

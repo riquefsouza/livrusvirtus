@@ -1,0 +1,46 @@
+--
+--  Callout skeleton
+--  ================
+--
+--  This is a skeleton of the SETL2 side of a callout handler.
+--
+
+package callout_package;
+
+   -- list all the services C will provide
+
+   procedure C_service;
+
+end callout_package;
+
+package body callout_package;
+
+   -- give each service an integer code
+
+   const C_service_code := 1;
+
+   -- transfer to C
+
+   procedure C_service;
+
+      callout(C_service_code,callback_handler,[]);
+
+   end C_service;
+
+   --
+   --  the callback handler routes calls based on the first argument
+   --
+
+   procedure callback_handler(service,args);
+
+      case service
+
+         when "request code" =>
+
+            null;
+
+      end case;
+
+   end callback_handler;
+
+end callout_package;

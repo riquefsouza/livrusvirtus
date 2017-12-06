@@ -1,0 +1,303 @@
+package Livrus;
+
+/**
+ * <p>Title: Livrus Virtus</p>
+ * <p>Description: Sistema integrante do projeto Livrus Virtus, versão
+ * programada no JBuilder 9 em Java</p>
+ * <p>Copyright: Todos os direitos reservados para: Henrique F. de Souza</p>
+ * <p>Company: </p>
+ * @author Henrique F. de Souza
+ * @version 1.0.0
+ */
+
+import java.awt.*;
+import java.sql.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class frmConVendas extends frmConsultas {
+  public static frmConVendas fConVendas;
+  String[] colNomes={"DataVenda", "CPF", "Cliente", "ISBN","Livro","Preço"};
+  JButton btnPCliente = new JButton();
+  JTextField edtHrVenda = new JTextField();
+  JLabel labISBN = new JLabel();
+  JLabel labLivro = new JLabel();
+  JLabel labCliente = new JLabel();
+  JLabel labPrecoTotal = new JLabel();
+  JTextField edtLivro = new JTextField();
+  JTextField edtISBN = new JTextField();
+  JLabel labDtVenda = new JLabel();
+  JTextField edtPrecoTotal = new JTextField();
+  JButton btnPLivro = new JButton();
+  JTextField edtCliente = new JTextField();
+  JTextField edtDtVenda = new JTextField();
+  ResultSet ConsTotal, ConsCampo;
+
+  public frmConVendas() {
+    try  {
+      jbInit();
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void jbInit() throws Exception {
+    this.setTitle("Consulta de Vendas Realizadas");
+    this.setSize(new Dimension(470, 345));
+    labDescricao.setText("CPF:");
+    labDescricao.setBounds(new Rectangle(6, 56, 85, 16));
+    edtDescricao.setBounds(new Rectangle(6, 74, 131, 21));
+    edtDescricao.addFocusListener(new java.awt.event.FocusAdapter() {
+      public void focusLost(FocusEvent e) {
+        edtDescricao_focusLost(e);
+      }
+    });
+    btnPesquisar.setBounds(new Rectangle(182, 32, 92, 25));
+    jPanel3.setPreferredSize(new Dimension(141,65));
+    jPanel1.setPreferredSize(new Dimension(458, 145));
+    btnLimpar.setBounds(new Rectangle(130, 31, 92, 25));
+    btnFechar.setBounds(new Rectangle(225, 31, 92, 25));
+    labDtVenda.setText("Data/Hora Venda:");
+    labDtVenda.setBounds(new Rectangle(6, 13, 102, 16));
+    edtDtVenda.setBounds(new Rectangle(6, 32, 80, 21));
+    edtDtVenda.addFocusListener(new java.awt.event.FocusAdapter() {
+      public void focusLost(FocusEvent e) {
+        edtDtVenda_focusLost(e);
+      }
+    });
+    edtHrVenda.setBounds(new Rectangle(88, 32, 80, 21));
+    edtHrVenda.setColumns(10);
+    edtHrVenda.addFocusListener(new java.awt.event.FocusAdapter() {
+      public void focusLost(FocusEvent e) {
+        edtHrVenda_focusLost(e);
+      }
+    });
+    edtCliente.setEnabled(false);
+    edtCliente.setBounds(new Rectangle(142, 74, 295, 21));
+    btnPLivro.setBounds(new Rectangle(438, 115, 21, 21));
+    btnPLivro.setText("...");
+    btnPLivro.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnPLivro_actionPerformed(e);
+      }
+    });
+    edtISBN.setBounds(new Rectangle(6, 115, 131, 21));
+    edtISBN.setColumns(10);
+    edtLivro.setBounds(new Rectangle(142, 115, 295, 21));
+    edtLivro.setEnabled(false);
+    labCliente.setBounds(new Rectangle(142, 56, 58, 15));
+    labCliente.setText("Cliente:");
+    labLivro.setText("Livro:");
+    labLivro.setBounds(new Rectangle(142, 98, 58, 15));
+    labISBN.setBounds(new Rectangle(6, 98, 82, 16));
+    labISBN.setText("ISBN:");
+    btnPCliente.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnPCliente_actionPerformed(e);
+      }
+    });
+    btnPCliente.setText("...");
+    btnPCliente.setBounds(new Rectangle(438, 74, 21, 21));
+    jPanel5.setMinimumSize(new Dimension(205, 35));
+    jPanel5.setPreferredSize(new Dimension(205, 35));
+    labPrecoTotal.setBounds(new Rectangle(114, 5, 72, 15));
+    labPrecoTotal.setText("Preço Total:");
+    edtPrecoTotal.setBounds(new Rectangle(190, 5, 124, 21));
+    edtPrecoTotal.setText("");
+    edtPrecoTotal.setEnabled(false);
+    edtISBN.addFocusListener(new java.awt.event.FocusAdapter() {
+      public void focusLost(FocusEvent e) {
+        edtISBN_focusLost(e);
+      }
+    });
+    this.addWindowListener(new java.awt.event.WindowAdapter() {
+      public void windowOpened(WindowEvent e) {
+        this_windowOpened(e);
+      }
+    });
+    btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnLimpar_actionPerformed(e);
+      }
+    });
+    btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnPesquisar_actionPerformed(e);
+      }
+    });
+    btnFechar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnFechar_actionPerformed(e);
+      }
+    });
+    jPanel1.add(labDtVenda, null);
+    jPanel1.add(edtDtVenda, null);
+    jPanel1.add(edtHrVenda, null);
+    jPanel1.add(labCliente, null);
+    jPanel1.add(edtCliente, null);
+    jPanel1.add(labISBN, null);
+    jPanel1.add(btnPLivro, null);
+    jPanel1.add(labLivro, null);
+    jPanel1.add(edtLivro, null);
+    jPanel1.add(edtDescricao, null);
+    jPanel1.add(edtISBN, null);
+    jPanel1.add(btnPCliente, null);
+    jPanel5.add(labPrecoTotal, null);
+    jPanel5.add(edtPrecoTotal, null);
+  }
+
+  void btnLimpar_actionPerformed(ActionEvent e) {
+    edtDtVenda.setText(RotinasGlobais.Rotinas.
+                       retDataStr(new java.util.Date(),"dd/MM/yyyy"));
+    edtHrVenda.setText(RotinasGlobais.Rotinas.
+                       retDataStr(new java.util.Date(),"hh:mm:ss"));
+    edtCliente.setText("");
+    edtISBN.setText("");
+    edtLivro.setText("");
+    edtPrecoTotal.setText("R$ 0,00");
+    edtDtVenda.requestFocus();
+
+    LimparDados(ConsVenda('L'),colNomes);
+  }
+
+  private String ConsVenda(char sOpcao)  {
+    String sDataVenda, sHoraVenda, sDtHrVenda;
+    if (edtDtVenda.getText().equals("")==false)
+      sDataVenda=RotinasGlobais.Rotinas.FormataDataStr(
+          edtDtVenda.getText(),"dd/MM/yyyy","yyyy-MM-dd");
+    else
+       sDataVenda="";
+    if (edtHrVenda.getText().equals("")==false)
+      sHoraVenda=RotinasGlobais.Rotinas.FormataDataStr(
+          edtHrVenda.getText(),"HH:mm:ss","HH:mm:ss.S");
+    else
+       sHoraVenda="";
+    sDtHrVenda=sDataVenda.trim()+" "+sHoraVenda.trim();
+    if (sOpcao=='L')
+     return ConsultasSQL.ConsSQL.Venda('S',"ZERO","","","","");
+    else
+     return ConsultasSQL.ConsSQL.Venda(sOpcao,edtISBN.getText(),
+     edtDescricao.getText(), sDtHrVenda.trim(),"","");
+
+  }
+
+  void btnPesquisar_actionPerformed(ActionEvent e) {
+   try {
+    if (PesquisarDados(ConsVenda('S'),"Venda não encontrada!",colNomes)) {
+     ConsTotal = RotinasGlobais.Rotinas.ConsultaDados(ConsVenda('P'));
+     if (ConsTotal.next())
+        edtPrecoTotal.setText("R$ "+ConsTotal.getObject(1).toString());
+    }
+   } catch (SQLException se) {
+     JOptionPane.showMessageDialog(null,se.getMessage(),"Erro",
+     JOptionPane.ERROR_MESSAGE);
+   }
+  }
+
+  void btnFechar_actionPerformed(ActionEvent e) {
+    super.btnFechar_actionPerformed(e);
+
+    frmPrincipal.fPrincipal.mnuVendasRealizadas.setEnabled(true);
+  }
+
+  void this_windowOpened(WindowEvent e) {
+    btnLimpar_actionPerformed(null);
+  }
+  void edtDtVenda_focusLost(FocusEvent e) {
+    if (edtDtVenda.getText().equals("")==false) {
+      if (RotinasGlobais.Rotinas.ValidaDateTime(
+          edtDtVenda.getText(),"dd/MM/yyyy")==false) {
+        edtDtVenda.setText("");
+        edtDtVenda.requestFocus();
+      }
+    }
+  }
+  void edtHrVenda_focusLost(FocusEvent e) {
+    if (edtHrVenda.getText().equals("")==false) {
+      if (RotinasGlobais.Rotinas.ValidaDateTime(
+          edtHrVenda.getText(),"HH:mm:ss")==false) {
+        edtHrVenda.setText("");
+        edtHrVenda.requestFocus();
+      }
+    }
+  }
+
+  void edtDescricao_focusLost(FocusEvent e) {
+    try {
+      if (edtDescricao.getText().equals("")==false) {
+        if (RotinasGlobais.Rotinas.ValidaCPF(edtDescricao.getText())) {
+
+          ConsCampo = RotinasGlobais.Rotinas.ConsultaCampoDesc(
+                     ConsultasSQL.ConsSQL.Cliente('S',edtDescricao.getText(),
+                     "","","","","","","","",""),"Cliente não encontrado!");
+          if (ConsCampo!=null) {
+             edtCliente.setText(ConsCampo.getObject(2).toString());
+          } else {
+            edtDescricao.setText("");
+            edtDescricao.requestFocus();
+          }
+
+        } else {
+          JOptionPane.showMessageDialog(this,"CPF inválido!",
+          frmPrincipal.fPrincipal.getTitle(), JOptionPane.OK_OPTION |
+          JOptionPane.ERROR_MESSAGE);
+          edtDescricao.setText("");
+          edtCliente.setText("");
+        }
+      } else
+         edtCliente.setText("");
+    } catch (SQLException se) {
+      JOptionPane.showMessageDialog(null,se.getMessage(),"Erro",
+      JOptionPane.ERROR_MESSAGE);
+    }
+  }
+  void btnPLivro_actionPerformed(ActionEvent e) {
+    frmConLivros pfConLivros = new frmConLivros();
+    RotinasGlobais.Rotinas.CentralizaDlg(pfConLivros);
+    pfConLivros.show();
+    edtISBN.setText(RotinasGlobais.Rotinas.sCodigoSelecionado);
+    edtISBN_focusLost(null);
+  }
+  void edtISBN_focusLost(FocusEvent e) {
+    try {
+      if (edtISBN.getText().equals("")==false) {
+        if (RotinasGlobais.Rotinas.ValidaISBN(edtISBN.getText())) {
+          ConsCampo = RotinasGlobais.Rotinas.ConsultaCampoDesc(
+              ConsultasSQL.ConsSQL.Livro('Q',edtISBN.getText(),
+              "","","","","","","","",""),"Livro não encontrado!");
+          if (ConsCampo!=null) {
+           if (Integer.parseInt(ConsCampo.getObject(4).toString()) > 0) {
+             edtLivro.setText(ConsCampo.getObject(2).toString());
+             RotinasGlobais.Rotinas.sPreco=ConsCampo.getObject(3).toString();
+           } else
+             JOptionPane.showMessageDialog(this,"Livro não existe no estoque!",
+             frmPrincipal.fPrincipal.getTitle(), JOptionPane.OK_OPTION |
+             JOptionPane.ERROR_MESSAGE);
+          } else {
+            edtISBN.setText("");
+            edtISBN.requestFocus();
+          }
+        } else {
+          JOptionPane.showMessageDialog(this,"ISBN inválido!",
+          frmPrincipal.fPrincipal.getTitle(), JOptionPane.OK_OPTION |
+          JOptionPane.ERROR_MESSAGE);
+          edtISBN.setText("");
+          edtLivro.setText("");
+        }
+      } else
+          edtLivro.setText("");
+    } catch (SQLException se) {
+      JOptionPane.showMessageDialog(null,se.getMessage(),"Erro",
+      JOptionPane.ERROR_MESSAGE);
+    }
+  }
+  void btnPCliente_actionPerformed(ActionEvent e) {
+    frmConClientes pfConClientes = new frmConClientes();
+    RotinasGlobais.Rotinas.CentralizaDlg(pfConClientes);
+    pfConClientes.show();
+    edtDescricao.setText(RotinasGlobais.Rotinas.sCodigoSelecionado);
+    edtDescricao_focusLost(null);
+  }
+
+}

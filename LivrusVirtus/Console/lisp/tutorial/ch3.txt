@@ -1,0 +1,80 @@
+LISP Tutorial   by Mark Meyer
+Chapter 3
+Functions
+--------------------------------------------------------------------------------
+TOPICS:  functions, prefix notation, arithmetic functions (operators)
+--------------------------------------------------------------------------------
+
+Functions in LISP are the heart of computations.  All activity happens because
+a function is evaluated.  Even things like assigning a value to a variable
+occurs as the side effect of a function.
+
+Here's one of the most common functions of LISP:  car, which gets the first
+element of a list and returns its value:
+
+      (car '(a b c))
+
+Notice that the function name always comes first, followed by the arguments.
+There may be 0 or more arguments.  In the above example, there is just one,
+namely '(a b c).  (Chapter 2.1 explains what that ridiculous quote stands for.)
+Functions are always enclosed inside parentheses.
+
+Here's the way to get the square root of a number:
+
+      (sqrt 4)
+
+to which LISP responds with
+
+      2.0.
+
+Surprisingly, the name of the function is on the INSIDE of the parentheses,
+unlike C, Ada or Modula-2, or almost any other language.  Thus,
+
+      sqrt(4)        <--- Wrong!!!
+
+is NOT RIGHT!  If you try this, LISP will get hopelessly confused.
+
+If there is more than one argument, put both inside the parentheses.  For
+instance, "expt" raises a number to a certain power.  To find the square
+root of 4, you could do
+
+      (expt 4 0.5)
+
+because raising 4 to the 0.5 power is finding the square root.  Note that
+NO COMMAS separate the arguments!
+
+Some functions can have a variable number of arguments, such as max and min,
+which find the largest and the smallest values respectively.  Here are some
+examples:
+
+      (max 5 2 3 5 6 7 1 0)
+
+which returns 7, while 
+
+      (max 4)
+
+returns 4.
+
+LISP is blessed with a whole host of arithmetic functions that correspond to 
+the familiar arithmetic operators.  For example, + adds numbers together, 
+while / does division.  The one thing to remember is that all functions are
+written using prefix notation, which means THE OPERATOR APPEARS FIRST!
+This may take some getting used to, since we are so used to writing arithmetic
+expressions in infix form.
+
+Here are some simple arithmetic examples.
+
+        (+ 5 2)
+        (- 10 8)
+        (/ 14 7)
+
+Just like C, if some of the arguments are themselves function calls, then
+you evaluate these first and save the returned values to use as arguments
+in the outer function calls.  This is sometimes called evaluating from
+the inside out:
+
+        (+ (- 10 8) (* 3 4))
+
+This corresponds to (10 - 8) + (3 * 4).
+
+--------------------------------------------------------------------------------

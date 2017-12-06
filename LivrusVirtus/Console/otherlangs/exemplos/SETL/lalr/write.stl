@@ -1,0 +1,450 @@
+--
+--  Table Output Procedures
+--  =======================
+--
+--  This package contains procedures for writing terminal and parse table
+--  information.  There really isn't a single good way to do this.  We
+--  can choose to just dump everything in text format, but we've already
+--  accumulated a lot of information in internal format, which can easily
+--  be used to generate source language tables already.  On the other
+--  hand, if we do generate source language tables then we will probably
+--  not write them in the format most preferred by the user.
+--
+--  What we have done is provide several formats, and encourage users to
+--  modify the source of this file to get the format they like.
+--
+
+package table_output;
+
+   var table_procedure_map := {["text",      write_text_tables],
+                               ["setl2",     write_setl2_tables]};
+
+   procedure write_tables;
+
+   procedure write_text_tables;
+
+   procedure write_setl2_tables;
+
+end table_output;
+
+package body table_output;
+
+   use globals;
+
+   --
+   --  write_tables
+   --  ------------
+   --
+   --  This is the entry procedure for this package.  We'll check the
+   --  format set by the user and stored as a global variable, then call
+   --  the appropriate procedure to output tables in that format.
+   --
+
+   procedure write_tables;
+
+      if table_procedure_map(table_format) = om then
+         abort("System error -- invalid table format");
+      end if;
+
+      table_procedure_map(table_format)();
+
+   end write_tables;
+
+   --
+   --  write_text_tables
+   --  -----------------
+   --
+   --  This procedure writes tables in plain text format.  This must be
+   --  read in by some other program and converted to something usable.
+   --
+
+   procedure write_text_tables;
+
+      var table_handle;                -- file handle for table file
+
+      --
+      --  First we open the output file.
+      --
+
+      if (table_handle := open(table_file_name, "text-out")) = om then
+         print("Can not open ", table_file_name);
+         stop;
+      end if;
+
+      --
+      --  Next we print terminals, in the format
+      --
+      --     <number> <length> <name> <alias-length> <alias-name>
+      --
+
+      inverse_alias_map := {[s, a] : [a, s] in alias_map};
+      printa(table_handle, "terminals ", num_terminals);
+      for s in [1 .. num_terminals] loop
+         nprinta(table_handle, s, " ", #symbol_list(s), " ",
+                             symbol_list(s), " ");
+         if (alias := inverse_alias_map(symbol_list(s))) /= om then
+            printa(table_handle, #alias, " ", alias);     
+         else
+            printa(table_handle, "0");
+         end if;
+      end loop;
+      
+      write_tuple("rule_lhs",        lhs_list);
+      write_tuple("rule_rhs",        [#rhs_list(r) : r in [1 .. num_rules]]);
+      write_tuple("default_action",  default_action);
+      write_tuple("term_index",      term_index);
+      write_tuple("term_check",      term_check);
+      write_tuple("term_action",     term_action);
+      write_tuple("goto_index",      goto_index);
+      write_tuple("goto_action",     goto_action);
+       
+      close(table_handle);
+
+      --
+      --  Much of the parse table data is stored in tuple.  This is a
+      --  general function which writes tuple data.
+      --
+
+      procedure write_tuple(name, data);
+
+         printa(table_handle, name, " ", #data);
+         max_data := max/data;
+         data_width := 2;
+         while max_data > 0 loop
+            data_width +:= 1;
+            max_data /:= 10;
+         end loop;
+
+         line := "";
+         for i in [1 .. #data] loop
+        
+            data_str := lpad(str(data(i)), data_width);
+
+            if #line + #data_str > 78 then
+               printa(table_handle, line);
+               line := "";
+            end if;
+
+            line +:= data_str;
+
+         end loop;
+         printa(table_handle, line);
+
+      end write_tuple;
+
+   end write_text_tables;
+
+   --
+   --  write_setl2_tables
+   --  ------------------
+   --
+   --  This procedure writes tables in SETL2 source code format.  We will
+   --  output two packages, one for token information used many places,
+   --  and one with parse tables used only by the parser.  We output
+   --  information in three general formats:
+   --
+   --     1.  As simple numeric constants.  We have a general procedure
+   --         which handles tuples of these pairs.
+   --
+   --     2.  As maps.  Again, we have a procedure which accepts pairs
+   --         of values, in a tuple.  We pass a tuple so the caller
+   --         can control the sequence, for beautification.
+   --
+   --     3.  As tuples of numeric data.  We pass large parse tables in
+   --         this format.
+   --
+
+   procedure write_setl2_tables;
+
+      var table_handle;                -- file handle for table file
+
+      --
+      --  First we open the output file and print a warning message for
+      --  anyone reading the output file.  The only way a change should
+      --  be made to this file is by re-running this program.
+      --
+
+      if (table_handle := open(table_file_name, "text-out")) = om then
+         print("Can not open ", table_file_name);
+         stop;
+      end if;
+
+      comment := word_fill(["WARNING: This file was created by a parse",
+                            "table generator from the source file",
+                            source_file_name + ",",
+                            "not by hand.  DO NOT CHANGE IT.",
+                            "If you need to change something here, ",
+                            "change",
+                            source_file_name,
+                            "and regenerate this file!"], 72);
+      printa(table_handle, "--");
+      for line in comment loop
+         printa(table_handle, "--  "+line);
+      end loop;
+      printa(table_handle, "--\n");
+       
+      --
+      --  token_class package
+      --
+      --  We output a bunch of information by token class.  If the
+      --  lexical analyzer is written carefully enough, it should be able
+      --  to use this information to accommodate any grammar changes.
+      --  The only thing we can't adapt from this information is a change
+      --  in lexical definition of a literal or identifier.
+      --
+
+      printa(table_handle, "package token_classes;\n");
+
+      --
+      --  We print a list of constant token class names.  We assume that
+      --  the programmer prefers lower case identifiers.
+      --
+
+      term_defs := [];
+      for i in [1 .. num_terminals] loop
+
+         name := symbol_list(i);
+         match(name, escape_mark);
+         name := tolower(name);
+         term_defs with:= ["tok_" + name, i];
+
+      end loop;
+      write_consts(term_defs);
+
+      --
+      --  Next we need a map of keyword strings to token classes, on the
+      --  assumption that the compiler recognizes keywords by entry in
+      --  the name table, and we will therefore need an initialization
+      --  list.
+      --
+
+      kw_map := {[name, tclass] : 
+                   tclass in [1 .. num_terminals - 2],
+                     name in symbol_desc(tclass)("keywords") ? {}};
+      kw_map := [["\"" + name + "\"", 
+                    "tok_" + tolower(symbol_list(kw_map(name))) ] :
+                 name in easy_sort(domain(kw_map))];
+      write_map("keyword_map",kw_map);
+
+      --
+      --  The compiler might want a map from token class numbers to
+      --  printable strings, probably to print verbose output in the
+      --  lexical analyzer or parser.
+      --
+                    
+      term_desc := [];
+      for name in symbol_list(1 .. num_terminals) loop
+
+         match(name, escape_mark);
+         name := tolower(name);
+         term_desc with:= ["tok_" + name, "\"tok_" + name + "\""];
+
+      end loop;
+      write_map("terminal_desc", term_desc);
+
+      --
+      --  We'd like to have a map of special symbols and token classes,
+      --  in case the lexical analyzer does something fancy to recognize
+      --  these things, like using regular expressions rather than brute
+      --  force.
+      --
+
+      sp_map := {[name, tclass] : 
+                   tclass in [1 .. num_terminals - 2],
+                     name in symbol_desc(tclass)("specials") ? {}};
+      sp_map := [["\"" + name + "\"", 
+                    "tok_" + tolower(symbol_list(sp_map(name))) ] :
+                 name in easy_sort(domain(sp_map))];
+      write_map("special_map",sp_map);
+
+      printa(table_handle, "end token_classes;\n");
+
+      --
+      --  parse tables
+      --
+      --  The parse table proper is only used by the parser, of course.
+      --  Most of this is just a bunch of long tuples of integers.
+      --
+
+      printa(table_handle, "package parse_tables;\n");
+      write_consts([["num_terminals",   num_terminals],
+                    ["num_rules",       num_rules],
+                    ["num_states",      num_states]]);
+      
+      write_tuple("rule_lhs",        lhs_list);
+      write_tuple("rule_rhs",        [#rhs_list(r) : r in [1 .. num_rules]]);
+      write_tuple("default_action",  default_action);
+      write_tuple("term_index",      term_index);
+      write_tuple("term_check",      term_check);
+      write_tuple("term_action",     term_action);
+      write_tuple("goto_index",      goto_index);
+      write_tuple("goto_action",     goto_action);
+       
+      printa(table_handle, "end parse_tables;\n");
+      close(table_handle);
+
+      --
+      --  write_consts
+      --  ------------
+      --
+      --  This procedure handles declarations of simple numeric
+      --  constants.  We get a tuple of pairs, the left hand element
+      --  being a character string and the right the integer value.  We
+      --  just format this nicely as a declaration.
+      --
+
+      procedure write_consts(data);
+
+         if #data = 0 then
+            return;
+         end if;
+
+         lhs_width := max/[#l : [l, r] in data];
+         lhs_width +:= 2;
+         while lhs_width mod 3 /= 1 loop
+            lhs_width +:= 1;
+         end loop;
+
+         rhs_width := 1;
+         destroy := max/[r : [l, r] in data];
+         while (destroy /:= 10) > 0 loop
+            rhs_width +:= 1;
+         end loop;
+
+         for i in [1 .. #data] loop
+        
+            [lhs, rhs] := data(i);
+            printa(table_handle, 
+                   if i = 1 then "   const " else "         " end if,
+                   rpad(lhs, lhs_width),
+                   " := ", lpad(str(rhs), rhs_width),
+                   if i < #data then "," else ";\n" end if); 
+         end loop;
+
+      end write_consts;
+
+      --
+      --  write_map
+      --  ---------
+      --
+      --  This procedure handles constant maps.  We are actually passed
+      --  this information as a tuple, so the caller can order the data
+      --  any way it likes.
+      --
+
+      procedure write_map(name, data);
+
+         if #data = 0 then
+            printa(table_handle, "   const ", name, " := {};\n");
+            return;
+         end if;
+
+         lhs_width := max/[#l : [l, r] in data];
+         lhs_width +:= 3;
+         while lhs_width mod 3 /= 1 loop
+            lhs_width +:= 1;
+         end loop;
+
+         printa(table_handle, "   const ", name, " := {");
+         for i in [1 .. #data] loop
+        
+            [lhs, rhs] := data(i);
+            printa(table_handle, "      [", rpad(lhs + ",", lhs_width),
+                                 rhs, "]",
+                                 if i < #data then "," else "" end if); 
+
+         end loop;
+
+         printa(table_handle, "   };\n");
+
+      end write_map;
+
+      --
+      --  write_tuple
+      --  -----------
+      --
+      --  The bulk of the parse tables are tuples of numbers.  This
+      --  procedure formats them nicely.
+      --
+
+      procedure write_tuple(name, data);
+
+         if #data = 0 then
+            printa(table_handle, "   const ", name, " := [];\n");
+            return;
+         end if;
+
+         max_data := max/data;
+         data_width := 2;
+         while max_data > 0 loop
+            data_width +:= 1;
+            max_data /:= 10;
+         end loop;
+
+         printa(table_handle, "   const ", name, " := [");
+         line := "        ";
+         for i in [1 .. #data] loop
+        
+            data_str := lpad(str(data(i)), data_width);
+            if i < #data then
+               data_str +:= ",";
+            end if;
+
+            if #line + #data_str > 78 then
+               printa(table_handle, line);
+               line := "        ";
+            end if;
+
+            line +:= data_str;
+
+         end loop;
+
+         printa(table_handle, line, "\n   ];\n");
+
+      end write_tuple;
+
+      --
+      --  word_fill
+      --  ---------
+      --
+      --  This procedure fills lines with words out to a specified
+      --  column, or as close as is reasonable.  It does not do right
+      --  justification.  It's useful in writing nicely formatted block
+      --  comments.
+      --
+
+      procedure word_fill(lines, fill_column);
+
+         big_line := +/[l + " " : l in lines]; 
+         out_lines := [];
+         line := "";
+
+         loop
+         
+            span(big_line, " \t"); 
+            word := break(big_line, " \t");
+            exit when word = "";
+
+            if #line + #word > fill_column then
+               rspan(line, " ");
+               out_lines with:= line;
+               line := "";
+            end if;
+       
+            line +:= word + " ";
+            if word(#word) in ".?!" then
+               line +:= " ";
+            end if;
+
+         end loop;
+            
+         rspan(line, " ");
+         out_lines with:= line;
+
+         return out_lines;
+            
+      end word_fill;
+
+   end write_setl2_tables;
+
+end table_output;

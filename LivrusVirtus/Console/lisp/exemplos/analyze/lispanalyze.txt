@@ -1,0 +1,31 @@
+#!/bin/csh
+
+#  This shell script calls IBCL on the input file that you give it,
+#  which must contain LISP source code.  It then runs an analysis
+#  program that does a bunch of cross-listing of function calls,
+#  which variables are bound or free, etc.  The output should be
+#  rather self-explanatory.
+
+if ($#argv == 0) then
+     echo "Usage:  lispanalyze sourcefile" 
+     echo "    or  lispanalyze sourcefile resultfile"
+     exit
+endif
+
+if ($#argv == 1) then
+
+     ibcl <<HEREDOC
+     (load "/usr/local/doc/HELP/LISP/EXAMPLES/ANALYZE/analyze")
+     (analyze-file "$1")
+     (bye)
+HEREDOC
+
+else
+
+     ibcl <<HEREDOC2
+     (load "/usr/local/doc/HELP/LISP/EXAMPLES/ANALYZE/analyze")
+     (analyze-file "$1" "$2")
+     (bye)
+HEREDOC2
+
+endif

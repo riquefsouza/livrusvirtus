@@ -1,0 +1,37 @@
+                        Built-in FP functions
+                        ---------------------
+
+List manipulation
+========================================================================
+   1         -- select first element, similar for 2, 3, etc.
+   1r        -- select last element, 2r is 2nd from last, etc.
+   id        -- return input data intact, identity function
+   length    -- length of the data list
+   iota      -- create a list of numbers, up to n
+   distl     -- distribute left
+   distr     -- distribute right
+   apndr     -- append to the right
+   tl        -- tail, all but the first element of the list
+   tlr       -- tail right, all but the last element of the list
+   
+   
+Arithmetic (integer only)
+========================================================================
+   +
+   -
+   *
+   %  or div  -- divide       (/ is used for a functional form)
+   
+Boolean
+========================================================================
+   =
+   >
+   >=
+   <
+   <=
+   or
+   and
+   not
+   atom       -- is the data item an atom or a list?
+   null       -- is the data item the empty list?
+   isanum     -- is the data item a number?

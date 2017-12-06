@@ -1,0 +1,36 @@
+===========================================================================
+How I implemented it:
+===========================================================================
+
+I wrote the original interpreter in LISP, and the source code for that is
+in /mnt1/dept/meyer/LANGS/FP/FP-LISP/fp.lsp.   The compiled version is in
+/mnt1/dept/meyer/LANGS/FP/fp.o.
+
+That LISP program forms the core of the Mark-FP interpreter, and in fact
+does all the work.  To make its ugly syntax closer to that of true FP,
+I wrote an interface using Yacc.
+
+How I did this was to write a parser using Yacc, which is in
+/mnt1/dept/meyer/LANGS/FP/TRAN.  This parser reads from the user's keyboard
+input and translates it into a LISP form, which is then sent through a 
+named pipe (called inpipe) to the IBCL interpreter, running the LISP code.
+Thus, there are two components active:
+
+
+    +------------+                                   +-------------+
+    | Yacc parser|             "inpipe"              | LISP inter- |
+    |            |---------------------------------->| preter for  |
+    |            |                                   |      FP     |
+    +------------+                                   +-------------+
+           ^                                                 |
+           |                                                 |
+           |                                                 |
+           |                                                 |
+           |                                                 V
+      user types                                      the answer comes
+    FP expression in                                 back on the screen
+      at keyboard                                 from the FP interpreter
+
+
+This may seem clumsy, and in fact is, especially when errors occur, but it
+was a very quick way to get this up and running.

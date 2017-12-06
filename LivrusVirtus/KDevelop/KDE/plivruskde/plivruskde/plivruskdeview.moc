@@ -1,0 +1,92 @@
+/****************************************************************************
+** PlivruskdeView meta object code from reading C++ file 'plivruskdeview.h'
+**
+** Created: Sun Jan 2 10:33:55 2005
+**      by: The Qt MOC ($Id: qt/moc_yacc.cpp   3.1.1   edited Dec 9 10:40 $)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#undef QT_NO_COMPAT
+#include "plivruskdeview.h"
+#include <qmetaobject.h>
+#include <qapplication.h>
+
+#include <private/qucomextra_p.h>
+#if !defined(Q_MOC_OUTPUT_REVISION) || (Q_MOC_OUTPUT_REVISION != 26)
+#error "This file was generated using the moc from 3.1.1. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+const char *PlivruskdeView::className() const
+{
+    return "PlivruskdeView";
+}
+
+QMetaObject *PlivruskdeView::metaObj = 0;
+static QMetaObjectCleanUp cleanUp_PlivruskdeView( "PlivruskdeView", &PlivruskdeView::staticMetaObject );
+
+#ifndef QT_NO_TRANSLATION
+QString PlivruskdeView::tr( const char *s, const char *c )
+{
+    if ( qApp )
+	return qApp->translate( "PlivruskdeView", s, c, QApplication::DefaultCodec );
+    else
+	return QString::fromLatin1( s );
+}
+#ifndef QT_NO_TRANSLATION_UTF8
+QString PlivruskdeView::trUtf8( const char *s, const char *c )
+{
+    if ( qApp )
+	return qApp->translate( "PlivruskdeView", s, c, QApplication::UnicodeUTF8 );
+    else
+	return QString::fromUtf8( s );
+}
+#endif // QT_NO_TRANSLATION_UTF8
+
+#endif // QT_NO_TRANSLATION
+
+QMetaObject* PlivruskdeView::staticMetaObject()
+{
+    if ( metaObj )
+	return metaObj;
+    QMetaObject* parentObject = QWidget::staticMetaObject();
+    metaObj = QMetaObject::new_metaobject(
+	"PlivruskdeView", parentObject,
+	0, 0,
+	0, 0,
+#ifndef QT_NO_PROPERTIES
+	0, 0,
+	0, 0,
+#endif // QT_NO_PROPERTIES
+	0, 0 );
+    cleanUp_PlivruskdeView.setMetaObject( metaObj );
+    return metaObj;
+}
+
+void* PlivruskdeView::qt_cast( const char* clname )
+{
+    if ( !qstrcmp( clname, "PlivruskdeView" ) )
+	return this;
+    return QWidget::qt_cast( clname );
+}
+
+bool PlivruskdeView::qt_invoke( int _id, QUObject* _o )
+{
+    return QWidget::qt_invoke(_id,_o);
+}
+
+bool PlivruskdeView::qt_emit( int _id, QUObject* _o )
+{
+    return QWidget::qt_emit(_id,_o);
+}
+#ifndef QT_NO_PROPERTIES
+
+bool PlivruskdeView::qt_property( int id, int f, QVariant* v)
+{
+    return QWidget::qt_property( id, f, v);
+}
+
+bool PlivruskdeView::qt_static_property( QObject* , int , int , QVariant* ){ return FALSE; }
+#endif // QT_NO_PROPERTIES

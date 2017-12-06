@@ -1,0 +1,197 @@
+package  Livrus;
+
+import System.*;
+import System.Drawing.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+import System.Data.OleDb.*;
+
+/// <summary>
+/// Summary description for WinForm.
+/// </summary>
+public class frmLogin extends System.Windows.Forms.Form
+{
+	public static frmLogin fLogin;
+	private boolean bFecharOuTerminar;
+	/// <summary>
+	/// Required designer variable.
+	/// </summary>
+	private System.ComponentModel.Container components = null;
+	private System.Windows.Forms.TextBox edtLogin;
+	private System.Windows.Forms.Label label1;
+	private System.Windows.Forms.Label label2;
+	private System.Windows.Forms.Label label3;
+	private System.Windows.Forms.TextBox edtSenha;
+	private System.Windows.Forms.Button btnLogin;
+	private System.Windows.Forms.Button btnCancelar;
+	private System.Data.OleDb.OleDbCommand Consulta;
+
+	public frmLogin()
+	{
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent();
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+	}
+
+	/// <summary>
+	/// Clean up any resources being used.
+	/// </summary>
+	protected void Dispose (boolean disposing)
+	{
+		if (disposing)
+		{
+			if (components != null)
+			{
+				components.Dispose();
+			}
+		}
+		super.Dispose(disposing);
+	}
+
+	/// <summary>
+	/// Required method for Designer support - do not modify
+	/// the contents of this method with the code editor.
+	/// </summary>
+	private void InitializeComponent()
+	{
+		System.Resources.ResourceManager resources = new System.Resources.ResourceManager(GetType());
+		this.edtLogin = new System.Windows.Forms.TextBox();
+		this.label1 = new System.Windows.Forms.Label();
+		this.label2 = new System.Windows.Forms.Label();
+		this.label3 = new System.Windows.Forms.Label();
+		this.edtSenha = new System.Windows.Forms.TextBox();
+		this.btnLogin = new System.Windows.Forms.Button();
+		this.btnCancelar = new System.Windows.Forms.Button();
+		this.Consulta = new System.Data.OleDb.OleDbCommand();
+		this.SuspendLayout();
+		// 
+		// edtLogin
+		// 
+		this.edtLogin.set_Location(new System.Drawing.Point(112, 32));
+		this.edtLogin.set_MaxLength(10);
+		this.edtLogin.set_Name("edtLogin");
+		this.edtLogin.set_Size(new System.Drawing.Size(80, 20));
+		this.edtLogin.set_TabIndex(2);
+		this.edtLogin.set_Text("");
+		// 
+		// label1
+		// 
+		this.label1.set_BackColor(System.Drawing.Color.get_Transparent());
+		this.label1.set_Image(((System.Drawing.Image)(resources.GetObject("label1.Image"))));
+		this.label1.set_Location(new System.Drawing.Point(8, 8));
+		this.label1.set_Name("label1");
+		this.label1.set_Size(new System.Drawing.Size(96, 96));
+		this.label1.set_TabIndex(0);
+		// 
+		// label2
+		// 
+		this.label2.set_Location(new System.Drawing.Point(112, 16));
+		this.label2.set_Name("label2");
+		this.label2.set_Size(new System.Drawing.Size(64, 16));
+		this.label2.set_TabIndex(1);
+		this.label2.set_Text("Login:");
+		// 
+		// label3
+		// 
+		this.label3.set_Location(new System.Drawing.Point(112, 64));
+		this.label3.set_Name("label3");
+		this.label3.set_Size(new System.Drawing.Size(64, 16));
+		this.label3.set_TabIndex(3);
+		this.label3.set_Text("Senha:");
+		// 
+		// edtSenha
+		// 
+		this.edtSenha.set_Location(new System.Drawing.Point(112, 80));
+		this.edtSenha.set_MaxLength(10);
+		this.edtSenha.set_Name("edtSenha");
+		this.edtSenha.set_PasswordChar('*');
+		this.edtSenha.set_Size(new System.Drawing.Size(80, 20));
+		this.edtSenha.set_TabIndex(4);
+		this.edtSenha.set_Text("");
+		// 
+		// btnLogin
+		// 
+		this.btnLogin.set_Location(new System.Drawing.Point(24, 112));
+		this.btnLogin.set_Name("btnLogin");
+		this.btnLogin.set_TabIndex(5);
+		this.btnLogin.set_Text("&Login");
+		this.btnLogin.add_Click(new System.EventHandler(this.btnLogin_Click));
+		// 
+		// btnCancelar
+		// 
+		this.btnCancelar.set_DialogResult(System.Windows.Forms.DialogResult.Cancel);
+		this.btnCancelar.set_Location(new System.Drawing.Point(104, 112));
+		this.btnCancelar.set_Name("btnCancelar");
+		this.btnCancelar.set_TabIndex(6);
+		this.btnCancelar.set_Text("&Cancelar");
+		this.btnCancelar.add_Click(new System.EventHandler(this.btnCancelar_Click));
+		// 
+		// frmLogin
+		// 
+		this.set_AcceptButton(this.btnLogin);
+		this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+		this.set_CancelButton(this.btnCancelar);
+		this.set_ClientSize(new System.Drawing.Size(202, 143));
+		this.get_Controls().Add(this.btnCancelar);
+		this.get_Controls().Add(this.btnLogin);
+		this.get_Controls().Add(this.label3);
+		this.get_Controls().Add(this.edtSenha);
+		this.get_Controls().Add(this.edtLogin);
+		this.get_Controls().Add(this.label2);
+		this.get_Controls().Add(this.label1);
+		this.set_FormBorderStyle(System.Windows.Forms.FormBorderStyle.FixedDialog);
+		this.set_MaximizeBox(false);
+		this.set_MinimizeBox(false);
+		this.set_Name("frmLogin");
+		this.set_StartPosition(System.Windows.Forms.FormStartPosition.CenterScreen);
+		this.set_Text("Login do sistema");
+		this.add_Closing(new System.ComponentModel.CancelEventHandler(this.frmLogin_Closing));
+		this.add_Load(new System.EventHandler(this.frmLogin_Load));
+		this.ResumeLayout(false);
+	}
+
+	private void frmLogin_Load(Object sender, System.EventArgs e)
+	{
+		bFecharOuTerminar=false;
+	}
+
+	private void frmLogin_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
+	{
+		if (bFecharOuTerminar)
+		  e.set_Cancel(false);
+		else
+		  Application.Exit();
+
+	}
+	
+	private void btnLogin_Click(Object sender, System.EventArgs e)
+	{
+		if (RotinasGlobais.Rotinas.ConsultaDados(Consulta,
+		 ConsultasSQL.ConsSQL.Usuario('S',edtLogin.get_Text(),edtSenha.get_Text()))) {
+		 RotinasGlobais.Rotinas.sUsuarioLogin=edtLogin.get_Text();
+		 RotinasGlobais.Rotinas.sUsuarioSenha=edtSenha.get_Text();
+		 frmPrincipal.fPrincipal.statusBar1.get_Panels().get_Item(0).set_Text(
+			"Usuário: "+edtLogin.get_Text());
+		 bFecharOuTerminar=true;
+		 Close();
+		} else
+		  MessageBox.Show("Login ou senha incorretos!",
+		  frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+		  MessageBoxIcon.Information);
+
+	}
+
+	private void btnCancelar_Click(Object sender, System.EventArgs e)
+	{
+		bFecharOuTerminar=false;
+		Close();
+	}
+
+}

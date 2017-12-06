@@ -1,0 +1,111 @@
+CREATE TABLE IF NOT EXISTS assunto (
+  codassunto smallint(6) NOT NULL DEFAULT '0' ,
+  assunto varchar(30) ,
+  PRIMARY KEY (codassunto)
+);
+
+CREATE TABLE IF NOT EXISTS autor (
+  codautor smallint(6) NOT NULL DEFAULT '0' ,
+  autor varchar(30) ,
+  PRIMARY KEY (codautor)
+);
+
+CREATE TABLE IF NOT EXISTS cliente (
+  cpf varchar(14) NOT NULL DEFAULT '' ,
+  email varchar(30) ,
+  nome varchar(30) ,
+  identidade varchar(10) ,
+  codendereco int(11) NOT NULL DEFAULT '0' ,
+  telefone varchar(17) ,
+  codpais char(3) ,
+  codprofissao int(11) ,
+  sexo char(1) ,
+  datanasc datetime ,
+  PRIMARY KEY (cpf),
+   KEY cliente_endereco (codendereco),
+   KEY cliente_pais (codpais),
+   KEY cliente_profissao (codprofissao)
+);
+
+CREATE TABLE IF NOT EXISTS editora (
+  codeditora smallint(6) NOT NULL DEFAULT '0' ,
+  editora varchar(50) ,
+  PRIMARY KEY (codeditora)
+);
+
+CREATE TABLE IF NOT EXISTS endereco (
+  codendereco int(11) NOT NULL DEFAULT '0' ,
+  logradouro varchar(40) ,
+  bairro varchar(15) ,
+  cep varchar(8) ,
+  cidade varchar(30) ,
+  estado varchar(20) ,
+  PRIMARY KEY (codendereco)
+);
+
+CREATE TABLE IF NOT EXISTS idioma (
+  codidioma smallint(6) NOT NULL DEFAULT '0' ,
+  idioma varchar(20) ,
+  PRIMARY KEY (codidioma)
+);
+
+CREATE TABLE IF NOT EXISTS livro (
+  isbn varchar(13) NOT NULL DEFAULT '' ,
+  titulo varchar(50) ,
+  edicao smallint(6) ,
+  anopubli smallint(6) ,
+  codeditora smallint(6) ,
+  volume smallint(6) ,
+  codidioma smallint(6) ,
+  npaginas smallint(6) ,
+  preco float ,
+  qtdestoque smallint(6) ,
+  PRIMARY KEY (isbn),
+   KEY livro_editora (codeditora),
+   KEY livro_idioma (codidioma)
+);
+
+CREATE TABLE IF NOT EXISTS livroass (
+  isbn varchar(13) NOT NULL DEFAULT '' ,
+  codassunto smallint(6) NOT NULL DEFAULT '0' ,
+  PRIMARY KEY (codassunto,isbn),
+   KEY livroass_livro (isbn),
+   KEY livroass_assunto (codassunto)
+);
+
+CREATE TABLE IF NOT EXISTS livroaut (
+  isbn varchar(13) NOT NULL DEFAULT '' ,
+  codautor smallint(6) NOT NULL DEFAULT '0' ,
+  PRIMARY KEY (codautor,isbn),
+   KEY livroaut_livro (isbn),
+   KEY livroaut_autor (codautor)
+);
+
+CREATE TABLE IF NOT EXISTS pais (
+  codpais char(3) NOT NULL DEFAULT '' ,
+  pais varchar(50) ,
+  PRIMARY KEY (codpais)
+);
+
+CREATE TABLE IF NOT EXISTS profissao (
+  codprofissao int(11) NOT NULL DEFAULT '0' ,
+  profissao varchar(50) ,
+  PRIMARY KEY (codprofissao)
+);
+
+CREATE TABLE IF NOT EXISTS usuario (
+  login varchar(10) NOT NULL DEFAULT '' ,
+  senha varchar(10) ,
+  PRIMARY KEY (login)
+);
+
+CREATE TABLE IF NOT EXISTS venda (
+  isbn varchar(13) NOT NULL DEFAULT '' ,
+  cpf varchar(14) NOT NULL DEFAULT '' ,
+  datavenda datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+  precovenda float ,
+  PRIMARY KEY (cpf,datavenda,isbn),
+   KEY venda_livro (isbn),
+   KEY venda_cliente (cpf)
+);
+

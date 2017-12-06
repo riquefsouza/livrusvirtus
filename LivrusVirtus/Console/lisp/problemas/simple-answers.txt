@@ -1,0 +1,36 @@
+                          Answers to Simple LISP problems
+-----------------------------------------------------------------------------
+
+1.
+       (defun average-age (a-list)
+             (let (sum)
+                  (setq sum 0)
+                  (dolist (person a-list)
+                       (setq sum (+ sum (second person)))
+                  )
+                  (/ sum (length a-list))
+             )
+       )
+
+
+2.     (mapcar #'second a-list)  gives you the ages, which are the second items
+                                 in each list.
+
+       Then stick the plus sign in front:
+
+       (apply #'+ (mapcar #'second a-list))
+
+       This gives you the sum.  Finally, divide by the length of the list:
+
+
+       (defun average-age (a-list)
+            (/ (apply #'+ (mapcar #'second a-list)) (length a-list))
+       )
+
+
+3.     This one is trivial if we use reverse,the built-in reversing function,
+       and mapcar.
+
+       (defun reverse-a-list (a-list)
+            (mapcar #'reverse a-list)
+       )

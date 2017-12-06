@@ -1,0 +1,4 @@
+// Concatenate two lists, just like append
+
+(def concat == null.1 -> 2;cons.[1.1,concat.[tl.1,2]])
+end

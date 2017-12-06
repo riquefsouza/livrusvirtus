@@ -1,0 +1,29 @@
+/utf8output
+/out:C:\LivrusVirtus\Delphi8.NET\WinForm\produto\Livrus.exe
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\Principal.frmPrincipal.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\Splash.frmSplash.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\Login.frmLogin.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\Sobre.frmSobre.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\AlterarSenha.frmAlterarSenha.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\Cadastros.frmCadastros.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\Consultas.frmConsultas.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\CadAssuntos.frmCadAssuntos.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConAssuntos.frmConAssuntos.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\CadAutores.frmCadAutores.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConAutores.frmConAutores.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\CadEditoras.frmCadEditoras.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConEditoras.frmConEditoras.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\CadEnderecos.frmCadEnderecos.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConEnderecos.frmConEnderecos.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\CadIdiomas.frmCadIdiomas.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConIdiomas.frmConIdiomas.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\CadPaises.frmCadPaises.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConPaises.frmConPaises.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\CadProfissoes.frmCadProfissoes.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConProfissoes.frmConProfissoes.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\CadClientes.frmCadClientes.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConClientes.frmConClientes.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\CadLivros.frmCadLivros.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConLivros.frmConLivros.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\ConVendas.frmConVendas.resources
+ /res:C:\LivrusVirtus\Delphi8.NET\WinForm\fontes\VenderLivros.frmVenderLivros.resources

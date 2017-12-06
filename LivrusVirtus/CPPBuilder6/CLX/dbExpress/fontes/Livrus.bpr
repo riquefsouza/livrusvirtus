@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="C:\LivrusVirtus\CPPBuilder6\CLX\dbExpress\produto\Livrus.exe"/>
+    <OBJFILES value="..\objs\Livrus.obj ..\objs\Principal.obj ..\objs\Cadastros.obj 
+      ..\objs\Consultas.obj ..\objs\CadAssuntos.obj ..\objs\AlterarSenha.obj 
+      ..\objs\ConProfissoes.obj ..\objs\CadClientes.obj ..\objs\CadEditoras.obj 
+      ..\objs\CadEnderecos.obj ..\objs\CadIdiomas.obj ..\objs\CadLivros.obj 
+      ..\objs\CadPaises.obj ..\objs\CadProfissoes.obj ..\objs\ConAssuntos.obj 
+      ..\objs\ConAutores.obj ..\objs\ConClientes.obj ..\objs\ConEditoras.obj 
+      ..\objs\ConEnderecos.obj ..\objs\ConIdiomas.obj ..\objs\ConLivros.obj 
+      ..\objs\ConPaises.obj ..\objs\CadAutores.obj ..\objs\ConVendas.obj 
+      ..\objs\ConsultasSQL.obj ..\objs\Login.obj ..\objs\VenderLivros.obj 
+      ..\objs\Sobre.obj ..\objs\Splash.obj ..\objs\RotinasGlobais.obj"/>
+    <RESFILES value="Livrus.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) Principal.xfm Cadastros.xfm Consultas.xfm CadAssuntos.xfm 
+      AlterarSenha.xfm ConProfissoes.xfm CadClientes.xfm CadEditoras.xfm 
+      CadEnderecos.xfm CadIdiomas.xfm CadLivros.xfm CadPaises.xfm 
+      CadProfissoes.xfm ConAssuntos.xfm ConAutores.xfm ConClientes.xfm 
+      ConEditoras.xfm ConEnderecos.xfm ConIdiomas.xfm ConLivros.xfm 
+      ConPaises.xfm CadAutores.xfm ConVendas.xfm Login.xfm VenderLivros.xfm 
+      Sobre.xfm Splash.xfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="visualdbclx.lib dsnap.lib dbexpress.lib bdertl.lib dbrtl.lib vcl.lib 
+      visualclx.lib rtl.lib"/>
+    <SPARELIBS value="rtl.lib visualclx.lib vcl.lib dbrtl.lib bdertl.lib dbexpress.lib dsnap.lib 
+      visualdbclx.lib"/>
+    <PACKAGES value="vcl.bpi rtl.bpi vclx.bpi websnap.bpi bdertl.bpi dsnap.bpi cds.bpi 
+      visualclx.bpi dbxcds.bpi teeui.bpi teedb.bpi tee.bpi dsnapcon.bpi 
+      dsnapent.bpi dsnapcrba.bpi soaprtl.bpi vcldb.bpi visualdbclx.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT"/>
+    <MAINSOURCE value="Livrus.cpp"/>
+    <INCLUDEPATH value="..\..\..\..;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\..\..\..;$(BCB)\lib;$(BCB)\lib\obj;C:\LivrusVirtus\CPPBuilder6\CLX\dbExpress\objs"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\..\..\.. -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\clx60.csm -Vx -Ve -X- -a8 -b- -k- -vi -c -tW -tWM"/>
+    <PFLAGS value="-N2C:\LivrusVirtus\CPPBuilder6\CLX\dbExpress\objs 
+      -N0C:\LivrusVirtus\CPPBuilder6\CLX\dbExpress\objs -$Y- -$L- -$D- -$A8 -v 
+      -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-IC:\LivrusVirtus\CPPBuilder6\CLX\dbExpress\objs -D&quot;&quot; -aa -Tpe -x -Gn"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="Livrus.res" FORMNAME="" UNITNAME="Livrus.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Livrus.cpp" FORMNAME="" UNITNAME="Livrus" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Principal.cpp" FORMNAME="frmPrincipal" UNITNAME="Principal" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Cadastros.cpp" FORMNAME="frmCadastros" UNITNAME="Cadastros" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Consultas.cpp" FORMNAME="frmConsultas" UNITNAME="Consultas" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadAssuntos.cpp" FORMNAME="frmCadAssuntos" UNITNAME="CadAssuntos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="AlterarSenha.cpp" FORMNAME="frmAlterarSenha" UNITNAME="AlterarSenha" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConProfissoes.cpp" FORMNAME="frmConProfissoes" UNITNAME="ConProfissoes" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadClientes.cpp" FORMNAME="frmCadClientes" UNITNAME="CadClientes" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadEditoras.cpp" FORMNAME="frmCadEditoras" UNITNAME="CadEditoras" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadEnderecos.cpp" FORMNAME="frmCadEnderecos" UNITNAME="CadEnderecos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadIdiomas.cpp" FORMNAME="frmCadIdiomas" UNITNAME="CadIdiomas" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadLivros.cpp" FORMNAME="frmCadLivros" UNITNAME="CadLivros" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadPaises.cpp" FORMNAME="frmCadPaises" UNITNAME="CadPaises" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadProfissoes.cpp" FORMNAME="frmCadProfissoes" UNITNAME="CadProfissoes" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConAssuntos.cpp" FORMNAME="frmConAssuntos" UNITNAME="ConAssuntos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConAutores.cpp" FORMNAME="frmConAutores" UNITNAME="ConAutores" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConClientes.cpp" FORMNAME="frmConClientes" UNITNAME="ConClientes" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConEditoras.cpp" FORMNAME="frmConEditoras" UNITNAME="ConEditoras" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConEnderecos.cpp" FORMNAME="frmConEnderecos" UNITNAME="ConEnderecos" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConIdiomas.cpp" FORMNAME="frmConIdiomas" UNITNAME="ConIdiomas" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConLivros.cpp" FORMNAME="frmConLivros" UNITNAME="ConLivros" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConPaises.cpp" FORMNAME="frmConPaises" UNITNAME="ConPaises" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CadAutores.cpp" FORMNAME="frmCadAutores" UNITNAME="CadAutores" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConVendas.cpp" FORMNAME="frmConVendas" UNITNAME="ConVendas" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConsultasSQL.cpp" FORMNAME="" UNITNAME="ConsultasSQL.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Login.cpp" FORMNAME="frmLogin" UNITNAME="Login" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="VenderLivros.cpp" FORMNAME="frmVenderLivros" UNITNAME="VenderLivros" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Sobre.cpp" FORMNAME="frmSobre" UNITNAME="Sobre" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Splash.cpp" FORMNAME="frmSplash" UNITNAME="Splash" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="RotinasGlobais.cpp" FORMNAME="" UNITNAME="RotinasGlobais.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Excluded Packages]
+c:\arquivos de programas\borland\cbuilder6\Bin\dclclxdb60.bpl=Borland CLX Database Components
+C:\Arquivos de programas\Borland\CBuilder6\Bin\dclclxstd60.bpl=Borland CLX Standard Components
+c:\arquivos de programas\borland\cbuilder6\Bin\dclite60.bpl=Borland Integrated Translation Environment
+
+[HistoryLists\hlIncludePath]
+Count=1
+Item0=..\..\..\..;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=2
+Item0=..\..\..\..;$(BCB)\lib;$(BCB)\lib\obj;C:\LivrusVirtus\CPPBuilder6\CLX\dbExpress\objs
+Item1=..\..\..\..;$(BCB)\lib;$(BCB)\lib\obj
+
+[HistoryLists\hlIntOutputDir]
+Count=3
+Item0=C:\LivrusVirtus\CPPBuilder6\CLX\dbExpress\objs
+Item1=C:\LivrusVirtus\CPPBuilder6\CLX\dbExpress\objs\
+Item2=..\objs
+
+[HistoryLists\hlFinalOutputDir]
+Count=4
+Item0=C:\LivrusVirtus\CPPBuilder6\CLX\dbExpress\produto\
+Item1=
+Item2=
+Item3=
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+  </IDEOPTIONS>
+</PROJECT>

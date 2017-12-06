@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resultset [
+    <!ELEMENT resultset (resultsetdata) >
+    <!ELEMENT resultsetdata (row)* >
+    <!ELEMENT row (column)+ >
+    <!ELEMENT column (#PCDATA)>
+    <!ATTLIST column
+        null (true | false) "false"
+        name CDATA #IMPLIED
+    >
+]>
+<resultset>
+    <row>
+        <column name="codprofissao">1</column>
+        <column name="profissao">Analista de Sistemas</column>
+    </row>
+    <row>
+        <column name="codprofissao">2</column>
+        <column name="profissao">Programador</column>
+    </row>
+    <row>
+        <column name="codprofissao">3</column>
+        <column name="profissao">Engenheiro de software</column>
+    </row>
+</resultset>

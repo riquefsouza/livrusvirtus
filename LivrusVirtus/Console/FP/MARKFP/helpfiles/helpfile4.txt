@@ -1,0 +1,393 @@
+                           MARK-FP:  An interpreter for
+                    The FP (Functional Programming) Language
+                               by Mark Meyer
+                                Spring, 1992
+
+
+I have created a quick and "dirty" interpreter in LISP for John Backus'
+FP language.  It does all the basic stuff but the error control is less
+than perfect due to the way I implemented it.
+
+===========================================================================
+How to use the program:
+===========================================================================
+
+To run Mark's FP, just start the program "mfp."  It is slow to get started,
+so please be patient!  It takes at least 30 seconds.
+
+        % mfp
+
+The prompt is ready...
+
+        ready...
+
+To test it out to make sure it is working, type in the following:
+
+        +:<1,2>
+
+You should see 3.
+
+To quit, just press CTRL-C.
+
+        CTRL-C
+
+===========================================================================
+What to do with errors:
+===========================================================================
+
+This is a VERY fragile program.  It breaks easily.  Sorry!  But the price
+is right, and there are no tools to create parser generators in LISP, so
+we'll have to make do.
+
+If you get "syntax error" from the parser, type the word
+
+    ok 
+
+and press RETURN.  This resets the parser.
+
+===========================================================================
+Getting input from files:
+===========================================================================
+
+It is too tedious to type in all definitions of FP functions each and every
+time, especially since this implementation breaks easily and crashes.  So
+there is a way to temporarily redirect the input from a file instead of the
+terminal.
+
+Just type 
+
+     file funcfile
+
+where "funcfile" is the name of a local file that contains FP function
+definitions or any FP code.  
+
+IMPORTANT WARNING!!!!  The last line of "funcfile" MUST CONTAIN  end.
+                                                   ^^^^^^^^^^^^
+This is the signal to FP to stop reading this file and to go back to the
+terminal.  If you do not put end in there, the program will crash!
+
+Here's an example of a very simple function file:
+
+     (def square == *.[id,id])
+     end
+
+This just defines the square function.  Once you have read in the file,
+you can use any function defined in it.
+
+===========================================================================
+Basics of the FP language as applied to MFP:
+===========================================================================
+
+For a full discussion, see your textbook, section 10.2.  Here are some
+details about this interpreter.
+
+Expressions:
+
+      The parser understands only 3 things:
+
+      1.  Function definitions
+      2.  Function applications
+      3.  Pure LISP commands
+
+The pure LISP commands are the easiest.  Just enclose the s-expression which 
+you want evaluated in dollar signs.  The s-expression is just a string of 
+characters which is passed to LISP, and can include quotes, parentheses, 
+double quotes, and anything except dollar signs.
+
+      $(setq x 15)$
+      $(system "vi xyz")$
+
+Function definitions takes the form of
+
+      (def functionname == function-expression)
+
+For example, this defines the square of a number:
+
+      (def square == *.[id,id])
+
+Once you define a function, you cannot define a function with the same name 
+unless you undefine the old one.  This is done by using the undef command
+in LISP:
+
+      $(undef square)$
+
+To see the list of functions, just get the value of the "flist" variable in 
+LISP:
+
+      $flist$
+
+The format of the functions will have been converted to an internal form which
+is quite different from the form you typed.  But at least you can see that such
+a function has been defined.
+
+Function application is done by putting a function expression in front of a data
+expression, with a semicolon between.  For example:
+ 
+      *:<5,3>
+
+This multiplies 5*3 and prints out 15.  If you have defined square as above, 
+you can use its name:
+
+      square:10
+
+This returns 100.  You can also use complicated functions expressions such as
+
+      +.[id,#1]:8
+
+which would add 1 to 8 and get 9.  
+
+You can use negative numbers, but no reals.
+
+==========================================================================
+Variables
+==========================================================================
+
+As originally defined, FP had no variables!  But in Mark-FP, they're back,
+by popular demand!  Yes, almost every (traditional) programmer feels naked 
+without variables, so we've added them back to FP.  But, there's a hitch.  
+A variable can be used solely as a label for one value, and only one value.  
+Once you bind a value to a variable name (what we call assignment in C, 
+Fortran, BASIC, etc), you can never unbind it, nor can you change the
+binding.  Thus, Mark-FP is an assign-once language.
+
+The assignment operator is <- but you cannot just assign a "raw" value into a
+variable name.  You must assign the output of a function application.  To
+put a "raw" value in, just use the "id" function.  So here is FP's way of
+assigning 5 to variable x:
+
+      x <- id:5
+
+To use the value of x, you surround the variable name in curly braces in
+order to distinguish it from symbolic data (sort of like quote in LISP):
+
+      +:<1,{x}>
+
+You will get 6.  Just for your own pleasure, you can see the value of a
+variable by presenting it to LISP as an atom, and LISP will look up its
+value for you.  Since this involves surrounding your s-expression with 
+dollar signs, looking up x's value would be:
+
+      $x$
+
+This works because all variables are implemented as just LISP variables.
+Actually, you can view the value in a variable by just using the id function:
+
+      id:{x}
+
+Every function application can be optionally preceded by an assignment which
+stores the value into a variable, so that you can save the output of a
+function application for later reuse.
+
+Here are more examples:
+
+      x <- square:5
+
+Now x has the value 25.  To use x's value, do something like
+
+      dec:{x}
+
+where "dec" decrements by 1.  You will get 24.
+
+To copy x's value into y, do
+
+      y <- id:{x}
+
+You can use the variable name, surrounded by curly braces, inside any
+data expression (as shown above in +:<1,{x}>) or by itself.  But if you
+ever try to assign a value to a variable that is bound, FP will scream
+and spit at you!
+
+The only "raison d'etre" (reason for being) of variables in FP is to
+use them as shorthands for values.  You never need them, because you
+could always put the expression that evaluated to the value of the variable
+into the places where the variable occurs.  Actually, if you use the value
+more than once, if your program uses variables, it will probably run faster 
+because it would not have to calculate the value twice.  
+
+Suppose you wanted to calculate (10 - 6) * (10 - 6), but you
+didn't have a square function.  You could calculuate (10 - 6) once,
+bind it to a variable, and then multiply:
+
+       diff <- -:<10,6 >
+       *:<{diff},{diff}>
+
+This isn't commonly done, because the construct can duplicate values, too.
+Here's the "proper" way to do the above in FP:
+
+       *.[id,id]:{diff}
+
+You could also have done the multiplication above by doing without the
+variable "diff" altogether:
+
+       *.[id,id].-:<10,6>
+
+Variables *NEVER* appear on the left hand side of the application sign
+(the colon) or inside of function definitions.  Also note that you cannot
+define functions using data expressions, if they use constants or variables.
+Thus, there is no way to build a function out of the two lines shown above:
+
+       diff <- -:<10,6 >
+       *:<{diff},{diff}>
+
+To define a square of differences of two values, you would say something
+like:
+
+       (def square_diff == *.[id,id].-)
+
+========================================================================
+Debugging
+========================================================================
+
+Debugging in FP amounts to making sure that your functions are written
+correctly, and the way you make sure is to apply them to input data.
+Thus, debugging boils down to just having a way to watch the interpreter
+apply functions to values.
+
+You can do this by setq-ing a special variable in LISP:
+
+      $(setq debuglevel 1)$
+
+You can turn off application watching by setq-ing it back to 0.
+
+Here's an example.  Suppose we define an average function as
+ 
+      (def average == div.[/+,length])
+
+Now if we turn on debugging, and apply our new average function to the
+list of numbers <3,5,8>:
+
+      average:<3,5,8>
+
+We will see the following:
+
+     APPLYING>>> AVERAGE  :::  (3 5 8)
+     
+     APPLYING>>> (COMPOSE DIV (CONSTRUCT (REDUCE +) LENGTH))  :::  (3 5 8)
+     
+     APPLYING>>> (CONSTRUCT (REDUCE +) LENGTH)  :::  (3 5 8)
+     
+     APPLYING>>> (REDUCE +)  :::  (3 5 8)
+     
+     APPLYING>>> (REDUCE +)  :::  (5 8)
+     
+     APPLYING>>> (REDUCE +)  :::  (8)
+     
+     APPLYING>>> +  :::  (5 8)
+     
+     APPLYING>>> +  :::  (3 13)
+     
+     APPLYING>>> LENGTH  :::  (3 5 8)
+     
+     APPLYING>>> DIV  :::  (16 3)
+     
+     5
+
+Note that this shows you some of the underlying LISP forms.
+
+========================================================================
+Comparison with syntax from the textbook by Dershem & Jipping:
+========================================================================
+
+There are a number of minor syntactic differences from pure FP, as given
+in our textbook, mainly due to the lack of character support on standard
+terminals.  For instance, the undefined symbol (upside-down T) is 
+
+      undefined
+
+because we don't have an equivalent graphic on our keyboards.
+
+The book also uses a function that returns the empty list, and it repre-
+sents it by a circle with a slash through it.  The equivalent Mark-FP
+function is "nil":
+
+      nil:5
+
+returns nil.  The "nil" function is not the same as "undefined"!.
+
+The constant functional form, represented by an overbar (see page 296),
+is done in Mark-FP by using the number or pound sign:
+
+      #1
+
+stands for a function which gives you the number 1, no matter what the
+input.  Beware!  1 is a function which gives the first elemtn of a list
+(just like "car" in LISP).  2 is also a function, 3 and so forth.  These
+are not the same functions as #1, #2, and #3, and they are not the same
+thing as the data items 1, 2, and 3.  Actually, data and functions are
+easy to tell apart because they are always separated by the colon in FP:
+data is on the right, functions on the left.
+
+The apply to all, represented by alpha in the book, is done with the
+"at" sign in Mark-FP:
+
+      @length
+
+stands for "apply length function to all".
+
+The right pointing arrow is ->.
+
+The circle, which denotes function composition, is represented by a
+period.  Thus, f1 composed with f2 is
+
+      f1.f2
+
+in Mark-FP.
+
+The three-bar equal sign, used in function definitions, is == in Mark-FP.
+(See examples of function definition above.)
+
+Spaces are generally not important.  You can put them in for readability
+or leave them out.
+
+Another slight representation difference is that Mark-FP translates
+all sequences from the bracket notation of FP to the LISP form of lists.
+For example:
+
+        <<6,7>,<2,3,8>>
+
+is represented as ((6 7)(2 3 8)) and if we apply a concatenation operator
+we will get (6 7 2 3 8) instead of <6,7,2,3,8>.
+
+You cannot use the empty angular brackets for the empty list.  You MUST
+use "nil" instead.  That is
+
+        <>
+
+is a syntax error.  To find the length of the empty list, do
+
+        length:nil
+
+instead.
+
+The division sign is represented by % in Mark-FP.
+
+Relational operators (boolean comparison operators) are the following:
+
+        =                    equal
+        ne                   not equal
+        lt                   less than
+        <=    le             less than or equal
+        gt                   greater than
+        >=    ge             greater than or equal
+
+The brackets are used, of course, to delimit lists, which is why they cannot
+be used as function symbols.
+
+Another primitive function that is provided in Mark-FP is "iota", which
+takes in a single integer, and returns a list of integers from 1 up to 
+that number:
+
+        i:5
+
+returns (1 2 3 4 5).
+
+========================================================================
+Comments
+========================================================================
+
+You can insert FP comments anywhere.  They take the form of C++ comments,
+i.e. they start with two slashes and end with a newline character.
+
+WARNING!  Do not put LISP comments inside the $ $ delimiters.  For some
+reason, the LISP interpreter gets all confused and goes to sleep forever.
+So, do not use LISP style comments, only FP comments.

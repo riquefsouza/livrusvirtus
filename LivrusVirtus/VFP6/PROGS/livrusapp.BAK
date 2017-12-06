@@ -1,0 +1,96 @@
+* Programa Inicio
+#INCLUDE [C:\LivrusVirtus\VFP6\INCLUDE\Livrus.h] 
+
+*--Limpeza do Ambiente
+CLEAR
+CLEAR ALL
+
+*--VARIÁVEIS GLOBAIS
+PUBLIC pTitulo,pFundo,pTalk,pPath,pDate,pDel,pCurrency,pPoint,pWState
+PUBLIC pBackColor,pSeparator,pExclusive,pReprocess,pRefresh,pError
+PUBLIC bLogon as Boolean
+PUBLIC ltbl, Rotinas AS OBJECT, ConsSQL AS OBJECT, fCadastros as Object
+PUBLIC fConsultas as object, fCAlterarSenha as object
+PUBLIC fCCadEnderecos as object, fCCadClientes as object, fCCadLivros as object
+PUBLIC fConVendas as object, fCVenderLivros as object
+PUBLIC dbConexao
+PUBLIC sUsuarioLogin, sUsuarioSenha
+PUBLIC sCodigoSelecionado, sPreco, sQtdEstoque, nPrecoTotal
+
+SET DEFAULT TO CAMINHO_PADRAO 
+SET PATH TO figuras; forms; include; libs; menus; produto; progs
+SET PROCEDURE TO RotinasGlobais, ConsultasSql, Cadastros, Consultas,;
+ CCadEnderecos, CAlterarSenha, CCadClientes, CCadLivros, CConVendas,;
+ CVenderLivros
+
+Rotinas = CREATEOBJECT("RotinasGlobais")
+ConsSQL = CREATEOBJECT("ConsultasSql") 
+fCadastros = CREATEOBJECT("Cadastros") 
+fConsultas = CREATEOBJECT("Consultas") 
+fCAlterarSenha = CREATEOBJECT("CAlterarSenha") 
+fCCadEnderecos = CREATEOBJECT("CCadEnderecos") 
+fCCadClientes = CREATEOBJECT("CCadClientes") 
+fCCadLivros = CREATEOBJECT("CCadLivros") 
+fCConVendas = CREATEOBJECT("CConVendas") 
+fCVenderLivros = CREATEOBJECT("CVenderLivros") 
+
+Rotinas.ConectaBanco()
+
+** Desabilita opções de Desenvolvimento
+Rotinas.DesabilitaOpDesenv(.T.)
+
+* Fecha programas abertos e outros tipos de janelas
+Rotinas.FechaTodasJanelas()
+
+*-- Preparação de Ambiente
+
+* salva configurações
+Rotinas.SalvaConfiguracoes(.T.)
+
+*-- Reconfigura o Ambiente
+Rotinas.ConfiguraSets()	&& configura os comandos SET
+
+ON SHUTDOWN QUIT		&& Permite a saida da aplicação pelo 'X'
+
+*-- Gerenciador de Erro
+*	Apartir deste momento, quando acontecer um erro o foxpro irá chamar o
+*	programa ErroSistema com a Mensagem de erro, o programa e o nº do erro
+ON ERROR Rotinas.ErroSistema(MESSAGE(), SYS(16), ERROR())
+
+** Módulo Principal
+_SCREEN.Caption = "Livrus Virtus"
+_screen.BackColor = RGB(128,128,128)
+_Screen.MDIForm = .T.
+_SCREEN.WINDOWSTATE = 0 	&& Executar normal
+_SCREEN.Icon = ICONE_PRINCIPAL
+
+DO MENU_LIVRUS		&& Chama Menu
+
+* Carrega Barra de Ferramentas
+ltlb = NEWOBJECT(BARRA_LIVRUS, LIB_LIVRUS)
+ltlb.Dock(0)
+ltlb.Visible=.T.
+         
+bLogon = .F.
+
+Rotinas.CarregaTela(FRM_SPLASH, LIB_LIVRUS) 	&& Tela de Splash - windowType = modal
+Rotinas.CarregaTela(FRM_LOGIN, LIB_LIVRUS)   && Tela de Logon - windowType = modal
+
+IF bLogon = .T.
+
+READ EVENTS     && Âncora. Faz com que o programa fique esperando as ações ;
+				&& DO operador. no .EXE, sem este comando, o MENU aparece e ;
+				&& desaparece em seguida, terminando o programa. ;
+				&& na opção sair, é emitido CLEAR EVENTS PARA terminar o READ
+ENDIF
+
+Rotinas.DisconectaBanco()
+
+** Restauração do Ambiente
+Rotinas.SalvaConfiguracoes(.F.)
+Rotinas.DesabilitaOpDesenv(.F.)
+
+*-- Fim do programa início
+CLEAR ALL
+CLEAR
+

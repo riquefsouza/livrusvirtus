@@ -1,0 +1,30 @@
+program deact;
+
+   infile := open(command_line(1),"text-in");
+   outfile := open(command_line(2),"text-out");
+
+   deleting := false;
+   loop
+
+      geta(infile,line);
+      exit when eof();
+
+      if deleting then
+         if match(line,"./") /= "" then
+            deleting := false;
+         end if;
+         continue;
+      end if;
+
+      if match(line,"/.") /= "" then
+         deleting := true;
+         continue;
+      end if;
+      printa(outfile,line);
+
+   end loop;
+
+   close(infile);
+   close(outfile);
+
+end deact;

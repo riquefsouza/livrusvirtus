@@ -1,0 +1,453 @@
+create procedure Assunto_NS
+(@Tipo	 char(1),
+@Codigo	 smallint = Null,
+@Assunto varchar(30) = Null)
+as
+if sTipo='N' 
+  select (max(codassunto)+1) as Codigo from Assunto
+else if sTipo='S'
+  select a.codassunto as Codigo, a.assunto as Assunto from Assunto a
+  where (a.codassunto = @Codigo or @Codigo is null)
+  and (a.assunto like '%'+@Assunto+'%' or @Assunto is null) 
+
+return
+
+//----------------------------
+
+create procedure Assunto_IUD
+(@Tipo	 char(1),
+@Codigo	 smallint,
+@Assunto varchar(30))
+as
+if sTipo='I'
+  insert into Assunto(codassunto, assunto) values(@Codigo,@Assunto)
+else if sTipo='U'
+  update Assunto set assunto=@Assunto where codassunto=@Codigo
+else if sTipo='D'
+  delete from Assunto where codassunto=@Codigo
+
+return
+
+//----------------------------
+
+create procedure Autor_NS
+(@Tipo	 char(1),
+@Codigo	 smallint = Null,
+@Autor varchar(30) = Null)
+as
+if sTipo='N' 
+  select (max(codautor)+1) as Codigo from Autor
+else if sTipo='S'
+  select a.codautor as Codigo, a.autor as Autor from Autor a
+  where (a.codautor = @Codigo or @Codigo is null)
+  and (a.autor like '%'+@Autor+'%' or @Autor is null) 
+
+return
+
+//----------------------------
+
+create procedure Autor_IUD
+(@Tipo	 char(1),
+@Codigo	 smallint,
+@Autor varchar(30))
+as
+if sTipo='I'
+  insert into Autor(codautor, autor) values(@Codigo,@Autor)
+else if sTipo='U'
+  update Autor set autor=@Autor where codautor=@Codigo
+else if sTipo='D'
+  delete from Autor where codautor=@Codigo
+
+return
+
+//----------------------------
+
+create procedure Editora_NS
+(@Tipo	 char(1),
+@Codigo	 smallint = Null,
+@Editora varchar(50) = Null)
+as
+if sTipo='N' 
+  select (max(codeditora)+1) as Codigo from Editora
+else if sTipo='S'
+  select e.codeditora as Codigo, e.editora as Editora from Editora e
+  where (e.codeditora = @Codigo or @Codigo is null)
+  and (e.editora like '%'+@Editora+'%' or @Editora is null) 
+
+return
+
+//----------------------------
+
+create procedure Editora_IUD
+(@Tipo	 char(1),
+@Codigo	 smallint,
+@Editora varchar(50))
+as
+if sTipo='I'
+  insert into Editora(codeditora, editora) values(@Codigo,@Editora)
+else if sTipo='U'
+  update Editora set editora=@Editora where codeditora=@Codigo
+else if sTipo='D'
+  delete from Editora where codeditora=@Codigo
+
+return
+
+//----------------------------
+
+create procedure Idioma_NS
+(@Tipo	 char(1),
+@Codigo	 smallint = Null,
+@Idioma varchar(20) = Null)
+as
+if sTipo='N' 
+  select (max(codidioma)+1) as Codigo from Idioma
+else if sTipo='S'
+  select i.codidioma as Codigo, i.idioma as Idioma from Idioma i
+  where (i.codidioma = @Codigo or @Codigo is null)
+  and (i.idioma like '%'+@Idioma+'%' or @Idioma is null) 
+
+return
+
+//----------------------------
+
+create procedure Idioma_IUD
+(@Tipo	 char(1),
+@Codigo	 smallint,
+@Idioma varchar(20))
+as
+if sTipo='I'
+  insert into Idioma(codidioma, idioma) values(@Codigo,@Idioma)
+else if sTipo='U'
+  update Idioma set idioma=@Idioma where codidioma=@Codigo
+else if sTipo='D'
+  delete from Idioma where codidioma=@Codigo
+
+return
+
+//----------------------------
+
+create procedure Usuario_S
+(@Login	varchar(10),
+@Senha varchar(10))
+as
+ select * from Usuario u where u.ulogin=@Login and u.senha=@Senha
+return
+
+//----------------------------
+
+create procedure Usuario_U
+(@Login	varchar(10),
+@Senha varchar(10))
+as
+ update Usuario set senha=@Senha where ulogin=@sLogin
+return
+
+//----------------------------
+
+create procedure Livro_SQ
+(@Tipo	char(1),
+@ISBN 	varchar(13) = Null,
+@Titulo varchar(50) = Null)
+as
+if sTipo='S' 
+ select l.isbn as ISBN, l.titulo as Titulo, l.edicao as Edicao,
+ l.anopubli as AnoPublicacao,l.volume as Volume,l.codeditora as CodEditora,
+ e.editora as Editora, l.codidioma as CodIdioma, i.idioma as Idioma,
+ l.npaginas as NumPaginas, l.preco as Preco, l.qtdestoque as Estoque
+ from Livro l, editora e, idioma i
+ where l.codeditora=e.codeditora
+ and l.codidioma=i.codidioma
+ and (l.isbn=@ISBN or @ISBN is null)
+ and (l.titulo like '%'+@Titulo+'%' or @Titulo is null) 
+else if sTipo='Q'
+ select l.isbn as ISBN, l.titulo as Título, l.preco as Preco,
+ l.qtdestoque as Estoque
+ from Livro l
+ where (l.isbn=@ISBN or @ISBN is null)
+ and (l.titulo like '%'+@Titulo+'%' or @Titulo is null) 
+
+return
+
+//----------------------------
+
+create procedure Livro_IUD
+(@Tipo	char(1),
+@ISBN 	varchar(13),
+@Titulo varchar(50) = Null,
+@Edicao smallint = Null,
+@AnoPubli smallint = Null,
+@CodEditora smallint = Null,
+@Volume smallint = Null,
+@CodIdioma smallint = Null,
+@NPaginas smallint = Null,
+@Preco smallint = Null,
+@QtdEstoque smallint = Null)
+as
+if sTipo='I' 
+  insert into Livro(isbn, titulo, edicao, anopubli, codeditora,
+  volume, codidioma,npaginas, preco, qtdestoque) 
+  values(@ISBN,@Titulo,@Edicao,@AnoPubli,@CodEditora,
+  @Volume,@CodIdioma,@NPaginas,@Preco,@QtdEstoque)
+else if sTipo='U' 
+  update Livro set titulo=@Titulo,edicao=@Edicao,anopubli=@AnoPubli,
+  volume=@Volume,codeditora=@CodEditora,codidioma=@CodIdioma,
+  npaginas=@NPaginas,preco=@Preco,qtdestoque=@QtdEstoque
+  where isbn=@ISBN
+else if sTipo='D' 
+  delete from Livro where isbn=@ISBN
+
+return
+
+//----------------------------
+
+create procedure Cliente_S
+(@CPF 	varchar(14) = Null,
+@Nome	varchar(30) = Null)
+as
+ select c.cpf as CPF, c.nome as Nome, c.email as Email,
+ c.identidade as Identidade, c.sexo as Sexo, c.telefone as Telefone,
+ c.datanasc as DtNascimento, c.codendereco as CodEndereco,
+ e.logradouro as Logradouro,e.bairro as Bairro,e.cep as CEP,
+ e.cidade as Cidade,e.estado as Estado,c.codpais as CodPaís,
+ p.pais as País, c.codprofissao as CodProfissao,r.profissao as Profissão
+ from Cliente c, endereco e, pais p, profissao r
+ where c.codendereco=e.codendereco
+ and c.codpais=p.codpais
+ and c.codprofissao=r.codprofissao
+ and (c.cpf=@CPF or @CPF is null)
+ and (c.nome like '%'+@Nome+'%' or @Nome is null)
+
+return
+
+//----------------------------
+
+create procedure Cliente_IUD
+(@Tipo		char(1),
+@CPF 		varchar(14),
+@Nome		varchar(30) = Null,
+@Email		varchar(30) = Null,
+@Identidade	varchar(10) = Null,
+@Sexo		char(1) = Null,
+@Telefone	varchar(17) = Null,
+@DtNascimento	smalldatetime = Null,
+@CodEndereco	smallint = Null,
+@CodPais	char(3) = Null,
+@CodProfissao	smallint = Null)
+as
+if sTipo='I'
+  insert into Cliente(cpf, nome, email, identidade, sexo,
+  telefone, datanasc, codendereco, codpais, codprofissao) 
+  values(@CPF,@Nome,@Email,@Identidade,@Sexo,@Telefone,
+  @DtNascimento,@CodEndereco,@CodPais,@CodProfissao)
+else if sTipo='U'
+  update Cliente set nome=@Nome,email=@Email,
+  identidade=@Identidade,sexo=@Sexo,telefone=@Telefone,
+  datanasc=@DtNascimento,codendereco=@CodEndereco,
+  copais=@CodPais,codprofissao=@CodProfissao
+  where cpf=@CPF
+else if sTipo='D' 
+  delete from Cliente where cpf=@CPF
+
+return
+
+//----------------------------
+
+create procedure Endereco_NS
+(@Tipo	    char(1),
+@Codigo	    smallint = Null,
+@Logradouro varchar(40) = Null)
+as
+if sTipo='N' 
+  select (max(codendereco)+1) as Codigo from Endereco
+else if sTipo='S'
+  select e.codendereco as Código, e.logradouro as Logradouro,
+  e.bairro as Bairro,e.cep as CEP,e.cidade as Cidade,e.estado as Estado
+  from Endereco e
+  where (e.codendereco=@Codigo or @Codigo is null)
+  and (e.logradouro like '%'+@Logradouro+'%' or @Logradouro is null)
+
+return
+
+//----------------------------
+
+create procedure Endereco_IUD
+(@Tipo	    char(1),
+@Codigo	    smallint,
+@Logradouro varchar(40) = Null,
+@Bairro	    varchar(15) = Null,
+@CEP        varchar(8) = Null,
+@Cidade     varchar(30) = Null,
+@Estado    varchar(20) = Null)
+as
+if sTipo='I' 
+  insert into Endereco(codendereco, logradouro, bairro, cep,
+  cidade, estado) 
+  values(@Codigo,@Logradouro,@Bairro,@CEP,@Cidade,@Estado)
+else if sTipo='U'
+  update Endereco set logradouro=@Logradouro,bairro=@Bairro,
+  cep=@CEP,cidade=@Cidade,estado=@Estado
+  where codendereco=@Codigo
+else if sTipo='D'
+  delete from Endereco where codendereco=@Codigo
+
+return
+
+//----------------------------
+
+create procedure Pais_S
+(@Codigo char(3) = Null,
+@Pais 	 varchar(50) = Null)
+as
+  select p.codpais as Código, p.pais as País from Pais p
+  where (p.codpais=@Codigo or @Codigo is null)
+  and (p.pais like '%'+@Pais+'%' or @Pais is null)
+
+return
+
+//----------------------------
+
+create procedure Pais_IUD
+(@Tipo	 char(1),
+@Codigo	 char(3) = Null,
+@Pais 	 varchar(50) = Null)
+as
+if sTipo='I'
+  insert into Pais(codpais, pais) values(@Codigo,@Pais)
+else if sTipo='U'
+  update Pais set pais=@Pais where codpais=@Codigo
+else if sTipo='D'
+  delete from Pais where codpais=@Codigo
+
+return
+
+//----------------------------
+
+create procedure Profissao_NS
+(@Tipo	 char(1),
+@Codigo	 smallint = Null,
+@Profissao varchar(50) = Null)
+as
+if sTipo='N' 
+  select (max(codprofissao)+1) as Codigo from Profissao
+else if sTipo='S'
+  select p.codprofissao as Codigo, p.profissao as Profissao from Profissao p
+  where (p.codprofissao = @Codigo or @Codigo is null)
+  and (p.profissao like '%'+@Profissao+'%' or @Profissao is null) 
+
+return
+
+//----------------------------
+
+create procedure Profissao_IUD
+(@Tipo	 char(1),
+@Codigo	 smallint,
+@Profissao varchar(50))
+as
+if sTipo='I'
+  insert into Profissao(codprofissao, profissao) values(@Codigo,@Profissao)
+else if sTipo='U'
+  update Profissao set profissao=@Profissao where codprofissao=@Codigo
+else if sTipo='D'
+  delete from Profissao where codprofissao=@Codigo
+
+return
+
+//----------------------------
+
+create procedure LivroAss_S
+(@ISBN varchar(13))
+as
+  select la.codassunto, a.assunto from LivroAss la, Assunto a
+  where la.codassunto=a.codassunto
+  and la.isbn=@ISBN
+
+return
+
+//----------------------------
+
+create procedure LivroAss_IUD
+(@Tipo	    char(1),
+@ISBN 	    varchar(13),
+@CodAssunto smallint)
+as
+if sTipo='I'
+  insert into LivroAss(isbn, codassunto) values(@ISBN,@CodAssunto)
+else if sTipo='D'
+  delete from LivroAss where isbn=@ISBN
+
+return
+
+//----------------------------
+
+create procedure LivroAut_S
+(@ISBN varchar(13))
+as
+  select la.codautor, a.autor from LivroAut la, Autor a
+  where la.codautor=a.codautor
+  and la.isbn=@ISBN
+
+return
+
+//----------------------------
+
+create procedure LivroAut_IUD
+(@Tipo	  char(1),
+@ISBN 	  varchar(13),
+@CodAutor smallint)
+as
+if sTipo='I'
+  insert into LivroAut(isbn, codautor) values(@ISBN,@CodAutor)
+else if sTipo='D'
+  delete from LivroAut where isbn=@ISBN
+
+return
+
+//----------------------------
+
+create procedure Venda_SP
+(@Tipo	char(1),
+@ISBN 	varchar(13) = Null,
+@CPF	varchar(14) = Null,
+@DataVenda smalldatetime = Null)
+as
+if sTipo='S'
+  select v.datavenda as DataVenda, v.cpf as CPF, c.nome as Cliente,
+  v.isbn as ISBN,l.Titulo as Livro, l.preco as Preco
+  from Venda v, Livro l, Cliente c
+  where v.isbn=l.isbn and v.cpf=c.cpf
+  and (v.isbn=@ISBN or @ISBN is null)
+  and (v.cpf=@CPF or @CPF is null)
+  and (v.datavenda=@DataVenda or @DataVenda is null)
+else if sTipo='P'
+  select v.precovenda as PrecoTotal
+  from Venda v, Livro l, Cliente c
+  where v.isbn=l.isbn and v.cpf=c.cpf
+  and (v.isbn=@ISBN or @ISBN is null)
+  and (v.cpf=@CPF or @CPF is null)
+  and (v.datavenda=@DataVenda or @DataVenda is null)
+
+return
+
+//----------------------------
+
+create procedure Venda_IUD
+(@Tipo	char(1),
+@ISBN 	varchar(13),
+@CPF	varchar(14),
+@DataVenda smalldatetime,
+@PrecoVenda real = Null,
+@QtdEstoque smallint = Null)
+as
+if sTipo='I'
+  insert into Venda(isbn, cpf, datavenda, precovenda) 
+  values(@ISBN,@CPF,@DataVenda,@PrecoVenda)
+else if sTipo='U'
+  update Livro set qtdestoque=@QtdEstoque where isbn=@ISBN
+else if sTipo='D'
+  delete from Venda where isbn=@ISBN 
+  and cpf=@CPF and datavenda=@DataVenda
+
+return
+
+//----------------------------
+

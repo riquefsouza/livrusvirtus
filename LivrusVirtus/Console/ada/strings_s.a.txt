@@ -1,0 +1,182 @@
+with text_io; use text_io;
+
+package strings is
+
+---------------------------------------------------------------------------
+--  This package allows you to declare character strings in Ada and use them
+--  more or less like you would C strings.  However, these strings are NOT
+--  null terminated.  Instead, the length of the current contents of the string
+--  is computed by finding the last non-blank character.  Thus it is real
+--  important that you use strclear to initialize your strings after you
+--  create them but before you use them.
+---------------------------------------------------------------------------
+
+     procedure strclear (s : out string);
+
+         -- Put all blanks into a character string.  This initializes the
+         -- string so that the other procedures and functions below can use it.
+
+     procedure strcpy (s1 : out string; s2 : in string);
+
+         -- This is the basic string assignment.  It copies the second string's
+         -- value into the first string.  It will initialize the first string
+         -- to all blanks.  The two strings do not have to be the same size,
+         -- nor do they have to have the same range.  If the second string is
+         -- too long to fit into the first, it is just truncated without error.
+
+     procedure strncpy (s1 : out string; s2 : in string; n : integer);
+
+         -- This is like strncpy except that only the first n characters are
+         -- copied.  If s2's current strlen is less than the value of n, then
+         -- copying only goes up to the current strlen.
+
+     procedure strcat (s1 : in out string; s2 : in string);
+
+         -- This concatesnates the contents of s2 onto the end of s1.  The end
+         -- of s1 is defined to start after the last non-blank of s1.  If s1
+         -- is full, then the string is truncated without error.
+
+     procedure strcat (fullname : out string; s1, s2 : in string);
+
+         -- This is a combination of strcpy and strcat.  It copies s1 into
+         -- "fullname", then concatenates s2 onto the end of "fullname."
+
+     procedure strncat (s1 : in out string; s2 : in string; n : integer);
+
+         -- This is just like strcat except that it only copies up to the 
+         -- value in n, or the length of s2, whichever is less.
+
+     procedure strput (s1 : out string; s2 : in string;
+                       s1start, s2start, leng : integer);
+
+         -- This function copies characters from s2 into s1, starting at
+         -- s2start in s2, and copying for "leng" characters, or until the
+         -- length of s2 is exceeded.  This is useful if you want to 
+
+     function strlen (s : in string) return integer;
+
+         -- This returns the actual number of characters in s.  It does not
+         -- care what the actual lower bound of s was.  It just returns the
+         -- actual number of non-blanks appear at the beginning.  If the string
+         -- contains nothing but blanks it returns 0.
+
+     function strcmp (s1 : in string; s2 : in string) return integer;
+
+         -- This returns 0 if s1 and s2 have the same character string, or
+         -- a negative number if s1<s2 in lexicographical order, or a positive
+         -- number if s1>s2.
+
+     function strncmp (s1 : in string; s2 : in string; n : integer)
+                   return integer;
+
+         -- Just like strcmp, only it compares only the first n characters.
+
+     function strxcmp (s1 : in string; s2 : in string) return integer;
+
+         -- This is like strcmp, except that it stops at the first blank in
+         -- either s1 or s2, rather that stopping at the last non-blank.
+  
+     function str_find_ch (s : string; ch : character) return integer;
+
+         -- This returns the position in s of the first occurrence of the
+         -- character "ch".  If s's range is something like 3..20 and the
+         -- desired character is at the beginning, it returns 3, not 1.
+
+     function str_scan_ch (s1 : string; s2 : string) return integer;
+
+         -- This is like str_find_ch, except that s2 is a set of characters.
+         -- The function returns the index of s1 where the first occurrence of
+         -- any of the characters in s2 is.
+
+     procedure stralpha (s : in out string);
+
+         -- This function replaces all non-letters with blanks.  It treats
+         -- lower and upper case letters as the same, and doesn't change them.
+
+     procedure strupper (s : in out string);
+   
+         -- This changes all lower case letters to upper case.  All non-letters
+         -- are left alone.
+
+     procedure strlower (s : in out string);
+
+         -- This changes all upper case letters to lower case.  All non-letters
+         -- are left alone.
+
+     procedure strshift (s1 : in out string; direction : integer);
+
+         -- This shifts a character string left if direction is negative,
+         -- right if positive.  If the shift is left, then the letters are
+         -- lost and blanks fill in at the end.  If the shift is right, blanks
+         -- are inserted at the beginning.  The number of characters to shift
+         -- is given by direction.
+
+     procedure strblankout (s : in out string; removed : in string);
+
+         -- This removes characters by blanking them out.  The string "removed"
+         -- is a set of characters.  Whenever one of them is found in "s", it
+         -- is changed to a blank.
+
+     function atoi (s : string) return integer;
+
+         -- This reads an integer from s and returns the corresponding number.
+         -- It stops at the first character that is not valid, like the first
+         -- nondigit (after it has started) or some invalid character.  Leading
+         -- plus and minus are ok.
+
+     function atof (line : string) return float;
+
+         -- This reads a float from s and returns the corresponding number.
+         -- It stops at the first character that is not valid, like the first
+         -- nondigit (after it has started) or some invalid character.  Leading
+         -- plus and minus are ok.
+
+     procedure itoa (n : integer; s : in out string);
+
+         -- This converts the number n to a character representation and puts
+         -- it into s.
+
+     procedure left_justify (s : in out string);
+
+         -- This removes all blanks from the beginning of character string s,
+         -- unless there are only blanks in which case s is left alone.
+
+     function is_alpha (s : in string) return boolean;
+
+         -- This returns true if the string is an alphabetic string (except
+         -- for blanks.
+
+     function is_int (s : in string) return boolean;
+
+         -- This returns true if the string starts with a valid integer (leading
+         -- sign is ok.)
+
+     function is_numeric (s : in string) return boolean;
+
+         -- This returns true if the string contains only blanks or digits.
+         -- Leading signs will cause it to return false.
+
+     function strstart (s : in string) return integer;
+
+         -- This returns the position of the first non-blank character, or 0
+         -- if the thing is all blanks.  The position is according to the range
+         -- of s, not necessarily beginning at 1.
+
+     procedure strclean (s : in out string);
+
+         -- This makes sure that every characters in "s" is printable, that is,
+         -- its ASCII code is between 32 and 126 inclusive.
+
+     procedure gets (s : out string);
+
+         -- Get a string from standard_input.  Clear out the string s first.
+         -- This does not check for end of file first.  In fact, it will 
+         -- propagate an error if end of file is true.
+
+     procedure gets (s : out string; fp : in out file_type);
+
+         -- Get a string from file "fp".  Clear out the string s first.
+         -- This does not check for end of file first.  In fact, it will 
+         -- propagate an error if end of file is true.
+     
+end strings;

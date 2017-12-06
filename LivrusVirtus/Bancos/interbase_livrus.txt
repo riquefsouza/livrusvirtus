@@ -1,0 +1,111 @@
+CREATE TABLE assunto (
+  codassunto smallint DEFAULT 0 NOT NULL ,
+  assunto varchar(30) ,
+  PRIMARY KEY (codassunto)
+);
+
+CREATE TABLE autor (
+  codautor smallint DEFAULT 0 NOT NULL ,
+  autor varchar(30) ,
+  PRIMARY KEY (codautor)
+);
+
+CREATE TABLE editora (
+  codeditora smallint DEFAULT 0 NOT NULL ,
+  editora varchar(50) ,
+  PRIMARY KEY (codeditora)
+);
+
+CREATE TABLE endereco (
+  codendereco integer DEFAULT 0 NOT NULL ,
+  logradouro varchar(40) ,
+  bairro varchar(15) ,
+  cep varchar(8) ,
+  cidade varchar(30) ,
+  estado varchar(20) ,
+  PRIMARY KEY (codendereco)
+);
+
+CREATE TABLE idioma (
+  codidioma smallint DEFAULT 0 NOT NULL ,
+  idioma varchar(20) ,
+  PRIMARY KEY (codidioma)
+);
+
+CREATE TABLE pais (
+  codpais char(3) DEFAULT '' NOT NULL,
+  pais varchar(50) ,
+  PRIMARY KEY (codpais)
+);
+
+CREATE TABLE profissao (
+  codprofissao integer DEFAULT 0 NOT NULL ,
+  profissao varchar(50) ,
+  PRIMARY KEY (codprofissao)
+);
+
+CREATE TABLE cliente (
+  cpf varchar(14) DEFAULT '' NOT NULL ,
+  email varchar(30) ,
+  nome varchar(30) ,
+  identidade varchar(10) ,
+  codendereco integer DEFAULT 0 NOT NULL ,
+  telefone varchar(17) ,
+  codpais char(3) ,
+  codprofissao integer ,
+  sexo char(1) ,
+  datanasc timestamp ,
+  PRIMARY KEY (cpf),
+  FOREIGN KEY (codendereco) REFERENCES endereco(codendereco),
+  FOREIGN KEY (codpais) REFERENCES pais(codpais),
+  FOREIGN KEY (codprofissao) REFERENCES profissao(codprofissao)
+);
+
+CREATE TABLE livro (
+  isbn varchar(13) DEFAULT '' NOT NULL,
+  titulo varchar(50) ,
+  edicao smallint,
+  anopubli smallint,
+  codeditora smallint,
+  volume smallint,
+  codidioma smallint,
+  npaginas smallint,
+  preco float ,
+  qtdestoque smallint,
+  PRIMARY KEY (isbn),
+  FOREIGN KEY (codeditora) REFERENCES editora(codeditora),
+  FOREIGN KEY (codidioma) REFERENCES idioma(codidioma)
+);
+
+CREATE TABLE livroass (
+  isbn varchar(13) DEFAULT '' NOT NULL,
+  codassunto smallint DEFAULT 0 NOT NULL,
+  PRIMARY KEY (codassunto,isbn),
+  FOREIGN KEY (isbn) REFERENCES livro(isbn),
+  FOREIGN KEY (codassunto) REFERENCES assunto(codassunto)
+);
+
+CREATE TABLE livroaut (
+  isbn varchar(13) DEFAULT '' NOT NULL,
+  codautor smallint DEFAULT 0 NOT NULL ,
+  PRIMARY KEY (codautor,isbn),
+  FOREIGN KEY (isbn) REFERENCES livro(isbn),
+  FOREIGN KEY (codautor) REFERENCES autor(codautor)
+);
+
+CREATE TABLE usuario (
+  login varchar(10) DEFAULT '' NOT NULL,
+  senha varchar(10) ,
+  PRIMARY KEY (login)
+);
+
+CREATE TABLE venda (
+  isbn varchar(13) DEFAULT '' NOT NULL,
+  cpf varchar(14) DEFAULT '' NOT NULL,
+  datavenda timestamp NOT NULL,
+  precovenda float ,
+  PRIMARY KEY (cpf,datavenda,isbn),
+  FOREIGN KEY (isbn) REFERENCES livro(isbn),
+  FOREIGN KEY (cpf) REFERENCES cliente(cpf)
+);
+

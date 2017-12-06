@@ -1,0 +1,1 @@
+c:\comps\luacheia\lua5 %1

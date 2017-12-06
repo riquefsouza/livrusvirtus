@@ -1,0 +1,29 @@
+                     TUTORIAL on the PROLOG PROGRAMMING LANGUAGE
++==========================================================================
+$startmenu
+|Chapter 1 -- Overview of Prolog, facts, rules, etc.
+   page PROGLANGS/PROLOG/TUTORIAL/ch1
+|Chapter 2 -- Predicates
+   page PROGLANGS/PROLOG/TUTORIAL/ch2
+|Chapter 3 -- Queries
+   page PROGLANGS/PROLOG/TUTORIAL/ch3
+|Chapter 4 -- Rules
+   page PROGLANGS/PROLOG/TUTORIAL/ch4
+|Chapter 5 -- Relationship to Logic
+   page PROGLANGS/PROLOG/TUTORIAL/ch5
+|Chapter 6 -- Structured Data
+   page PROGLANGS/PROLOG/TUTORIAL/ch6
+|Chapter 7 -- Uses and interpretation of Prolog programs
+   page PROGLANGS/PROLOG/TUTORIAL/ch7
+|Chapter 8 -- Pattern matching
+   page PROGLANGS/PROLOG/TUTORIAL/ch8
+|Chapter 9 -- Arithmetic
+   page PROGLANGS/PROLOG/TUTORIAL/ch9
+|Chapter 10 -- More about rules and Backtracking
+   page PROGLANGS/PROLOG/TUTORIAL/ch10
+|Chapter 11 -- How to write recursive rules
+   page PROGLANGS/PROLOG/TUTORIAL/ch11
+|Chapter 12 -- More about how to write recursive rules: accumulators
+   page PROGLANGS/PROLOG/TUTORIAL/ch12
+$endmenu
++==========================================================================

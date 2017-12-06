@@ -1,0 +1,167 @@
+/****************************************************************************
+** PlivruskdeApp meta object code from reading C++ file 'plivruskde.h'
+**
+** Created: Sun Jan 2 10:34:02 2005
+**      by: The Qt MOC ($Id: qt/moc_yacc.cpp   3.1.1   edited Dec 9 10:40 $)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#undef QT_NO_COMPAT
+#include "plivruskde.h"
+#include <qmetaobject.h>
+#include <qapplication.h>
+
+#include <private/qucomextra_p.h>
+#if !defined(Q_MOC_OUTPUT_REVISION) || (Q_MOC_OUTPUT_REVISION != 26)
+#error "This file was generated using the moc from 3.1.1. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+const char *PlivruskdeApp::className() const
+{
+    return "PlivruskdeApp";
+}
+
+QMetaObject *PlivruskdeApp::metaObj = 0;
+static QMetaObjectCleanUp cleanUp_PlivruskdeApp( "PlivruskdeApp", &PlivruskdeApp::staticMetaObject );
+
+#ifndef QT_NO_TRANSLATION
+QString PlivruskdeApp::tr( const char *s, const char *c )
+{
+    if ( qApp )
+	return qApp->translate( "PlivruskdeApp", s, c, QApplication::DefaultCodec );
+    else
+	return QString::fromLatin1( s );
+}
+#ifndef QT_NO_TRANSLATION_UTF8
+QString PlivruskdeApp::trUtf8( const char *s, const char *c )
+{
+    if ( qApp )
+	return qApp->translate( "PlivruskdeApp", s, c, QApplication::UnicodeUTF8 );
+    else
+	return QString::fromUtf8( s );
+}
+#endif // QT_NO_TRANSLATION_UTF8
+
+#endif // QT_NO_TRANSLATION
+
+QMetaObject* PlivruskdeApp::staticMetaObject()
+{
+    if ( metaObj )
+	return metaObj;
+    QMetaObject* parentObject = KMainWindow::staticMetaObject();
+    static const QUMethod slot_0 = {"slotFileNew", 0, 0 };
+    static const QUMethod slot_1 = {"slotFileOpen", 0, 0 };
+    static const QUParameter param_slot_2[] = {
+	{ "url", &static_QUType_ptr, "KURL", QUParameter::In }
+    };
+    static const QUMethod slot_2 = {"slotFileOpenRecent", 1, param_slot_2 };
+    static const QUMethod slot_3 = {"slotFileSave", 0, 0 };
+    static const QUMethod slot_4 = {"slotFileSaveAs", 0, 0 };
+    static const QUMethod slot_5 = {"slotFileClose", 0, 0 };
+    static const QUMethod slot_6 = {"slotFilePrint", 0, 0 };
+    static const QUMethod slot_7 = {"slotFileQuit", 0, 0 };
+    static const QUMethod slot_8 = {"slotEditUndo", 0, 0 };
+    static const QUMethod slot_9 = {"slotEditCut", 0, 0 };
+    static const QUMethod slot_10 = {"slotEditCopy", 0, 0 };
+    static const QUMethod slot_11 = {"slotEditPaste", 0, 0 };
+    static const QUMethod slot_12 = {"slotViewToolBar", 0, 0 };
+    static const QUMethod slot_13 = {"slotViewStatusBar", 0, 0 };
+    static const QUMethod slot_14 = {"slotWindowNewWindow", 0, 0 };
+    static const QUParameter param_slot_15[] = {
+	{ "text", &static_QUType_QString, 0, QUParameter::In }
+    };
+    static const QUMethod slot_15 = {"slotStatusMsg", 1, param_slot_15 };
+    static const QUMethod slot_16 = {"windowMenuAboutToShow", 0, 0 };
+    static const QUParameter param_slot_17[] = {
+	{ "id", &static_QUType_int, 0, QUParameter::In }
+    };
+    static const QUMethod slot_17 = {"windowMenuActivated", 1, param_slot_17 };
+    static const QUMethod slot_18 = {"slotWindowTile", 0, 0 };
+    static const QUMethod slot_19 = {"slotWindowCascade", 0, 0 };
+    static const QMetaData slot_tbl[] = {
+	{ "slotFileNew()", &slot_0, QMetaData::Private },
+	{ "slotFileOpen()", &slot_1, QMetaData::Private },
+	{ "slotFileOpenRecent(const KURL&)", &slot_2, QMetaData::Private },
+	{ "slotFileSave()", &slot_3, QMetaData::Private },
+	{ "slotFileSaveAs()", &slot_4, QMetaData::Private },
+	{ "slotFileClose()", &slot_5, QMetaData::Private },
+	{ "slotFilePrint()", &slot_6, QMetaData::Private },
+	{ "slotFileQuit()", &slot_7, QMetaData::Private },
+	{ "slotEditUndo()", &slot_8, QMetaData::Private },
+	{ "slotEditCut()", &slot_9, QMetaData::Private },
+	{ "slotEditCopy()", &slot_10, QMetaData::Private },
+	{ "slotEditPaste()", &slot_11, QMetaData::Private },
+	{ "slotViewToolBar()", &slot_12, QMetaData::Private },
+	{ "slotViewStatusBar()", &slot_13, QMetaData::Private },
+	{ "slotWindowNewWindow()", &slot_14, QMetaData::Private },
+	{ "slotStatusMsg(const QString&)", &slot_15, QMetaData::Private },
+	{ "windowMenuAboutToShow()", &slot_16, QMetaData::Private },
+	{ "windowMenuActivated(int)", &slot_17, QMetaData::Private },
+	{ "slotWindowTile()", &slot_18, QMetaData::Private },
+	{ "slotWindowCascade()", &slot_19, QMetaData::Private }
+    };
+    metaObj = QMetaObject::new_metaobject(
+	"PlivruskdeApp", parentObject,
+	slot_tbl, 20,
+	0, 0,
+#ifndef QT_NO_PROPERTIES
+	0, 0,
+	0, 0,
+#endif // QT_NO_PROPERTIES
+	0, 0 );
+    cleanUp_PlivruskdeApp.setMetaObject( metaObj );
+    return metaObj;
+}
+
+void* PlivruskdeApp::qt_cast( const char* clname )
+{
+    if ( !qstrcmp( clname, "PlivruskdeApp" ) )
+	return this;
+    return KMainWindow::qt_cast( clname );
+}
+
+bool PlivruskdeApp::qt_invoke( int _id, QUObject* _o )
+{
+    switch ( _id - staticMetaObject()->slotOffset() ) {
+    case 0: slotFileNew(); break;
+    case 1: slotFileOpen(); break;
+    case 2: slotFileOpenRecent((const KURL&)*((const KURL*)static_QUType_ptr.get(_o+1))); break;
+    case 3: slotFileSave(); break;
+    case 4: slotFileSaveAs(); break;
+    case 5: slotFileClose(); break;
+    case 6: slotFilePrint(); break;
+    case 7: slotFileQuit(); break;
+    case 8: slotEditUndo(); break;
+    case 9: slotEditCut(); break;
+    case 10: slotEditCopy(); break;
+    case 11: slotEditPaste(); break;
+    case 12: slotViewToolBar(); break;
+    case 13: slotViewStatusBar(); break;
+    case 14: slotWindowNewWindow(); break;
+    case 15: slotStatusMsg((const QString&)static_QUType_QString.get(_o+1)); break;
+    case 16: windowMenuAboutToShow(); break;
+    case 17: windowMenuActivated((int)static_QUType_int.get(_o+1)); break;
+    case 18: slotWindowTile(); break;
+    case 19: slotWindowCascade(); break;
+    default:
+	return KMainWindow::qt_invoke( _id, _o );
+    }
+    return TRUE;
+}
+
+bool PlivruskdeApp::qt_emit( int _id, QUObject* _o )
+{
+    return KMainWindow::qt_emit(_id,_o);
+}
+#ifndef QT_NO_PROPERTIES
+
+bool PlivruskdeApp::qt_property( int id, int f, QVariant* v)
+{
+    return KMainWindow::qt_property( id, f, v);
+}
+
+bool PlivruskdeApp::qt_static_property( QObject* , int , int , QVariant* ){ return FALSE; }
+#endif // QT_NO_PROPERTIES

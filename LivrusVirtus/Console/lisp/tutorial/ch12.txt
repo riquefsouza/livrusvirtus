@@ -1,0 +1,97 @@
+LISP Tutorial   by Mark Meyer
+Chapter 12
+Character strings
+--------------------------------------------------------------------------------
+TOPICS:  
+--------------------------------------------------------------------------------
+
+All programming languages have to have character strings, and LISP is no differ-
+ent.  You can bind character string values to variables, use them as literal
+constants, read and write them, and return them from functions.  Many functions
+work on character strings.
+
+You can also deal with individual characters.  These are written in a funny way
+in Common LISP:  the character is preceded by #\ as in #\A or #\, or even #\.
+VERY IMPORTANT!  The C-like notation of 'a' does NOT mean the same thing as #\a
+but rather the symbolic atom a.  Remember the quote?  Well it is used in this
+case to introduce a symbolic atom, like 'mark or 'sally or 'a.  Note that 'mark
+is not a character string, either!
+
+Back to true strings.
+
+One interesting and important simplification of Common LISP is that strings are
+sequences of characters, so many sequence functions like subseq will work on 
+character strings the same as lists.
+
+Here are examples of storing and manipulating character strings:
+
+    (setq x "My name")
+    (length x)
+    (length "abc")
+    (princ x)
+    (princ "Hi there")
+    (reverse "abc")
+
+There are number of string comparison functions:
+
+    (string= x "My nome")
+    (string< x "My nome")
+
+To get specific characters out of strings, use char:
+
+    (char "abcde" 3)  ==> d
+
+Here's how one would compare these in a function:
+
+    (equal #\d (char "abcde" 3))
+
+Note that char starts at 0 for the first character.
+
+To pull out a subsequence from a character string, use subseq:
+
+    (subseq "abcde" 2 4) ==> "cd"
+
+The 2nd number is not included, so 2 3 is meant "positions 2 up to 3, but not 
+including 3."
+
+A related function finds a character within a string and returns its position:
+
+    (position #\b "abc") ==> 1
+
+Of course we often need to concatenate, or splice together, strings:
+
+    (concatenate 'string "abc" "def" "z") 
+
+gives "abcdefz".
+
+If you sort with a list of strings, be sure to use the proper string< function,
+or else you will be surprised!
+
+    (sort '("joe" "abe" "mark") #'string<)  
+
+gives ("abe" "joe" "mark").
+
+Occasionally, you need to convert between symbolic atoms and true strings.
+There are two functions for this:
+
+    (symbol-name 'hi)  ==>  "HI"
+    (make-symbol "HI")  ==>  hi
+
+Finally, you may need to "read" a lisp form from a string, for example, if you
+are creating a function on the fly, while the program is running.   LISP has
+a function called "read-from-string" which does this:
+
+    (setq x (read-from-string "(car y")) 
+
+This puts the lisp list (car y) into variable x.  You can treat it as a data 
+object or you could evaluate it:
+
+    (eval x)
+
+There are many other string functions that you can find in the books.  Also,
+I have written a quite elaborate string package that can be used in your pro-
+grams.  It is called "strings" and is available from the help system.  There is
+documentation at the front of the file which lists all the functions and tells
+in English what they do.
+
+-------------------------------------------------------------------------------

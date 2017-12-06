@@ -1,0 +1,86 @@
+# Microsoft Developer Studio Generated Dependency File, included by Livrus.mak
+
+.\AlterarSenha.cpp : \
+	".\AlterarSenha.h"\
+	".\ListaStr.h"\
+	".\Livrus.h"\
+	".\RotinasGlobais.h"\
+	
+
+.\CadAssuntos.cpp : \
+	".\CadAssuntos.h"\
+	".\ListaStr.h"\
+	".\Livrus.h"\
+	".\RotinasGlobais.h"\
+	
+
+.\ConAssuntos.cpp : \
+	".\ConAssuntos.h"\
+	".\ConsultasSQL.h"\
+	".\ListaStr.h"\
+	".\RotinasGlobais.h"\
+	
+
+.\ConsultasSQL.cpp : \
+	".\ConsultasSQL.h"\
+	".\ListaStr.h"\
+	".\RotinasGlobais.h"\
+	
+
+.\ListaStr.cpp : \
+	".\ListaStr.h"\
+	
+
+.\Livrus.cpp : \
+	".\AlterarSenha.h"\
+	".\CadAssuntos.h"\
+	".\ConAssuntos.h"\
+	".\ConsultasSQL.h"\
+	".\ListaStr.h"\
+	".\Livrus.h"\
+	".\Login.h"\
+	".\RotinasGlobais.h"\
+	".\Sobre.h"\
+	".\Splash.h"\
+	
+
+.\Login.cpp : \
+	".\ConsultasSQL.h"\
+	".\ListaStr.h"\
+	".\Livrus.h"\
+	".\Login.h"\
+	".\RotinasGlobais.h"\
+	
+
+.\RotinasGlobais.cpp : \
+	".\ListaStr.h"\
+	".\Livrus.h"\
+	".\RotinasGlobais.h"\
+	
+
+.\Sobre.cpp : \
+	".\ListaStr.h"\
+	".\RotinasGlobais.h"\
+	".\Sobre.h"\
+	
+
+.\Splash.cpp : \
+	".\ListaStr.h"\
+	".\RotinasGlobais.h"\
+	".\Splash.h"\
+	
+
+.\StdAfx.cpp : \
+	"..\..\..\arquivos de programas\microsoft visual studio\vc98\include\basetsd.h"\
+	".\StdAfx.h"\
+	
+
+.\Livrus.rc : \
+	".\barra.bmp"\
+	".\Livrus.h"\
+	".\Livrus.ico"\
+	".\LivrusVirtus.bmp"\
+	".\Login.bmp"\
+	".\Login.h"\
+	".\Sobre.h"\
+	

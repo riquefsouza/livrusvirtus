@@ -1,0 +1,307 @@
+--
+--  Program LALR
+--  ============
+--
+--  This program computes LALR parse tables from a grammar file,
+--  producing a semantic action file and a table file.  Much of this was
+--  inspired by an earlier version written by Phillippe Charles and
+--  Matthew Smosna.
+--
+--  We're not going to describe any of the theory of constructing LALR
+--  parse tables in these comments.  The reader should be thoroughly
+--  familiar with that already, or will be hopelessly confused by this
+--  program.
+--
+
+program lalr;
+
+   use globals,                        -- global symbols
+       parser,                         -- LALR parser                         
+       semantic_actions,               -- semantic actions, attached to 
+                                       -- reductions
+       simple_edits,                   -- crude edit of grammar
+       table_calculations,             -- calculate parse tables
+       table_output;                   -- table output procedures
+
+   --
+   --  The main program loops over the command line, setting options and
+   --  picking out source files.  We keep track of command line options,
+   --  since these should override options found in the source file.
+   --
+
+   i := 1;
+   while i <= #command_line loop
+
+      arg := command_line(i);
+
+      --
+      --  We expect any argument beginning with a dash to be an option,
+      --  and any without a dash to be a source file name.
+      --
+
+      if arg(1) = "-" then
+      
+         case arg(2)
+
+            --
+            --  By default, we'll form names for the action, table, and
+            --  log files by appending `.act', `.tab', and `.log' to the
+            --  root of the grammar file name.  This is generally not the
+            --  best choice, but without knowing the language used for
+            --  these files it's the best we can do.  Here we let the
+            --  user choose something better.
+            --
+
+            when "s" =>
+
+               arg := command_line(i +:= 1);
+               if arg = om or arg(1) = "-" then
+                  print("Missing action file name on -s option!");
+                  stop;
+               end if;
+               action_file_name := arg;
+               cline_overrides("action_file_name") := action_file_name;
+               
+            when "t" =>
+
+               arg := command_line(i +:= 1);
+               if arg = om or arg(1) = "-" then
+                  print("Missing table file name on -t option!");
+                  stop;
+               end if;
+               table_file_name := arg;
+               cline_overrides("table_file_name") := table_file_name;
+               
+            --
+            --  We allow a general description of comment styles in the
+            --  %options section of the source file.  This option
+            --  preloads a few canned formats.  This is primarily so a
+            --  comment can preceed the %options section.
+            --
+
+            when "c" =>
+
+               arg := command_line(i +:= 1);
+               if arg = om or arg(1) = "-" then
+                  print("Missing comment style on -c option!");
+                  stop;
+               end if;
+
+               case arg
+                  when "c", "C", "pl1", "PL1" =>
+                     comment_delimiters := ["/*", "*/"];
+                  when "setl2", "SETL2", "ada", "Ada", "ADA" =>
+                     comment_delimiters := ["--"];
+                  otherwise =>
+                     print("Sorry, ", arg, " is not recognized on -c option");
+                     stop;
+               end case;
+
+            --
+            --  We have three broad modes of operation: 1) preprocess and
+            --  generate action file only, 2) edit grammar for conflicts,
+            --  but do not produce parse tables, and 3) do everything.
+            --  These options let the user choose the mode, according two
+            --  several criteria.  If edit_only or actions_only are
+            --  explicitly specified, then of course we do that.  If a
+            --  log file is specified, then we load the grammar, and if
+            --  there are no changes from the previous run actions_only
+            --  will be set to true.
+            --
+
+            when "a" =>
+               actions_only := true;
+               cline_overrides("actions_only") := true;
+
+            when "e" =>
+               edit_only := true;
+               cline_overrides("edit_only") := true;
+
+            when "l" =>
+
+               check_log_file := true;
+               cline_overrides("check_log_file") := true;
+
+            when "L" =>
+
+               arg := command_line(i +:= 1);
+               if arg = om or arg(1) = "-" then
+                  print("Missing log file name on -L option!");
+                  stop;
+               end if;
+               log_file_name := arg;
+               cline_overrides("log_file_name") := log_file_name;
+               
+            --
+            --  Verbose mode generates printouts of intermediate tables,
+            --  hopefully useful in debugging a grammar.
+            --
+
+            when "v" =>
+               verbose := true;
+               cline_overrides("verbose") := true;
+
+            --
+            --  There are many other options controllable in the
+            --  `%options' section of the source, but that's all on the
+            --  command line.
+            --
+
+            otherwise =>
+               print("Invalid run option => ", arg);
+               stop;
+
+         end case;
+
+      else
+  
+         --
+         --  Since we didn't find a leading "-" on this argument, we
+         --  assume it's the name of the source file.  We make sure the
+         --  extension is ".g", then start processing the file.
+         --
+
+         suffix := rbreak(arg, ".");
+         if arg = "" then
+            source_file_name := suffix + ".g";
+         elseif suffix /= "g" then
+            source_file_name := arg + suffix + ".g";
+         else 
+            source_file_name := arg + suffix;
+         end if;
+
+         process_source_file();
+
+      end if;
+      i +:= 1;
+
+   end loop;
+
+   --
+   --  process_source_file
+   --  -------------------
+   --
+   --  This procedure drives the processing for one source file.  We
+   --  establish a few defaults dependent on source file name, load the
+   --  grammar, calculate tables, and write them out.
+   --
+
+   procedure process_source_file;
+
+      print("Processing ", source_file_name);
+
+      --
+      --  Output file names depend on input file names by default.
+      --
+
+      action_file_name := cline_overrides("action_file_name") ?
+                          source_file_name(1 .. #source_file_name-1)+"act";
+      table_file_name  := cline_overrides("table_file_name") ?
+                          source_file_name(1 .. #source_file_name-1)+"tab";
+      log_file_name    := cline_overrides("table_file_name") ?
+                          source_file_name(1 .. #source_file_name-1)+"log";
+      error_count := 0;
+
+      --
+      --  Load the grammar file into memory tables.
+      --
+
+      initialize_tables();
+      parse(source_file_name);
+      if action_handle /= om then
+         close(action_handle);
+         action_handle := om;
+      end if;
+
+      --
+      --  At this point, the grammar file is loaded into memory, but with
+      --  only the crudest of error checking.  However, in most cases
+      --  that's all we need to do.  The vast majority of changes to a
+      --  grammar file are to the semantic actions, not the grammar.
+      --  Therefore, we have a mechanism to avoid recalculating the parse
+      --  tables, if that isn't necessary.  We look for a log file from a
+      --  prior run, and check the grammar in the log file against the
+      --  one we just loaded.  If there are no changes then we're done
+      --  with this file.  Otherwise we keep going.
+      --
+
+      if error_count = 0 and (not actions_only) and check_log_file then
+
+         log_file := open(log_file_name, "binary-in");
+         if log_file = om then
+            actions_only := false;
+         else
+
+            getb(log_file, last_tables);
+            actions_only := last_tables = [symbol_list,
+                                           symbol_desc,
+                                           lhs_list,
+                                           rhs_list,
+                                           num_terminals];
+            close(log_file);
+
+            if actions_only then 
+               print("Grammar unchanged, skipping table calculations");
+            end if;
+
+         end if;
+
+         if not actions_only then
+            log_file := open(log_file_name, "binary-out");
+            putb(log_file, [symbol_list,
+                            symbol_desc,
+                            lhs_list,
+                            rhs_list,
+                            num_terminals]);
+            close(log_file);
+         end if;
+
+      end if;
+
+      --
+      --  If we're doing more than just generating a semantic action
+      --  file, we do a light edit of the rules and print the grammar.
+      --
+
+      if error_count = 0 and (not actions_only) then
+         edit_grammar();
+      end if;
+      if verbose then
+        print_grammar();
+      end if;
+
+      --
+      --  If there were no obvious input errors then calculate parse
+      --  tables.
+      --
+
+      if error_count = 0 and not actions_only then
+         calculate_tables();
+      end if;
+
+      --
+      --  If there were still no errors then write out the parse tables.
+      --
+
+      if error_count = 0 and not actions_only and not edit_only then
+         write_tables();
+      end if;
+
+      --
+      --  Reset options set in the `%options'.
+      --
+
+      cline_overrides("action_file_name") := om;
+      cline_overrides("table_file_name") := om;
+      cline_overrides("log_file_name") := om;
+      cpp_line_numbers := false;
+      table_format := "text";
+      verbose := cline_overrides("verbose") ? false;
+      actions_only := cline_overrides("actions_only") ? false;
+      edit_only := cline_overrides("edit_only") ? false;
+      default_rules := true;
+      start_symbol := om;
+
+   end process_source_file;
+
+end lalr;

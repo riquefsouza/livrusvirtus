@@ -1,0 +1,110 @@
+--
+--  STABLE ASSIGNMENT PROGRAM
+--  =========================
+--
+--  This program matches students with colleges in such a way that the
+--  following three conditions are satisfied:
+--
+--     1.  No college accepts more than quota(c).
+--     2.  A college never admits a student if it has filled its quota
+--         and there exists an unassigned student to whom the college is
+--         acceptable and the college prefers.
+--     3.  There is not situation in which two students each prefer the
+--         other's college, and each college prefers the other's student.
+--
+--  The algorithm is due to David Gale and Lloyd Shapley.
+--
+
+program gale_shapley;
+
+   -- colleges
+
+   const A := "NYU", B := "Harvard", C := "Princeton", D := "MIT";
+
+   -- student preferences
+
+   stud_pref := {[1,[A,B,C]],[2,[B,C,A,D]],[3,[C,A,B]],[4,[B,A,C]]};
+
+   -- college preferences
+   
+   coll_pref := {[A,[1,2,3,4]],[B,[4,3,2,1]],[C,[2,4,3]],[D,[1,2,3]]};
+
+   -- college quotas
+
+   quota := {[A,2],[B,1],[C,1],[D,2]};
+
+   -- perform the assignment and print results
+
+   print(assign(stud_pref,coll_pref,quota));
+
+   --
+   --  Assign
+   --  ------
+   --
+   --  Make the stable assignment.
+   --
+
+   procedure assign(rw stud_pref,coll_pref,quota);
+
+      colleges := domain quota;
+      active := {[c,[]] : c in colleges};  -- active list by college
+      applicants := domain stud_pref;      -- initialize applicant list
+
+      -- we may need as many rounds as there are colleges
+
+      for j in [1 .. #quota] loop
+
+         new_applicants := applicants;
+        
+         -- each student who has a college to apply to does so
+
+         for s in applicants | stud_pref(s) /= [] loop
+
+            first_choice fromb stud_pref(s);
+            active(first_choice) with:= s;
+            new_applicants less:= s;
+    
+         end loop;
+
+         applicants := new_applicants;
+
+         -- drop all over quota applicants
+
+         for c in colleges | #active(c) > quota(c) loop
+
+            active(c) := pref_sort(active(c),coll_pref(c));
+
+            for k in [quota(c)+1 .. #active(c)] loop
+               applicants with:= active(c)(k);
+            end loop;
+
+            active(c) := active(c)(1 .. #active(c) min quota(c));
+
+         end loop;
+
+         if not (exists s in applicants | stud_pref(c) /= []) then
+            exit;
+         end if;
+
+      end loop;
+
+      return [active,applicants];
+
+   end assign;
+
+   --
+   --  Pref_sort
+   --  ---------
+   --
+   --  Sort applicants by college choice.
+   --
+
+   procedure pref_sort(apvect,order);
+
+      applicants := {x : x in apvect};
+      return [x in order | x in applicants];
+
+   end pref_sort;
+
+end gale_shapley;
+

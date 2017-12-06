@@ -1,0 +1,371 @@
+package  Livrus;
+
+import System.*;
+import System.Drawing.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+
+/// <summary>
+/// Summary description for WinForm.
+/// </summary>
+public class frmCadastros extends System.Windows.Forms.Form
+{
+	protected ArrayList Registros;
+	protected ArrayList Campos;
+	protected int nLinhaRegistro;
+	/// <summary>
+	/// Required designer variable.
+	/// </summary>
+	private System.ComponentModel.Container components = null;
+	protected System.Windows.Forms.Label labCodigo;
+	protected System.Windows.Forms.TextBox edtCodigo;
+	protected System.Windows.Forms.Label labDescricao;
+	protected System.Windows.Forms.TextBox edtDescricao;
+	protected System.Windows.Forms.Button btnNovo;
+	protected System.Windows.Forms.Button btnPesquisar;
+	protected System.Windows.Forms.Button btnAnterior;
+	protected System.Windows.Forms.Button btnProximo;
+	protected System.Windows.Forms.Button btnFechar;
+	protected System.Windows.Forms.Button btnLimpar;
+	protected System.Windows.Forms.Button btnExcluir;
+	protected System.Windows.Forms.Button btnSalvar;
+	protected System.Data.OleDb.OleDbCommand Arquiva;
+
+	public frmCadastros()
+	{
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent();
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+		Registros = new ArrayList();
+		nLinhaRegistro = 0;
+	}
+
+	/// <summary>
+	/// Clean up any resources being used.
+	/// </summary>
+	protected void Dispose (boolean disposing)
+	{
+		if (disposing)
+		{
+			if (components != null)
+			{
+				components.Dispose();
+			}
+		}
+		super.Dispose(disposing);
+	}
+
+	/// <summary>
+	/// Required method for Designer support - do not modify
+	/// the contents of this method with the code editor.
+	/// </summary>
+	private void InitializeComponent()
+	{
+		this.labCodigo = new System.Windows.Forms.Label();
+		this.edtCodigo = new System.Windows.Forms.TextBox();
+		this.labDescricao = new System.Windows.Forms.Label();
+		this.edtDescricao = new System.Windows.Forms.TextBox();
+		this.btnNovo = new System.Windows.Forms.Button();
+		this.btnPesquisar = new System.Windows.Forms.Button();
+		this.btnAnterior = new System.Windows.Forms.Button();
+		this.btnProximo = new System.Windows.Forms.Button();
+		this.btnFechar = new System.Windows.Forms.Button();
+		this.btnLimpar = new System.Windows.Forms.Button();
+		this.btnExcluir = new System.Windows.Forms.Button();
+		this.btnSalvar = new System.Windows.Forms.Button();
+		this.Arquiva = new System.Data.OleDb.OleDbCommand();
+		this.SuspendLayout();
+		// 
+		// labCodigo
+		// 
+		this.labCodigo.set_Location(new System.Drawing.Point(8, 8));
+		this.labCodigo.set_Name("labCodigo");
+		this.labCodigo.set_Size(new System.Drawing.Size(56, 16));
+		this.labCodigo.set_TabIndex(0);
+		this.labCodigo.set_Text("Código:");
+		// 
+		// edtCodigo
+		// 
+		this.edtCodigo.set_Location(new System.Drawing.Point(8, 24));
+		this.edtCodigo.set_Name("edtCodigo");
+		this.edtCodigo.set_MaxLength(10);
+		this.edtCodigo.set_Size(new System.Drawing.Size(128, 20));
+		this.edtCodigo.set_TabIndex(1);
+		this.edtCodigo.set_Text("");
+		this.edtCodigo.add_Leave(new System.EventHandler(this.edtCodigo_Leave));
+		// 
+		// labDescricao
+		// 
+		this.labDescricao.set_Location(new System.Drawing.Point(8, 48));
+		this.labDescricao.set_Name("labDescricao");
+		this.labDescricao.set_Size(new System.Drawing.Size(64, 16));
+		this.labDescricao.set_TabIndex(3);
+		this.labDescricao.set_Text("Descrição:");
+		// 
+		// edtDescricao
+		// 
+		this.edtDescricao.set_Enabled(false);
+		this.edtDescricao.set_Location(new System.Drawing.Point(8, 64));
+		this.edtDescricao.set_Name("edtDescricao");
+		this.edtDescricao.set_MaxLength(30);
+		this.edtDescricao.set_Size(new System.Drawing.Size(232, 20));
+		this.edtDescricao.set_TabIndex(4);
+		this.edtDescricao.set_Text("");
+		// 
+		// btnNovo
+		// 
+		this.btnNovo.set_Location(new System.Drawing.Point(152, 24));
+		this.btnNovo.set_Name("btnNovo");
+		this.btnNovo.set_TabIndex(2);
+		this.btnNovo.set_Text("&Novo");
+		this.btnNovo.add_Click(new System.EventHandler(this.btnNovo_Click));
+		// 
+		// btnPesquisar
+		// 
+		this.btnPesquisar.set_Location(new System.Drawing.Point(256, 8));
+		this.btnPesquisar.set_Name("btnPesquisar");
+		this.btnPesquisar.set_TabIndex(5);
+		this.btnPesquisar.set_Text("&Pesquisar");
+		// 
+		// btnAnterior
+		// 
+		this.btnAnterior.set_Enabled(false);
+		this.btnAnterior.set_Location(new System.Drawing.Point(256, 40));
+		this.btnAnterior.set_Name("btnAnterior");
+		this.btnAnterior.set_TabIndex(6);
+		this.btnAnterior.set_Text("&Anterior");
+		this.btnAnterior.add_Click(new System.EventHandler(this.btnAnterior_Click));
+		// 
+		// btnProximo
+		// 
+		this.btnProximo.set_Enabled(false);
+		this.btnProximo.set_Location(new System.Drawing.Point(256, 72));
+		this.btnProximo.set_Name("btnProximo");
+		this.btnProximo.set_TabIndex(7);
+		this.btnProximo.set_Text("Próxi&mo");
+		this.btnProximo.add_Click(new System.EventHandler(this.btnProximo_Click));
+		// 
+		// btnFechar
+		// 
+		this.btnFechar.set_DialogResult(System.Windows.Forms.DialogResult.Cancel);
+		this.btnFechar.set_Location(new System.Drawing.Point(256, 104));
+		this.btnFechar.set_Name("btnFechar");
+		this.btnFechar.set_TabIndex(11);
+		this.btnFechar.set_Text("&Fechar");
+		this.btnFechar.add_Click(new System.EventHandler(this.btnFechar_Click));
+		// 
+		// btnLimpar
+		// 
+		this.btnLimpar.set_Location(new System.Drawing.Point(176, 104));
+		this.btnLimpar.set_Name("btnLimpar");
+		this.btnLimpar.set_TabIndex(10);
+		this.btnLimpar.set_Text("&Limpar");
+		this.btnLimpar.add_Click(new System.EventHandler(this.btnLimpar_Click));
+		// 
+		// btnExcluir
+		// 
+		this.btnExcluir.set_Enabled(false);
+		this.btnExcluir.set_Location(new System.Drawing.Point(96, 104));
+		this.btnExcluir.set_Name("btnExcluir");
+		this.btnExcluir.set_TabIndex(9);
+		this.btnExcluir.set_Text("&Excluir");
+		// 
+		// btnSalvar
+		// 
+		this.btnSalvar.set_Enabled(false);
+		this.btnSalvar.set_Location(new System.Drawing.Point(16, 104));
+		this.btnSalvar.set_Name("btnSalvar");
+		this.btnSalvar.set_TabIndex(8);
+		this.btnSalvar.set_Text("&Salvar");
+		// 
+		// frmCadastros
+		// 
+		this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+		this.set_CancelButton(this.btnFechar);
+		this.set_ClientSize(new System.Drawing.Size(336, 133));
+		this.get_Controls().Add(this.btnSalvar);
+		this.get_Controls().Add(this.btnExcluir);
+		this.get_Controls().Add(this.btnLimpar);
+		this.get_Controls().Add(this.btnFechar);
+		this.get_Controls().Add(this.btnProximo);
+		this.get_Controls().Add(this.btnAnterior);
+		this.get_Controls().Add(this.btnPesquisar);
+		this.get_Controls().Add(this.btnNovo);
+		this.get_Controls().Add(this.edtDescricao);
+		this.get_Controls().Add(this.labDescricao);
+		this.get_Controls().Add(this.edtCodigo);
+		this.get_Controls().Add(this.labCodigo);
+		this.set_Name("frmCadastros");
+		this.set_Text("Cadastro de");
+		this.add_Closing(new System.ComponentModel.CancelEventHandler(this.frmCadastros_Closing));
+		this.add_MouseMove(new System.Windows.Forms.MouseEventHandler(this.frmCadastros_MouseMove));
+		this.ResumeLayout(false);
+	}
+
+	private void btnFechar_Click(Object sender, System.EventArgs e)
+	{
+		Close();
+	}
+
+	protected boolean ValidaDados(boolean bTodosDados)
+	{
+		return true;
+	}
+
+	protected void InformaLimpaDados(boolean bInformar)
+	{
+		if (bInformar) {
+		  Campos = (ArrayList)Registros.get_Item(nLinhaRegistro);
+		  edtCodigo.set_Text(Campos.get_Item(0).ToString());
+		  edtDescricao.set_Text(Campos.get_Item(1).ToString());
+		} else {
+		  edtCodigo.set_Text("");
+		  edtDescricao.set_Text("");
+		  edtCodigo.set_Enabled(true);
+		  edtCodigo.Focus();
+		}
+	}
+
+	protected void HabilitaDados(boolean bHabilita)
+	{
+		edtDescricao.set_Enabled(bHabilita);
+	}
+
+	private void btnNovo_Click(Object sender, System.EventArgs e)
+	{
+		btnSalvar.set_Enabled(true);
+		btnExcluir.set_Enabled(false);
+		btnPesquisar.set_Enabled(false);
+		btnAnterior.set_Enabled(false);
+		btnProximo.set_Enabled(false);
+		btnNovo.set_Enabled(false);
+
+		InformaLimpaDados(false);
+		HabilitaDados(true);
+	}
+
+	protected void NovoDado(String sTextoSql)
+	{
+		 if (RotinasGlobais.Rotinas.ConsultaDados(Registros, sTextoSql)) {
+			Campos = (ArrayList)Registros.get_Item(0);
+			edtCodigo.set_Text(Campos.get_Item(0).ToString());
+			edtCodigo.set_Enabled(false);
+			edtDescricao.Focus();
+		 }
+	}
+
+	protected void btnLimpar_Click(Object sender, System.EventArgs e)
+	{
+		btnSalvar.set_Enabled(false);
+		btnExcluir.set_Enabled(false);
+		btnPesquisar.set_Enabled(true);
+		btnAnterior.set_Enabled(false);
+		btnProximo.set_Enabled(false);
+		btnNovo.set_Enabled(true);
+
+		InformaLimpaDados(false);
+		HabilitaDados(false);
+	}
+
+	protected void ExcluirDados(String sTextoSql)
+	{
+	   if (ValidaDados(false)) {
+
+		 DialogResult res;
+		 res = MessageBox.Show(this, "Certeza de excluir?",
+		 frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.YesNo,
+		 MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+		 if (res == DialogResult.Yes) {
+			  Arquiva = frmPrincipal.fPrincipal.db.CreateCommand();
+			  Arquiva.set_CommandText(sTextoSql);
+			  Arquiva.ExecuteNonQuery();
+			  Arquiva.Dispose();
+			  btnLimpar_Click(this,null);
+		 }
+	   }
+	}
+
+	protected void PesquisarDados(String sTextoSql, String sMensagemErro)
+	{
+		if (edtCodigo.get_Text().Equals("")) {
+		  btnAnterior.set_Enabled(true);
+		  btnProximo.set_Enabled(true);
+		}
+
+		if (RotinasGlobais.Rotinas.ConsultaDados(Registros,sTextoSql)) {
+		     nLinhaRegistro=0;
+			 InformaLimpaDados(true);
+			 HabilitaDados(true);
+
+			 btnSalvar.set_Enabled(true);
+			 btnExcluir.set_Enabled(true);
+			 btnPesquisar.set_Enabled(false);
+		} else
+		  MessageBox.Show(sMensagemErro, frmPrincipal.fPrincipal.get_Text(),
+		  MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+	}
+
+	private void btnAnterior_Click(Object sender, System.EventArgs e)
+	{
+		if (nLinhaRegistro > 0) {
+			nLinhaRegistro=nLinhaRegistro - 1;
+			InformaLimpaDados(true);
+		}
+	}
+
+	private void btnProximo_Click(Object sender, System.EventArgs e)
+	{
+		if (nLinhaRegistro < (Registros.get_Count()-1)) {
+			nLinhaRegistro=nLinhaRegistro + 1;
+			InformaLimpaDados(true);
+		}
+	}
+
+	protected void SalvarDados(String sTextoSql,String sTextoUpdate,
+									String sTextoInsert, boolean bLimparDados)
+	{
+		if (ValidaDados(true)) {
+		   Arquiva = frmPrincipal.fPrincipal.db.CreateCommand();
+		   if (RotinasGlobais.Rotinas.ConsultaDados(Arquiva,sTextoSql)) {
+			 Arquiva.set_CommandText(sTextoUpdate);
+		   } else {
+			 Arquiva.set_CommandText(sTextoInsert);
+		   }
+		   Arquiva.ExecuteNonQuery();
+		   Arquiva.Dispose();
+		   if (bLimparDados)
+			  btnLimpar_Click(this,null);
+		}
+	}
+
+	protected void edtCodigo_Leave(Object sender, System.EventArgs e)
+	{
+	  if (edtCodigo.get_Text().Equals("")==false) {
+		if (RotinasGlobais.Rotinas.ValidaInteger(edtCodigo.get_Text())==false) {
+		  edtCodigo.set_Text("");
+		  edtCodigo.Focus();
+		}
+	  }
+	}
+
+	private void frmCadastros_MouseMove(Object sender, System.Windows.Forms.MouseEventArgs e)
+	{
+		frmPrincipal.fPrincipal.statusBar1.get_Panels().get_Item(1).set_Text(this.get_Text());
+	}
+	
+	private void frmCadastros_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
+	{
+		frmPrincipal.fPrincipal.statusBar1.get_Panels().get_Item(1).set_Text("");
+	}
+
+}
+

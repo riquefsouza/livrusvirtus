@@ -1,0 +1,812 @@
+unit CadClientes;
+
+interface
+
+uses
+  System.Drawing, System.Collections, System.ComponentModel,
+  System.Windows.Forms, System.Data, Cadastros;
+
+type
+  frmCadClientes = class(Cadastros.frmCadastros)
+  {$REGION 'Designer Managed Code'}
+  strict private
+    /// <summary>
+    /// Required designer variable.
+    /// </summary>
+    Components: System.ComponentModel.Container;
+    labEmail: System.Windows.Forms.Label;
+    edtEmail: System.Windows.Forms.TextBox;
+    edtIdentidade: System.Windows.Forms.TextBox;
+    labIdentidade: System.Windows.Forms.Label;
+    rdgSexo: System.Windows.Forms.GroupBox;
+    rbMasculino: System.Windows.Forms.RadioButton;
+    rbFeminino: System.Windows.Forms.RadioButton;
+    edtTelefone: System.Windows.Forms.TextBox;
+    labTelefone: System.Windows.Forms.Label;
+    edtDtNascimento: System.Windows.Forms.DateTimePicker;
+    labDtNascimento: System.Windows.Forms.Label;
+    grpEndereco: System.Windows.Forms.GroupBox;
+    edtCodEndereco: System.Windows.Forms.TextBox;
+    btnPEndereco: System.Windows.Forms.Button;
+    edtBairro: System.Windows.Forms.TextBox;
+    labBairro: System.Windows.Forms.Label;
+    edtLogradouro: System.Windows.Forms.TextBox;
+    labLogradouro: System.Windows.Forms.Label;
+    labEstado: System.Windows.Forms.Label;
+    edtCidade: System.Windows.Forms.TextBox;
+    labCidade: System.Windows.Forms.Label;
+    edtCEP: System.Windows.Forms.TextBox;
+    labCEP: System.Windows.Forms.Label;
+    edtEstado: System.Windows.Forms.TextBox;
+    edtPais: System.Windows.Forms.TextBox;
+    edtCodPais: System.Windows.Forms.TextBox;
+    labPais: System.Windows.Forms.Label;
+    btnPPais: System.Windows.Forms.Button;
+    btnPProfissao: System.Windows.Forms.Button;
+    edtProfissao: System.Windows.Forms.TextBox;
+    edtCodProfissao: System.Windows.Forms.TextBox;
+    labProfissao: System.Windows.Forms.Label;
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    procedure InitializeComponent;
+    procedure frmCadClientes_Closing(sender: System.Object; e: System.ComponentModel.CancelEventArgs);
+    procedure btnSalvar_Click(sender: System.Object; e: System.EventArgs);
+    procedure btnPesquisar_Click(sender: System.Object; e: System.EventArgs);
+    procedure btnExcluir_Click(sender: System.Object; e: System.EventArgs);
+    procedure edtCodigo_Leave(sender: System.Object; e: System.EventArgs);
+    procedure edtCodEndereco_Leave(sender: System.Object; e: System.EventArgs);
+    procedure edtCodPais_Leave(sender: System.Object; e: System.EventArgs);
+    procedure edtCodProfissao_Leave(sender: System.Object; e: System.EventArgs);
+    procedure btnPEndereco_Click(sender: System.Object; e: System.EventArgs);
+    procedure btnPPais_Click(sender: System.Object; e: System.EventArgs);
+    procedure btnPProfissao_Click(sender: System.Object; e: System.EventArgs);
+  {$ENDREGION}
+  strict protected
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    procedure Dispose(Disposing: Boolean); override;
+    function ValidaDados(bTodosDados: boolean): boolean; override;
+    procedure InformaLimpaDados(bInformar: boolean); override;
+    procedure HabilitaDados(bHabilita: boolean); override;
+  private
+    { Private Declarations }
+    ConsCampo: ArrayList;
+    sSexo: String;
+  public
+    constructor Create;
+  end;
+
+  [assembly: RuntimeRequiredAttribute(TypeOf(frmCadClientes))]
+
+var fCadClientes: frmCadClientes;
+
+implementation
+
+uses Principal, ConsultasSQL, RotinasGlobais, ConEnderecos, ConPaises,
+  ConProfissoes;
+
+{$AUTOBOX ON}
+
+{$REGION 'Windows Form Designer generated code'}
+/// <summary>
+/// Required method for Designer support -- do not modify
+/// the contents of this method with the code editor.
+/// </summary>
+procedure frmCadClientes.InitializeComponent;
+begin
+  Self.labEmail := System.Windows.Forms.Label.Create;
+  Self.edtEmail := System.Windows.Forms.TextBox.Create;
+  Self.edtIdentidade := System.Windows.Forms.TextBox.Create;
+  Self.labIdentidade := System.Windows.Forms.Label.Create;
+  Self.rdgSexo := System.Windows.Forms.GroupBox.Create;
+  Self.rbFeminino := System.Windows.Forms.RadioButton.Create;
+  Self.rbMasculino := System.Windows.Forms.RadioButton.Create;
+  Self.edtTelefone := System.Windows.Forms.TextBox.Create;
+  Self.labTelefone := System.Windows.Forms.Label.Create;
+  Self.edtDtNascimento := System.Windows.Forms.DateTimePicker.Create;
+  Self.labDtNascimento := System.Windows.Forms.Label.Create;
+  Self.grpEndereco := System.Windows.Forms.GroupBox.Create;
+  Self.edtEstado := System.Windows.Forms.TextBox.Create;
+  Self.labEstado := System.Windows.Forms.Label.Create;
+  Self.edtCidade := System.Windows.Forms.TextBox.Create;
+  Self.labCidade := System.Windows.Forms.Label.Create;
+  Self.edtCEP := System.Windows.Forms.TextBox.Create;
+  Self.labCEP := System.Windows.Forms.Label.Create;
+  Self.edtBairro := System.Windows.Forms.TextBox.Create;
+  Self.labBairro := System.Windows.Forms.Label.Create;
+  Self.edtLogradouro := System.Windows.Forms.TextBox.Create;
+  Self.labLogradouro := System.Windows.Forms.Label.Create;
+  Self.btnPEndereco := System.Windows.Forms.Button.Create;
+  Self.edtCodEndereco := System.Windows.Forms.TextBox.Create;
+  Self.edtPais := System.Windows.Forms.TextBox.Create;
+  Self.edtCodPais := System.Windows.Forms.TextBox.Create;
+  Self.labPais := System.Windows.Forms.Label.Create;
+  Self.btnPPais := System.Windows.Forms.Button.Create;
+  Self.btnPProfissao := System.Windows.Forms.Button.Create;
+  Self.edtProfissao := System.Windows.Forms.TextBox.Create;
+  Self.edtCodProfissao := System.Windows.Forms.TextBox.Create;
+  Self.labProfissao := System.Windows.Forms.Label.Create;
+  Self.rdgSexo.SuspendLayout;
+  Self.grpEndereco.SuspendLayout;
+  Self.SuspendLayout;
+  // 
+  // labCodigo
+  // 
+  Self.labCodigo.Name := 'labCodigo';
+  Self.labCodigo.Text := 'CPF:';
+  // 
+  // edtCodigo
+  // 
+  Self.edtCodigo.MaxLength := 14;
+  Self.edtCodigo.Name := 'edtCodigo';
+  Include(Self.edtCodigo.Leave, Self.edtCodigo_Leave);
+  // 
+  // labDescricao
+  // 
+  Self.labDescricao.Name := 'labDescricao';
+  // 
+  // edtDescricao
+  // 
+  Self.edtDescricao.Name := 'edtDescricao';
+  // 
+  // btnNovo
+  // 
+  Self.btnNovo.Name := 'btnNovo';
+  // 
+  // btnPesquisar
+  // 
+  Self.btnPesquisar.Location := System.Drawing.Point.Create(440, 8);
+  Self.btnPesquisar.Name := 'btnPesquisar';
+  Include(Self.btnPesquisar.Click, Self.btnPesquisar_Click);
+  // 
+  // btnAnterior
+  // 
+  Self.btnAnterior.Location := System.Drawing.Point.Create(440, 40);
+  Self.btnAnterior.Name := 'btnAnterior';
+  // 
+  // btnProximo
+  // 
+  Self.btnProximo.Location := System.Drawing.Point.Create(440, 72);
+  Self.btnProximo.Name := 'btnProximo';
+  // 
+  // btnFechar
+  // 
+  Self.btnFechar.Location := System.Drawing.Point.Create(440, 424);
+  Self.btnFechar.Name := 'btnFechar';
+  // 
+  // btnLimpar
+  // 
+  Self.btnLimpar.Location := System.Drawing.Point.Create(360, 424);
+  Self.btnLimpar.Name := 'btnLimpar';
+  // 
+  // btnExcluir
+  // 
+  Self.btnExcluir.Location := System.Drawing.Point.Create(280, 424);
+  Self.btnExcluir.Name := 'btnExcluir';
+  Include(Self.btnExcluir.Click, Self.btnExcluir_Click);
+  // 
+  // btnSalvar
+  // 
+  Self.btnSalvar.Location := System.Drawing.Point.Create(200, 424);
+  Self.btnSalvar.Name := 'btnSalvar';
+  Include(Self.btnSalvar.Click, Self.btnSalvar_Click);
+  // 
+  // labEmail
+  // 
+  Self.labEmail.Location := System.Drawing.Point.Create(8, 88);
+  Self.labEmail.Name := 'labEmail';
+  Self.labEmail.Size := System.Drawing.Size.Create(100, 16);
+  Self.labEmail.TabIndex := 5;
+  Self.labEmail.Text := 'E-mail:';
+  // 
+  // edtEmail
+  // 
+  Self.edtEmail.Enabled := False;
+  Self.edtEmail.Location := System.Drawing.Point.Create(8, 104);
+  Self.edtEmail.MaxLength := 30;
+  Self.edtEmail.Name := 'edtEmail';
+  Self.edtEmail.Size := System.Drawing.Size.Create(320, 20);
+  Self.edtEmail.TabIndex := 6;
+  Self.edtEmail.Text := '';
+  // 
+  // edtIdentidade
+  // 
+  Self.edtIdentidade.Enabled := False;
+  Self.edtIdentidade.Location := System.Drawing.Point.Create(336, 104);
+  Self.edtIdentidade.MaxLength := 10;
+  Self.edtIdentidade.Name := 'edtIdentidade';
+  Self.edtIdentidade.Size := System.Drawing.Size.Create(92, 20);
+  Self.edtIdentidade.TabIndex := 8;
+  Self.edtIdentidade.Text := '';
+  // 
+  // labIdentidade
+  // 
+  Self.labIdentidade.Location := System.Drawing.Point.Create(336, 88);
+  Self.labIdentidade.Name := 'labIdentidade';
+  Self.labIdentidade.Size := System.Drawing.Size.Create(68, 16);
+  Self.labIdentidade.TabIndex := 7;
+  Self.labIdentidade.Text := 'Identidade:';
+  // 
+  // rdgSexo
+  // 
+  Self.rdgSexo.Controls.Add(Self.rbFeminino);
+  Self.rdgSexo.Controls.Add(Self.rbMasculino);
+  Self.rdgSexo.Location := System.Drawing.Point.Create(8, 128);
+  Self.rdgSexo.Name := 'rdgSexo';
+  Self.rdgSexo.Size := System.Drawing.Size.Create(184, 40);
+  Self.rdgSexo.TabIndex := 9;
+  Self.rdgSexo.TabStop := False;
+  Self.rdgSexo.Text := 'Sexo';
+  // 
+  // rbFeminino
+  // 
+  Self.rbFeminino.Location := System.Drawing.Point.Create(104, 16);
+  Self.rbFeminino.Name := 'rbFeminino';
+  Self.rbFeminino.Size := System.Drawing.Size.Create(72, 16);
+  Self.rbFeminino.TabIndex := 1;
+  Self.rbFeminino.Text := 'Feminino';
+  // 
+  // rbMasculino
+  // 
+  Self.rbMasculino.Enabled := False;
+  Self.rbMasculino.Location := System.Drawing.Point.Create(16, 16);
+  Self.rbMasculino.Name := 'rbMasculino';
+  Self.rbMasculino.Size := System.Drawing.Size.Create(80, 16);
+  Self.rbMasculino.TabIndex := 0;
+  Self.rbMasculino.Text := 'Masculino';
+  // 
+  // edtTelefone
+  // 
+  Self.edtTelefone.Enabled := False;
+  Self.edtTelefone.Location := System.Drawing.Point.Create(200, 144);
+  Self.edtTelefone.MaxLength := 17;
+  Self.edtTelefone.Name := 'edtTelefone';
+  Self.edtTelefone.Size := System.Drawing.Size.Create(128, 20);
+  Self.edtTelefone.TabIndex := 11;
+  Self.edtTelefone.Text := '';
+  // 
+  // labTelefone
+  // 
+  Self.labTelefone.Location := System.Drawing.Point.Create(200, 128);
+  Self.labTelefone.Name := 'labTelefone';
+  Self.labTelefone.Size := System.Drawing.Size.Create(68, 16);
+  Self.labTelefone.TabIndex := 10;
+  Self.labTelefone.Text := 'Telefone:';
+  // 
+  // edtDtNascimento
+  // 
+  Self.edtDtNascimento.Enabled := False;
+  Self.edtDtNascimento.Location := System.Drawing.Point.Create(336, 144);
+  Self.edtDtNascimento.Name := 'edtDtNascimento';
+  Self.edtDtNascimento.Size := System.Drawing.Size.Create(96, 20);
+  Self.edtDtNascimento.TabIndex := 13;
+  // 
+  // labDtNascimento
+  // 
+  Self.labDtNascimento.Location := System.Drawing.Point.Create(336, 128);
+  Self.labDtNascimento.Name := 'labDtNascimento';
+  Self.labDtNascimento.Size := System.Drawing.Size.Create(96, 16);
+  Self.labDtNascimento.TabIndex := 12;
+  Self.labDtNascimento.Text := 'Dt. Nascimento:';
+  // 
+  // grpEndereco
+  // 
+  Self.grpEndereco.Controls.Add(Self.edtEstado);
+  Self.grpEndereco.Controls.Add(Self.labEstado);
+  Self.grpEndereco.Controls.Add(Self.edtCidade);
+  Self.grpEndereco.Controls.Add(Self.labCidade);
+  Self.grpEndereco.Controls.Add(Self.edtCEP);
+  Self.grpEndereco.Controls.Add(Self.labCEP);
+  Self.grpEndereco.Controls.Add(Self.edtBairro);
+  Self.grpEndereco.Controls.Add(Self.labBairro);
+  Self.grpEndereco.Controls.Add(Self.edtLogradouro);
+  Self.grpEndereco.Controls.Add(Self.labLogradouro);
+  Self.grpEndereco.Controls.Add(Self.btnPEndereco);
+  Self.grpEndereco.Controls.Add(Self.edtCodEndereco);
+  Self.grpEndereco.Location := System.Drawing.Point.Create(8, 176);
+  Self.grpEndereco.Name := 'grpEndereco';
+  Self.grpEndereco.Size := System.Drawing.Size.Create(424, 152);
+  Self.grpEndereco.TabIndex := 14;
+  Self.grpEndereco.TabStop := False;
+  Self.grpEndereco.Text := 'Endereço';
+  // 
+  // edtEstado
+  // 
+  Self.edtEstado.Enabled := False;
+  Self.edtEstado.Location := System.Drawing.Point.Create(280, 120);
+  Self.edtEstado.MaxLength := 10;
+  Self.edtEstado.Name := 'edtEstado';
+  Self.edtEstado.Size := System.Drawing.Size.Create(128, 20);
+  Self.edtEstado.TabIndex := 11;
+  Self.edtEstado.Text := '';
+  // 
+  // labEstado
+  // 
+  Self.labEstado.Location := System.Drawing.Point.Create(280, 104);
+  Self.labEstado.Name := 'labEstado';
+  Self.labEstado.Size := System.Drawing.Size.Create(64, 16);
+  Self.labEstado.TabIndex := 10;
+  Self.labEstado.Text := 'Estado:';
+  // 
+  // edtCidade
+  // 
+  Self.edtCidade.Enabled := False;
+  Self.edtCidade.Location := System.Drawing.Point.Create(88, 120);
+  Self.edtCidade.MaxLength := 30;
+  Self.edtCidade.Name := 'edtCidade';
+  Self.edtCidade.Size := System.Drawing.Size.Create(184, 20);
+  Self.edtCidade.TabIndex := 9;
+  Self.edtCidade.Text := '';
+  // 
+  // labCidade
+  // 
+  Self.labCidade.Location := System.Drawing.Point.Create(88, 104);
+  Self.labCidade.Name := 'labCidade';
+  Self.labCidade.Size := System.Drawing.Size.Create(64, 16);
+  Self.labCidade.TabIndex := 8;
+  Self.labCidade.Text := 'Cidade:';
+  // 
+  // edtCEP
+  // 
+  Self.edtCEP.Enabled := False;
+  Self.edtCEP.Location := System.Drawing.Point.Create(8, 120);
+  Self.edtCEP.MaxLength := 8;
+  Self.edtCEP.Name := 'edtCEP';
+  Self.edtCEP.Size := System.Drawing.Size.Create(72, 20);
+  Self.edtCEP.TabIndex := 7;
+  Self.edtCEP.Text := '';
+  // 
+  // labCEP
+  // 
+  Self.labCEP.Location := System.Drawing.Point.Create(8, 104);
+  Self.labCEP.Name := 'labCEP';
+  Self.labCEP.Size := System.Drawing.Size.Create(64, 16);
+  Self.labCEP.TabIndex := 6;
+  Self.labCEP.Text := 'CEP:';
+  // 
+  // edtBairro
+  // 
+  Self.edtBairro.Enabled := False;
+  Self.edtBairro.Location := System.Drawing.Point.Create(280, 74);
+  Self.edtBairro.MaxLength := 10;
+  Self.edtBairro.Name := 'edtBairro';
+  Self.edtBairro.Size := System.Drawing.Size.Create(128, 20);
+  Self.edtBairro.TabIndex := 5;
+  Self.edtBairro.Text := '';
+  // 
+  // labBairro
+  // 
+  Self.labBairro.Location := System.Drawing.Point.Create(280, 58);
+  Self.labBairro.Name := 'labBairro';
+  Self.labBairro.Size := System.Drawing.Size.Create(68, 16);
+  Self.labBairro.TabIndex := 4;
+  Self.labBairro.Text := 'Bairro:';
+  // 
+  // edtLogradouro
+  // 
+  Self.edtLogradouro.Enabled := False;
+  Self.edtLogradouro.Location := System.Drawing.Point.Create(8, 74);
+  Self.edtLogradouro.MaxLength := 30;
+  Self.edtLogradouro.Name := 'edtLogradouro';
+  Self.edtLogradouro.Size := System.Drawing.Size.Create(264, 20);
+  Self.edtLogradouro.TabIndex := 3;
+  Self.edtLogradouro.Text := '';
+  // 
+  // labLogradouro
+  // 
+  Self.labLogradouro.Location := System.Drawing.Point.Create(8, 58);
+  Self.labLogradouro.Name := 'labLogradouro';
+  Self.labLogradouro.Size := System.Drawing.Size.Create(78, 16);
+  Self.labLogradouro.TabIndex := 2;
+  Self.labLogradouro.Text := 'Logradouro:';
+  // 
+  // btnPEndereco
+  // 
+  Self.btnPEndereco.Enabled := False;
+  Self.btnPEndereco.Location := System.Drawing.Point.Create(104, 24);
+  Self.btnPEndereco.Name := 'btnPEndereco';
+  Self.btnPEndereco.Size := System.Drawing.Size.Create(22, 20);
+  Self.btnPEndereco.TabIndex := 1;
+  Self.btnPEndereco.Text := '...';
+  Include(Self.btnPEndereco.Click, Self.btnPEndereco_Click);
+  // 
+  // edtCodEndereco
+  // 
+  Self.edtCodEndereco.Enabled := False;
+  Self.edtCodEndereco.Location := System.Drawing.Point.Create(8, 24);
+  Self.edtCodEndereco.MaxLength := 10;
+  Self.edtCodEndereco.Name := 'edtCodEndereco';
+  Self.edtCodEndereco.Size := System.Drawing.Size.Create(92, 20);
+  Self.edtCodEndereco.TabIndex := 0;
+  Self.edtCodEndereco.Text := '';
+  Include(Self.edtCodEndereco.Leave, Self.edtCodEndereco_Leave);
+  // 
+  // edtPais
+  // 
+  Self.edtPais.Enabled := False;
+  Self.edtPais.Location := System.Drawing.Point.Create(92, 352);
+  Self.edtPais.MaxLength := 30;
+  Self.edtPais.Name := 'edtPais';
+  Self.edtPais.Size := System.Drawing.Size.Create(224, 20);
+  Self.edtPais.TabIndex := 17;
+  Self.edtPais.Text := '';
+  // 
+  // edtCodPais
+  // 
+  Self.edtCodPais.Enabled := False;
+  Self.edtCodPais.Location := System.Drawing.Point.Create(8, 352);
+  Self.edtCodPais.MaxLength := 10;
+  Self.edtCodPais.Name := 'edtCodPais';
+  Self.edtCodPais.Size := System.Drawing.Size.Create(80, 20);
+  Self.edtCodPais.TabIndex := 16;
+  Self.edtCodPais.Text := '';
+  Include(Self.edtCodPais.Leave, Self.edtCodPais_Leave);
+  // 
+  // labPais
+  // 
+  Self.labPais.Location := System.Drawing.Point.Create(8, 336);
+  Self.labPais.Name := 'labPais';
+  Self.labPais.Size := System.Drawing.Size.Create(88, 16);
+  Self.labPais.TabIndex := 15;
+  Self.labPais.Text := 'País de origem:';
+  // 
+  // btnPPais
+  // 
+  Self.btnPPais.Enabled := False;
+  Self.btnPPais.Location := System.Drawing.Point.Create(320, 352);
+  Self.btnPPais.Name := 'btnPPais';
+  Self.btnPPais.Size := System.Drawing.Size.Create(22, 20);
+  Self.btnPPais.TabIndex := 18;
+  Self.btnPPais.Text := '...';
+  Include(Self.btnPPais.Click, Self.btnPPais_Click);
+  // 
+  // btnPProfissao
+  // 
+  Self.btnPProfissao.Enabled := False;
+  Self.btnPProfissao.Location := System.Drawing.Point.Create(320, 392);
+  Self.btnPProfissao.Name := 'btnPProfissao';
+  Self.btnPProfissao.Size := System.Drawing.Size.Create(22, 20);
+  Self.btnPProfissao.TabIndex := 22;
+  Self.btnPProfissao.Text := '...';
+  Include(Self.btnPProfissao.Click, Self.btnPProfissao_Click);
+  // 
+  // edtProfissao
+  // 
+  Self.edtProfissao.Enabled := False;
+  Self.edtProfissao.Location := System.Drawing.Point.Create(96, 392);
+  Self.edtProfissao.MaxLength := 30;
+  Self.edtProfissao.Name := 'edtProfissao';
+  Self.edtProfissao.Size := System.Drawing.Size.Create(224, 20);
+  Self.edtProfissao.TabIndex := 21;
+  Self.edtProfissao.Text := '';
+  // 
+  // edtCodProfissao
+  // 
+  Self.edtCodProfissao.Enabled := False;
+  Self.edtCodProfissao.Location := System.Drawing.Point.Create(8, 392);
+  Self.edtCodProfissao.MaxLength := 10;
+  Self.edtCodProfissao.Name := 'edtCodProfissao';
+  Self.edtCodProfissao.Size := System.Drawing.Size.Create(80, 20);
+  Self.edtCodProfissao.TabIndex := 20;
+  Self.edtCodProfissao.Text := '';
+  Include(Self.edtCodProfissao.Leave, Self.edtCodProfissao_Leave);
+  // 
+  // labProfissao
+  // 
+  Self.labProfissao.Location := System.Drawing.Point.Create(8, 376);
+  Self.labProfissao.Name := 'labProfissao';
+  Self.labProfissao.Size := System.Drawing.Size.Create(88, 16);
+  Self.labProfissao.TabIndex := 19;
+  Self.labProfissao.Text := 'Profissão:';
+  // 
+  // frmCadClientes
+  // 
+  Self.AutoScaleBaseSize := System.Drawing.Size.Create(5, 13);
+  Self.ClientSize := System.Drawing.Size.Create(520, 453);
+  Self.Controls.Add(Self.edtProfissao);
+  Self.Controls.Add(Self.edtCodProfissao);
+  Self.Controls.Add(Self.edtPais);
+  Self.Controls.Add(Self.edtCodPais);
+  Self.Controls.Add(Self.edtTelefone);
+  Self.Controls.Add(Self.edtIdentidade);
+  Self.Controls.Add(Self.edtEmail);
+  Self.Controls.Add(Self.btnPProfissao);
+  Self.Controls.Add(Self.labProfissao);
+  Self.Controls.Add(Self.btnPPais);
+  Self.Controls.Add(Self.labPais);
+  Self.Controls.Add(Self.grpEndereco);
+  Self.Controls.Add(Self.labDtNascimento);
+  Self.Controls.Add(Self.edtDtNascimento);
+  Self.Controls.Add(Self.labTelefone);
+  Self.Controls.Add(Self.rdgSexo);
+  Self.Controls.Add(Self.labIdentidade);
+  Self.Controls.Add(Self.labEmail);
+  Self.Name := 'frmCadClientes';
+  Self.Text := 'Cadastro de Clientes';
+  Include(Self.Closing, Self.frmCadClientes_Closing);
+  Self.Controls.SetChildIndex(Self.labEmail, 0);
+  Self.Controls.SetChildIndex(Self.labIdentidade, 0);
+  Self.Controls.SetChildIndex(Self.rdgSexo, 0);
+  Self.Controls.SetChildIndex(Self.labTelefone, 0);
+  Self.Controls.SetChildIndex(Self.edtDtNascimento, 0);
+  Self.Controls.SetChildIndex(Self.labDtNascimento, 0);
+  Self.Controls.SetChildIndex(Self.grpEndereco, 0);
+  Self.Controls.SetChildIndex(Self.labPais, 0);
+  Self.Controls.SetChildIndex(Self.btnPPais, 0);
+  Self.Controls.SetChildIndex(Self.labProfissao, 0);
+  Self.Controls.SetChildIndex(Self.btnPProfissao, 0);
+  Self.Controls.SetChildIndex(Self.edtEmail, 0);
+  Self.Controls.SetChildIndex(Self.edtIdentidade, 0);
+  Self.Controls.SetChildIndex(Self.edtTelefone, 0);
+  Self.Controls.SetChildIndex(Self.edtCodPais, 0);
+  Self.Controls.SetChildIndex(Self.edtPais, 0);
+  Self.Controls.SetChildIndex(Self.edtCodProfissao, 0);
+  Self.Controls.SetChildIndex(Self.edtProfissao, 0);
+  Self.Controls.SetChildIndex(Self.labCodigo, 0);
+  Self.Controls.SetChildIndex(Self.edtCodigo, 0);
+  Self.Controls.SetChildIndex(Self.labDescricao, 0);
+  Self.Controls.SetChildIndex(Self.edtDescricao, 0);
+  Self.Controls.SetChildIndex(Self.btnNovo, 0);
+  Self.Controls.SetChildIndex(Self.btnPesquisar, 0);
+  Self.Controls.SetChildIndex(Self.btnAnterior, 0);
+  Self.Controls.SetChildIndex(Self.btnProximo, 0);
+  Self.Controls.SetChildIndex(Self.btnFechar, 0);
+  Self.Controls.SetChildIndex(Self.btnLimpar, 0);
+  Self.Controls.SetChildIndex(Self.btnExcluir, 0);
+  Self.Controls.SetChildIndex(Self.btnSalvar, 0);
+  Self.rdgSexo.ResumeLayout(False);
+  Self.grpEndereco.ResumeLayout(False);
+  Self.ResumeLayout(False);
+end;
+{$ENDREGION}
+
+procedure frmCadClientes.Dispose(Disposing: Boolean);
+begin
+  if Disposing then
+  begin
+    if Components <> nil then
+      Components.Dispose();
+  end;
+  inherited Dispose(Disposing);
+end;
+
+constructor frmCadClientes.Create;
+begin
+  inherited Create;
+  //
+  // Required for Windows Form Designer support
+  //
+  InitializeComponent;
+  //
+  // TODO: Add any constructor code after InitializeComponent call
+  //
+  ConsCampo := ArrayList.Create;
+end;
+
+function frmCadClientes.ValidaDados(bTodosDados: boolean): boolean;
+begin
+  result:=true;
+  if (Rotinas.ValidaCampo(edtCodigo.Text,'CPF não informado!')) then
+    result:=false;
+  if (bTodosDados) then begin
+    if (Rotinas.ValidaCampo(edtDescricao.Text,'Nome não informado!')) then
+        result:=false;
+    if (Rotinas.ValidaCampo(edtEmail.Text,'E-mail não informado!')) then
+        result:=false;
+    if (rbMasculino.Checked=false) and (rbFeminino.Checked=false) then begin
+      MessageBox.Show(Self,'Sexo não informado!',
+      fPrincipal.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        result:=false;
+    end;
+    if (Rotinas.ValidaCampo(edtTelefone.Text, 'Telefone não informado!')) then
+        result:=false;
+    if (Rotinas.ValidaCampo(edtCodEndereco.Text, 'Endereço não informado!')) then
+        result:=false;
+    if (Rotinas.ValidaCampo(edtCodPais.Text, 'País não informado!')) then
+        result:=false;
+    if (Rotinas.ValidaCampo(edtCodProfissao.Text, 'Profissão não informada!')) then
+        result:=false;
+  end;
+end;
+
+procedure frmCadClientes.InformaLimpaDados(bInformar: boolean);
+begin
+  inherited InformaLimpaDados(bInformar);
+
+  if (bInformar) then begin
+    edtEmail.Text:=Campos.Item[2].ToString;
+    edtIdentidade.Text:=Campos.Item[3].ToString;
+    if (Campos.Item[4].ToString='M') then begin
+       rbMasculino.Checked:=true;
+       rbFeminino.Checked:=false;
+    end else begin
+      rbMasculino.Checked:=false;
+      rbFeminino.Checked:=true;
+    end;
+    edtTelefone.Text:=Campos.Item[5].ToString;
+    edtDtNascimento.Text:=Rotinas.FormataDataStr(
+    				 Campos.Item[6].ToString,'dd/MM/yyyy');
+    edtCodEndereco.Text:=Campos.Item[7].ToString;
+    edtLogradouro.Text:=Campos.Item[8].ToString;
+    edtBairro.Text:=Campos.Item[9].ToString;
+    edtCEP.Text:=Campos.Item[10].ToString;
+    edtCidade.Text:=Campos.Item[11].ToString;
+    edtEstado.Text:=Campos.Item[12].ToString;
+    edtCodPais.Text:=Campos.Item[13].ToString;
+    edtPais.Text:=Campos.Item[14].ToString;
+    edtCodProfissao.Text:=Campos.Item[15].ToString;
+    edtProfissao.Text:=Campos.Item[16].ToString;
+  end else begin
+    edtEmail.Clear;
+    edtIdentidade.Clear;
+    rbMasculino.Checked:=false;
+    rbFeminino.Checked:=false;
+    edtTelefone.Clear;
+    edtDtNascimento.Value:=DateTime.Now;
+    edtCodEndereco.Clear;
+    edtLogradouro.Clear;
+    edtBairro.Clear;
+    edtCEP.Clear;
+    edtCidade.Clear;
+    edtEstado.Clear;
+    edtCodPais.Clear;
+    edtPais.Clear;
+    edtCodProfissao.Clear;
+    edtProfissao.Clear;
+  end;
+
+end;
+
+procedure frmCadClientes.HabilitaDados(bHabilita: boolean);
+begin
+   inherited HabilitaDados(bHabilita);
+  
+   edtEmail.Enabled:=bHabilita;
+   edtIdentidade.Enabled:=bHabilita;
+   rbMasculino.Enabled:=bHabilita;
+   rbFeminino.Enabled:=bHabilita;
+   edtTelefone.Enabled:=bHabilita;
+   edtDtNascimento.Enabled:=bHabilita;
+   edtCodEndereco.Enabled:=bHabilita;
+   btnPEndereco.Enabled:=bHabilita;
+   edtCodPais.Enabled:=bHabilita;
+   btnPPais.Enabled:=bHabilita;
+   edtCodProfissao.Enabled:=bHabilita;
+   btnPProfissao.Enabled:=bHabilita;
+end;
+
+procedure frmCadClientes.btnExcluir_Click(sender: System.Object; e: System.EventArgs);
+begin
+  ExcluirDados(ConsSQL.Cliente('D',edtCodigo.Text,'','','','','','','','',''));
+end;
+
+procedure frmCadClientes.btnPesquisar_Click(sender: System.Object; e: System.EventArgs);
+begin
+  PesquisarDados(ConsSQL.Cliente('S',edtCodigo.Text,
+  '','','','','','','','',''),'Cliente não encontrado!');
+end;
+
+procedure frmCadClientes.btnSalvar_Click(sender: System.Object; e: System.EventArgs);
+begin
+  if rbMasculino.Checked then
+     sSexo:='M'
+  else
+     sSexo:='F';
+
+  SalvarDados(ConsSQL.Cliente('S',edtCodigo.Text,'','','','','','','','',''),
+  ConsSQL.Cliente('U',edtCodigo.Text,edtDescricao.Text,
+  edtEmail.Text,edtIdentidade.Text,sSexo,edtTelefone.Text,
+  edtDtNascimento.Value.ToString('MM/dd/yyyy'),
+  edtCodEndereco.Text,edtCodPais.Text,edtCodProfissao.Text),
+  ConsSQL.Cliente('I',edtCodigo.Text,edtDescricao.Text,
+  edtEmail.Text,edtIdentidade.Text,sSexo,edtTelefone.Text,
+  edtDtNascimento.Value.ToString('MM/dd/yyyy'),
+  edtCodEndereco.Text,edtCodPais.Text,edtCodProfissao.Text),
+  true);
+end;
+
+procedure frmCadClientes.frmCadClientes_Closing(sender: System.Object; e: System.ComponentModel.CancelEventArgs);
+begin
+  fPrincipal.mnuCadClientes.Enabled:=true;
+  fPrincipal.tlbClientes.Enabled:=true;
+end;
+
+procedure frmCadClientes.edtCodigo_Leave(sender: System.Object; e: System.EventArgs);
+begin
+  if (edtCodigo.Text<>'') then begin
+    if (RotinasGlobais.Rotinas.ValidaCPF(edtCodigo.Text)=false) then begin
+  	  MessageBox.Show(Self,'CPF inválido!',
+  	  fPrincipal.Text, MessageBoxButtons.OK,
+  	  MessageBoxIcon.Error);
+  	  edtCodigo.Clear;
+  	  edtCodigo.Focus;
+    end;
+  end;
+end;
+
+procedure frmCadClientes.edtCodEndereco_Leave(sender: System.Object; e: System.EventArgs);
+begin
+  if (edtCodEndereco.Text<>'') then begin
+	edtLogradouro.Text:=
+	RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+	edtCodEndereco.Text,ConsultasSQL.ConsSQL.Endereco('S',
+	edtCodEndereco.Text,'','','','',''),'Endereço não encontrado!');
+	if (edtLogradouro.Text<>'') then begin
+	  edtBairro.Text:=ConsCampo[2].ToString;
+	  edtCEP.Text:=ConsCampo[3].ToString;
+	  edtCidade.Text:=ConsCampo[4].ToString;
+	  edtEstado.Text:=ConsCampo[5].ToString;
+	end else begin
+	  edtCodEndereco.Focus;
+	  edtLogradouro.Clear;
+	  edtBairro.Clear;
+	  edtCEP.Clear;
+	  edtCidade.Clear;
+	  edtEstado.Clear;
+	end;
+  end else begin
+	  edtLogradouro.Clear;
+	  edtBairro.Clear;
+	  edtCEP.Clear;
+	  edtCidade.Clear;
+	  edtEstado.Clear;
+  end;
+end;
+
+procedure frmCadClientes.edtCodPais_Leave(sender: System.Object; e: System.EventArgs);
+begin
+  if (edtCodPais.Text<>'') then begin
+     edtPais.Text:=RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+     ConsultasSQL.ConsSQL.Pais('S',edtCodPais.Text,''),
+     'País não encontrado!');
+     if (edtPais.Text='') then begin
+  	 edtCodPais.Clear;
+  	 edtCodPais.Focus;
+     end;
+   end else
+  	edtPais.Clear;
+end;
+
+procedure frmCadClientes.edtCodProfissao_Leave(sender: System.Object; e: System.EventArgs);
+begin
+  if (edtCodProfissao.Text<>'') then begin
+   edtProfissao.Text:=RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+   edtCodProfissao.Text,ConsultasSQL.ConsSQL.Profissao('S',
+   edtCodProfissao.Text,''),'Profissão não encontrado!');
+   if (edtProfissao.Text='') then
+      edtCodProfissao.Focus;
+  end else
+	edtProfissao.Clear;
+end;
+
+procedure frmCadClientes.btnPEndereco_Click(sender: System.Object; e: System.EventArgs);
+var pfConEnderecos: frmConEnderecos;
+begin
+  pfConEnderecos := frmConEnderecos.Create;
+  pfConEnderecos.ShowDialog;
+  edtCodEndereco.Text:=RotinasGlobais.Rotinas.sCodigoSelecionado;
+  edtCodEndereco_Leave(Self, nil);
+end;
+
+procedure frmCadClientes.btnPPais_Click(sender: System.Object; e: System.EventArgs);
+var pfConPaises: frmConPaises;
+begin
+  pfConPaises := frmConPaises.Create;
+  pfConPaises.ShowDialog;
+  edtCodPais.Text:=RotinasGlobais.Rotinas.sCodigoSelecionado;
+  edtCodPais_Leave(Self,nil);
+end;
+
+procedure frmCadClientes.btnPProfissao_Click(sender: System.Object; e: System.EventArgs);
+var pfConProfissoes: frmConProfissoes;
+begin
+  pfConProfissoes := frmConProfissoes.Create;
+  pfConProfissoes.ShowDialog;
+  edtCodProfissao.Text:=RotinasGlobais.Rotinas.sCodigoSelecionado;
+  edtCodProfissao_Leave(Self,nil);
+end;
+
+end.

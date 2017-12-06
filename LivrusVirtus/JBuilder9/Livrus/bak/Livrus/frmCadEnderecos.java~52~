@@ -1,0 +1,247 @@
+package Livrus;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+/**
+ * <p>Title: Livrus Virtus</p>
+ * <p>Description: Sistema integrante do projeto Livrus Virtus, versão
+ * programada no JBuilder 9 em Java</p>
+ * <p>Copyright: Todos os direitos reservados para: Henrique F. de Souza</p>
+ * <p>Company: </p>
+ * @author Henrique F. de Souza
+ * @version 1.0.0
+ */
+
+public class frmCadEnderecos extends frmCadastros {
+  public static frmCadEnderecos fCadEnderecos;
+  JLabel labEstado = new JLabel();
+  JTextField edtCEP = new JTextField(10);
+  JComboBox cmbEstado = new JComboBox();
+  JTextField edtCidade = new JTextField(20);
+  JLabel labBairro = new JLabel();
+  JLabel labCEP = new JLabel();
+  JLabel labCidade = new JLabel();
+  JTextField edtBairro = new JTextField();
+
+  public frmCadEnderecos() {
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void jbInit() throws Exception {
+    this.setTitle("Cadastro de Enderecos");
+    this.labDescricao.setText("Logradouro: ");
+    this.edtDescricao.setBounds(new Rectangle(12, 74, 276, 21));
+    this.setSize(new Dimension(537, 206));
+
+    labBairro.setText("Bairro:");
+    labBairro.setBounds(new Rectangle(294, 52, 69, 19));
+    edtBairro.setBounds(new Rectangle(294, 74, 142, 21));
+    edtBairro.setEnabled(false);
+    labCEP.setText("CEP:");
+    labCEP.setBounds(new Rectangle(12, 100, 54, 16));
+    edtCEP.setBounds(new Rectangle(12, 118, 72, 21));
+    edtCEP.setEnabled(false);
+    labCidade.setText("Cidade:");
+    labCidade.setBounds(new Rectangle(88, 100, 85, 16));
+    edtCidade.setBounds(new Rectangle(88, 118, 200, 21));
+    edtCidade.setEnabled(false);
+    labEstado.setBounds(new Rectangle(296, 100, 69, 19));
+    labEstado.setText("Estado:");
+    cmbEstado.setBounds(new Rectangle(294, 118, 142, 21));
+    cmbEstado.setEnabled(false);
+
+    jPanel1.add(edtBairro, null);
+    jPanel1.add(labBairro, null);
+    jPanel1.add(edtCidade, null);
+    jPanel1.add(labCidade, null);
+    jPanel1.add(edtCEP, null);
+    jPanel1.add(labCEP, null);
+    jPanel1.add(labEstado, null);
+    jPanel1.add(cmbEstado, null);
+
+    btnNovo.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnNovo_actionPerformed(e);
+      }
+    });
+    btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnExcluir_actionPerformed(e);
+      }
+    });
+    btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnPesquisar_actionPerformed(e);
+      }
+    });
+    btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnSalvar_actionPerformed(e);
+      }
+    });
+    btnFechar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnFechar_actionPerformed(e);
+      }
+    });
+    this.addInternalFrameListener(new javax.swing.event.InternalFrameAdapter() {
+      public void internalFrameClosing(InternalFrameEvent e) {
+        this_internalFrameClosing(e);
+      }
+      public void internalFrameOpened(InternalFrameEvent e) {
+        this_internalFrameOpened(e);
+      }
+
+    });
+    btnNovo.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnNovo_actionPerformed(e);
+      }
+    });
+  }
+
+  protected boolean ValidaDados(boolean bTodosDados)
+  {
+        super.ValidaDados(bTodosDados);
+
+        if (RotinasGlobais.Rotinas.ValidaCampo(edtCodigo.getText(),
+                "Código não informado!"))
+          return false;
+        if (bTodosDados) {
+          if (RotinasGlobais.Rotinas.ValidaCampo(edtDescricao.getText(),
+                "Logradouro não informado!"))
+                return false;
+          if (RotinasGlobais.Rotinas.ValidaCampo(edtBairro.getText(),
+                "Bairro não informado!"))
+                return false;
+          if (RotinasGlobais.Rotinas.ValidaCampo(edtCEP.getText(),
+                "CEP não informado!"))
+                return false;
+          if (RotinasGlobais.Rotinas.ValidaCampo(edtCidade.getText(),
+                "Cidade não informado!"))
+                return false;
+        }
+        return true;
+  }
+
+  protected void InformaLimpaDados(boolean bInformar)
+  {
+    super.InformaLimpaDados(bInformar);
+
+      if (bInformar) {
+        edtBairro.setText(Campos.get(2).toString());
+        edtCEP.setText(Campos.get(3).toString());
+        edtCidade.setText(Campos.get(4).toString());
+        RecuperaEstado(Campos.get(5).toString());
+
+      } else {
+        edtBairro.setText("");
+        edtCEP.setText("");
+        edtCidade.setText("");
+        cmbEstado.setSelectedIndex(0);
+      }
+  }
+
+  protected void HabilitaDados(boolean bHabilita)
+  {
+    super.HabilitaDados(bHabilita);
+
+     edtBairro.setEnabled(bHabilita);
+     edtCEP.setEnabled(bHabilita);
+     edtCidade.setEnabled(bHabilita);
+     cmbEstado.setEnabled(bHabilita);
+  }
+
+  void btnNovo_actionPerformed(ActionEvent e) {
+    super.btnNovo_actionPerformed(e);
+
+    NovoDado(ConsultasSQL.ConsSQL.Endereco('N',
+    edtCodigo.getText(),"","","","",""));
+  }
+
+  void btnExcluir_actionPerformed(ActionEvent e) {
+    ExcluirDados(ConsultasSQL.ConsSQL.Endereco('D',
+    edtCodigo.getText(), "","","","",""));
+  }
+
+  void btnPesquisar_actionPerformed(ActionEvent e) {
+    PesquisarDados(ConsultasSQL.ConsSQL.Endereco('S',
+    edtCodigo.getText(), "","","","",""), "Endereço não encontrado!",6);
+  }
+
+  void btnSalvar_actionPerformed(ActionEvent e) {
+    SalvarDados(ConsultasSQL.ConsSQL.Endereco('S',edtCodigo.getText(),"",
+    "","","",""),
+    ConsultasSQL.ConsSQL.Endereco('U',edtCodigo.getText(),
+    edtDescricao.getText(),edtBairro.getText(),edtCEP.getText(),
+    edtCidade.getText(),cmbEstado.getSelectedItem().toString()),
+    ConsultasSQL.ConsSQL.Endereco('I',edtCodigo.getText(),
+    edtDescricao.getText(),edtBairro.getText(),edtCEP.getText(),
+    edtCidade.getText(),cmbEstado.getSelectedItem().toString()),true);
+  }
+
+  void btnFechar_actionPerformed(ActionEvent e) {
+    super.btnFechar_actionPerformed(e);
+
+    this_internalFrameClosing(null);
+  }
+
+  void this_internalFrameClosing(InternalFrameEvent e) {
+    super.this_internalFrameClosing(e);
+
+    frmPrincipal.fPrincipal.mnuCadEnderecos.setEnabled(true);
+  }
+
+  private void AdicionaCombo() {
+    cmbEstado.addItem("Pernambuco");
+    cmbEstado.addItem("Acre");
+    cmbEstado.addItem("Alagoas");
+    cmbEstado.addItem("Amapá");
+    cmbEstado.addItem("Amazonas");
+    cmbEstado.addItem("Bahia");
+    cmbEstado.addItem("Brasília");
+    cmbEstado.addItem("Ceará");
+    cmbEstado.addItem("Distrito Federal");
+    cmbEstado.addItem("Espírito Santo");
+    cmbEstado.addItem("Goiás");
+    cmbEstado.addItem("Mato Grosso");
+    cmbEstado.addItem("Mato Grosso do Sul");
+    cmbEstado.addItem("Minas Gerais");
+    cmbEstado.addItem("Pará");
+    cmbEstado.addItem("Paraíba");
+    cmbEstado.addItem("Paraná");
+    cmbEstado.addItem("Santa Catarina");
+    cmbEstado.addItem("Rio Grande do Norte");
+    cmbEstado.addItem("Rio Grande do Sul");
+    cmbEstado.addItem("Rio de Janeiro");
+    cmbEstado.addItem("Rondônia");
+    cmbEstado.addItem("Roraima");
+    cmbEstado.addItem("São Paulo");
+    cmbEstado.addItem("Sergipe");
+    cmbEstado.addItem("Tocantins");
+  }
+
+  private void RecuperaEstado(String sEstado) {
+   for(int nCont=0; nCont <= cmbEstado.getItemCount(); nCont++) {
+      if (cmbEstado.getItemAt(nCont).equals(sEstado)) {
+         cmbEstado.setSelectedIndex(nCont);
+         break;
+      }
+   }
+  }
+
+  void this_internalFrameOpened(InternalFrameEvent e) {
+    AdicionaCombo();
+    cmbEstado.setSelectedIndex(0);
+  }
+
+}
+

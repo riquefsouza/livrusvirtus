@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<GTK-Interface>
+
+<project>
+  <name>Plivrus2</name>
+  <program_name>livrus</program_name>
+  <directory></directory>
+  <source_directory>src</source_directory>
+  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <language>C++</language>
+  <gnome_support>False</gnome_support>
+  <gettext_support>True</gettext_support>
+</project>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>frmPrincipal</name>
+  <width>310</width>
+  <height>400</height>
+  <title>Livrus Virtus</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_CENTER</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox1</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkMenuBar</class>
+      <name>menubar1</name>
+      <shadow_type>GTK_SHADOW_OUT</shadow_type>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GtkMenuItem</class>
+	<name>mnuCadastros</name>
+	<signal>
+	  <name>activate</name>
+	  <handler>on_mnuCadastros_activate</handler>
+	  <last_modification_time>Sun, 16 Jan 2005 16:09:48 GMT</last_modification_time>
+	</signal>
+	<label>_Cadastros</label>
+	<right_justify>False</right_justify>
+
+	<widget>
+	  <class>GtkMenu</class>
+	  <name>mnuCadastros_menu</name>
+
+	  <widget>
+	    <class>GtkMenuItem</class>
+	    <name>mnuCadAssuntos</name>
+	    <signal>
+	      <name>activate</name>
+	      <handler>on_mnuCadAssuntos_activate</handler>
+	      <last_modification_time>Sun, 16 Jan 2005 16:09:48 GMT</last_modification_time>
+	    </signal>
+	    <label>Assuntos</label>
+	    <right_justify>False</right_justify>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkToolbar</class>
+      <name>toolbar1</name>
+      <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
+      <type>GTK_TOOLBAR_ICONS</type>
+      <space_size>5</space_size>
+      <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+      <relief>GTK_RELIEF_NORMAL</relief>
+      <tooltips>True</tooltips>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<child_name>Toolbar:button</child_name>
+	<name>button1</name>
+	<label></label>
+	<icon>cliente.xpm</icon>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<child_name>Toolbar:button</child_name>
+	<name>button2</name>
+	<label></label>
+	<icon>livro.xpm</icon>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<child_name>Toolbar:button</child_name>
+	<name>button3</name>
+	<label></label>
+	<icon>livros.xpm</icon>
+      </widget>
+
+      <widget>
+	<class>GtkVSeparator</class>
+	<name>vseparator1</name>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<child_name>Toolbar:button</child_name>
+	<name>button4</name>
+	<label></label>
+	<icon>sobre.xpm</icon>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<child_name>Toolbar:button</child_name>
+	<name>button5</name>
+	<label></label>
+	<icon>sair.xpm</icon>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkFixed</class>
+      <name>fixed1</name>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox1</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkStatusbar</class>
+	<name>statusbar1</name>
+	<width>120</width>
+	<height>21</height>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkStatusbar</class>
+	<name>statusbar2</name>
+	<height>21</height>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+</GTK-Interface>

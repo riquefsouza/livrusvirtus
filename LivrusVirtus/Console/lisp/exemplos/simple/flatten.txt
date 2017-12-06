@@ -1,0 +1,16 @@
+;  This flattens a list, i.e. it removes all sublists and puts every
+;  atomic item at the same level within one big list.
+
+(defun flatten (s-expression)
+    (if (atom s-expression)
+        s-expression
+        (flatten-aux s-expression)
+    )
+)
+
+(defun flatten-aux (somelist)
+    (if (listp (car somelist))
+        (append (flatten (car somelist)) (flatten (cdr somelist)))
+        (cons (car somelist) (flatten (cdr somelist)))
+    )
+)

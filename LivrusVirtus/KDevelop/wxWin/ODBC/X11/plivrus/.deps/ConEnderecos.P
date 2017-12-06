@@ -1,0 +1,397 @@
+ConEnderecos.o: ConEnderecos.cpp resource.h \
+  /usr/local/include/wx/wxprec.h /usr/local/include/wx/defs.h \
+  /usr/local/include/wx/platform.h \
+  /usr/local/lib/wx/include/x11univ-2.4/wx/setup.h \
+  /usr/local/include/wx/chkconf.h /usr/local/include/wx/features.h \
+  /usr/local/include/wx/version.h /usr/local/include/wx/debug.h \
+  /usr/include/assert.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/limits.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/syslimits.h \
+  /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+  /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+  /usr/include/bits/stdio_lim.h /usr/include/bits/wordsize.h \
+  /usr/local/include/wx/wxchar.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdarg.h \
+  /usr/include/wchar.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdio.h \
+  /usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stddef.h \
+  /usr/include/bits/wchar.h /usr/include/xlocale.h /usr/include/ctype.h \
+  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+  /usr/include/endian.h /usr/include/bits/endian.h /usr/include/string.h \
+  /usr/local/include/wx/wx.h /usr/local/include/wx/object.h \
+  /usr/local/include/wx/memory.h /usr/local/include/wx/string.h \
+  /usr/include/libio.h /usr/include/_G_config.h /usr/include/gconv.h \
+  /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
+  /usr/include/time.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/strings.h \
+  /usr/local/include/wx/buffer.h /usr/local/include/wx/strconv.h \
+  /usr/local/include/wx/dynarray.h /usr/local/include/wx/list.h \
+  /usr/local/include/wx/hash.h /usr/local/include/wx/intl.h \
+  /usr/local/include/wx/fontenc.h /usr/local/include/wx/log.h \
+  /usr/local/include/wx/ioswrap.h /usr/local/include/wx/event.h \
+  /usr/local/include/wx/clntdata.h /usr/local/include/wx/gdicmn.h \
+  /usr/local/include/wx/colour.h /usr/local/include/wx/x11/colour.h \
+  /usr/local/include/wx/gdiobj.h /usr/local/include/wx/x11/gdiobj.h \
+  /usr/local/include/wx/palette.h /usr/local/include/wx/x11/palette.h \
+  /usr/local/include/wx/font.h /usr/local/include/wx/x11/font.h \
+  /usr/local/include/wx/cursor.h /usr/local/include/wx/x11/cursor.h \
+  /usr/local/include/wx/bitmap.h /usr/local/include/wx/x11/bitmap.h \
+  /usr/local/include/wx/image.h /usr/local/include/wx/hashmap.h \
+  /usr/local/include/wx/stream.h /usr/local/include/wx/filefn.h \
+  /usr/local/include/wx/imagbmp.h /usr/local/include/wx/imagpng.h \
+  /usr/local/include/wx/imaggif.h /usr/local/include/wx/imagpcx.h \
+  /usr/local/include/wx/imagjpeg.h /usr/local/include/wx/imagtiff.h \
+  /usr/local/include/wx/imagpnm.h /usr/local/include/wx/imagxpm.h \
+  /usr/local/include/wx/imagiff.h /usr/local/include/wx/utils.h \
+  /usr/local/include/wx/longlong.h /usr/include/dirent.h \
+  /usr/include/bits/dirent.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+  /usr/include/bits/confname.h /usr/include/getopt.h \
+  /usr/local/include/wx/thread.h /usr/local/include/wx/module.h \
+  /usr/local/include/wx/app.h /usr/local/include/wx/window.h \
+  /usr/local/include/wx/region.h /usr/local/include/wx/x11/region.h \
+  /usr/local/include/wx/validate.h /usr/local/include/wx/dcclient.h \
+  /usr/local/include/wx/x11/dcclient.h /usr/local/include/wx/dc.h \
+  /usr/local/include/wx/brush.h /usr/local/include/wx/x11/brush.h \
+  /usr/local/include/wx/pen.h /usr/local/include/wx/x11/pen.h \
+  /usr/local/include/wx/x11/dc.h /usr/local/include/wx/icon.h \
+  /usr/local/include/wx/x11/icon.h /usr/local/include/wx/accel.h \
+  /usr/local/include/wx/generic/accel.h \
+  /usr/local/include/wx/x11/window.h /usr/local/include/wx/univ/window.h \
+  /usr/local/include/wx/build.h /usr/local/include/wx/x11/app.h \
+  /usr/local/include/wx/univ/theme.h /usr/local/include/wx/panel.h \
+  /usr/local/include/wx/generic/panelg.h /usr/local/include/wx/containr.h \
+  /usr/local/include/wx/frame.h /usr/local/include/wx/toplevel.h \
+  /usr/local/include/wx/iconbndl.h /usr/local/include/wx/x11/toplevel.h \
+  /usr/local/include/wx/univ/toplevel.h \
+  /usr/local/include/wx/univ/inpcons.h \
+  /usr/local/include/wx/univ/inphand.h /usr/local/include/wx/univ/frame.h \
+  /usr/local/include/wx/dcmemory.h /usr/local/include/wx/x11/dcmemory.h \
+  /usr/local/include/wx/dcprint.h /usr/local/include/wx/dcscreen.h \
+  /usr/local/include/wx/x11/dcscreen.h /usr/local/include/wx/button.h \
+  /usr/local/include/wx/control.h /usr/local/include/wx/univ/control.h \
+  /usr/local/include/wx/univ/button.h /usr/local/include/wx/menu.h \
+  /usr/local/include/wx/menuitem.h /usr/local/include/wx/univ/menuitem.h \
+  /usr/local/include/wx/univ/menu.h /usr/local/include/wx/dialog.h \
+  /usr/local/include/wx/univ/dialog.h /usr/local/include/wx/timer.h \
+  /usr/local/include/wx/generic/timer.h /usr/local/include/wx/settings.h \
+  /usr/local/include/wx/msgdlg.h /usr/local/include/wx/generic/msgdlgg.h \
+  /usr/local/include/wx/cmndata.h /usr/local/include/wx/ctrlsub.h \
+  /usr/local/include/wx/bmpbuttn.h /usr/local/include/wx/univ/bmpbuttn.h \
+  /usr/local/include/wx/checkbox.h /usr/local/include/wx/univ/checkbox.h \
+  /usr/local/include/wx/checklst.h /usr/local/include/wx/listbox.h \
+  /usr/local/include/wx/univ/listbox.h /usr/local/include/wx/scrolwin.h \
+  /usr/local/include/wx/generic/scrolwin.h \
+  /usr/local/include/wx/univ/checklst.h /usr/local/include/wx/choice.h \
+  /usr/local/include/wx/univ/choice.h /usr/local/include/wx/combobox.h \
+  /usr/local/include/wx/univ/combobox.h /usr/local/include/wx/scrolbar.h \
+  /usr/local/include/wx/univ/scrolbar.h \
+  /usr/local/include/wx/univ/scrarrow.h /usr/local/include/wx/stattext.h \
+  /usr/local/include/wx/univ/stattext.h /usr/local/include/wx/statbmp.h \
+  /usr/local/include/wx/univ/statbmp.h /usr/local/include/wx/statbox.h \
+  /usr/local/include/wx/univ/statbox.h /usr/local/include/wx/radiobox.h \
+  /usr/local/include/wx/univ/radiobox.h /usr/local/include/wx/radiobut.h \
+  /usr/local/include/wx/univ/radiobut.h /usr/local/include/wx/textctrl.h \
+  /usr/local/include/wx/x11/textctrl.h /usr/local/include/wx/datetime.h \
+  /usr/local/include/wx/datetime.inl /usr/local/include/wx/slider.h \
+  /usr/local/include/wx/univ/slider.h \
+  /usr/local/include/wx/univ/scrthumb.h /usr/local/include/wx/gauge.h \
+  /usr/local/include/wx/univ/gauge.h /usr/local/include/wx/dirdlg.h \
+  /usr/local/include/wx/generic/dirdlgg.h /usr/local/include/wx/toolbar.h \
+  /usr/local/include/wx/tbarbase.h /usr/local/include/wx/univ/toolbar.h \
+  /usr/local/include/wx/layout.h /usr/local/include/wx/sizer.h \
+  /usr/local/include/wx/mdi.h /usr/local/include/wx/generic/mdig.h \
+  /usr/local/include/wx/notebook.h /usr/local/include/wx/imaglist.h \
+  /usr/local/include/wx/generic/imaglist.h \
+  /usr/local/include/wx/univ/notebook.h /usr/local/include/wx/statusbr.h \
+  /usr/local/include/wx/univ/statusbr.h /usr/local/include/wx/choicdlg.h \
+  /usr/local/include/wx/generic/choicdgg.h \
+  /usr/local/include/wx/textdlg.h \
+  /usr/local/include/wx/generic/textdlgg.h \
+  /usr/local/include/wx/valtext.h /usr/local/include/wx/filedlg.h \
+  /usr/local/include/wx/generic/filedlgg.h /usr/local/include/wx/splash.h \
+  /usr/local/include/wx/generic/splash.h /usr/local/include/wx/calctrl.h \
+  /usr/local/include/wx/generic/calctrl.h \
+  /usr/local/include/wx/spinctrl.h /usr/local/include/wx/spinbutt.h \
+  /usr/local/include/wx/univ/spinbutt.h \
+  /usr/local/include/wx/generic/spinctlg.h /usr/local/include/wx/grid.h \
+  /usr/local/include/wx/generic/grid.h \
+  /usr/local/include/wx/generic/gridctrl.h /usr/local/include/wx/dbgrid.h \
+  Consultas.h RotinasGlobais.h /usr/local/include/sql.h \
+  /usr/local/include/sqltypes.h Principal.h Filha.h CadAssuntos.h \
+  Cadastros.h CadAutores.h CadEditoras.h CadEnderecos.h CadIdiomas.h \
+  CadPaises.h CadProfissoes.h CadClientes.h DateCtrl.h CadLivros.h \
+  VenderLivros.h ConVendas.h AlterarSenha.h Sobre.h ConAssuntos.h \
+  ConAutores.h ConEditoras.h ConEnderecos.h ConIdiomas.h ConPaises.h \
+  ConProfissoes.h ConClientes.h ConLivros.h ConsultasSQL.h
+ConEnderecos.cpp :
+resource.h :
+/usr/local/include/wx/wxprec.h :
+/usr/local/include/wx/defs.h :
+/usr/local/include/wx/platform.h :
+/usr/local/lib/wx/include/x11univ-2.4/wx/setup.h :
+/usr/local/include/wx/chkconf.h :
+/usr/local/include/wx/features.h :
+/usr/local/include/wx/version.h :
+/usr/local/include/wx/debug.h :
+/usr/include/assert.h :
+/usr/include/features.h :
+/usr/include/sys/cdefs.h :
+/usr/include/gnu/stubs.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/limits.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/syslimits.h :
+/usr/include/limits.h :
+/usr/include/bits/posix1_lim.h :
+/usr/include/bits/local_lim.h :
+/usr/include/linux/limits.h :
+/usr/include/bits/posix2_lim.h :
+/usr/include/bits/xopen_lim.h :
+/usr/include/bits/stdio_lim.h :
+/usr/include/bits/wordsize.h :
+/usr/local/include/wx/wxchar.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdarg.h :
+/usr/include/wchar.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stdio.h :
+/usr/lib/gcc-lib/i586-mandrake-linux-gnu/3.2.2/include/stddef.h :
+/usr/include/bits/wchar.h :
+/usr/include/xlocale.h :
+/usr/include/ctype.h :
+/usr/include/bits/types.h :
+/usr/include/bits/typesizes.h :
+/usr/include/endian.h :
+/usr/include/bits/endian.h :
+/usr/include/string.h :
+/usr/local/include/wx/wx.h :
+/usr/local/include/wx/object.h :
+/usr/local/include/wx/memory.h :
+/usr/local/include/wx/string.h :
+/usr/include/libio.h :
+/usr/include/_G_config.h :
+/usr/include/gconv.h :
+/usr/include/bits/sys_errlist.h :
+/usr/include/bits/stdio.h :
+/usr/include/stdlib.h :
+/usr/include/bits/waitflags.h :
+/usr/include/bits/waitstatus.h :
+/usr/include/sys/types.h :
+/usr/include/time.h :
+/usr/include/sys/select.h :
+/usr/include/bits/select.h :
+/usr/include/bits/sigset.h :
+/usr/include/bits/time.h :
+/usr/include/sys/sysmacros.h :
+/usr/include/bits/pthreadtypes.h :
+/usr/include/bits/sched.h :
+/usr/include/alloca.h :
+/usr/include/strings.h :
+/usr/local/include/wx/buffer.h :
+/usr/local/include/wx/strconv.h :
+/usr/local/include/wx/dynarray.h :
+/usr/local/include/wx/list.h :
+/usr/local/include/wx/hash.h :
+/usr/local/include/wx/intl.h :
+/usr/local/include/wx/fontenc.h :
+/usr/local/include/wx/log.h :
+/usr/local/include/wx/ioswrap.h :
+/usr/local/include/wx/event.h :
+/usr/local/include/wx/clntdata.h :
+/usr/local/include/wx/gdicmn.h :
+/usr/local/include/wx/colour.h :
+/usr/local/include/wx/x11/colour.h :
+/usr/local/include/wx/gdiobj.h :
+/usr/local/include/wx/x11/gdiobj.h :
+/usr/local/include/wx/palette.h :
+/usr/local/include/wx/x11/palette.h :
+/usr/local/include/wx/font.h :
+/usr/local/include/wx/x11/font.h :
+/usr/local/include/wx/cursor.h :
+/usr/local/include/wx/x11/cursor.h :
+/usr/local/include/wx/bitmap.h :
+/usr/local/include/wx/x11/bitmap.h :
+/usr/local/include/wx/image.h :
+/usr/local/include/wx/hashmap.h :
+/usr/local/include/wx/stream.h :
+/usr/local/include/wx/filefn.h :
+/usr/local/include/wx/imagbmp.h :
+/usr/local/include/wx/imagpng.h :
+/usr/local/include/wx/imaggif.h :
+/usr/local/include/wx/imagpcx.h :
+/usr/local/include/wx/imagjpeg.h :
+/usr/local/include/wx/imagtiff.h :
+/usr/local/include/wx/imagpnm.h :
+/usr/local/include/wx/imagxpm.h :
+/usr/local/include/wx/imagiff.h :
+/usr/local/include/wx/utils.h :
+/usr/local/include/wx/longlong.h :
+/usr/include/dirent.h :
+/usr/include/bits/dirent.h :
+/usr/include/unistd.h :
+/usr/include/bits/posix_opt.h :
+/usr/include/bits/environments.h :
+/usr/include/bits/confname.h :
+/usr/include/getopt.h :
+/usr/local/include/wx/thread.h :
+/usr/local/include/wx/module.h :
+/usr/local/include/wx/app.h :
+/usr/local/include/wx/window.h :
+/usr/local/include/wx/region.h :
+/usr/local/include/wx/x11/region.h :
+/usr/local/include/wx/validate.h :
+/usr/local/include/wx/dcclient.h :
+/usr/local/include/wx/x11/dcclient.h :
+/usr/local/include/wx/dc.h :
+/usr/local/include/wx/brush.h :
+/usr/local/include/wx/x11/brush.h :
+/usr/local/include/wx/pen.h :
+/usr/local/include/wx/x11/pen.h :
+/usr/local/include/wx/x11/dc.h :
+/usr/local/include/wx/icon.h :
+/usr/local/include/wx/x11/icon.h :
+/usr/local/include/wx/accel.h :
+/usr/local/include/wx/generic/accel.h :
+/usr/local/include/wx/x11/window.h :
+/usr/local/include/wx/univ/window.h :
+/usr/local/include/wx/build.h :
+/usr/local/include/wx/x11/app.h :
+/usr/local/include/wx/univ/theme.h :
+/usr/local/include/wx/panel.h :
+/usr/local/include/wx/generic/panelg.h :
+/usr/local/include/wx/containr.h :
+/usr/local/include/wx/frame.h :
+/usr/local/include/wx/toplevel.h :
+/usr/local/include/wx/iconbndl.h :
+/usr/local/include/wx/x11/toplevel.h :
+/usr/local/include/wx/univ/toplevel.h :
+/usr/local/include/wx/univ/inpcons.h :
+/usr/local/include/wx/univ/inphand.h :
+/usr/local/include/wx/univ/frame.h :
+/usr/local/include/wx/dcmemory.h :
+/usr/local/include/wx/x11/dcmemory.h :
+/usr/local/include/wx/dcprint.h :
+/usr/local/include/wx/dcscreen.h :
+/usr/local/include/wx/x11/dcscreen.h :
+/usr/local/include/wx/button.h :
+/usr/local/include/wx/control.h :
+/usr/local/include/wx/univ/control.h :
+/usr/local/include/wx/univ/button.h :
+/usr/local/include/wx/menu.h :
+/usr/local/include/wx/menuitem.h :
+/usr/local/include/wx/univ/menuitem.h :
+/usr/local/include/wx/univ/menu.h :
+/usr/local/include/wx/dialog.h :
+/usr/local/include/wx/univ/dialog.h :
+/usr/local/include/wx/timer.h :
+/usr/local/include/wx/generic/timer.h :
+/usr/local/include/wx/settings.h :
+/usr/local/include/wx/msgdlg.h :
+/usr/local/include/wx/generic/msgdlgg.h :
+/usr/local/include/wx/cmndata.h :
+/usr/local/include/wx/ctrlsub.h :
+/usr/local/include/wx/bmpbuttn.h :
+/usr/local/include/wx/univ/bmpbuttn.h :
+/usr/local/include/wx/checkbox.h :
+/usr/local/include/wx/univ/checkbox.h :
+/usr/local/include/wx/checklst.h :
+/usr/local/include/wx/listbox.h :
+/usr/local/include/wx/univ/listbox.h :
+/usr/local/include/wx/scrolwin.h :
+/usr/local/include/wx/generic/scrolwin.h :
+/usr/local/include/wx/univ/checklst.h :
+/usr/local/include/wx/choice.h :
+/usr/local/include/wx/univ/choice.h :
+/usr/local/include/wx/combobox.h :
+/usr/local/include/wx/univ/combobox.h :
+/usr/local/include/wx/scrolbar.h :
+/usr/local/include/wx/univ/scrolbar.h :
+/usr/local/include/wx/univ/scrarrow.h :
+/usr/local/include/wx/stattext.h :
+/usr/local/include/wx/univ/stattext.h :
+/usr/local/include/wx/statbmp.h :
+/usr/local/include/wx/univ/statbmp.h :
+/usr/local/include/wx/statbox.h :
+/usr/local/include/wx/univ/statbox.h :
+/usr/local/include/wx/radiobox.h :
+/usr/local/include/wx/univ/radiobox.h :
+/usr/local/include/wx/radiobut.h :
+/usr/local/include/wx/univ/radiobut.h :
+/usr/local/include/wx/textctrl.h :
+/usr/local/include/wx/x11/textctrl.h :
+/usr/local/include/wx/datetime.h :
+/usr/local/include/wx/datetime.inl :
+/usr/local/include/wx/slider.h :
+/usr/local/include/wx/univ/slider.h :
+/usr/local/include/wx/univ/scrthumb.h :
+/usr/local/include/wx/gauge.h :
+/usr/local/include/wx/univ/gauge.h :
+/usr/local/include/wx/dirdlg.h :
+/usr/local/include/wx/generic/dirdlgg.h :
+/usr/local/include/wx/toolbar.h :
+/usr/local/include/wx/tbarbase.h :
+/usr/local/include/wx/univ/toolbar.h :
+/usr/local/include/wx/layout.h :
+/usr/local/include/wx/sizer.h :
+/usr/local/include/wx/mdi.h :
+/usr/local/include/wx/generic/mdig.h :
+/usr/local/include/wx/notebook.h :
+/usr/local/include/wx/imaglist.h :
+/usr/local/include/wx/generic/imaglist.h :
+/usr/local/include/wx/univ/notebook.h :
+/usr/local/include/wx/statusbr.h :
+/usr/local/include/wx/univ/statusbr.h :
+/usr/local/include/wx/choicdlg.h :
+/usr/local/include/wx/generic/choicdgg.h :
+/usr/local/include/wx/textdlg.h :
+/usr/local/include/wx/generic/textdlgg.h :
+/usr/local/include/wx/valtext.h :
+/usr/local/include/wx/filedlg.h :
+/usr/local/include/wx/generic/filedlgg.h :
+/usr/local/include/wx/splash.h :
+/usr/local/include/wx/generic/splash.h :
+/usr/local/include/wx/calctrl.h :
+/usr/local/include/wx/generic/calctrl.h :
+/usr/local/include/wx/spinctrl.h :
+/usr/local/include/wx/spinbutt.h :
+/usr/local/include/wx/univ/spinbutt.h :
+/usr/local/include/wx/generic/spinctlg.h :
+/usr/local/include/wx/grid.h :
+/usr/local/include/wx/generic/grid.h :
+/usr/local/include/wx/generic/gridctrl.h :
+/usr/local/include/wx/dbgrid.h :
+Consultas.h :
+RotinasGlobais.h :
+/usr/local/include/sql.h :
+/usr/local/include/sqltypes.h :
+Principal.h :
+Filha.h :
+CadAssuntos.h :
+Cadastros.h :
+CadAutores.h :
+CadEditoras.h :
+CadEnderecos.h :
+CadIdiomas.h :
+CadPaises.h :
+CadProfissoes.h :
+CadClientes.h :
+DateCtrl.h :
+CadLivros.h :
+VenderLivros.h :
+ConVendas.h :
+AlterarSenha.h :
+Sobre.h :
+ConAssuntos.h :
+ConAutores.h :
+ConEditoras.h :
+ConEnderecos.h :
+ConIdiomas.h :
+ConPaises.h :
+ConProfissoes.h :
+ConClientes.h :
+ConLivros.h :
+ConsultasSQL.h :

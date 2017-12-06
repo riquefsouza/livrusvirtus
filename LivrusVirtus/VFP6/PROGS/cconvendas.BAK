@@ -1,0 +1,147 @@
+DEFINE CLASS CConVendas AS CUSTOM
+* AS Consultas
+*------------------------------------------------------------------------------------
+function ConsVenda()
+LParameters frmCon, sOpcao
+local sDtHrVenda, sret
+
+if len(frmCon.edtDtHrVenda.Value) > 0
+   sDtHrVenda = frmCon.edtDtHrVenda.Value
+else
+   sDtHrVenda = ""
+endif
+if sOpcao="L" then
+ sret = ConsSQL.Venda("S","ZERO","","","","")
+else
+ sret = ConsSQL.Venda(sOpcao,alltrim(frmCon.edtISBN.Value),;
+        alltrim(frmCon.edtDescricao.Value),sDtHrVenda,"","")
+endif 
+return sret
+endfunc
+*------------------------------------------------------------------------------------
+procedure btnLimparClick()
+LParameters frmCon
+
+  frmCon.edtDtHrVenda.Value = substr(ttoc(datetime()),1,17)
+  frmCon.edtCliente.Value = ""
+  frmCon.edtISBN.Value = ""
+  frmCon.edtLivro.Value = ""
+  frmCon.edtPrecoTotal.Value="R$ 0,00"
+  frmCon.edtDtHrVenda.SetFocus()
+
+  fConsultas.LimparDados(frmCon, 'curConVendas',;
+  this.ConsVenda(frmCon, 'L'), frmCon.gridConsulta)
+
+endproc
+*------------------------------------------------------------------------------------
+Function PesquisarDados()
+LParameters frmCon
+
+If Rotinas.ConsultaDadosX('curConVendas', this.ConsVenda(frmCon, "S"),;
+ frmCon.gridConsulta)
+* frmCon.btnPesquisar.Enabled = .F.
+ this.ConsultaChange(frmCon, 'curConVendas')
+ 
+ Rotinas.ConsultaDados('ConsTotal',this.ConsVenda(frmCon, "P"))
+ frmCon.edtPrecoTotal.Value = "R$ " + alltrim(str(ConsTotal.PrecoTotal,7,2))
+ Return .T.
+Else
+ MESSAGEBOX("Venda não encontrada!", 64, "Livrus Virtus")
+ Return .F.
+EndIf
+
+endfunc
+*------------------------------------------------------------------------------------
+procedure edtDtHrVendaLostFocus()
+LParameters frmCad
+
+ if alltrim(frmCad.edtDtHrVenda.Value)<>""
+   if Rotinas.validaDataHora(alltrim(frmCad.edtDtHrVenda.Value),.F.) = .F.
+      MESSAGEBOX("Data/Hora inválida!", 16, _Screen.Caption)
+      frmCad.edtDtHrVenda.Value = ttoc(datetime())
+      frmCad.edtDtHrVenda.SetFocus()
+   endif
+ endif
+endproc
+*------------------------------------------------------------------------------------
+procedure edtDescricaoLostFocus()
+LParameters frmCon, Consulta
+
+if alltrim(frmCon.edtDescricao.Value)<>""   
+  if Rotinas.ValidaCPF(alltrim(frmCon.edtDescricao.Value)) then
+     sTextoSql = ConsSQL.Cliente("S",alltrim(frmCon.edtDescricao.Value),;
+                 "","","","","","","","","")  
+	  if Rotinas.ConsultaDados(Consulta, sTextoSql) 
+	    frmCon.edtCliente.Value = alltrim(curConVenCli.Nome)
+	  else
+	    MESSAGEBOX("Cliente não encontrado!", 16, _Screen.Caption)
+	    frmCon.edtCliente.Value = ""
+	    frmCon.edtDescricao.SetFocus()
+	  endif
+	  Rotinas.FecharCursor(Consulta)
+  else
+    frmCon.edtDescricao.Value = ""
+    MESSAGEBOX("CPF inválido!", 16, _Screen.Caption)    	  
+  endif	  
+else
+  frmCon.edtCliente.Value = ""
+  frmCon.edtDescricao.SetFocus()
+endif
+endproc
+*------------------------------------------------------------------------------------
+procedure edtISBNLostFocus()
+LParameters frmCon, Consulta
+
+if alltrim(frmCon.edtISBN.Value)<>""   
+  if Rotinas.ValidaISBN(alltrim(frmCon.edtISBN.Value)) 
+     sTextoSql = ConsSQL.Livro("Q",alltrim(frmCon.edtISBN.Value),;
+                 "","","","","","","","","")  
+	  if Rotinas.ConsultaDados(Consulta, sTextoSql) 
+            if curConVenLiv.QtdEstoque > 0
+       	      frmCon.edtLivro.Value = alltrim(curConVenLiv.Titulo)
+              sPreco = curConVenLiv.Preco
+            else
+	      MESSAGEBOX("Livro não existe no estoque!", 16, _Screen.Caption)
+  	    endif	    
+	  else
+	    MESSAGEBOX("Livro não encontrado!", 16, _Screen.Caption)
+	    frmCon.edtISBN.Value = ""
+	    frmCon.edtLivro.SetFocus()
+	  endif
+	  Rotinas.FecharCursor(Consulta)
+  else
+    frmCon.edtISBN.Value = ""
+    MESSAGEBOX("ISBN inválido!", 16, _Screen.Caption)    	  
+  endif	  
+else
+  frmCon.edtLivro.Value = ""
+  frmCon.edtISBN.SetFocus()
+endif
+endproc
+*------------------------------------------------------------------------------------
+Procedure ConsultaChange()
+LParameters frmCon, Consulta
+
+	select &Consulta
+
+    frmCon.labRegistros.Caption = "Registro " + alltrim(Str(RecNo())) +;
+     " de " + alltrim(Str(RecCount()))
+EndProc
+*------------------------------------------------------------------------------------
+Procedure frmResize()
+LParameters frmCon, gridConsulta
+
+  gridConsulta.Height = Abs(frmCon.Height - 203)
+  gridConsulta.Width = frmCon.Width
+  frmCon.btnLimpar.Left = frmCon.Width - 158
+  frmCon.btnLimpar.Top = frmCon.Height - 28
+  frmCon.btnFechar.Left = frmCon.Width - 78
+  frmCon.btnFechar.Top = frmCon.Height - 28
+  frmCon.LabRegistros.Top = frmCon.Height - 23
+  frmCon.labPrecoTotal.Left = frmCon.Width - 188
+  frmCon.labPrecoTotal.Top = frmCon.Height - 55  
+  frmCon.edtPrecoTotal.Left = frmCon.Width - 128
+  frmCon.edtPrecoTotal.Top = frmCon.Height - 55    
+EndProc
+*------------------------------------------------------------------------------------
+ENDDEFINE

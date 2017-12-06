@@ -1,0 +1,19 @@
+with text_io; use text_io;
+with strings; use strings;
+
+procedure main is
+
+     package io_int is new integer_io (integer);
+     use io_int;
+
+     temp : string(1..80);
+
+begin
+
+     put ("Please tell me your name."); new_line;
+
+     gets (temp);
+     put_line ("Okay ");
+     put_line (temp);
+
+end main;

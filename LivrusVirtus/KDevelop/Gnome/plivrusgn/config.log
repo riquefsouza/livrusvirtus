@@ -1,0 +1,140 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:742: checking for a BSD compatible install
+configure:795: checking whether build environment is sane
+configure:852: checking whether make sets ${MAKE}
+configure:898: checking for working aclocal-1.4
+configure:911: checking for working autoconf
+configure:924: checking for working automake-1.4
+configure:937: checking for working autoheader
+configure:950: checking for working makeinfo
+configure:965: checking whether to enable maintainer-specific portions of Makefiles
+configure:1058: checking for gnome-config
+configure:1095: checking if /usr/bin/gnome-config works
+configure:1103: checking for orbit-config
+configure:1139: checking for orbit-idl
+configure:1173: checking for working ORBit environment
+configure:1209: checking for gnorba libraries
+configure:1319: checking for strerror in -lcposix
+configure:1338: cc -o conftest -O0 -g3 -Wall   conftest.c -lcposix   1>&5
+/usr/bin/ld: cannot find -lcposix
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 1327 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char strerror();
+
+int main() {
+strerror()
+; return 0; }
+configure:1363: checking for gcc
+configure:1476: checking whether the C compiler (gcc -O0 -g3 -Wall ) works
+configure:1492: gcc -o conftest -O0 -g3 -Wall   conftest.c  1>&5
+configure:1489: warning: return type defaults to `int'
+configure:1518: checking whether the C compiler (gcc -O0 -g3 -Wall ) is a cross-compiler
+configure:1523: checking whether we are using GNU C
+configure:1532: gcc -E conftest.c
+configure:1551: checking whether gcc accepts -g
+configure:1583: checking how to run the C preprocessor
+configure:1604: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1663: checking for ANSI C header files
+configure:1676: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1743: gcc -o conftest -O0 -g3 -Wall   conftest.c  1>&5
+configure: In function `main':
+configure:1738: warning: implicit declaration of function `exit'
+configure:1778: checking for Cygwin environment
+configure:1794: gcc -c -O0 -g3 -Wall  conftest.c 1>&5
+configure: In function `main':
+configure:1790: `__CYGWIN32__' undeclared (first use in this function)
+configure:1790: (Each undeclared identifier is reported only once
+configure:1790: for each function it appears in.)
+configure: failed program was:
+#line 1783 "configure"
+#include "confdefs.h"
+
+int main() {
+
+#ifndef __CYGWIN__
+#define __CYGWIN__ __CYGWIN32__
+#endif
+return __CYGWIN__;
+; return 0; }
+configure:1811: checking for mingw32 environment
+configure:1823: gcc -c -O0 -g3 -Wall  conftest.c 1>&5
+configure: In function `main':
+configure:1819: `__MINGW32__' undeclared (first use in this function)
+configure:1819: (Each undeclared identifier is reported only once
+configure:1819: for each function it appears in.)
+configure: failed program was:
+#line 1816 "configure"
+#include "confdefs.h"
+
+int main() {
+return __MINGW32__;
+; return 0; }
+configure:1915: checking host system type
+configure:1936: checking build system type
+configure:1965: checking for ld used by GCC
+configure:2033: checking if the linker (/usr/bin/ld) is GNU ld
+GNU ld version 2.13.90.0.18 20030121
+configure:2050: checking for /usr/bin/ld option to reload object files
+configure:2062: checking for BSD-compatible nm
+configure:2100: checking for a sed that does not truncate output
+configure:2184: checking whether ln -s works
+configure:2205: checking how to recognise dependent libraries
+configure:2391: checking for object suffix
+configure:2397: gcc -c -O0 -g3 -Wall  conftest.c 1>&5
+configure:2417: checking for executable suffix
+configure:2427: gcc -o conftest -O0 -g3 -Wall   conftest.c  1>&5
+configure:2458: checking command to parse /usr/bin/nm -B output
+configure:2541: gcc -c -O0 -g3 -Wall  conftest.c 1>&5
+configure:2544: /usr/bin/nm -B conftest.o | sed -n -e 's/^.*[ ]\([ABCDGISTW][ABCDGISTW]*\)[ ][ ]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' > conftest.nm
+configure:2595: gcc -o conftest -O0 -g3 -Wall   conftest.c conftstm.o 1>&5
+conftest.c:6: warning: `main' is usually a function
+configure:2644: checking for dlfcn.h
+configure:2654: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2823: checking for ranlib
+configure:2890: checking for strip
+configure:2992: gcc -c -O0 -g3 -Wall  conftest.c 1>&5
+configure:3147: checking for objdir
+configure:3174: checking for gcc option to produce PIC
+configure:3322: checking if gcc PIC flag -fPIC works
+configure:3336: gcc -c -O0 -g3 -Wall -fPIC -DPIC  conftest.c 1>&5
+configure:3388: checking if gcc static flag -static works
+configure:3403: gcc -o conftest -O0 -g3 -Wall   -static conftest.c  1>&5
+/usr/bin/ld: cannot find -lc
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 3396 "configure"
+#include "confdefs.h"
+
+int main() {
+
+; return 0; }
+configure:3430: checking if gcc supports -c -o file.o
+configure:3449: gcc -c -O0 -g3 -Wall -o out/conftest2.o  conftest.c 1>&5
+configure:3478: checking if gcc supports -c -o file.lo
+configure:3496: gcc -c -O0 -g3 -Wall -c -o conftest.lo  conftest.c 1>&5
+configure: In function `main':
+configure:3492: warning: unused variable `some_variable'
+configure:3546: checking if gcc supports -fno-rtti -fno-exceptions
+configure:3559: gcc -c -O0 -g3 -Wall -fno-rtti -fno-exceptions -c conftest.c  conftest.c 1>&5
+configure: In function `main':
+configure:3555: warning: unused variable `some_variable'
+configure: In function `main':
+configure:3555: warning: unused variable `some_variable'
+configure:3586: checking whether the linker (/usr/bin/ld) supports shared libraries
+configure:4285: checking how to hardcode library paths into programs
+configure:4313: checking whether stripping libraries is possible
+configure:4327: checking dynamic linker characteristics
+configure:4745: checking if libtool supports shared libraries
+configure:4749: checking whether to build shared libraries
+configure:4772: checking whether to build static libraries
+configure:5308: checking whether -lc should be explicitly linked in
+configure:5315: gcc -c -O0 -g3 -Wall  conftest.c 1>&5
+conftest.c:1: warning: `dummy' defined but not used
+configure:5328: gcc -shared conftest.o  -v -Wl,-soname -Wl,conftest -o conftest 2>&1 | grep  -lc  >/dev/null 2>&1

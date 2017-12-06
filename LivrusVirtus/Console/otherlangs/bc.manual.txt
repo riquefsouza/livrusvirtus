@@ -1,0 +1,131 @@
+BC(1)                    USER COMMANDS                      BC(1)
+
+
+
+NAME
+     bc - arbitrary-precision arithmetic language
+
+SYNOPSIS
+     bc [ -c ] [ -l ] [ filename...]
+
+DESCRIPTION
+     bc is an interactive processor for a language  which  resem-
+     bles  C  but  provides  unlimited  precision arithmetic.  bc
+     takes input from any files given, then  reads  the  standard
+     input.
+
+OPTIONS
+     -c   Compile only.  bc is actually a preprocessor for dc(1),
+          which  it invokes automatically, unless the -c (compile
+          only) option is present.  In this case the dc input  is
+          sent to the standard output instead.
+
+     -l   Is the name of an arbitrary precision math library.
+
+USAGE
+  Comments
+     Enclosed in /* and */.
+
+  Names
+     Simple variables: l, where, l is a lower-case letter.
+     Array elements: l[expression], where, expression is a  legal
+     bc expression.
+     The words ibase, obase, and scale.
+
+  Other Operands
+     Arbitrarily long numbers  with  optional  sign  and  decimal
+     point.
+          (expression)
+          sqrt (expression)
+          length (expression) Number   of   significant   decimal
+                              digits
+          scale (expression)  Number of digits right  of  decimal
+                              point
+          l(expression,       ..., expression)
+
+  Operators
+          +  -  *  /  %  ^    (% is remainder; ^ is exponent)
+          ++   --             (prefix  and  postfix;   apply   to
+                              names)
+          ==  <=  >=  !=  <  >
+          =  +=  -=  *=  /=  %=  ^=
+
+  Statements
+          expression
+          {statement; ...; statement}
+                              where,  statement  is  a  legal  bc
+                              statement.
+          if (expression)statement
+          while ( expression ) statement
+          for ( expression ;  expression ; expression ) statement
+          null statement
+          break
+          quit
+
+  Function Definitions
+          define
+               l ( l,...,l ) {
+               auto l ,..., l
+               statement ;... statement
+               return ( expression ) }
+
+  Functions in -l Math Library
+          s(x)                                   sine
+          c(x)                                   cosine
+          e(x)                                   exponential
+          l(x)                                   log
+          a(x)                                   arctangent
+          j(n,x)                                 Bessel function
+
+     All function arguments are passed by value.
+
+     The value of a statement that is an  expression  is  printed
+     unless  the  main  operator  is an assignment.  Either semi-
+     colons or newlines may separate statements.   Assignment  to
+     scale  influences  the  number  of  digits to be retained on
+     arithmetic operations in the manner of  dc(1).   Assignments
+     to  ibase  or  obase  set  the input and output number radix
+     respectively.
+
+     The same letter may be used as an array, a function,  and  a
+     simple variable simultaneously.  All variables are global to
+     the program.  `Auto' variables are pushed down during  func-
+     tion  calls.   When  using  arrays  as function arguments or
+     defining them as automatic variables empty  square  brackets
+     must follow the array name.
+
+EXAMPLES
+     Define a function to compute an  approximate  value  of  the
+     exponential function:
+     scale = 20
+     define
+     e(x){
+          auto a, b, c, i, s
+          a = 1
+          b = 1
+          s = 1
+          for(i=1; 1==1; i++){
+               a = a*x
+               b = b*i
+               c = a/b
+               if(c == 0) return(s)
+               s = s+c
+          }
+     }
+
+     Print approximate values of the exponential function of  the
+     first ten integers:
+
+          for(i=1; i<=10; i++) e(i)
+
+FILES
+     /usr/lib/lib.b      mathematical library
+
+     dc(1)               desk calculator proper
+
+SEE ALSO
+     dc(1)
+
+BUGS
+     for statement must have all three expression's.
+     quit is interpreted when read, not when executed.

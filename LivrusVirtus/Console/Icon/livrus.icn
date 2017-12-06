@@ -1,0 +1,2444 @@
+#------------------------------------------------------------------------------
+# Sistema integrante do projeto Livrus Virtus.
+# Todos os direitos reservados para Henrique F. de Souza.
+# Versão programada na linguagem Icon.
+#------------------------------------------------------------------------------
+# programa Livrus
+
+record regAssunto(codigo, assunto)
+record regAutor(codigo, autor)
+record regEditora(codigo, editora)
+record regIdioma(codigo, idioma)
+record regUsuario(login, senha)
+record regPais(codigo, pais)
+record regProfissao(codigo, profissao)
+record regLivro(isbn, titulo, edicao, anopubli, codeditora, volume,
+                codidioma, npaginas, preco, qtdestoque)
+record regLivroAss(isbn, codassunto)
+record regLivroAut(isbn, codautor)
+record regCliente(cpf, nome, email, identidade, sexo, telefone, dtnascimento,
+                  codendereco, codpais, codprofissao)
+record regEndereco(codigo, logradouro, bairro, cep, cidade, estado)
+record regVenda(dthrvenda, # data/hora da venda dd/mm/yyyy hh:mm:ss
+                cpf, isbn, precovenda)
+
+global true, false
+
+global ctTipo, opTexto, opNumero, opData, opDataHora, opSenha
+global ctArqs, opAssunto, opAutor, opEditora, opEndereco, opIdioma, opPais, 
+   opProfissao, opCliente, opLivro, opLivroAss, opLivroAut, opUsuario, opVenda
+global ctAcao, opNovo, opAlterar, opPesquisar, opSalvarInclusao,
+       opSalvarAlteracao, opExcluir, opConfirmaExclusao, opListarTodos
+
+global CRLF, TAM_CRLF, QTD_MAX_LINHA, ARQ_ABRE, ARQ_CRIA, 
+       MSG_ARQERRO, MSG_ARQCERRO
+
+global MSG_ERRO, MSG_OPCAO, MSG_PRESS, MSG_REGINC, MSG_REGNINC, MSG_REGALT,
+       MSG_REGNALT, MSG_REGEXC, MSG_REGNEXC, MSG_REGEXST
+global MSG_NUMINV, MSG_DATAINV, MSG_DTHRINV, MSG_ISBNINV, MSG_CPFINV, 
+       MSG_SENCONFERE, MSG_SENCONFIRM, MSG_LOGINENCON, MSG_SEMESTOQUE
+
+global ARQ_ASSUNTO, ARQ_AUTOR, ARQ_EDITORA, ARQ_IDIOMA,  ARQ_USUARIO, ARQ_PAIS,
+       ARQ_PROFISSAO, ARQ_LIVRO, ARQ_LIVASS, ARQ_LIVAUT, ARQ_CLIENTE, 
+       ARQ_ENDERECO, ARQ_VENDA
+global TAM_ASSUNTO, TAM_AUTOR, TAM_EDITORA, TAM_IDIOMA, TAM_USUARIO, TAM_PAIS, 
+       TAM_PROFISSAO, TAM_LIVRO, TAM_LIVASS, TAM_LIVAUT, TAM_CLIENTE, 
+       TAM_ENDERECO, TAM_VENDA
+
+global bopcao, opmenu, g_nPosChave, g_nTamChave, g_nPreco, g_SalvarInclusao
+
+global tAssunto, tAutor, tEditora, tIdioma, tEndereco, tPais, tProfissao, 
+       tLivro, tLivroAss, tLivroAut, tCliente, tUsuario, tVenda
+global tfAssunto, tfAutor, tfEditora, tfIdioma, tfEndereco, tfPais, tfProfissao,
+       tfLivro, tfLivroAss, tfLivroAut, tfCliente, tfUsuario, tfVenda
+
+# constantes
+procedure constantes()
+true := 1 
+false := 0
+
+ctTipo := set([opTexto:=1, opNumero:=2, opData:=3, opDataHora:=4, opSenha:=5])
+ctArqs := set([opAssunto:=1, opAutor:=2, opEditora:=3, opEndereco:=4, 
+          opIdioma:=5, opPais:=6, opProfissao:=7, opCliente:=8, opLivro:=9, 
+          opLivroAss:=10, opLivroAut:=11, opUsuario:=12, opVenda:=13])
+ctAcao := set([opNovo:=1, opAlterar:=2, opPesquisar:=3, opSalvarInclusao:=4,
+              opSalvarAlteracao:=5, opExcluir:=6, opConfirmaExclusao:=7, 
+              opListarTodos:=8])
+
+CRLF := "\r\n" # windows 
+TAM_CRLF := 2
+# CRLF := "\n"
+# TAM_CRLF := 1 # unix 
+# CRLF := "\r"
+# TAM_CRLF := 1 # macintosh 
+
+QTD_MAX_LINHA := 18
+
+ARQ_ABRE := "bt"
+ARQ_CRIA := "ct"
+
+MSG_ARQERRO := "Erro: o arquivo não pode ser aberto."
+MSG_ARQCERRO := "Erro: o arquivo não pode ser criado."
+MSG_ERRO := "Erro: opção inválida digite de novo"
+MSG_OPCAO := "Escolha uma opção: "
+MSG_PRESS := "pressione para continuar..."
+
+MSG_REGINC := "registro incluido!"
+MSG_REGNINC := "registro não incluido!"
+MSG_REGALT := "registro alterado!"
+MSG_REGNALT := "registro não alterado!"
+MSG_REGEXC := "registro excluido!"
+MSG_REGNEXC := "registro não excluido!"
+MSG_REGEXST := "registro já existe!"
+
+MSG_NUMINV := "Número inválido ou menor do que 1!"
+MSG_DATAINV := "Data inválida!, formato correto (dd/mm/yyyy)"
+MSG_DTHRINV := "Data/hora inválida!, formato correto (dd/mm/yyyy hh:mm:ss)"
+MSG_ISBNINV := "ISBN inválido!"
+MSG_CPFINV := "CPF inválido!"
+MSG_SENCONFERE := "senha não confere com a senha atual!"
+MSG_SENCONFIRM := "nova senha não confere com a senha confirmada!"
+MSG_LOGINENCON := "login não encontrado!"
+MSG_SEMESTOQUE := "livro não existe no estoque!"
+
+ARQ_ASSUNTO := "assunto.dat"
+ARQ_AUTOR := "autor.dat"
+ARQ_EDITORA := "editora.dat"
+ARQ_IDIOMA := "idioma.dat"
+ARQ_USUARIO := "usuario.dat"
+ARQ_PAIS := "pais.dat"
+ARQ_PROFISSAO := "profissao.dat"
+ARQ_LIVRO := "livro.dat"
+ARQ_LIVASS := "livroass.dat"
+ARQ_LIVAUT := "livroaut.dat"
+ARQ_CLIENTE := "cliente.dat"
+ARQ_ENDERECO := "endereco.dat"
+ARQ_VENDA := "venda.dat"
+
+TAM_ASSUNTO := 40
+TAM_AUTOR := 40
+TAM_EDITORA := 60
+TAM_IDIOMA := 30
+TAM_USUARIO := 20
+TAM_PAIS := 53
+TAM_PROFISSAO := 60
+TAM_LIVRO := 143
+TAM_LIVASS := 23
+TAM_LIVAUT := 23
+TAM_CLIENTE := 135
+TAM_ENDERECO := 123
+TAM_VENDA := 56
+
+# variaveis globais
+bopcao := false
+opmenu := ""
+g_nPosChave := 0
+g_nTamChave := 0
+g_nPreco := 0.0
+g_SalvarInclusao := false
+
+tAssunto := regAssunto("","")
+tAutor := regAutor("","")
+tEditora := regEditora("","")
+tIdioma := regIdioma("","")
+tEndereco := regEndereco("","","","","","")
+tPais := regPais("","")
+tProfissao := regProfissao("","")
+tLivro := regLivro("","","","","","","","","","")
+tLivroAss := regLivroAss("","")
+tLivroAut := regLivroAut("","")
+tCliente := regCliente("","","","","","","","","","")
+tUsuario := regUsuario("","")
+tVenda := regVenda("","","","")
+end
+
+#------------------------------------------------------------------------------
+# Função que retorna o tamanho de uma string.
+# stexto - indica a string
+# retorna - o tamanho da string
+#------------------------------------------------------------------------------
+procedure length(stexto)
+local ntam
+
+  ntam := 0
+  while stexto >> "" do {
+      ntam+:=1
+      stexto:=stexto[2:0]      
+  }
+  return ntam
+end
+
+#------------------------------------------------------------------------------
+# Função que retorna um pedaço de uma string.
+# stexto - indica a string
+# nini - indica a posicao inicial do pedaco
+# ntam - indica o tamanho do pedaco
+# retorna - o pedaço da string
+#------------------------------------------------------------------------------
+procedure substr(stexto,nini,ntam)
+  return stexto[nini:nini+ntam]
+end
+
+#------------------------------------------------------------------------------
+# Faz uma pesquisa relativa de um texto através de um valor chave.
+# sTexto - o texto
+# sChave - a chave a ser pesquisada
+# retorna - se achou ou não a chave dentro do texto
+#------------------------------------------------------------------------------
+procedure strRelativa(sTexto, sChave)
+  if find(sChave,sTexto) > 0 then 
+    return true 
+  else 
+    return false
+end
+
+#------------------------------------------------------------------------------
+# Calcula o modulo11 de um valor qualquer.
+# svalor - a mstring com o número a ser calculado
+# ndig - dígito do valor a ser calculado
+# retorna - o dígito correto
+#------------------------------------------------------------------------------
+procedure modulo11(svalor, ndig)
+local ncont, nsoma, nvalor, npos
+local sres, slocal
+
+ ncont:=1
+ slocal:=""
+ while ncont <= 11 do {
+   slocal:=substr(svalor,ncont,1) || slocal
+   ncont+:=1
+ }
+ nsoma:=0
+ if ndig=1 then
+   ncont:=3
+ else
+   ncont:=2
+ npos:=2
+ while ncont <= 11 do {
+   sres:=substr(slocal,ncont,1)
+   nvalor:=integer(sres)
+   nsoma:=nsoma + (nvalor * npos)
+   ncont+:=1
+   npos+:=1
+ }
+ nsoma:=(11 - (nsoma % 11))
+
+if nsoma > 9 then
+  return 0
+else
+  return nsoma
+end
+#------------------------------------------------------------------------------
+# Validação de um número de CPF qualquer.
+# cpf - a mstring com o número do CPF
+# retorna - se é valido ou não
+#------------------------------------------------------------------------------
+procedure validaCPF(cpf)
+local scpf, sres
+local nvalor1, nvalor2
+
+if (length(cpf)=14) then {
+  scpf:=substr(cpf,1,3) || substr(cpf,5,3) || substr(cpf,9,3) || substr(cpf,13,2)
+  sres:=substr(cpf,13,1)
+  nvalor1:=integer(sres)
+  sres:=substr(cpf,14,1)
+  nvalor2:=integer(sres)
+  if ((modulo11(scpf,1)=nvalor1) & (modulo11(scpf,2)=nvalor2)) then
+    return true
+  else
+    return false
+} else
+  return false
+end
+#------------------------------------------------------------------------------
+# Validação de um número ISBN qualquer.
+# isbn - a mstring com o número do ISBN
+# retorna - se é valido ou não
+#------------------------------------------------------------------------------
+procedure validaISBN(isbn)
+local snum, sdigito, sisbn
+local nvalor, nsoma, nstatus, ncont
+
+if (length(isbn)=13) then {
+  sdigito := substr(isbn, length(isbn), 1)
+  sisbn:=""
+  every ncont:=1 to length(isbn)-1 do {
+    if (substr(isbn,ncont,1)~=="-") then
+      sisbn:=sisbn || substr(isbn,ncont,1)
+  }
+  if sdigito == "X" then
+    nsoma := 10
+  else {
+    nvalor:=integer(sdigito)
+    nsoma := nvalor
+  }
+  every ncont:=1 to 9 do {
+    snum:=substr(sisbn, ncont, 1)
+    nvalor:=integer(snum)
+    nsoma:=nsoma + (nvalor * (11 - ncont))
+  }
+  if (nsoma % 11) = 0 then
+    return true
+  else
+    return false
+} else
+  return false
+end
+#------------------------------------------------------------------------------
+# Esconde a digitação da senha
+# retorna - a senha digitada
+#------------------------------------------------------------------------------
+procedure digitaSenha(sRotulo, nTamSenha)
+local sSenha, sLetra
+local ncont
+
+writes(sRotulo)
+sSenha:=read()
+#  ncont := 0
+#  sSenha:=""
+#  sLetra:="\0"
+#  while((sLetra~=="\r") & (ncont < nTamSenha)) do {
+#    sLetra:=getch()
+#    sSenha:=sSenha || sLetra
+#    ncont+:=1
+#  }
+return sSenha
+end
+#------------------------------------------------------------------------------
+# Validação de um número qualquer.
+# sRotulo - o texto antes de se digitar o número
+# sNumero - a mstring com o valor do número
+# retorna - o sNumero
+#------------------------------------------------------------------------------
+procedure validaNumero(sRotulo, sNumero)
+local nnum
+local nStatus
+
+nStatus:=-1
+while (nStatus~=0) do {
+  writes(sRotulo)
+  sNumero:=read()
+  nnum:=real(sNumero)
+  if type(nnum)=="real" then {
+    if (nnum < 0.01) then
+       write(MSG_NUMINV)
+    else
+      nStatus := 0
+  } else
+      write(MSG_NUMINV)
+}
+return sNumero
+end
+#------------------------------------------------------------------------------
+# Validação de uma data ou data/hora qualquer.
+# sRotulo - o texto antes de se digitar a data/hora
+# sDataHora - a mstring com o valor da data/hora
+# bSoData - indica se vai validar somente uma data sem a hora
+# retorna - a sDataHora
+#------------------------------------------------------------------------------
+procedure validaDataHora(sRotulo, sDataHora, bSoData)
+local bvalida, bdatavalida, bhoravalida
+local sdia, smes, sano, shora, smin, sseg
+local ndia, nmes, nano, nhora, nmin, nseg, nudiames, ntam
+
+bvalida:=false
+bdatavalida:=false
+bhoravalida:=false
+nudiames:=0
+
+if bSoData=true then ntam:=10
+else ntam:=19
+while (bvalida=false) do {
+  writes(sRotulo)
+  sDataHora := read()
+  if length(sDataHora)=ntam then {
+    sdia:=substr(sDataHora,1,2)
+    ndia:=integer(sdia)
+    smes:=substr(sDataHora,4,2)
+    nmes:=integer(smes)
+    sano:=substr(sDataHora,7,4)
+    nano:=integer(sano)
+  
+    if (nano >= 1) & (nano <= 9999) then {
+      if (nmes >= 1) & (nmes <= 31) then {
+         case nmes of {
+           1 | 3 | 5 | 7 | 8 | 10 | 12: nudiames:=31
+           2: {
+               # ano bissexto 
+               if (nano % 4)=0 then nudiames:=29
+               else nudiames:=28
+           }
+           4 | 6 | 9 | 11: nudiames:=30
+         }
+         if (ndia >=1) & (ndia <=nudiames) then
+            bdatavalida:=true
+      }
+    }
+  
+    if bSoData=true then {
+       if bdatavalida=true then bvalida:=true
+       else write(MSG_DATAINV)
+    } else {
+      if bdatavalida=true then {
+          shora:=substr(sDataHora,12,2)
+          nhora:=integer(shora)
+          smin:=substr(sDataHora,15,2)
+          nmin:=integer(smin)
+          sseg:=substr(sDataHora,18,2)
+          nseg:=integer(sseg)
+  
+          if (nhora >= 0) & (nhora <= 23) then {
+            if (nmin >= 0) & (nmin <= 59) then {
+              if (nseg >= 0) & (nseg <= 59) then
+                 bhoravalida:=true
+            }
+          }
+  
+          if bhoravalida=true then 
+            bvalida:=true
+          else 
+            write(MSG_DTHRINV)
+      } else
+        write(MSG_DTHRINV)
+    }
+  } else {
+    if bSoData=true then write(MSG_DATAINV)
+    else write(MSG_DTHRINV)
+  }
+}
+return sDataHora
+end
+#------------------------------------------------------------------------------
+# Retorna a Data e a hora do sistema.
+# retorna - a data e a hora
+#------------------------------------------------------------------------------
+procedure retDataHora()
+local sdia,smes,sano,sdatahora
+
+sano:=substr(&date,1,4)
+smes:=substr(&date,5,4)
+sdia:=substr(&date,9,2)
+sdatahora:= sdia || smes || sano || " " || &clock
+
+return sdatahora
+end
+#------------------------------------------------------------------------------
+# Calcula o tamanho do arquivo.
+# sArq - o arquivo
+# retorna - o tamanho do arquivo
+#------------------------------------------------------------------------------
+procedure tamArq(sArq)
+local ntam, npos
+
+npos:=where(sArq)
+seek(sArq,0)
+ntam:=where(sArq)
+seek(sArq,npos)
+
+return ntam 
+end
+#------------------------------------------------------------------------------
+# Abre ou cria os arquivos do sistema.
+# bAbre - condição para abrir ou criar os arquivos do sistema
+#------------------------------------------------------------------------------
+procedure abrecriaArqs(bAbre)
+
+if bAbre=true then {
+  if not(tfAssunto := open(ARQ_ASSUNTO, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_ASSUNTO)
+    exit(0)
+  }
+  if not(tfAutor := open(ARQ_AUTOR, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_AUTOR)
+    exit(0)
+  }
+  if not(tfEditora := open(ARQ_EDITORA, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_EDITORA)
+    exit(0)
+  }
+  if not(tfIdioma := open(ARQ_IDIOMA, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_IDIOMA)
+    exit(0)
+  }
+  if not(tfEndereco := open(ARQ_ENDERECO, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_ENDERECO)
+    exit(0)
+  }
+  if not(tfPais := open(ARQ_PAIS, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_PAIS)
+    exit(0)
+  }
+  if not(tfProfissao := open(ARQ_PROFISSAO, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_PROFISSAO)
+    exit(0)
+  }
+  if not(tfLivro := open(ARQ_LIVRO, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_LIVRO)
+    exit(0)
+  }
+  if not(tfLivroAss := open(ARQ_LIVASS, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_LIVASS)
+    exit(0)
+  }
+  if not(tfLivroAut := open(ARQ_LIVAUT, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_LIVAUT)
+    exit(0)
+  }
+  if not(tfCliente := open(ARQ_CLIENTE, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_CLIENTE)
+    exit(0)
+  }
+  if not(tfUsuario := open(ARQ_USUARIO, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_USUARIO)
+    exit(0)
+  }
+  if not(tfVenda := open(ARQ_VENDA, ARQ_ABRE)) then {
+    write(MSG_ARQERRO || " --> " || ARQ_VENDA)
+    exit(0)
+  }
+} else {
+  if not(tfAssunto := open(ARQ_ASSUNTO, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_ASSUNTO)
+  if not(tfAutor := open(ARQ_AUTOR, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_AUTOR)
+  if not(tfEditora := open(ARQ_EDITORA, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_EDITORA)
+  if not(tfIdioma := open(ARQ_IDIOMA, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_IDIOMA)
+  if not(tfEndereco := open(ARQ_ENDERECO, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_ENDERECO)
+  if not(tfPais := open(ARQ_PAIS, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_PAIS)
+  if not(tfProfissao := open(ARQ_PROFISSAO, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_PROFISSAO)
+  if not(tfLivro := open(ARQ_LIVRO, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_LIVRO)
+  if not(tfLivroAss := open(ARQ_LIVASS, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_LIVASS)
+  if not(tfLivroAut := open(ARQ_LIVAUT, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_LIVAUT)
+  if not(tfCliente := open(ARQ_CLIENTE, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_CLIENTE)
+  if not(tfUsuario := open(ARQ_USUARIO, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_USUARIO)
+  if not(tfVenda := open(ARQ_VENDA, ARQ_CRIA)) then
+    write(MSG_ARQCERRO || " --> " || ARQ_VENDA)
+}
+end
+#------------------------------------------------------------------------------
+# Fecha todos os arquivos abertos.
+#------------------------------------------------------------------------------
+procedure fechaArqs()
+ close(tfAssunto)
+ close(tfAutor)
+ close(tfEditora)
+ close(tfIdioma)
+ close(tfEndereco)
+ close(tfPais)
+ close(tfProfissao)
+ close(tfLivro)
+ close(tfLivroAss)
+ close(tfLivroAut)
+ close(tfCliente)
+ close(tfUsuario)
+ close(tfVenda)
+end
+#------------------------------------------------------------------------------
+# Pesquisa um registro através de um valor chave num arquivo.
+# sArq - o arquivo
+# sChave - a chave a ser pesquisada
+# nPosChave - a posicao inicial da chave dentro do registro
+# nTamChave - o tamanho da chave dentro do registro
+# nTamLinha - o tamanho do registro
+# retorna - o registro pesquisado
+#------------------------------------------------------------------------------
+procedure pesqArq(sArq, sChave, nPosChave, nTamChave, nTamLinha)
+local slinha, sres, bQuebra, nPosicao, stemp
+
+bQuebra:=false
+seek(sArq, 1)
+while (slinha := read(sArq)) & (bQuebra=false) do {
+  sres:=trim(substr(slinha,nPosChave,nTamChave))
+  if (\sres) & (sres == sChave) then {
+     stemp:=slinha
+     bQuebra:=true
+  }
+}
+nPosicao:=where(sArq)-((nTamLinha + TAM_CRLF) * 2)
+if nPosicao > 1 then
+   seek(sArq, nPosicao)
+else
+   seek(sArq, 1)
+if (\sres) then {
+  if (sres~==sChave) then
+     return ""
+  else
+     return substr(stemp,1,nTamLinha)
+} else
+  return ""
+end
+#------------------------------------------------------------------------------
+# Pesquisa se tem linha excluída senão vai para a última linha do arquivo.
+# sArq - o arquivo
+# nTamLinha - o tamanho do registro
+#------------------------------------------------------------------------------
+procedure pesqLinhaExcluida(sArq, nTamLinha)
+local sExcluido
+
+sExcluido:=pesqArq(sArq, "*", 1, 1, nTamLinha)
+if sExcluido=="" then
+   seek(sArq, tamArq(sArq))
+end
+#------------------------------------------------------------------------------
+# Pesquisa o maior código num arquivo.
+# sArq - o arquivo
+# nPosChave - a posicao inicial da chave dentro do registro
+# nTamChave - o tamanho da chave dentro do registro
+# nTamLinha - o tamanho do registro
+# retorna - o maior código
+#------------------------------------------------------------------------------
+procedure pesqMaxCod(sArq, nPosChave, nTamChave, nTamLinha)
+local slinha, sres, bQuebra, nMaior, nCod
+
+bQuebra:=false
+nMaior:=0
+seek(sArq, 1)
+while (slinha := read(sArq)) & (bQuebra=false) do {
+  sres:=trim(substr(slinha,nPosChave,nTamChave))
+  if \sres then {
+    nCod:=integer(sres)
+    if nCod > nMaior then
+       nMaior:=nCod
+  }
+}
+pesqLinhaExcluida(sArq, nTamLinha)
+sres:=string(nMaior+1)
+return sres
+end
+#------------------------------------------------------------------------------
+# Grava os registros num determinado arquivo.
+# sArq - o arquivo
+# sTexto - o registro a ser gravado
+# sMsgAcerto - a mensagem caso o registro foi gravado
+# sMsgErro - a mensagem caso o registro não foi gravado
+#------------------------------------------------------------------------------
+procedure escreveArq(sArq, sTexto, sMsgAcerto, sMsgErro)
+#sTexto:=sTexto || CRLF
+write(sArq, sTexto)
+write(sMsgAcerto)
+# write(sMsgErro)
+end
+#------------------------------------------------------------------------------
+# Monta o tamanho do registro no arquivo de acordo com o tipo de arquivo.
+# sreg - o tipo de arquivo
+# retorna - o registro montado
+#------------------------------------------------------------------------------
+procedure LinhaReg(sreg)
+local slinha
+
+slinha:=""
+if member(ctArqs, sreg) = opAssunto then
+  slinha:=left(tAssunto.codigo,10) || left(tAssunto.assunto,30)
+else if member(ctArqs, sreg) = opAutor then
+  slinha:=left(tAutor.codigo,10) || left(tAutor.autor,30)
+else if member(ctArqs, sreg) = opEditora then
+  slinha:=left(tEditora.codigo,10) || left(tEditora.editora,50)
+else if member(ctArqs, sreg) = opEndereco then
+  slinha:=left(tEndereco.codigo,10) || left(tEndereco.logradouro,40) ||
+  left(tEndereco.bairro,15) || left(tEndereco.cep,8) || 
+  left(tEndereco.cidade,30) || left(tEndereco.estado,20)
+else if member(ctArqs, sreg) = opIdioma then
+  slinha:=left(tIdioma.codigo,10) || left(tIdioma.idioma,20)
+else if member(ctArqs, sreg) = opPais then
+  slinha:=left(tPais.codigo,3) || left(tPais.pais,50)
+else if member(ctArqs, sreg) = opProfissao then
+  slinha:=left(tProfissao.codigo,10) || left(tProfissao.profissao,50)
+else if member(ctArqs, sreg) = opUsuario then
+  slinha:=left(tUsuario.login,10) || left(tUsuario.senha,10)
+else if member(ctArqs, sreg) = opLivro then
+  slinha:=left(tLivro.isbn,13) || left(tLivro.titulo,50) || 
+  left(tLivro.edicao,10) || left(tLivro.anopubli,10) || 
+  left(tLivro.codeditora,10) || left(tLivro.volume,10) ||
+  left(tLivro.codidioma,10) || left(tLivro.npaginas,10) || 
+  left(tLivro.preco,10) || left(tLivro.qtdestoque,10)
+else if member(ctArqs, sreg) = opLivroAss then
+  slinha:=left(tLivroAss.isbn,13) || left(tlivroAss.codassunto,10)
+else if member(ctArqs, sreg) = opLivroAut then
+  slinha:=left(tLivroAut.isbn,13) || left(tlivroAut.codautor,10)
+else if member(ctArqs, sreg) = opCliente then
+  slinha:=left(tCliente.cpf,14) || left(tCliente.nome,30) || 
+  left(tCliente.email,30) || left(tCliente.identidade,10) || 
+  left(tCliente.sexo,1) || left(tCliente.telefone,17) ||
+  left(tCliente.dtnascimento,10) || left(tCliente.codendereco,10) ||
+  left(tCliente.codpais,3) || left(tCliente.codprofissao,10)
+else if member(ctArqs, sreg) = opVenda then
+  slinha:=left(tVenda.dthrvenda,19) || left(tVenda.cpf,14) || 
+  left(tVenda.isbn,13) || left(tVenda.precovenda,10)
+
+return slinha
+end
+#------------------------------------------------------------------------------
+# Retorna o tamanho do registro no arquivo de acordo com o tipo de arquivo.
+# sreg - o tipo de arquivo
+# retorna - o tamanho do registro
+#------------------------------------------------------------------------------
+procedure tamReg(sreg)
+local nret
+
+nret:=0
+if member(ctArqs, sreg) = opAssunto then nret:=TAM_ASSUNTO
+else if member(ctArqs, sreg) = opAutor then nret:=TAM_AUTOR
+else if member(ctArqs, sreg) = opEditora then nret:=TAM_EDITORA
+else if member(ctArqs, sreg) = opEndereco then nret:=TAM_ENDERECO
+else if member(ctArqs, sreg) = opIdioma then nret:=TAM_IDIOMA
+else if member(ctArqs, sreg) = opPais then nret:=TAM_PAIS
+else if member(ctArqs, sreg) = opProfissao then nret:=TAM_PROFISSAO
+else if member(ctArqs, sreg) = opUsuario then nret:=TAM_USUARIO
+else if member(ctArqs, sreg) = opLivro then nret:=TAM_LIVRO
+else if member(ctArqs, sreg) = opLivroAss then nret:=TAM_LIVASS
+else if member(ctArqs, sreg) = opLivroAut then nret:=TAM_LIVAUT
+else if member(ctArqs, sreg) = opCliente then nret:=TAM_CLIENTE
+else if member(ctArqs, sreg) = opVenda then nret:=TAM_VENDA
+
+return nret
+end
+#------------------------------------------------------------------------------
+# Seleciona o rotulo de cada campo de acordo com o tipo de arquivo.
+# sreg - o tipo de arquivo
+# nNum - indica qual rotulo será retornado
+# retorna - o rotulo
+#------------------------------------------------------------------------------
+procedure rotulo(sreg, nNum)
+local sret
+
+sret:=""
+if member(ctArqs, sreg) = opAssunto then {
+   case nNum of {
+     0: sret:="Assunto(s) não encontrado(s)!"
+     1: {
+         sret:="Código do assunto: "
+         g_nPosChave:=1
+         g_nTamChave:=10
+        }
+     2: {
+         sret:="Assunto: "
+         g_nPosChave:=11
+         g_nTamChave:=30
+        }
+   }
+} else if member(ctArqs, sreg) = opAutor then {
+   case nNum of {
+     0: sret:="Autor(es) não encontrado(s)!"
+     1: {
+         sret:="Código do autor: "
+         g_nPosChave:=1
+         g_nTamChave:=10
+        }
+     2: {
+         sret:="Autor: "
+         g_nPosChave:=11
+         g_nTamChave:=30
+        }
+   }
+} else if member(ctArqs, sreg) = opEditora then {
+   case nNum of {
+     0: sret:="Editora(s) não encontrada(s)!"
+     1: {
+         sret:="Código da editora: "
+         g_nPosChave:=1
+         g_nTamChave:=10
+        }
+     2: {
+         sret:="Editora: "
+         g_nPosChave:=11
+         g_nTamChave:=50
+        }
+   }
+} else if member(ctArqs, sreg) = opEndereco then {
+   case nNum of {
+     0: sret:="Endereço(s) não encontrado(s)!"
+     1: {
+         sret:="Código do endereço: "
+         g_nPosChave:=1
+         g_nTamChave:=10
+        }
+     2: {
+         sret:="Logradouro: "
+         g_nPosChave:=11
+         g_nTamChave:=40
+        }
+     3: {
+         sret:="Bairro: "
+         g_nPosChave:=51
+         g_nTamChave:=15
+        }
+     4: {
+         sret:="CEP: "
+         g_nPosChave:=66
+         g_nTamChave:=8
+        }
+     5: {
+         sret:="Cidade: "
+         g_nPosChave:=74
+         g_nTamChave:=30
+        }
+     6: {
+         sret:="Estado: "
+         g_nPosChave:=104
+         g_nTamChave:=20
+        }
+   }
+} else if member(ctArqs, sreg) = opIdioma then {
+   case nNum of {
+     0: sret:="Idioma(s) não encontrado(s)!"
+     1: {
+         sret:="Código do idioma: "
+         g_nPosChave:=1
+         g_nTamChave:=10
+        }
+     2: {
+         sret:="Idioma: "
+         g_nPosChave:=11
+         g_nTamChave:=20
+        }
+   }
+} else if member(ctArqs, sreg) = opPais then {
+   case nNum of {
+     0: sret:="País(es) não encontrado(s)!"
+     1: {
+         sret:="Código do país: "
+         g_nPosChave:=1
+         g_nTamChave:=3
+        }
+     2: {
+         sret:="País: "
+         g_nPosChave:=4
+         g_nTamChave:=50
+        }
+   }
+} else if member(ctArqs, sreg) = opProfissao then {
+   case nNum of {
+     0: sret:="Profissão(es) não encontrada(s)!"
+     1: {
+         sret:="Código da profissão: "
+         g_nPosChave:=1
+         g_nTamChave:=10
+        }
+     2: {
+         sret:="Profissão: "
+         g_nPosChave:=11
+         g_nTamChave:=50
+        }
+   }
+} else if member(ctArqs, sreg) = opUsuario then {
+   case nNum of {
+     0: sret:="login ou senha incorreta, tente de novo!"
+     1: {
+         sret:="Login: "
+         g_nPosChave:=1
+         g_nTamChave:=10
+        }
+     2: {
+         sret:="Senha: "
+         g_nPosChave:=11
+         g_nTamChave:=10
+        }
+   }
+} else if member(ctArqs, sreg) = opLivro then {
+   case nNum of {
+     0: sret:="Livro(s) não encontrado(s)!"
+     1: {
+         sret:="ISBN: "
+         g_nPosChave:=1
+         g_nTamChave:=13
+        }
+     2: {
+         sret:="Título: "
+         g_nPosChave:=14
+         g_nTamChave:=50
+        }
+     3: {
+         sret:="Edição: "
+         g_nPosChave:=64
+         g_nTamChave:=10
+        }
+     4: {
+         sret:="Ano de Publicação: "
+         g_nPosChave:=74
+         g_nTamChave:=10
+        }
+     5: {
+         sret:="Código da editora: "
+         g_nPosChave:=84
+         g_nTamChave:=10
+        }
+     6: {
+         sret:="Volume: "
+         g_nPosChave:=94
+         g_nTamChave:=10
+        }
+     7: {
+         sret:="Código do idioma: "
+         g_nPosChave:=104
+         g_nTamChave:=10
+        }
+     8: {
+         sret:="Número de páginas: "
+         g_nPosChave:=114
+         g_nTamChave:=10
+        }
+     9: {
+         sret:="Preço: "
+         g_nPosChave:=124
+         g_nTamChave:=10
+        }
+     10: {
+          sret:="Qtd. Estoque: "
+          g_nPosChave:=134
+          g_nTamChave:=10
+         }
+   }
+} else if member(ctArqs, sreg) = opLivroAss then {
+   case nNum of {
+     0: sret:="Assunto(s) não encontrado(s)!"
+     1: {
+         sret:="ISBN: "
+         g_nPosChave:=1
+         g_nTamChave:=13
+        }
+     2: {
+         sret:="Código do assunto: "
+         g_nPosChave:=14
+         g_nTamChave:=10
+        }
+   }
+} else if member(ctArqs, sreg) = opLivroAut then {
+   case nNum of {
+     0: sret:="Autor(s) não encontrado(s)!"
+     1: {
+         sret:="ISBN: "
+         g_nPosChave:=1
+         g_nTamChave:=13
+        }
+     2: {
+         sret:="Código do autor: "
+         g_nPosChave:=14
+         g_nTamChave:=10
+        }
+   }
+} else if member(ctArqs, sreg) = opCliente then {
+   case nNum of {
+     0: sret:="Cliente(s) não encontrado(s)!"
+     1: {
+         sret:="CPF: "
+         g_nPosChave:=1
+         g_nTamChave:=14
+        }
+     2: {
+         sret:="Nome: "
+         g_nPosChave:=15
+         g_nTamChave:=30
+        }
+     3: {
+         sret:="E-mail: "
+         g_nPosChave:=45
+         g_nTamChave:=30
+        }
+     4: {
+         sret:="Identidade: "
+         g_nPosChave:=75
+         g_nTamChave:=10
+        }
+     5: {
+         sret:="Sexo: "
+         g_nPosChave:=85
+         g_nTamChave:=1
+        }
+     6: {
+         sret:="Telefone: "
+         g_nPosChave:=86
+         g_nTamChave:=17
+        }
+     7: {
+         sret:="Dt. Nascimento: "
+         g_nPosChave:=103
+         g_nTamChave:=10
+        }
+     8: {
+         sret:="Código do endereço: "
+         g_nPosChave:=113
+         g_nTamChave:=10
+        }
+     9: {
+         sret:="Código do país: "
+         g_nPosChave:=123
+         g_nTamChave:=3
+        }
+     10: {
+          sret:="Código da Profissão: "
+          g_nPosChave:=126
+          g_nTamChave:=10
+        }
+   }
+} else if member(ctArqs, sreg) = opVenda then {
+   case nNum of {
+     0: sret:="Venda(s) não encontrada(s)!"
+     1: {
+         sret:="Data/Hora venda: "
+         g_nPosChave:=1
+         g_nTamChave:=19
+        }
+     2: {
+         sret:="CPF: "
+         g_nPosChave:=20
+         g_nTamChave:=14
+        }
+     3: {
+         sret:="ISBN: "
+         g_nPosChave:=34
+         g_nTamChave:=13
+        }
+     4: {
+         sret:="Preço de venda: "
+         g_nPosChave:=47
+         g_nTamChave:=10
+        }
+   }
+}
+
+return sret
+end
+#------------------------------------------------------------------------------
+# Indica se continua ou não mostrando um número máximo de linhas.
+# nlinha - a linha a ser continuada
+# nQtdLinha - a quantidade de linhas a serem mostradas
+# retorna - se continua ou não
+#------------------------------------------------------------------------------
+procedure ContinuaSN(nlinha, nQtdLinha)
+local bSOp, bret, opCSubMenu
+
+bret:=false
+if nlinha > 0 then {
+  if (nlinha % nQtdLinha) = 0 then {
+     bSOp:=true
+     while (bSOp=true) do {
+       menu(13)
+       opCSubMenu := read()
+       if (opCSubMenu=="S") | (opCSubMenu=="s") then bSOp:=false
+       else if (opCSubMenu=="N") | (opCSubMenu=="n") then {
+          bret:=true
+          bSOp:=false
+       } else write(MSG_ERRO)
+     }
+  }
+}
+return bret
+end
+#------------------------------------------------------------------------------
+# Lista vários registros de acordo com a pesquisa feita.
+# sArq - o arquivo
+# sreg - o tipo de arquivo
+# sChave - a chave a ser pesquisada
+# nPosChave - a posicao inicial da chave dentro do registro
+# nTamChave - o tamanho da chave dentro do registro
+# nTamLinha - o tamanho do registro
+# nQtdLinha - a quantidade de linhas a serem mostradas
+# retorna - se encontrou algum registro
+#------------------------------------------------------------------------------
+procedure ListarTodos(sArq, sreg, sChave, nPosChave, nTamChave, nTamLinha, 
+  nQtdLinha, bPesqRelativa)
+local slinha, bQuebra, bAchou, bRet, nCont, sres
+
+bRet:=false
+bQuebra:=false
+nCont:=0
+mostrarDados(sreg, "", 2)
+seek(sArq, 1)
+while (slinha := read(sArq)) & (bQuebra=false) do {
+  if bPesqRelativa=true then {
+    sres:=trim(substr(slinha,nPosChave,nTamChave))
+    if (\sres) & (strRelativa(sres,sChave)=true) then {
+       bAchou:=true
+       bRet:=true
+    } else
+       bAchou:=false
+  } else {
+    bAchou:=true
+    bRet:=true
+  }
+
+  if bAchou=true then {
+    mostrarDados(sreg, substr(slinha,1,nTamLinha), 3)
+    nCont+:=1
+  }
+
+  bQuebra:=ContinuaSN(nCont, nQtdLinha)
+}
+return bRet
+end
+#------------------------------------------------------------------------------
+# Lista vários registros entre arquivos de acordo com a pesquisa feita.
+# sArq1 - o arquivo de ligação
+# sreg1 - o tipo de arquivo de ligação
+# nPosChave1 - a posicao inicial da primeira chave no arquivo de ligação
+# nTamChave1 - o tamanho da primeira chave no arquivo de ligação
+# nPosChave2 - a posicao inicial da segunda chave do arquivo de ligação
+# nTamChave2 - o tamanho da segunda chave do arquivo de ligação
+# sChave - a chave a ser pesquisada no arquivo de ligação
+# sArq2 - o arquivo a ser pesquisado
+# sreg2 - o tipo de arquivo a ser pesquisado
+# nPosChave3 - a posicao inicial da chave do arquivo pesquisado
+# nQtdLinha - a quantidade de linhas a serem mostradas
+#------------------------------------------------------------------------------
+procedure ListarRegLigados(sArq1, sreg1, nPosChave1, nTamChave1, 
+          nPosChave2, nTamChave2, sChave, sArq2, sreg2, nPosChave3, nQtdLinha)
+local slinha1, bQuebra, bRet, nCont, sCodigo1, sCodigo2, slinha2
+
+bRet:=false
+nCont:=0
+bQuebra:=false
+mostrarDados(sreg2, "", 2)
+seek(sArq1, 1)
+while (slinha1 := read(sArq1)) & (bQuebra=false) do {
+  sCodigo1:=trim(substr(slinha1,nPosChave1,nTamChave1))
+  if (\sCodigo1) & (sCodigo1==sChave) then {
+    sCodigo2:=trim(substr(slinha1,nPosChave2,nTamChave2))
+    slinha2:=pesqArq(sArq2, sCodigo2, nPosChave3, nTamChave2, tamReg(sreg2))
+    mostrarDados(sreg2, substr(slinha2, 1, tamReg(sreg2)), 3)
+    bRet:=true
+    nCont+:=1
+  }
+  bQuebra:=ContinuaSN(nCont, nQtdLinha)
+}
+if bRet=false then
+   write(rotulo(sreg2,0))
+end
+#------------------------------------------------------------------------------
+# Valida a entrada de registros de acordo com a pesquisa feita.
+# sArq - o arquivo
+# sreg - o tipo de arquivo
+# nTexto - o numero do rótulo da entrada
+# sEntrada - a chave a ser pesquisada e validada
+# nTentativas - o número máximo de tentativas
+# bPesqRelativa - indica se vai realizar uma pesquisa relativa
+# bTipoEntrada - indica o tipo de entrada
+# retorna - o registro pesquisado e validado
+#------------------------------------------------------------------------------
+procedure validaEntrada(sArq, sreg, nTexto, sEntrada, nTentativas,
+          bPesqRelativa, bTipoEntrada)
+local bQuebra, sres, sTexto, sMsgErro, ncont, nPosChave, nTamChave, nTamLinha
+
+nTamLinha:=tamReg(sreg)
+sMsgErro:=rotulo(sreg,0)
+sTexto:=rotulo(sreg,nTexto)
+nPosChave:=g_nPosChave
+nTamChave:=g_nTamChave
+
+ncont:=1
+bQuebra:=false
+  while (bQuebra=false) & (ncont <= nTentativas ) do {
+
+    if member(ctTipo, bTipoEntrada) = opTexto then {
+      writes(sTexto)
+      sEntrada:=read()
+    } else if member(ctTipo, bTipoEntrada) = opNumero then
+       sEntrada:=validaNumero(sTexto,sEntrada)
+    else if member(ctTipo, bTipoEntrada) = opData then
+      sEntrada:=validaDataHora(sTexto,sEntrada,true)
+    else if member(ctTipo, bTipoEntrada) = opDataHora then
+      sEntrada:=validaDataHora(sTexto,sEntrada,false)
+    else if member(ctTipo, bTipoEntrada) = opSenha then
+      sEntrada:=digitaSenha(sTexto, 10) 
+
+    if bPesqRelativa=true then {
+       if ListarTodos(sArq, sreg, sEntrada, nPosChave, nTamChave, nTamLinha,
+                      QTD_MAX_LINHA, true)=true then
+          sres:=" "     
+    } else
+       sres:=pesqArq(sArq, sEntrada, nPosChave, nTamChave, nTamLinha)
+
+    if sres=="" then
+       write(sMsgErro)
+    else
+       bQuebra:=true
+
+    ncont+:=1
+  }
+return sres
+end
+#------------------------------------------------------------------------------
+# Mostra a tela de splash do sistema.
+#------------------------------------------------------------------------------
+procedure frmSplash()
+local cont
+
+ write("*---------------------------------------" ||
+ "-------------------------------------*")
+ write("| LL    II VV   VV RRRRR  UU  UU   SSSS " ||
+ "VV   VV II RRRRR  TTTT UU  UU   SSSS |")
+ write("| LL    II  VV VV  RR   R UU  UU  SS    " ||
+ " VV VV  II RR   R  TT  UU  UU  SS    |")
+ write("| LL    II   VVV   RRRRR  UU  UU    SS  " ||
+ "  VVV   II RRRRR   TT  UU  UU    SS  |")
+ write("| LLLLL II    V    RR   R  UUUU  SSSS   " ||
+ "   V    II RR   R  TT   UUUU  SSSS   |")
+ write("*---------------------------------------" ||
+ "-------------------------------------*")
+ every cont:=1 to 18 do write()
+ writes(MSG_PRESS)
+ read()
+end
+#------------------------------------------------------------------------------
+# Mostra a tela de sobre do sistema.
+#------------------------------------------------------------------------------
+procedure frmSobre()
+local cont
+
+ write("*------------------------------------------------------------*")
+ write("|  LL        II  VV       VV  RRRRRRR   UU    UU   SSSSSSS   |")
+ write("|  LL        II   VV     VV   RR     R  UU    UU  SS         |")
+ write("|  LL        II    VV   VV    RR     R  UU    UU   SSSS      |")
+ write("|  LL        II     VV VV     RRRRRRR   UU    UU     SSSS    |")
+ write("|  LLLL      II      VVV      RR RR     UU    UU        SS   |")
+ write("|  LLLLLLLL  II       V       RR   RR    UUUUUU   SSSSSSSS   |")
+ write("|                                                            |")
+ write("|  VV       VV  II  RRRRRRR   TTTTTTTT  UU    UU   SSSSSSS   |")
+ write("|   VV     VV   II  RR     R     TT     UU    UU  SS         |")
+ write("|    VV   VV    II  RR     R     TT     UU    UU   SSSS      |")
+ write("|     VV VV     II  RRRRRRR      TT     UU    UU     SSSS    |")
+ write("|      VVV      II  RR RR        TT     UU    UU        SS   |")
+ write("|       V       II  RR   RR      TT      UUUUUU   SSSSSSSS   |")
+ write("|                                                            |")
+ write("|                                               Versao 1.0.0 |")
+ write("| Sistema integrante do projeto Livrus Virtus.               |")
+ write("| Todos os direitos reservados para Henrique F. de Souza.    |")
+ write("| Versao programada na linguagem Icon.                       |")
+ write("*------------------------------------------------------------*")
+ every cont:=1 to 4 do write()
+ writes(MSG_PRESS)
+ read()
+end
+#------------------------------------------------------------------------------
+# Mostra a tela de login do sistema.
+# retorna - se o login foi validado corretamente
+#------------------------------------------------------------------------------
+procedure frmLogin()
+local bret, slinha
+
+  bret:=false
+  write("*--------------------------------------------------------------*")
+  write("| Login do sistema                                             |")
+  write("*--------------------------------------------------------------*")
+  slinha:=validaEntrada(tfUsuario, opUsuario, 1, tUsuario.login, 3,
+        false, opTexto)
+  if slinha~=="" then {
+     slinha:=validaEntrada(tfUsuario, opUsuario, 2, tUsuario.senha, 3,
+        false, opSenha)
+     if slinha~=="" then {
+        tUsuario.login:=trim(substr(slinha, 1, 10))
+        tUsuario.senha:=trim(substr(slinha, 11, 10))
+        bret:=true
+     }
+  }
+  write()
+  return bret
+end
+#------------------------------------------------------------------------------
+# Mostra os menus do sistema.
+# num - o número do menu
+#------------------------------------------------------------------------------}
+procedure menu(num)
+
+ if (num=1) then {
+  write("*--------------------------------------------------------------*")
+  write("| (C)adastros        (P)esquisas     (V)endas        (O)pções  |")
+  write("*--------------------------------------------------------------*")
+ } else if (num=2) then {
+   write("*---------------------------------*")
+   write("| 01. Cadastro de Assuntos        |")
+   write("| 02. Cadastro de Autores         |")
+   write("| 03. Cadastro de Editoras        |")
+   write("| 04. Cadastro de Endereços       |")
+   write("| 05. Cadastro de Idiomas         |")
+   write("| 06. Cadastro de Países          |")
+   write("| 07. Cadastro de Profissões      |")
+   write("| 08. Cadastro de Clientes        |")
+   write("| 09. Cadastro de Livros          |")
+   write("| 10. Voltar ao menu              |")
+   write("*---------------------------------*")
+ } else if (num=3) then {
+   write("*---------------------------------*")
+   write("| 01. Consulta de Assuntos        |")
+   write("| 02. Consulta de Autores         |")
+   write("| 03. Consulta de Editoras        |")
+   write("| 04. Consulta de Endereços       |")
+   write("| 05. Consulta de Idiomas         |")
+   write("| 06. Consulta de Países          |")
+   write("| 07. Consulta de Profissões      |")
+   write("| 08. Consulta de Clientes        |")
+   write("| 09. Consulta de Livros          |")
+   write("| 10. Voltar ao menu              |")
+   write("*---------------------------------*")
+ } else if (num=4) then {
+   write("*---------------------------------*")
+   write("| 01. Vender Livros               |")
+   write("| 02. Vendas Realizadas           |")
+   write("| 03. Voltar ao menu              |")
+   write("*---------------------------------*")
+ } else if (num=5) then {
+   write("*---------------------------------*")
+   write("| 01. Alterar senha               |")
+   write("| 02. Sobre o sistema             |")
+   write("| 03. Sair do sistema             |")
+   write("| 04. Voltar ao menu              |")
+   write("*---------------------------------*")
+ } else if (num=6) then {
+   write("*--------------------------------------------------------------*")
+   write("| (1) Novo  (2) Pesquisar   (3) Voltar ao menu                 |")
+   write("*--------------------------------------------------------------*")
+ } else if (num=7) then {
+   write("*--------------------------------------------------------------*")
+   write("| (1) Salvar inclusão       (2) Voltar ao menu                 |")
+   write("*--------------------------------------------------------------*")
+ } else if (num=8) then {
+   write("*--------------------------------------------------------------*")
+   write("| (1) Alterar       (2) Excluir     (3) Voltar ao menu         |")
+   write("*--------------------------------------------------------------*")
+ } else if (num=9) then {
+   write("*--------------------------------------------------------------*")
+   write("| (1) Salvar alteração      (2) Voltar ao menu                 |")
+   write("*--------------------------------------------------------------*")
+ } else if (num=10) then {
+   write("*--------------------------------------------------------------*")
+   write("| Certeza de excluir? (S/N)                                    |")
+   write("*--------------------------------------------------------------*")
+ } else if (num=11) then {
+   write("*--------------------------------------------------------------*")
+   write("| Deseja sair do sistema? (S/N)                                |")
+   write("*--------------------------------------------------------------*")
+ } else if (num=12) then {
+   write("*--------------------------------------------------------------*")
+   write("| (1) Pesquisar  (2) Listar todos   (3) Voltar ao menu         |")
+   write("*--------------------------------------------------------------*")
+ } else if (num=13) then {
+   write("*--------------------------------------------------------------*")
+   write("| Deseja continuar? (S/N)                                      |")
+   write("*--------------------------------------------------------------*")
+ } else if (num=14) then {
+   write("*--------------------------------------------------------------*")
+   write("| Salvar inclusão (S/N)                                        |")
+   write("*--------------------------------------------------------------*")
+ }
+ writes(MSG_OPCAO)
+end
+#------------------------------------------------------------------------------
+# Realiza os cadastros de acordo com o tipo de arquivo.
+# sreg - o tipo de arquivo
+# sacao - a ação a ser realizada
+#------------------------------------------------------------------------------
+procedure frmCadastros(sreg, sacao)
+local slinha
+
+if member(ctArqs, sreg) = opAssunto then {
+   if member(ctAcao, sacao) = opNovo then {
+      tAssunto.codigo:=pesqMaxCod(tfAssunto, 1, 10, tamReg(sreg))
+      mostrarDados(sreg, "", 1)
+      subMenu(7, sreg)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+     slinha:=validaEntrada(tfAssunto,sreg,1,tAssunto.codigo,1,false,opNumero)
+      if slinha~=="" then {
+        mostrarDados(sreg, "", 2)
+        mostrarDados(sreg, slinha, 3)
+        subMenu(8, sreg)
+      }
+   } else if member(ctAcao, sacao) = opAlterar then {
+      mostrarDados(sreg, "", 1)
+      subMenu(9, sreg)
+   } else if member(ctAcao, sacao) = opExcluir then {
+      subMenu(10, sreg)
+   }
+} else if member(ctArqs, sreg) = opAutor then {
+   if member(ctAcao, sacao) = opNovo then {
+      tAutor.codigo:=pesqMaxCod(tfAutor, 1, 10, tamReg(sreg))
+      mostrarDados(sreg, "", 1)
+      subMenu(7, sreg)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+      slinha:=validaEntrada(tfAutor, sreg, 1, tAutor.codigo,1,false,opNumero)
+      if slinha~=="" then {
+        mostrarDados(sreg, "", 2)
+        mostrarDados(sreg, slinha, 3)
+        subMenu(8, sreg)
+      }
+   } else if member(ctAcao, sacao) = opAlterar then {
+      mostrarDados(sreg, "", 1)
+      subMenu(9, sreg)
+   } else if member(ctAcao, sacao) = opExcluir then {
+      subMenu(10, sreg)
+   }
+} else if member(ctArqs, sreg) = opEditora then {
+   if member(ctAcao, sacao) = opNovo then {
+      tEditora.codigo:=pesqMaxCod(tfEditora, 1, 10, tamReg(sreg))
+      mostrarDados(sreg, "", 1)
+      subMenu(7, sreg)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+     slinha:=validaEntrada(tfEditora,sreg,1,tEditora.codigo,1,false,opNumero)
+      if slinha~=="" then {
+        mostrarDados(sreg, "", 2)
+        mostrarDados(sreg, slinha, 3)
+        subMenu(8, sreg)
+      }
+   } else if member(ctAcao, sacao) = opAlterar then {
+      mostrarDados(sreg, "", 1)
+      subMenu(9, sreg)
+   } else if member(ctAcao, sacao) = opExcluir then {
+      subMenu(10, sreg)
+   }
+} else if member(ctArqs, sreg) = opEndereco then {
+   if member(ctAcao, sacao) = opNovo then {
+      tEndereco.codigo:=pesqMaxCod(tfEndereco, 1, 10, tamReg(sreg))
+      mostrarDados(sreg, "", 1)
+      subMenu(7, sreg)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+      slinha:=validaEntrada(tfEndereco,sreg,1,tEndereco.codigo,1,
+              false,opNumero)
+      if slinha~=="" then {
+        mostrarDados(sreg, "", 2)
+        mostrarDados(sreg, slinha, 3)
+        subMenu(8, sreg)
+      }
+   } else if member(ctAcao, sacao) = opAlterar then {
+      mostrarDados(sreg, "", 1)
+      subMenu(9, sreg)
+   } else if member(ctAcao, sacao) = opExcluir then {
+      subMenu(10, sreg)
+   }
+} else if member(ctArqs, sreg) = opIdioma then {
+   if member(ctAcao, sacao) = opNovo then {
+      tIdioma.codigo:=pesqMaxCod(tfIdioma, 1, 10, tamReg(sreg))
+      mostrarDados(sreg, "", 1)
+      subMenu(7, sreg)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+      slinha:=validaEntrada(tfIdioma,sreg,1,tIdioma.codigo,1,false,opNumero)
+      if slinha~=="" then {
+        mostrarDados(sreg, "", 2)
+        mostrarDados(sreg, slinha, 3)
+        subMenu(8, sreg)
+      }
+   } else if member(ctAcao, sacao) = opAlterar then {
+      mostrarDados(sreg, "", 1)
+      subMenu(9, sreg)
+   } else if member(ctAcao, sacao) = opExcluir then {
+      subMenu(10, sreg)
+   }
+} else if member(ctArqs, sreg) = opPais then {
+   if member(ctAcao, sacao) = opNovo then {
+      writes(rotulo(sreg, 1))
+      tPais.codigo:=read()
+      slinha:=pesqArq(tfPais, tPais.codigo, 1, 3, tamReg(sreg))
+      if slinha="" then {
+         pesqLinhaExcluida(tfPais, tamReg(sreg))
+         mostrarDados(sreg, "", 1)
+         subMenu(7, sreg)
+      } else write(MSG_REGEXST)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+      slinha:=validaEntrada(tfPais, sreg, 1, tPais.codigo, 1, false, opTexto)
+      if slinha~=="" then {
+        mostrarDados(sreg, "", 2)
+        mostrarDados(sreg, slinha, 3)
+        subMenu(8, sreg)
+      }
+   } else if member(ctAcao, sacao) = opAlterar then {
+      write(rotulo(sreg, 1) || tPais.codigo)
+      mostrarDados(sreg, "", 1)
+      subMenu(9, sreg)
+   } else if member(ctAcao, sacao) = opExcluir then {
+      subMenu(10, sreg)
+   }
+} else if member(ctArqs, sreg) = opProfissao then {
+   if member(ctAcao, sacao) = opNovo then {
+      tProfissao.codigo:=pesqMaxCod(tfProfissao, 1, 10, tamReg(sreg))
+      mostrarDados(sreg, "", 1)
+      subMenu(7, sreg)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+      slinha:=validaEntrada(tfProfissao,sreg,1,tProfissao.codigo,1,
+              false,opNumero)
+      if slinha~=="" then {
+        mostrarDados(sreg, "", 2)
+        mostrarDados(sreg, slinha, 3)
+        subMenu(8, sreg)
+      }
+   } else if member(ctAcao, sacao) = opAlterar then {
+      mostrarDados(sreg, "", 1)
+      subMenu(9, sreg)
+   } else if member(ctAcao, sacao) = opExcluir then {
+      subMenu(10, sreg)
+   }
+} else if member(ctArqs, sreg) = opLivro then {
+   if member(ctAcao, sacao) = opNovo then {
+      writes(rotulo(sreg, 1))
+      tLivro.isbn:=read()
+      if validaISBN(tLivro.isbn)=true then {
+          slinha:=pesqArq(tfLivro, tLivro.isbn, 1, 13, tamReg(sreg))
+          if slinha="" then {
+             pesqLinhaExcluida(tfLivro, tamReg(sreg))
+             mostrarDados(sreg, "", 1)
+             subMenu(7, sreg)
+             frmCadLigados(opLivroAss, opNovo, tLivro.isbn)
+             frmCadLigados(opLivroAut, opNovo, tLivro.isbn)
+          } else write(MSG_REGEXST)
+      } else write(MSG_ISBNINV)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+      slinha:=validaEntrada(tfLivro, sreg, 1, tLivro.isbn, 1,false,opTexto)
+      if slinha~=="" then {
+         mostrarDados(sreg, "", 2)
+         mostrarDados(sreg, slinha, 3)
+         subMenu(8, sreg)
+      }
+   } else if member(ctAcao, sacao) = opAlterar then {
+      write(rotulo(sreg, 1), tLivro.isbn)
+      mostrarDados(sreg, "", 1)
+      subMenu(9, sreg)
+      frmCadLigados(opLivroAss, opExcluir, tLivro.isbn)
+      write("Assuntos dos livros excluídos, inclua novos!")
+      frmCadLigados(opLivroAss, opNovo, tLivro.isbn)
+      frmCadLigados(opLivroAut, opExcluir, tLivro.isbn)
+      write("Autores dos livros excluídos, inclua novos!")
+      frmCadLigados(opLivroAut, opNovo, tLivro.isbn)
+   } else if member(ctAcao, sacao) = opExcluir then {
+      subMenu(10, sreg)
+      write("Assuntos dos livros sendo excluídos!")
+      frmCadLigados(opLivroAss, opExcluir, tLivro.isbn)
+      write("Autores dos livros sendo excluídos!")
+      frmCadLigados(opLivroAut, opExcluir, tLivro.isbn)
+   }
+} else if member(ctArqs, sreg) = opCliente then {
+   if member(ctAcao, sacao) = opNovo then {
+      writes(rotulo(sreg, 1))
+      tCliente.cpf:=read()
+      if validaCPF(tCliente.cpf) then {
+          slinha:=pesqArq(tfCliente, tCliente.cpf, 1, 14, tamReg(sreg))
+          if slinha="" then {
+             pesqLinhaExcluida(tfCliente, tamReg(sreg))
+             mostrarDados(sreg, "", 1)
+             subMenu(7, sreg)
+          } else write(MSG_REGEXST)
+      } else write(MSG_CPFINV)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+      slinha:=validaEntrada(tfCliente, sreg, 1, tCliente.cpf,1,false,opTexto)
+      if slinha~=="" then {
+         mostrarDados(sreg, "", 2)
+         mostrarDados(sreg, slinha, 3)
+         subMenu(8, sreg)
+      }
+   } else if member(ctAcao, sacao) = opAlterar then {
+      write(rotulo(sreg, 1) || tCliente.cpf)
+      mostrarDados(sreg, "", 1)
+      subMenu(9, sreg)
+   } else if member(ctAcao, sacao) = opExcluir then {
+      subMenu(10, sreg)
+   }
+} else if member(ctArqs, sreg) = opVenda then {
+   if member(ctAcao, sacao) = opNovo then {
+      tVenda.dthrvenda:=retDataHora()
+      write(rotulo(sreg, 1) || tVenda.dthrvenda)
+      slinha:=pesqArq(tfVenda, tVenda.dthrvenda, 1, 19, tamReg(sreg))
+      if slinha=="" then {
+         slinha:=validaEntrada(tfCliente,opCliente,1,tVenda.cpf,3,
+                 false,opTexto)
+         if slinha~=="" then {
+            tVenda.cpf:=trim(substr(slinha,1,14))
+            if validaCPF(tVenda.cpf)=true then {
+               writes(" " || rotulo(opCliente, 2)) # Nome 
+               write(substr(slinha, g_nPosChave, g_nTamChave))
+               frmCadLigados(opVenda, opNovo, tVenda.cpf)
+            } else write(MSG_CPFINV)
+         }
+      } else write(MSG_REGEXST)
+   } else if member(ctAcao, sacao) = opPesquisar then {
+      slinha:=validaEntrada(tfVenda, sreg, 1, tVenda.dthrvenda,1,
+              false,opDataHora)
+      if slinha~=="" then {
+        mostrarDados(sreg, "", 2)
+        mostrarDados(sreg, slinha, 3)
+        subMenu(8, sreg)
+      }
+   }
+}
+end
+#------------------------------------------------------------------------------
+# Realiza as consultas de acordo com o tipo de arquivo.
+# sreg - o tipo de arquivo
+# sacao - a ação a ser realizada
+#------------------------------------------------------------------------------
+procedure frmConsultas(sreg, sacao)
+local slinha
+
+slinha:=""
+if member(ctArqs, sreg) = opAssunto then {
+   if member(ctAcao, sacao) = opPesquisar then
+      slinha:=validaEntrada(tfAssunto,sreg,2,tAssunto.assunto,1,true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfAssunto, sreg, "", 0, 0, tamReg(sreg),
+        QTD_MAX_LINHA, false) = false then
+        write(rotulo(sreg, 0))
+   }
+} else if member(ctArqs, sreg) = opAutor then {
+   if member(ctAcao, sacao) = opPesquisar then
+      slinha:=validaEntrada(tfAutor,sreg, 2, tAutor.autor, 1, true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfAutor, sreg, "", 0, 0, tamReg(sreg),
+        QTD_MAX_LINHA, false) = false then
+        write(rotulo(sreg, 0))
+   }
+} else if member(ctArqs, sreg) = opEditora then {
+   if member(ctAcao, sacao) = opPesquisar then
+      slinha:=validaEntrada(tfEditora,sreg,2,tEditora.editora,1,true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfEditora, sreg, "", 0, 0, tamReg(sreg),
+        QTD_MAX_LINHA, false) = false then
+        write(rotulo(sreg, 0))
+   }
+} else if member(ctArqs, sreg) = opEndereco then {
+   if member(ctAcao, sacao) = opPesquisar then
+      slinha:=validaEntrada(tfEndereco,sreg,2,tEndereco.Logradouro,1,
+              true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfEndereco, sreg, "", 0, 0, tamReg(sreg),
+         3, false) = false then
+        write(rotulo(sreg, 0))
+   }
+} else if member(ctArqs, sreg) = opIdioma then {
+   if member(ctAcao, sacao) = opPesquisar then
+      slinha:=validaEntrada(tfIdioma, sreg, 2, tIdioma.idioma,1,true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfIdioma, sreg, "", 0, 0, tamReg(sreg),
+        QTD_MAX_LINHA, false) = false then
+        write(rotulo(sreg, 0))
+   }
+} else if member(ctArqs, sreg) = opPais then {
+   if member(ctAcao, sacao) = opPesquisar then
+      slinha:=validaEntrada(tfPais, sreg, 2, tPais.pais, 1, true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfPais, sreg, "", 0, 0, tamReg(sreg),
+        QTD_MAX_LINHA, false) = false then
+        write(rotulo(sreg, 0))
+   }
+} else if member(ctArqs, sreg) = opProfissao then {
+   if member(ctAcao, sacao) = opPesquisar then
+     slinha:=validaEntrada(tfProfissao,sreg,2,tProfissao.profissao,1,
+             true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfProfissao, sreg, "", 0, 0, tamReg(sreg),
+        QTD_MAX_LINHA, false) = false then
+        write(rotulo(sreg, 0))
+   }
+} else if member(ctArqs, sreg) = opLivro then {
+   if member(ctAcao, sacao) = opPesquisar then
+      slinha:=validaEntrada(tfLivro, sreg, 2, tLivro.titulo, 1, true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfLivro, sreg, "", 0, 0, tamReg(sreg),
+        1, false) = false then
+        write(rotulo(sreg, 0))
+   }
+} else if member(ctArqs, sreg) = opCliente then {
+   if member(ctAcao, sacao) = opPesquisar then
+      slinha:=validaEntrada(tfCliente, sreg, 2, tCliente.nome,1,true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfCliente, sreg, "", 0, 0, tamReg(sreg),
+        1, false) = false then
+        write(rotulo(sreg, 0))
+   }
+} else if member(ctArqs, sreg) = opVenda then {
+   if member(ctAcao, sacao) = opPesquisar then
+      slinha:=validaEntrada(tfVenda, sreg, 2, tVenda.cpf, 1, true,opTexto)
+   else if member(ctAcao, sacao) = opListarTodos then {
+      if ListarTodos(tfVenda, sreg, "", 0, 0, tamReg(sreg),
+        QTD_MAX_LINHA, false) = false then
+        write(rotulo(sreg, 0))
+   }
+}
+if slinha=="" then
+   writes()
+end
+#------------------------------------------------------------------------------
+# Mostra a tela de alteração de senha do sistema e realiza a alteração.
+#------------------------------------------------------------------------------
+procedure frmAlterarSenha()
+local bQuebra, sres, sSenhaAtual, sNovaSenha, sConfirmaSenha, nopcao
+
+write(rotulo(opUsuario, 1) || tUsuario.login)
+nopcao:=1
+bQuebra:=false
+while (bQuebra=false) do {
+  case nopcao of {
+   1: {
+       sSenhaAtual:=digitaSenha("Senha Atual: ",10)
+       if sSenhaAtual~==tUsuario.senha then {
+          write(MSG_SENCONFERE)
+          bQuebra:=true
+       } else nopcao:=2
+      }
+   2: {
+       sNovaSenha:=digitaSenha("Nova Senha: ",10)
+       sConfirmaSenha:=digitaSenha("Confirma Senha: ",10)
+       if sNovaSenha~==sConfirmaSenha then {
+          write(MSG_SENCONFIRM)
+          bQuebra:=true
+       } else nopcao:=3
+      }
+   3: {
+       sres:=pesqArq(tfUsuario, tUsuario.login, 1, 10, tamReg(opUsuario))
+       if sres=="" then
+         write(MSG_LOGINENCON)
+       else {
+         tUsuario.senha:=sConfirmaSenha
+         subMenu(9,opUsuario)
+         bQuebra:=true
+       }
+      }
+  }
+}
+end
+#------------------------------------------------------------------------------
+# Executa uma ação de gravação de acordo com o tipo de arquivo.
+# sreg - o tipo de arquivo
+# sacao - a ação a ser realizada
+#------------------------------------------------------------------------------
+procedure btnAcao(sreg, sacao)
+
+if member(ctArqs, sreg) = opAssunto then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfAssunto, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfAssunto, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfAssunto, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opAutor then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfAutor, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfAutor, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfAutor, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opEditora then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfEditora, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfEditora, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfEditora, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opEndereco then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfEndereco, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfEndereco, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfEndereco, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opIdioma then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfIdioma, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfIdioma, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfIdioma, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opPais then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfPais, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfPais, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfPais, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opProfissao then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfProfissao, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfProfissao, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfProfissao, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opLivro then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfLivro, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfLivro, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfLivro, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opLivroAss then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfLivroAss, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfLivroAss, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfLivroAss, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opLivroAut then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfLivroAut, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfLivroAut, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfLivroAut, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opCliente then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfCliente, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfCliente, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfCliente, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opVenda then {
+   if member(ctAcao, sacao) = opSalvarInclusao then
+      escreveArq(tfVenda, LinhaReg(sreg), MSG_REGINC, MSG_REGNINC)
+   else if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfVenda, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+   else if member(ctAcao, sacao) = opConfirmaExclusao then
+      escreveArq(tfVenda, repl("*",tamReg(sreg)), MSG_REGEXC, MSG_REGNEXC)
+} else if member(ctArqs, sreg) = opUsuario then {
+   if member(ctAcao, sacao) = opSalvarAlteracao then
+      escreveArq(tfUsuario, LinhaReg(sreg), MSG_REGALT, MSG_REGNALT)
+}
+end
+#------------------------------------------------------------------------------
+# Seleciona o menu e/ou a tela certa de acordo com o tipo de arquivo.
+# nmenu - o número do menu
+# sreg - o tipo de arquivo
+#------------------------------------------------------------------------------
+procedure subMenu(nmenu, sreg)
+local opSubMenu, opCSubMenu, bSOp
+
+bSOp:=true
+case nmenu of {
+ 6:{
+    while (bSOp=true) do {
+      menu(nmenu)
+      opSubMenu:=read()
+      case opSubMenu of {
+        "1": frmCadastros(sreg, opNovo)
+        "2": frmCadastros(sreg, opPesquisar)
+        "3": bSOp:=false
+        default: write(MSG_ERRO)
+      }
+    }
+   }
+ 7:{
+    while (bSOp=true) do {
+      menu(nmenu)
+      opSubMenu:=read()
+      case opSubMenu of {
+        "1": { btnAcao(sreg, opSalvarInclusao) 
+             bSOp:=false 
+           }
+        "2": bSOp:=false
+        default: write(MSG_ERRO)
+      }
+    }
+   }
+ 8:{
+    while(bSOp=true) do {
+      menu(nmenu)
+      opSubMenu:=read()
+      case opSubMenu of {
+        "1": { frmCadastros(sreg, opAlterar) 
+             bSOp:=false 
+           }
+        "2": { frmCadastros(sreg, opExcluir) 
+             bSOp:=false 
+           }
+        "3": bSOp:=false
+        default: write(MSG_ERRO)
+      }
+    }
+   }
+ 9:{
+    while (bSOp=true) do {
+      menu(nmenu)
+      opSubMenu:=read()
+      case opSubMenu of {
+        "1": { btnAcao(sreg, opSalvarAlteracao) 
+             bSOp:=false 
+           }
+        "2": bSOp:=false
+        default: write(MSG_ERRO)
+      }
+    }
+   }
+ 10:{
+    while (bSOp=true) do {
+      menu(nmenu)
+      opCSubMenu:=read()
+      if (opCSubMenu=="S") | (opCSubMenu=="s") then {
+        btnAcao(sreg, opConfirmaExclusao)
+        bSOp:=false
+      } else if (opCSubMenu="N") | (opCSubMenu="n") then bSOp:=false
+      else write(MSG_ERRO)
+    }
+   }
+ 12:{
+    while (bSOp=true) do {
+      menu(nmenu)
+      opSubMenu:=read()
+      case opSubMenu of {
+        "1": frmConsultas(sreg, opPesquisar)
+        "2": frmConsultas(sreg, opListarTodos)
+        "3": bSOp:=false
+        defaul: write(MSG_ERRO)
+      }
+    }
+   }
+ 14:{
+    while (bSOp=true) do {
+      menu(nmenu)
+      opCSubMenu:=read()
+      if (opCSubMenu=="S") | (opCSubMenu=="s") then {
+        btnAcao(sreg, opSalvarInclusao)
+        bSOp:=false
+        g_SalvarInclusao:=true
+      } else if (opCSubMenu=="N") | (opCSubMenu=="n") then bSOp:=false
+      else write(MSG_ERRO)
+    }
+   }
+}
+
+end
+#------------------------------------------------------------------------------
+# Seleciona o submenu e/ou a tela certa de acordo com número do menu.
+# nmenu - o número do menu
+#------------------------------------------------------------------------------
+procedure usaMenu(num)
+local opSubMenu, bSOp, opSair
+
+ bSOp:=true
+ if num = 1 then { # Cadastros
+   while (bSOp=true) do {
+     menu(2)
+     opSubMenu:=read()
+     case opSubMenu of {
+       "1": subMenu(6, opAssunto)
+       "2": subMenu(6, opAutor)
+       "3": subMenu(6, opEditora)
+       "4": subMenu(6, opEndereco)
+       "5": subMenu(6, opIdioma)
+       "6": subMenu(6, opPais)
+       "7": subMenu(6, opProfissao)
+       "8": subMenu(6, opCliente)
+       "9": subMenu(6, opLivro)
+       "10": bSOp:=false
+       default: write(MSG_ERRO)
+     }
+   }
+ } else if num = 2 then { # Pesquisas
+   while (bSOp=true) do {
+     menu(3)
+     opSubMenu:=read()
+     case opSubMenu of {
+       "1": subMenu(12, opAssunto)
+       "2": subMenu(12, opAutor)
+       "3": subMenu(12, opEditora)
+       "4": subMenu(12, opEndereco)
+       "5": subMenu(12, opIdioma)
+       "6": subMenu(12, opPais)
+       "7": subMenu(12, opProfissao)
+       "8": subMenu(12, opCliente)
+       "9": subMenu(12, opLivro)
+       "10": bSOp:=false
+       default: write(MSG_ERRO)
+     }
+   }
+ } else if num = 3 then { # Vendas
+   while (bSOp=true) do {
+     menu(4)
+     opSubMenu:=read()
+     case opSubMenu of {
+       "1": subMenu(6, opVenda)
+       "2": subMenu(12, opVenda)
+       "3": bSOp:=false
+       default: write(MSG_ERRO)
+     }
+   }
+ } else if num = 4 then { #Opcoes
+   while (bSOp=true) do {
+     menu(5)
+     opSubMenu:=read()
+     case opSubMenu of {
+       "1": frmAlterarSenha()
+       "2": frmSobre()
+       "3": {
+           menu(11)
+           opSair:=read()
+           if (opSair=="S") | (opSair=="s") then {
+              fechaArqs()
+              exit(0)
+           }
+         }
+       "4": bSOp:=false
+       default: write(MSG_ERRO)
+     }
+   }
+ }
+end
+#------------------------------------------------------------------------------
+# Mostra as entradas e as saídas do sistema.
+# sreg - o tipo de arquivo
+# slinha - o registro com os dados
+# nOpcao - indica qual opção será mostrada
+#------------------------------------------------------------------------------
+procedure mostrarDados(sreg, slinha, nOpcao)
+
+if member(ctArqs, sreg) = opAssunto then {
+  case nOpcao of {
+    1: {
+        write(rotulo(sreg, 1) ||  tAssunto.codigo)
+        writes(rotulo(sreg, 2))
+        tAssunto.assunto:=read()
+       }
+    2: {
+        write("Código     Assunto")
+        write("------     -------")
+       }
+    3: {
+        tAssunto.codigo:=substr(slinha, 1, 10)
+        tAssunto.assunto:=substr(slinha, 11, 30)
+        write(tAssunto.codigo || " " || tAssunto.assunto)
+       }
+  }
+} else if member(ctArqs, sreg) = opAutor then {
+  case nOpcao of {
+    1: {
+        write(rotulo(sreg, 1) ||  tAutor.codigo)
+        writes(rotulo(sreg, 2))
+        tAutor.autor:=read()
+       }
+    2: {
+        write("Código     Autor")
+        write("------     -----")
+       }
+    3: {
+        tAutor.codigo:=substr(slinha, 1, 10)
+        tAutor.autor:=substr(slinha, 11, 30)
+        write(tAutor.codigo || " " || tAutor.autor)
+       }
+  }
+} else if member(ctArqs, sreg) = opEditora then {
+  case nOpcao of {
+    1: {
+        write(rotulo(sreg, 1) ||  tEditora.codigo)
+        writes(rotulo(sreg, 2))
+        tEditora.editora:=read()
+       }
+    2: {
+        write("Código     Editora")
+        write("------     -------")
+       }
+    3: {
+        tEditora.codigo:=substr(slinha, 1, 10)
+        tEditora.editora:=substr(slinha, 11, 50)
+        write(tEditora.codigo || " " || tEditora.editora)
+       }
+  }
+} else if member(ctArqs, sreg) = opEndereco then {
+  case nOpcao of {
+    1: {
+        write(rotulo(sreg, 1) ||  tEndereco.codigo)
+        writes(rotulo(sreg, 2))
+        tEndereco.Logradouro:=read()
+        writes(rotulo(sreg, 3))
+        tEndereco.bairro:=read()
+        writes(rotulo(sreg, 4))
+        tEndereco.cep:=read()
+        writes(rotulo(sreg, 5))
+        tEndereco.cidade:=read()
+        writes(rotulo(sreg, 6))
+        tEndereco.estado:=read()
+       }
+    3: {
+        tEndereco.codigo:=trim(substr(slinha, 1, 10))
+        tEndereco.logradouro:=trim(substr(slinha, 11, 40))
+        tEndereco.bairro:=trim(substr(slinha, 51, 15))
+        tEndereco.cep:=trim(substr(slinha, 66, 8))
+        tEndereco.cidade:=trim(substr(slinha, 74, 30))
+        tEndereco.estado:=trim(substr(slinha, 104, 20))
+        write("--------------------")
+        write(rotulo(sreg, 1) ||  tEndereco.codigo)
+        write(rotulo(sreg, 2) ||  tEndereco.Logradouro)
+        write(rotulo(sreg, 3) ||  tEndereco.bairro)
+        write(rotulo(sreg, 4) ||  tEndereco.cep)
+        write(rotulo(sreg, 5) ||  tEndereco.cidade)
+        write(rotulo(sreg, 6) ||  tEndereco.estado)
+       }
+  }
+} else if member(ctArqs, sreg) = opIdioma then {
+  case nOpcao of {
+    1: {
+        write(rotulo(sreg, 1) ||  tIdioma.codigo)
+        writes(rotulo(sreg, 2))
+        tIdioma.idioma:=read()
+       }
+    2: {
+        write("Código     Idioma")
+        write("------     ------")
+       }
+    3: {
+        tIdioma.codigo:=substr(slinha, 1, 10)
+        tIdioma.idioma:=substr(slinha, 11, 20)
+        write(tIdioma.codigo || " " || tIdioma.idioma)
+       }
+  }
+} else if member(ctArqs, sreg) = opPais then {
+  case nOpcao of {
+    1: {
+        writes(rotulo(sreg, 2))
+        tPais.pais:=read()
+       }
+    2: {
+        write("Código País")
+        write("------ ----")
+       }
+    3: {
+        tPais.codigo:=substr(slinha, 1, 3)
+        tPais.pais:=substr(slinha, 4, 50)
+        write(tPais.codigo || "    " || tPais.pais)
+       }
+  }
+} else if member(ctArqs, sreg) = opProfissao then {
+  case nOpcao of {
+    1: {
+        write(rotulo(sreg, 1) ||  tProfissao.codigo)
+        writes(rotulo(sreg, 2))
+        tProfissao.profissao:=read()
+       }
+    2: {
+        write("Código     Profissão")
+        write("------     ---------")
+       }
+    3: {
+        tProfissao.codigo:=substr(slinha, 1, 10)
+        tProfissao.profissao:=substr(slinha, 11, 50)
+        write(tProfissao.codigo || " " || tProfissao.profissao)
+       }
+  }
+} else if member(ctArqs, sreg) = opLivro then {
+  case nOpcao of {
+    1: {
+        writes(rotulo(sreg, 2))
+        tLivro.titulo:=read()
+        tLivro.edicao:=validaNumero(rotulo(sreg, 3) ||  tLivro.edicao)
+        tLivro.anopubli:=validaNumero(rotulo(sreg, 4) ||  tLivro.anopubli)
+        mostrarSubDados(opLivro, opEditora, false)
+        tLivro.volume:=validaNumero(rotulo(sreg, 6), tLivro.volume)
+        mostrarSubDados(opLivro, opIdioma, false)
+        tLivro.npaginas:=validaNumero(rotulo(sreg, 8), tLivro.npaginas)
+        tLivro.preco:=validaNumero(rotulo(sreg, 9), tLivro.preco)
+        tLivro.qtdestoque:=validaNumero(rotulo(sreg, 10), tLivro.qtdestoque)
+       }
+    3: {
+        tLivro.isbn:=trim(substr(slinha, 1, 13))
+        tLivro.titulo:=trim(substr(slinha, 14, 50))
+        tLivro.edicao:=trim(substr(slinha, 64, 10))
+        tLivro.anopubli:=trim(substr(slinha, 74, 10))
+        tLivro.codeditora:=trim(substr(slinha, 84, 10))
+        tLivro.volume:=trim(substr(slinha, 94, 10))
+        tLivro.codidioma:=trim(substr(slinha, 104, 10))
+        tLivro.npaginas:=trim(substr(slinha, 114, 10))
+        tLivro.preco:=trim(substr(slinha, 124, 10))
+        tLivro.qtdestoque:=trim(substr(slinha, 134, 10))
+        write("--------------------")
+        write(rotulo(sreg, 1) ||  tLivro.isbn)
+        write(rotulo(sreg, 2) ||  tLivro.titulo)
+        write(rotulo(sreg, 3) ||  tLivro.edicao)
+        write(rotulo(sreg, 4) ||  tLivro.anopubli)
+        write(rotulo(sreg, 5) ||  tLivro.codeditora)
+        mostrarSubDados(opLivro, opEditora, true)
+        write(rotulo(sreg, 6) ||  tLivro.volume)
+        write(rotulo(sreg, 7) ||  tLivro.codidioma)
+        mostrarSubDados(opLivro, opIdioma, true)
+        write(rotulo(sreg, 8) ||  tLivro.npaginas)
+        write(rotulo(sreg, 9) ||  tLivro.preco)
+        write(rotulo(sreg, 10) ||  tLivro.qtdestoque)
+        ListarRegLigados(tfLivroAss, opLivroAss, 1, 13, 14, 10, tLivro.isbn,
+                         tfAssunto, opAssunto, 1, 4)
+        ListarRegLigados(tfLivroAut, opLivroAut, 1, 13, 14, 10, tLivro.isbn,
+                         tfAutor, opAutor, 1, 4)
+       }
+  }
+} else if member(ctArqs, sreg) = opCliente then {
+  case nOpcao of {
+    1: {
+        writes(rotulo(sreg, 2))
+        tCliente.nome:=read()
+        writes(rotulo(sreg, 3))
+        tCliente.email:=read()
+        writes(rotulo(sreg, 4))
+        tCliente.identidade:=read()
+        writes(rotulo(sreg, 5))
+        tCliente.sexo:=read()
+        writes(rotulo(sreg, 6))
+        tCliente.telefone:=read()
+        tCliente.dtnascimento:=
+                validaDataHora(rotulo(sreg, 7), tCliente.dtnascimento, true)
+        mostrarSubDados(opCliente, opEndereco, false)
+        mostrarSubDados(opCliente, opPais, false)
+        mostrarSubDados(opCliente, opProfissao, false)
+       }
+    3: {
+        tCliente.cpf:=trim(substr(slinha, 1, 14))
+        tCliente.nome:=trim(substr(slinha, 15, 30))
+        tCliente.email:=trim(substr(slinha, 45, 30))
+        tCliente.identidade:=trim(substr(slinha, 75, 10))
+        tCliente.sexo:=trim(substr(slinha, 85, 1))
+        tCliente.telefone:=trim(substr(slinha, 86, 17))
+        tCliente.dtnascimento:=trim(substr(slinha, 103, 10))
+        tCliente.codendereco:=trim(substr(slinha, 113, 10))
+        tCliente.codpais:=trim(substr(slinha, 123, 3))
+        tCliente.codprofissao:=trim(substr(slinha, 126, 10))
+        write("--------------------")
+        write(rotulo(sreg, 1) ||  tCliente.cpf)
+        write(rotulo(sreg, 2) ||  tCliente.nome)
+        write(rotulo(sreg, 3) ||  tCliente.email)
+        write(rotulo(sreg, 4) ||  tCliente.identidade)
+        write(rotulo(sreg, 5) ||  tCliente.sexo)
+        write(rotulo(sreg, 6) ||  tCliente.telefone)
+        write(rotulo(sreg, 7) ||  tCliente.dtnascimento)
+        write(rotulo(sreg, 8) ||  tCliente.codendereco)
+        mostrarSubDados(opCliente, opEndereco, true)
+        write(rotulo(sreg, 9) ||  tCliente.codpais)
+        mostrarSubDados(opCliente, opPais, true)
+        write(rotulo(sreg, 10) ||  tCliente.codprofissao)
+        mostrarSubDados(opCliente, opProfissao, true)
+       }
+  }
+} else if member(ctArqs, sreg) = opVenda then {
+  case nOpcao of {
+    1: mostrarSubDados(opVenda,opVenda, false)
+    2: {
+        write("DataHoraVenda       CPF            ISBN          "+
+        "PreçoVenda")
+        write("-------------       ---            ----          "+
+        "----------")
+       }
+    3: {
+        tVenda.dthrvenda:=substr(slinha, 1, 19)
+        tVenda.cpf:=substr(slinha, 20, 14)
+        tVenda.isbn:=substr(slinha, 34, 13)
+        tVenda.precovenda:=substr(slinha, 47, 10)
+        write(tVenda.dthrvenda || " " || tVenda.cpf || " " || 
+        tVenda.isbn || " " || tVenda.precovenda)
+       }
+  }
+}
+end
+#------------------------------------------------------------------------------
+# Mostra as sub informções de entrada e de saída.
+# sreg - o tipo de arquivo
+# ssubreg - o subtipo de arquivo
+# bSoMostrar - se vai só mostrar na saída 
+#------------------------------------------------------------------------------
+procedure mostrarSubDados(sreg, ssubreg, bSoMostrar)
+local sRegistro, sPreco, nMaxTentativas
+
+nMaxTentativas:=3
+if member(ctArqs, sreg) = opLivro then {
+  if member(ctArqs, ssubreg) = opEditora then {
+    if bSoMostrar then
+       sRegistro:=pesqArq(tfEditora,tLivro.codeditora,1,10,tamReg(opEditora))
+    else
+       sRegistro:=validaEntrada(tfEditora,ssubreg,1,tLivro.codeditora,
+                  nMaxTentativas,false,opNumero)
+    if sRegistro~=="" then {
+      tLivro.codeditora:=trim(substr(sRegistro,1,10))
+      writes(" " || rotulo(opEditora, 2))
+      write(substr(sRegistro, g_nPosChave, g_nTamChave))
+    }
+  } else if member(ctArqs, ssubreg) = opIdioma then {
+    if bSoMostrar=true then
+       sRegistro:=pesqArq(tfIdioma, tLivro.codidioma, 1, 10,tamReg(opIdioma))
+    else
+       sRegistro:=validaEntrada(tfIdioma,ssubreg,1,tLivro.codidioma,
+                  nMaxTentativas,false,opNumero)
+    if sRegistro~=="" then {
+      tLivro.codidioma:=trim(substr(sRegistro,1,10))
+      writes(" " || rotulo(opIdioma, 2))
+      write(substr(sRegistro, g_nPosChave, g_nTamChave))
+    }
+  }
+} else if member(ctArqs, sreg) = opCliente then {
+  if member(ctArqs, ssubreg) = opEndereco then {
+    if bSoMostrar=true then
+       sRegistro:=pesqArq(tfEndereco, tCliente.codendereco, 1, 10,
+                  tamReg(opEndereco))
+    else
+       sRegistro:=validaEntrada(tfEndereco,ssubreg,1,tCliente.codendereco,
+                  nMaxTentativas,false,opNumero)
+    if sRegistro~=="" then {
+      tCliente.codendereco:=trim(substr(sRegistro,1,10))
+      writes(" " || rotulo(opEndereco, 2))
+      write(substr(sRegistro, g_nPosChave, g_nTamChave))
+      writes(" " || rotulo(opEndereco, 3))
+      write(substr(sRegistro, g_nPosChave, g_nTamChave))
+      writes(" " || rotulo(opEndereco, 4))
+      write(substr(sRegistro, g_nPosChave, g_nTamChave))
+      writes(" " || rotulo(opEndereco, 5))
+      write(substr(sRegistro, g_nPosChave, g_nTamChave))
+      writes(" " || rotulo(opEndereco, 6))
+      write(substr(sRegistro, g_nPosChave, g_nTamChave))
+    }
+  } else if member(ctArqs, ssubreg) = opPais then {
+    if bSoMostrar=true then
+       sRegistro:=pesqArq(tfPais, tCliente.codpais, 1, 3, tamReg(opPais))
+    else
+       sRegistro:=validaEntrada(tfPais,ssubreg,1,tCliente.codpais,
+                  nMaxTentativas,false,opTexto)
+    if sRegistro~=="" then {
+      tCliente.codpais:=trim(substr(sRegistro,1,3))
+      writes(" " || rotulo(opPais, 2))
+      write(substr(sRegistro, g_nPosChave, g_nTamChave))
+    }
+  } else if member(ctArqs, ssubreg) = opProfissao then {
+    if bSoMostrar=true then
+       sRegistro:=pesqArq(tfProfissao, tCliente.codprofissao, 1, 10,
+                  tamReg(opProfissao))
+    else
+       sRegistro:=validaEntrada(tfProfissao,ssubreg,1,tCliente.codprofissao,
+                  nMaxTentativas,false,opNumero)
+    if sRegistro~=="" then {
+      tCliente.codprofissao:=trim(substr(sRegistro,1,10))
+      writes(" " || rotulo(opProfissao, 2))
+      write(substr(sRegistro, g_nPosChave, g_nTamChave))
+    }
+  }
+} else if member(ctArqs, sreg) = opVenda then {
+  sRegistro:=pesqArq(tfLivro, tVenda.isbn, 1, 13, tamReg(opLivro))
+  if sRegistro~=="" then {
+    writes(" " || rotulo(opLivro, 2)) # Titulo
+    write(substr(sRegistro, g_nPosChave, g_nTamChave))
+    writes(" " || rotulo(opLivro, 9)) # Preco
+    sPreco:=substr(sRegistro, g_nPosChave, g_nTamChave)
+    g_nPreco:=real(sPreco)
+    write(sPreco)
+  }
+}
+end
+#------------------------------------------------------------------------------
+# Realiza os cadastros dos arquivos que se ligam a outros arquivos.
+# sreg - o tipo de arquivo
+# sacao - a ação a ser realizada
+# sCodigo - um das chaves do arquivo de ligação
+#------------------------------------------------------------------------------
+procedure frmCadLigados(sreg, sacao, sCodigo)
+local nQtd, nCont, nQtdEstoque, nTotalPreco, slinha, sTotalPreco, sPreco, sQtd
+
+if member(ctAcao, sacao) = opNovo then {
+  nCont:=1
+  if member(ctArqs, sreg) = opLivroAss then {
+    sQtd:=validaNumero("Quantos assuntos quer cadastrar?: ", sQtd)
+    nQtd:=integer(sQtd)
+    seek(tfLivroAss, 1)
+    while nCont <= nQtd do {
+      tLivroAss.isbn:=sCodigo
+      write(rotulo(opLivroAss, 2))
+      tLivroAss.codassunto:=read()
+      slinha:=pesqArq(tfAssunto, tLivroAss.codassunto,1,10,tamReg(opAssunto))
+      writes(" " || rotulo(opAssunto, 2))
+      write(substr(slinha, g_nPosChave, g_nTamChave))
+      pesqLinhaExcluida(tfLivroAss, tamReg(sreg))
+      subMenu(14, sreg)
+      nCont+:=1
+    }
+  } else if member(ctArqs, sreg) = opLivroAut then {
+    sQtd:=validaNumero("Quantos autores quer cadastrar?: ",sQtd)
+    nQtd:=integer(sQtd)
+    seek(tfLivroAut, 1)
+    while nCont <= nQtd do {
+      tLivroAut.isbn:=sCodigo
+      write(rotulo(opLivroAut, 2))
+      tLivroAut.codautor:=read()
+      slinha:=pesqArq(tfAutor, tLivroAut.codautor,1,10,tamReg(opAutor))
+      writes(" " || rotulo(opAutor, 2))
+      write(substr(slinha, g_nPosChave, g_nTamChave))
+      pesqLinhaExcluida(tfLivroAut, tamReg(sreg))
+      subMenu(14, sreg)
+      nCont+:=1
+    }
+  } else if member(ctArqs, sreg) = opVenda then {
+    sQtd:=validaNumero("Quantos livros quer vender?: ",sQtd)
+    nQtd:=integer(sQtd)
+    nTotalPreco:=0
+    while nCont <= nQtd do {
+      slinha:=validaEntrada(tfLivro,opLivro,1,tVenda.isbn,3,false,opTexto)
+      if slinha~=="" then {
+        tVenda.isbn:=trim(substr(slinha,1,13))
+        if validaISBN(tVenda.isbn)=true then {
+          mostrarDados(sreg, "", 1)
+          tLivro.qtdestoque:=trim(substr(slinha,134,10))
+          nQtdEstoque:=integer(tLivro.qtdestoque)
+          if nQtdEstoque > 0 then {
+             nTotalPreco:=nTotalPreco + g_nPreco
+             sPreco:=string(g_nPreco)
+             tVenda.precovenda:=sPreco
+             g_SalvarInclusao:=false
+             subMenu(14, sreg)
+             if g_SalvarInclusao=true then {
+                slinha:=pesqArq(tfLivro, tVenda.isbn, 1, 13, tamReg(opLivro))
+                if slinha~=="" then {
+                   nQtdEstoque:=nQtdEstoque-1
+                   tLivro.qtdestoque:=string(nQtdEstoque)
+                   slinha:=substr(slinha,1,133) || left(tLivro.qtdestoque,10)
+                   escreveArq(tfLivro, slinha, "", "")
+                }
+             }
+             nCont+:=1
+          } else write(MSG_SEMESTOQUE)
+        } else write(MSG_ISBNINV)
+      }
+    }
+    sTotalPreco:=string(nTotalPreco)
+    write("Total de " || rotulo(sreg,4) || sTotalPreco)
+  }
+} else if member(ctAcao, sacao) = opExcluir then {
+  if member(ctArqs, sreg) = opLivroAss then 
+     ExcluirRegLigados(tfLivroAss, sreg, 1, 13, sCodigo)
+  else if member(ctArqs, sreg) = opLivroAut then
+     ExcluirRegLigados(tfLivroAut, sreg, 1, 13, sCodigo)
+}
+end
+#------------------------------------------------------------------------------
+# Realiza a exclusão dos arquivos de ligação.
+# sArq - o arquivo de ligação
+# sreg - o tipo de arquivo de ligação
+# nPosChave - a posicao inicial da chave dentro do registro
+# nTamChave - o tamanho da chave dentro do registro
+# sChave - a chave a ser excluida
+#------------------------------------------------------------------------------
+procedure ExcluirRegLigados(sArq, sreg, nPosChave, nTamChave, sChave)
+local slinha, sCodigo
+
+  seek(sArq, 1)
+  while slinha := read(sArq) do {
+    sCodigo:=trim(substr(slinha,nPosChave,nTamChave))
+    if (\sCodigo) & (sCodigo==sChave) then
+       btnAcao(sreg,opConfirmaExclusao)
+  }
+end
+#------------------------------------------------------------------------------
+# Parte inicial do código
+#------------------------------------------------------------------------------
+procedure main(args)
+ constantes()
+ if !args=="-cria" then
+   abrecriaArqs(false)
+ else {
+   frmSplash()
+   abrecriaArqs(true)
+   if frmLogin()=true then {
+     bopcao:=true
+     while (bopcao=true) do {
+       menu(1)
+       opmenu:=read()
+       if (opmenu=="C") | (opmenu=="c") then usaMenu(1)
+       else if (opmenu=="P") | (opmenu=="p") then usaMenu(2)
+       else if (opmenu=="V") | (opmenu=="v") then usaMenu(3)
+       else if (opmenu=="O") | (opmenu=="o") then usaMenu(4)
+       else write(MSG_ERRO)
+     }
+   } else {
+     fechaArqs()
+     exit(0)
+   }
+ }
+end

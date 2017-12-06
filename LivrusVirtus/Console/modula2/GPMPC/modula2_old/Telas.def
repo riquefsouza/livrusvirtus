@@ -1,0 +1,32 @@
+DEFINITION MODULE Telas;
+
+FROM StdStrings IMPORT String;
+FROM Arquivos IMPORT ctArqs, ctAcao;
+
+CONST
+  MSG_PRESS = 'pressione para continuar...';
+
+  MSG_ISBNINV = 'ISBN inválido!';
+  MSG_CPFINV = 'CPF inválido!';
+  MSG_SEMESTOQUE = 'livro não existe no estoque!';
+  MSG_SENCONFERE = 'senha não confere com a senha atual!';
+  MSG_SENCONFIRM = 'nova senha não confere com a senha confirmada!';
+  MSG_LOGINENCON = 'login não encontrado!';
+
+  MSG_REGEXST = 'registro já existe!';
+
+VAR
+ g_SalvarInclusao: BOOLEAN;
+
+(*--- Rotinas de implementação da interface ---------------------------------*)
+PROCEDURE frmSplash();
+PROCEDURE frmSobre();
+PROCEDURE frmLogin(): BOOLEAN;
+PROCEDURE frmCadastros(sreg: ctArqs; sacao: ctAcao);
+PROCEDURE frmConsultas(sreg: ctArqs; sacao: ctAcao);
+PROCEDURE frmAlterarSenha;
+PROCEDURE subMenu(nmenu: INTEGER; sreg: ctArqs);
+PROCEDURE usaMenu(num: INTEGER);
+PROCEDURE frmCadLigados(sreg: ctArqs; sacao: ctAcao; sCodigo: String);
+
+END Telas.

@@ -1,0 +1,24 @@
+unit CadAutores;
+
+interface
+
+uses
+  SysUtils, Types, Classes, Variants, QTypes, QGraphics, QControls, QForms, 
+  QDialogs, QStdCtrls, Cadastros, FMTBcd, DB, SqlExpr;
+
+type
+  TfrmCadAutores = class(TfrmCadastros)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadAutores: TfrmCadAutores;
+
+implementation
+
+{$R *.xfm}
+
+end.

@@ -1,0 +1,10 @@
+#!/euphoria/bin/exu
+-- Livrus Virtus
+without warning
+with trace
+include Principal.e
+include Login.e
+
+--void = show_modal( frmLogin )
+
+wxMain( frmPrincipal )

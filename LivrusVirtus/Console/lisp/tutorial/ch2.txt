@@ -1,0 +1,80 @@
+LISP Tutorial   by Mark Meyer
+Chapter 2
+Atoms and Lists; S-expressions
+--------------------------------------------------------------------------------
+TOPICS:  Atoms, data types, lists, s-expressions
+--------------------------------------------------------------------------------
+
+There is only one kind of data in LISP (actually, in Common LISP there are
+different data types but we are reverting back to the basic, elementary,
+original LISP just to get started.)  It is called the
+
+        s-expression
+
+or "symbolic expression."  Every s-expression takes on one of two forms:
+
+        an atom -- either a name or a number
+        a list  -- two parens enclose a sequence of 0 or more s-expressions
+
+Here are some valid atoms:
+
+        6
+        hey!
+        had-enough-yet?
+        12345
+        -4.675
+        #\A
+        "Mark Meyer"
+        mark
+        hi+there
+        canisius_college
+
+Notice we are allowed numbers (integers and floats), single characters such
+as #\A, character strings such as "Mark Meyer" and symbolic values, such as
+the last three above.  Symbolic values are kind of like enumerated values in
+C or Modula-2.  They look like identifiers, but they are treated as data
+values in expressions.  LISP doesn't define a strong line between identifiers
+used for variable names and symbolic values -- it just depends what the context
+of use is.  (See "the quote" below).
+
+Here are some lists.  Note that some lists are empty, and some lists contain 
+just atoms, while others contain lists and atoms!
+
+        ()
+        (17 26 19 8 47)
+        (mark kathy sally)
+        (hi (5 6 2) there john (mark kathy sally))
+        ((mark))
+        ((mark 36) (kathy 25) (sally 55))
+
+Lists can be arbitrarily complex.  There are no restrictions of what lists
+can contain, or how many values can be in the list, or how deeply nested the
+lists may be or anything.  That is one of the beauty of LISP, and also one of
+its downfalls, for it is too easy to get screwed up.
+
+Sometimes you want to tell LISP that a list you are using is a function, with
+a function name for evaluation at the start of the list.  To do this, just
+type in the list.  But other times, you want to tell LISP that the list you
+are using is pure data, and that LISP is not supposed to "evaluate" it.  (This
+is analogous to using immediate data in an assembler program or constants in
+other languages.)  The QUOTE is the mechanism that tells LISP what your
+intentions are.
+
+To use the quote, just put a single (forward) quote in front of the atom or
+the list.  LISP then thinks of it as pure data:
+
+        '(a b c)
+        'mark
+        '(car (mark sally kathy))
+
+If you DO NOT use the quote, then LISP will try to evaluate!  We will explain
+in the next chapter what this means.
+
+Numbers do not need the quote, although it cannot hurt.  Thus, '5 and 5 mean
+the same thing -- just the number 5.  The same is also true of characters and
+character string; they do not need the quote, either.
+
+        #\A
+        "Mark Meyer"
+
+--------------------------------------------------------------------------------

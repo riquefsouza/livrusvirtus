@@ -1,0 +1,6 @@
+/* 1 */  thief(john).
+/* 2 */  likes(mary,food).
+/* 3 */  likes(mary,wine).
+/* 3.1 */likes(john,gold).
+/* 4 */  likes(john,X) :- likes(X,wine).
+/* 5 */  may_steal(X,Y) :- thief(X), likes(X,Y).

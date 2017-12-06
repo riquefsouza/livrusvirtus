@@ -1,0 +1,89 @@
+LISP Tutorial   by Mark Meyer
+Chapter 8
+Functions
+--------------------------------------------------------------------------------
+TOPICS:  How to define your own functions
+--------------------------------------------------------------------------------
+
+Defining your own function in LISP is quite easy.  Like C, you must create a
+name for the function, tell what the parameters are and assign identifiers to
+them, and then define the function.  Like C, functions can create local
+variables or they can use global variables.  And like C, there is no "call by
+reference" parameters -- functions cannot change their parameters.  They
+primarily alter their environment or return a value.  But unlike C, a function
+can return an arbitrarily complex object -- a list with nested lists, or a
+single number, or a character string, or even (gasp) a new function!  And also
+unlike C, the return type of a function is not indicated.
+
+Here's a simple function that squares a number:
+
+     (defun square (n)
+          (* n n)
+     )
+
+Notice that we must use the keyword "defun" which is short for "define func-
+tion."  The function's name follows, then the parameter list (sans types),
+followed by 1 or more forms.  The value of the LAST form executed is the
+return value of the function.
+
+For example, suppose you wanted to sort a list of number that was passed in 
+as a parameter, and to return that list sans (without) the first element.
+You could do:
+
+     (defun notsmall (somelist)
+          (setq tempvar (sort somelist '<))
+          (cdr tempvar)
+     )
+
+Only the value of the second form, (cdr tempvar), will be sent back as the
+returned value.  
+
+The above example illustrates many things about LISP functions.  First, you
+can return a whole list, not just a single value.  Second, any variables that
+you just "use", such as tempvar, are automatically declared and exist.  However,
+they are declared as globals!  So once you end the function, tempvar still
+remains.  Third, somelist, the parameter, is a true local variable.  It is
+eliminated once you return from the function, and any other variable named
+"somelist" does not interfere nor is harmed.
+
+So how could you avoid creating new global variables inadvertently?  by using
+a let form!  Here's our next version:
+
+     (defun notsmall (somelist)
+        (let (tempvar)   ;--new variable: tempvar
+             (setq tempvar (sort somelist '<))
+             (cdr tempvar)
+        )
+     )
+
+The first thing after "let" is always a list of new, temporary variables.
+Sadly, LISP is short on syntax and keywords so there is no easy way to just
+see that (tempvar) is not a function call but rather a list of new temps.
+You could use comments, as shown above.  A comment starts with a semicolon and
+ends at the end of the line.
+
+However, no true "LISPer" would write the above function in that fashion.
+Since the value of (sort somelist '<) is used directly in the next line, why
+not collapse the two?
+
+     (defun notsmall (somelist)
+          (cdr (sort somelist '<))
+     )
+
+This does away with the temporary variable and the let form altogether, and is
+an example of true functional programming.
+
+In the spirit of functional programming, we reduce our need for variables
+drastically by hooking together functions in long chains, or compositions, as 
+they are called in math.  The result of one function call goes into another
+as input.  However, we sometimes still need variables, especially when we need
+to save the value in order to use it several times, rather than recompute it
+each time.  Variables are also needed when there are several parameters, and it
+may not be easy or convenient to telescope function calls together.  
+
+But in general, we follow the "assign only once" rule, which says that variables
+are just names for values, rather than storage boxes whose contents change all
+the time.  Once you use setq to bind a value to a variable, you never use 
+another setq with that same variable name.
+
+--------------------------------------------------------------------------------

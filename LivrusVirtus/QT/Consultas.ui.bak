@@ -1,0 +1,240 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>frmConsultas</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>frmConsultas</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>393</width>
+            <height>252</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Consulta de </string>
+    </property>
+    <property name="icon">
+        <pixmap>Livrus.bmp</pixmap>
+    </property>
+    <widget class="QLayoutWidget">
+        <property name="name">
+            <cstring>layout1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>392</width>
+                <height>250</height>
+            </rect>
+        </property>
+        <vbox>
+            <property name="name">
+                <cstring>unnamed</cstring>
+            </property>
+            <widget class="QFrame">
+                <property name="name">
+                    <cstring>frame1</cstring>
+                </property>
+                <property name="minimumSize">
+                    <size>
+                        <width>390</width>
+                        <height>60</height>
+                    </size>
+                </property>
+                <property name="frameShape">
+                    <enum>StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                    <enum>Plain</enum>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>labDescricao</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>8</x>
+                            <y>3</y>
+                            <width>55</width>
+                            <height>24</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Descrição:</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit">
+                    <property name="name">
+                        <cstring>edtDescricao</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>28</y>
+                            <width>290</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>btnPesquisar</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>308</x>
+                            <y>26</y>
+                            <width>75</width>
+                            <height>25</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Pesquisar</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+P</string>
+                    </property>
+                </widget>
+            </widget>
+            <widget class="QTable">
+                <column>
+                    <property name="text">
+                        <string>Código</string>
+                    </property>
+                </column>
+                <column>
+                    <property name="text">
+                        <string>Descrição</string>
+                    </property>
+                </column>
+                <property name="name">
+                    <cstring>gridConsulta</cstring>
+                </property>
+                <property name="numRows">
+                    <number>1</number>
+                </property>
+                <property name="numCols">
+                    <number>2</number>
+                </property>
+                <property name="readOnly">
+                    <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                    <enum>Single</enum>
+                </property>
+            </widget>
+            <widget class="QFrame">
+                <property name="name">
+                    <cstring>frame2</cstring>
+                </property>
+                <property name="minimumSize">
+                    <size>
+                        <width>390</width>
+                        <height>40</height>
+                    </size>
+                </property>
+                <property name="frameShape">
+                    <enum>StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                    <enum>Plain</enum>
+                </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>btnLimpar</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>226</x>
+                            <y>8</y>
+                            <width>75</width>
+                            <height>25</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Limpar</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+L</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>btnFechar</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>306</x>
+                            <y>8</y>
+                            <width>75</width>
+                            <height>25</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Fechar</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+F</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>labRegistros</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>9</y>
+                            <width>110</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Registro 0 de 0</string>
+                    </property>
+                </widget>
+            </widget>
+        </vbox>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>btnPesquisar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmConsultas</receiver>
+        <slot>btnPesquisar_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnLimpar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmConsultas</receiver>
+        <slot>btnLimpar_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>btnFechar</sender>
+        <signal>clicked()</signal>
+        <receiver>frmConsultas</receiver>
+        <slot>btnFechar_clicked()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>edtDescricao</tabstop>
+    <tabstop>btnPesquisar</tabstop>
+    <tabstop>gridConsulta</tabstop>
+    <tabstop>btnLimpar</tabstop>
+    <tabstop>btnFechar</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in implementation">Consultas.ui.h</include>
+</includes>
+<slots>
+    <slot>btnPesquisar_clicked()</slot>
+    <slot>btnLimpar_clicked()</slot>
+    <slot>btnFechar_clicked()</slot>
+</slots>
+<pixmapinproject/>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

@@ -1,0 +1,72 @@
+package Livrus;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class frmSplash extends JDialog {
+  public static frmSplash fSplash;
+
+  ImageIcon image1;
+  Timer timer1;
+  JPanel jPanel1 = new JPanel();
+  JLabel jLabel1 = new JLabel();
+  BorderLayout borderLayout1 = new BorderLayout();
+
+  public frmSplash(Frame frame) {
+    super(frame);
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try  {
+      jbInit();
+      pack();
+    }
+    catch (Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+
+  public frmSplash() {
+    this(null);
+  }
+
+  void jbInit() throws Exception {
+    image1 = new ImageIcon(getClass().getResource("LivrusVirtus.gif"));
+    this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    this.setModal(true);
+    setResizable(false);
+    this.setUndecorated(true);
+    java.awt.event.ActionListener executarTarefa =
+        new java.awt.event.ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            this_fechar();
+        }
+    };
+    this.timer1 = new Timer(1000, executarTarefa);
+    this.timer1.start();
+    jLabel1.setBorder(BorderFactory.createRaisedBevelBorder());
+    jLabel1.setIcon(image1);
+
+    this.setBackground(SystemColor.control);
+    this.setSize(new Dimension(257, 78));
+
+    jPanel1.setPreferredSize(new Dimension(257, 78));
+    jPanel1.setLayout(borderLayout1);
+    this.getContentPane().add(jPanel1, BorderLayout.NORTH);
+    jPanel1.add(jLabel1,  BorderLayout.CENTER);
+  }
+
+  protected void processWindowEvent(WindowEvent e) {
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+      dispose();
+    }
+    super.processWindowEvent(e);
+  }
+
+  void this_fechar() {
+    dispose();
+  }
+
+
+}
+

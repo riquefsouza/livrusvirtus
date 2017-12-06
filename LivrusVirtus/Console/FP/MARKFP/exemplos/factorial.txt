@@ -1,0 +1,20 @@
+//  This is the good old factorial function, written up as a recursive FP
+//  function.  fact:5 is defined to be 5*4*3*2*1.  fact:0 is defined to be 1.
+//  If a negative number is given, this function returns the special FP value
+//  "undefined".
+
+     (def eq0 == eq.[id,#0])
+     (def dec == -.[id,#1])
+     (def pos == gt.[id,#0])
+     (def fact == eq0 -> #1 ; (pos -> *.[id,fact.dec] ; undefined))
+
+//  Factorial grows very quickly.  Here's a way of getting the factorials
+//  of the first N numbers, where N is the input argument:
+
+     (def factall == (@fact).iota)
+
+//  Here's the way to get the sum of the first N factorials.  (Why anyone would
+//  ever want to do this is beyond me, but it illustrates FP functional forms.
+
+     (def sumfacts == (/+).factall)
+end

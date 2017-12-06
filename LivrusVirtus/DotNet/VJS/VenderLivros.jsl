@@ -1,0 +1,512 @@
+package  Livrus;
+
+import System.*;
+import System.Drawing.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+
+/// <summary>
+/// Summary description for WinForm.
+/// </summary>
+public class frmVenderLivros extends System.Windows.Forms.Form
+{
+	public static frmVenderLivros fVenderLivros;
+	float nPrecoTotal;
+	ArrayList slISBNs, slPrecos, slQtdEstoque, ConsCampo;
+	System.Data.OleDb.OleDbCommand Arquiva;
+	/// <summary>
+	/// Required designer variable.
+	/// </summary>
+	private System.ComponentModel.Container components = null;
+	private System.Windows.Forms.Label labDtHrVenda;
+	private System.Windows.Forms.TextBox edtDtHrVenda;
+	private System.Windows.Forms.Label labLivrosVender;
+	private System.Windows.Forms.ListBox lstLivros;
+	private System.Windows.Forms.Label labLivro;
+	private System.Windows.Forms.Button btnPCliente;
+	private System.Windows.Forms.TextBox edtCliente;
+	private System.Windows.Forms.Button btnPLivro;
+	private System.Windows.Forms.TextBox edtLivro;
+	private System.Windows.Forms.TextBox edtISBN;
+	private System.Windows.Forms.Label labISBN;
+	private System.Windows.Forms.Label labCLiente;
+	private System.Windows.Forms.TextBox edtCPF;
+	private System.Windows.Forms.Label labCPF;
+	private System.Windows.Forms.Button btnAdLivros;
+	private System.Windows.Forms.TextBox edtPrecoTotal;
+	private System.Windows.Forms.Label labPrecoTotal;
+	private System.Windows.Forms.Button btnVender;
+	private System.Windows.Forms.Button btnLimpar;
+	private System.Windows.Forms.Button btnFechar;
+
+	public frmVenderLivros()
+	{
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent();
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+		slISBNs = new ArrayList();
+		slPrecos = new ArrayList();
+		slQtdEstoque = new ArrayList();
+		ConsCampo = new ArrayList();
+		Arquiva = new System.Data.OleDb.OleDbCommand();
+	}
+
+	/// <summary>
+	/// Clean up any resources being used.
+	/// </summary>
+	protected void Dispose (boolean disposing)
+	{
+		if (disposing)
+		{
+			if (components != null)
+			{
+				components.Dispose();
+			}
+		}
+		super.Dispose(disposing);
+	}
+
+	/// <summary>
+	/// Required method for Designer support - do not modify
+	/// the contents of this method with the code editor.
+	/// </summary>
+	private void InitializeComponent()
+	{
+          this.labDtHrVenda = new System.Windows.Forms.Label();
+          this.edtDtHrVenda = new System.Windows.Forms.TextBox();
+          this.labLivrosVender = new System.Windows.Forms.Label();
+          this.lstLivros = new System.Windows.Forms.ListBox();
+          this.labLivro = new System.Windows.Forms.Label();
+          this.btnPCliente = new System.Windows.Forms.Button();
+          this.edtCliente = new System.Windows.Forms.TextBox();
+          this.btnPLivro = new System.Windows.Forms.Button();
+          this.edtLivro = new System.Windows.Forms.TextBox();
+          this.edtISBN = new System.Windows.Forms.TextBox();
+          this.labISBN = new System.Windows.Forms.Label();
+          this.labCLiente = new System.Windows.Forms.Label();
+          this.edtCPF = new System.Windows.Forms.TextBox();
+          this.labCPF = new System.Windows.Forms.Label();
+          this.btnAdLivros = new System.Windows.Forms.Button();
+          this.edtPrecoTotal = new System.Windows.Forms.TextBox();
+          this.labPrecoTotal = new System.Windows.Forms.Label();
+          this.btnVender = new System.Windows.Forms.Button();
+          this.btnLimpar = new System.Windows.Forms.Button();
+          this.btnFechar = new System.Windows.Forms.Button();
+          this.SuspendLayout();
+          // 
+          // labDtHrVenda
+          // 
+          this.labDtHrVenda.set_Location(new System.Drawing.Point(8, 8));
+          this.labDtHrVenda.set_Name("labDtHrVenda");
+          this.labDtHrVenda.set_Size(new System.Drawing.Size(100, 16));
+          this.labDtHrVenda.set_TabIndex(0);
+          this.labDtHrVenda.set_Text("Data/Hora Venda:");
+          // 
+          // edtDtHrVenda
+          // 
+          this.edtDtHrVenda.set_Enabled(false);
+          this.edtDtHrVenda.set_Location(new System.Drawing.Point(8, 24));
+          this.edtDtHrVenda.set_Name("edtDtHrVenda");
+          this.edtDtHrVenda.set_Size(new System.Drawing.Size(120, 20));
+          this.edtDtHrVenda.set_TabIndex(1);
+          this.edtDtHrVenda.set_Text("");
+          // 
+          // labLivrosVender
+          // 
+          this.labLivrosVender.set_Location(new System.Drawing.Point(8, 128));
+          this.labLivrosVender.set_Name("labLivrosVender");
+          this.labLivrosVender.set_Size(new System.Drawing.Size(112, 16));
+          this.labLivrosVender.set_TabIndex(13);
+          this.labLivrosVender.set_Text("Livros para vender:");
+          // 
+          // lstLivros
+          // 
+          this.lstLivros.set_Location(new System.Drawing.Point(8, 144));
+          this.lstLivros.set_Name("lstLivros");
+          this.lstLivros.set_Size(new System.Drawing.Size(464, 108));
+          this.lstLivros.set_TabIndex(14);
+          this.lstLivros.add_DoubleClick(new System.EventHandler(this.lstLivros_DoubleClick));
+          // 
+          // labLivro
+          // 
+          this.labLivro.set_Location(new System.Drawing.Point(144, 88));
+          this.labLivro.set_Name("labLivro");
+          this.labLivro.set_Size(new System.Drawing.Size(52, 16));
+          this.labLivro.set_TabIndex(9);
+          this.labLivro.set_Text("Livro:");
+          // 
+          // btnPCliente
+          // 
+          this.btnPCliente.set_Location(new System.Drawing.Point(448, 64));
+          this.btnPCliente.set_Name("btnPCliente");
+          this.btnPCliente.set_Size(new System.Drawing.Size(22, 20));
+          this.btnPCliente.set_TabIndex(6);
+          this.btnPCliente.set_Text("...");
+          this.btnPCliente.add_Click(new System.EventHandler(this.btnPCliente_Click));
+          // 
+          // edtCliente
+          // 
+          this.edtCliente.set_Enabled(false);
+          this.edtCliente.set_Location(new System.Drawing.Point(144, 64));
+          this.edtCliente.set_MaxLength(30);
+          this.edtCliente.set_Name("edtCliente");
+          this.edtCliente.set_Size(new System.Drawing.Size(304, 20));
+          this.edtCliente.set_TabIndex(5);
+          this.edtCliente.set_Text("");
+          // 
+          // btnPLivro
+          // 
+          this.btnPLivro.set_Location(new System.Drawing.Point(448, 104));
+          this.btnPLivro.set_Name("btnPLivro");
+          this.btnPLivro.set_Size(new System.Drawing.Size(22, 20));
+          this.btnPLivro.set_TabIndex(12);
+          this.btnPLivro.set_Text("...");
+          this.btnPLivro.add_Click(new System.EventHandler(this.btnPLivro_Click));
+          // 
+          // edtLivro
+          // 
+          this.edtLivro.set_Enabled(false);
+          this.edtLivro.set_Location(new System.Drawing.Point(144, 104));
+          this.edtLivro.set_MaxLength(30);
+          this.edtLivro.set_Name("edtLivro");
+          this.edtLivro.set_Size(new System.Drawing.Size(280, 20));
+          this.edtLivro.set_TabIndex(10);
+          this.edtLivro.set_Text("");
+          // 
+          // edtISBN
+          // 
+          this.edtISBN.set_Location(new System.Drawing.Point(8, 104));
+          this.edtISBN.set_MaxLength(13);
+          this.edtISBN.set_Name("edtISBN");
+          this.edtISBN.set_Size(new System.Drawing.Size(128, 20));
+          this.edtISBN.set_TabIndex(8);
+          this.edtISBN.set_Text("");
+          this.edtISBN.add_Leave(new System.EventHandler(this.edtISBN_Leave));
+          // 
+          // labISBN
+          // 
+          this.labISBN.set_Location(new System.Drawing.Point(8, 88));
+          this.labISBN.set_Name("labISBN");
+          this.labISBN.set_Size(new System.Drawing.Size(52, 16));
+          this.labISBN.set_TabIndex(7);
+          this.labISBN.set_Text("ISBN:");
+          // 
+          // labCLiente
+          // 
+          this.labCLiente.set_Location(new System.Drawing.Point(144, 48));
+          this.labCLiente.set_Name("labCLiente");
+          this.labCLiente.set_Size(new System.Drawing.Size(52, 16));
+          this.labCLiente.set_TabIndex(4);
+          this.labCLiente.set_Text("Cliente:");
+          // 
+          // edtCPF
+          // 
+          this.edtCPF.set_Location(new System.Drawing.Point(8, 64));
+          this.edtCPF.set_MaxLength(14);
+          this.edtCPF.set_Name("edtCPF");
+          this.edtCPF.set_Size(new System.Drawing.Size(128, 20));
+          this.edtCPF.set_TabIndex(3);
+          this.edtCPF.set_Text("");
+          this.edtCPF.add_Leave(new System.EventHandler(this.edtCPF_Leave));
+          // 
+          // labCPF
+          // 
+          this.labCPF.set_Location(new System.Drawing.Point(8, 48));
+          this.labCPF.set_Name("labCPF");
+          this.labCPF.set_Size(new System.Drawing.Size(52, 16));
+          this.labCPF.set_TabIndex(2);
+          this.labCPF.set_Text("CPF:");
+          // 
+          // btnAdLivros
+          // 
+          this.btnAdLivros.set_Location(new System.Drawing.Point(424, 104));
+          this.btnAdLivros.set_Name("btnAdLivros");
+          this.btnAdLivros.set_Size(new System.Drawing.Size(22, 20));
+          this.btnAdLivros.set_TabIndex(11);
+          this.btnAdLivros.set_Text("+");
+          this.btnAdLivros.add_Click(new System.EventHandler(this.btnAdLivros_Click));
+          // 
+          // edtPrecoTotal
+          // 
+          this.edtPrecoTotal.set_Enabled(false);
+          this.edtPrecoTotal.set_Location(new System.Drawing.Point(344, 256));
+          this.edtPrecoTotal.set_MaxLength(10);
+          this.edtPrecoTotal.set_Name("edtPrecoTotal");
+          this.edtPrecoTotal.set_Size(new System.Drawing.Size(128, 20));
+          this.edtPrecoTotal.set_TabIndex(16);
+          this.edtPrecoTotal.set_Text("");
+          // 
+          // labPrecoTotal
+          // 
+          this.labPrecoTotal.set_Location(new System.Drawing.Point(272, 256));
+          this.labPrecoTotal.set_Name("labPrecoTotal");
+          this.labPrecoTotal.set_Size(new System.Drawing.Size(64, 16));
+          this.labPrecoTotal.set_TabIndex(15);
+          this.labPrecoTotal.set_Text("Preço total:");
+          // 
+          // btnVender
+          // 
+          this.btnVender.set_Location(new System.Drawing.Point(240, 288));
+          this.btnVender.set_Name("btnVender");
+          this.btnVender.set_TabIndex(17);
+          this.btnVender.set_Text("&Vender");
+          this.btnVender.add_Click(new System.EventHandler(this.btnVender_Click));
+          // 
+          // btnLimpar
+          // 
+          this.btnLimpar.set_Location(new System.Drawing.Point(320, 288));
+          this.btnLimpar.set_Name("btnLimpar");
+          this.btnLimpar.set_TabIndex(18);
+          this.btnLimpar.set_Text("&Limpar");
+          this.btnLimpar.add_Click(new System.EventHandler(this.btnLimpar_Click));
+          // 
+          // btnFechar
+          // 
+          this.btnFechar.set_DialogResult(System.Windows.Forms.DialogResult.Cancel);
+          this.btnFechar.set_Location(new System.Drawing.Point(400, 288));
+          this.btnFechar.set_Name("btnFechar");
+          this.btnFechar.set_TabIndex(19);
+          this.btnFechar.set_Text("&Fechar");
+          this.btnFechar.add_Click(new System.EventHandler(this.btnFechar_Click));
+          // 
+          // frmVenderLivros
+          // 
+          this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+          this.set_ClientSize(new System.Drawing.Size(480, 317));
+          this.get_Controls().Add(this.btnVender);
+          this.get_Controls().Add(this.btnLimpar);
+          this.get_Controls().Add(this.btnFechar);
+          this.get_Controls().Add(this.edtPrecoTotal);
+          this.get_Controls().Add(this.edtCPF);
+          this.get_Controls().Add(this.edtCliente);
+          this.get_Controls().Add(this.edtLivro);
+          this.get_Controls().Add(this.edtISBN);
+          this.get_Controls().Add(this.edtDtHrVenda);
+          this.get_Controls().Add(this.labPrecoTotal);
+          this.get_Controls().Add(this.btnAdLivros);
+          this.get_Controls().Add(this.labCPF);
+          this.get_Controls().Add(this.labLivro);
+          this.get_Controls().Add(this.btnPCliente);
+          this.get_Controls().Add(this.btnPLivro);
+          this.get_Controls().Add(this.labISBN);
+          this.get_Controls().Add(this.labCLiente);
+          this.get_Controls().Add(this.lstLivros);
+          this.get_Controls().Add(this.labLivrosVender);
+          this.get_Controls().Add(this.labDtHrVenda);
+          this.set_Name("frmVenderLivros");
+          this.set_Text("Vender Livros");
+          this.add_Closing(new System.ComponentModel.CancelEventHandler(this.frmVenderLivros_Closing));
+          this.add_Load(new System.EventHandler(this.frmVenderLivros_Load));
+          this.add_MouseMove(new System.Windows.Forms.MouseEventHandler(this.frmVenderLivros_MouseMove));
+          this.ResumeLayout(false);
+	}
+
+	private void LimpaDados() {
+		edtDtHrVenda.set_Text(DateTime.get_Now().ToString("dd/MM/yyyy hh:mm:ss"));
+		edtCPF.Clear();
+		edtCliente.Clear();
+		edtISBN.Clear();
+		edtLivro.Clear();
+		lstLivros.get_Items().Clear();
+		slPrecos.Clear();
+		nPrecoTotal=0;
+		edtPrecoTotal.set_Text("R$ 0,00");
+		edtCPF.Focus();
+	}
+	private boolean ValidaDados()
+	{
+		if (RotinasGlobais.Rotinas.ValidaCampo(edtCPF.get_Text(),
+				"CPF não informado!"))
+		  return false;
+		if (lstLivros.get_Items().get_Count() == 0){
+		  MessageBox.Show(this,"Livro(s) para vender não informado(s)!",
+		  frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+		  MessageBoxIcon.Error);
+		  return false;
+		}
+		return true;
+	}
+	private boolean SalvaLista() {
+	  int nCont, nQtdEstoque;
+            try {
+		for (nCont=0; nCont <= lstLivros.get_Items().get_Count()-1; nCont++) {
+		 RotinasGlobais.Rotinas.ConsultaDados(Arquiva,
+		 ConsultasSQL.ConsSQL.Venda('I',slISBNs.get_Item(nCont).ToString(),
+		 edtCPF.get_Text(),RotinasGlobais.Rotinas.FormataDataStr(
+		 edtDtHrVenda.get_Text(),"MM/dd/yyyy hh:mm:ss"),RotinasGlobais.Rotinas.
+		 VirgulaParaPonto(Convert.ToString(nPrecoTotal),false),""));
+
+		 nQtdEstoque=Int32.Parse(slQtdEstoque.get_Item(nCont).ToString());
+		 nQtdEstoque=nQtdEstoque-1;
+		 RotinasGlobais.Rotinas.ConsultaDados(Arquiva,
+		 ConsultasSQL.ConsSQL.Venda('U',slISBNs.get_Item(nCont).ToString(),
+		 "","","", Convert.ToString(nQtdEstoque)));
+		}
+              return true; 
+ 	    } catch(System.Exception e) {
+              MessageBox.Show(this, e.get_Message(), frmPrincipal.fPrincipal.get_Text(),
+              MessageBoxButtons.OK,MessageBoxIcon.Error);
+              return false;
+            }
+
+	}
+
+	private void edtCPF_Leave(Object sender, System.EventArgs e)
+	{
+		if (edtCPF.get_Text().Equals("")==false) {
+		  if (RotinasGlobais.Rotinas.ValidaCPF(edtCPF.get_Text())) {
+
+			  edtCliente.set_Text(
+			  RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+			  ConsultasSQL.ConsSQL.Cliente('S',edtCPF.get_Text(),
+			  "","","","","","","","",""),"Cliente não encontrado!"));
+			  if (edtCliente.get_Text().Equals("")) {
+				edtCPF.Clear();
+				edtCPF.Focus();
+			  }
+		  } else {
+			  MessageBox.Show(this,"CPF inválido!",
+			  frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+			  MessageBoxIcon.Error);
+			  edtCPF.Clear();
+			  edtCliente.Clear();
+		  }
+		}
+	}
+	
+	private void btnPCliente_Click(Object sender, System.EventArgs e)
+	{
+		frmConClientes pfConClientes = new frmConClientes();
+		pfConClientes.ShowDialog();
+		edtCPF.set_Text(RotinasGlobais.Rotinas.sCodigoSelecionado);
+		edtCPF_Leave(this,null);
+	}
+	
+	private void edtISBN_Leave(Object sender, System.EventArgs e)
+	{
+		if (edtISBN.get_Text().Equals("")==false) {
+		  if (RotinasGlobais.Rotinas.ValidaISBN(edtISBN.get_Text())) {
+			  edtLivro.set_Text(
+			  RotinasGlobais.Rotinas.ConsultaCampoDesc(ConsCampo,
+			  ConsultasSQL.ConsSQL.Livro('Q',edtISBN.get_Text(),
+			  "","","","","","","","",""),"Livro não encontrado!"));
+			  if (edtLivro.get_Text().Equals("")==false) {
+			   if (Int32.Parse(ConsCampo.get_Item(3).ToString()) > 0) {
+				 RotinasGlobais.Rotinas.sPreco=ConsCampo.get_Item(2).ToString();
+			   } else
+				  MessageBox.Show(this,"Livro não existe no estoque!",
+				  frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+				  MessageBoxIcon.Error);
+			  } else {
+				edtISBN.Clear();
+				edtISBN.Focus();
+			  }
+		  } else {
+			  MessageBox.Show(this,"ISBN inválido!",
+			  frmPrincipal.fPrincipal.get_Text(), MessageBoxButtons.OK,
+			  MessageBoxIcon.Error);
+			  edtISBN.Clear();
+			  edtLivro.Clear();
+		  }
+		}
+	}
+
+	private void btnPLivro_Click(Object sender, System.EventArgs e)
+	{
+		frmConLivros pfConLivros = new frmConLivros();
+		pfConLivros.ShowDialog();
+		edtISBN.set_Text(RotinasGlobais.Rotinas.sCodigoSelecionado);
+		edtISBN_Leave(this,null);
+	}
+	
+	private void btnAdLivros_Click(Object sender, System.EventArgs e)
+	{
+	   String sLivros;
+
+	   if (edtISBN.get_Text().Equals("")==false) {
+		 sLivros=edtISBN.get_Text()+" - "+edtLivro.get_Text()+" - R$ "+
+			 RotinasGlobais.Rotinas.sPreco;
+		 if (lstLivros.get_Items().IndexOf(sLivros)==-1) {
+		   slISBNs.Add(edtISBN.get_Text());
+		   slPrecos.Add(RotinasGlobais.Rotinas.sPreco);
+		   slQtdEstoque.Add(RotinasGlobais.Rotinas.sQtdEstoque);
+		   lstLivros.get_Items().Add(sLivros);
+		   nPrecoTotal=nPrecoTotal+
+					Single.Parse(RotinasGlobais.Rotinas.sPreco);
+		 }
+		 edtISBN.Clear();
+		 edtLivro.Clear();
+		 edtPrecoTotal.set_Text("R$ "+ RotinasGlobais.Rotinas.VirgulaParaPonto(
+							   Convert.ToString(nPrecoTotal),true));
+	  }
+	}
+
+	private void lstLivros_DoubleClick(Object sender, System.EventArgs e)
+	{
+		float nPreco;
+
+		if (lstLivros.get_Items().get_Count() > 0) {
+
+		  nPreco=Single.Parse(slPrecos.get_Item(
+			  lstLivros.get_SelectedIndex()).ToString());
+		  nPrecoTotal=nPrecoTotal-nPreco;
+		  edtPrecoTotal.set_Text("R$ "+Convert.ToString(nPrecoTotal));
+
+		  slISBNs.RemoveAt(lstLivros.get_SelectedIndex());
+		  slPrecos.RemoveAt(lstLivros.get_SelectedIndex());
+		  slQtdEstoque.RemoveAt(lstLivros.get_SelectedIndex());
+		  lstLivros.get_Items().RemoveAt(lstLivros.get_SelectedIndex());
+		}
+	}
+
+	private void btnVender_Click(Object sender, System.EventArgs e)
+	{
+           if (ValidaDados()) {
+              if (SalvaLista()) {
+                MessageBox.Show(this,"Venda realizada com sucesso!", 
+		frmPrincipal.fPrincipal.get_Text(),
+                MessageBoxButtons.OK,MessageBoxIcon.Information);
+                LimpaDados();
+              }
+           }
+	}
+
+	private void btnLimpar_Click(Object sender, System.EventArgs e)
+	{
+		 LimpaDados();
+	}
+	
+	private void btnFechar_Click(Object sender, System.EventArgs e)
+	{
+		frmVenderLivros_Closing(this,null);
+		Close();
+	}
+
+	private void frmVenderLivros_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
+	{
+		frmPrincipal.fPrincipal.tlbVender.set_Enabled(true);
+		frmPrincipal.fPrincipal.mnuVenderLivros.set_Enabled(true);
+		frmPrincipal.fPrincipal.statusBar1.get_Panels().get_Item(1).set_Text("");
+	}
+
+	private void frmVenderLivros_Load(Object sender, System.EventArgs e)
+	{
+		nPrecoTotal=0;
+		edtDtHrVenda.set_Text(DateTime.get_Now().ToString("dd/MM/yyyy hh:mm:ss"));
+	}
+
+	private void frmVenderLivros_MouseMove(Object sender, System.Windows.Forms.MouseEventArgs e)
+	{
+		frmPrincipal.fPrincipal.statusBar1.get_Panels().get_Item(1).set_Text(this.get_Text());
+	}
+
+}
+
+

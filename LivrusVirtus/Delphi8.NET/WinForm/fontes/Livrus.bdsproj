@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<PersonalityInfo>
+		<Option>
+			<Option Name="Personality" Type="String">DelphiDotNet.Personality</Option>
+			<Option Name="ProjectType" Type="String"></Option>
+			<Option Name="Version" Type="String">1.0</Option>
+			<Option Name="GUID" Type="String">{EF551E7D-7D96-4C39-AA3F-27F2C79D8692}</Option>
+		</Option>
+	</PersonalityInfo>
+	<DelphiDotNet.Personality>
+		<Source>
+			<Source Name="MainSource" Type="String">Livrus.dpr</Source>
+		</Source>
+		<FileVersion>
+			<FileVersion Name="Version" Type="String">7.0</FileVersion>
+		</FileVersion>
+		<Compiler>
+			<Compiler Name="A" Type="Integer">0</Compiler>
+			<Compiler Name="B" Type="Integer">0</Compiler>
+			<Compiler Name="C" Type="Integer">1</Compiler>
+			<Compiler Name="D" Type="Integer">1</Compiler>
+			<Compiler Name="E" Type="Integer">0</Compiler>
+			<Compiler Name="F" Type="Integer">0</Compiler>
+			<Compiler Name="G" Type="Integer">1</Compiler>
+			<Compiler Name="H" Type="Integer">1</Compiler>
+			<Compiler Name="I" Type="Integer">1</Compiler>
+			<Compiler Name="J" Type="Integer">0</Compiler>
+			<Compiler Name="K" Type="Integer">0</Compiler>
+			<Compiler Name="L" Type="Integer">1</Compiler>
+			<Compiler Name="M" Type="Integer">0</Compiler>
+			<Compiler Name="N" Type="Integer">1</Compiler>
+			<Compiler Name="O" Type="Integer">1</Compiler>
+			<Compiler Name="P" Type="Integer">1</Compiler>
+			<Compiler Name="Q" Type="Integer">0</Compiler>
+			<Compiler Name="R" Type="Integer">0</Compiler>
+			<Compiler Name="S" Type="Integer">0</Compiler>
+			<Compiler Name="T" Type="Integer">0</Compiler>
+			<Compiler Name="U" Type="Integer">0</Compiler>
+			<Compiler Name="V" Type="Integer">1</Compiler>
+			<Compiler Name="W" Type="Integer">0</Compiler>
+			<Compiler Name="X" Type="Integer">1</Compiler>
+			<Compiler Name="Y" Type="Integer">1</Compiler>
+			<Compiler Name="Z" Type="Integer">1</Compiler>
+			<Compiler Name="ShowHints" Type="Boolean">True</Compiler>
+			<Compiler Name="ShowWarnings" Type="Boolean">True</Compiler>
+			<Compiler Name="UnitAliases" Type="String">WinTypes=Borland.Vcl.Windows;WinProcs=Borland.Vcl.Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;</Compiler>
+			<Compiler Name="NamespacePrefix" Type="String"></Compiler>
+			<Compiler Name="GenerateDocumentation" Type="Boolean">False</Compiler>
+			<Compiler Name="DefaultNamespace" Type="String"></Compiler>
+			<Compiler Name="SymbolDeprecated" Type="Boolean">True</Compiler>
+			<Compiler Name="SymbolLibrary" Type="Boolean">True</Compiler>
+			<Compiler Name="SymbolPlatform" Type="Boolean">True</Compiler>
+			<Compiler Name="SymbolExperimental" Type="Boolean">True</Compiler>
+			<Compiler Name="UnitLibrary" Type="Boolean">True</Compiler>
+			<Compiler Name="UnitPlatform" Type="Boolean">True</Compiler>
+			<Compiler Name="UnitDeprecated" Type="Boolean">True</Compiler>
+			<Compiler Name="UnitExperimental" Type="Boolean">True</Compiler>
+			<Compiler Name="HResultCompat" Type="Boolean">True</Compiler>
+			<Compiler Name="HidingMember" Type="Boolean">True</Compiler>
+			<Compiler Name="HiddenVirtual" Type="Boolean">True</Compiler>
+			<Compiler Name="Garbage" Type="Boolean">True</Compiler>
+			<Compiler Name="BoundsError" Type="Boolean">True</Compiler>
+			<Compiler Name="ZeroNilCompat" Type="Boolean">True</Compiler>
+			<Compiler Name="StringConstTruncated" Type="Boolean">True</Compiler>
+			<Compiler Name="ForLoopVarVarPar" Type="Boolean">True</Compiler>
+			<Compiler Name="TypedConstVarPar" Type="Boolean">True</Compiler>
+			<Compiler Name="AsgToTypedConst" Type="Boolean">True</Compiler>
+			<Compiler Name="CaseLabelRange" Type="Boolean">True</Compiler>
+			<Compiler Name="ForVariable" Type="Boolean">True</Compiler>
+			<Compiler Name="ConstructingAbstract" Type="Boolean">True</Compiler>
+			<Compiler Name="ComparisonFalse" Type="Boolean">True</Compiler>
+			<Compiler Name="ComparisonTrue" Type="Boolean">True</Compiler>
+			<Compiler Name="ComparingSignedUnsigned" Type="Boolean">True</Compiler>
+			<Compiler Name="CombiningSignedUnsigned" Type="Boolean">True</Compiler>
+			<Compiler Name="UnsupportedConstruct" Type="Boolean">True</Compiler>
+			<Compiler Name="FileOpen" Type="Boolean">True</Compiler>
+			<Compiler Name="FileOpenUnitSrc" Type="Boolean">True</Compiler>
+			<Compiler Name="BadGlobalSymbol" Type="Boolean">True</Compiler>
+			<Compiler Name="DuplicateConstructorDestructor" Type="Boolean">True</Compiler>
+			<Compiler Name="InvalidDirective" Type="Boolean">True</Compiler>
+			<Compiler Name="PackageNoLink" Type="Boolean">True</Compiler>
+			<Compiler Name="PackageThreadVar" Type="Boolean">True</Compiler>
+			<Compiler Name="ImplicitImport" Type="Boolean">True</Compiler>
+			<Compiler Name="HPPEMITIgnored" Type="Boolean">True</Compiler>
+			<Compiler Name="NoRetVal" Type="Boolean">True</Compiler>
+			<Compiler Name="UseBeforeDef" Type="Boolean">True</Compiler>
+			<Compiler Name="ForLoopVarUndef" Type="Boolean">True</Compiler>
+			<Compiler Name="UnitNameMismatch" Type="Boolean">True</Compiler>
+			<Compiler Name="NoCFGFileFound" Type="Boolean">True</Compiler>
+			<Compiler Name="MessageDirective" Type="Boolean">True</Compiler>
+			<Compiler Name="ImplicitVariants" Type="Boolean">True</Compiler>
+			<Compiler Name="UnicodeToLocale" Type="Boolean">True</Compiler>
+			<Compiler Name="LocaleToUnicode" Type="Boolean">True</Compiler>
+			<Compiler Name="ImagebaseMultiple" Type="Boolean">True</Compiler>
+			<Compiler Name="SuspiciousTypecast" Type="Boolean">True</Compiler>
+			<Compiler Name="PrivatePropAccessor" Type="Boolean">True</Compiler>
+			<Compiler Name="UnsafeType" Type="Boolean">True</Compiler>
+			<Compiler Name="UnsafeCode" Type="Boolean">True</Compiler>
+			<Compiler Name="UnsafeCast" Type="Boolean">True</Compiler>
+			<Compiler Name="OptionTruncated" Type="Boolean">True</Compiler>
+			<Compiler Name="WideCharReduced" Type="Boolean">True</Compiler>
+			<Compiler Name="DuplicatesIgnored" Type="Boolean">True</Compiler>
+		</Compiler>
+		<Linker>
+			<Linker Name="MapFile" Type="Integer">0</Linker>
+			<Linker Name="OutputObjs" Type="Integer">0</Linker>
+			<Linker Name="ConsoleApp" Type="Integer">1</Linker>
+			<Linker Name="DebugInfo" Type="Boolean">True</Linker>
+			<Linker Name="RemoteSymbols" Type="Boolean">False</Linker>
+			<Linker Name="GenerateDRC" Type="Boolean">False</Linker>
+			<Linker Name="MinStackSize" Type="Integer">4096</Linker>
+			<Linker Name="MaxStackSize" Type="Integer">1048576</Linker>
+			<Linker Name="ImageBase" Type="Integer">4194304</Linker>
+			<Linker Name="ExeDescription" Type="String"></Linker>
+		</Linker>
+		<Directories>
+			<Directories Name="OutputDir" Type="String">C:\LivrusVirtus\Delphi8.NET\WinForm\produto</Directories>
+			<Directories Name="UnitOutputDir" Type="String">C:\LivrusVirtus\Delphi8.NET\WinForm\dcus</Directories>
+			<Directories Name="PackageDLLOutputDir" Type="String"></Directories>
+			<Directories Name="PackageDCPOutputDir" Type="String"></Directories>
+			<Directories Name="SearchPath" Type="String">c:\winnt\microsoft.net\framework\v1.1.4322;c:\arquivos de programas\arquivos comuns\borland shared\bds\shared assemblies\2.0</Directories>
+			<Directories Name="Packages" Type="String">c:\arquivos de programas\arquivos comuns\borland shared\bds\shared assemblies\2.0\Borland.Data.Common.dll;c:\winnt\microsoft.net\framework\v1.1.4322\System.Design.dll;c:\arquivos de programas\arquivos comuns\borland shared\bds\shared assemblies\2.0\Borland.Data.Provider.dll;c:\winnt\microsoft.net\framework\v1.1.4322\System.XML.dll;c:\winnt\microsoft.net\framework\v1.1.4322\System.Windows.Forms.dll;c:\winnt\microsoft.net\framework\v1.1.4322\System.Drawing.dll;c:\winnt\microsoft.net\framework\v1.1.4322\System.Data.dll;c:\winnt\microsoft.net\framework\v1.1.4322\System.dll</Directories>
+			<Directories Name="Conditionals" Type="String"></Directories>
+			<Directories Name="DebugSourceDirs" Type="String"></Directories>
+			<Directories Name="UsePackages" Type="Boolean">True</Directories>
+		</Directories>
+		<Parameters>
+			<Parameters Name="RunParams" Type="String"></Parameters>
+			<Parameters Name="HostApplication" Type="String"></Parameters>
+			<Parameters Name="Launcher" Type="String"></Parameters>
+			<Parameters Name="UseLauncher" Type="Boolean">False</Parameters>
+			<Parameters Name="DebugCWD" Type="String"></Parameters>
+			<Parameters Name="RemoteHost" Type="String"></Parameters>
+			<Parameters Name="RemotePath" Type="String"></Parameters>
+			<Parameters Name="RemoteLauncher" Type="String"></Parameters>
+			<Parameters Name="RemoteCWD" Type="String"></Parameters>
+			<Parameters Name="RemoteDebug" Type="Boolean">False</Parameters>
+		</Parameters>
+		<Language>
+			<Language Name="ActiveLang" Type="String"></Language>
+			<Language Name="ProjectLang" Type="String">$00000000</Language>
+			<Language Name="RootDir" Type="String"></Language>
+		</Language>
+		<VersionInfo>
+			<VersionInfo Name="IncludeVerInfo" Type="Boolean">False</VersionInfo>
+			<VersionInfo Name="AutoIncBuild" Type="Boolean">False</VersionInfo>
+			<VersionInfo Name="MajorVer" Type="Integer">1</VersionInfo>
+			<VersionInfo Name="MinorVer" Type="Integer">0</VersionInfo>
+			<VersionInfo Name="Release" Type="Integer">0</VersionInfo>
+			<VersionInfo Name="Build" Type="Integer">0</VersionInfo>
+			<VersionInfo Name="Debug" Type="Boolean">False</VersionInfo>
+			<VersionInfo Name="PreRelease" Type="Boolean">False</VersionInfo>
+			<VersionInfo Name="Special" Type="Boolean">False</VersionInfo>
+			<VersionInfo Name="Private" Type="Boolean">False</VersionInfo>
+			<VersionInfo Name="DLL" Type="Boolean">False</VersionInfo>
+			<VersionInfo Name="Locale" Type="Integer">1046</VersionInfo>
+			<VersionInfo Name="CodePage" Type="Integer">1252</VersionInfo>
+		</VersionInfo>  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <FileList>
+      <File FileName="$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="System" AssemblyName="system" Version="1.0.5000.0" LinkUnits="False"/>
+      <File FileName="$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.Data.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="System.Data" AssemblyName="system.data" Version="1.0.5000.0" LinkUnits="False"/>
+      <File FileName="$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.Drawing.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="System.Drawing" AssemblyName="system.drawing" Version="1.0.5000.0" LinkUnits="False"/>
+      <File FileName="$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.Windows.Forms.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="System.Windows.Forms" AssemblyName="system.windows.forms" Version="1.0.5000.0" LinkUnits="False"/>
+      <File FileName="$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.XML.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="System.XML" AssemblyName="system.xml" Version="1.0.5000.0" LinkUnits="False"/>
+      <File FileName="Principal.resx" ContainerId="ResXCompiler" ModuleName="Principal" Parent="Principal.pas"/>
+      <File FileName="app.config" ContainerId="ConfigurationCompiler" ModuleName="app"/>
+      <File FileName="c:\arquivos de programas\arquivos comuns\borland shared\bds\shared assemblies\2.0\Borland.Data.Provider.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="Borland.Data.Provider" AssemblyName="Borland.Data.Provider" Version="1.5.1.0" LinkUnits="False"/>
+      <File FileName="$(SystemRoot)\microsoft.net\framework\v1.1.4322\System.Design.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="System.Design" AssemblyName="System.Design" Version="1.0.5000.0" LinkUnits="False"/>
+      <File FileName="c:\arquivos de programas\arquivos comuns\borland shared\bds\shared assemblies\2.0\Borland.Data.Common.dll" ContainerId="DelphiDotNetAssemblyCompiler" ModuleName="Borland.Data.Common" AssemblyName="Borland.Data.Common" Version="1.5.1.0" LinkUnits="False"/>
+      <File FileName="Splash.resx" ContainerId="ResXCompiler" ModuleName="Splash" Parent="Splash.pas"/>
+      <File FileName="Login.resx" ContainerId="ResXCompiler" ModuleName="Login" Parent="Login.pas"/>
+      <File FileName="Sobre.resx" ContainerId="ResXCompiler" ModuleName="Sobre.resx" Parent="Sobre.pas"/>
+      <File FileName="AlterarSenha.resx" ContainerId="ResXCompiler" ModuleName="AlterarSenha.resx" Parent="AlterarSenha.pas"/>
+      <File FileName="Cadastros.resx" ContainerId="ResXCompiler" ModuleName="Cadastros.resx" Parent="Cadastros.pas"/>
+      <File FileName="Consultas.resx" ContainerId="ResXCompiler" ModuleName="Consultas.resx" Parent="Consultas.pas"/>
+      <File FileName="CadAssuntos.resx" ContainerId="ResXCompiler" ModuleName="CadAssuntos.resx" Parent="CadAssuntos.pas"/>
+      <File FileName="ConAssuntos.resx" ContainerId="ResXCompiler" ModuleName="ConAssuntos.resx" Parent="ConAssuntos.pas"/>
+      <File FileName="CadAutores.resx" ContainerId="ResXCompiler" ModuleName="CadAutores.resx" Parent="CadAutores.pas"/>
+      <File FileName="ConAutores.resx" ContainerId="ResXCompiler" ModuleName="ConAutores.resx" Parent="ConAutores.pas"/>
+      <File FileName="CadEditoras.resx" ContainerId="ResXCompiler" ModuleName="CadEditoras.resx" Parent="CadEditoras.pas"/>
+      <File FileName="ConEditoras.resx" ContainerId="ResXCompiler" ModuleName="ConEditoras.resx" Parent="ConEditoras.pas"/>
+      <File FileName="CadEnderecos.resx" ContainerId="ResXCompiler" ModuleName="CadEnderecos.resx" Parent="CadEnderecos.pas"/>
+      <File FileName="ConEnderecos.resx" ContainerId="ResXCompiler" ModuleName="ConEnderecos.resx" Parent="ConEnderecos.pas"/>
+      <File FileName="CadIdiomas.resx" ContainerId="ResXCompiler" ModuleName="CadIdiomas.resx" Parent="CadIdiomas.pas"/>
+      <File FileName="ConIdiomas.resx" ContainerId="ResXCompiler" ModuleName="ConIdiomas.resx" Parent="ConIdiomas.pas"/>
+      <File FileName="CadPaises.resx" ContainerId="ResXCompiler" ModuleName="CadPaises.resx" Parent="CadPaises.pas"/>
+      <File FileName="ConPaises.resx" ContainerId="ResXCompiler" ModuleName="ConPaises.resx" Parent="ConPaises.pas"/>
+      <File FileName="CadProfissoes.resx" ContainerId="ResXCompiler" ModuleName="CadProfissoes.resx" Parent="CadProfissoes.pas"/>
+      <File FileName="ConProfissoes.resx" ContainerId="ResXCompiler" ModuleName="ConProfissoes.resx" Parent="ConProfissoes.pas"/>
+      <File FileName="CadClientes.resx" ContainerId="ResXCompiler" ModuleName="CadClientes.resx" Parent="CadClientes.pas"/>
+      <File FileName="ConClientes.resx" ContainerId="ResXCompiler" ModuleName="ConClientes.resx" Parent="ConClientes.pas"/>
+      <File FileName="CadLivros.resx" ContainerId="ResXCompiler" ModuleName="CadLivros.resx" Parent="CadLivros.pas"/>
+      <File FileName="ConLivros.resx" ContainerId="ResXCompiler" ModuleName="ConLivros.resx" Parent="ConLivros.pas"/>
+      <File FileName="ConVendas.resx" ContainerId="ResXCompiler" ModuleName="ConVendas.resx" Parent="ConVendas.pas"/>
+      <File FileName="VenderLivros.resx" ContainerId="ResXCompiler" ModuleName="VenderLivros.resx" Parent="VenderLivros.pas"/>
+      <File FileName="" ContainerId="" ModuleName="System.Reflection"/>
+      <File FileName="" ContainerId="" ModuleName="System.Runtime.CompilerServices"/>
+      <File FileName="" ContainerId="" ModuleName="System.Windows.Forms"/>
+      <File FileName="" ContainerId="" ModuleName="System.Data"/>
+      <File FileName="" ContainerId="" ModuleName="System.Data.OleDb"/>
+      <File FileName="Principal.pas" ContainerId="" ModuleName="Principal"/>
+      <File FileName="Splash.pas" ContainerId="" ModuleName="Splash"/>
+      <File FileName="Login.pas" ContainerId="" ModuleName="Login"/>
+      <File FileName="RotinasGlobais.pas" ContainerId="" ModuleName="RotinasGlobais"/>
+      <File FileName="ConsultasSQL.pas" ContainerId="" ModuleName="ConsultasSQL"/>
+      <File FileName="Sobre.pas" ContainerId="" ModuleName="Sobre"/>
+      <File FileName="AlterarSenha.pas" ContainerId="" ModuleName="AlterarSenha"/>
+      <File FileName="Cadastros.pas" ContainerId="" ModuleName="Cadastros"/>
+      <File FileName="Consultas.pas" ContainerId="" ModuleName="Consultas"/>
+      <File FileName="CadAssuntos.pas" ContainerId="" ModuleName="CadAssuntos"/>
+      <File FileName="ConAssuntos.pas" ContainerId="" ModuleName="ConAssuntos"/>
+      <File FileName="CadAutores.pas" ContainerId="" ModuleName="CadAutores"/>
+      <File FileName="ConAutores.pas" ContainerId="" ModuleName="ConAutores"/>
+      <File FileName="CadEditoras.pas" ContainerId="" ModuleName="CadEditoras"/>
+      <File FileName="ConEditoras.pas" ContainerId="" ModuleName="ConEditoras"/>
+      <File FileName="CadEnderecos.pas" ContainerId="" ModuleName="CadEnderecos"/>
+      <File FileName="ConEnderecos.pas" ContainerId="" ModuleName="ConEnderecos"/>
+      <File FileName="CadIdiomas.pas" ContainerId="" ModuleName="CadIdiomas"/>
+      <File FileName="ConIdiomas.pas" ContainerId="" ModuleName="ConIdiomas"/>
+      <File FileName="CadPaises.pas" ContainerId="" ModuleName="CadPaises"/>
+      <File FileName="ConPaises.pas" ContainerId="" ModuleName="ConPaises"/>
+      <File FileName="CadProfissoes.pas" ContainerId="" ModuleName="CadProfissoes"/>
+      <File FileName="ConProfissoes.pas" ContainerId="" ModuleName="ConProfissoes"/>
+      <File FileName="CadClientes.pas" ContainerId="" ModuleName="CadClientes"/>
+      <File FileName="ConClientes.pas" ContainerId="" ModuleName="ConClientes"/>
+      <File FileName="CadLivros.pas" ContainerId="" ModuleName="CadLivros"/>
+      <File FileName="ConLivros.pas" ContainerId="" ModuleName="ConLivros"/>
+      <File FileName="ConVendas.pas" ContainerId="" ModuleName="ConVendas"/>
+      <File FileName="VenderLivros.pas" ContainerId="" ModuleName="VenderLivros"/>
+    </FileList>
+  </DelphiDotNet.Personality>
+</BorlandProject>

@@ -1,0 +1,26 @@
+                        OTHER PROGRAMMING LANGUAGES
++==============================================================
+$startmenu
+|ML overview
+   show ml /usr/local/doc/HELP/PROGLANGS/OTHERLANGS/overviews
+|J overview
+   show j /usr/local/doc/HELP/PROGLANGS/OTHERLANGS/overviews
+|Perl overview
+   show perl /usr/local/doc/HELP/PROGLANGS/OTHERLANGS/overviews
+|Scheme overview
+   show scheme /usr/local/doc/HELP/PROGLANGS/OTHERLANGS/overviews
+|BC overview
+   show bc /usr/local/doc/HELP/PROGLANGS/OTHERLANGS/overviews
+|Bc manual page
+   page PROGLANGS/OTHERLANGS/bc.manual
+|SETL overview
+   show setl /usr/local/doc/HELP/PROGLANGS/OTHERLANGS/overviews
+|SETL man page
+   page PROGLANGS/OTHERLANGS/setl2.manual
+|
+   null
+|Examples of many of these languages
+   menu PROGLANGS/OTHERLANGS/EXAMPLES/main.menu
+$endmenu
++====================================================================
+

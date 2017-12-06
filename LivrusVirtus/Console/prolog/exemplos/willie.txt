@@ -1,0 +1,6 @@
+liveinsea(X) :- fish(X).
+fish(X) :- cod(X).
+fish(X) :- mackerel(X).
+liveinsea(X) :- whale(X).
+cod(homer).
+whale(willie).

@@ -1,0 +1,49 @@
+with text_io; use text_io;
+with strings; use strings;
+
+
+procedure misc is
+     package io_int is new integer_io (integer); use io_int;
+
+     line : string(1..40);
+begin
+
+     strcpy (line, "78392343");
+     if is_int(line) then
+          put_line ("this is an integer");
+     else
+          put_line ("this is NOT an integer");
+     end if;
+
+     strcpy (line, "783Z2343");
+     if is_int(line) then
+          put_line ("this is an integer");
+     else
+          put_line ("this is NOT an integer");
+     end if;
+
+
+     strcpy (line, "    abc  def");
+     put (strstart(line)); new_line;
+
+     line(4) := character'val(3);
+
+     if is_alpha(line) then
+          put_line ("this is alpha");
+     else
+          put_line ("this is NOT alpha");
+     end if;
+
+
+     strclean (line);
+     put (line); new_line;
+
+     if is_alpha(line) then
+          put_line ("this is alpha");
+     else
+          put_line ("this is NOT alpha");
+     end if;
+
+     left_justify(line);
+     put (line); new_line;
+end misc;

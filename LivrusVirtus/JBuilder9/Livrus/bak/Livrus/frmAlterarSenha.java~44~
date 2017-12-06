@@ -1,0 +1,192 @@
+package Livrus;
+
+import java.awt.*;
+import java.sql.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+/**
+ * <p>Title: Livrus Virtus</p>
+ * <p>Description: Sistema integrante do projeto Livrus Virtus, versão programada no JBuilder 9 em Java</p>
+ * <p>Copyright: Todos os direitos reservados para: Henrique F. de Souza</p>
+ * <p>Company: </p>
+ * @author Henrique F. de Souza
+ * @version 1.0.0
+ */
+
+public class frmAlterarSenha extends JInternalFrame {
+  public static frmAlterarSenha fAlterarSenha;
+  Statement Arquiva;
+  BorderLayout borderLayout2 = new BorderLayout();
+  JLabel labLogin = new JLabel();
+  JButton btnSalvar = new JButton();
+  JLabel labNovaSenha = new JLabel();
+  JPanel jPanel3 = new JPanel();
+  JPanel jPanel1 = new JPanel();
+  JPanel jPanel2 = new JPanel();
+  JButton btnLimpar = new JButton();
+  JPanel jPanel5 = new JPanel();
+  JButton btnFechar = new JButton();
+  BorderLayout borderLayout1 = new BorderLayout();
+  JTextField edtLogin = new JTextField();
+  JPasswordField edtNovaSenha = new JPasswordField();
+  JPasswordField edtConfirmarSenha = new JPasswordField();
+  JLabel labSenhaAtual = new JLabel();
+  JLabel labConfirmarSenha = new JLabel();
+  JPasswordField edtSenhaAtual = new JPasswordField();
+  FlowLayout flowLayout1 = new FlowLayout();
+
+  public frmAlterarSenha() {
+    try {
+      jbInit();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+  private void jbInit() throws Exception {
+    this.setClosable(true);
+    this.setIconifiable(true);
+    this.setTitle("Alteração de Senha");
+    this.setSize(new Dimension(294, 172));
+    this.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+      public void mouseMoved(MouseEvent e) {
+        this_mouseMoved(e);
+      }
+    });
+    this.addInternalFrameListener(new javax.swing.event.InternalFrameAdapter() {
+      public void internalFrameClosing(InternalFrameEvent e) {
+        this_internalFrameClosing(e);
+      }
+      public void internalFrameOpened(InternalFrameEvent e) {
+        this_internalFrameOpened(e);
+      }
+    });
+    labLogin.setText("Login:");
+    labLogin.setBounds(new Rectangle(12, 8, 80, 16));
+    btnSalvar.setText("Salvar");
+    btnSalvar.setEnabled(true);
+    btnSalvar.setMargin(new Insets(2, 18, 2, 18));
+    btnSalvar.setMnemonic('S');
+    btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnSalvar_actionPerformed(e);
+      }
+    });
+    labNovaSenha.setText("Nova Senha: ");
+    labNovaSenha.setBounds(new Rectangle(12, 52, 80, 19));
+    jPanel3.setBorder(null);
+    jPanel3.setLayout(null);
+    jPanel1.setLayout(borderLayout2);
+    jPanel2.setBorder(null);
+    jPanel2.setLayout(borderLayout1);
+    btnLimpar.setMargin(new Insets(2, 18, 2, 18));
+    btnLimpar.setMnemonic('L');
+    btnLimpar.setText("Limpar");
+    btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnLimpar_actionPerformed(e);
+      }
+    });
+    btnFechar.setText("Fechar");
+    btnFechar.setMargin(new Insets(2, 18, 2, 18));
+    btnFechar.setMnemonic('F');
+    btnFechar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        btnFechar_actionPerformed(e);
+      }
+    });
+    edtLogin.setEnabled(false);
+    edtLogin.setColumns(10);
+    edtLogin.setBounds(new Rectangle(112, 28, 86, 21));
+    edtNovaSenha.setBounds(new Rectangle(112, 74, 86, 21));
+    edtNovaSenha.setColumns(10);
+    edtConfirmarSenha.setColumns(10);
+    edtConfirmarSenha.setBounds(new Rectangle(112, 74, 99, 21));
+    labSenhaAtual.setBounds(new Rectangle(112, 8, 80, 16));
+    labSenhaAtual.setText("Senha Atual: ");
+    labConfirmarSenha.setBounds(new Rectangle(112, 52, 120, 19));
+    labConfirmarSenha.setText("Confirmar Senha: ");
+    edtSenhaAtual.setBounds(new Rectangle(112, 28, 99, 21));
+    edtSenhaAtual.setColumns(10);
+    jPanel5.setLayout(flowLayout1);
+    jPanel3.add(edtLogin, null);
+    jPanel3.add(edtNovaSenha, null);
+    jPanel3.add(labLogin, null);
+    jPanel3.add(labNovaSenha, null);
+    jPanel3.add(edtSenhaAtual, null);
+    jPanel3.add(edtConfirmarSenha, null);
+    jPanel3.add(labConfirmarSenha, null);
+    jPanel3.add(labSenhaAtual, null);
+    jPanel1.add(jPanel3, BorderLayout.CENTER);
+    this.getContentPane().add(jPanel2,  BorderLayout.SOUTH);
+    jPanel2.add(jPanel5,  BorderLayout.CENTER);
+    jPanel5.add(btnSalvar, null);
+    jPanel5.add(btnLimpar, null);
+    jPanel5.add(btnFechar, null);
+    this.getContentPane().add(jPanel1,  BorderLayout.CENTER);
+  }
+
+  void this_internalFrameClosing(InternalFrameEvent e) {
+    frmPrincipal.fPrincipal.mnuAlterarSenha.setEnabled(true);
+    frmPrincipal.fPrincipal.statusBar2.setText("");
+  }
+
+  void btnFechar_actionPerformed(ActionEvent e) {
+    this_internalFrameClosing(null);
+    dispose();
+  }
+  void btnLimpar_actionPerformed(ActionEvent e) {
+    edtSenhaAtual.setText("");
+    edtNovaSenha.setText("");
+    edtConfirmarSenha.setText("");
+    edtSenhaAtual.requestFocus();
+  }
+  private boolean ValidaDados()
+  {
+    if ( String.valueOf(edtSenhaAtual.getPassword()).trim().equals(
+      RotinasGlobais.Rotinas.sUsuarioSenha.trim())==false) {
+      JOptionPane.showMessageDialog(this,
+      "A Senha atual não confere com a senha do usuário!",
+      frmPrincipal.fPrincipal.getTitle(), JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
+    if (RotinasGlobais.Rotinas.ValidaCampo(
+        String.valueOf(edtNovaSenha.getPassword()),
+        "Nova senha não informada!")) {
+          return false;
+    }
+    if (String.valueOf(edtNovaSenha.getPassword()).trim().equals(
+        String.valueOf(edtConfirmarSenha.getPassword()).trim())==false) {
+      JOptionPane.showMessageDialog(this,
+      "A Nova senha não confere com a senha a confirmar!",
+      frmPrincipal.fPrincipal.getTitle(), JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
+
+    return true;
+  }
+
+  void btnSalvar_actionPerformed(ActionEvent e) {
+    if (ValidaDados()) {
+      RotinasGlobais.Rotinas.AtualizaDados(Arquiva,
+      ConsultasSQL.ConsSQL.Usuario('U', RotinasGlobais.Rotinas.sUsuarioLogin,
+          String.valueOf(edtConfirmarSenha.getPassword())));
+      RotinasGlobais.Rotinas.sUsuarioSenha=String.valueOf(edtNovaSenha.getPassword());
+      JOptionPane.showMessageDialog(this, "Senha alterada com sucesso!",
+      frmPrincipal.fPrincipal.getTitle(), JOptionPane.INFORMATION_MESSAGE);
+    }
+  }
+
+  void this_internalFrameOpened(InternalFrameEvent e) {
+    edtLogin.setText(RotinasGlobais.Rotinas.sUsuarioLogin);
+  }
+
+  void this_mouseMoved(MouseEvent e) {
+    frmPrincipal.fPrincipal.statusBar2.setText(this.getTitle());
+  }
+
+}
+
+
