@@ -1,2 +1,2 @@
 # livrusvirtus
-livrusvirtus - Um simples sistema de livraria programado em várias linguagens
+livrusvirtus - A simple bookstore system programmed in several languages
